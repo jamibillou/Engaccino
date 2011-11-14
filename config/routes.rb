@@ -1,7 +1,7 @@
 Engaccino::Application.routes.draw do
   
   root :to => 'pages#overview'
-  match '/walkthough', :to => 'pages#walkthough'
+  match '/walkthrough', :to => 'pages#walkthrough'
   match '/pricing', :to => 'pages#pricing'
   match '/about', :to => 'pages#about'
   match '/contact', :to => 'pages#contact'

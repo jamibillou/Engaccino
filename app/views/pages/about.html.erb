@@ -1,2 +1,15 @@
-<h1>Pages#about</h1>
-<p>Find me in app/views/pages/about.html.erb</p>
+<header>
+  <%= link_to logo, root_path %>
+  <div id="signin_signup">
+    Already a member? <%= link_to 'Sign in', '#' %> <%= link_to 'Sign up!', '#', :class => 'button' %>
+  </div>
+  <nav>
+    <ul>
+      <li class="round"><%= link_to 'Overview', root_path %></li>
+      <li class="round"><%= link_to 'Walkthrough', walkthrough_path %></li>
+      <li class="round"><%= link_to 'Pricing', pricing_path %></li>
+      <li class="round selected"><%= link_to 'About', about_path %></li>
+      <li class="round"><%= link_to 'Contact', contact_path %></li>
+    </ul>
+  </nav>
+</header>
