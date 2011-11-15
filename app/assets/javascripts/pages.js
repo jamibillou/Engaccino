@@ -1,2 +1,9 @@
-// Place all the behaviors and hooks related to the matching controller here.
-// All this logic will automatically be available in application.js.
+/* Functions calls when the page has just finished to load */
+$(document).ready(function()
+{
+	$("#search_bar").click(function()
+	{
+		$("#search_bar_input").attr("value","");
+		$("#search_bar_input").css("color","black");
+	})		
+})

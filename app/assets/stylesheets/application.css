@@ -71,6 +71,24 @@ header #signin_signup a.button {
   color: white;
 }
 
+/* SEARCH BAR */
+
+.search_bar
+{
+	background-image: url('search.png');
+	background-repeat: no-repeat;
+	background-position-x: 98%;
+	background-position-y: 2px;
+	height: 20px;
+	width: 35%;
+	border: 1px solid #515151;
+	position: absolute;
+	right: 25%;
+	top: 75px;
+	color: #A8A8A8;
+	padding: 5px;
+}
+
 /* COMMON ATTRIBUTES */
 .round {
   -moz-border-radius: 5px;
