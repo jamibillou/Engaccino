@@ -13,6 +13,8 @@ body {
 /* HEADER */
 header {
   padding-top: 8px;
+  font-size: 13px;
+  font-weight: bold;
 }
 
 header nav {
@@ -32,9 +34,7 @@ header nav ul li {
   list-style-type: none;
   display: inline-block;
   padding: 1.1em 1.1em;
-  font-size: 13px;
   margin-top: 11px;
-  font-weight: bold;
   color: #515151;
 }
 
@@ -45,7 +45,6 @@ header nav ul li a {
 
 header nav ul li.selected {
   background-color: #515151;
-  font-weight: 500;
 }
 
 header nav ul li.selected a {
@@ -59,9 +58,9 @@ header .logo {
 
 header #signin_signup {
   float: right;
-  padding-top: 72px;
+  padding-top: 70px;
   padding-right: 6px;
-  font-size: 12px;
+  font-weight: normal;
 }
 header #signin_signup a {
   color: #444;
@@ -71,22 +70,38 @@ header #signin_signup a.button {
   color: white;
 }
 
-/* SEARCH BAR */
+#container {
+ padding-left: 12px; 
+}
 
+/* FOOTER */
+footer {
+  width: 100%;
+  bottom: 0;
+  position: absolute;
+  background-color: #cbcbcb;
+  padding: 5px;
+  padding-left: 20px;
+  color: white;
+}
+
+/* SEARCH BAR */
 .search_bar
 {
+	height: 31px;
+	width: 34%;
+	float: right;
+	margin-top: 9px;
+	margin-right: 25px;
 	background-image: url('search.png');
 	background-repeat: no-repeat;
 	background-position-x: 98%;
-	background-position-y: 2px;
-	height: 20px;
-	width: 35%;
-	border: 1px solid #515151;
-	position: absolute;
-	right: 25%;
-	top: 75px;
-	color: #A8A8A8;
-	padding: 5px;
+	background-position-y: 6px;
+	border: 1px solid #969696;
+	color: #929292;
+	font-style: italic;
+	font-size: inherit;
+	font-weight: 500;
 }
 
 /* COMMON ATTRIBUTES */

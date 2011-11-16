@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def logo
+    image_tag("logo.png", :alt => "Engaccino", :class => "logo")
+  end
+  
   def title 
     base_title = "Engaccino"
     if @title.nil?
@@ -9,7 +13,12 @@ module ApplicationHelper
     end
   end
   
-  def logo
-    image_tag("logo.png", :alt => "Engaccino", :class => "logo")
+  def menu_items
+    [{:title => "Overview",      :path => root_path,        :selected => ("Overview" == @title)},
+     {:title => "Walkthrough",   :path => walkthrough_path, :selected => ("Walkthrough" == @title)},
+     {:title => "Pricing",       :path => pricing_path,     :selected => ("Pricing" == @title)},
+     {:title => "About",         :path => about_path,       :selected => ("About" == @title)},
+     {:title => "Contact",       :path => contact_path,     :selected => ("Contact" == @title)}]
   end
+  
 end

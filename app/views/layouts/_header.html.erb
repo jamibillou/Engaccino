@@ -3,16 +3,14 @@
   <div id="signin_signup">
     Already a member? <%= link_to 'Sign in', '#' %> <%= link_to 'Sign up!', '#', :class => 'button' %>
   </div>
+  <%= render 'layouts/search_form' %>
   <nav>
     <ul>
-      <% @menu_items.each do |item| %>
-      		<% if item[:title] == @title %>
-      			<li class="round selected"><%= link_to item[:title], item[:link] %></li>
-      		<% else %>
-      			<li class="round"><%= link_to item[:title], item[:link] %></li>
-      		<% end %>
-      <% end %>	
+      <% menu_items.each do |menu_item| %>
+        <li class="round<% if menu_item[:selected] %> selected<% end %>">
+          <%= link_to menu_item[:title], menu_item[:path] %>
+        </li>
+      <% end %>
     </ul>
-    <%= render 'layouts/search_form' %> 
   </nav>
 </header>
