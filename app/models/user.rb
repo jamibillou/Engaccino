@@ -1,5 +1,27 @@
 class User < ActiveRecord::Base
+
+  attr_accessible :first_name,
+                  :middle_name,
+                  :last_name,
+                  :city,
+                  :country,
+                  :nationality,
+                  :birthdate,
+                  :phone,
+                  :email,
+                  :facebook_login,
+                  :linkedin_login,
+                  :twitter_login
+  
+  email_regex = /\A[\w+\d\-.]+@[a-z\d\-.]+\.[a-z.]+\z/i
+                 
+  validates :first_name, :presence => true
+  validates :last_name,  :presence => true
+  validates :email,      :presence => true,
+                         :format => { :with => email_regex },
+                         :uniqueness => { :case_sensitive => false }  
 end
+
 # == Schema Information
 #
 # Table name: users
@@ -13,13 +35,14 @@ end
 #  nationality        :string(255)
 #  birthdate          :date
 #  phone              :string(255)
+#  email              :string(255)
 #  facebook_login     :string(255)
 #  linkedin_login     :string(255)
 #  twitter_login      :string(255)
 #  facebook_connect   :boolean(1)
 #  linkedin_connect   :boolean(1)
 #  twitter_connect    :boolean(1)
-#  admin              :boolean(1)
+#  admin              :boolean(1)      default(FALSE)
 #  encrypted_password :string(255)
 #  created_at         :datetime
 #  updated_at         :datetime

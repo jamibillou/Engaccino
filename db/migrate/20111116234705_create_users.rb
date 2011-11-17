@@ -9,13 +9,14 @@ class CreateUsers < ActiveRecord::Migration
       t.string :nationality
       t.date :birthdate
       t.string :phone
+      t.string :email
       t.string :facebook_login
       t.string :linkedin_login
       t.string :twitter_login
-      t.boolean :facebook_connect
-      t.boolean :linkedin_connect
-      t.boolean :twitter_connect
-      t.boolean :admin
+      t.boolean :facebook_connect, :default => false
+      t.boolean :linkedin_connect, :default => false
+      t.boolean :twitter_connect, :default => false
+      t.boolean :admin, :default => false
       t.string :encrypted_password
 
       t.timestamps
