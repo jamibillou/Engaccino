@@ -4,6 +4,7 @@ gem 'rails', '3.1.1'
 gem 'mysql2'
 gem 'jquery-rails'
 gem 'will_paginate'
+gem 'countries'
 
 group :development do
   gem 'rspec-rails'
