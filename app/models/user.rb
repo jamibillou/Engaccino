@@ -14,22 +14,31 @@ class User < ActiveRecord::Base
                   :twitter_login
   
   email_regex = /\A[\w+\d\-.]+@[a-z\d\-.]+\.[a-z.]+\z/i
-                 
-  validates :first_name, :presence => true,
-                         :length => { :maximum => 80 }
-  validates :middle_name,:length => { :maximum => 80 }
-  validates :last_name,  :presence => true,
-                         :length => { :maximum => 80 }
-  validates :email,      :presence => true,
-                         :format => { :with => email_regex },
-                         :uniqueness => { :case_sensitive => false } 
-  validates :country,    :presence => true,
-                         :if => :valid_country?                              
+  phone_regex = /\+(?:[0-9] ?){6,14}[0-9]/
+  twitter_regex = /@\w{2,}/
+
+  validates :first_name,            :presence => true,
+                                    :length => { :maximum => 80 }
+  validates :middle_name,           :length => { :maximum => 80 }
+  validates :last_name,             :presence => true,
+                                    :length => { :maximum => 80 }
+  validates :phone,                 :length => { :minimum => 7, :maximum => 20 },
+                                    :format => { :with => phone_regex }                       
+  validates :email,                 :presence => true,
+                                    :format => { :with => email_regex },
+                                    :uniqueness => { :case_sensitive => false } 
+  validates :country,               :presence => true,
+                                    :if => :valid_country?     
+  validates :facebook_login,        :format => { :with => email_regex },
+                                    :uniqueness => { :case_sensitive => false }
+  validates :linkedin_login,        :format => { :with => email_regex },
+                                    :uniqueness => { :case_sensitive => false }                         
   
   def valid_country?
     #Country.new(self.country).valid?
     false
   end                     
+
 end
 
 # == Schema Information

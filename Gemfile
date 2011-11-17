@@ -5,6 +5,7 @@ gem 'mysql2'
 gem 'jquery-rails'
 gem 'will_paginate'
 gem 'countries'
+gem 'phony'
 
 group :development do
   gem 'rspec-rails'
