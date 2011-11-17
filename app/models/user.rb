@@ -14,12 +14,21 @@ class User < ActiveRecord::Base
                   :twitter_login
   
   email_regex = /\A[\w+\d\-.]+@[a-z\d\-.]+\.[a-z.]+\z/i
+  phone_regex = /\+(?:[0-9] ?){6,14}[0-9]/
+  twitter_regex = /@\w{2,}/
                  
-  validates :first_name, :presence => true
-  validates :last_name,  :presence => true
-  validates :email,      :presence => true,
-                         :format => { :with => email_regex },
-                         :uniqueness => { :case_sensitive => false }  
+  validates :first_name,     :presence => true
+  validates :last_name,      :presence => true
+  validates :phone,          :length => { :minimum => 7, :maximum => 20 },
+                             :format => { :with => phone_regex }
+  validates :email,          :presence => true,
+                             :format => { :with => email_regex },
+                             :uniqueness => { :case_sensitive => false }
+  validates :facebook_login, :format => { :with => email_regex },
+                             :uniqueness => { :case_sensitive => false }
+  validates :linkedin_login, :format => { :with => email_regex },
+                             :uniqueness => { :case_sensitive => false }
+    
 end
 
 # == Schema Information

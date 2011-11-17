@@ -16,3 +16,11 @@ end
 Factory.sequence :email do |n|
   "user_#{n}@example.com"
 end
+
+Factory.sequence :facebook_login do |n|
+  "user_#{n}@facebook.com"
+end
+
+Factory.sequence :linkedin_login do |n|
+  "user_#{n}@linkedin.com"
+end
