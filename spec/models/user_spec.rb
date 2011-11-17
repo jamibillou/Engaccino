@@ -8,7 +8,7 @@ describe User do
       :middle_name => "",
       :last_name => "Doe",
       :city => "Rotterdam",         
-      :country => "Netherlands (The)",
+      :country => "NL",
       :nationality => "A-marrocan",
       :birthdate => 40.years.ago,
       :phone => "+31 6 00000000",
@@ -33,6 +33,24 @@ describe User do
     no_name_user.should_not be_valid
   end
   
+  it "should reject too long first names" do
+    long_first_name = "f" * 81
+    long_first_name_user = User.new(@attributes.merge(:first_name => long_first_name))
+    long_first_name_user.should_not be_valid
+  end
+  
+  it "should reject too long middle names" do
+    long_middle_name = "f" * 81
+    long_middle_name_user = User.new(@attributes.merge(:middle_name => long_middle_name))
+    long_middle_name_user.should_not be_valid
+  end
+  
+  it "should reject too long last names" do
+    long_last_name = "f" * 81
+    long_last_name_user = User.new(@attributes.merge(:last_name => long_last_name))
+    long_last_name_user.should_not be_valid
+  end
+  
   it "should reject empty emails addresses" do
     no_email_user = User.new(@attributes.merge(:email => ""))
     no_email_user.should_not be_valid
@@ -54,6 +72,11 @@ describe User do
     end
   end
   
+  it "should reject countries that are not contained in the list" do
+    invalid_country_user = User.new(@attributes.merge(:country => "SAVOIE"))
+    invalid_country_user.should_not be_valid
+  end
+  
   it "should reject duplicate email addresses" do
     user = Factory(:user, :email => Factory.next(:email))
     duplicate_email_user = User.new(@attributes.merge(:email => user.email))
@@ -65,7 +88,8 @@ describe User do
     upcased_email_user = User.new(@attributes.merge(:email => user.email.upcase))
     upcased_email_user.should_not be_valid
   end
-  
+    
+    
   describe "admin attribute" do
     
     before(:each) do

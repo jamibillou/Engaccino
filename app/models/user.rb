@@ -15,11 +15,21 @@ class User < ActiveRecord::Base
   
   email_regex = /\A[\w+\d\-.]+@[a-z\d\-.]+\.[a-z.]+\z/i
                  
-  validates :first_name, :presence => true
-  validates :last_name,  :presence => true
+  validates :first_name, :presence => true,
+                         :length => { :maximum => 80 }
+  validates :middle_name,:length => { :maximum => 80 }
+  validates :last_name,  :presence => true,
+                         :length => { :maximum => 80 }
   validates :email,      :presence => true,
                          :format => { :with => email_regex },
-                         :uniqueness => { :case_sensitive => false }  
+                         :uniqueness => { :case_sensitive => false } 
+  validates :country,    :presence => true,
+                         :if => :valid_country?                              
+  
+  def valid_country?
+    #Country.new(self.country).valid?
+    false
+  end                     
 end
 
 # == Schema Information

@@ -3,7 +3,7 @@ Factory.define :user do |user|
   user.middle_name ""
   user.last_name "Doe" 
   user.city "Rotterdam"         
-  user.country "Netherlands (The)"      
+  user.country "NL"     
   user.nationality "A-marrocan"
   user.birthdate 40.years.ago
   user.phone "+31 6 00000000"
