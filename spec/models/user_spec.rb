@@ -8,7 +8,7 @@ describe User do
       :middle_name => "",
       :last_name => "Pablo",
       :city => "Madrid",         
-      :country => "SP",
+      :country => "ES",
       :nationality => "Spanish",
       :birthdate => 25.years.ago,
       :phone => "+34 6 88888888",
@@ -112,6 +112,11 @@ describe User do
     end
   end
   
+  it "should accept empty facebook logins" do
+    empty_facebook_user = User.new(@attributes.merge(:facebook_login => ""))
+    empty_facebook_user.should be_valid
+  end
+  
   it "should reject invalid facebook logins" do
     invalid_facebook_logins = ['invalid_facebook_login', 'invalid@example', 'invalid@user@example.com', 'inv,alide@']
     invalid_facebook_logins.each do |invalid_facebook_login|
@@ -136,6 +141,11 @@ describe User do
       valid_linkedin_login_user = User.new(@attributes.merge(:linkedin_login => valid_linkedin_login))
       valid_linkedin_login_user.should be_valid
     end
+  end
+  
+  it "should accept empty linkedin logins" do
+    empty_linkedin_user = User.new(@attributes.merge(:linkedin_login => ""))
+    empty_linkedin_user.should be_valid
   end
   
   it "should reject invalid linkedin logins" do
