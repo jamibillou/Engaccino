@@ -1,0 +1,30 @@
+# Sample localization file for French. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+fr:
+  menu_overview: "Présentation"
+  menu_walkthrough: "Démonstration"
+  menu_pricing: "Tarifs"
+  menu_about: "A propos de"
+  menu_contact: "Contact"
+  
+  switch_uk: "Sélectionner l'anglais comme langue par défaut"
+  switch_french: "Sélectionner le français comme langue par défaut"
+  
+  search_bar: "Rechercher sur Engaccino"
+  
+  already_member: "Déjà membre?"
+  sign_in: "Se connecter"
+  sign_up: "S'inscrire !"
+  
+  pages:
+    overview:
+      content: "Bienvenue sur la célèbre application Engaccino !!"
+    contact:
+      content: "N'hésitez pas à nous contacter pour plus d'information !!"
+    about:
+      content: "Comment les BG en sont venus à Engaccino..."
+    pricing:
+      content: "Voici nos différentes propositions tarifaires... Evidemment, si vous vous inscrivez comme candidat, c'est gratuit !!"
+    walkthrough:
+      content: "Prenez quelques minutes pour comprendre le fonctionnement de l'application"

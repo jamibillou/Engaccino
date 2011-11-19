@@ -1,22 +1,22 @@
 class PagesController < ApplicationController
     
   def overview
-    @title = "Overview"
+    @title = t(:menu_overview)
   end
 
   def walkthrough
-    @title = "Walkthrough"
+    @title = t(:menu_walkthrough)
   end
 
   def pricing
-    @title = "Pricing"
+    @title = t(:menu_pricing)
   end
 
   def about
-    @title = "About"
+    @title = t(:menu_about)
   end
 
   def contact
-    @title = "Contact"
+    @title = t(:menu_contact)
   end
 end

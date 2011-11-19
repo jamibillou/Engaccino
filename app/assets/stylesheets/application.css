@@ -70,6 +70,13 @@ header #signin_signup a.button {
   color: white;
 }
 
+header .flags
+{
+	float: right;
+	margin-right: 10px;
+	margin-top: 27px;
+}
+
 #container {
  padding-left: 12px; 
 }

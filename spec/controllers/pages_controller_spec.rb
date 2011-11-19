@@ -17,22 +17,22 @@ describe PagesController do
     
     it "should have the right title" do
       get :overview
-      response.should have_selector("title", :content => "#{@base_title} | Overview")
+      response.should have_selector("title", :content => "#{@base_title} | "+I18n.t(:menu_overview))
     end
     
     it "should have the right selected navigation tab" do
       get :overview
-      response.should have_selector('li', :class => 'round selected', :content => 'Overview')
+      response.should have_selector('li', :class => 'round selected', :content => I18n.t(:menu_overview))
     end
     
     it "should have a sign up button" do
       get :overview
-      response.should have_selector('a', :class => 'button', :content => 'Sign up')
+      response.should have_selector('a', :class => 'button', :content => I18n.t(:sign_up))
     end
     
     it "should have a sign in link" do
       get :overview
-      response.should have_selector('a', :content => 'Sign in')
+      response.should have_selector('a', :content => I18n.t(:sign_in))
     end
     
     it "should have a search bar" do
@@ -50,22 +50,22 @@ describe PagesController do
     
     it "should have the right title" do
       get :walkthrough
-      response.should have_selector("title", :content => "#{@base_title} | Walkthrough")
+      response.should have_selector("title", :content => "#{@base_title} | "+I18n.t(:menu_walkthrough))
     end
     
     it "should have the right selected navigation tab" do
       get :walkthrough
-      response.should have_selector('li', :class => 'round selected', :content => 'Walkthrough')
+      response.should have_selector('li', :class => 'round selected', :content => I18n.t(:menu_walkthrough))
     end
     
     it "should have a sign up button" do
       get :walkthrough
-      response.should have_selector('a', :class => 'button', :content => 'Sign up')
+      response.should have_selector('a', :class => 'button', :content => I18n.t(:sign_up))
     end
     
     it "should have a sign in link" do
       get :walkthrough
-      response.should have_selector('a', :content => 'Sign in')
+      response.should have_selector('a', :content => I18n.t(:sign_in))
     end
     
     it "should have a search bar" do
@@ -83,22 +83,22 @@ describe PagesController do
     
     it "should have the right title" do
       get :pricing
-      response.should have_selector("title", :content => "#{@base_title} | Pricing")
+      response.should have_selector("title", :content => "#{@base_title} | "+I18n.t(:menu_pricing))
     end
     
     it "should have the right selected navigation tab" do
       get :pricing
-      response.should have_selector('li', :class => 'round selected', :content => 'Pricing')
+      response.should have_selector('li', :class => 'round selected', :content => I18n.t(:menu_pricing))
     end
     
     it "should have a sign up button" do
       get :pricing
-      response.should have_selector('a', :class => 'button', :content => 'Sign up')
+      response.should have_selector('a', :class => 'button', :content => I18n.t(:sign_up))
     end
     
     it "should have a sign in link" do
       get :pricing
-      response.should have_selector('a', :content => 'Sign in')
+      response.should have_selector('a', :content => I18n.t(:sign_in))
     end
     
     it "should have a search bar" do
@@ -116,22 +116,22 @@ describe PagesController do
     
     it "should have the right title" do
       get :about
-      response.should have_selector("title", :content => "#{@base_title} | About")
+      response.should have_selector("title", :content => "#{@base_title} | "+I18n.t(:menu_about))
     end
     
     it "should have the right selected navigation tab" do
       get :about
-      response.should have_selector('li', :class => 'round selected', :content => 'About')
+      response.should have_selector('li', :class => 'round selected', :content => I18n.t(:menu_about))
     end
     
     it "should have a sign up button" do
       get :about
-      response.should have_selector('a', :class => 'button', :content => 'Sign up')
+      response.should have_selector('a', :class => 'button', :content => I18n.t(:sign_up))
     end
     
     it "should have a sign in link" do
       get :about
-      response.should have_selector('a', :content => 'Sign in')
+      response.should have_selector('a', :content => I18n.t(:sign_in))
     end
     
     it "should have a search bar" do
@@ -149,22 +149,22 @@ describe PagesController do
     
     it "should have the right title" do
       get :contact
-      response.should have_selector("title", :content => "#{@base_title} | Contact")
+      response.should have_selector("title", :content => "#{@base_title} | "+I18n.t(:menu_contact))
     end
     
     it "should have the right selected navigation tab" do
       get :contact
-      response.should have_selector('li', :class => 'round selected', :content => 'Contact')
+      response.should have_selector('li', :class => 'round selected', :content => I18n.t(:menu_contact))
     end
     
     it "should have a sign up button" do
       get :contact
-      response.should have_selector('a', :class => 'button', :content => 'Sign up')
+      response.should have_selector('a', :class => 'button', :content => I18n.t(:sign_up))
     end
     
     it "should have a sign in link" do
       get :contact
-      response.should have_selector('a', :content => 'Sign in')
+      response.should have_selector('a', :content => I18n.t(:sign_in))
     end
     
     it "should have a search bar" do

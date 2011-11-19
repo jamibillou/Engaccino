@@ -4,6 +4,14 @@ module ApplicationHelper
     image_tag("logo.png", :alt => "Engaccino", :class => "logo")
   end
   
+  def uk_flag
+    image_tag("uk.png", :alt => "English", :class => "flag")
+  end
+  
+  def french_flag
+    image_tag("fr.png", :alt => "French", :class => "flag")
+  end
+  
   def title 
     base_title = "Engaccino"
     if @title.nil?
@@ -14,11 +22,11 @@ module ApplicationHelper
   end
   
   def menu_items
-    [{:title => "Overview",      :path => root_path,        :selected => ("Overview" == @title)},
-     {:title => "Walkthrough",   :path => walkthrough_path, :selected => ("Walkthrough" == @title)},
-     {:title => "Pricing",       :path => pricing_path,     :selected => ("Pricing" == @title)},
-     {:title => "About",         :path => about_path,       :selected => ("About" == @title)},
-     {:title => "Contact",       :path => contact_path,     :selected => ("Contact" == @title)}]
+    [{:title => t(:menu_overview),      :path => root_path,        :selected => (t(:menu_overview) == @title)},
+     {:title => t(:menu_walkthrough),   :path => walkthrough_path, :selected => (t(:menu_walkthrough) == @title)},
+     {:title => t(:menu_pricing),       :path => pricing_path,     :selected => (t(:menu_pricing) == @title)},
+     {:title => t(:menu_about),         :path => about_path,       :selected => (t(:menu_about) == @title)},
+     {:title => t(:menu_contact),       :path => contact_path,     :selected => (t(:menu_contact) == @title)}]
   end
   
 end

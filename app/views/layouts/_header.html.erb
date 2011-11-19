@@ -1,7 +1,13 @@
 <header>
   <%= link_to logo, root_path %>
+  
+  <span class="flags">
+  	<%= link_to uk_flag, url_for(:locale => 'en'), { :title => t(:switch_uk) } %>
+  	<%= link_to french_flag, url_for(:locale => 'fr'), { :title => t(:switch_french) } %>
+  </span>
+  
   <div id="signin_signup">
-    Already a member? <%= link_to 'Sign in', '#' %> <%= link_to 'Sign up!', '#', :class => 'button' %>
+    <%t :already_member %><%= link_to t(:sign_in), '#' %> <%= link_to t(:sign_up), '#', :class => 'button' %>
   </div>
   <%= render 'layouts/search_form' %>
   <nav>

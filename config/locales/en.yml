@@ -2,4 +2,29 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  menu_overview: "Overview"
+  menu_walkthrough: "Walkthrough"
+  menu_pricing: "Pricing"
+  menu_about: "About"
+  menu_contact: "Contact"
+  
+  switch_uk: "Set English as default language"
+  switch_french: "Set French as default language"
+  
+  search_bar: "Search Engaccino"
+  
+  already_member: "Already a member?"
+  sign_in: "Sign In"
+  sign_up: "Sign Up !"
+  
+  pages:
+    overview:
+      content: "Welcome to the famous Engaccino's application !"
+    contact:
+      content: "Don't hesitate to contact us for more information !!"
+    about:
+      content: "Description of the BG'S Team..."
+    pricing:
+      content: "Here are our different offers... Of course, if you're a candidate, it's free !!"
+    walkthrough:
+      content: "Please take a few minutes to discover how the software is working..."
