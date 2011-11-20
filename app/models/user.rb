@@ -13,30 +13,50 @@ class User < ActiveRecord::Base
                   :linkedin_login,
                   :twitter_login
   
-  email_regex = /\A[\w+\d\-.]+@[a-z\d\-.]+\.[a-z.]+\z/i
-  phone_regex = /\+(?:[0-9] ?){6,14}[0-9]/
-  twitter_regex = /@\w{2,}/
   countries_array = Country.all.collect { |c| c[1] }
+  dates_array = (100.years.ago.to_date..11.years.ago.to_date).to_a
+  email_regex = /^[\w+\d\-.]+@[a-z\d\-.]+\.[a-z.]+$/i
+  phone_regex = /^\+(?:[0-9] ?){6,14}[0-9]$/
+  twitter_regex = /^@(_|([a-z]_)|[a-z])([a-z0-9]+_?)*$/i
 
   validates :first_name,            :presence => true,
                                     :length => { :maximum => 80 }
-  validates :middle_name,           :length => { :maximum => 80 }
+                                    
+  validates :middle_name,           :length => { :maximum => 80 },
+                                    :allow_blank => true
+                                    
   validates :last_name,             :presence => true,
                                     :length => { :maximum => 80 }
+                                    
+  validates :country,               :presence => true,
+                                    :inclusion => { :in => countries_array }
+                                    
+  validates :nationality,           :inclusion => { :in => countries_array },
+                                    :allow_blank => true
+                                    
+  validates :birthdate,             :presence => true,
+                                    :inclusion => { :in => dates_array }
+                                    
   validates :phone,                 :length => { :minimum => 7, :maximum => 20 },
-                                    :format => { :with => phone_regex }                       
+                                    :format => { :with => phone_regex },
+                                    :allow_blank => true       
+                                                  
   validates :email,                 :presence => true,
                                     :format => { :with => email_regex },
                                     :uniqueness => { :case_sensitive => false } 
-  validates :country,               :presence => true,
-                                    :inclusion => { :in => countries_array }  
+                                    
   validates :facebook_login,        :format => { :with => email_regex },
                                     :uniqueness => { :case_sensitive => false },
                                     :allow_blank => true
+                                    
   validates :linkedin_login,        :format => { :with => email_regex },
                                     :uniqueness => { :case_sensitive => false },
-                                    :allow_blank => true                         
-  
+                                    :allow_blank => true
+                                    
+  validates :twitter_login,         :format => { :with => twitter_regex },
+                                    :uniqueness => { :case_sensitive => false },
+                                    :allow_blank => true
+                                                          
 end
 
 # == Schema Information
