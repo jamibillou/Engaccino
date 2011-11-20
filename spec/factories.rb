@@ -11,6 +11,8 @@ Factory.define :user do |user|
   user.facebook_login "j.doe@example.com"
   user.linkedin_login "j.doe@example.com"
   user.twitter_login "@john_d"
+  user.password "Georges?"
+  user.password_confirmation "Georges?"
 end
 
 Factory.sequence :email do |n|

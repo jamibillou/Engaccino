@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
 
+  attr_accessor :password
+  
   attr_accessible :first_name,
                   :middle_name,
                   :last_name,
@@ -11,7 +13,9 @@ class User < ActiveRecord::Base
                   :email,
                   :facebook_login,
                   :linkedin_login,
-                  :twitter_login
+                  :twitter_login,
+                  :password,
+                  :password_confirmation
   
   countries_array = Country.all.collect { |c| c[1] }
   dates_array = (100.years.ago.to_date..11.years.ago.to_date).to_a
@@ -56,7 +60,45 @@ class User < ActiveRecord::Base
   validates :twitter_login,         :format => { :with => twitter_regex },
                                     :uniqueness => { :case_sensitive => false },
                                     :allow_blank => true
-                                                          
+                                    
+  validates :password,              :presence => true,
+                                    :confirmation => true,
+  					                        :length => { :within => 6..40 }
+  
+  before_save :encrypt_password
+  
+  def has_password?(submitted_password)
+    encrypted_password == encrypt(submitted_password)
+  end
+  
+  class << self
+  
+    def authenticate(email, submitted_password)
+      user = find_by_email(email)
+      (user && user.has_password?(submitted_password)) ? user : nil
+    end
+    
+  end
+  
+  private 
+  
+    def encrypt_password
+      self.salt = make_salt if new_record?
+      self.encrypted_password = encrypt(password)
+    end
+    
+    def encrypt(string)
+      secure_hash("#{salt} -- #{string}")
+    end
+    
+    def make_salt
+      secure_hash("#{Time.now.utc} -- #{password}")
+    end
+    
+    def secure_hash(string)
+      Digest::SHA2.hexdigest(string)
+    end
+    
 end
 
 # == Schema Information

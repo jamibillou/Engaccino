@@ -15,7 +15,9 @@ describe User do
       :email => "jp@example.net",
       :facebook_login => "jp@example.net",
       :linkedin_login => "jp@example.net",
-      :twitter_login => "@j_pablo"
+      :twitter_login => "@j_pablo",
+      :password => "pouetpouet38",
+      :password_confirmation => "pouetpouet38"
     }
     @user = Factory(:user)
   end
@@ -269,6 +271,89 @@ describe User do
     end
   end
   
+  describe "passwords" do
+  
+    it "should have a :password attribute" do
+      @user.should respond_to(:password)
+    end
+    
+    it "should have a password confirmation attribute" do
+      @user.should respond_to(:password_confirmation)
+    end
+  end
+  
+  describe "password validations" do
+    
+    it "should require a password" do
+      User.new(@attributes.merge(:password => "", :password_confirmation => "")).should_not be_valid
+    end
+    
+    it "should require a matching password confirmation" do
+      User.new(@attributes.merge(:password_confirmation => "invalid")).should_not be_valid
+    end
+    
+    it "should reject too short passwords" do
+      short = "a" * 5
+      attr = @attributes.merge(:password => short, :password_confirmation => short)
+      User.new(attr).should_not be_valid
+    end
+    
+    it "should reject too long passwords" do
+      long = "a" * 41
+      attr = @attributes.merge(:password => long, :password_confirmation => long)
+      User.new(attr).should_not be_valid
+    end
+  end
+  
+  describe "password encryption" do
+  
+    it "should have an encrypted pasword attribute" do
+      @user.should respond_to(:encrypted_password)
+    end
+    
+    it "should set the encrypted_password attribute" do
+      @user.encrypted_password.should_not be_blank
+    end
+    
+    it "should have a salt" do
+      @user.should respond_to(:salt)
+    end
+    
+    describe "has_password? method" do
+    
+      it "should exist" do
+        @user.should respond_to(:has_password?)
+      end
+      
+      it "should return true if the passwords match" do
+        @user.has_password?(@user.password).should be_true
+      end
+      
+      it "should return false if the passwords do not match" do
+        @user.has_password?("invalid").should be_false
+      end
+    end
+    
+    describe "authenticate method" do
+      
+      it "should exist" do
+        User.should respond_to(:authenticate)
+      end
+      
+      it "should return nil on email/password mismatch" do
+        User.authenticate(@user.email, "wrongpass").should be_nil
+      end
+      
+      it "should return nil for an email with no user" do
+        User.authenticate("dm@me.com", @user.password).should be_nil
+      end
+      
+      it "should return the user on email/password match" do
+        User.authenticate(@user.email, @user.password).should == @user
+      end
+    end
+  end
+  
   describe "attribute :admin" do
         
     it "should respond to admin" do
@@ -284,7 +369,6 @@ describe User do
       @user.should be_admin
     end
   end 
-    
 end
 
 # == Schema Information
