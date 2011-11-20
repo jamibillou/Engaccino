@@ -1,15 +1,7 @@
 module ApplicationHelper
 
   def logo
-    image_tag("logo.png", :alt => "Engaccino", :class => "logo")
-  end
-  
-  def uk_flag
-    image_tag("uk.png", :alt => "English", :class => "flag")
-  end
-  
-  def french_flag
-    image_tag("fr.png", :alt => "French", :class => "flag")
+    image_tag("logo.png", :alt => "Engaccino", :id => "logo")
   end
   
   def title 

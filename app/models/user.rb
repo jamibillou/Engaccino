@@ -16,7 +16,7 @@ class User < ActiveRecord::Base
   email_regex = /\A[\w+\d\-.]+@[a-z\d\-.]+\.[a-z.]+\z/i
   phone_regex = /\+(?:[0-9] ?){6,14}[0-9]/
   twitter_regex = /@\w{2,}/
-  array_countries = Country.all.collect { |c| c[1]}
+  countries_array = Country.all.collect { |c| c[1] }
 
   validates :first_name,            :presence => true,
                                     :length => { :maximum => 80 }
@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
                                     :format => { :with => email_regex },
                                     :uniqueness => { :case_sensitive => false } 
   validates :country,               :presence => true,
-                                    :inclusion => { :in => array_countries}  
+                                    :inclusion => { :in => countries_array }  
   validates :facebook_login,        :format => { :with => email_regex },
                                     :uniqueness => { :case_sensitive => false },
                                     :allow_blank => true

@@ -1,0 +1,7 @@
+<ul>
+  <% menu_items.each do |menu_item| %>
+    <li class="round<% if menu_item[:selected] %> selected<% end %>">
+      <%= link_to menu_item[:title], menu_item[:path] %>
+    </li>
+  <% end %>
+</ul>

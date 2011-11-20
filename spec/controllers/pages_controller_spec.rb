@@ -17,7 +17,7 @@ describe PagesController do
     
     it "should have the right title" do
       get :overview
-      response.should have_selector("title", :content => "#{@base_title} | "+I18n.t(:menu_overview))
+      response.should have_selector("title", :content => "#{@base_title} | #{I18n.t(:menu_overview)}")
     end
     
     it "should have the right selected navigation tab" do
@@ -50,7 +50,7 @@ describe PagesController do
     
     it "should have the right title" do
       get :walkthrough
-      response.should have_selector("title", :content => "#{@base_title} | "+I18n.t(:menu_walkthrough))
+      response.should have_selector("title", :content => "#{@base_title} | #{I18n.t(:menu_walkthrough)}")
     end
     
     it "should have the right selected navigation tab" do
@@ -83,7 +83,7 @@ describe PagesController do
     
     it "should have the right title" do
       get :pricing
-      response.should have_selector("title", :content => "#{@base_title} | "+I18n.t(:menu_pricing))
+      response.should have_selector("title", :content => "#{@base_title} | #{I18n.t(:menu_pricing)}")
     end
     
     it "should have the right selected navigation tab" do
@@ -116,7 +116,7 @@ describe PagesController do
     
     it "should have the right title" do
       get :about
-      response.should have_selector("title", :content => "#{@base_title} | "+I18n.t(:menu_about))
+      response.should have_selector("title", :content => "#{@base_title} | #{I18n.t(:menu_about)}")
     end
     
     it "should have the right selected navigation tab" do
@@ -149,7 +149,7 @@ describe PagesController do
     
     it "should have the right title" do
       get :contact
-      response.should have_selector("title", :content => "#{@base_title} | "+I18n.t(:menu_contact))
+      response.should have_selector("title", :content => "#{@base_title} | #{I18n.t(:menu_contact)}")
     end
     
     it "should have the right selected navigation tab" do

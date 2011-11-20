@@ -1,22 +1,9 @@
 <header>
   <%= link_to logo, root_path %>
-  
-  <span class="flags">
-  	<%= link_to uk_flag, url_for(:locale => 'en'), { :title => t(:switch_uk) } %>
-  	<%= link_to french_flag, url_for(:locale => 'fr'), { :title => t(:switch_french) } %>
-  </span>
-  
-  <div id="signin_signup">
-    <%t :already_member %><%= link_to t(:sign_in), '#' %> <%= link_to t(:sign_up), '#', :class => 'button' %>
-  </div>
-  <%= render 'layouts/search_form' %>
+  <%= render 'layouts/languages_form' %>
   <nav>
-    <ul>
-      <% menu_items.each do |menu_item| %>
-        <li class="round<% if menu_item[:selected] %> selected<% end %>">
-          <%= link_to menu_item[:title], menu_item[:path] %>
-        </li>
-      <% end %>
-    </ul>
+    <%= render 'layouts/signin_signup_links' %>
+    <%= render 'layouts/search_form' %>
+    <%= render 'layouts/main_menu' %>
   </nav>
 </header>

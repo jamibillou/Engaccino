@@ -1,0 +1,35 @@
+/* Functions called when the page has just finished loading */
+$(document).ready(function()
+{
+	
+	/* When the User clicks the search bar */
+	$("#search_bar").click(function()
+	{
+		if ($("#search_bar_input").attr("value") == "<%= I18n.t(:search_bar_value) %>") {
+		  $("#search_bar_input").css("color","#acacb3");
+		}
+	})
+	
+	/* When the User starts typing in the search bar */
+	$("#search_bar").keydown(function()
+	{
+		if ($("#search_bar_input").attr("value") == "<%= I18n.t(:search_bar_value) %>") {
+		  $("#search_bar_input").attr("value","");
+		  $("#search_bar_input").css("font-style","normal");
+		  $("#search_bar_input").css("color","#444");
+		}
+	})
+	
+	/* When the User clicks somewhere else than the search bar */
+	$("#search_bar").focusout(function()
+	{
+	  if ($("#search_bar_input").attr("value") == "" || $("#search_bar_input").attr("value") == "<%= I18n.t(:search_bar_value) %>") {
+  	  $("#search_bar_input").css("font-style","italic");
+  	  $("#search_bar_input").css("color","#7c7777");
+  	  if ($("#search_bar_input").attr("value") == "") {
+  	    $("#search_bar_input").attr("value","<%= I18n.t(:search_bar_value) %>");
+      }
+    }
+	})
+		
+})

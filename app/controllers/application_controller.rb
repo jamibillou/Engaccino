@@ -3,8 +3,8 @@ class ApplicationController < ActionController::Base
   
   before_filter :set_locale
   
+  # Avoids having to pass the locale as a parameter in the URL
   def set_locale
-    #It avoid having the local parameters in every urls
     I18n.default_locale = params[:locale] if !params[:locale].nil?
     I18n.locale = I18n.default_locale
   end

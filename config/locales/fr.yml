@@ -1,21 +1,21 @@
-# Sample localization file for French. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 fr:
-  menu_overview: "Présentation"
-  menu_walkthrough: "Démonstration"
+  
+  # Application header
+  
+  menu_overview: "Aperçu"
+  menu_walkthrough: "Visite guidée"
   menu_pricing: "Tarifs"
-  menu_about: "A propos de"
+  menu_about: "Qui sommes nous ?"
   menu_contact: "Contact"
   
-  switch_uk: "Sélectionner l'anglais comme langue par défaut"
-  switch_french: "Sélectionner le français comme langue par défaut"
-  
-  search_bar: "Rechercher sur Engaccino"
-  
+  search_bar_value: "Accés rapide"
+  search_bar_title: "Rechercher un contact, une entreprise, offre d'emploi, etc."
+   
   already_member: "Déjà membre?"
   sign_in: "Se connecter"
   sign_up: "S'inscrire !"
+  
+  # Controllers
   
   pages:
     overview:
