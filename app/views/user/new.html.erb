@@ -1,2 +1,7 @@
-<h1>User#new</h1>
-<p>Find me in app/views/user/new.html.erb</p>
+<h2><%=t 'users.new.create_engaccino_account' %></h2>
+<%= form_for(@user) do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %> 
+	<%= render 'signup_step1', :f => f %>
+<% end %>
+<br />
+<%= link_to t('users.new.set_up_profile'), signup_path, :class => 'button' %>

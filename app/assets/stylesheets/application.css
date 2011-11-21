@@ -1,11 +1,15 @@
 html {
   font-family: arial;
-  color: #444;
+  color: black;
+
 }
+
+h1 { font-size: 25px; margin: 0; padding: 0; }
+h2 { font-size: 20px; font-weight: normal; }
 
 body {
   line-height: 1.5;
-  background: white;
+  background: #f1f1f1;
   margin: 0;
   padding: 0;
 }
@@ -25,13 +29,13 @@ header #logo {
 header #languages
 {
 	float: right;
-	padding-right: 12px;
+	padding-right: 20px;
 	font-size: 11px;
 }
 header #languages a
 {
 	text-decoration: none;
-	color: #444;
+	color: black;
 }
 header #languages a:hover
 {
@@ -96,16 +100,20 @@ header #signin_signup {
   font-weight: normal;
 }
 header #signin_signup a {
-  color: #444;
+  color: black;
   font-weight: bold;
 }
 header #signin_signup a.button {
   color: white;
+  margin-right: 15px;
+  margin-left: 5px;
 }
 
 /* CONTENT */
-#container {
- padding-left: 12px; 
+#container h1 {
+  margin-top: 40px;
+  margin-left: 45px;
+  margin-bottom: 10px;
 }
 
 /* FOOTER */
@@ -130,7 +138,7 @@ a.button {
   border-radius: 5px;
   background-color: #0b7fd2;
   padding: 9px 30px;
-  margin: 5px;
+  margin: 0;
   color: white;
   text-decoration: none;
   font-size: 13px;
@@ -139,4 +147,23 @@ a.button {
 a.button:hover {
   text-decoration: underline;
 }
+
+.white_block {
+  background: white;
+  margin-left: 25px;
+  margin-right: 25px;
+  padding: 5px 20px 30px 20px;
+}
+.white_block p {
+  margin-top: 40px;
+}
+
+.field {
+  height: 35px;
+  width: 300px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  font-size: ;
+}
+
 

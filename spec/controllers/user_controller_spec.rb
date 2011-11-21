@@ -2,53 +2,69 @@ require 'spec_helper'
 
 describe UserController do
 
+  render_views
+
+  before(:each) do
+    @user = Factory(:user)
+  end
+
   describe "GET 'index'" do
     it "returns http success" do
-      get 'index'
+      get :index
       response.should be_success
     end
   end
 
   describe "GET 'show'" do
+    
     it "returns http success" do
-      get 'show'
+      get :show, :id => @user
       response.should be_success
     end
   end
 
   describe "GET 'new'" do
+  
     it "returns http success" do
-      get 'new'
+      get :new
       response.should be_success
+    end
+    
+    it "should have the right title" do 
+      get :new
+      response.should have_selector('title', :content => I18n.t('users.new.title'))
     end
   end
 
-  describe "GET 'create'" do
+  describe "POST 'create'" do
+  
     it "returns http success" do
-      get 'create'
+      post :create
       response.should be_success
     end
   end
 
   describe "GET 'edit'" do
+  
     it "returns http success" do
-      get 'edit'
+      get :edit, :id => @user
       response.should be_success
     end
   end
 
-  describe "GET 'update'" do
+  describe "PUT 'update'" do
+  
     it "returns http success" do
-      get 'update'
+      put :update, :id => @user
       response.should be_success
     end
   end
 
-  describe "GET 'destroy'" do
+  describe "DELETE 'destroy'" do
+    
     it "returns http success" do
-      get 'destroy'
+      delete :destroy, :id => @user
       response.should be_success
     end
   end
-
 end

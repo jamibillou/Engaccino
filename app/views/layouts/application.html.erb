@@ -16,7 +16,10 @@
   <%= render 'layouts/header' %>	
 	
   <div id="container">
-    <%= yield %>
+    <h1><%= @title %></h1>
+    <div class="white_block">
+      <%= yield %>
+    </div>
   </div>
   
   <footer>

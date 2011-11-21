@@ -5,13 +5,13 @@ fr:
   menu_overview: "Aperçu"
   menu_walkthrough: "Visite guidée"
   menu_pricing: "Tarifs"
-  menu_about: "Qui sommes nous ?"
+  menu_about: "À propos"
   menu_contact: "Contact"
   
   search_bar_value: "Accès rapide"
   search_bar_title: "Rechercher un contact, une entreprise, offre d'emploi, etc."
    
-  already_member: "Déjà membre?"
+  already_member: "Déjà membre ?"
   sign_in: "Se connecter"
   sign_up: "S'inscrire !"
   
@@ -19,12 +19,32 @@ fr:
   
   pages:
     overview:
-      content: "Bienvenue sur la célèbre application Engaccino !!"
-    contact:
-      content: "N'hésitez pas à nous contacter pour plus d'information !!"
-    about:
-      content: "Comment les BG en sont venus à Engaccino..."
-    pricing:
-      content: "Voici nos différentes propositions tarifaires... Evidemment, si vous vous inscrivez comme candidat, c'est gratuit !!"
+      summary: "Bienvenue sur Engaccino !"
+      content: ""
     walkthrough:
-      content: "Prenez quelques minutes pour comprendre le fonctionnement de l'application"
+      summary: "Une petite visite ?"
+      content: ""
+    pricing:
+      summary: "Gratuit pour tous les candidats !"
+      content: ""  
+    about:
+      summary: "L'équipe"
+      content: ""
+    contact:
+      summary: "Comment nous contacter"
+      content: ""
+          
+  users:
+    index:
+      title: "Liste des utilisateurs"
+    show:
+      title: "Profil de "
+    new:
+      title: "S'inscrire"
+      set_up_profile: "Créer mon profil"
+      create_engaccino_account: "Créer un compte Engaccino"
+      email_field: "Email"
+      password_field: "Mot de passe"
+      confirmation_field: "Confirmez votre mot de passe"
+    edit:
+      title: "Editez votre profil"
