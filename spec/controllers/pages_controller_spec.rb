@@ -27,7 +27,7 @@ describe PagesController do
     
     it "should have a sign up button" do
       get :overview
-      response.should have_selector('a', :class => 'button', :content => I18n.t(:sign_up))
+      response.should have_selector('a', :content => I18n.t(:sign_up))
     end
     
     it "should have a sign in link" do
@@ -60,7 +60,7 @@ describe PagesController do
     
     it "should have a sign up button" do
       get :walkthrough
-      response.should have_selector('a', :class => 'button', :content => I18n.t(:sign_up))
+      response.should have_selector('a', :content => I18n.t(:sign_up))
     end
     
     it "should have a sign in link" do
@@ -93,7 +93,7 @@ describe PagesController do
     
     it "should have a sign up button" do
       get :pricing
-      response.should have_selector('a', :class => 'button', :content => I18n.t(:sign_up))
+      response.should have_selector('a', :content => I18n.t(:sign_up))
     end
     
     it "should have a sign in link" do
@@ -126,7 +126,7 @@ describe PagesController do
     
     it "should have a sign up button" do
       get :about
-      response.should have_selector('a', :class => 'button', :content => I18n.t(:sign_up))
+      response.should have_selector('a', :content => I18n.t(:sign_up))
     end
     
     it "should have a sign in link" do
@@ -159,7 +159,7 @@ describe PagesController do
     
     it "should have a sign up button" do
       get :contact
-      response.should have_selector('a', :class => 'button', :content => I18n.t(:sign_up))
+      response.should have_selector('a', :content => I18n.t(:sign_up))
     end
     
     it "should have a sign in link" do

@@ -32,7 +32,7 @@ describe UserController do
     
     it "should have the right title" do 
       get :new
-      response.should have_selector('title', :content => I18n.t('users.new.title'))
+      response.should have_selector('title', :content => I18n.t('user.new.title'))
     end
   end
 

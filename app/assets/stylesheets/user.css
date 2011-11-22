@@ -1,4 +1,7 @@
-/*
-  Place all the styles related to the matching controller here.
-  They will automatically be included in application.css.
-*/
+#signup_part_1 {
+  display: block;
+}
+
+#signup_part_2 {
+  display: none;
+}

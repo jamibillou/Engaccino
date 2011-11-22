@@ -15,7 +15,7 @@ fr:
   sign_in: "Se connecter"
   sign_up: "S'inscrire !"
   
-  # Controllers
+  # Views
   
   pages:
     overview:
@@ -34,7 +34,7 @@ fr:
       summary: "Comment nous contacter"
       content: ""
           
-  users:
+  user:
     index:
       title: "Liste des utilisateurs"
     show:
@@ -43,8 +43,18 @@ fr:
       title: "S'inscrire"
       set_up_profile: "Créer mon profil"
       create_engaccino_account: "Créer un compte Engaccino"
+      or_use_social_account: "Ou connectez vous avec votre compte Facebook ou Twitter"
+      connect_via: "S'indentifier via"
       email_field: "Email"
       password_field: "Mot de passe"
       confirmation_field: "Confirmez votre mot de passe"
+      speed_up_by_import: "Gagnez du temps, importez vos détails depuis LinkedIn ou Facebook."
+      import_from: "Importez depuis"
+      personal_information: "Civilité"
+      professional_experience: "Expérience professionnelle"
+      education: "Formation"
+      status: "Statut"
+      view_profile: "Afficher mon profil"
+      complete_your_profile: "Excellent! Plus qu'à compléter votre profil"
     edit:
       title: "Editez votre profil"

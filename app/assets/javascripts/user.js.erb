@@ -1,0 +1,96 @@
+$(document).ready(function()
+{
+
+  /** SIGNUP PAGE **/
+  
+  /* CHANGES THE EMAIL FIELD APPARENCE */
+  
+  $("#signup_email_input").click(function()
+  {
+  	if ($("#signup_email_input").attr("value") == "<%= I18n.t('user.new.email_field') %>") {
+  	  $("#signup_email_input").css("color","#acacb3");
+  	}
+  })
+  $("#signup_email_input").keydown(function()
+  {
+  	if ($("#signup_email_input").attr("value") == "<%= I18n.t('user.new.email_field') %>") {
+  	  $("#signup_email_input").attr("value","");
+  	  $("#signup_email_input").css("font-style","normal");
+  	  $("#signup_email_input").css("color","#444");
+  	}
+  })
+  $("#signup_email_input").focusout(function()
+  {
+    if ($("#signup_email_input").attr("value") == "" || $("#signup_email_input").attr("value") == "<%= I18n.t('user.new.email_field') %>") {
+  	  $("#signup_email_input").css("font-style","italic");
+  	  $("#signup_email_input").css("color","#7c7777");
+  	  if ($("#signup_email_input").attr("value") == "") {
+  	    $("#signup_email_input").attr("value","<%= I18n.t('user.new.email_field') %>");
+      }
+    }
+  })
+  
+  /* CHANGES THE PASSWORD FIELD APPEARANCE */
+  
+  $("#signup_password_input").click(function()
+  {
+  	if ($("#signup_password_input").attr("value") == "<%= I18n.t('user.new.password_field') %>") {
+  	  $("#signup_password_input").css("color","#acacb3");
+  	}
+  })
+  $("#signup_password_input").keydown(function()
+  {
+  	if ($("#signup_password_input").attr("value") == "<%= I18n.t('user.new.password_field') %>") {
+  	  $("#signup_password_input").attr("value","");
+  	  $("#signup_password_input").css("font-style","normal");
+  	  $("#signup_password_input").css("color","#444");
+  	}
+  })
+  $("#signup_password_input").focusout(function()
+  {
+    if ($("#signup_password_input").attr("value") == "" || $("#signup_password_input").attr("value") == "<%= I18n.t('user.new.password_field') %>") {
+  	  $("#signup_password_input").css("font-style","italic");
+  	  $("#signup_password_input").css("color","#7c7777");
+  	  if ($("#signup_password_input").attr("value") == "") {
+  	    $("#signup_password_input").attr("value","<%= I18n.t('user.new.password_field') %>");
+      }
+    }
+  })
+  
+  /* CHANGES THE PASSWORD CONFIRMATION FIELD APPEARANCE */
+  
+  $("#signup_password_confirmation_input").click(function()
+  {
+  	if ($("#signup_password_confirmation_input").attr("value") == "<%= I18n.t('user.new.confirmation_field') %>") {
+  	  $("#signup_password_confirmation_input").css("color","#acacb3");
+  	}
+  })
+  $("#signup_password_confirmation_input").keydown(function()
+  {
+  	if ($("#signup_password_confirmation_input").attr("value") == "<%= I18n.t('user.new.confirmation_field') %>") {
+  	  $("#signup_password_confirmation_input").attr("value","");
+  	  $("#signup_password_confirmation_input").css("font-style","normal");
+  	  $("#signup_password_confirmation_input").css("color","#444");
+  	}
+  })
+  $("#signup_password_confirmation_input").focusout(function()
+  {
+    if ($("#signup_password_confirmation_input").attr("value") == "" || $("#signup_password_confirmation_input").attr("value") == "<%= I18n.t('user.new.confirmation_field') %>") {
+  	  $("#signup_password_confirmation_input").css("font-style","italic");
+  	  $("#signup_password_confirmation_input").css("color","#7c7777");
+  	  if ($("#signup_password_confirmation_input").attr("value") == "") {
+  	    $("#signup_password_confirmation_input").attr("value","<%= I18n.t('user.new.confirmation_field') %>");
+      }
+    }
+  })
+  
+  /* HIDES THE FIRST STEP OF THE SIGNUP PROCESS AND REVEALS THE SECOND ONE */
+  
+  $("#signup_form_1_submit").click(function()
+  {
+    $("#signup_part_1").attr("class","white_block hidden");
+    $("#container_title").html("<%= I18n.t('user.new.complete_your_profile') %>");
+    $("#signup_part_2").attr("class","visible");
+  })
+  
+})
