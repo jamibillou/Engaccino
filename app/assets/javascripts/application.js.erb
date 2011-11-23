@@ -1,59 +1,36 @@
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
 //= require i18n
 //= require i18n/translations
 
 $(document).ready(function()
 {
-	arrayBars = new Array(Array("search_bar_input","search_bar_value"));
-	
-	for (var bar in arrayBars)
-	{
-		stylizeBar(bar[0],bar[1]);
-	}
-	
-	
-	/* CHANGES THE SEARCH BAR APPEARANCE */
-	
-	/*$("#search_bar").click(function()
-	{
-		if ($("#search_bar_input").attr("value") == I18n.t("search_bar_value")) {
-		  $("#search_bar_input").css("color","#acacb3");
-		}
-	})	
-	$("#search_bar").keydown(function()
-	{
-		if ($("#search_bar_input").attr("value") == "<%= I18n.t(:search_bar_value) %>") {
-		  $("#search_bar_input").attr("value","");
-		  $("#search_bar_input").css("font-style","normal");
-		  $("#search_bar_input").css("color","#444");
-		}
-	})
-	$("#search_bar").focusout(function()
-	{
-	  if ($("#search_bar_input").attr("value") == "" || $("#search_bar_input").attr("value") == "<%= I18n.t(:search_bar_value) %>") {
-  	  $("#search_bar_input").css("font-style","italic");
-  	  $("#search_bar_input").css("color","#7c7777");
-  	  if ($("#search_bar_input").attr("value") == "") {
-  	    $("#search_bar_input").attr("value","<%= I18n.t(:search_bar_value) %>");
-      }
-    }
-	})*/
-	
-})
+	var arrayBarsApplication = new Array(Array("search_bar_input","search_bar_value"));
+	loopBars(arrayBarsApplication);
+});
 
+//Call by every js file, with its specific bars
+function loopBars(arrayBars)
+{
+	for (var i in arrayBars)
+	{
+		//alert(arrayBars[i][0]+"/"+arrayBars[i][1]);
+		stylizeBar(arrayBars[i][0],arrayBars[i][1]);
+	}
+}
+
+//For each bar given in parameters, change the style and the behaviour
 function stylizeBar(barId,barValue)
 {
-	$("#"+barId).click(function())
+	$("#"+barId).click(function()
 	{
 		if($("#"+barId).attr("value") == I18n.t(barValue))
 		{
 			$("#"+barId).css("color","#acacb3");	
 		}
-	}
+	});
 	
-	$("#"+barId).keydown(function())
+	$("#"+barId).keydown(function()
 	{
 		if($("#"+barId).attr("value") == I18n.t(barValue))
 		{
@@ -61,7 +38,7 @@ function stylizeBar(barId,barValue)
 			$("#"+barId).css("font-style","normal");
 			$("#"+barId).css("color","#444");	
 		}
-	}
+	});
 	
 	$("#"+barId).focusout(function()
 	{
@@ -74,5 +51,5 @@ function stylizeBar(barId,barValue)
 				$("#"+barId).attr("value",I18n.t(barValue)); 
 			}
 		}
-	})
+	});
 }
