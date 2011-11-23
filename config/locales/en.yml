@@ -68,6 +68,7 @@ en:
       company_field: "Company"
       role_field: "Role"
       timeframe_field: "Time frame"
+      timeframe_education_field: "Time frame"
       education: "Education"
       degree_field: "Degree"
       university_field: "University"

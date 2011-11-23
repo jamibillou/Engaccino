@@ -12,7 +12,7 @@
                                          [t('user.new.happy_status'), 5]]),
                      :class => 'combo') %>
     <% end %>
-    <% if field[:id] == 'timeframe' %>
+    <% if field[:id].include?('timeframe') %>
       <%= link_to '+', '#', :class => 'slightly_round blue button' %>
     <% end %>
     <% if field[:new_line] %>
