@@ -1,43 +1,15 @@
-<div id="signup_part_1" class="white_block visible">
-  <div class="left dashed">
-    <h2><%=t '.create_engaccino_account' %></h2>
-    <%= form_for @user, :html => { :id => 'signup_form_1' } do |f| %>
-      <%= render 'shared/error_messages', :object => f.object %> 
-    	<%= render 'signup_form_1', :f => f %>
-    	<%= f.submit t('.set_up_profile'), :class => 'hidden' %>
+<%= form_for @user do |f| %>
+  <div id="signup_part_1" class="white_block visible">
+    <%= render :partial => 'signup_with_engaccino_account', :locals => { :f => f } %>
+    <%= render :partial => 'signup_with_social_media', :locals => { :f => f } %>
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+  </div>
+  <div id="signup_part_2" class="hidden">
+    <%= render 'signup_speed_up' %>
+    <% signup_blocks.each do |block| %>
+      <%= render :partial => 'signup_block', :locals => { :block => block, :f => f } %>
     <% end %>
-    <br />
-    <%= link_to t('.set_up_profile'), '#', :id => 'signup_form_1_submit', :class => 'button blue round' %>
   </div>
-  <div class="right dashed" width="500">
-    <h2><%=t '.or_use_social_account' %></h2>
-    <%= link_to "#{t('.connect_via')} Facebook", '#', :class => 'button grey big_tall margin_right slightly_round left' %>
-    <%= link_to "#{t('.connect_via')} Twitter", '#', :class => 'button grey big_tall slightly_round right' %>
-  </div>
-  <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-</div>
-<div id="signup_part_2" class="hidden">
-  <div class="white_block">
-      <div class="left">
-        <p><%=t '.speed_up_by_import' %></p>
-      </div>
-      <div class="right">
-        <%= link_to "#{t('.import_from')} LinkedIn", '#', :class => 'button grey big margin_right slightly_round left' %>
-        <%= link_to "#{t('.import_from')} Facebook", '#', :class => 'button grey big slightly_round right' %>
-      </div>
-      <br /><br />
-  </div>
-  <div class="white_block">
-    <h2><%=t '.personal_information' %></h2>
-  </div>
-  <div class="white_block">
-    <h2><%=t '.professional_experience' %></h2>
-  </div>
-  <div class="white_block">
-    <h2><%=t '.education' %></h2>
-  </div>
-  <div class="white_block">
-    <h2><%=t '.status' %></h2>
-  </div>
-  <%= link_to t('.view_profile'), '#', :id => 'signup_form_2_submit', :class => 'button blue round center' %>
-</div>
+  <%= f.submit t('user.new.set_up_profile'), :class => 'hidden' %>
+<% end %>
+<%= link_to t('.view_profile'), '#', :id => 'signup_form_2_submit', :class => 'button blue round center' %>

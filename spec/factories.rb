@@ -1,6 +1,5 @@
 Factory.define :user do |user|
   user.first_name "John"
-  user.middle_name ""
   user.last_name "Doe" 
   user.city "Rotterdam"         
   user.country "NL"     

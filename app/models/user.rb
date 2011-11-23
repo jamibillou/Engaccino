@@ -3,7 +3,6 @@ class User < ActiveRecord::Base
   attr_accessor :password
   
   attr_accessible :first_name,
-                  :middle_name,
                   :last_name,
                   :city,
                   :country,
@@ -25,10 +24,7 @@ class User < ActiveRecord::Base
 
   validates :first_name,            :presence => true,
                                     :length => { :maximum => 80 }
-                                    
-  validates :middle_name,           :length => { :maximum => 80 },
-                                    :allow_blank => true
-                                    
+                            
   validates :last_name,             :presence => true,
                                     :length => { :maximum => 80 }
                                     
@@ -118,12 +114,13 @@ end
 #  facebook_login     :string(255)
 #  linkedin_login     :string(255)
 #  twitter_login      :string(255)
-#  facebook_connect   :boolean(1)
-#  linkedin_connect   :boolean(1)
-#  twitter_connect    :boolean(1)
+#  facebook_connect   :boolean(1)      default(FALSE)
+#  linkedin_connect   :boolean(1)      default(FALSE)
+#  twitter_connect    :boolean(1)      default(FALSE)
 #  admin              :boolean(1)      default(FALSE)
 #  encrypted_password :string(255)
 #  created_at         :datetime
 #  updated_at         :datetime
+#  salt               :string(255)
 #
 

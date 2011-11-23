@@ -1,0 +1,22 @@
+<div id="<%= block[:id] %>" class="white_block">
+  <h2><%=t ".#{block[:id]}" %></h2>
+  <% block[:fields].each do |field| %>
+    <% unless field[:id] == 'status' %>
+      <%= f.text_field field[:id], :value => t("user.new.#{field[:id]}_field"), :id => "signup_#{field[:id]}_input", :class => 'field margin_right' %>
+    <% else %>
+      <%= select_tag(field[:id],
+                     options_for_select([[t('user.new.available_status'), 1],
+                                         [t('user.new.looking_status'), 2],
+                                         [t('user.new.open_status'), 3],
+                                         [t('user.new.listening_status'), 4],
+                                         [t('user.new.happy_status'), 5]]),
+                     :class => 'combo') %>
+    <% end %>
+    <% if field[:id] == 'timeframe' %>
+      <%= link_to '+', '#', :class => 'slightly_round blue button' %>
+    <% end %>
+    <% if field[:new_line] %>
+      <br />
+    <% end %>
+  <% end %>
+</div>
