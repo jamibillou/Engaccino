@@ -1,8 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  before_filter :set_locale, :export_i18n_messages
-  
+  before_filter :set_locale
   # Avoids having to pass the locale as a parameter in the URL
   def set_locale
     I18n.default_locale = params[:locale] if !params[:locale].nil?
@@ -10,7 +9,7 @@ class ApplicationController < ActionController::Base
   end
   
   #Generates the Javascript Translation (http://blog.10to1.be/rails/2011/03/22/localizing-javascript-in-your-rails-app/)
-  def export_i18n_messages
-    SimpleIdeias::I18n.export! if Rails.env.development?
-  end
+  #def export_i18n_messages
+  #  SimpleIdeias::I18n.export! if Rails.env.development?
+  #end
 end

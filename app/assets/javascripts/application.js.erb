@@ -1,13 +1,22 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require i18n
+//= require i18n/translations
 
 $(document).ready(function()
 {
+	arrayBars = new Array(Array("search_bar_input","search_bar_value"));
+	
+	for (var bar in arrayBars)
+	{
+		stylizeBar(bar[0],bar[1]);
+	}
+	
 	
 	/* CHANGES THE SEARCH BAR APPEARANCE */
 	
-	$("#search_bar").click(function()
+	/*$("#search_bar").click(function()
 	{
 		if ($("#search_bar_input").attr("value") == I18n.t("search_bar_value")) {
 		  $("#search_bar_input").css("color","#acacb3");
@@ -30,17 +39,40 @@ $(document).ready(function()
   	    $("#search_bar_input").attr("value","<%= I18n.t(:search_bar_value) %>");
       }
     }
-	})
+	})*/
 	
 })
 
-function stylizeBar(barId)
+function stylizeBar(barId,barValue)
 {
+	$("#"+barId).click(function())
+	{
+		if($("#"+barId).attr("value") == I18n.t(barValue))
+		{
+			$("#"+barId).css("color","#acacb3");	
+		}
+	}
+	
 	$("#"+barId).keydown(function())
 	{
-		$("#"+barId).attr("value","");
-		$("#"+barId).css("font-style","normal");
-		$("#"+barId).css("color","#444");
+		if($("#"+barId).attr("value") == I18n.t(barValue))
+		{
+			$("#"+barId).attr("value","");
+			$("#"+barId).css("font-style","normal");
+			$("#"+barId).css("color","#444");	
+		}
 	}
-
+	
+	$("#"+barId).focusout(function()
+	{
+		if($("#"+barId).attr("value") == "" || $("#"+barId).attr("value") == I18n.t(barValue))
+		{
+			$("#"+barId).css("font-style","italic");
+			$("#"+barId).css("color","#7c7777");
+			if($("#"+barId).attr("value") == "")
+			{
+				$("#"+barId).attr("value",I18n.t(barValue)); 
+			}
+		}
+	})
 }
