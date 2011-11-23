@@ -1,19 +1,4 @@
 Engaccino::Application.routes.draw do
-  
-  scope "(:locale)", :locale => /en|fr/ do
-  
-    resources :user
-  
-    match '/users', :to => 'user#index'
-    match '/signup', :to => 'user#new'
-  
-    root :to => 'pages#overview'
-    match '/walkthrough', :to => 'pages#walkthrough'
-    match '/pricing', :to => 'pages#pricing'
-    match '/about', :to => 'pages#about'
-    match '/contact', :to => 'pages#contact'
-  end
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -4,4 +4,4 @@
 # If you change this key, all old signed cookies will become invalid!
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-Engaccino::Application.config.secret_token = '4e44a18e2819491510a063e012695d6aaad93c763d66d4a944bbae7ae09652c66f40a321c8967882350d2a29211a90aa93b05a4a0366ac0fd688139c61797719'
+Engaccino::Application.config.secret_token = '2ad3e6c0f7d59fa7a86defa878fbef9472cf84be5995925021a56f9a56949d852a4f8fa5339cf1600ae87e2ca8cc2f22e97da495de00d93c0e937bbbc6449da5'

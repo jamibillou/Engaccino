@@ -9,7 +9,7 @@ $(document).ready(function()
 	
 	$("#search_bar").click(function()
 	{
-		if ($("#search_bar_input").attr("value") == "<%= I18n.t(:search_bar_value) %>") {
+		if ($("#search_bar_input").attr("value") == I18n.t("search_bar_value")) {
 		  $("#search_bar_input").css("color","#acacb3");
 		}
 	})	
@@ -33,3 +33,14 @@ $(document).ready(function()
 	})
 	
 })
+
+function stylizeBar(barId)
+{
+	$("#"+barId).keydown(function())
+	{
+		$("#"+barId).attr("value","");
+		$("#"+barId).css("font-style","normal");
+		$("#"+barId).css("color","#444");
+	}
+
+}
