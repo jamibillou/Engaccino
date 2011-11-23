@@ -1,5 +1,5 @@
 class UserController < ApplicationController
-  
+    
   def index
   end
 
@@ -7,8 +7,8 @@ class UserController < ApplicationController
   end
 
   def new
-    @user = User.new
     @title = t 'user.new.title'
+    @user = User.new
   end
 
   def create

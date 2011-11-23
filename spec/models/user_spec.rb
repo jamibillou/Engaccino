@@ -5,7 +5,6 @@ describe User do
   before(:each) do
     @attributes = {
       :first_name => "Juan",
-      :middle_name => "",
       :last_name => "Pablo",
       :city => "Madrid",         
       :country => "ES",
@@ -116,20 +115,6 @@ describe User do
   end
   
   describe "optional attributes" do
-  
-    describe ":middle_name" do
-    
-      it "should accept empty middles names" do
-        empty_middle_name_user = User.new(@attributes.merge(:middle_name => ""))
-        empty_middle_name_user.should be_valid
-      end
-      
-      it "should reject too long middle names" do
-        long_middle_name = "f" * 81
-        long_middle_name_user = User.new(@attributes.merge(:middle_name => long_middle_name))
-        long_middle_name_user.should_not be_valid
-      end
-    end
     
     describe ":nationality" do
     
@@ -388,12 +373,13 @@ end
 #  facebook_login     :string(255)
 #  linkedin_login     :string(255)
 #  twitter_login      :string(255)
-#  facebook_connect   :boolean(1)
-#  linkedin_connect   :boolean(1)
-#  twitter_connect    :boolean(1)
+#  facebook_connect   :boolean(1)      default(FALSE)
+#  linkedin_connect   :boolean(1)      default(FALSE)
+#  twitter_connect    :boolean(1)      default(FALSE)
 #  admin              :boolean(1)      default(FALSE)
 #  encrypted_password :string(255)
 #  created_at         :datetime
 #  updated_at         :datetime
+#  salt               :string(255)
 #
 

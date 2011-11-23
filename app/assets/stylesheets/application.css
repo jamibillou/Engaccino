@@ -207,6 +207,12 @@ a.button.grey:hover {
   color: #7c7777;
   font-style: italic;
 }
+.field.margin_right {
+  margin-right: 10px;
+}
+.combo {
+  font-size: 18px;
+}
 
 /* VISIBILITY */
 .hidden {
