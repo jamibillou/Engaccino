@@ -24,6 +24,7 @@ function stylizeBar(barId,barValue)
 {
 	$("#"+barId).click(function()
 	{
+		//alert($("#"+barId).attr("value")+"///"+I18n.t(barValue));
 		if($("#"+barId).attr("value") == I18n.t(barValue))
 		{
 			$("#"+barId).css("color","#acacb3");	
