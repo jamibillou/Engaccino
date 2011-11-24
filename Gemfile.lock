@@ -47,6 +47,8 @@ GEM
       i18n (~> 0.4)
     hike (1.2.1)
     i18n (0.6.0)
+    i18n-js (2.1.2)
+      i18n
     jquery-rails (1.0.17)
       railties (~> 3.0)
       thor (~> 0.14)
@@ -126,6 +128,7 @@ DEPENDENCIES
   countries
   factory_girl_rails
   faker
+  i18n-js
   jquery-rails
   mysql2
   phony

@@ -37,7 +37,7 @@ module UserHelper
                      { :id => 'university',
                        :new_line => false
                      },
-                     { :id => 'timeframe',
+                     { :id => 'timeframe_education',
                        :new_line => false
                      }
                    ] },

@@ -1,35 +1,56 @@
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require i18n
+//= require i18n/translations
 
 $(document).ready(function()
 {
-	
-	/* CHANGES THE SEARCH BAR APPEARANCE */
-	
-	$("#search_bar").click(function()
+	var arrayBarsApplication = new Array(Array("search_bar_input","search_bar_value"));
+	loopBars(arrayBarsApplication);
+});
+
+//Call by every js file, with its specific bars
+function loopBars(arrayBars)
+{
+	for (var i in arrayBars)
 	{
-		if ($("#search_bar_input").attr("value") == "<%= I18n.t(:search_bar_value) %>") {
-		  $("#search_bar_input").css("color","#acacb3");
+		//alert(arrayBars[i][0]+"/"+arrayBars[i][1]);
+		stylizeBar(arrayBars[i][0],arrayBars[i][1]);
+	}
+}
+
+//For each bar given in parameters, change the style and the behaviour
+function stylizeBar(barId,barValue)
+{
+	$("#"+barId).click(function()
+	{
+		//alert($("#"+barId).attr("value")+"///"+I18n.t(barValue));
+		if($("#"+barId).attr("value") == I18n.t(barValue))
+		{
+			$("#"+barId).css("color","#acacb3");	
 		}
-	})	
-	$("#search_bar").keydown(function()
-	{
-		if ($("#search_bar_input").attr("value") == "<%= I18n.t(:search_bar_value) %>") {
-		  $("#search_bar_input").attr("value","");
-		  $("#search_bar_input").css("font-style","normal");
-		  $("#search_bar_input").css("color","#444");
-		}
-	})
-	$("#search_bar").focusout(function()
-	{
-	  if ($("#search_bar_input").attr("value") == "" || $("#search_bar_input").attr("value") == "<%= I18n.t(:search_bar_value) %>") {
-  	  $("#search_bar_input").css("font-style","italic");
-  	  $("#search_bar_input").css("color","#7c7777");
-  	  if ($("#search_bar_input").attr("value") == "") {
-  	    $("#search_bar_input").attr("value","<%= I18n.t(:search_bar_value) %>");
-      }
-    }
-	})
+	});
 	
-})
+	$("#"+barId).keydown(function()
+	{
+		if($("#"+barId).attr("value") == I18n.t(barValue))
+		{
+			$("#"+barId).attr("value","");
+			$("#"+barId).css("font-style","normal");
+			$("#"+barId).css("color","#444");	
+		}
+	});
+	
+	$("#"+barId).focusout(function()
+	{
+		if($("#"+barId).attr("value") == "" || $("#"+barId).attr("value") == I18n.t(barValue))
+		{
+			$("#"+barId).css("font-style","italic");
+			$("#"+barId).css("color","#7c7777");
+			if($("#"+barId).attr("value") == "")
+			{
+				$("#"+barId).attr("value",I18n.t(barValue)); 
+			}
+		}
+	});
+}
