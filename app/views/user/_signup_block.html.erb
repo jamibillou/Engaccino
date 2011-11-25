@@ -1,9 +1,12 @@
 <div id="<%= block[:id] %>" class="white_block">
   <h2><%=t ".#{block[:id]}" %></h2>
   <% block[:fields].each do |field| %>
-    <% unless field[:id] == 'status' %>
+  	<% case field[:type] %>
+  	<% when "text" %>
       <%= f.text_field field[:id], :value => t("user.new.#{field[:id]}_field"), :id => "signup_#{field[:id]}_input", :class => 'field margin_right' %>
-    <% else %>
+    <% when "date" %>
+      <%= f.date_select field[:id], :value => t("user.new.#{field[:id]}_field"), :id => "signup_#{field[:id]}_input", :class => 'field margin_right' %>
+    <% when "select" %>
       <%= select_tag(field[:id],
                      options_for_select([[t('user.new.available_status'), 1],
                                          [t('user.new.looking_status'), 2],
@@ -18,4 +21,5 @@
       <br />
     <% end %>
   <% end %>
+<br /><%= link_to t('user.new.set_up_profile'), '#', :id => 'signup_form_submit_1', :class => 'button blue round' %>
 </div>

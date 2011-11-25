@@ -19,16 +19,16 @@ $(document).ready(function()
 	styleInputFields(userInputFields);
   
   // HIDES THE 1ST PART OF THE SIGNUP FORM AND REVEALS THE 2ND
-  $("#signup_form_submit_1").click(function()
+  /*$("#signup_form_submit_1").click(function()
   {
     $("#signup_part_1").hide();
     $("#container_title").html(I18n.t('user.new.complete_your_profile'));
     $("#signup_part_2").show();
     $("#signup_form_submit_2").show();
-  })
+  })*/
   
   // SUBMITS THE SIGNUP FORM
-  $("#signup_form_submit_2").click(function()
+  $("#signup_form_submit_1").click(function()
   {
     $("#signup_form").submit();
   })

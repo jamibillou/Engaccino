@@ -4,15 +4,19 @@ module UserHelper
     [ { :id => 'personal_information',
     
         :fields => [ { :id => 'first_name',
+                       :type => 'text',
                        :new_line => true
                      },
                      { :id => 'last_name',
+                       :type => 'text',
                        :new_line => true
                      },
                      { :id => 'birthdate',
+                       :type => 'date',
                        :new_line => true
                      },
                      { :id => 'country',
+                       :type => 'text',
                        :new_line => true
                      }
                    ] }
@@ -40,6 +44,7 @@ module UserHelper
 #                   ] },
 #      { :id => 'status',
 #        :fields => [ { :id => 'status',
+# =>                    :type => 'select',
 #                       :new_line => false
 #                     }
 #                   ] }

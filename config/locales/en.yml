@@ -15,6 +15,9 @@ en:
   sign_in: "Sign in"
   sign_up: "Sign up!"
   
+  flash:
+    error: "Something went wrong, sorry about that."
+  
   # Views
   
   pages:

@@ -15,12 +15,16 @@ class UserController < ApplicationController
 
   def create
     @user = User.new(params[:user])
-    if @user.save
+    if !params[:step].nil?
+      @title = t 'user.new.title'
+      check_first_step
+      render :new
+    elsif @user.save
       # sign_in @user
-      redirect_to @user, :flash => { :success => "Welcome to Engaccino!" }
+      redirect_to @user, :flash => { :success => "Welcome to Engaccino!" }  
     else
       @title = t 'user.new.title'
-      flash.now[:error] = "Something went wrong, sorry about that."
+      flash.now[:error] = t 'flash.error'
       render :new
     end
   end
@@ -33,5 +37,15 @@ class UserController < ApplicationController
 
   def destroy
   end
+  
+  private
+    def check_first_step
+      if !@user.valid_attribute?(:email) || !@user.valid_attribute?(:password)
+        params[:step] = nil
+        flash.now[:error] = t 'flash.error'
+      else
+        
+      end
+    end
 
 end
