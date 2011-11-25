@@ -1,2 +1,10 @@
-<h1>User#create</h1>
-<p>Find me in app/views/user/create.html.erb</p>
+<%= form_for @user, :url => { :action => "create2" }, :html => { :id => 'signup_form' } do |f| %>
+	<%= render 'shared/error_messages', :object => f.object %> 
+	<div id="signup_part_2">
+    	<%= render 'signup_speed_up' %>
+		<% signup_blocks.each do |block| %>
+      		<%= render :partial => 'signup_block', :locals => { :block => block, :f => f } %>
+		<% end %>
+	</div>
+<% end %>
+<%= link_to t('.view_profile'), '#', :id => 'signup_form_submit_2', :class => 'button blue round center hidden' %>
