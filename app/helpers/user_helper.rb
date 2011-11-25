@@ -14,38 +14,35 @@ module UserHelper
                      },
                      { :id => 'country',
                        :new_line => true
-                     },
-                     { :id => 'email',
-                       :new_line => false
-                     },
-                   ] },
-      { :id => 'professional_experience',
-        :fields => [ { :id => 'role',
-                       :new_line => false
-                     },
-                     { :id => 'company',
-                       :new_line => false
-                     },
-                     { :id => 'timeframe',
-                       :new_line => false
-                     }
-                   ] },
-      { :id => 'education',
-        :fields => [ { :id => 'degree',
-                       :new_line => false
-                     },
-                     { :id => 'university',
-                       :new_line => false
-                     },
-                     { :id => 'timeframe_education',
-                       :new_line => false
-                     }
-                   ] },
-      { :id => 'status',
-        :fields => [ { :id => 'status',
-                       :new_line => false
                      }
                    ] }
+#      { :id => 'professional_experience',
+#        :fields => [ { :id => 'role',
+#                       :new_line => false
+#                     },
+#                     { :id => 'company',
+#                       :new_line => false
+#                     },
+#                     { :id => 'timeframe',
+#                       :new_line => false
+#                     }
+#                   ] },
+#      { :id => 'education',
+#        :fields => [ { :id => 'degree',
+#                       :new_line => false
+#                     },
+#                     { :id => 'university',
+#                       :new_line => false
+#                     },
+#                     { :id => 'timeframe_education',
+#                       :new_line => false
+#                     }
+#                   ] },
+#      { :id => 'status',
+#        :fields => [ { :id => 'status',
+#                       :new_line => false
+#                     }
+#                   ] }
     ]
   end
 end

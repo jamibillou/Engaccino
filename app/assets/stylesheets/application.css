@@ -197,6 +197,11 @@ a.button.grey:hover {
 .white_block p.after_h2 {
   margin-top: 40px;
 }
+.white_block.error {
+  border: 1px solid #dd7f7f;
+  color: #db6a6a;
+  font-size: 12px;
+}
 
 /* FIELDS */
 .field {
@@ -210,16 +215,10 @@ a.button.grey:hover {
 .field.margin_right {
   margin-right: 10px;
 }
-.combo {
-  font-size: 18px;
-}
 
 /* VISIBILITY */
 .hidden {
   display: none;
-}
-.visible {
-  display: block;
 }
 
 /* POSITIONS */
@@ -240,4 +239,40 @@ a.button.grey:hover {
 .right.dashed {
   float: left;
   padding-left: 40px;
+}
+
+/* FLASH MESSAGES */
+.flash {
+  height:  17px;
+  font-size: 12px;
+  font-weight: 100;
+  padding: 5px 6px;
+}
+.flash.success {
+  background: -webkit-gradient(linear, left top, left bottom, from(#cae9c6), to(#b6d2b3));
+  background: -moz-linear-gradient(top,  #cae9c6,  #b6d2b3);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cae9c6', endColorstr='#b6d2b3');
+  color: #469946;
+}
+.flash.notice {
+  background: -webkit-gradient(linear, left top, left bottom, from(#ffcc00), to(#e6b900));
+  background: -moz-linear-gradient(top,  #ffcc00,  #e6b900);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffcc00', endColorstr='#e6b900');
+  color: #c47004;
+}
+.flash.error {
+  background: -webkit-gradient(linear, left top, left bottom, from(#dd7f7f), to(#db6a6a));
+  background: -moz-linear-gradient(top,  #dd7f7f,  #db6a6a);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#dd7f7f', endColorstr='#db6a6a');
+  color: #8f0000;
+}
+.flash a.close {
+  height: 15px;
+  width: 15px;
+  float: right;
+  background-image: url('close_flash.png');
+  background-repeat: no-repeat;
+}
+.flash a.close:hover {
+  background-position: -15px 0;
 }

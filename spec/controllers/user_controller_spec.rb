@@ -42,6 +42,63 @@ describe UserController do
       post :create
       response.should be_success
     end
+    
+    describe "failure" do
+      
+      before(:each) {
+        @attr = { :name => "", :email => "", :password => "", :password_confirmation => "" }
+      }
+      
+      it "should have the right title" do
+        post :create, :user => @attr
+        response.should have_selector('title', :content => I18n.t('user.new.title'))
+      end
+      
+      it "should render the 'new' page" do
+        post :create, :user => @attr
+        response.should render_template(:new)
+      end
+      
+      it "should not create a user" do
+        lambda do
+          post :create, :user => @attr
+        end.should_not change(User, :count)
+      end
+    end
+    
+    describe "success" do
+    
+      before(:each) do
+        @attr = { :first_name => "New",
+                  :last_name => "User",
+                  :email => "new_user@example.com",
+                  :password => "pouetpouet45",
+                  :password_confirmation => "pouetpouet45",
+                  :country => "NL",
+                  :birthdate => 27.years.ago }
+      end
+      
+      it "should create a user" do
+        lambda do
+          post :create, :user => @attr
+        end.should change(User, :count).by(1)
+      end
+      
+#      it "should redirect to the User#show page" do
+#        post :create, :user => @attr
+#        response.should redirect_to(user_path(assigns(:user)))
+#      end
+#      
+#      it "should have a welcome message" do
+#        post :create, :user => @attr
+#        flash[:success].should =~ /welcome to the sample app/i
+#      end
+#      
+#      it "should sign user in" do
+#        post :create, :user => @attr
+#        controller.should be_signed_in
+#      end
+    end
   end
 
   describe "GET 'edit'" do

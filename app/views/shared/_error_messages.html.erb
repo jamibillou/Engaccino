@@ -1,13 +1,8 @@
 <% if object.errors.any? %>
-  <div id="error_explanation">
-    <h2> 
-      We couldn't save this <%= object.class.to_s.underscore.humanize.downcase %>
-    </h2>
-    <p><%= pluralize(object.errors.count, "error") %>:</p>
-    <ul>
-    <% object.errors.full_messages.each do |message| %>
-      <li><%= message.downcase %></li>
-    <% end %>
-    </ul>
+  <div id="error_explanation" class="white_block error">
+      We couldn't save this <%= object.class.to_s.underscore.humanize.downcase %>:
+      <% object.errors.full_messages.each do |message| %>
+        <%= message.downcase %><%= ", " unless message == object.errors.full_messages.last %>
+      <% end %>
   </div>
 <% end %>

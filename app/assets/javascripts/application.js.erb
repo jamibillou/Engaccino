@@ -5,52 +5,59 @@
 
 $(document).ready(function()
 {
-	var arrayBarsApplication = new Array(Array("search_bar_input","search_bar_value"));
-	loopBars(arrayBarsApplication);
+	// ARRAY OF INPUT FIELDS TO BE STYLED
+	var applicationInputFields = new Array(Array("search_bar_input","search_bar_value"));
+	
+	// STYLES INPUT FIELDS
+	styleInputFields(applicationInputFields);
 });
 
-//Call by every js file, with its specific bars
-function loopBars(arrayBars)
+// STYLES ALL INPUT FIELDS OF THE ARRAY PASSED AS PARAMETER
+function styleInputFields(arrayInputFields)
 {
-	for (var i in arrayBars)
+	for (var i in arrayInputFields)
 	{
-		//alert(arrayBars[i][0]+"/"+arrayBars[i][1]);
-		stylizeBar(arrayBars[i][0],arrayBars[i][1]);
+		styleInputField(arrayInputFields[i][0],arrayInputFields[i][1]);
 	}
 }
 
-//For each bar given in parameters, change the style and the behaviour
-function stylizeBar(barId,barValue)
+// STYLES THE INPUT FIELD PASSED AS PARAMETER
+function styleInputField(inputFieldId,inputFieldValue)
 {
-	$("#"+barId).click(function()
+	$("#"+inputFieldId).click(function()
 	{
-		//alert($("#"+barId).attr("value")+"///"+I18n.t(barValue));
-		if($("#"+barId).attr("value") == I18n.t(barValue))
+		if($("#"+inputFieldId).attr("value") == I18n.t(inputFieldValue))
 		{
-			$("#"+barId).css("color","#acacb3");	
+			$("#"+inputFieldId).css("color","#acacb3");	
 		}
 	});
 	
-	$("#"+barId).keydown(function()
+	$("#"+inputFieldId).keydown(function()
 	{
-		if($("#"+barId).attr("value") == I18n.t(barValue))
+		if($("#"+inputFieldId).attr("value") == I18n.t(inputFieldValue))
 		{
-			$("#"+barId).attr("value","");
-			$("#"+barId).css("font-style","normal");
-			$("#"+barId).css("color","#444");	
+			$("#"+inputFieldId).attr("value","");
+			$("#"+inputFieldId).css("font-style","normal");
+			$("#"+inputFieldId).css("color","#444");	
 		}
 	});
 	
-	$("#"+barId).focusout(function()
+	$("#"+inputFieldId).focusout(function()
 	{
-		if($("#"+barId).attr("value") == "" || $("#"+barId).attr("value") == I18n.t(barValue))
+		if($("#"+inputFieldId).attr("value") == "" || $("#"+inputFieldId).attr("value") == I18n.t(inputFieldValue))
 		{
-			$("#"+barId).css("font-style","italic");
-			$("#"+barId).css("color","#7c7777");
-			if($("#"+barId).attr("value") == "")
+			$("#"+inputFieldId).css("font-style","italic");
+			$("#"+inputFieldId).css("color","#7c7777");
+			if($("#"+inputFieldId).attr("value") == "")
 			{
-				$("#"+barId).attr("value",I18n.t(barValue)); 
+				$("#"+inputFieldId).attr("value",I18n.t(inputFieldValue)); 
 			}
 		}
 	});
+	
+	// CLOSES THE FLASH MESSAGES
+	$("#close_flash").click(function()
+	{
+	  $("#flash").hide();
+	})
 }

@@ -1,5 +1,6 @@
-<%= form_for @user do |f| %>
-  <div id="signup_part_1" class="white_block visible">
+<%= form_for @user, :url => { :action => "create" }, :html => { :id => 'signup_form' } do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %> 
+  <div id="signup_part_1" class="white_block">
     <%= render :partial => 'signup_with_engaccino_account', :locals => { :f => f } %>
     <%= render :partial => 'signup_with_social_media', :locals => { :f => f } %>
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
@@ -12,4 +13,4 @@
   </div>
   <%= f.submit t('user.new.set_up_profile'), :class => 'hidden' %>
 <% end %>
-<%= link_to t('.view_profile'), '#', :id => 'signup_form_2_submit', :class => 'button blue round center' %>
+<%= link_to t('.view_profile'), '#', :id => 'signup_form_submit_2', :class => 'button blue round center hidden' %>
