@@ -1,17 +1,11 @@
 $(document).ready(function()
 {
 	// STYLES INPUT FIELDS
-	customForm("signup_form_1");
-	customForm("signup_form_2");
+	customForm("signup_form_1","user.new");
+	customForm("signup_form_2","user.new");
   
-  // SUBMITS THE SIGNUP FORM
-  $("#signup_form_1_submit").click(function()
-  {
-    $("#signup_form_1").submit();
-  })
-  $("#signup_form_2_submit").click(function()
-  {
-    $("#signup_form_2").submit();
-  })
-  
+  // SUBMITS THE SIGNUP FORMS
+  submitForm("signup_form_1","signup_form_1_submit","user.new")
+  submitForm("signup_form_2","signup_form_2_submit","user.new")
+
 })

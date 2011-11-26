@@ -3,10 +3,10 @@
   <% block[:fields].each do |field| %>
   	<% case field[:type] %>
     	<% when "text" %>
-        <%= f.text_field field[:id], :value => t("user.new.#{field[:id]}_field"), :id => "signup_#{field[:id]}_input", :class => 'field margin_right' %>
+        <%= f.text_field field[:id], :value => t("user.new.signup_#{field[:id]}_field"), :id => "signup_#{field[:id]}_field", :class => 'field margin_right' %>
       <% when "date" %>
-        <%= f.date_select field[:id], :value => t("user.new.#{field[:id]}_field"), 
-        								:id => "signup_#{field[:id]}_input", 
+        <%= f.date_select field[:id], :value => t("user.new.signup_#{field[:id]}_field"), 
+        								:id => "signup_#{field[:id]}_field", 
         								:class => 'field margin_right',
         								:start_year => 1900 %>
       <% when "select" %>

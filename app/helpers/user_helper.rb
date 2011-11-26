@@ -19,35 +19,44 @@ module UserHelper
                        :type => 'text',
                        :new_line => true
                      }
+                   ] },
+      { :id => 'professional_experience',
+      
+        :fields => [ { :id => 'role',
+                       :type => 'text',
+                       :new_line => false
+                     },
+                     { :id => 'company',
+                       :type => 'text',
+                       :new_line => false
+                     },
+                     { :id => 'experience_timeframe',
+                       :type => 'text',
+                       :new_line => false
+                     }
+                   ] },
+      { :id => 'education',
+      
+        :fields => [ { :id => 'degree',
+                       :type => 'text',
+                       :new_line => false
+                     },
+                     { :id => 'university',
+                       :type => 'text',
+                       :new_line => false
+                     },
+                     { :id => 'education_timeframe',
+                       :type => 'text',
+                       :new_line => false
+                     }
+                   ] },
+      { :id => 'status',
+      
+        :fields => [ { :id => 'status',
+                       :type => 'select',
+                       :new_line => false
+                     }
                    ] }
-#      { :id => 'professional_experience',
-#        :fields => [ { :id => 'role',
-#                       :new_line => false
-#                     },
-#                     { :id => 'company',
-#                       :new_line => false
-#                     },
-#                     { :id => 'timeframe',
-#                       :new_line => false
-#                     }
-#                   ] },
-#      { :id => 'education',
-#        :fields => [ { :id => 'degree',
-#                       :new_line => false
-#                     },
-#                     { :id => 'university',
-#                       :new_line => false
-#                     },
-#                     { :id => 'timeframe_education',
-#                       :new_line => false
-#                     }
-#                   ] },
-#      { :id => 'status',
-#        :fields => [ { :id => 'status',
-# =>                    :type => 'select',
-#                       :new_line => false
-#                     }
-#                   ] }
     ]
   end
 end

@@ -7,7 +7,7 @@ $(document).ready(function()
 {
 	
 	// CUSTOMS FORMS
-	customForm("search_bar");
+	customForm("search_bar","");
 	
 	// CLOSES THE FLASH MESSAGES
 	$("#close_flash").click(function()
@@ -17,19 +17,21 @@ $(document).ready(function()
 });
 
 // CUSTOMS ALL THE FIELDS OF THE FORM PASSED AS PARAMETER
-function customForm(formId)
+function customForm(formId,view)
 {
   $("#"+formId+" input").each(function()
   {
-  	customInputField($(this).attr("id"),$(this).attr("value"),formId);
+  	if (!$(this).hasClass("hidden")) {
+  	  customInputField($(this).attr("id"),$(this).attr("value"),formId,view);
+  	}
   });
 }
 
 // STYLES THE GIVEN FIELD AND ENABLES SUBMIT BY HITTING THE RETURN KEY
-function customInputField(inputFieldId,inputFieldValue,formId)
+function customInputField(inputFieldId,inputFieldValue,formId,view)
 {
 	styleInputField(inputFieldId,inputFieldValue);
-	submitFormOnReturn(inputFieldId,formId)
+	submitFormOnReturn(inputFieldId,formId,view)
 }
 
 // STYLES THE INPUT FIELD PASSED AS PARAMETER
@@ -68,13 +70,41 @@ function styleInputField(inputFieldId,inputFieldValue)
 }
 
 // SUBMITS FORM BY HITTING THE RETURN KEY
-function submitFormOnReturn(inputFieldId,formId)
+function submitFormOnReturn(inputFieldId,formId,view)
 {
   $("#"+inputFieldId).keydown(function(e)
   {
     if (e.keyCode == 13)
     {
+      emptyDefaultValuesFromForm(formId,view);
       $("#"+formId).submit();
     }
   });
+}
+
+// SUBMITS FORM THROUGH AN EXTERNAL BUTTON
+function submitForm(formId,buttonId,view) {
+  
+  $("#"+buttonId).click(function()
+  {
+    emptyDefaultValuesFromForm(formId,view);
+    $("#"+formId).submit();
+  })
+}
+
+// EMPTIES FIELDS THAT STILL HAVE THE DEFAULT VALUE
+function emptyDefaultValuesFromForm(formId,view)
+{
+  $("#"+formId+" input").each(function()
+  {
+  	if (!$(this).hasClass("hidden") && $(this).attr("type") != "hidden") {
+  	  emptyFieldsWithDefaultValue($(this).attr("id"),view);
+  	}
+  });
+}
+
+function emptyFieldsWithDefaultValue(inputFieldId,view) {
+  if ($("#"+inputFieldId).attr("value") == I18n.t(view+"."+inputFieldId)) {
+    $("#"+inputFieldId).attr("value", "");
+  }
 }
