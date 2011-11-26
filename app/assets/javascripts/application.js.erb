@@ -5,20 +5,31 @@
 
 $(document).ready(function()
 {
-	// ARRAY OF INPUT FIELDS TO BE STYLED
-	var applicationInputFields = new Array(Array("search_bar_input","search_bar_value"));
 	
-	// STYLES INPUT FIELDS
-	styleInputFields(applicationInputFields);
+	// CUSTOMS FORMS
+	customForm("search_bar");
+	
+	// CLOSES THE FLASH MESSAGES
+	$("#close_flash").click(function()
+	{
+	  $("#flash").hide();
+	})
 });
 
-// STYLES ALL INPUT FIELDS OF THE ARRAY PASSED AS PARAMETER
-function styleInputFields(arrayInputFields)
+// CUSTOMS ALL THE FIELDS OF THE FORM PASSED AS PARAMETER
+function customForm(formId)
 {
-	for (var i in arrayInputFields)
-	{
-		styleInputField(arrayInputFields[i][0],arrayInputFields[i][1]);
-	}
+  $("#"+formId+" input").each(function()
+  {
+  	customInputField($(this).attr("id"),$(this).attr("value"),formId);
+  });
+}
+
+// STYLES THE GIVEN FIELD AND ENABLES SUBMIT BY HITTING THE RETURN KEY
+function customInputField(inputFieldId,inputFieldValue,formId)
+{
+	styleInputField(inputFieldId,inputFieldValue);
+	submitFormOnReturn(inputFieldId,formId)
 }
 
 // STYLES THE INPUT FIELD PASSED AS PARAMETER
@@ -26,7 +37,7 @@ function styleInputField(inputFieldId,inputFieldValue)
 {
 	$("#"+inputFieldId).click(function()
 	{
-		if($("#"+inputFieldId).attr("value") == I18n.t(inputFieldValue))
+		if($("#"+inputFieldId).attr("value") == inputFieldValue)
 		{
 			$("#"+inputFieldId).css("color","#acacb3");	
 		}
@@ -34,7 +45,7 @@ function styleInputField(inputFieldId,inputFieldValue)
 	
 	$("#"+inputFieldId).keydown(function()
 	{
-		if($("#"+inputFieldId).attr("value") == I18n.t(inputFieldValue))
+		if($("#"+inputFieldId).attr("value") == inputFieldValue)
 		{
 			$("#"+inputFieldId).attr("value","");
 			$("#"+inputFieldId).css("font-style","normal");
@@ -44,20 +55,26 @@ function styleInputField(inputFieldId,inputFieldValue)
 	
 	$("#"+inputFieldId).focusout(function()
 	{
-		if($("#"+inputFieldId).attr("value") == "" || $("#"+inputFieldId).attr("value") == I18n.t(inputFieldValue))
+		if($("#"+inputFieldId).attr("value") == "" || $("#"+inputFieldId).attr("value") == inputFieldValue)
 		{
 			$("#"+inputFieldId).css("font-style","italic");
 			$("#"+inputFieldId).css("color","#7c7777");
 			if($("#"+inputFieldId).attr("value") == "")
 			{
-				$("#"+inputFieldId).attr("value",I18n.t(inputFieldValue)); 
+				$("#"+inputFieldId).attr("value",inputFieldValue); 
 			}
 		}
 	});
-	
-	// CLOSES THE FLASH MESSAGES
-	$("#close_flash").click(function()
-	{
-	  $("#flash").hide();
-	})
+}
+
+// SUBMITS FORM BY HITTING THE RETURN KEY
+function submitFormOnReturn(inputFieldId,formId)
+{
+  $("#"+inputFieldId).keydown(function(e)
+  {
+    if (e.keyCode == 13)
+    {
+      $("#"+formId).submit();
+    }
+  });
 }

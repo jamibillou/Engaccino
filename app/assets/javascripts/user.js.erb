@@ -1,22 +1,8 @@
 $(document).ready(function()
 {
-	// ARRAY OF INPUT FIELDS TO BE STYLED
-	var userInputFields = new Array(Array("signup_email_input","user.new.email_field"),
-                								  Array("signup_password_input","user.new.password_field"),
-                								  Array("signup_password_confirmation_input","user.new.confirmation_field"),
-                								  Array("signup_first_name_input","user.new.first_name_field"),
-                								  Array("signup_last_name_input","user.new.last_name_field"),
-                								  Array("signup_year_of_birth_input","user.new.year_of_birth_field"),
-                								  Array("signup_country_input","user.new.country_field"),
-                								  Array("signup_role_input","user.new.role_field"),
-                								  Array("signup_company_input","user.new.company_field"),
-                								  Array("signup_timeframe_input","user.new.timeframe_field"),
-                								  Array("signup_degree_input","user.new.degree_field"),
-                								  Array("signup_university_input","user.new.university_field"),
-                								  Array("signup_timeframe_education_input","user.new.timeframe_education_field"));
-	
 	// STYLES INPUT FIELDS
-	styleInputFields(userInputFields);
+	customForm("signup_form_1");
+	customForm("signup_form_2");
   
   // SUBMITS THE SIGNUP FORM
   $("#signup_form_1_submit").click(function()

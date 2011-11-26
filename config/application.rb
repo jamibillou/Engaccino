@@ -30,7 +30,7 @@ module Engaccino
     # config.time_zone = 'Central Time (US & Canada)'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
-    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '*.{rb,yml}').to_s]
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
     config.i18n.default_locale = :en
 
     # Configure the default encoding used in templates for Ruby 1.9.
@@ -47,5 +47,6 @@ module Engaccino
     
     # Replace the field_with_error div by a span, to avoid the carriage return
     config.action_view.field_error_proc = Proc.new { |html_tag, instance| "<span class=\"field_with_errors\">#{html_tag}</span>".html_safe}
+    
   end
 end

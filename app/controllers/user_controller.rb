@@ -15,8 +15,8 @@ class UserController < ApplicationController
     
   def signup_step_2
     @user = User.new
-    @new_user = User.new(params)
-    # unless @new_user.valid_attribute?(:email) && @new_user.valid_attribute?(:password)) # could not get the valid_attribute? method to work
+    # @new_user = User.new(params) # could not get the valid_attribute? method to work
+    # unless @new_user.valid_attribute?(:email) && @new_user.valid_attribute?(:password))
     unless ((params[:email] =~ /^[\w+\d\-.]+@[a-z\d\-.]+\.[a-z.]+$/i) && (params[:password].length >= 6 && params[:password].length <= 40 ) && (params[:password] == params[:password_confirmation]))
       flash.now[:error] = t 'flash.error.general'
       render :new
