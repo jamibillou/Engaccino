@@ -1,9 +1,6 @@
-<%= form_for @user, :url => { :action => "create" }, :html => { :id => 'signup_form' } do |f| %>
-  <%= render 'shared/error_messages', :object => f.object %> 
-  <div id="signup_part_1" class="white_block">
-    <%= render :partial => 'signup_with_engaccino_account', :locals => { :f => f } %>
-    <%= render :partial => 'signup_with_social_media', :locals => { :f => f } %>
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-    <%= link_to t('user.new.set_up_profile'), '#', :id => 'signup_form_submit_1', :class => 'button blue round' %>
-  </div>
-<% end %>
+<div id="signup_part_1" class="white_block">
+  <%= render :partial => 'new_with_engaccino_account' %>
+  <%= render :partial => 'new_with_social_media' %>
+  <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+  <%= link_to t('user.new.set_up_profile'), '#', :id => 'signup_form_1_submit', :class => 'button blue round' %>
+</div>

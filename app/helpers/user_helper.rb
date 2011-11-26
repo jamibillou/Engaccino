@@ -11,8 +11,8 @@ module UserHelper
                        :type => 'text',
                        :new_line => true
                      },
-                     { :id => 'birthdate',
-                       :type => 'date',
+                     { :id => 'year_of_birth',
+                       :type => 'text',
                        :new_line => true
                      },
                      { :id => 'country',

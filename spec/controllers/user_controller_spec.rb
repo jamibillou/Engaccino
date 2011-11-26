@@ -34,118 +34,91 @@ describe UserController do
       get :new
       response.should have_selector('title', :content => I18n.t('user.new.title'))
     end
+    
   end
 
-  describe "POST 'create'" do
+  describe "POST 'signup_step_2'" do
+          
+    it "returns http success" do
+      post :signup_step_2
+      response.should be_success
+    end
+  
+    describe "success" do
     
-    describe "Form submission part 1" do
-      
-      it "returns http success" do
-        post :create
-        response.should be_success
-      end
-    
-      describe "success" do
-        before(:each) do
-          @attr = { :email => "new_user@example.com",
-                    :password => "pouetpouet45",
-                    :password_confirmation => "pouetpouet45"
-                  }
-        end
-        
-        it "should have render the 2nd part of the form" do
-          post :create, :user => @attr
-          response.should render_template(:create)
-        end
-        
-        it "should have the right h2 title" do
-          post :create, :user => @attr
-          response.should have_selector('h2', :content => I18n.t('user.new.personal_information'))
-        end
-      end
-      
-      describe "failure" do
-        before(:each) do
-          @attr = { :email => "",
-                    :password => "",
-                    :password_confirmation => ""
-                  }
-        end
-        
-        it "should have render the 'new' page" do
-          post :create, :user => @attr
-          response.should render_template(:new)
-        end
-        
-        it "should have the right h2 title" do
-          post :create, :user => @attr
-          response.should have_selector('h2', :content => I18n.t('user.new.create_engaccino_account'))
-        end
+      it "should render the 2nd signup form" do
+        post :signup_step_2, :email => "new_user@example.com", :password => "pouetpouet45", :password_confirmation => "pouetpouet45"
+        response.should render_template(:signup_step_2)
       end
       
     end
     
-    describe "Form submission part 2" do
+    describe "failure" do
+      
+      it "should render the 'new' template" do
+        post :signup_step_2, :email => "", :password => "", :password_confirmation => ""
+        response.should render_template(:new)
+      end
+      
+      it "should have a flash message" do
+        post :signup_step_2, :email => "", :password => "", :password_confirmation => ""
+        response.should have_selector('div', :class => 'flash error')
+      end
+    end
+    
+    describe "POST 'create'" do
+    
       
       before(:each) do
-        @user_attr = {:email => "new_user@example.com",
-                         :password => "pouetpouet45",
-                         :password_confirmation => "pouetpouet45"} 
-        session[:new_user] = User.new(@user_attr)
+        session[:new_user] = { :email => "new_user@example.com",
+                               :password => "pouetpouet45",
+                               :password_confirmation => "pouetpouet45"
+                             }
       end
       
       describe "success" do
+      
         before(:each) do
           @attr = { :first_name => "New",
                     :last_name => "User",
                     :country => "NL",
-                    :birthdate => 27.years.ago }
+                    :year_of_birth => 27.years.ago.year
+                  }
         end
         
         it "should create a user" do
          lambda do
-            post :create2, :user => @attr
+            post :create, :user => @attr
           end.should change(User, :count).by(1)
         end
       
         it "should redirect to the User#show page" do
-          post :create2, :user => @attr
+          post :create, :user => @attr
           response.should redirect_to(user_path(assigns(:user)))
         end
       end
       
       describe "failure" do
-        @attr = { :first_name => "",
-                  :last_name => "",
-                  :country => ""}
         
-                    
-        it "should render to the create page" do
-           post :create2, :user => @attr
-           response.should render_template(:create)
-        end  
-         
-        it "should have the right h2 title" do
-          post :create2, :user => @attr
-          response.should have_selector('h2', :content => I18n.t('user.new.personal_information'))
+        before(:each) do
+          @attr = { :first_name => "",
+                    :last_name => "",
+                    :country => ""
+                  }
         end
+                    
+        it "should render to the 2nd signup form" do
+           post :create, :user => @attr
+           response.should render_template(:signup_step_2)
+        end  
         
         it "should not create a user" do
           lambda do
-            post :create2, :user => @attr
+            post :create, :user => @attr
           end.should_not change(User, :count)
         end
       end
     end
-#      it "should have a welcome message" do
-#        post :create, :user => @attr
-#        flash[:success].should =~ /welcome to the sample app/i
-#      end
-#      
-#      it "should sign user in" do
-#        post :create, :user => @attr
-#        controller.should be_signed_in
-#      end
   end
 
   describe "GET 'edit'" do

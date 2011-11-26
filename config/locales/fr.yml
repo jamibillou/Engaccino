@@ -61,7 +61,7 @@ fr:
       city_field: "Ville"
       country_field: "Pays"
       nationality_field: "Nationalité"
-      birthdate_field: "Date de naissance"
+      year_of_birth_field: "Année de naissance"
       phone_field: "Téléphone"
       professional_experience: "Expérience professionnelle"
       company_field: "Entreprise"

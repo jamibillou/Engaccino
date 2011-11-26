@@ -1,9 +1,7 @@
 Engaccino::Application.routes.draw do
     
-    resources :user do
-      get 'create2', :on => :collection
-    end
-  
+    resources :user
+    
     match '/users', :to => 'user#index'
     match '/signup', :to => 'user#new'
   
@@ -12,7 +10,7 @@ Engaccino::Application.routes.draw do
     match '/pricing', :to => 'pages#pricing'
     match '/about', :to => 'pages#about'
     match '/contact', :to => 'pages#contact'
-    match 'user/create2', :to => 'user#create2'
+    match 'signup_step_2', :to => 'user#signup_step_2'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -15,6 +15,8 @@ en:
   sign_in: "Sign in"
   sign_up: "Sign up!"
   
+  # Errors
+  
   flash:
     error: "Something went wrong, sorry about that."
   
@@ -65,7 +67,7 @@ en:
       city_field: "City"
       country_field: "Country"
       nationality_field: "Nationality"
-      birthdate_field: "Date of birth"
+      year_of_birth_field: "Year of birth"
       phone_field: "Phone"
       professional_experience: "Professional experience"
       company_field: "Company"

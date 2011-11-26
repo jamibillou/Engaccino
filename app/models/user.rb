@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
                   :city,
                   :country,
                   :nationality,
-                  :birthdate,
+                  :year_of_birth,
                   :phone,
                   :email,
                   :facebook_login,
@@ -17,7 +17,6 @@ class User < ActiveRecord::Base
                   :password_confirmation
   
   countries_array = Country.all.collect { |c| c[1] }
-  dates_array = (100.years.ago.to_date..11.years.ago.to_date).to_a
   email_regex = /^[\w+\d\-.]+@[a-z\d\-.]+\.[a-z.]+$/i
   phone_regex = /^\+(?:[0-9] ?){6,14}[0-9]$/
   twitter_regex = /^@(_|([a-z]_)|[a-z])([a-z0-9]+_?)*$/i
@@ -34,8 +33,8 @@ class User < ActiveRecord::Base
   validates :nationality,           :inclusion => { :in => countries_array },
                                     :allow_blank => true
                                     
-  validates :birthdate,             :presence => true,
-                                    :inclusion => { :in => dates_array }
+  validates :year_of_birth,         :presence => true,
+                                    :inclusion => { :in => 1900..Time.now.year }
                                     
   validates :phone,                 :length => { :minimum => 7, :maximum => 20 },
                                     :format => { :with => phone_regex },
@@ -122,5 +121,6 @@ end
 #  created_at         :datetime
 #  updated_at         :datetime
 #  salt               :string(255)
+#  year_of_birth      :integer(4)
 #
 
