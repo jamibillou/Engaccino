@@ -21,7 +21,7 @@ function customForm(formId,view)
 {
   $("#"+formId+" input").each(function()
   {
-  	if (!$(this).hasClass("hidden")) {
+  	if (!$(this).hasClass("hidden") && $(this).attr("type") != "hidden") {
   	  customInputField($(this).attr("id"),$(this).attr("value"),formId,view);
   	}
   });
