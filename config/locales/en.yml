@@ -18,7 +18,10 @@ en:
   # Errors
   
   flash:
-    error: "Something went wrong, sorry about that."
+    success:
+      welcome: "Welcome to Engaccino!"
+    error: 
+      general: "Something went wrong, sorry about that."
   
   # Views
   

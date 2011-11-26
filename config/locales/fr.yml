@@ -15,8 +15,13 @@ fr:
   sign_in: "Se connecter"
   sign_up: "S'inscrire !"
   
+  # Errors
+  
   flash:
-    error: "Une erreur est survenue, excusez-nous pour la gêne occasionnée."
+    success:
+      welcome: "Bienvenue sur Engaccino !"
+    error: 
+      general: "Oups, un erreur est survenue."
   
   # Views
   
