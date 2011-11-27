@@ -1,5 +1,7 @@
 Engaccino::Application.routes.draw do
     
+  get "ajax/countries"
+
     resources :user
     
     match '/users', :to => 'user#index'
