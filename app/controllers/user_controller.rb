@@ -15,12 +15,12 @@ class UserController < ApplicationController
     
   def signup_step_2
     @user = User.new
-     @new_user = User.new(params)
-     unless @new_user.valid_attribute?(:email) && @new_user.valid_attribute?(:password)
-      flash.now[:error] = t 'flash.error.general'
+    @new_user = User.new(params)
+    session[:new_user] = params
+    unless @new_user.valid_attribute?(:email) && @new_user.valid_attribute?(:password)
+      flash.now[:notice] = flash_error_messages(@new_user, [:email, :password])
       render :new
     else
-      session[:new_user] = params
       @title = t 'user.new.complete_your_profile'
     end
   end
@@ -31,7 +31,7 @@ class UserController < ApplicationController
       redirect_to @user, :flash => { :success => t('flash.success.welcome') }
     else
       @title = t 'user.new.complete_your_profile'
-      flash.now[:error] = t 'flash.error.general'
+      flash.now[:error] = flash_error_messages(@user)
       render :signup_step_2
     end
   end 

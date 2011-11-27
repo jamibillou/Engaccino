@@ -1,5 +1,10 @@
 fr:
   
+  # Punctuation 
+  _:: " :"
+  _?: " ?"
+  _!: " !"
+  
   # Header
   
   menu_overview: "Aperçu"
@@ -21,7 +26,10 @@ fr:
     success:
       welcome: "Bienvenue sur Engaccino !"
     error: 
+      base: "Erreur"
       general: "Oups, un erreur est survenue."
+      could_not_save: "Nous n'avons pu enregistrer cet"
+      correct_before_resubmit: "Merci de corriger avant de réessayer."
   
   # Views
   
@@ -85,3 +93,44 @@ fr:
       view_profile: "Afficher mon profil"
     edit:
       title: "Editez votre profil"
+      
+  activerecord:
+      errors:
+        messages:
+          # Default messages: complete sentences
+          inclusion: "incorrect"
+          exclusion: "a une valeur défendue"
+          invalid: "invalide"
+          confirmation: "et confirmation différents"
+          accepted: "doit être accepté"
+          empty: "obligatoire"
+          blank: "obligatoire"
+          too_long: "est trop long (maximum : %{count} caractères)"
+          too_short: "est trop court (minimum : %{count} caractères)"
+          wrong_length: "n'as pas le bon nombre de caractères (%{count} caractères demandés)" 
+          taken: "est déjà pris"
+          not_a_number: "n'est pas un nombre"
+          greater_than: "doit être supérieur à %{count}"
+          greater_than_or_equal_to : "doit être supérieur ou égal à %{count}"
+          equal_to: "doit être égal à %{count}"
+          less_than: "doit être inférieur à"
+          less_than_or_equal_to : "doit être inférieur ou égal à %{count}"     
+          odd: "doit être impair"
+          even: "doit être pair"
+      models:
+        user: Utilisateur
+      attributes:
+        user:
+          first_name: "Prénom"
+          last_name: "Nom"
+          city: "Ville"
+          country: "Pays"
+          nationality: "Nationalité"
+          year_of_birth: "Année de naissance"
+          phone: "Téléphone"
+          email: "Adresse email"
+          facebook_login: "Identifiant Facebook"
+          linkedin_login: "Identifiant LinkedIn"
+          twitter_login: "Identifiant Twitter"
+          password: mot de passse
+          

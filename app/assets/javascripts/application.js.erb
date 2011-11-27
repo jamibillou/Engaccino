@@ -6,35 +6,35 @@
 $(document).ready(function()
 {
 	
-	// CUSTOMS FORMS
+	// CUSTOMS THE SEARCH BAR
 	customForm("search_bar","");
 	
-	// CLOSES THE FLASH MESSAGES
+	// CLOSES FLASH MESSAGES THROUGH THE X BUTTON
 	$("#close_flash").click(function()
 	{
 	  $("#flash").hide();
 	})
 });
 
-// CUSTOMS ALL THE FIELDS OF THE FORM PASSED AS PARAMETER
-function customForm(formId,view)
+// CUSTOMS ALL THE FIELDS OF THE GIVEN FORM
+function customForm(formId,translationPath)
 {
   $("#"+formId+" input").each(function()
   {
   	if (!$(this).hasClass("hidden") && $(this).attr("type") != "hidden") {
-  	  customInputField($(this).attr("id"),$(this).attr("value"),formId,view);
+  	  customInputField($(this).attr("id"),$(this).attr("value"),formId,translationPath);
   	}
   });
 }
 
 // STYLES THE GIVEN FIELD AND ENABLES SUBMIT BY HITTING THE RETURN KEY
-function customInputField(inputFieldId,inputFieldValue,formId,view)
+function customInputField(inputFieldId,inputFieldValue,formId,translationPath)
 {
 	styleInputField(inputFieldId,inputFieldValue);
-	submitFormOnReturn(inputFieldId,formId,view)
+	submitFormOnReturn(inputFieldId,formId,translationPath)
 }
 
-// STYLES THE INPUT FIELD PASSED AS PARAMETER
+// STYLES THE GIVEN INPUT FIELD
 function styleInputField(inputFieldId,inputFieldValue)
 {
 	$("#"+inputFieldId).click(function()
@@ -69,42 +69,43 @@ function styleInputField(inputFieldId,inputFieldValue)
 	});
 }
 
-// SUBMITS FORM BY HITTING THE RETURN KEY
-function submitFormOnReturn(inputFieldId,formId,view)
+// SUBMITS THE GIVEN FORM BY HITTING THE RETURN KEY
+function submitFormOnReturn(inputFieldId,formId,translationPath)
 {
   $("#"+inputFieldId).keydown(function(e)
   {
     if (e.keyCode == 13)
     {
-      emptyDefaultValuesFromForm(formId,view);
+      emptyDefaultValuesForm(formId,translationPath);
       $("#"+formId).submit();
     }
   });
 }
 
-// SUBMITS FORM THROUGH AN EXTERNAL BUTTON
-function submitForm(formId,buttonId,view) {
+// SUBMITS THE GIVEN FORM THROUGH THE GIVEN EXTERNAL BUTTON
+function submitForm(formId,buttonId,translationPath) {
   
   $("#"+buttonId).click(function()
   {
-    emptyDefaultValuesFromForm(formId,view);
+    emptyDefaultValuesForm(formId,translationPath);
     $("#"+formId).submit();
   })
 }
 
-// EMPTIES FIELDS THAT STILL HAVE THE DEFAULT VALUE
-function emptyDefaultValuesFromForm(formId,view)
+// GIVEN A FORM, EMPTIES FIELDS THAT HAVE DEFAULT VALUES
+function emptyDefaultValuesForm(formId,translationPath)
 {
   $("#"+formId+" input").each(function()
   {
   	if (!$(this).hasClass("hidden") && $(this).attr("type") != "hidden") {
-  	  emptyFieldsWithDefaultValue($(this).attr("id"),view);
+  	  emptyDefaultValueField($(this).attr("id"),translationPath);
   	}
   });
 }
 
-function emptyFieldsWithDefaultValue(inputFieldId,view) {
-  if ($("#"+inputFieldId).attr("value") == I18n.t(view+"."+inputFieldId)) {
+// EMPTIES THE GIVEN FIELD IF IT HAS THE DEFAULT VALUE
+function emptyDefaultValueField(inputFieldId,translationPath) {
+  if ($("#"+inputFieldId).attr("value") == I18n.t(translationPath+inputFieldId)) {
     $("#"+inputFieldId).attr("value", "");
   }
 }

@@ -1,7 +1,6 @@
 <div id="signup_part_2">
   <%= render 'signup_speed_up' %>
   <%= form_for @user, :url => { :action => "create" }, :html => { :id => 'signup_form_2' } do |f| %>
-    <%= render 'shared/error_messages', :object => @user %>
     <% signup_blocks.each do |block| %>
       <%= render :partial => 'signup_block', :locals => { :block => block, :f => f } %>
   	<% end %>

@@ -1,4 +1,5 @@
 # From http://veerasundaravel.wordpress.com/2011/02/01/rails-activerecord-validate-single-attribute/
+
 module ValidateAttribute
   def self.included(base)
     base.send :include, InstanceMethods

@@ -1,5 +1,5 @@
 module UserHelper
-
+  
   def signup_blocks
     [ { :id => 'personal_information',
     

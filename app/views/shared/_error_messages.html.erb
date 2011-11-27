@@ -1,8 +1,13 @@
 <% if object.errors.any? %>
   <div id="error_explanation" class="white_block error">
-      We couldn't save this <%= object.class.to_s.underscore.humanize.downcase %>:
-      <% object.errors.full_messages.each do |message| %>
-        <%= message.downcase %><%= ", " unless message == object.errors.full_messages.last %>
+      <%=t 'flash.error.could_not_save' %> <%= object.class.model_name.human.downcase %><%=t '_:' %><br />
+      <ul>
+      <% object.errors.each do |attribute, message| %>
+        <% if object.errors[attribute].first == message %>
+          <li><%= "#{object.class.human_attribute_name(attribute).downcase} #{message}" %></li>
+        <% end %>
       <% end %>
+      </ul>
+      <%=t 'flash.error.correct_before_resubmit' %>
   </div>
 <% end %>
