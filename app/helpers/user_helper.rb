@@ -54,6 +54,7 @@ module UserHelper
       
         :fields => [ { :id => 'status',
                        :type => 'select',
+                       :options => ["available","looking","open","listening","happy"],
                        :new_line => false
                      }
                    ] }

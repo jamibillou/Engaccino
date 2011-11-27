@@ -4,18 +4,12 @@
   	<% case field[:type] %>
     	<% when "text" %>
         <%= f.text_field field[:id], :value => t("user.new.signup_#{field[:id]}_field"), :id => "signup_#{field[:id]}_field", :class => 'field margin_right' %>
-      <% when "date" %>
-        <%= f.date_select field[:id], :value => t("user.new.signup_#{field[:id]}_field"), 
-        								:id => "signup_#{field[:id]}_field", 
-        								:class => 'field margin_right',
-        								:start_year => 1900 %>
       <% when "select" %>
-        <%= select_tag(field[:id],
-                       options_for_select([[t('user.new.available_status'), 1],
-                                           [t('user.new.looking_status'), 2],
-                                           [t('user.new.open_status'), 3],
-                                           [t('user.new.listening_status'), 4],
-                                           [t('user.new.happy_status'), 5]])) %>
+        <% options = [] %>
+        <% field[:options].each_with_index do |option, index| %>
+          <%  options[index] = [t("user.new.#{option}_status"), index] %>
+        <% end %>
+        <%= select_tag(field[:id], options_for_select(options)) %>
     <% end %>
     <% if field[:id].include?('timeframe') %>
       <%= link_to '+', '#', :class => 'slightly_round blue button' %>
