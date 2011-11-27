@@ -1,0 +1,17 @@
+fr:
+  pages:
+    overview:
+      summary: "Bienvenue sur Engaccino !"
+      content: ""
+    walkthrough:
+      summary: "Une petite visite ?"
+      content: ""
+    pricing:
+      summary: "Gratuit pour tous les candidats !"
+      content: ""  
+    about:
+      summary: "L'équipe"
+      content: ""
+    contact:
+      summary: "Comment nous contacter"
+      content: ""

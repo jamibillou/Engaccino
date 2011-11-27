@@ -1,0 +1,32 @@
+fr:
+
+  # Header
+  
+  menu_overview: "Aperçu"
+  menu_walkthrough: "Visite guidée"
+  menu_pricing: "Tarifs"
+  menu_about: "À propos"
+  menu_contact: "Contact"
+  
+  search_bar_value: "Accès rapide"
+  search_bar_title: "Rechercher un contact, une entreprise, offre d'emploi, etc."
+   
+  already_member: "Déjà membre ?"
+  sign_in: "Se connecter"
+  sign_up: "S'inscrire !"
+  
+  # Punctuation 
+  _:: " :"
+  _?: " ?"
+  _!: " !"
+  
+  # Errors
+  
+  flash:
+    success:
+      welcome: "Bienvenue sur Engaccino !"
+    error: 
+      base: "Erreur"
+      general: "Oups, un erreur est survenue."
+      could_not_save: "Nous n'avons pu enregistrer cet"
+      correct_before_resubmit: "Merci de corriger avant de réessayer."

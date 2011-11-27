@@ -1,0 +1,18 @@
+fr:
+  activerecord:    
+    models:
+      user: Utilisateur
+    attributes:
+      user:
+        first_name: "Prénom"
+        last_name: "Nom"
+        city: "Ville"
+        country: "Pays"
+        nationality: "Nationalité"
+        year_of_birth: "Année de naissance"
+        phone: "Téléphone"
+        email: "Adresse email"
+        facebook_login: "Identifiant Facebook"
+        linkedin_login: "Identifiant LinkedIn"
+        twitter_login: "Identifiant Twitter"
+        password: mot de passse

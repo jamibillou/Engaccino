@@ -1,0 +1,32 @@
+en:
+
+  # Header
+  
+  menu_overview: "Overview"
+  menu_walkthrough: "Tour"
+  menu_pricing: "Pricing"
+  menu_about: "About"
+  menu_contact: "Contact"
+  
+  search_bar_value: "Search Engaccino"
+  search_bar_title: "Jump to any contact, company, job, etc."
+  
+  already_member: "Already a member?"
+  sign_in: "Sign in"
+  sign_up: "Sign up!"
+  
+  # Punctuation 
+  _:: ":"
+  _?: "?"
+  _!: "!"
+  
+  # Errors
+  
+  flash:
+    success:
+      welcome: "Welcome to Engaccino!"
+    error: 
+      base: "Error"
+      general: "Something went wrong, sorry about that."
+      could_not_save: "We couldn't save this"
+      correct_before_resubmit: "Please correct this before submitting again."
