@@ -18,7 +18,7 @@ class UserController < ApplicationController
     @new_user = User.new(params)
     session[:new_user] = params
     unless @new_user.valid_attribute?(:email) && @new_user.valid_attribute?(:password)
-      flash.now[:notice] = flash_error_messages(@new_user, [:email, :password])
+      flash.now[:error] = flash_error_messages(@new_user, [:email, :password])
       render :new
     else
       @title = t 'user.new.complete_your_profile'
