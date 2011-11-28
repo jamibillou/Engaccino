@@ -6,10 +6,10 @@
 
 $(document).ready(function()
 {
-	
+
 	// CUSTOMS THE SEARCH BAR
 	customForm("search_bar","");
-	
+
 	// CLOSES FLASH MESSAGES THROUGH THE X BUTTON
 	$("#close_flash").click(function()
 	{
@@ -45,7 +45,7 @@ function styleInputField(inputFieldId,inputFieldValue)
 			$("#"+inputFieldId).css("color","#acacb3");	
 		}
 	});
-	
+
 	$("#"+inputFieldId).keydown(function()
 	{
 		if($("#"+inputFieldId).attr("value") == inputFieldValue)
@@ -55,7 +55,7 @@ function styleInputField(inputFieldId,inputFieldValue)
 			$("#"+inputFieldId).css("color","#444");	
 		}
 	});
-	
+
 	$("#"+inputFieldId).focusout(function()
 	{
 		if($("#"+inputFieldId).attr("value") == "" || $("#"+inputFieldId).attr("value") == inputFieldValue)
