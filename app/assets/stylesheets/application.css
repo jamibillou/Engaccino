@@ -86,8 +86,8 @@ header nav ul li.selected a {
 	background-position-x: 98%;
 	background-position-y: 6px;
 	border: 1px solid #969696;
-	color: #7c7777;
-	font-style: italic;
+	color: #444;
+	font-style: normal;
 	font-size: inherit;
 	font-weight: 500;
 }
@@ -208,8 +208,8 @@ a.button.grey:hover {
   width: 300px;
   margin-top: 4px;
   margin-bottom: 4px;
-  color: #7c7777;
-  font-style: italic;
+  color: #444;
+  font-style: normal;
 }
 .field.margin_right {
   margin-right: 10px;

@@ -3,7 +3,9 @@
   <% block[:fields].each do |field| %>
   	<% case field[:type] %>
     	<% when "text" %>
-        <%= f.text_field field[:id], :value => t("user.new.signup_#{field[:id]}_field"), :id => "signup_#{field[:id]}_field", :class => 'field margin_right' %>
+        <%= f.text_field field[:id], :value => (!params[:user].nil? && !params[:user][field[:id]].nil? && !params[:user][field[:id]].empty?) ? params[:user][field[:id]] : t("user.new.signup_#{field[:id]}_field"),
+                                     :id => "signup_#{field[:id]}_field",
+                                     :class => 'field margin_right' %>
       <% when "select" %>
         <% options = [] %>
         <% field[:options].each do |option| %>

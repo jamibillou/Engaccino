@@ -47,7 +47,7 @@ describe UserController do
     describe "success" do
     
       it "should render the 2nd signup form" do
-        post :signup_step_2, :email => "new_user@example.com", :password => "pouetpouet45", :password_confirmation => "pouetpouet45"
+        post :signup_step_2, :user => { :email => "new_user@example.com", :password => "pouetpouet45", :password_confirmation => "pouetpouet45" }
         response.should render_template(:signup_step_2)
       end
       
@@ -67,19 +67,14 @@ describe UserController do
     end
     
     describe "POST 'create'" do
-    
-      
-      before(:each) do
-        session[:new_user] = { :email => "new_user@example.com",
-                               :password => "pouetpouet45",
-                               :password_confirmation => "pouetpouet45"
-                             }
-      end
       
       describe "success" do
       
         before(:each) do
-          @attr = { :first_name => "New",
+          @attr = { 
+                    :email => "new_user@example.com",
+                    :password => "pouetpouet45",
+                    :first_name => "New",
                     :last_name => "User",
                     :country => "NL",
                     :year_of_birth => 27.years.ago.year

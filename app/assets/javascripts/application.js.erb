@@ -23,24 +23,36 @@ function customForm(formId,translationPath)
   $("#"+formId+" input").each(function()
   {
   	if (!$(this).hasClass("hidden") && $(this).attr("type") != "hidden") {
-  	  customInputField($(this).attr("id"),$(this).attr("value"),formId,translationPath);
+  	  customInputField($(this).attr("id"),I18n.t(translationPath+$(this).attr("id")),formId);
   	}
   });
 }
 
 // STYLES THE GIVEN FIELD AND ENABLES SUBMIT BY HITTING THE RETURN KEY
-function customInputField(inputFieldId,inputFieldValue,formId,translationPath)
+function customInputField(inputFieldId,inputFieldDefaultValue,formId)
 {
-	styleInputField(inputFieldId,inputFieldValue);
-	submitFormOnReturn(inputFieldId,formId,translationPath)
+	styleInputField(inputFieldId,inputFieldDefaultValue);
+	submitFormOnReturn(inputFieldId,formId,inputFieldDefaultValue)
 }
 
 // STYLES THE GIVEN INPUT FIELD
-function styleInputField(inputFieldId,inputFieldValue)
+function styleInputField(inputFieldId,inputFieldDefaultValue)
 {
+	$("#"+inputFieldId).ready(function()
+	{
+    if ($("#"+inputFieldId).attr("value") == inputFieldDefaultValue)
+    {
+      $("#"+inputFieldId).css("color","#7c7777");
+      $("#"+inputFieldId).css("font-style","italic");
+    } else {
+      $("#"+inputFieldId).css("color","#444");
+      $("#"+inputFieldId).css("font-style","normal");
+    }
+	});
+	
 	$("#"+inputFieldId).click(function()
 	{
-		if($("#"+inputFieldId).attr("value") == inputFieldValue)
+		if($("#"+inputFieldId).attr("value") == inputFieldDefaultValue)
 		{
 			$("#"+inputFieldId).css("color","#acacb3");	
 		}
@@ -48,7 +60,7 @@ function styleInputField(inputFieldId,inputFieldValue)
 
 	$("#"+inputFieldId).keydown(function()
 	{
-		if($("#"+inputFieldId).attr("value") == inputFieldValue)
+		if($("#"+inputFieldId).attr("value") == inputFieldDefaultValue)
 		{
 			$("#"+inputFieldId).attr("value","");
 			$("#"+inputFieldId).css("font-style","normal");
@@ -58,55 +70,55 @@ function styleInputField(inputFieldId,inputFieldValue)
 
 	$("#"+inputFieldId).focusout(function()
 	{
-		if($("#"+inputFieldId).attr("value") == "" || $("#"+inputFieldId).attr("value") == inputFieldValue)
+		if($("#"+inputFieldId).attr("value") == "" || $("#"+inputFieldId).attr("value") == inputFieldDefaultValue)
 		{
 			$("#"+inputFieldId).css("font-style","italic");
 			$("#"+inputFieldId).css("color","#7c7777");
 			if($("#"+inputFieldId).attr("value") == "")
 			{
-				$("#"+inputFieldId).attr("value",inputFieldValue); 
+				$("#"+inputFieldId).attr("value",inputFieldDefaultValue); 
 			}
 		}
 	});
 }
 
 // SUBMITS THE GIVEN FORM BY HITTING THE RETURN KEY
-function submitFormOnReturn(inputFieldId,formId,translationPath)
+function submitFormOnReturn(inputFieldId,formId,inputFieldDefaultValue)
 {
   $("#"+inputFieldId).keydown(function(e)
   {
     if (e.keyCode == 13)
     {
-      emptyDefaultValuesForm(formId,translationPath);
+      emptyDefaultValuesForm(formId,inputFieldDefaultValue);
       $("#"+formId).submit();
     }
   });
 }
 
 // SUBMITS THE GIVEN FORM THROUGH THE GIVEN EXTERNAL BUTTON
-function submitForm(formId,buttonId,translationPath) {
+function submitForm(formId,buttonId,inputFieldDefaultValue) {
   
   $("#"+buttonId).click(function()
   {
-    emptyDefaultValuesForm(formId,translationPath);
+    emptyDefaultValuesForm(formId,inputFieldDefaultValue);
     $("#"+formId).submit();
   })
 }
 
 // GIVEN A FORM, EMPTIES FIELDS THAT HAVE DEFAULT VALUES
-function emptyDefaultValuesForm(formId,translationPath)
+function emptyDefaultValuesForm(formId,inputFieldDefaultValue)
 {
   $("#"+formId+" input").each(function()
   {
   	if (!$(this).hasClass("hidden") && $(this).attr("type") != "hidden") {
-  	  emptyDefaultValueField($(this).attr("id"),translationPath);
+  	  emptyDefaultValueField($(this).attr("id"),inputFieldDefaultValue);
   	}
   });
 }
 
 // EMPTIES THE GIVEN FIELD IF IT HAS THE DEFAULT VALUE
-function emptyDefaultValueField(inputFieldId,translationPath) {
-  if ($("#"+inputFieldId).attr("value") == I18n.t(translationPath+inputFieldId)) {
+function emptyDefaultValueField(inputFieldId,inputFieldDefaultValue) {
+  if ($("#"+inputFieldId).attr("value") == inputFieldDefaultValue) {
     $("#"+inputFieldId).attr("value", "");
   }
 }
