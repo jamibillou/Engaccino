@@ -14,11 +14,10 @@ class UserController < ApplicationController
   end 
     
   def signup_step_2
-    @user = User.new
-    @new_user = User.new(params)
-    session[:new_user] = params
-    unless @new_user.valid_attribute?(:email) && @new_user.valid_attribute?(:password)
-      flash.now[:error] = flash_error_messages(@new_user, [:email, :password])
+    @user = User.new(params[:user])
+    session[:new_user] = params[:user]
+    unless @user.valid_attribute?(:email) && @user.valid_attribute?(:password)
+      flash.now[:error] = flash_error_messages(@user, [:email, :password])
       render :new
     else
       @title = t 'user.new.complete_your_profile'
