@@ -13,6 +13,8 @@ Engaccino::Application.routes.draw do
     match '/about', :to => 'pages#about'
     match '/contact', :to => 'pages#contact'
     match 'signup_step_2', :to => 'user#signup_step_2'
+    
+    match '/ajax/code', :to => 'ajax#code'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
