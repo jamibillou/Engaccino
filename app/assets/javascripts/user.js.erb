@@ -9,9 +9,16 @@ $(document).ready(function()
   submitForm("signup_form_2","signup_form_2_submit","user.new.")
   
   // COUNTRY AUTOCOMPLETER INITIALIZATION
-  $("#signup_country_field").autocomplete({source:"/ajax/countries",
-  										   autoFocus: true,
-  										   minLength: 2,
-  										   })
+  $("#signup_country_full_text_field").autocomplete(
+  		{source:"/ajax/countries",
+	   	autoFocus: true,
+	   	minLength: 2,
+	   	close: function(){
+	   		//alert($("#signup_country_full_text_field").val());
+	   		$.getJSON("/ajax/code?country="+$("#signup_country_full_text_field").val(),
+	   			   function(data){
+	   				   $("#signup_country_field").val(data.code);
+	   			   })
+	   	}})
 
 })

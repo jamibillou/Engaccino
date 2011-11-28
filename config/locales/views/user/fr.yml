@@ -24,7 +24,7 @@ fr:
       signup_middle_name_field: "Deuxième prénom"
       signup_last_name_field: "Nom de famille"
       signup_city_field: "Ville"
-      signup_country_field: "Pays"
+      signup_country_full_text_field: "Pays"
       signup_nationality_field: "Nationalité"
       signup_year_of_birth_field: "Année de naissance"
       signup_phone_field: "Téléphone"

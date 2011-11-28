@@ -2,8 +2,10 @@
   <h2><%=t "user.new.#{block[:id]}" %></h2>
   <% block[:fields].each do |field| %>
   	<% case field[:type] %>
-    	<% when "text" %>
+      <% when "text" %>
         <%= f.text_field field[:id], :value => t("user.new.signup_#{field[:id]}_field"), :id => "signup_#{field[:id]}_field", :class => 'field margin_right' %>
+      <% when "hidden" %>
+      	<%= f.hidden_field field[:id], :value => "", :id => "signup_#{field[:id]}_field" %>
       <% when "select" %>
         <% options = [] %>
         <% field[:options].each do |option| %>

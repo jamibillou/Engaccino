@@ -14,5 +14,17 @@ class AjaxController < ApplicationController
     end
     return final_list.sort
   end
+  
+  def code
+    country_code = search_code(params[:country])
+    respond_to do |format|
+      format.json { render :json => {:code => country_code}}
+    end
+  end
+  
+  def search_code(country)
+    full_country = Country.find_by_name(country)
+    return full_country[0]
+  end
 
 end
