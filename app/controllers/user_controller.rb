@@ -15,7 +15,6 @@ class UserController < ApplicationController
     
   def signup_step_2
     @user = User.new(params[:user])
-    session[:new_user] = params[:user]
     unless @user.valid_attribute?(:email) && @user.valid_attribute?(:password)
       flash.now[:error] = flash_error_messages(@user, [:email, :password])
       render :new
@@ -25,7 +24,7 @@ class UserController < ApplicationController
   end
   
   def create
-    @user = User.new(params[:user].merge(:email => session[:new_user][:email], :password => session[:new_user][:password]))
+    @user = User.new(params[:user])
     if @user.save
       redirect_to @user, :flash => { :success => t('flash.success.welcome') }
     else
