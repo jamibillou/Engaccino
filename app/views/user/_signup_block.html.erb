@@ -2,10 +2,15 @@
   <h2><%=t "user.new.#{block[:id]}" %></h2>
   <% block[:fields].each do |field| %>
   	<% case field[:type] %>
+<<<<<<< HEAD
     	<% when "text" %>
         <%= f.text_field field[:id], :value => (!params[:user].nil? && !params[:user][field[:id]].nil? && !params[:user][field[:id]].empty?) ? params[:user][field[:id]] : t("user.new.signup_#{field[:id]}_field"),
                                      :id => "signup_#{field[:id]}_field",
                                      :class => 'field margin_right' %>
+=======
+      <% when "text" %>
+        <%= f.text_field field[:id], :value => t("user.new.signup_#{field[:id]}_field"), :id => "signup_#{field[:id]}_field", :class => 'field margin_right' %>
+>>>>>>> 7965da8bed8c35c6f4b34ce947c603f05caf4b4e
       <% when "hidden" %>
       	<%= f.hidden_field field[:id], :value => "", :id => "signup_#{field[:id]}_field" %>
       <% when "select" %>
