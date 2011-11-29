@@ -3,14 +3,9 @@ $(document).ready(function()
   // CUSTOMS THE SIGNUP FORMS
   customForm("signup_form_1","user.new.");
   customForm("signup_form_2","user.new.");
-  
-  // SUBMITS THE SIGNUP FORMS
-  submitForm("signup_form_1","signup_form_1_submit","user.new.")
-  submitForm("signup_form_2","signup_form_2_submit","user.new.")
-  
 
-  $("#signup_country_full_text_field").autocomplete(
-  		{source:"/ajax/countries",
+  	$("#signup_country_full_text_field").autocomplete(
+		{source:"/ajax/countries",
 	   	autoFocus: true,
 	   	minLength: 2,
 	   	close: function(){
@@ -18,6 +13,10 @@ $(document).ready(function()
 	   			   function(data){
 	   				   $("#signup_country_field").val(data.code);
 	   			   })
-	   	}})
+	   	}});
+  
+  // SUBMITS THE SIGNUP FORMS
+  submitForm("signup_form_1","signup_form_1_submit","user.new.");
+  submitForm("signup_form_2","signup_form_2_submit","user.new.");
 
 })
