@@ -4,8 +4,8 @@
     <%= f.text_field :email, :value => (params[:user]) && !params[:user][:email].empty? ? params[:user][:email] : t('user.new.signup_email_field'),
                              :id => 'signup_email_field',
                              :class => 'field' %><br />
-    <%= f.text_field :password, :value => t('user.new.signup_password_field'), :id => 'signup_password_field', :class => 'field' %><br />
-    <%= f.text_field :password_confirmation, :value => t('user.new.signup_password_confirmation_field'), :id => 'signup_password_confirmation_field', :class => 'field' %><br />
+    <%= f.password_field :password, :value => t('user.new.signup_password_field'), :id => 'signup_password_field', :class => 'field' %><br />
+    <%= f.password_field :password_confirmation, :value => t('user.new.signup_password_confirmation_field'), :id => 'signup_password_confirmation_field', :class => 'field' %><br />
     <%= f.submit t('user.new.set_up_profile'), :class => 'hidden' %>
   <% end %>
   <br />
