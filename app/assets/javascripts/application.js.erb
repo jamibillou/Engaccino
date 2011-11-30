@@ -8,7 +8,7 @@ $(document).ready(function()
 {
 
 	// CUSTOMS THE SEARCH BAR
-	customForm("search_bar","");
+	customForm("search_bar", "");
 
 	// CLOSES FLASH MESSAGES THROUGH THE X BUTTON
 	$("#close_flash").click(function()
@@ -18,142 +18,156 @@ $(document).ready(function()
 });
 
 // CUSTOMS ALL THE FIELDS OF THE GIVEN FORM
-function customForm(formId,translationPath)
+function customForm(formId, translationPath)
 {
   $("#"+formId+" input").each(function()
   {
   	if (!$(this).hasClass("hidden") && $(this).attr("type") != "hidden") {
-  	  customInputField($(this).attr("id"),I18n.t(translationPath+$(this).attr("id")),formId,$(this).attr("type"));
+  	  customInputField($(this).attr("id"), I18n.t(translationPath+$(this).attr("id")), formId, $(this).attr("type"));
+  	  submitFormOnReturn($(this).attr("id"), formId, translationPath);
   	}
   });
 }
 
 // STYLES THE GIVEN FIELD AND ENABLES SUBMIT BY HITTING THE RETURN KEY
-function customInputField(inputFieldId,inputFieldDefaultValue,formId,inputFieldType)
+function customInputField(inputFieldId, inputFieldDefaultValue, formId, inputFieldType)
 {
-	if(inputFieldType == "password")
+	if (inputFieldType == "password")
 	{
-		styleInputPasswordField(inputFieldId,inputFieldDefaultValue);
+		styleInputPasswordField(inputFieldId, inputFieldDefaultValue);
 	}
 	else
 	{
-		styleInputField(inputFieldId,inputFieldDefaultValue);
+		styleInputField(inputFieldId, inputFieldDefaultValue);
 	}	
-	submitFormOnReturn(inputFieldId,formId,inputFieldDefaultValue);
 }
 
 // STYLES THE GIVEN INPUT FIELD
-function styleInputField(inputFieldId,inputFieldDefaultValue)
+function styleInputField(inputFieldId, inputFieldDefaultValue)
 {
 	$("#"+inputFieldId).ready(function()
 	{
-		if ($("#"+inputFieldId).attr("value") == inputFieldDefaultValue)
+		if ($("#"+inputFieldId).val() == inputFieldDefaultValue)
 	    {
-	      $("#"+inputFieldId).css("color","#7c7777");
-	      $("#"+inputFieldId).css("font-style","italic");
+	      $("#"+inputFieldId).css("color", "#7c7777");
+	      $("#"+inputFieldId).css("font-style", "italic");
 	    } 
 	    else {
-	      $("#"+inputFieldId).css("color","#444");
-	      $("#"+inputFieldId).css("font-style","normal");
+	      $("#"+inputFieldId).css("color", "#444");
+	      $("#"+inputFieldId).css("font-style", "normal");
 	    }	    	    
 	});
 	
-	$("#"+inputFieldId).click(function()
+	$("#"+inputFieldId).focus(function()
 	{
-		if($("#"+inputFieldId).attr("value") == inputFieldDefaultValue)
+		if($("#"+inputFieldId).val() == inputFieldDefaultValue)
 		{
-			$("#"+inputFieldId).css("color","#acacb3");	
+			$("#"+inputFieldId).css("color", "#acacb3");	
 		}
 	});
 
 	$("#"+inputFieldId).keydown(function()
 	{
-		if($("#"+inputFieldId).attr("value") == inputFieldDefaultValue)
+		if($("#"+inputFieldId).val() == inputFieldDefaultValue)
 		{
-			$("#"+inputFieldId).attr("value","");			
-			$("#"+inputFieldId).css("font-style","normal");
-			$("#"+inputFieldId).css("color","#444");	
+			$("#"+inputFieldId).val("");			
+			$("#"+inputFieldId).css("font-style", "normal");
+			$("#"+inputFieldId).css("color", "#444");	
 		}
 	});
 
-	$("#"+inputFieldId).focusout(function()
+	$("#"+inputFieldId).blur(function()
 	{
-		if($("#"+inputFieldId).attr("value") == "" || $("#"+inputFieldId).attr("value") == inputFieldDefaultValue)
+		if($("#"+inputFieldId).val() == "" || $("#"+inputFieldId).val() == inputFieldDefaultValue)
 		{
-			$("#"+inputFieldId).css("font-style","italic");
-			$("#"+inputFieldId).css("color","#7c7777");
-			if($("#"+inputFieldId).attr("value") == "")
+			$("#"+inputFieldId).css("font-style", "italic");
+			$("#"+inputFieldId).css("color", "#7c7777");
+			if($("#"+inputFieldId).val() == "")
 			{
-				$("#"+inputFieldId).attr("value",inputFieldDefaultValue); 
+				$("#"+inputFieldId).val(inputFieldDefaultValue); 
 			}
 		}
 	});
 }
 
-//STYLES THE PASSWORD FIELDS
-function styleInputPasswordField(inputFieldId,inputFieldDefaultValue)
+// STYLES THE GIVEN PASSWORD FIELD
+function styleInputPasswordField(inputFieldId, inputFieldDefaultValue)
 {
-    $("#"+inputFieldId).after("<input class='field' id='"+inputFieldId+"_Placeholder' type='text' value='"+inputFieldDefaultValue+"'/>");
-	$("#"+inputFieldId+"_Placeholder").css("color","#7c7777");
-    $("#"+inputFieldId+"_Placeholder").css("font-style","italic");
-	$("#"+inputFieldId+"_Placeholder").show();	
+  $("#"+inputFieldId).after("<input class='field' id='"+inputFieldId+"_placeholder' type='text' value='"+inputFieldDefaultValue+"' />");
+	$("#"+inputFieldId+"_placeholder").css("color", "#7c7777");
+  $("#"+inputFieldId+"_placeholder").css("font-style", "italic");
+	$("#"+inputFieldId+"_placeholder").show();	
 	$("#"+inputFieldId).hide();
 	
-	$("#"+inputFieldId+"_Placeholder").focus(function()
+	$("#"+inputFieldId+"_placeholder").focus(function()
 	{
-		$("#"+inputFieldId+"_Placeholder").hide();
-		$("#"+inputFieldId).attr("value","");
+		$("#"+inputFieldId+"_placeholder").css("color", "#acacb3");	
+	});
+	
+	$("#"+inputFieldId+"_placeholder").keydown(function()
+	{
+		$("#"+inputFieldId+"_placeholder").hide();
+		$("#"+inputFieldId).val("");
 		$("#"+inputFieldId).show();
 		$("#"+inputFieldId).focus();
 	});
 	
+	$("#"+inputFieldId+"_placeholder").blur(function()
+	{
+		if ($("#"+inputFieldId+"_placeholder").val() == "" || $("#"+inputFieldId+"_placeholder").val() == inputFieldDefaultValue)
+		{			
+			$("#"+inputFieldId+"_placeholder").css("color", "#7c7777");
+		}		
+	});
+	
 	$("#"+inputFieldId).blur(function()
 	{
-		if($("#"+inputFieldId).val() == "")
+		if($("#"+inputFieldId).val() == "" || $("#"+inputFieldId).val() == inputFieldDefaultValue)
 		{			
-			$("#"+inputFieldId+"_Placeholder").show();
+			$("#"+inputFieldId+"_placeholder").show();
 			$("#"+inputFieldId).hide();
+			$("#"+inputFieldId+"_placeholder").css("color", "#7c7777");
 		}		
 	});
 }
 
 // SUBMITS THE GIVEN FORM BY HITTING THE RETURN KEY
-function submitFormOnReturn(inputFieldId,formId,inputFieldDefaultValue)
+function submitFormOnReturn(inputFieldId, formId, translationPath)
 {
   $("#"+inputFieldId).keydown(function(e)
   {
     if (e.keyCode == 13)
     {
-      emptyDefaultValuesForm(formId,inputFieldDefaultValue);
+      emptyDefaultValuesForm(formId, translationPath);
       $("#"+formId).submit();
     }
   });
 }
 
 // SUBMITS THE GIVEN FORM THROUGH THE GIVEN EXTERNAL BUTTON
-function submitForm(formId,buttonId,inputFieldDefaultValue) {
+function submitForm(formId, buttonId, translationPath) {
   
   $("#"+buttonId).click(function()
   {
-    emptyDefaultValuesForm(formId,inputFieldDefaultValue);
+    emptyDefaultValuesForm(formId, translationPath);
     $("#"+formId).submit();
   })
 }
 
 // GIVEN A FORM, EMPTIES FIELDS THAT HAVE DEFAULT VALUES
-function emptyDefaultValuesForm(formId,inputFieldDefaultValue)
+function emptyDefaultValuesForm(formId, translationPath)
 {
   $("#"+formId+" input").each(function()
   {
   	if (!$(this).hasClass("hidden") && $(this).attr("type") != "hidden") {
-  	  emptyDefaultValueField($(this).attr("id"),inputFieldDefaultValue);
+  	  emptyDefaultValueField($(this).attr("id"), I18n.t(translationPath+$(this).attr("id")));
   	}
   });
 }
 
 // EMPTIES THE GIVEN FIELD IF IT HAS THE DEFAULT VALUE
-function emptyDefaultValueField(inputFieldId,inputFieldDefaultValue) {
-  if ($("#"+inputFieldId).attr("value") == inputFieldDefaultValue) {
-    $("#"+inputFieldId).attr("value", "");
+function emptyDefaultValueField(inputFieldId, inputFieldDefaultValue) {
+  if ($("#"+inputFieldId).val() == inputFieldDefaultValue) {
+    $("#"+inputFieldId).val("");
   }
 }

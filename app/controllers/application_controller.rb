@@ -9,16 +9,13 @@ class ApplicationController < ActionController::Base
   end
   
   def flash_error_messages(object, only_for_attributes = false)
-    flash_error = "#{t('flash.error.base')}#{t('_:')} "
-    errors = full_messages_errors_without_duplicates(object, only_for_attributes)
-    errors.each_with_index do |error, index|
-      flash_error += "#{object.class.human_attribute_name(error[0]).downcase} #{error[1]}"
-      (index != errors.count-1) ? flash_error += ", " : flash_error += "."
-    end
-    flash_error
+    errors = errors_without_duplicates(object, only_for_attributes)
+    errors.map! do |error|
+      "#{object.class.human_attribute_name(error[0]).downcase} #{error[1]}#{(error != errors.last) ? ", " : "."}"
+    end.insert(0, "#{t('flash.error.base')}#{t('_:')} ").join
   end
   
-  def full_messages_errors_without_duplicates(object, only_for_attributes = false)
+  def errors_without_duplicates(object, only_for_attributes = false)
     object.errors.select do |attribute, message|
       if only_for_attributes
         only_for_attributes.include?(attribute) && message == object.errors[attribute].first

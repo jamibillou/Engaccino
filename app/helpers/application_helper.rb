@@ -1,16 +1,12 @@
 module ApplicationHelper
 
   def logo
-    image_tag("logo.png", :alt => "Engaccino", :id => "logo")
+    image_tag "logo.png", :alt => "Engaccino", :id => "logo"
   end
   
   def title 
     base_title = "Engaccino"
-    if @title.nil?
-      base_title
-    else 
-      "#{base_title} | #{@title}"
-    end
+    @title.nil? ? base_title : "#{base_title} | #{@title}"
   end
   
   def menu_items

@@ -1,29 +1,24 @@
 class AjaxController < ApplicationController
   
   def countries
-    country_list = search_countries(params[:term]) if (params[:term])
-    render json: country_list    
+    countries = find_countries(params[:term]) if (params[:term])
+    render json: countries    
   end
   
-  def search_countries(text)
-    temp_list = Country.all.select { |item| item[0].downcase.include?(text.downcase) }
-    final_list = []
-    temp_list.each do |item|
-      final_list.push(item[0])
-    end
-    return final_list.sort
+  def find_countries(text)
+    Country.all.select { |item| item[0].downcase.include?(text.downcase) }.map do |item|
+      item[0]
+    end.sort
   end
   
   def code
-    country_code = search_code(params[:country])
     respond_to do |format|
-      format.json { render :json => {:code => country_code}}
+      format.json { render :json => { :code => find_code(params[:country]) } }
     end
   end
   
-  def search_code(country)
-    full_country = Country.find_by_name(country)
-    return full_country[0]
+  def find_code(country)
+    Country.find_by_name(country)[0]
   end
 
 end

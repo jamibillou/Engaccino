@@ -5,7 +5,7 @@ fr:
     attributes:
       user:
         first_name: "Prénom"
-        last_name: "Nom"
+        last_name: "Nom de famille"
         city: "Ville"
         country: "Pays"
         nationality: "Nationalité"
@@ -15,4 +15,4 @@ fr:
         facebook_login: "Identifiant Facebook"
         linkedin_login: "Identifiant LinkedIn"
         twitter_login: "Identifiant Twitter"
-        password: mot de passse
+        password: "Mot de passe"

@@ -3,7 +3,7 @@ fr:
       errors:
         messages:
           # Default messages: complete sentences
-          inclusion: "incorrect"
+          inclusion: "incorrect(e)"
           exclusion: "a une valeur défendue"
           invalid: "invalide"
           confirmation: "et confirmation différents"

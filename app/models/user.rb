@@ -2,34 +2,23 @@ class User < ActiveRecord::Base
 
   attr_accessor :password
   
-  attr_accessible :first_name,
-                  :last_name,
-                  :city,
-                  :country,
-                  :nationality,
-                  :year_of_birth,
-                  :phone,
-                  :email,
-                  :facebook_login,
-                  :linkedin_login,
-                  :twitter_login,
-                  :password,
-                  :password_confirmation
+  attr_accessible :first_name, :last_name,
+                  :city, :country,
+                  :nationality, :year_of_birth,
+                  :phone, :email,
+                  :facebook_login, :linkedin_login, :twitter_login,
+                  :password, :password_confirmation
   
   countries_array = Country.all.collect { |c| c[1] }
   email_regex = /^[\w+\d\-.]+@[a-z\d\-.]+\.[a-z]{2,3}(\.[a-z]{2,3})?$/i
   phone_regex = /^\+(?:[0-9] ?){6,14}[0-9]$/
   twitter_regex = /^@(_|([a-z]_)|[a-z])([a-z0-9]+_?)*$/i
   
-  validates_presence_of             :first_name,
-                                    :last_name,
-                                    :country,
-                                    :year_of_birth,
-                                    :email,
-                                    :password
+  validates_presence_of             :first_name, :last_name,
+                                    :country, :year_of_birth,
+                                    :email, :password
     
-  validates :first_name,            :presence => true,
-                                    :length => { :maximum => 80 }
+  validates :first_name,            :length => { :maximum => 80 }
                             
   validates :last_name,             :length => { :maximum => 80 }
                                     
