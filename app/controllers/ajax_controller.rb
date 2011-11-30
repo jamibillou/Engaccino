@@ -6,9 +6,7 @@ class AjaxController < ApplicationController
   end
   
   def find_countries(text)
-    Country.all.select { |item| item[0].downcase.include?(text.downcase) }.map do |item|
-      item[0]
-    end.sort
+    Country.all.select { |item| item[0].downcase.include?(text.downcase) }.map { |item| item[0] }.sort
   end
   
   def code
