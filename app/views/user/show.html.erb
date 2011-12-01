@@ -1,5 +1,43 @@
-<div class="white_block">
-  <p>Email: <%= @user.email %></p>
-  <p>Year of birth: <%= @user.year_of_birth %></p>
-  <p>Country: <%= @user.country %></p>
+<div class="card_block left">
+  <div class="head">
+    <div class="identity">
+      <div class="photo left">Profile<br />photo</div>
+      <div class="name_place_status right">
+        <h2><%= @user.first_name %><br /><%= @user.last_name %></h2> 
+        City, <%= Country.search(@user.country).name %>
+        <h3>Status</h3>
+      </div>
+    </div>
+    <div class="title">
+      <h2>Title</h2>
+      at Company
+    </div>
+  </div>
+  <div class="experience">
+    <h2>EXPERIENCE</h2>
+    <h3>yrs</h3>
+  </div>
+  <div class="degree">
+    <h2>DEGREE</h2>
+    Degree description
+  </div>
+  <div class="pro_skills">
+    <h2>PROFESSIONAL SKILLS</h2>
+    <p>Skill 1</p>
+    <p>Skill 2</p>
+    <p>Skill 3</p>
+  </div>
+  <div class="contact">
+    <h2>Contact <%= @user.first_name %></h2>
+    <p><%= @user.email %></p>
+    <p>+319328573295</p>
+    <div class="buttons">
+      <a class="small slightly_round grey button left margin_right" href="#">Fb</a>
+      <a class="small slightly_round grey button left margin_right" href="#">Li</a>
+      <a class="small slightly_round grey button left" href="#">Tw</a>
+    </div>
+  </div>
+</div>
+<div class="timeline right">
+  <h2>&nbsp;&nbsp;&nbsp;&nbsp;Timeline</h2>
 </div>

@@ -4,6 +4,7 @@
 <head>
   <title><%= title %></title>
   <%= stylesheet_link_tag    "application" %>
+  <%= stylesheet_link_tag    "user" %>
   <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "user" %>
   <%= javascript_tag do %>
@@ -24,7 +25,7 @@
   <%= render 'layouts/header' %>	
 	
   <div id="container">
-    <h1 id="container_title"><%= @title %></h1>
+    <%= "<h1 id='container_title'><%= #{@title}</h1>" unless @user && @title == "#{@user.first_name} #{@user.last_name}" %>
     <%= yield %>
   </div>
   

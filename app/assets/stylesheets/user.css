@@ -1,0 +1,139 @@
+/* QUICK VIEW CARD */
+
+.card_block {
+  width: 250px;
+  margin-bottom: 25px;
+  padding: 15px 20px 22px 20px;
+  font-size: 12px;
+}
+
+/* Head */
+.card_block .head {
+  background: white;
+  margin-bottom: 4px;
+}
+.card_block .head .identity .photo { /* only for now */
+  width: 30px;
+  height: 55px;
+  margin-left: 8px;
+  margin-top: 8px;
+  margin-right: 10px;
+  padding-left: 20px;
+  padding-top: 25px;
+  background-color: #444;
+  color: white;
+  text-align: center;
+  font-size: 10px;
+}
+.card_block .head .identity .name_place_status {
+  float: left;
+  padding-top: 6px;
+}
+.card_block .head .identity .name_place_status h2 {
+  padding-bottom: 2px;
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.2;
+}
+.card_block .head .identity .name_place_status h3 {
+  font-size: 13px;
+  margin: 0;
+  color: green;
+  font-weight: bold;
+}
+.card_block .head .title {
+  padding-left: 20px;
+  padding-top: 100px;
+  padding-bottom: 10px;
+  margin: 0;
+}
+.card_block .head .title h2 {
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
+
+/* Experience */
+.card_block .experience {
+  height: 80px;
+  width: 80px;
+  margin-right: 4px;
+  padding-left: 12px;
+  background: white;
+  float: left;
+  text-align: left;
+  font-size: 25px;
+}
+.card_block .experience h3 { 
+  margin: 0;
+  font-weight: 100;
+  text-align: left;
+}
+.card_block .experience h2 {
+  color: #BBB;
+  font-weight: 600;
+  font-size: 10px;
+  margin-bottom: 0;
+}
+
+/* Degree */
+.card_block .degree {
+  height: 80px;
+  width: 102px;
+  padding-left: 12px;
+  padding-right: 40px;
+  background: white;
+  float: right;
+  font-size: 13px;
+}
+.card_block .degree h2 {
+  color: #BBB;
+  font-weight: bold;
+  font-size: 10px;
+}
+
+/* Professional skills */
+.card_block .pro_skills {
+  height: 120px;
+  padding-left: 12px;
+  background: white;
+  margin-top: 88px;
+  padding-top: 3px;
+  font-size: 13px;
+  line-height: 2;
+}
+.card_block .pro_skills h2 {
+  color: #BBB;
+  font-weight: bold;
+  font-size: 10px;
+}
+
+/* Contact information */
+.card_block .contact {
+  height: 140px;
+  padding-left: 12px;
+  padding-top: 20px;
+  margin-top: 4px;
+  background: white;
+  font-size: 13px;
+}
+.card_block .contact h2 {
+  font-size: 17px;
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+.card_block .contact .buttons {
+  margin-top: 10px;
+}
+
+/* TIMELINE */
+.timeline {
+  height: 527px;
+  float: left;
+  background-color: white;
+  width: 600px;
+  margin-top: 15px;
+  font-size: 12px;
+}
