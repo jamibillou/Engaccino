@@ -25,9 +25,7 @@
   <%= render 'layouts/header' %>	
 	
   <div id="container">
-    <% unless @user && @title == "#{@user.first_name} #{@user.last_name}" %>
-      <h1 id="container_title"><%= @title %></h1>
-    <% end %>
+    <%= "<h1 id='container_title'><%= #{@title}</h1>" unless @user && @title == "#{@user.first_name} #{@user.last_name}" %>
     <%= yield %>
   </div>
   
