@@ -42,8 +42,3 @@ fr:
       view_profile: "Afficher mon profil"
     edit:
       title: "Editez votre profil"
-      edit_profile: "Editer mon profil"
-      edit_first_name_field: "Prénom"
-      edit_last_name_field: "Nom de famille"
-      edit_country_full_text_field: "Pays"
-      edit_year_of_birth_field: "Année de naissance"

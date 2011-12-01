@@ -35,19 +35,9 @@ class UserController < ApplicationController
   end 
 
   def edit
-    @user = User.find_by_id(params[:id])
-    @title = t 'user.edit.title'
   end
 
   def update
-    @user = User.find_by_id(params[:id])
-    if @user.update_attributes(params[:user])
-      redirect_to @user, :flash => { :success => t('flash.success.profile_updated') }
-    else
-      @title = t 'user.edit.title'
-      flash.now[:error] = flash_error_messages(@user)
-      render :edit
-    end
   end
 
   def destroy

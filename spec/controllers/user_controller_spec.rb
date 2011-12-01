@@ -118,66 +118,17 @@ describe UserController do
 
   describe "GET 'edit'" do
   
-    it "should be successful" do
+    it "returns http success" do
       get :edit, :id => @user
       response.should be_success
-    end
-    
-    it "should have the right title" do
-      get :edit, :id => @user
-      response.should have_selector('title', :content => I18n.t('user.edit.title'))
-    end
-    
-    it "should have a form to edit the user profile" do
-      get :edit, :id => @user
-      response.should have_selector('form', :id => 'edit_form')
     end
   end
 
   describe "PUT 'update'" do
   
-    describe "PUT 'update'" do
-    
-      describe "failure" do
-      
-        before(:each) do
-          @attr = { :first_name => "",
-                    :last_name => "",
-                    :country => ""
-                  }
-        end
-        
-        it "should render the edit page" do
-          put :update, :id => @user, :user => @attr
-          response.should render_template(:edit)
-        end
-      end
-      
-      describe "success" do
-        
-        before(:each) do
-          @attr = { :first_name => "New first name",
-                    :last_name => "New last name",
-                    :country => "FR",
-                    :year_of_birth => 1978,
-                    :password => "pouetpouet"
-                  }
-        end
-        
-        it "should change the User's attributes" do
-          put :update, :id => @user,  :user => @attr
-          user = assigns(:user)
-          @user.reload
-          @user.first_name.should == user.first_name
-          @user.last_name.should == user.last_name
-          @user.country.should == user.country
-        end
-        
-        it "should have a flash message" do
-          put :update, :id => @user, :user => @attr
-          response.should have_selector('div', :class => 'flash success')
-        end
-      end
+    it "returns http success" do
+      put :update, :id => @user
+      response.should be_success
     end
   end
 
