@@ -42,3 +42,9 @@ en:
       view_profile: "View my profile"
     edit:
       title: "Edit your profile"
+      edit_profile: "Edit my profile"
+      edit_first_name_field: "First name"
+      edit_last_name_field: "Last name"
+      edit_country_full_text_field: "Country"
+      edit_year_of_birth_field: "Year of birth"
+      

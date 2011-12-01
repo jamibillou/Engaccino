@@ -1,2 +1,17 @@
-<h1>User#edit</h1>
-<p>Find me in app/views/user/edit.html.erb</p>
+<div class="white_block">
+  <%= form_for @user, :html => { :id => 'edit_form' } do |f| %>
+    <%= f.text_field :first_name, :value => @user.first_name, :id => 'edit_first_name_field', :class => 'field' %>
+    <br />
+    <%= f.text_field :last_name, :value => @user.last_name, :id => 'edit_last_name_field', :class => 'field' %>
+    <br />
+    <%= f.text_field :year_of_birth, :value => @user.year_of_birth, :id => 'edit_year_of_birth_field', :class => 'field' %>
+    <br />
+    <%= f.hidden_field :country, :value => @user.country, :id => 'edit_country_field' %>
+    <%= f.text_field :country_full_text, :value => Country.search(@user.country).name, :id => 'edit_country_full_text_field', :class => 'field' %>
+  	<%= f.hidden_field :password, :value => "pouet38", :id => 'edit_password_field' %>
+  	<%= f.submit t('user.edit.edit_profile'), :class => 'hidden' %>
+  <% end %>
+  <br />
+  <%= link_to t('user.edit.edit_profile'), '#', :id => 'edit_form_submit', :class => 'button blue round left' %>
+  <br /><br />
+</div>

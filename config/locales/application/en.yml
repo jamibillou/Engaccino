@@ -25,6 +25,7 @@ en:
   flash:
     success:
       welcome: "Welcome to Engaccino!"
+      profile_updated: "Your profile has been updated :)"
     error: 
       base: "Error"
       general: "Something went wrong, sorry about that."
