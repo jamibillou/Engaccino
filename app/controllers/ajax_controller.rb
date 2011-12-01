@@ -16,7 +16,8 @@ class AjaxController < ApplicationController
   end
   
   def find_code(country)
-    Country.find_by_name(country)[0]
+    return Country.find_by_name(country)[0] if !Country.find_by_name(country).nil?
+    return "error" 
   end
 
 end
