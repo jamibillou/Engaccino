@@ -25,6 +25,7 @@ fr:
   flash:
     success:
       welcome: "Bienvenue sur Engaccino !"
+      welcome_home: "Bienvenue sur votre page profil !"
     error: 
       base: "Erreur"
       general: "Oups, un erreur est survenue."

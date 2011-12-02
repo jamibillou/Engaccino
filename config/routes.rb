@@ -6,13 +6,14 @@ Engaccino::Application.routes.draw do
     
     match '/users', :to => 'user#index'
     match '/signup', :to => 'user#new'
+    match '/user/update', :to => 'user#update'
   
     root :to => 'pages#overview'
     match '/walkthrough', :to => 'pages#walkthrough'
     match '/pricing', :to => 'pages#pricing'
     match '/about', :to => 'pages#about'
     match '/contact', :to => 'pages#contact'
-    match 'signup_step_2', :to => 'user#signup_step_2'
+    match 'signup_step_2/:id', :to => 'user#signup_step_2'
     
     match '/ajax/code', :to => 'ajax#code'
 

@@ -11,33 +11,36 @@ class UserController < ApplicationController
   def new
     @user = User.new
     @title = t 'user.new.title'
-  end 
-    
-  def signup_step_2
-    @user = User.new(params[:user])
-    unless @user.valid_attribute?(:email) && @user.valid_attribute?(:password)
-      flash.now[:error] = flash_error_messages(@user, [:email, :password])
-      render :new
-    else
-      @title = t 'user.new.complete_your_profile'
-    end
   end
   
   def create
     @user = User.new(params[:user])
-    if @user.save
-      redirect_to @user, :flash => { :success => t('flash.success.welcome') }
+    unless @user.save
+      flash.now[:error] = flash_error_messages(@user, [:email, :password])
+      render :new
     else
+      flash.now[:success] = t('flash.success.welcome') 
       @title = t 'user.new.complete_your_profile'
+      render :signup_step_2
+    end
+  end 
+    
+  def signup_step_2        
+    @user = User.find(@user.id)
+    @title = t 'user.new.complete_your_profile'    
+  end
+  
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(params[:user])
+      redirect_to @user, :flash => { :success => t('flash.success.welcome_home') }
+    else
       flash.now[:error] = flash_error_messages(@user)
       render :signup_step_2
     end
   end 
 
   def edit
-  end
-
-  def update
   end
 
   def destroy
