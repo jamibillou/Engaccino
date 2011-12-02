@@ -26,6 +26,7 @@ en:
     success:
       welcome: "Welcome to Engaccino!"
       profile_updated: "Your profile has been updated :)"
+      welcome_home: "Welcome to your homepage!"
     error: 
       base: "Error"
       general: "Something went wrong, sorry about that."

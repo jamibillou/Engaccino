@@ -26,6 +26,7 @@ fr:
     success:
       welcome: "Bienvenue sur Engaccino !"
       profile_updated: "Votre profil a été mis à jour :)"
+      welcome_home: "Bienvenue sur votre page profil !"
     error: 
       base: "Erreur"
       general: "Oups, un erreur est survenue."

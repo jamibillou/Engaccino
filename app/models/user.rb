@@ -14,20 +14,20 @@ class User < ActiveRecord::Base
   phone_regex = /^\+(?:[0-9] ?){6,14}[0-9]$/
   twitter_regex = /^@(_|([a-z]_)|[a-z])([a-z0-9]+_?)*$/i
   
-  validates_presence_of             :first_name, :last_name,
-                                    :country, :year_of_birth,
-                                    :email, :password
+  validates_presence_of             :email, :password
     
   validates :first_name,            :length => { :maximum => 80 }
                             
   validates :last_name,             :length => { :maximum => 80 }
                                     
-  validates :country,               :inclusion => { :in => countries_array }
+  validates :country,               :inclusion => { :in => countries_array },
+                                    :allow_blank => true
                                     
   validates :nationality,           :inclusion => { :in => countries_array },
                                     :allow_blank => true
                                     
-  validates :year_of_birth,         :inclusion => { :in => 1900..Time.now.year }
+  validates :year_of_birth,         :inclusion => { :in => 1900..Time.now.year },
+                                    :allow_blank => true  
                                     
   validates :phone,                 :length => { :minimum => 7, :maximum => 20 },
                                     :format => { :with => phone_regex },

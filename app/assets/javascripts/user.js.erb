@@ -5,19 +5,19 @@ $(document).ready(function()
   customForm("signup_form_2","user.new.");
   customForm("edit_form","user.edit.");
   
-	$("#signup_country_full_text_field").autocomplete(
+  $("#signup_country_full_text_field").autocomplete(
 	{
 		source:"/ajax/countries",
-   	autoFocus: true,
-   	minLength: 2,
-   	close: function()
-   	{
-   		$.getJSON("/ajax/code?country="+$("#signup_country_full_text_field").val(),
-	    function(data)
-	    {
-		    $("#signup_country_field").val(data.code);
-	    })
-   	}
+	   	autoFocus: true,
+	   	minLength: 2,
+	   	change: function()
+	   	{
+	   		$.getJSON("/ajax/code?country="+$("#signup_country_full_text_field").val(),
+		    function(data)
+		    {
+		    	$("#signup_country_field").val(data.code);
+		    })
+	   	}
   });
   
   // SUBMITS THE SIGNUP FORMS

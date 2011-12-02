@@ -37,18 +37,32 @@ describe UserController do
     
   end
 
-  describe "POST 'signup_step_2'" do
+  describe "POST 'create'" do
           
     it "returns http success" do
-      post :signup_step_2
+      post :create
       response.should be_success
     end
   
     describe "success" do
     
+      before(:each) do
+        @attr = { 
+                  :email => "new_user@example.com", 
+                  :password => "pouetpouet45", 
+                  :password_confirmation => "pouetpouet45" 
+                 }
+      end
+    
       it "should render the 2nd signup form" do
-        post :signup_step_2, :user => { :email => "new_user@example.com", :password => "pouetpouet45", :password_confirmation => "pouetpouet45" }
+        post :create, :user => @attr
         response.should render_template(:signup_step_2)
+      end
+      
+      it "should create a user" do
+        lambda do
+          post :create, :user => @attr
+        end.should change(User, :count).by(1)
       end
       
     end
@@ -56,63 +70,79 @@ describe UserController do
     describe "failure" do
       
       it "should render the 'new' template" do
-        post :signup_step_2, :email => "", :password => "", :password_confirmation => ""
+        post :create, :email => "", :password => "", :password_confirmation => ""
         response.should render_template(:new)
       end
       
       it "should have a flash message" do
-        post :signup_step_2, :email => "", :password => "", :password_confirmation => ""
+        post :create, :email => "", :password => "", :password_confirmation => ""
         response.should have_selector('div', :class => 'flash error')
       end
+    end    
+  end
+  
+  describe "PUT 'update'" do
+          
+    it "returns http success" do
+      put :update, :id => @user
+    response.should be_success
     end
     
-    describe "POST 'create'" do
-      
-      describe "success" do
-      
-        before(:each) do
-          @attr = { 
-                    :email => "new_user@example.com",
-                    :password => "pouetpouet45",
-                    :first_name => "New",
-                    :last_name => "User",
-                    :country => "NL",
-                    :year_of_birth => 27.years.ago.year
-                  }
-        end
-        
-        it "should create a user" do
-         lambda do
-            post :create, :user => @attr
-          end.should change(User, :count).by(1)
-        end
-      
-        it "should redirect to the User#show page" do
-          post :create, :user => @attr
-          response.should redirect_to(user_path(assigns(:user)))
-        end
+    describe "success" do
+    
+      before(:each) do
+        @attr = { 
+                  :first_name => "New",
+                  :last_name => "User",
+                  :country => "NL",
+                  :year_of_birth => 27.years.ago.year
+                }
+      end
+    
+      it "should redirect to the User#show page" do
+        put :update, :user => @attr, :id => @user
+        response.should redirect_to(user_path)
       end
       
-      describe "failure" do
-        
-        before(:each) do
-          @attr = { :first_name => "",
-                    :last_name => "",
-                    :country => ""
-                  }
-        end
-                    
-        it "should render to the 2nd signup form" do
-           post :create, :user => @attr
-           response.should render_template(:signup_step_2)
-        end  
-        
-        it "should not create a user" do
-          lambda do
-            post :create, :user => @attr
-          end.should_not change(User, :count)
-        end
+      it "should update the user's attributes" do
+        put :update, :user => @attr, :id => @user
+        user = assigns(:user)
+        @user.reload
+        @user.first_name == user.first_name
+        @user.last_name == user.last_name
+        @user.country == user.country
+        @user.year_of_birth == user.year_of_birth
       end
+      
+      it "should not create a user" do
+        lambda do
+          put :update, :user => @attr, :id => @user
+        end.should_not change(User, :count)
+      end
+
+    end
+    
+    describe "failure" do
+      
+      before(:each) do
+        @attr = { 
+                  :email => "new_user@example.com",
+                  :first_name => "",
+                  :last_name => "",
+                  :country => ""
+                }
+      end
+                  
+      it "should render to the 2nd signup form" do
+         put :update, :user => @attr, :id => @user
+         response.should render_template(:signup_step_2)
+      end 
+      
+      it "should not create another user" do
+        lambda do
+          put :update, :user => @attr, :id => @user
+        end.should_not change(User, :count)
+      end 
     end
   end
 
