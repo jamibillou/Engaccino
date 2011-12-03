@@ -45,6 +45,7 @@ class UserController < ApplicationController
     @title = t 'user.edit.title'
   end
 <<<<<<< HEAD
+<<<<<<< HEAD
    
   def update
     @user = User.find_by_id(params[:id])
@@ -56,6 +57,8 @@ class UserController < ApplicationController
       render :edit
     end
   end
+=======
+>>>>>>> b232d3a375384cd40141f175723f6093862bde9c
 =======
 >>>>>>> b232d3a375384cd40141f175723f6093862bde9c
 
