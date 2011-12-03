@@ -164,6 +164,7 @@ describe UserController do
     end
   end
 
+<<<<<<< HEAD
   describe "PUT 'update'" do
   
     describe "failure" do
@@ -208,6 +209,8 @@ describe UserController do
     end
   end
 
+=======
+>>>>>>> b232d3a375384cd40141f175723f6093862bde9c
   describe "DELETE 'destroy'" do
     
     it "returns http success" do
