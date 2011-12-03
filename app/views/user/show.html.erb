@@ -4,7 +4,7 @@
       <div class="photo left">Profile<br />photo</div>
       <div class="name_place_status right">
         <h2><%= @user.first_name %><br /><%= @user.last_name %></h2> 
-        City, <%= Country.search(@user.country).name %>
+        City, <%= unless @user.country.blank? then Country.search(@user.country).name end %>
         <h3>Status</h3>
       </div>
     </div>
@@ -37,7 +37,4 @@
       <a class="small slightly_round grey button left" href="#">Tw</a>
     </div>
   </div>
-</div>
-<div class="timeline right">
-  <h2>&nbsp;&nbsp;&nbsp;&nbsp;Timeline</h2>
 </div>

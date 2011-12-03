@@ -2,8 +2,7 @@ module UserHelper
   
   def signup_blocks
     [ { :id => 'personal_information',
-        :fields => [ { :id => 'id', :type => 'hidden' },
-                     { :id => 'first_name', :type => 'text', :new_line => true },
+        :fields => [ { :id => 'first_name', :type => 'text', :new_line => true },
                      { :id => 'last_name', :type => 'text', :new_line => true },
                      { :id => 'year_of_birth', :type => 'text', :new_line => true },
                      { :id => 'country', :type => 'hidden' },

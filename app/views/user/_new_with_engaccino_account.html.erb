@@ -1,6 +1,8 @@
 <div class="left dashed">
   <h2><%=t 'user.new.create_engaccino_account' %></h2>
-  <%= form_for @user, :url => { :action => :create}, :html => { :id => 'signup_form_1' } do |f| %>
+  <%= form_for @user, :url => { :action => :create }, :html => { :id => 'signup_form_1' } do |f| %>
+    <%= f.hidden_field :first_name, :value => t('user.new.signup_first_name_field') %>
+    <%= f.hidden_field :last_name, :value => t('user.new.signup_last_name_field') %>
     <%= f.text_field :email, :value => (params[:user]) && !params[:user][:email].empty? ? params[:user][:email] : t('user.new.signup_email_field'),
                              :id => 'signup_email_field',
                              :class => 'field' %><br />

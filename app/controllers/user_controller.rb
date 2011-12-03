@@ -19,48 +19,42 @@ class UserController < ApplicationController
       flash.now[:error] = flash_error_messages(@user, [:email, :password])
       render :new
     else
-      flash.now[:success] = t('flash.success.welcome') 
       @title = t 'user.new.complete_your_profile'
-      render :signup_step_2
-    end
-  end 
-    
-  def signup_step_2        
-    @user = User.find(@user.id)
-    @title = t 'user.new.complete_your_profile'    
-  end
-  
-  def update
-    @user = User.find(params[:id])
-    if @user.update_attributes(params[:user])
-      redirect_to @user, :flash => { :success => t('flash.success.welcome_home') }
-    else
-      flash.now[:error] = flash_error_messages(@user)
-      render :signup_step_2
+      render :signup_step_2, :id => @user
     end
   end 
 
+  def signup_step_2
+    @user = User.find(params[:id])
+    @title = t 'user.new.complete_your_profile'
+  end
+
   def edit
-    @user = User.find_by_id(params[:id])
+    @user = User.find(params[:id])
     @title = t 'user.edit.title'
   end
-<<<<<<< HEAD
-<<<<<<< HEAD
-   
+  
   def update
-    @user = User.find_by_id(params[:id])
-    if @user.update_attributes(params[:user])
-      redirect_to @user, :flash => { :success => t('flash.success.profile_updated') }
+    if params[:id] == 'update'
+      origin_page = :signup_step_2
+      origin_page_title = t 'user.new.complete_your_profile'
+      @user = User.find(params[:user][:id])
+      flash_message = 'flash.success.welcome'
     else
-      @title = t 'user.edit.title'
-      flash.now[:error] = flash_error_messages(@user)
-      render :edit
+      origin_page = :edit
+      origin_page_title = t 'user.edit.title'
+      @user = User.find(params[:id])
+      flash_message = 'flash.success.profile_updated'
     end
-  end
-=======
->>>>>>> b232d3a375384cd40141f175723f6093862bde9c
-=======
->>>>>>> b232d3a375384cd40141f175723f6093862bde9c
+    if @user.update_attributes(params[:user])
+      @title = "#{@user.first_name} #{@user.last_name}"
+      redirect_to @user, :flash => { :success => t(flash_message) }
+    else
+      flash.now[:error] = flash_error_messages(@user)
+      @title = origin_page_title
+      render origin_page
+    end
+  end 
 
   def destroy
   end

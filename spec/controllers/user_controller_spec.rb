@@ -9,7 +9,7 @@ describe UserController do
   end
 
   describe "GET 'index'" do
-    it "returns http success" do
+    it "should return http success" do
       get :index
       response.should be_success
     end
@@ -17,7 +17,7 @@ describe UserController do
 
   describe "GET 'show'" do
     
-    it "returns http success" do
+    it "should return http success" do
       get :show, :id => @user
       response.should be_success
     end
@@ -25,7 +25,7 @@ describe UserController do
 
   describe "GET 'new'" do
   
-    it "returns http success" do
+    it "should return http success" do
       get :new
       response.should be_success
     end
@@ -34,12 +34,11 @@ describe UserController do
       get :new
       response.should have_selector('title', :content => I18n.t('user.new.title'))
     end
-    
   end
 
   describe "POST 'create'" do
           
-    it "returns http success" do
+    it "should return http success" do
       post :create
       response.should be_success
     end
@@ -47,11 +46,11 @@ describe UserController do
     describe "success" do
     
       before(:each) do
-        @attr = { 
+        @attr = { :first_name => "First name",
+                  :last_name => "Last name",
                   :email => "new_user@example.com", 
                   :password => "pouetpouet45", 
-                  :password_confirmation => "pouetpouet45" 
-                 }
+                  :password_confirmation => "pouetpouet45" }
       end
     
       it "should render the 2nd signup form" do
@@ -81,9 +80,27 @@ describe UserController do
     end    
   end
   
+  describe "GET 'edit'" do
+  
+    it "should return http success" do
+      get :edit, :id => @user
+      response.should be_success
+    end
+          
+    it "should have the right title" do
+      get :edit, :id => @user
+      response.should have_selector('title', :content => I18n.t('user.edit.title'))
+    end
+          
+    it "should have a form to edit the user profile" do
+      get :edit, :id => @user
+      response.should have_selector('form', :id => 'edit_form')
+    end
+  end
+  
   describe "PUT 'update'" do
           
-    it "returns http success" do
+    it "should return http success" do
       put :update, :id => @user
     response.should be_success
     end
@@ -91,17 +108,9 @@ describe UserController do
     describe "success" do
     
       before(:each) do
-        @attr = { 
-                  :first_name => "New",
+        @attr = { :first_name => "Updated",
                   :last_name => "User",
-                  :country => "NL",
-                  :year_of_birth => 27.years.ago.year
-                }
-      end
-    
-      it "should redirect to the User#show page" do
-        put :update, :user => @attr, :id => @user
-        response.should redirect_to(user_path)
+                  :password => "pouetpouet" }
       end
       
       it "should update the user's attributes" do
@@ -119,23 +128,29 @@ describe UserController do
           put :update, :user => @attr, :id => @user
         end.should_not change(User, :count)
       end
-
+      
+      it "should redirect to the User#show page" do
+        put :update, :user => @attr, :id => @user
+        response.should redirect_to(@user)
+        put :update, :user => @attr.merge(:id => @user), :id => 'update'
+        response.should redirect_to(@user)
+      end
     end
     
     describe "failure" do
       
       before(:each) do
-        @attr = { 
-                  :email => "new_user@example.com",
+        @attr = { :email => "new_user@example.com",
                   :first_name => "",
                   :last_name => "",
-                  :country => ""
-                }
+                  :country => "" }
       end
                   
-      it "should render to the 2nd signup form" do
-         put :update, :user => @attr, :id => @user
+      it "should render the 2nd signup form or the edit page" do
+         put :update, :user => @attr.merge(:id => @user), :id => 'update'
          response.should render_template(:signup_step_2)
+         put :update, :user => @attr, :id => @user
+         response.should render_template(:edit)
       end 
       
       it "should not create another user" do
@@ -146,77 +161,9 @@ describe UserController do
     end
   end
 
-  describe "GET 'edit'" do
-  
-    it "returns http success" do
-      get :edit, :id => @user
-      response.should be_success
-    end
-          
-    it "should have the right title" do
-      get :edit, :id => @user
-      response.should have_selector('title', :content => I18n.t('user.edit.title'))
-    end
-          
-    it "should have a form to edit the user profile" do
-      get :edit, :id => @user
-      response.should have_selector('form', :id => 'edit_form')
-    end
-  end
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-  describe "PUT 'update'" do
-  
-    describe "failure" do
-    
-      before(:each) do
-        @attr = { :first_name => "",
-                  :last_name => "",
-                  :country => ""
-                }
-      end
-      
-      it "should render the edit page" do
-        put :update, :id => @user, :user => @attr
-        response.should render_template(:edit)
-      end
-    end
-    
-    describe "success" do
-      
-      before(:each) do
-        @attr = { :first_name => "New first name",
-                  :last_name => "New last name",
-                  :country => "FR",
-                  :year_of_birth => "1978",
-                  :password => "pouetpouet"
-                }
-      end
-      
-      it "should change the User's attributes" do
-        put :update, :id => @user,  :user => @attr
-        user = assigns(:user)
-        @user.reload
-        @user.first_name.should == user.first_name
-        @user.last_name.should == user.last_name
-        @user.country.should == user.country
-      end
-      
-      it "should have a flash message" do
-        put :update, :id => @user, :user => @attr
-        response.should have_selector('div', :class => 'flash success')
-      end
-    end
-  end
-
-=======
->>>>>>> b232d3a375384cd40141f175723f6093862bde9c
-=======
->>>>>>> b232d3a375384cd40141f175723f6093862bde9c
   describe "DELETE 'destroy'" do
     
-    it "returns http success" do
+    it "should return http success" do
       delete :destroy, :id => @user
       response.should be_success
     end

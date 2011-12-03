@@ -1,6 +1,8 @@
 <div id="signup_part_2">
   <%= render 'signup_speed_up' %>
   <%= form_for @user, :url => { :action => :update }, :html => { :id => 'signup_form_2' } do |f| %>
+    <%= f.hidden_field :id, :value => @user.id, :id => "signup_id_field" %>
+    <%= f.hidden_field :password, :value => "pouetpouet", :id => "signup_id_field" %>
     <% signup_blocks.each do |block| %>
       <%= render :partial => 'signup_block', :locals => { :block => block, :f => f } %>
   	<% end %>

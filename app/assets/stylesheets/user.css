@@ -3,7 +3,7 @@
 .card_block {
   width: 250px;
   margin-bottom: 25px;
-  padding: 15px 20px 22px 20px;
+  padding: 18px 20px 22px 20px;
   font-size: 12px;
 }
 
@@ -126,14 +126,4 @@
 }
 .card_block .contact .buttons {
   margin-top: 10px;
-}
-
-/* TIMELINE */
-.timeline {
-  height: 527px;
-  float: left;
-  background-color: white;
-  width: 600px;
-  margin-top: 15px;
-  font-size: 12px;
 }

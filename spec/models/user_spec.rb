@@ -30,13 +30,13 @@ describe User do
   
     describe ":first_name, :last_name" do
     
-      it "should accept empty first names or last names" do
+      it "should not accept empty first names or last names" do
         empty_first_name_user = User.new(@attr.merge(:first_name => ""))
         empty_last_name_user = User.new(@attr.merge(:last_name => ""))
         empty_name_user = User.new(@attr.merge(:first_name => "", :last_name => ""))
-        empty_first_name_user.should be_valid
-        empty_last_name_user.should be_valid
-        empty_name_user.should be_valid
+        empty_first_name_user.should_not be_valid
+        empty_last_name_user.should_not be_valid
+        empty_name_user.should_not be_valid
       end
       
       it "should reject too long first names" do
@@ -85,7 +85,10 @@ describe User do
         end
       end
     end
-      
+  end
+  
+  describe "optional attributes" do
+    
     describe ":country" do
     
       it "should accept empty countries" do
@@ -112,9 +115,6 @@ describe User do
         too_recent_year_of_birth_user.should_not be_valid
       end
     end
-  end
-  
-  describe "optional attributes" do
     
     describe ":nationality" do
     
