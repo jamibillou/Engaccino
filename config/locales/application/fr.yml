@@ -8,7 +8,7 @@ fr:
   menu_about: "À propos"
   menu_contact: "Contact"
   
-  search_bar_value: "Accès rapide"
+  search_bar: "Accès rapide"
   search_bar_title: "Rechercher un contact, une entreprise, offre d'emploi, etc."
    
   already_member: "Déjà membre ?"

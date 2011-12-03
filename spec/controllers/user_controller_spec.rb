@@ -52,16 +52,16 @@ describe UserController do
                   :password => "pouetpouet45", 
                   :password_confirmation => "pouetpouet45" }
       end
-    
-      it "should render the 2nd signup form" do
-        post :create, :user => @attr
-        response.should render_template(:signup_step_2)
-      end
       
       it "should create a user" do
         lambda do
           post :create, :user => @attr
         end.should change(User, :count).by(1)
+      end
+      
+      it "should render the 2nd signup form" do
+        post :create, :user => @attr
+        response.should render_template(:edit)
       end
       
     end
@@ -94,7 +94,7 @@ describe UserController do
           
     it "should have a form to edit the user profile" do
       get :edit, :id => @user
-      response.should have_selector('form', :id => 'edit_form')
+      response.should have_selector('form', :id => 'user_edit_form')
     end
   end
   
@@ -132,8 +132,6 @@ describe UserController do
       it "should redirect to the User#show page" do
         put :update, :user => @attr, :id => @user
         response.should redirect_to(@user)
-        put :update, :user => @attr.merge(:id => @user), :id => 'update'
-        response.should redirect_to(@user)
       end
     end
     
@@ -147,8 +145,6 @@ describe UserController do
       end
                   
       it "should render the 2nd signup form or the edit page" do
-         put :update, :user => @attr.merge(:id => @user), :id => 'update'
-         response.should render_template(:signup_step_2)
          put :update, :user => @attr, :id => @user
          response.should render_template(:edit)
       end 

@@ -1,0 +1,11 @@
+<div id="signup">
+  <%= render 'signup_speed_up' %>
+  <%= form_for @user, :html => { :id => 'user_signup_form' } do |f| %>
+    <%= f.hidden_field :password, :value => "pouetpouet" %>
+    <% signup_blocks.each do |block| %>
+      <%= render :partial => 'signup_block', :locals => { :block => block, :f => f } %>
+  	<% end %>
+  	<%= f.submit t('user.edit.view_profile'), :class => 'hidden' %>
+  <% end %>
+</div>
+<%= link_to t('user.edit.view_profile'), '#', :id => 'submit', :class => 'button blue round center' %>

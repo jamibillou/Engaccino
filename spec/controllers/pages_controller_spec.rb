@@ -37,7 +37,7 @@ describe PagesController do
     
     it "should have a search bar" do
       get :overview
-      response.should have_selector('form', :id => 'search_bar')
+      response.should have_selector('form', :id => 'search_bar_form')
     end
   end
 
@@ -70,7 +70,7 @@ describe PagesController do
     
     it "should have a search bar" do
       get :walkthrough
-      response.should have_selector('form', :id => 'search_bar')
+      response.should have_selector('form', :id => 'search_bar_form')
     end
   end
 
@@ -103,7 +103,7 @@ describe PagesController do
     
     it "should have a search bar" do
       get :pricing
-      response.should have_selector('form', :id => 'search_bar')
+      response.should have_selector('form', :id => 'search_bar_form')
     end
   end
 
@@ -136,7 +136,7 @@ describe PagesController do
     
     it "should have a search bar" do
       get :about
-      response.should have_selector('form', :id => 'search_bar')
+      response.should have_selector('form', :id => 'search_bar_form')
     end
   end
 
@@ -169,7 +169,7 @@ describe PagesController do
     
     it "should have a search bar" do
       get :contact
-      response.should have_selector('form', :id => 'search_bar')
+      response.should have_selector('form', :id => 'search_bar_form')
     end
   end
 end

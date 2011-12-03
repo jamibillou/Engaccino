@@ -8,7 +8,7 @@ $(document).ready(function()
 {
 
 	// CUSTOMS THE SEARCH BAR
-	customForm("search_bar", "");
+	customForm("search_bar_form", "");
 
 	// CLOSES FLASH MESSAGES THROUGH THE X BUTTON
 	$("#close_flash").click(function()
@@ -145,9 +145,9 @@ function submitFormOnReturn(inputFieldId, formId, translationPath)
 }
 
 // SUBMITS THE GIVEN FORM THROUGH THE GIVEN EXTERNAL BUTTON
-function submitForm(formId, buttonId, translationPath) {
+function submitForm(formId, translationPath) {
   
-  $("#"+buttonId).click(function()
+  $("#submit").click(function()
   {
     emptyDefaultValuesForm(formId, translationPath);
     $("#"+formId).submit();
