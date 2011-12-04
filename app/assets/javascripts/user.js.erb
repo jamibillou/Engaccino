@@ -10,7 +10,7 @@ $(document).ready(function()
 		source:"/ajax/countries",
 	   	autoFocus: true,
 	   	minLength: 2,
-	   	change: function()
+	   	close: function()
 	   	{
 	   		$.getJSON("/ajax/code?country="+$("#country_full_text").val(),
 		    function(data)

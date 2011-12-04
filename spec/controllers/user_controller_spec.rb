@@ -149,8 +149,15 @@ describe UserController do
         end.should_not change(User, :count)
       end
       
-      it "should redirect to the User#show page" do
+      it "should redirect to the User#show page (from the signup page)" do
         put :update, :user => @attr, :id => @user
+        session[:edit_page] = :signup
+        response.should redirect_to(@user)
+      end
+      
+      it "should redirect to the User#show page (from the edit page)" do
+        put :update, :user => @attr, :id => @user
+        session[:edit_page] = :edit
         response.should redirect_to(@user)
       end
     end
@@ -164,8 +171,15 @@ describe UserController do
                   :country => "" }
       end
                   
-      it "should render the 2nd signup form or the edit page" do
+      it "should render the edit page if we come from the edit page" do
          put :update, :user => @attr, :id => @user
+         session[:edit_page] = :edit
+         response.should render_template(:edit)
+      end
+      
+      it "should render the 2nd signup form if we come from the sign_up page" do
+         put :update, :user => @attr, :id => @user
+         session[:edit_page] = :signup
          response.should render_template(:edit)
       end 
       
