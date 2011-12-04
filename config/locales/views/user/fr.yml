@@ -2,6 +2,9 @@ fr:
   user:
     
     personal_information: "Civilité"
+    email: "Email"
+    password: "Mot de passe"
+    password_confirmation: "Confirmation de mot de passe"
     first_name: "Prénom"
     middle_name: "Deuxième prénom"
     last_name: "Nom de famille"
@@ -42,3 +45,5 @@ fr:
       speed_up_by_import: "Gagnez du temps, importez vos détails depuis LinkedIn ou Facebook."
       import_from: "Importez depuis"
       view_profile: "Afficher mon profil"
+    destroy:
+      title: "Supprimer"

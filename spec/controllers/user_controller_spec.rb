@@ -9,9 +9,29 @@ describe UserController do
   end
 
   describe "GET 'index'" do
+    
     it "should return http success" do
       get :index
       response.should be_success
+    end
+    
+    it "should have the right title" do
+      get :index
+      response.should have_selector('title', :content => I18n.t('user.index.title'))
+    end
+    
+    it "should have a card for each user" do 
+      get :index
+      User.all do |user|
+        response.should have_selector('div', :id => "user_#{user.id}")
+      end  
+    end
+    
+    it "should have a destroy link for each user" do 
+      get :index
+      User.all do |user|
+        response.should have_selector('div', :id => "destroy_user_#{user.id}")
+      end  
     end
   end
 
@@ -159,9 +179,16 @@ describe UserController do
 
   describe "DELETE 'destroy'" do
     
-    it "should return http success" do
+    it "should destroy the user" do
+      lambda do
+        delete :destroy, :id => @user
+      end.should change(User, :count).by(-1)
+    end
+    
+    it "should redirect to the users page" do
       delete :destroy, :id => @user
-      response.should be_success
+      flash[:success].should == I18n.t('flash.success.user_destroyed')
+      response.should redirect_to(users_path)
     end
   end
 end

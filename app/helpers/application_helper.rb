@@ -17,4 +17,7 @@ module ApplicationHelper
      {:title => t(:menu_contact),       :path => contact_path,     :selected => (t(:menu_contact) == @title)}]
   end
   
+  def trash
+    image_tag "trash.png", :alt => t('delete'), :class => "trash"
+  end
 end

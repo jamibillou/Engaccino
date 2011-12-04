@@ -45,3 +45,5 @@ en:
       speed_up_by_import: "Speed up this step, import your information from LinkedIn or Facebook."
       import_from: "Import from"
       view_profile: "View my profile"
+    destroy:
+      title: "Delete"

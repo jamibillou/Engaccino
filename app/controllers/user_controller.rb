@@ -1,6 +1,8 @@
 class UserController < ApplicationController
     
   def index
+    @users = User.all
+    @title = t 'user.index.title'
   end
 
   def show
@@ -52,6 +54,8 @@ class UserController < ApplicationController
   end 
 
   def destroy
+   User.find(params[:id]).destroy
+   redirect_to users_path, :flash => { :success => t('flash.success.user_destroyed') }
   end
 
 end

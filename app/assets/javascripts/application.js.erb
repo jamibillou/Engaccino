@@ -171,3 +171,16 @@ function emptyDefaultValueField(inputFieldId, inputFieldDefaultValue) {
     $("#"+inputFieldId).val("");
   }
 }
+
+// REVEALS THE GIVEN ITEM WHEN THE MOUSE IS OVER THE GIVEN BLOCK
+function revealItem(itemToRevealId, blockToHoverId)
+{
+  $("#"+blockToHoverId).mouseenter(function()
+  {
+    $("#"+itemToRevealId).show();
+  });
+  $("#"+blockToHoverId).mouseleave(function()
+  {
+    $("#"+itemToRevealId).hide();
+  });
+}
