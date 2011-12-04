@@ -7,7 +7,7 @@
                                  :id => 'last_name', :class => 'field' %><br />
     <%= f.text_field :year_of_birth, :value => (@user.year_of_birth) ? @user.year_of_birth : t('user.year_of_birth'),
                                      :id => 'year_of_birth', :class => 'field' %><br />
-    <%= f.hidden_field :country, :value => @user.country, :id => 'edit_country_field' %>
+    <%= f.hidden_field :country, :value => @user.country, :id => 'country' %>
     <%= f.text_field :country_full_text, :value => (@user.country.blank?) ? t('user.country_full_text') : Country.search(@user.country).name,
                                          :id => 'country_full_text', :class => 'field' %>
     <%= f.submit t('user.edit.edit_profile'), :class => 'hidden' %>
