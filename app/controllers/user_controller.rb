@@ -21,6 +21,7 @@ class UserController < ApplicationController
     else
       @title = t 'user.edit.complete_your_profile'
       session[:edit_page] = :signup
+      sign_in @user
       render :edit, :id => @user
     end
   end

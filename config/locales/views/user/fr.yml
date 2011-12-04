@@ -2,6 +2,9 @@ fr:
   user:
     
     personal_information: "Civilité"
+    email: "Email"
+    password: "Mot de passe"
+    password_confirmation: "Saisissez à nouveau le mot de passe"
     first_name: "Prénom"
     middle_name: "Deuxième prénom"
     last_name: "Nom de famille"

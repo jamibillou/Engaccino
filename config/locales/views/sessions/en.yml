@@ -1,0 +1,11 @@
+en:
+  sessions:
+    
+    email: "Email"
+    password: "Password"
+   
+    new:
+      title: "Sign In"
+      connect: "Get connected"
+      get_connected: "Please fill the identification form to access to your profile"
+      not_yet_registered: "Not yet registered ? Hurry up :"

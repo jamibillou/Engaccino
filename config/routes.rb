@@ -1,19 +1,24 @@
 Engaccino::Application.routes.draw do
     
+  get "sessions/new"
+
   get "ajax/countries"
 
     resources :user
+    resources :sessions, :only => [:new, :create, :destroy]
     
     match '/users', :to => 'user#index'
     match '/signup', :to => 'user#new'
     match '/user/update', :to => 'user#update'
+    
+    match '/signin', :to => 'sessions#new'
+    match '/signout', :to => 'sessions#destroy'
   
     root :to => 'pages#overview'
     match '/walkthrough', :to => 'pages#walkthrough'
     match '/pricing', :to => 'pages#pricing'
     match '/about', :to => 'pages#about'
     match '/contact', :to => 'pages#contact'
-    match 'signup_step_2/:id', :to => 'user#signup_step_2'
     
     match '/ajax/code', :to => 'ajax#code'
 

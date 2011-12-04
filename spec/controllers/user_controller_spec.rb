@@ -64,6 +64,11 @@ describe UserController do
         response.should render_template(:edit)
       end
       
+      it "should signed the user in" do
+        post :create, :user => @attr
+        controller.should be_signed_in
+      end
+      
     end
     
     describe "failure" do
