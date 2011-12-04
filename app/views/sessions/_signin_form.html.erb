@@ -1,0 +1,9 @@
+<div id='signin'>
+	<h2><%=t 'sessions.new.get_connected' %></h2>
+	<%= form_for(:session, :url => sessions_path, :html => { :id => 'sessions_new_form' }) do |f| %>
+	    <%= f.text_field  :email, :id => 'email', :class => 'field', :value => t('sessions.email') %><br />
+        <%= f.password_field :password, :id => 'password', :class => 'field' %>
+	<% end %>
+	<br/>
+	<%= link_to t('sessions.new.connect'), '#', :id => 'submit', :class => 'button blue round' %>
+</div>

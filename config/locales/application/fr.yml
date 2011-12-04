@@ -13,6 +13,7 @@ fr:
    
   already_member: "Déjà membre ?"
   sign_in: "Se connecter"
+  sign_out: "Se déconnecter"
   sign_up: "S'inscrire !"
   
   # Punctuation 
@@ -32,6 +33,7 @@ fr:
       general: "Oups, un erreur est survenue."
       could_not_save: "Nous n'avons pu enregistrer cet"
       correct_before_resubmit: "Merci de corriger avant de réessayer."
+      signin: "Email/password invalides"
       
   # Actions
   delete: "delete"

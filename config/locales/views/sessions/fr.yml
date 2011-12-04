@@ -1,0 +1,11 @@
+fr:
+  sessions:
+    
+    email: "Email"
+    password: "Mot de passe"
+    
+    new:
+      title: "Identification"
+      connect: "Se connecter"
+      get_connected: "Veuillez remplir le formulaire d'identification pour accéder à votre profil"
+      not_yet_registered: "Vous n'êtes pas encore inscrit ? Qu'attendez-vous : "

@@ -13,6 +13,7 @@ en:
   
   already_member: "Already a member?"
   sign_in: "Sign in"
+  sign_out: "Sign out"
   sign_up: "Sign up!"
   
   # Punctuation 
@@ -32,6 +33,7 @@ en:
       general: "Something went wrong, sorry about that."
       could_not_save: "We couldn't save this"
       correct_before_resubmit: "Please correct this before submitting again."
+      signin: "Email/password mismatch"
     
   # Actions
-  delete: "suppr."
+  delete: "suppr."      

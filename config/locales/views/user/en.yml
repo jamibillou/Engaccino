@@ -26,7 +26,7 @@ en:
     looking_status: "Looking for a new challenge"
     open_status: "Might change jobs, open to propositions"
     listening_status: "Satisfied at work, listening to offers"
-    happy_status: "Happily employed, no change planed"  
+    happy_status: "Happily employed, no change planed"
   
     index:
       title: "List of all Users"
