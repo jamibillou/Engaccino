@@ -68,7 +68,6 @@ class User < ActiveRecord::Base
       user = find_by_id(id)
       (user && user.salt == cookie_salt) ? user : nil
     end
-    
   end
   
   private 
@@ -89,7 +88,6 @@ class User < ActiveRecord::Base
     def secure_hash(string)
       Digest::SHA2.hexdigest(string)
     end
-    
 end
 
 # == Schema Information

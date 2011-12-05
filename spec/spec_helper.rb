@@ -5,7 +5,9 @@ Spork.prefork do
   # Loading more in this block will cause your tests to run faster. However, 
   # if you change any configuration or code from libraries loaded here, you'll
   # need to restart spork for it take effect.
-  
+  def test_sign_in(user)
+    controller.current_user = user
+  end
 end
 
 Spork.each_run do
@@ -57,7 +59,4 @@ RSpec.configure do |config|
   # rspec-rails.
   config.infer_base_class_for_anonymous_controllers = false
   
-  def test_sign_in(user)
-    controller.sign_in(user)
-  end
 end
