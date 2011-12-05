@@ -4,7 +4,7 @@ fr:
     personal_information: "Civilité"
     email: "Email"
     password: "Mot de passe"
-    password_confirmation: "Saisissez à nouveau votre mot de passe"
+    password_confirmation: "Confirmez votre mot de passe"
     first_name: "Prénom"
     middle_name: "Deuxième prénom"
     last_name: "Nom de famille"
@@ -35,14 +35,14 @@ fr:
     new:
       title: "S'inscrire"
       create_engaccino_account: "Créer un compte Engaccino"
-      or_use_social_account: "Ou connectez vous avec votre compte Facebook ou Twitter"
-      connect_via: "S'identifier via"
+      or_use_social_connect: "Ou connectez vous avec Facebook ou Twitter"
+      connect_via: "Se connecter via"
       set_up_profile: "Créer mon profil"
     edit:
       title: "Editez votre profil"
       edit_profile: "Editer mon profil"
-      complete_your_profile: "Excellent! Plus qu'à compléter votre profil"
-      speed_up_by_import: "Gagnez du temps, importez vos détails depuis LinkedIn ou Facebook."
+      complete_your_profile: "Excellent! Complétez votre profil"
+      speed_up_by_import: "Gagnez du temps, importez vos détails."
       import_from: "Importez depuis"
       view_profile: "Afficher mon profil"
     destroy:

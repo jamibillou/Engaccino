@@ -3,9 +3,11 @@ fr:
     
     email: "Email"
     password: "Mot de passe"
-    
+   
     new:
-      title: "Identification"
-      connect: "Se connecter"
-      get_connected: "Veuillez remplir le formulaire d'identification pour accéder à votre profil"
-      not_yet_registered: "Vous n'êtes pas encore inscrit ? Qu'attendez-vous : "
+      title: "Identifiez vous"
+      signin: "Identifiez vous"
+      use_engaccino_account: "Avec votre compte Engaccino"
+      or_use_social_connect: "Ou connectez vous avec Facebook ou Twitter"
+      connect_via: "Ou se connecter via"
+      non_member: "Pas encore membre?"

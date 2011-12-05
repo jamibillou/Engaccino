@@ -1,6 +1,6 @@
 <div id="signin_signup">
 	<% if signed_in? %>
-		<%= link_to t(:sign_out), signout_path %>
+		<%= link_to t(:sign_out), signout_path %> 
 	<% else %>
 		<%=t :already_member %> <%= link_to t(:sign_in), signin_path %>   <%= link_to t(:sign_up), signup_path, :class => 'button blue round' %>
 	<% end %>  
