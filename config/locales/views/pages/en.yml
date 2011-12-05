@@ -1,21 +1,12 @@
 en:
   pages:
     overview:
-      summary: "Welcome to Engaccino!"
-      content: "To make a long story short we have created this site to bring better interactions to the recruiting process.
-               Because looking for work and promoting your talent should not be a pain in the neck, we built a social platform where unemployment gets a chance to be easy and fun.
-               Recruiters are one click away, you can even private message them or apply to vacancies they post.
-               Of course the same is true the other way around, recruiters are here to find candidates and will get in touch with you!"
+      summary: "Welcome!"
     tour:
-      summary: "Take a quick tour of our app"
-      content: "It is pretty simple, you create a profile and resume in a few clicks (really, we're not joking!), and you are immediately able to find recruiters and vacancies, follow, get in touch, etc.
-               It is quite straightforward for recruiters as well: create an account and possibly a company profile, start hunting a new talents around you!"
+      summary: "Take a quick tour"
     pricing:
-      summary: "Free for candidates!"
-      content: "As for companies, it basically depends how many recruiters your are bringing the service. The more traffic the more expensive but we decided to charge a fix price for unlimited seats so we don't become a huge line in your budget."
+      summary: "Are you a candidate? Then it's free!"
     about:
-      summary: "Born and raised in France with international genes"
-      content: "Our names are Franck Sabattier and Dominic Matheron, we currently live in Rotterdam, Netherlands (The) where we have developed and launched Engaccino. We have been very close friends for 10 years and think this is the best way to get work done. Franck is a software engineer and has always been so ever since we two met. Dominic studied software development with Franck back from 2003 to 2005 and then started moving around and exploring various paths and places (England, China, Holland). With different visions and the same goals and beliefs, we strive for good software, which we see as a great user experience (Dominic) driven by rigorously optimized modern code (Franck)."
+      summary: "The team"
     contact:
-      summary: "Get in touch with us"
-      content: "Here are our email, phone, and social media details if you want to contact us. We always have time when it comes to helping you guys use Engaccino or listening to your feedback."
+      summary: "Get in touch"

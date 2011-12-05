@@ -1,5 +1,8 @@
 class UserController < ApplicationController
     
+  before_filter :authenticate, :except => [:new, :create]
+  before_filter :correct_user, :only => [:edit, :update]
+  
   def index
     @users = User.all
     @title = t 'user.index.title'
@@ -29,12 +32,10 @@ class UserController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
     @title = t 'user.edit.title'
   end
   
   def update
-    @user = User.find(params[:id])
     if session[:edit_page] == :signup
       edit_title = t 'user.edit.complete_your_profile'
       flash_message = 'welcome'
@@ -58,4 +59,15 @@ class UserController < ApplicationController
    User.find(params[:id]).destroy
    redirect_to users_path, :flash => { :success => t('flash.success.user_destroyed') }
   end
+  
+  private
+  
+    def authenticate
+      deny_access unless signed_in?
+    end
+    
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to user_path(current_user), :notice => t('flash.notice.other_user_page') unless current_user?(@user)
+    end
 end
