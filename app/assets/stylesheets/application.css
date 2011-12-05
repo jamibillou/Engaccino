@@ -98,7 +98,7 @@ header nav ul li.selected a {
 header #signin_signup {
   float: right;
   padding-top: 17px;
-  padding-right: 6px;
+  padding-right: 20px;
   font-weight: normal;
 }
 header #signin_signup a {
@@ -107,7 +107,6 @@ header #signin_signup a {
 }
 header #signin_signup a.button {
   color: white;
-  margin-right: 15px;
   margin-left: 5px;
 }
 
@@ -340,4 +339,8 @@ a.button.grey_gradient:hover {
 .trash {
   float:  right;
   padding: 10px;
+}
+.settings {
+  float: right;
+  padding: 2px 0px 0px 16px;
 }

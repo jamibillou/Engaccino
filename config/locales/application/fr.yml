@@ -7,6 +7,10 @@ fr:
   menu_pricing: "Tarifs"
   menu_about: "À propos"
   menu_contact: "Contact"
+  menu_dashboard: "Tableau de bord"
+  menu_profile: "Profil"
+  menu_contacts: "Editer"
+  menu_messages: "Utilisateurs"
   
   search_bar: "Accès rapide"
   search_bar_title: "Rechercher un contact, une entreprise, offre d'emploi, etc."
@@ -15,6 +19,7 @@ fr:
   sign_in: "Identifiez vous"
   sign_out: "Se déconnecter"
   sign_up: "S'inscrire !"
+  settings: "Préférences"
   
   # Punctuation 
   _:: " :"
@@ -33,7 +38,7 @@ fr:
       general: "Oups, un erreur est survenue."
       could_not_save: "Nous n'avons pu enregistrer cet"
       correct_before_resubmit: "Merci de corriger avant de réessayer."
-      signin: "Email/password invalides"
+      signin: "Email/password invalides."
       
   # Actions
   delete: "delete"
