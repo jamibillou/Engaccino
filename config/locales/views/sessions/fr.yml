@@ -6,7 +6,7 @@ fr:
    
     new:
       title: "Identifiez vous"
-      signin: "Identifiez vous"
+      signin: "Identifiez moi !"
       use_engaccino_account: "Avec votre compte Engaccino"
       or_use_social_connect: "Ou connectez vous avec Facebook ou Twitter"
       connect_via: "Ou se connecter via"

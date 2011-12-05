@@ -3,14 +3,14 @@ fr:
   # Header
   
   menu_overview: "Aperçu"
-  menu_walkthrough: "Visite guidée"
+  menu_tour: "Visite guidée"
   menu_pricing: "Tarifs"
   menu_about: "À propos"
   menu_contact: "Contact"
   menu_dashboard: "Tableau de bord"
   menu_profile: "Profil"
-  menu_contacts: "Editer"
-  menu_messages: "Utilisateurs"
+  menu_edit: "Editer"
+  menu_users: "Utilisateurs"
   
   search_bar: "Accès rapide"
   search_bar_title: "Rechercher un contact, une entreprise, offre d'emploi, etc."

@@ -3,14 +3,14 @@ en:
   # Header
   
   menu_overview: "Overview"
-  menu_walkthrough: "Tour"
+  menu_tour: "Tour"
   menu_pricing: "Pricing"
   menu_about: "About"
   menu_contact: "Contact"
   menu_dashboard: "Dashboard"
   menu_profile: "Profile"
-  menu_contacts: "Edit"
-  menu_messages: "Users"
+  menu_edit: "Edit"
+  menu_users: "Users"
   
   search_bar: "Search Engaccino"
   search_bar_title: "Jump to any contact, company, job, etc."
