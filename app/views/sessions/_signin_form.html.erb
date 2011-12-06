@@ -1,9 +1,10 @@
-<div id='signin'>
-	<h2><%=t 'sessions.new.get_connected' %></h2>
-	<%= form_for(:session, :url => sessions_path, :html => { :id => 'sessions_new_form' }) do |f| %>
+<div id="signin" class="left dashed">
+  <h2><%=t 'sessions.new.use_engaccino_account' %></h2>
+	<%= form_for :session, :url => sessions_path, :html => { :id => 'signin_form' } do |f| %>
 	    <%= f.text_field  :email, :id => 'email', :class => 'field', :value => t('sessions.email') %><br />
-        <%= f.password_field :password, :id => 'password', :class => 'field' %>
+      <%= f.password_field :password, :id => 'password', :class => 'field' %><br />
+      <%= f.submit t('sessions.new.signin'), :class => 'hidden' %>
 	<% end %>
 	<br/>
-	<%= link_to t('sessions.new.connect'), '#', :id => 'submit', :class => 'button blue round' %>
+	<%= link_to t('sessions.new.signin'), '#', :id => 'submit', :class => 'button blue round' %>
 </div>

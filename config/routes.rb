@@ -15,7 +15,7 @@ Engaccino::Application.routes.draw do
     match '/signout', :to => 'sessions#destroy'
   
     root :to => 'pages#overview'
-    match '/walkthrough', :to => 'pages#walkthrough'
+    match '/tour', :to => 'pages#tour'
     match '/pricing', :to => 'pages#pricing'
     match '/about', :to => 'pages#about'
     match '/contact', :to => 'pages#contact'

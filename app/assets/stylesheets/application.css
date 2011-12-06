@@ -98,7 +98,7 @@ header nav ul li.selected a {
 header #signin_signup {
   float: right;
   padding-top: 17px;
-  padding-right: 6px;
+  padding-right: 20px;
   font-weight: normal;
 }
 header #signin_signup a {
@@ -107,7 +107,6 @@ header #signin_signup a {
 }
 header #signin_signup a.button {
   color: white;
-  margin-right: 15px;
   margin-left: 5px;
 }
 
@@ -122,8 +121,8 @@ header #signin_signup a.button {
 footer {
   bottom: 0;
   right: 20px;
-  padding-left: 15px;
-  position: absolute;
+  padding-top: 60%;
+  padding-right: 15px;
   text-align: right;
 }
 
@@ -205,9 +204,6 @@ a.button.grey_gradient:hover {
 .white_block h2 {
   margin-top: 10px;
   padding: 0;
-}
-.white_block p.after_h2 {
-  margin-top: 40px;
 }
 .white_block.error {
   border: 1px solid #dd7f7f;
@@ -340,4 +336,8 @@ a.button.grey_gradient:hover {
 .trash {
   float:  right;
   padding: 10px;
+}
+.settings {
+  float: right;
+  padding: 2px 0px 0px 16px;
 }

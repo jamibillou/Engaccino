@@ -25,3 +25,7 @@ end
 Factory.sequence :linkedin_login do |n|
   "user_#{n}@linkedin.com"
 end
+
+Factory.sequence :twitter_login do |n|
+  "@user_#{n}"
+end

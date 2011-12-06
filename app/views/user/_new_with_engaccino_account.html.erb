@@ -8,7 +8,7 @@
                              :class => 'field' %><br />
     <%= f.password_field :password, :value => t('user.password'), :id => 'password', :class => 'field' %><br />
     <%= f.password_field :password_confirmation, :value => t('user.password_confirmation'), :id => 'password_confirmation', :class => 'field' %><br />
-    <%= f.submit t('user.new.set_up_profile'), :class => 'hidden' %>
+    <%= f.submit t('user.new.set_up_profile'), :class => 'hidden' %><br />
+    <%= link_to t('user.new.set_up_profile'), '#', :id => 'submit', :class => 'button blue round' %>
   <% end %>
-  <br />
 </div>

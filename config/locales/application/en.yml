@@ -3,10 +3,14 @@ en:
   # Header
   
   menu_overview: "Overview"
-  menu_walkthrough: "Tour"
+  menu_tour: "Tour"
   menu_pricing: "Pricing"
   menu_about: "About"
   menu_contact: "Contact"
+  menu_dashboard: "Dashboard"
+  menu_profile: "Profile"
+  menu_edit: "Edit"
+  menu_users: "Users"
   
   search_bar: "Search Engaccino"
   search_bar_title: "Jump to any contact, company, job, etc."
@@ -15,6 +19,7 @@ en:
   sign_in: "Sign in"
   sign_out: "Sign out"
   sign_up: "Sign up!"
+  settings: "Settings"
   
   # Punctuation 
   _:: ":"
@@ -33,7 +38,10 @@ en:
       general: "Something went wrong, sorry about that."
       could_not_save: "We couldn't save this"
       correct_before_resubmit: "Please correct this before submitting again."
-      signin: "Email/password mismatch"
+      signin: "Email/password mismatch."
+    notice:
+      please_signin: "Please sign in to access this page."
+      other_user_page: "You can't access this page for another user."
     
   # Actions
   delete: "suppr."      

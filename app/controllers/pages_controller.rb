@@ -4,8 +4,8 @@ class PagesController < ApplicationController
     @title = t(:menu_overview)
   end
 
-  def walkthrough
-    @title = t(:menu_walkthrough)
+  def tour
+    @title = t(:menu_tour)
   end
 
   def pricing

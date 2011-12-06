@@ -29,20 +29,20 @@ en:
     happy_status: "Happily employed, no change planed"
   
     index:
-      title: "List of all Users"
+      title: "List of all users"
     show:
       title: "'s Profile"
     new:
       title: "Sign up"
       create_engaccino_account: "Create an Engaccino account"
-      or_use_social_account: "Or, connect using your Facebook or Twitter account"
+      or_use_social_connect: "Or, connect using Facebook or Twitter"
       connect_via: "Connect via"
       set_up_profile: "Set up my profile"
     edit:
       title: "Edit your profile"
       edit_profile: "Edit my profile"
       complete_your_profile: "Great! Now complete your profile"
-      speed_up_by_import: "Speed up this step, import your information from LinkedIn or Facebook."
+      speed_up_by_import: "Speed up this step, import your details."
       import_from: "Import from"
       view_profile: "View my profile"
     destroy:
