@@ -190,8 +190,7 @@ describe UserController do
       
         before(:each) do
           @attr = { :first_name => "Updated",
-                    :last_name => "User",
-                    :password => "pouetpouet" }
+                    :last_name => "User"}
         end
         
         it "should update the user's attributes" do

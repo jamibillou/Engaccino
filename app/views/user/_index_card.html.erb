@@ -8,11 +8,13 @@
         <h3>Status</h3>
       </div>
     </div>
-    <%= link_to trash, user, :method => :delete,
-                             :confirm => "#{t('user.destroy.title')} #{user.first_name} #{user.last_name}#{t('_?')}",
-                             :title => "#{t('user.destroy.title')} #{user.first_name} #{user.last_name}",
-                             :id => "destroy_user_#{user.id}",
-                             :class => 'hidden' %>
+    <% if @current_user.admin? %>
+    	<%= link_to trash, user, :method => :delete,
+	                             :confirm => "#{t('user.destroy.title')} #{user.first_name} #{user.last_name}#{t('_?')}",
+	                             :title => "#{t('user.destroy.title')} #{user.first_name} #{user.last_name}",
+	                             :id => "destroy_user_#{user.id}",
+	                             :class => 'hidden' %>
+    <% end %>
     <div class="title">
       <h2>Title</h2>
       at Company

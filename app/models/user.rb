@@ -14,7 +14,9 @@ class User < ActiveRecord::Base
   phone_regex = /^\+(?:[0-9] ?){6,14}[0-9]$/
   twitter_regex = /^@(_|([a-z]_)|[a-z])([a-z0-9]+_?)*$/i
   
-  validates_presence_of             :email, :password, :first_name, :last_name
+  validates_presence_of             :email, :first_name, :last_name
+  validates_presence_of             :password,
+                                    :on => :create
     
   validates :first_name,            :length => { :maximum => 80 }
                             
@@ -49,7 +51,8 @@ class User < ActiveRecord::Base
                                     :allow_blank => true
                                     
   validates :password,              :confirmation => true,
-  					                        :length => { :within => 6..40 }
+  					                        :length => { :within => 6..40 },
+  					                        :on => :create
   
   before_save :encrypt_password
   
@@ -74,7 +77,7 @@ class User < ActiveRecord::Base
   
     def encrypt_password
       self.salt = make_salt if new_record?
-      self.encrypted_password = encrypt(password)
+      self.encrypted_password = encrypt(password) unless !new_record? || password.blank?
     end
     
     def encrypt(string)

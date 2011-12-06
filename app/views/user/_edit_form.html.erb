@@ -1,6 +1,5 @@
 <div id="edit" class="white_block">
   <%= form_for @user, :html => { :id => 'user_edit_form' } do |f| %>
-    <%= f.hidden_field :password, :value => "pouet38" %>
     <%= f.text_field :first_name, :value => (@user.first_name && !@user.first_name.blank?) ? @user.first_name : t('user.first_name'),
                                   :id => 'first_name', :class => 'field' %><br />
     <%= f.text_field :last_name, :value => (@user.last_name && !@user.last_name.blank?) ? @user.last_name : t('user.last_name'),

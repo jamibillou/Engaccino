@@ -91,6 +91,28 @@ describe "LayoutLinks" do
       click_button
     }
     
+    describe "as an admin user" do
+      
+      before(:each) do
+        @user.toggle!(:admin)
+      end
+            
+      it "should have a destroy link" do
+        @user.admin.should be_true
+        response.should have_selector("a", :href => user_path(@user), :id => "destroy_user_#{@user.id}")
+      end
+            
+    end
+    
+    describe "as a standard user" do
+      
+      it "should NOT have a destroy link" do
+        @user.admin.should be_false
+        response.should_not have_selector("a", :href => user_path(@user), :id => "destroy_user_#{@user.id}")
+      end
+      
+    end
+    
     it "should have a dashboard link" do
       response.should have_selector("a", :href => '#', :content => I18n.t(:menu_dashboard))
     end
@@ -101,10 +123,6 @@ describe "LayoutLinks" do
     
     it "should have an edit link" do
       response.should have_selector("a", :href => edit_user_path(@user), :content => I18n.t(:menu_edit))
-    end
-    
-    it "should have a users link" do
-      response.should have_selector("a", :href => users_path, :content => I18n.t(:menu_users))
     end
     
     it "should have a signout link" do
