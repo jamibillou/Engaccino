@@ -1,0 +1,11 @@
+<div id="education" class="white_block">
+  <h2><%=t "user.education" %></h2>
+  <%= f.text_field :degree,              :value => (!params[:user].nil? && !params[:user][:degree].nil? && !params[:user][:degree].empty?) ? params[:user][:degree] : t("user.degree"),
+                                         :id => 'degree', :class => 'field margin_right' %>
+  <%= f.text_field :university,          :value => (!params[:user].nil? && !params[:user][:university].nil? && !params[:user][:university].empty?) ? params[:user][:university] : t("user.university"),
+                                         :id => 'university', :class => 'field margin_right' %>
+  <%= f.text_field :education_timeframe, :value => (!params[:user].nil? && !params[:user][:education_timeframe].nil? && !params[:user][:education_timeframe].empty?) ?
+                                                   params[:user][:education_timeframe] : t("user.education_timeframe"),
+                                         :id => 'education_timeframe', :class => 'field margin_right' %>
+  <%= link_to '+', '#', :class => 'slightly_round blue button' %>
+</div>
