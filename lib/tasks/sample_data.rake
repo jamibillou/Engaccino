@@ -27,7 +27,7 @@ def make_users
   years = (1900..12.years.ago.year).to_a
   99.times do |n|
     full_name = Faker::Name.name.split
-    email = "user_#{n+1}@emgaccino.com"
+    email = "user_#{n+1}@engaccino.com"
     twitter = "@#{full_name[0].downcase}_#{full_name[1].downcase.slice(0)}_#{n+1}"
     password = "password"
     country = countries[rand(countries.size)]
