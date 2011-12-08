@@ -94,7 +94,7 @@ describe "Users" do
    describe "admin users" do        
       
       before(:each) do
-        @user.toggle!(admin)
+        @user.toggle!(:admin)
       end
       
       it "should have destroy links on the users page" do
