@@ -2,8 +2,8 @@ Factory.define :user do |user|
   user.first_name "John"
   user.last_name "Doe" 
   user.city "Rotterdam"         
-  user.country "NL"     
-  user.nationality "NL"
+  user.country "Netherlands"     
+  user.nationality "Netherlands"
   user.year_of_birth 1975
   user.phone "+31 6 00000000"
   user.email "j.doe@example.com"

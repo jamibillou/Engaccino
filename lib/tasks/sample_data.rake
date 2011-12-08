@@ -12,8 +12,8 @@ def make_users
   admin = User.create!(:first_name => "Beau",
                        :last_name => "Gosse",
                        :city => "Barcelona",         
-                       :country => "ES",     
-                       :nationality => "ES",
+                       :country => "Spain",     
+                       :nationality => "Spain",
                        :year_of_birth => 1984,
                        :phone => "+31 6 00000000",
                        :email => "bg@engaccino.com",
@@ -23,7 +23,7 @@ def make_users
                        :password => "password",
                        :password_confirmation => "password")
   admin.toggle!(:admin)
-  countries = Country.all.collect { |c| c[1] }
+  countries = Country.all.collect { |c| c[0] }
   years = (1900..12.years.ago.year).to_a
   99.times do |n|
     full_name = Faker::Name.name.split
