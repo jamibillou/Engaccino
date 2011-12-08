@@ -144,16 +144,6 @@ function submitFormOnReturn(inputFieldId, formId, translationPath)
   });
 }
 
-// SUBMITS THE GIVEN FORM THROUGH THE GIVEN EXTERNAL BUTTON
-function submitForm(formId, translationPath) {
-  
-  $("#submit").click(function()
-  {
-    emptyDefaultValuesForm(formId, translationPath);
-    $("#"+formId).submit();
-  })
-}
-
 // GIVEN A FORM, EMPTIES FIELDS THAT HAVE DEFAULT VALUES
 function emptyDefaultValuesForm(formId, translationPath)
 {

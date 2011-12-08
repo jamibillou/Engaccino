@@ -5,7 +5,6 @@
     <%= render :partial => 'signup_professional_experience', :locals => { :f => f } %>
     <%= render :partial => 'signup_education', :locals => { :f => f } %>
     <%= render :partial => 'signup_status', :locals => { :f => f } %>
-    <%= f.submit t('user.edit.view_profile'), :class => 'hidden' %>
+    <%= f.submit t('user.edit.view_profile'), :class => 'center' %>
   <% end %>
 </div>
-<%= link_to t('user.edit.view_profile'), '#', :id => 'submit', :class => 'button blue round center' %>

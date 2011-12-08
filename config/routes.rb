@@ -9,7 +9,6 @@ Engaccino::Application.routes.draw do
     
     match '/users', :to => 'user#index'
     match '/signup', :to => 'user#new'
-    match '/user/update', :to => 'user#update'
     
     match '/signin', :to => 'sessions#new'
     match '/signout', :to => 'sessions#destroy'

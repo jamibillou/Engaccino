@@ -139,6 +139,26 @@ footer {
 }
 
 /* BUTTONS */
+
+input[type=submit] {
+  padding: 9px 30px;
+  margin: 0;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: bold;
+  background-color: #0b7fd2;
+  color: white;
+  border: none;
+  cursor: pointer;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+input[type=submit]:hover {
+  text-decoration: underline;
+}
+
 a.button {
   padding: 9px 30px;
   margin: 0;

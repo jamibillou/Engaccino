@@ -180,11 +180,6 @@ describe UserController do
       before(:each) do
         test_sign_in(@user)
       end
-    
-      it "should return http success" do
-        put :update, :id => @user
-        response.should be_success
-      end
       
       describe "success" do
       
