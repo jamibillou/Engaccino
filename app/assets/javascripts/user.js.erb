@@ -5,19 +5,11 @@ $(document).ready(function()
   customForm("user_signup_form","user.");
   customForm("user_edit_form","user.");
   
-  $("#country_full_text").autocomplete(
+  $("#country").autocomplete(
 	{
 		source:"/ajax/countries",
 	   	autoFocus: true,
-	   	minLength: 2,
-	   	close: function()
-	   	{
-	   		$.getJSON("/ajax/code?country="+$("#country_full_text").val(),
-		    function(data)
-		    {
-		    	$("#country").val(data.code);
-		    })
-	   	}
+	   	minLength: 2
   });
 
   // SHOULD ONLY BE DONE ON THE USER INDEX PAGE

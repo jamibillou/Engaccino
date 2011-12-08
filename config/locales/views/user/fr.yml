@@ -9,7 +9,7 @@ fr:
     middle_name: "Deuxième prénom"
     last_name: "Nom de famille"
     city: "Ville"
-    country_full_text: "Pays"
+    country: "Pays"
     nationality: "Nationalité"
     year_of_birth: "Année de naissance"
     phone: "Téléphone"
