@@ -1,0 +1,17 @@
+<ul>
+    <li class="round<% if t(:menu_overview) == @title %> selected<% end %>">
+      <%= link_to t(:menu_overview), root_path %>
+    </li>
+    <li class="round<% if t(:menu_tour) == @title %> selected<% end %>">
+      <%= link_to t(:menu_tour), tour_path %>
+    </li>
+    <li class="round<% if t(:menu_pricing) == @title %> selected<% end %>">
+      <%= link_to t(:menu_pricing), pricing_path %>
+    </li>
+    <li class="round<% if t(:menu_about) == @title %> selected<% end %>">
+      <%= link_to t(:menu_about), about_path %>
+    </li>
+    <li class="round<% if t(:menu_contact) == @title %> selected<% end %>">
+      <%= link_to t(:menu_contact), contact_path %>
+    </li>
+</ul>

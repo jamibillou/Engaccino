@@ -81,39 +81,34 @@ describe "Users" do
     end
   end
   
-  describe "visit users page" do
+  describe "admin features" do
     
     before(:each) do
       @user = Factory(:user)
+      visit signin_path
+      fill_in :email,    :with => @user.email
+      fill_in :password, :with => @user.password
+      click_button
     end
     
-    describe "as an admin user" do
+   describe "admin users" do        
       
       before(:each) do
-        @user.toggle!(:admin)
+        @user.toggle!(admin)
       end
-            
-      it "should have a destroy link" do
-        visit signin_path
-        fill_in :email,    :with => @user.email
-        fill_in :password, :with => @user.password
-        click_button
+      
+      it "should have destroy links on the users page" do
         visit users_path
         response.should have_selector("a", :href => user_path(@user), :id => "destroy_user_#{@user.id}")
       end          
     end
   
-    describe "as a standard user" do
+    describe "non admin users" do
       
-      it "should NOT have a destroy link" do
-        visit signin_path
-        fill_in :email,    :with => @user.email
-        fill_in :password, :with => @user.password
-        click_button
+      it "should not have destroy links on the users page" do
         visit users_path
         response.should_not have_selector("a", :href => user_path(@user), :id => "destroy_user_#{@user.id}")
       end    
     end    
   end
-  
 end
