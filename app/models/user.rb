@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   countries_array = Country.all.collect { |c| c[0] }
   email_regex = /^[\w+\d\-.]+@[a-z\d\-.]+\.[a-z]{2,3}(\.[a-z]{2,3})?$/i
   phone_regex = /^\+(?:[0-9] ?){6,14}[0-9]$/
-  twitter_regex = /@(_|([a-z]_)|[a-z])([a-z0-9]+_?)*/i
+  twitter_regex = /^@(_|([a-z]_)|[a-z])([a-z0-9]+_?)*$/i
   
   validates_presence_of             :email, :first_name, :last_name
   validates_presence_of             :password,

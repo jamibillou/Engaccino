@@ -28,6 +28,7 @@ def make_users
   99.times do |n|
     full_name = Faker::Name.name.split
     email = "user_#{n+1}@emgaccino.com"
+    twitter = "@#{full_name[0].downcase}_#{full_name[1].downcase.slice(0)}_#{n+1}"
     password = "password"
     country = countries[rand(countries.size)]
     year = years[rand(years.size)]
@@ -41,7 +42,7 @@ def make_users
                  :email => email,
                  :facebook_login => email,
                  :linkedin_login => email,
-                 :twitter_login => "@#{full_name[0].downcase}_#{full_name[1].downcase.slice(0)}_#{n+1}",
+                 :twitter_login => puts(twitter),
                  :password => password,
                  :password_confirmation => password)
   end
