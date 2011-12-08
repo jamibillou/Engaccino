@@ -11,6 +11,7 @@ describe UserController do
   describe "GET 'index'" do
     
     describe "for non-signed-in users" do
+      
       it "should deny access to 'index'" do
         get :index
         response.should redirect_to(signin_path)
@@ -53,6 +54,7 @@ describe UserController do
   describe "GET 'show'" do
     
     describe "for non-signed-in users" do
+      
       it "should deny access to 'show'" do
         get :show, :id => @user
         response.should redirect_to(signin_path)
@@ -62,10 +64,18 @@ describe UserController do
     
     describe "for signed-in users" do
     
-      it "should return http success" do
+      before (:each) do
         test_sign_in(@user)
+      end
+      
+      it "should return http success" do
         get :show, :id => @user
         response.should be_success
+      end
+      
+      it "should have the right selected navigation tab" do
+        get :show, :id => @user
+        response.should have_selector('li', :class => 'round selected', :content => I18n.t(:menu_profile))
       end
     end
   end
@@ -135,6 +145,7 @@ describe UserController do
   describe "GET 'edit'" do
   
     describe "for non-signed-in users" do
+      
       it "should deny access to 'edit'" do
         get :edit, :id => @user
         response.should redirect_to(signin_path)
@@ -168,6 +179,7 @@ describe UserController do
   describe "PUT 'update'" do
           
     describe "for non-signed-in users" do
+      
       it "should deny access to 'update'" do
         put :update, :id => @user
         response.should redirect_to(signin_path)
@@ -296,6 +308,7 @@ describe UserController do
   describe "DELETE 'destroy'" do
     
     describe "for non-signed-in users" do
+      
       it "should deny access to 'update'" do
         delete :destroy, :id => @user
         response.should redirect_to(signin_path)
