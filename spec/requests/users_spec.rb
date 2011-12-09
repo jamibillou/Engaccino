@@ -3,7 +3,63 @@ require 'spec_helper'
 describe "Users" do
 
   describe "signup" do
-   ### to be written ###
+    
+    describe "failure" do
+      
+      it "should not sign a user up" do
+        visit signup_path
+        fill_in :email,                 :with => "test@example.com"
+        fill_in :password,              :with => "password"
+        fill_in :password_confirmation, :with => "passwordd"
+        click_button
+        response.should have_selector('div.flash.error', :content => I18n.t('flash.error.base'))
+      end
+            
+    end
+    
+    describe "success" do
+      
+      before(:each) do
+        @attr = {:email                 => "test@example.com",
+                 :password              => "password",
+                 :password_confirmation => "password"}
+      end
+      
+      it "should sign a user up" do
+        visit signup_path
+        fill_in :email,                 :with => @attr[:email]
+        fill_in :password,              :with => @attr[:password]
+        fill_in :password_confirmation, :with => @attr[:password_confirmation]
+        click_button
+        response.should have_selector('h1', :content => I18n.t('user.edit.complete_your_profile'))
+      end
+      
+      it "should sign a user in" do
+        visit signup_path
+        fill_in :email,                 :with => @attr[:email]
+        fill_in :password,              :with => @attr[:password]
+        fill_in :password_confirmation, :with => @attr[:password_confirmation]
+        click_button
+        controller.should be_signed_in
+      end
+      
+      it "should sign a user up even after having submitted invalid fields first" do
+        visit signup_path
+        fill_in :email,                 :with => "test@example.com"
+        fill_in :password,              :with => "password"
+        fill_in :password_confirmation, :with => "passwordd"
+        click_button
+        visit signup_path
+        fill_in :email,                 :with => @attr[:email]
+        fill_in :password,              :with => @attr[:password]
+        fill_in :password_confirmation, :with => @attr[:password_confirmation]
+        click_button
+        response.should have_selector('h1', :content => I18n.t('user.edit.complete_your_profile'))
+      end
+      
+    end
+    
+   ### to be completed ###
   end
   
   describe "sign in/out" do
