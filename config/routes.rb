@@ -1,14 +1,13 @@
 Engaccino::Application.routes.draw do
     
   get "sessions/new"
-
   get "ajax/countries"
 
-    resources :user
+    resources :users
     resources :sessions, :only => [:new, :create, :destroy]
     
-    match '/users', :to => 'user#index'
-    match '/signup', :to => 'user#new'
+    match '/users', :to => 'users#index'
+    match '/signup', :to => 'users#new'
     
     match '/signin', :to => 'sessions#new'
     match '/signout', :to => 'sessions#destroy'
@@ -19,8 +18,6 @@ Engaccino::Application.routes.draw do
     match '/about', :to => 'pages#about'
     match '/contact', :to => 'pages#contact'
     
-    match '/ajax/code', :to => 'ajax#code'
-
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

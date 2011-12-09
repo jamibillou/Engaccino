@@ -1,12 +1,12 @@
-class UserController < ApplicationController
+class UsersController < ApplicationController
     
   before_filter :authenticate, :except => [:new, :create]
   before_filter :correct_user, :only => [:edit, :update]
   
   def index
     @users = User.all
-    @title = t 'user.index.title'
-    @javascripts = ['user/index']
+    @title = t 'users.index.title'
+    @javascripts = ['users/index']
   end
 
   def show
@@ -16,37 +16,37 @@ class UserController < ApplicationController
 
   def new
     @user = User.new
-    @title = t 'user.new.title'
-    @javascripts = ['user/new']
+    @title = t 'users.new.title'
+    @javascripts = ['users/new']
   end
   
   def create
     @user = User.new(params[:user])
     unless @user.save
       flash.now[:error] = flash_error_messages(@user, [:email, :password])
-      @javascripts = ['user/new']
+      @javascripts = ['users/new']
       render :new
     else
-      @title = t 'user.edit.complete_your_profile'
+      @title = t 'users.edit.complete_your_profile'
       session[:edit_page] = :signup
       sign_in @user
-      @javascripts = ['user/edit']
+      @javascripts = ['users/edit']
       render :edit, :id => @user
     end
   end
 
   def edit
-    @title = t 'user.edit.title'
-    @javascripts = ['user/edit']
+    @title = t 'users.edit.title'
+    @javascripts = ['users/edit']
   end
   
   def update
     if session[:edit_page] == :signup
-      edit_title = t 'user.edit.complete_your_profile'
+      edit_title = t 'users.edit.complete_your_profile'
       flash_message = 'welcome'
     else
       session[:edit_page] = :edit
-      edit_title = t 'user.edit.title'
+      edit_title = t 'users.edit.title'
       flash_message = 'profile_updated'
     end
     if @user.update_attributes(params[:user])

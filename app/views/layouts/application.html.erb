@@ -5,6 +5,16 @@
     <title><%= title %></title>
     <%= stylesheet_link_tag    "application" %>
     <%= stylesheet_link_tag    "user" %>
+    <%= javascript_include_tag "application" %>
+    <% unless @javascripts.nil? %>
+      <% @javascripts.each do |javascript| %>
+    	  <%= javascript_include_tag javascript %>
+    	<% end %>
+    <% end %>
+    <%= javascript_tag do %>
+      I18n.defaultLocale = "<%= I18n.default_locale %>";
+      I18n.locale = "<%= I18n.locale %>";
+    <% end %>
     <%= csrf_meta_tags %>
   </head>
   
@@ -28,17 +38,5 @@
       <%= debug(params) if Rails.env.development? %>
     </footer>
   </body>
-  
-  <!-- javascripts last for faster loading -->
-  <%= javascript_include_tag "application" %>
-  <% unless @javascripts.nil? %>
-    <% @javascripts.each do |javascript| %>
-  	  <%= javascript_include_tag javascript %>
-  	<% end %>
-  <% end %>
-  <%= javascript_tag do %>
-  	I18n.defaultLocale = "<%= I18n.default_locale %>";
-  	I18n.locale = "<%= I18n.locale %>";
-  <% end %>
-
+    
 </html>

@@ -1,0 +1,13 @@
+<div class="left dashed">
+  <h2><%=t 'users.new.create_engaccino_account' %></h2>
+  <%= form_for @user, :url => { :action => :create }, :html => { :id => 'user_new_form' } do |f| %>
+    <%= f.hidden_field :first_name, :value => t('users.first_name') %>
+    <%= f.hidden_field :last_name, :value => t('users.last_name') %>
+    <%= f.text_field :email, :value => (params[:user]) && !params[:user][:email].empty? ? params[:user][:email] : t('users.email'),
+                             :id => 'email',
+                             :class => 'field' %><br />
+    <%= f.password_field :password, :value => t('users.password'), :id => 'password', :class => 'field' %><br />
+    <%= f.password_field :password_confirmation, :value => t('users.password_confirmation'), :id => 'password_confirmation', :class => 'field' %><br /><br />
+    <%= f.submit t('users.new.set_up_profile') %>
+  <% end %>
+</div>

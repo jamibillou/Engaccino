@@ -5,7 +5,6 @@ gem 'mysql2'
 gem 'jquery-rails'
 gem 'will_paginate'
 gem 'countries'
-gem 'phony'
 gem 'i18n-js'
 
 group :development do

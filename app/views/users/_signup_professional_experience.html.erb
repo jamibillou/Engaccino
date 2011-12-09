@@ -1,11 +1,11 @@
 <div id="professional_experience" class="white_block">
-  <h2><%=t "user.professional_experience" %></h2>
-  <%= f.text_field :role,                 :value => (!params[:user].nil? && !params[:user][:role].nil? && !params[:user][:role].empty?) ? params[:user][:role] : t("user.role"),
+  <h2><%=t "users.professional_experience" %></h2>
+  <%= f.text_field :role,                 :value => (!params[:user].nil? && !params[:user][:role].nil? && !params[:user][:role].empty?) ? params[:user][:role] : t('users.role'),
                                           :id => 'role', :class => 'field margin_right' %>
-  <%= f.text_field :company,              :value => (!params[:user].nil? && !params[:user][:company].nil? && !params[:user][:company].empty?) ? params[:user][:company] : t("user.company"),
+  <%= f.text_field :company,              :value => (!params[:user].nil? && !params[:user][:company].nil? && !params[:user][:company].empty?) ? params[:user][:company] : t('users.company'),
                                           :id => 'company', :class => 'field margin_right' %>
   <%= f.text_field :experience_timeframe, :value => (!params[:user].nil? && !params[:user][:experience_timeframe].nil? && !params[:user][:experience_timeframe].empty?) ?
-                                                    params[:user][:experience_timeframe] : t("user.experience_timeframe"),
+                                                    params[:user][:experience_timeframe] : t('users.experience_timeframe'),
                                           :id => 'experience_timeframe', :class => 'field margin_right' %>
   <%= link_to '+', '#', :class => 'slightly_round blue button' %>
 </div>

@@ -13,7 +13,7 @@ describe "FriendlyForwardings" do
       fill_in :email,    :with => @user.email
       fill_in :password, :with => @user.password
       click_button
-      response.should render_template('user/show')
+      response.should render_template('users/show')
     end
     
     it "edit" do
@@ -21,7 +21,7 @@ describe "FriendlyForwardings" do
       fill_in :email,    :with => @user.email
       fill_in :password, :with => @user.password
       click_button
-      response.should render_template('user/edit')
+      response.should render_template('users/edit')
     end
     
     it "users" do
@@ -29,7 +29,7 @@ describe "FriendlyForwardings" do
       fill_in :email,    :with => @user.email
       fill_in :password, :with => @user.password
       click_button
-      response.should render_template('user/index')
+      response.should render_template('users/index')
     end
   end
 end

@@ -1,0 +1,11 @@
+<div id="personal_information" class="white_block">
+  <h2><%=t "users.personal_information" %></h2>
+  <%= f.text_field :first_name,        :value => (!params[:user].nil? && !params[:user][:first_name].nil? && !params[:user][:first_name].empty?) ? params[:user][:first_name] : t('users.first_name'),
+                                       :id => 'first_name', :class => 'field' %><br />
+  <%= f.text_field :last_name,         :value => (!params[:user].nil? && !params[:user][:last_name].nil? && !params[:user][:last_name].empty?) ? params[:user][:last_name] : t('users.last_name'),
+                                       :id => 'last_name', :class => 'field' %><br />
+  <%= f.text_field :year_of_birth,     :value => (!params[:user].nil? && !params[:user][:year_of_birth].nil? && !params[:user][:year_of_birth].empty?) ? params[:user][:year_of_birth] : t('users.year_of_birth'),
+                                       :id => 'year_of_birth', :class => 'field' %><br />
+  <%= f.text_field :country,           :value => (!params[:user].nil? && !params[:user][:country].nil? && !params[:user][:country].empty?) ? params[:user][:country] :  t('users.country'),
+                                       :id => 'country', :class => 'field' %>
+</div>

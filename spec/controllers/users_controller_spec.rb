@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe UserController do
+describe UsersController do
 
   render_views
 
@@ -32,7 +32,7 @@ describe UserController do
       
       it "should have the right title" do
         get :index
-        response.should have_selector('title', :content => I18n.t('user.index.title'))
+        response.should have_selector('title', :content => I18n.t('users.index.title'))
       end
       
       it "should have a card for each user" do 
@@ -89,7 +89,7 @@ describe UserController do
     
     it "should have the right title" do 
       get :new
-      response.should have_selector('title', :content => I18n.t('user.new.title'))
+      response.should have_selector('title', :content => I18n.t('users.new.title'))
     end
   end
 
@@ -166,7 +166,7 @@ describe UserController do
             
       it "should have the right title" do
         get :edit, :id => @user
-        response.should have_selector('title', :content => I18n.t('user.edit.title'))
+        response.should have_selector('title', :content => I18n.t('users.edit.title'))
       end
             
       it "should have a form to edit the user profile" do

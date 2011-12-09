@@ -11,8 +11,8 @@
     </div>    	
     <% if current_user.admin? %>
     	<%= link_to trash, user, :method => :delete,
-	                             :confirm => "#{t('user.destroy.title')} #{user.first_name} #{user.last_name}#{t('_?')}",
-	                             :title => "#{t('user.destroy.title')} #{user.first_name} #{user.last_name}",
+	                             :confirm => "#{t('users.destroy.title')} #{user.first_name} #{user.last_name}#{t('_?')}",
+	                             :title => "#{t('users.destroy.title')} #{user.first_name} #{user.last_name}",
 	                             :id => "destroy_user_#{user.id}",
 	                             :class => "hidden"%>
     <% end %>

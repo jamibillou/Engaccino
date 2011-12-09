@@ -31,7 +31,7 @@ describe "Users" do
         fill_in :password,              :with => @attr[:password]
         fill_in :password_confirmation, :with => @attr[:password_confirmation]
         click_button
-        response.should have_selector('h1', :content => I18n.t('user.edit.complete_your_profile'))
+        response.should have_selector('h1', :content => I18n.t('users.edit.complete_your_profile'))
       end
       
       it "should sign a user in" do
@@ -54,7 +54,7 @@ describe "Users" do
         fill_in :password,              :with => @attr[:password]
         fill_in :password_confirmation, :with => @attr[:password_confirmation]
         click_button
-        response.should have_selector('h1', :content => I18n.t('user.edit.complete_your_profile'))
+        response.should have_selector('h1', :content => I18n.t('users.edit.complete_your_profile'))
       end
       
     end

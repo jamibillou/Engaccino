@@ -1,5 +1,5 @@
 fr:
-  user:
+  users:
     
     personal_information: "Civilité"
     email: "Email"
@@ -41,7 +41,7 @@ fr:
     edit:
       title: "Editez votre profil"
       edit_profile: "Editer mon profil"
-      complete_your_profile: "Excellent! Complétez votre profil"
+      complete_your_profile: "Excellent! Maintenant, complétez votre profil."
       speed_up_by_import: "Gagnez du temps, importez vos détails."
       import_from: "Importez depuis"
       view_profile: "Afficher mon profil"

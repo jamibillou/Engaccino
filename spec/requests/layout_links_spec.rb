@@ -40,7 +40,7 @@ describe "LayoutLinks" do
   it "should have a Sign up page at '/signup'" do 
     get '/signup'
     response.should be_success
-    response.should have_selector('title', :content => I18n.t('user.new.title'))
+    response.should have_selector('title', :content => I18n.t('users.new.title'))
   end
   
   it "should have a Sign in page at '/signin'" do 
@@ -65,7 +65,7 @@ describe "LayoutLinks" do
       click_link I18n.t(:menu_contact)
       response.should have_selector('title', :content => I18n.t(:menu_contact))
       click_link I18n.t(:sign_up)
-      response.should have_selector('title', :content => I18n.t('user.new.title'))
+      response.should have_selector('title', :content => I18n.t('users.new.title'))
       click_link I18n.t(:sign_in)
       response.should have_selector('title', :content => I18n.t('sessions.new.title'))
     end
