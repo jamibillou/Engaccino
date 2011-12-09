@@ -1,0 +1,12 @@
+$(document).ready(function()
+{
+  // CUSTOMS THE FORM
+  customForm("user_new_form","user.");
+  
+  $("#country").autocomplete(
+  {
+  	source:"/ajax/countries",
+    autoFocus: true,
+    minLength: 2
+  });
+})

@@ -1,0 +1,7 @@
+$(document).ready(function()
+{
+  // REVEALS TRASH LINKS WHEN MOUSE OVER CARD BLOCKS
+  <% User.all.each do |user| %>
+    revealItem("destroy_user_<%= user.id %>","user_<%= user.id %>");
+  <% end %>
+})

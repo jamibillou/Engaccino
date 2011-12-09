@@ -1,42 +1,44 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-  <title><%= title %></title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= stylesheet_link_tag    "user" %>
+  <head>
+    <title><%= title %></title>
+    <%= stylesheet_link_tag    "application" %>
+    <%= stylesheet_link_tag    "user" %>
+    <%= csrf_meta_tags %>
+  </head>
+  
+  <body>
+    <% flash.each do |key, value| %>
+      <div id="flash" class="flash <%= key %>">
+        <%= value %>
+        <%= link_to '', '#', :id => 'close_flash', :class => 'close' %>
+      </div>
+    <% end %>
+  
+    <%= render 'layouts/header' %>	
+  	
+    <div id="container">
+      <% unless @user && @title == "#{@user.first_name} #{@user.last_name}" %>
+        <h1 id="container_title"><%= @title %></h1>
+      <% end %>
+      <%= yield %>
+    </div>
+    <footer>
+      <%= debug(params) if Rails.env.development? %>
+    </footer>
+  </body>
+  
+  <!-- javascripts last for faster loading -->
   <%= javascript_include_tag "application" %>
-  <% if !@js_files.nil? %>
-	<% @js_files.each do |js_file| %>
-		<%= javascript_include_tag js_file %>
+  <% unless @javascripts.nil? %>
+    <% @javascripts.each do |javascript| %>
+  	  <%= javascript_include_tag javascript %>
   	<% end %>
   <% end %>
   <%= javascript_tag do %>
   	I18n.defaultLocale = "<%= I18n.default_locale %>";
   	I18n.locale = "<%= I18n.locale %>";
   <% end %>
-  <%= csrf_meta_tags %>
-</head>
-
-<body>
-  <% flash.each do |key, value| %>
-    <div id="flash" class="flash <%= key %>">
-      <%= value %>
-      <%= link_to '', '#', :id => 'close_flash', :class => 'close' %>
-    </div>
-  <% end %>
-
-  <%= render 'layouts/header' %>	
-	
-  <div id="container">
-    <% unless @user && @title == "#{@user.first_name} #{@user.last_name}" %>
-      <h1 id="container_title"><%= @title %></h1>
-    <% end %>
-    <%= yield %>
-  </div>
-  <footer>
-    <%= debug(params) if Rails.env.development? %>
-  </footer>
-</body>
 
 </html>
