@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
   
   def new
     @title = I18n.t('sessions.new.title')
+    @js_files = ["sessions"]
   end
   
   def create
@@ -9,6 +10,7 @@ class SessionsController < ApplicationController
     if user.nil?
       flash.now[:error] = I18n.t('flash.error.signin')
       @title = I18n.t('sessions.new.title')
+      @js_files = ["sessions"]
       render :new  
     else
       sign_in user

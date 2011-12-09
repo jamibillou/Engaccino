@@ -16,23 +16,27 @@ class UserController < ApplicationController
   def new
     @user = User.new
     @title = t 'user.new.title'
+    @js_files = ["user"]
   end
   
   def create
     @user = User.new(params[:user])
     unless @user.save
       flash.now[:error] = flash_error_messages(@user, [:email, :password])
+      @js_files = ["user"]
       render :new
     else
       @title = t 'user.edit.complete_your_profile'
       session[:edit_page] = :signup
       sign_in @user
+      @js_files = ["user"]
       render :edit, :id => @user
     end
   end
 
   def edit
     @title = t 'user.edit.title'
+    @js_files = ["user"]
   end
   
   def update

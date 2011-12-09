@@ -6,8 +6,11 @@
   <%= stylesheet_link_tag    "application" %>
   <%= stylesheet_link_tag    "user" %>
   <%= javascript_include_tag "application" %>
-  <%= javascript_include_tag "user" %>
-  <%= javascript_include_tag "sessions" %>
+  <% if !@js_files.nil? %>
+	<% @js_files.each do |js_file| %>
+		<%= javascript_include_tag js_file %>
+  	<% end %>
+  <% end %>
   <%= javascript_tag do %>
   	I18n.defaultLocale = "<%= I18n.default_locale %>";
   	I18n.locale = "<%= I18n.locale %>";
