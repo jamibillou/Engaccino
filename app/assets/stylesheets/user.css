@@ -13,12 +13,12 @@
 }
 .card_block .head .identity .photo { /* only for now */
   width: 30px;
-  height: 55px;
+  height: 47px;
   margin-left: 8px;
   margin-top: 8px;
   margin-right: 10px;
   padding-left: 20px;
-  padding-top: 25px;
+  padding-top: 33px;
   background-color: #444;
   color: white;
   text-align: center;
@@ -118,7 +118,7 @@
 
 /* Contact information */
 .card_block .contact {
-  height: 140px;
+  height: 110px;
   padding-left: 12px;
   padding-top: 20px;
   margin-top: 4px;

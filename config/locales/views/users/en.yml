@@ -13,7 +13,7 @@ en:
     nationality: "Nationality"
     year_of_birth: "Year of birth"
     phone: "Phone"
-    professional_experience: "Professional experience"
+    professional_experience: "Professional xperience"
     company: "Company"
     role: "Role"
     experience_timeframe: "Time frame"
@@ -27,6 +27,14 @@ en:
     open_status: "Might change jobs, open to propositions"
     listening_status: "Satisfied at work, listening to offers"
     happy_status: "Happily employed, no change planed"
+    profile_photo: "Photo"
+    experience: "Experience"
+    years: "yrs"
+    degree: "Degree"
+    degree_name: "Degree name"
+    professional_skills: "Professional skills"
+    skill: "Skill"
+    contact: "Contact"
   
     index:
       title: "List of all users"

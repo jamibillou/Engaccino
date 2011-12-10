@@ -1,14 +1,21 @@
-<div id="user_<%= @user.id %>" class="card_block left">
+<div id="user_<%= user.id %>" class="card_block left">
   <div class="head">
     <div class="identity">
       <div class="photo left"><%=t 'users.profile_photo' %></div>
       <div class="name_place_status right">
-        <h2><%= @user.first_name %><br /><%= @user.last_name %></h2> 
-        <%= unless @user.city.blank? then @user.city else t('users.city') end %>, 
-        <%= unless @user.country.blank? then display_country(@user.country) else t('users.country') end %>
+        <h2><a href="<%= user_path(user) %>"><%= user.first_name %><br /><%= user.last_name %></a></h2> 
+        <%= unless user.city.blank? then user.city else t('users.city') end %>, 
+        <%= unless user.country.blank? then display_country(user.country) else t('users.country') end %>
         <h3><%=t 'users.status' %></h3>
       </div>
-    </div>
+    </div>    	
+    <% if current_user.admin? %>
+    	<%= link_to trash, user, :method => :delete,
+	                             :confirm => "#{t('users.destroy.title')} #{user.first_name} #{user.last_name}#{t('_?')}",
+	                             :title => "#{t('users.destroy.title')} #{user.first_name} #{user.last_name}",
+	                             :id => "destroy_user_#{user.id}",
+	                             :class => "hidden"%>
+    <% end %>
     <div class="title">
       <h2><%=t 'users.role' %></h2>
       at <%=t 'users.company' %>
@@ -27,15 +34,5 @@
     <p><%=t 'users.skill' %> 1</p>
     <p><%=t 'users.skill' %> 2</p>
     <p><%=t 'users.skill' %> 3</p>
-  </div>
-  <div class="contact">
-    <h2><%= "#{t('users.contact')} #{@user.first_name}" %></h2>
-    <p><%= @user.email %></p>
-    <p><%= @user.phone %></p>
-    <div class="buttons">
-      <a class="small slightly_round grey button left margin_right" href="#">Fb</a>
-      <a class="small slightly_round grey button left margin_right" href="#">Li</a>
-      <a class="small slightly_round grey button left" href="#">Tw</a>
-    </div>
   </div>
 </div>
