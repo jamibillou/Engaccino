@@ -3,3 +3,6 @@ require File.expand_path('../application', __FILE__)
 
 # Initialize the rails application
 Engaccino::Application.initialize!
+
+# Load String extended features
+require 'string_extended'
