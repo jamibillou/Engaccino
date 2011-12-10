@@ -2,6 +2,9 @@ class UsersController < ApplicationController
     
   before_filter :authenticate, :except => [:new, :create]
   before_filter :correct_user, :only => [:edit, :update]
+  before_filter :completed_signup, :only => [:index, :show]
+  before_filter :admin_user, :only => [:destroy]
+  before_filter :new_user, :only => [:new, :create]
   
   def index
     @users = User.all
@@ -35,19 +38,19 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @title = (@user.profile_completion == 0) ? t('users.edit.complete_your_profile') : t('users.edit.title')
+    @title = completed_signup? ? t('users.edit.title') : t('users.edit.complete_your_profile')
     @javascripts = ['users/edit']
   end
   
   def update
     if @user.update_attributes(params[:user])
       @title = "#{@user.first_name} #{@user.last_name}"
-      @user.update_attributes(:profile_completion => 10) if @user.profile_completion == 0
-      flash_message = (@user.profile_completion == 0) ? 'welcome' : 'profile_updated'
+      flash_message = completed_signup? ? 'profile_updated' : 'welcome'
+      @user.update_attributes(:profile_completion => 10) unless completed_signup?
       redirect_to @user, :flash => { :success => t("flash.success.#{flash_message}") }
     else
       flash.now[:error] = flash_error_messages(@user)
-      @title = (@user.profile_completion == 0) ? 'users.edit.complete_your_profile' : 'users.edit.title'
+      @title = completed_signup? ? 'users.edit.title' : 'users.edit.complete_your_profile'
       render :edit
     end
   end 
@@ -66,5 +69,22 @@ class UsersController < ApplicationController
     def correct_user
       @user = User.find(params[:id])
       redirect_to user_path(current_user), :notice => t('flash.notice.other_user_page') unless current_user?(@user)
+    end
+    
+    def completed_signup
+      @user = current_user
+      redirect_to edit_user_path(@user), :notice => t('flash.notice.please_finish_signup') unless completed_signup?
+    end
+    
+    def admin_user
+      @user = current_user
+      redirect_to user_path(@user), :notice => t('flash.notice.restricted_page') unless @user.admin
+    end
+    
+    def new_user
+      unless current_user.nil?
+        @user = current_user
+        redirect_to user_path(@user), :notice => t('flash.notice.already_registered')
+      end
     end
 end

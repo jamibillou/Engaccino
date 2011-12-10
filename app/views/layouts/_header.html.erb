@@ -4,7 +4,7 @@
   <nav>
     <%= render 'layouts/signin_up_menu' %>
     <%= render 'layouts/search_form' %>
-    <% unless signed_in? %>
+    <% unless signed_in? && completed_signup? %>
       <%= render 'layouts/public_menu' %>
     <% else %>
       <%= render 'layouts/member_menu' %>

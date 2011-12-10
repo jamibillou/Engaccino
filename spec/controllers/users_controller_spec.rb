@@ -25,28 +25,44 @@ describe UsersController do
         test_sign_in(@user)
       end
       
-      it "should return http success" do
-        get :index
-        response.should be_success
+      describe "who haven't completed signup" do
+        
+        it "should deny access to 'index'" do
+          get :index
+          response.should redirect_to(edit_user_path(@user))
+          flash[:notice].should == I18n.t('flash.notice.please_finish_signup')
+        end
       end
       
-      it "should have the right title" do
-        get :index
-        response.should have_selector('title', :content => I18n.t('users.index.title'))
-      end
+      describe "who have completed signup" do
       
-      it "should have a card for each user" do 
-        get :index
-        User.all do |user|
-          response.should have_selector('div', :id => "user_#{user.id}")
-        end  
-      end
-      
-      it "should have a destroy link for each user" do 
-        get :index
-        User.all do |user|
-          response.should have_selector('div', :id => "destroy_user_#{user.id}")
-        end  
+        before(:each) do
+          @user.update_attributes(:profile_completion => 10)
+        end
+        
+        it "should return http success" do
+          get :index
+          response.should be_success
+        end
+        
+        it "should have the right title" do
+          get :index
+          response.should have_selector('title', :content => I18n.t('users.index.title'))
+        end
+        
+        it "should have a card for each user" do 
+          get :index
+          User.all do |user|
+            response.should have_selector('div', :id => "user_#{user.id}")
+          end  
+        end
+        
+        it "should have a destroy link for each user" do 
+          get :index
+          User.all do |user|
+            response.should have_selector('div', :id => "destroy_user_#{user.id}")
+          end  
+        end
       end
     end
   end
@@ -68,83 +84,124 @@ describe UsersController do
         test_sign_in(@user)
       end
       
-      it "should return http success" do
-        get :show, :id => @user
-        response.should be_success
+      describe "who haven't completed signup" do
+        
+        it "should deny access to 'show'" do
+          get :show,  :id => @user
+          response.should redirect_to(edit_user_path(@user))
+          flash[:notice].should == I18n.t('flash.notice.please_finish_signup')
+        end
       end
       
-      it "should have the right selected navigation tab" do
-        get :show, :id => @user
-        response.should have_selector('li', :class => 'round selected', :content => I18n.t(:menu_profile))
+      describe "who have completed signup" do
+        
+        before(:each) do
+          @user.update_attributes(:profile_completion => 10)
+        end
+        
+        it "should return http success" do
+          get :show, :id => @user
+          response.should be_success
+        end
+        
+        it "should have the right selected navigation tab" do
+          get :show, :id => @user
+          response.should have_selector('li', :class => 'round selected', :content => I18n.t(:menu_profile))
+        end
       end
     end
   end
 
   describe "GET 'new'" do
   
-    it "should return http success" do
-      get :new
-      response.should be_success
+    describe "for signed-in users" do
+      
+      it "should deny access to 'new'" do
+        test_sign_in(@user)
+        get :new
+        response.should redirect_to(user_path(@user))
+        flash[:notice].should == I18n.t('flash.notice.already_registered')
+      end
     end
     
-    it "should have the right title" do 
-      get :new
-      response.should have_selector('title', :content => I18n.t('users.new.title'))
+    describe "for non-signed-in users" do
+    
+      it "should return http success" do
+        get :new
+        response.should be_success
+      end
+      
+      it "should have the right title" do 
+        get :new
+        response.should have_selector('title', :content => I18n.t('users.new.title'))
+      end
     end
   end
 
   describe "POST 'create'" do
           
-    it "should return http success" do
-      post :create
-      response.should be_success
-    end
-  
-    describe "success" do
-    
-      before(:each) do
-        @attr = { :first_name => "First name",
-                  :last_name => "Last name",
-                  :email => "new_user@example.com", 
-                  :password => "pouetpouet45", 
-                  :password_confirmation => "pouetpouet45" }
-      end
+    describe "for signed-in users" do
       
-      it "should create a user" do
-        lambda do
+      it "should deny access to 'create'" do
+        test_sign_in(@user)
+        post :create
+        response.should redirect_to(user_path(@user))
+        flash[:notice].should == I18n.t('flash.notice.already_registered')
+      end
+    end
+    
+    describe "for non-signed-in users" do
+    
+      it "should return http success" do
+        post :create
+        response.should be_success
+      end
+    
+      describe "success" do
+      
+        before(:each) do
+          @attr = { :first_name => "First name",
+                    :last_name => "Last name",
+                    :email => "new_user@example.com", 
+                    :password => "pouetpouet45", 
+                    :password_confirmation => "pouetpouet45" }
+        end
+        
+        it "should create a user" do
+          lambda do
+            post :create, :user => @attr
+          end.should change(User, :count).by(1)
+        end
+        
+        it "should render the 2nd signup form" do
           post :create, :user => @attr
-        end.should change(User, :count).by(1)
+          response.should render_template(:edit)
+        end
+        
+        it "should signed the user in" do
+          post :create, :user => @attr
+          controller.should be_signed_in
+        end
       end
       
-      it "should render the 2nd signup form" do
-        post :create, :user => @attr
-        response.should render_template(:edit)
+      describe "failure" do
+        
+        it "should render the 'new' template" do
+          post :create, :email => "", :password => "", :password_confirmation => ""
+          response.should render_template(:new)
+        end
+        
+        it "should have a flash message" do
+          post :create, :email => "", :password => "", :password_confirmation => ""
+          response.should have_selector('div', :class => 'flash error')
+        end
       end
-      
-      it "should signed the user in" do
-        post :create, :user => @attr
-        controller.should be_signed_in
-      end
-      
-    end
-    
-    describe "failure" do
-      
-      it "should render the 'new' template" do
-        post :create, :email => "", :password => "", :password_confirmation => ""
-        response.should render_template(:new)
-      end
-      
-      it "should have a flash message" do
-        post :create, :email => "", :password => "", :password_confirmation => ""
-        response.should have_selector('div', :class => 'flash error')
-      end
-    end    
+    end  
   end
   
   describe "GET 'edit'" do
   
-    describe "for non-signed-in users," do
+    describe "for non-signed-in users" do
       
       it "should deny access to 'edit'" do
         get :edit, :id => @user
@@ -153,9 +210,9 @@ describe UsersController do
       end
     end
     
-    describe "for signed-in users," do
+    describe "for signed-in users" do
     
-      before(:each) do
+      before (:each) do
         test_sign_in(@user)
       end
     
@@ -335,16 +392,38 @@ describe UsersController do
         test_sign_in(@user)
       end
       
-      it "should destroy the user" do
-        lambda do
+      describe "who haven't got admin rights" do
+      
+        it "should not destroy the user" do
+          lambda do
+            delete :destroy, :id => @user
+          end.should_not change(User, :count).by(-1)
+        end
+        
+        it "should redirect to the root path" do
           delete :destroy, :id => @user
-        end.should change(User, :count).by(-1)
+          flash[:notice].should == I18n.t('flash.notice.restricted_page')
+          response.should redirect_to(user_path(@user))
+        end
       end
       
-      it "should redirect to the users page" do
-        delete :destroy, :id => @user
-        flash[:success].should == I18n.t('flash.success.user_destroyed')
-        response.should redirect_to(users_path)
+      describe "who have admin rights" do
+      
+        before(:each) do
+          @user.toggle!(:admin)
+        end
+        
+        it "should destroy the user" do
+          lambda do
+            delete :destroy, :id => @user
+          end.should change(User, :count).by(-1)
+        end
+        
+        it "should redirect to the users page" do
+          delete :destroy, :id => @user
+          flash[:success].should == I18n.t('flash.success.user_destroyed')
+          response.should redirect_to(users_path)
+        end
       end
     end
   end

@@ -7,7 +7,11 @@ describe "FriendlyForwardings" do
   end
   
   describe "should forward to the requested page after signin" do
-  
+    
+    before(:each) do
+      @user.update_attributes(:profile_completion => 10)
+    end
+    
     it "profile" do
       visit user_path(@user)
       fill_in :email,    :with => @user.email

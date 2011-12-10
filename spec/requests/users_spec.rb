@@ -76,6 +76,7 @@ describe "Users" do
     
       before(:each) do
         @user = Factory(:user)
+        @user.update_attributes(:profile_completion => 10)
       end
       
       it "should sign a user in" do
@@ -138,6 +139,7 @@ describe "Users" do
     
     before(:each) do
       @user = Factory(:user)
+      @user.update_attributes(:profile_completion => 10)
       visit signin_path
       fill_in :email,    :with => @user.email
       fill_in :password, :with => @user.password

@@ -42,6 +42,9 @@ fr:
     notice:
       please_signin: "Merci de vous identifier pour accéder à cette page."
       other_user_page: "Vous ne pouvez pas accéder à cette page pour un autre utilisateur."
+      please_finish_signup: "Finissez d'abord votre inscription pour accéder à cette page."
+      restricted_page: "Cette page est protégée, vous ne pouvez pas y accéder !"
+      already_registered: "Ce n'est pas votre compte ? Déconnectez vous et créez le votre !"
       
   # Actions
   delete: "delete"
