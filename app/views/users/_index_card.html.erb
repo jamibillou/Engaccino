@@ -3,7 +3,7 @@
     <div class="identity">
       <div class="photo left">Profile<br />photo</div>
       <div class="name_place_status right">
-        <h2><a href="<%= user_path(user) %>"><%= user.first_name %><br /><%= user.last_name %></a></h2> 
+        <h2><a href="<%= user_path(user) %>"><%= user.first_name %><br /><%= user.last_name %> (<%= user.profile_completion %>)</a></h2> 
         <%= unless user.city.blank? then user.city else "City" end %>, 
         <%= unless user.country.blank? then display_country(user.country) else "Country" end %>
         <h3>Status</h3>

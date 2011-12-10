@@ -144,7 +144,7 @@ describe UsersController do
   
   describe "GET 'edit'" do
   
-    describe "for non-signed-in users" do
+    describe "for non-signed-in users," do
       
       it "should deny access to 'edit'" do
         get :edit, :id => @user
@@ -153,7 +153,7 @@ describe UsersController do
       end
     end
     
-    describe "for signed-in users" do
+    describe "for signed-in users," do
     
       before(:each) do
         test_sign_in(@user)
@@ -164,14 +164,38 @@ describe UsersController do
         response.should be_success
       end
             
-      it "should have the right title" do
-        get :edit, :id => @user
-        response.should have_selector('title', :content => I18n.t('users.edit.title'))
+      describe "edit page" do
+      
+        before(:each) do
+          @user.update_attributes(:profile_completion => 10)
+        end
+        
+        it "should have the right title" do
+          get :edit, :id => @user
+          response.should have_selector('title', :content => I18n.t('users.edit.title'))
+        end
+              
+        it "should have an edit form" do
+          get :edit, :id => @user
+          response.should have_selector('form', :id => 'user_edit_form')
+        end
       end
-            
-      it "should have a form to edit the user profile" do
-        get :edit, :id => @user
-        response.should have_selector('form', :id => 'user_edit_form')
+      
+      describe "signup page" do
+      
+        before(:each) do
+          @user.update_attributes(:profile_completion => 0)
+        end
+        
+        it "should have the right title" do
+          get :edit, :id => @user
+          response.should have_selector('title', :content => I18n.t('users.edit.complete_your_profile'))
+        end
+              
+        it "should have a signup form" do
+          get :edit, :id => @user
+          response.should have_selector('form', :id => 'user_signup_form')
+        end
       end
     end
   end
@@ -208,6 +232,7 @@ describe UsersController do
           @user.last_name == user.last_name
           @user.country == user.country
           @user.year_of_birth == user.year_of_birth
+          @user.profile_completion >= 0
         end
         
         it "should not create a user" do
@@ -216,15 +241,8 @@ describe UsersController do
           end.should_not change(User, :count)
         end
         
-        it "should redirect to the User#show page (from the signup page)" do
+        it "should redirect to the User#show page" do
           put :update, :user => @attr, :id => @user
-          session[:edit_page] = :signup
-          response.should redirect_to(@user)
-        end
-        
-        it "should redirect to the User#show page (from the edit page)" do
-          put :update, :user => @attr, :id => @user
-          session[:edit_page] = :edit
           response.should redirect_to(@user)
         end
       end

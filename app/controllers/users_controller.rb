@@ -28,7 +28,6 @@ class UsersController < ApplicationController
       render :new
     else
       @title = t 'users.edit.complete_your_profile'
-      session[:edit_page] = :signup
       sign_in @user
       @javascripts = ['users/edit']
       render :edit, :id => @user
@@ -36,26 +35,19 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @title = t 'users.edit.title'
+    @title = (@user.profile_completion == 0) ? t('users.edit.complete_your_profile') : t('users.edit.title')
     @javascripts = ['users/edit']
   end
   
   def update
-    if session[:edit_page] == :signup
-      edit_title = t 'users.edit.complete_your_profile'
-      flash_message = 'welcome'
-    else
-      session[:edit_page] = :edit
-      edit_title = t 'users.edit.title'
-      flash_message = 'profile_updated'
-    end
     if @user.update_attributes(params[:user])
-      session[:edit_page] = :edit
       @title = "#{@user.first_name} #{@user.last_name}"
+      @user.update_attributes(:profile_completion => 10) if @user.profile_completion == 0
+      flash_message = (@user.profile_completion == 0) ? 'welcome' : 'profile_updated'
       redirect_to @user, :flash => { :success => t("flash.success.#{flash_message}") }
     else
       flash.now[:error] = flash_error_messages(@user)
-      @title = edit_title
+      @title = (@user.profile_completion == 0) ? 'users.edit.complete_your_profile' : 'users.edit.title'
       render :edit
     end
   end 

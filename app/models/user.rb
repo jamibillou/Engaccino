@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
                   :nationality, :year_of_birth,
                   :phone, :email,
                   :facebook_login, :linkedin_login, :twitter_login,
-                  :password, :password_confirmation
+                  :password, :password_confirmation,
+                  :profile_completion
   
   countries_array = Country.all.collect { |c| c[0] }
   email_regex = /^[\w+\d\-.]+@[a-z\d\-.]+\.[a-z]{2,3}(\.[a-z]{2,3})?$/i
@@ -15,8 +16,7 @@ class User < ActiveRecord::Base
   twitter_regex = /^@(_|([a-z]_)|[a-z])([a-z0-9]+_?)*$/i
   
   validates_presence_of             :email, :first_name, :last_name
-  validates_presence_of             :password,
-                                    :on => :create
+  validates_presence_of             :password, :on => :create
     
   validates :first_name,            :length => { :maximum => 80 }
                             
@@ -53,6 +53,8 @@ class User < ActiveRecord::Base
   validates :password,              :confirmation => true,
   					                        :length => { :within => 6..40 },
   					                        :on => :create
+  					                        
+  validates :profile_completion,    :inclusion => { :in => 0..100 }
   
   before_save :encrypt_password
   
@@ -119,5 +121,6 @@ end
 #  updated_at         :datetime
 #  salt               :string(255)
 #  year_of_birth      :integer(4)
+#  profile_completion :integer(4)      default(0)
 #
 

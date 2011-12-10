@@ -21,7 +21,8 @@ def make_users
                        :linkedin_login => "bg@engaccino.com",
                        :twitter_login => "@beaugosse",
                        :password => "password",
-                       :password_confirmation => "password")
+                       :password_confirmation => "password",
+                       :profile_completion => 10)
   admin.toggle!(:admin)
   countries = Country.all.collect { |c| c[0] }
   years = (1900..12.years.ago.year).to_a
@@ -44,6 +45,7 @@ def make_users
                  :linkedin_login => email,
                  :twitter_login => puts(twitter),
                  :password => password,
-                 :password_confirmation => password)
+                 :password_confirmation => password,
+                 :profile_completion => 10)
   end
 end

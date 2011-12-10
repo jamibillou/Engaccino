@@ -339,9 +339,9 @@ describe User do
     end
   end
   
-  describe "attribute :admin" do
+  describe ":admin attribute" do
         
-    it "should respond to admin" do
+    it "should exist" do
       @user.should respond_to(:admin)
     end
     
@@ -353,7 +353,18 @@ describe User do
       @user.toggle!(:admin)
       @user.should be_admin
     end
-  end 
+  end
+  
+  describe ":profile_completion attribute" do
+  
+    it "should exist" do
+      @user.should respond_to(:profile_completion)
+    end
+    
+    it "should not be more than 0 by default" do
+      @user.profile_completion.should == 0
+    end
+  end
 end
 
 # == Schema Information
@@ -382,5 +393,6 @@ end
 #  updated_at         :datetime
 #  salt               :string(255)
 #  year_of_birth      :integer(4)
+#  profile_completion :integer(4)
 #
 

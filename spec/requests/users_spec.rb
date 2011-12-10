@@ -14,7 +14,6 @@ describe "Users" do
         click_button
         response.should have_selector('div.flash.error', :content => I18n.t('flash.error.base'))
       end
-            
     end
     
     describe "success" do
@@ -56,10 +55,8 @@ describe "Users" do
         click_button
         response.should have_selector('h1', :content => I18n.t('users.edit.complete_your_profile'))
       end
-      
     end
-    
-   ### to be completed ###
+    ### to be completed ###
   end
   
   describe "sign in/out" do
