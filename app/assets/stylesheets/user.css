@@ -24,29 +24,26 @@
   text-align: center;
   font-size: 10px;
 }
-.card_block .head .identity .name_place_status {
+.card_block .head .identity .name_place {
   float: left;
+  margin-left: 85px;
+  position: absolute;
   padding-top: 6px;
+  max-width: 150px;
 }
-.card_block .head .identity .name_place_status a {
+.card_block .head .identity .name_place a {
   color: black;
   text-decoration: none;
 }
-.card_block .head .identity .name_place_status a:hover {
+.card_block .head .identity .name_place a:hover {
   text-decoration: underline;
 }
-.card_block .head .identity .name_place_status h2 {
+.card_block .head .identity .name_place h2 {
   padding-bottom: 2px;
   margin: 0;
   font-size: 20px;
   font-weight: bold;
   line-height: 1.2;
-}
-.card_block .head .identity .name_place_status h3 {
-  font-size: 13px;
-  margin: 0;
-  color: green;
-  font-weight: bold;
 }
 .card_block .head .title {
   padding-left: 20px;
@@ -61,6 +58,22 @@
   padding: 0;
 }
 
+/* Status */
+.card_block .status {
+  height: 45px;
+  padding-left: 12px;
+  background: white;	
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+.card_block .status h2 {
+  font-size: 16px;
+  padding-top: 5px;
+  margin: 0;
+  color: green;
+  font-weight: bold;
+}
+
 /* Experience */
 .card_block .experience {
   height: 80px;
@@ -70,7 +83,7 @@
   background: white;
   float: left;
   text-align: left;
-  font-size: 25px;
+  font-size: 25px;  
 }
 .card_block .experience h3 { 
   margin: 0;
@@ -118,9 +131,9 @@
 
 /* Contact information */
 .card_block .contact {
-  height: 110px;
+  height: 120px;
   padding-left: 12px;
-  padding-top: 20px;
+  padding-top: 10px;
   margin-top: 4px;
   background: white;
   font-size: 13px;

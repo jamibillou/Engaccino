@@ -2,17 +2,19 @@
   <div class="head">
     <div class="identity">
       <div class="photo left"><%=t 'users.profile_photo' %></div>
-      <div class="name_place_status right">
+      <div class="name_place">
         <h2><%= @user.first_name %><br /><%= @user.last_name %></h2> 
         <%= unless @user.city.blank? then @user.city else t('users.city') end %>, 
-        <%= unless @user.country.blank? then display_country(@user.country) else t('users.country') end %>
-        <h3><%=t 'users.status' %></h3>
+        <%= unless @user.country.blank? then display_country(@user.country) else t('users.country') end %>        
       </div>
     </div>
     <div class="title">
       <h2><%=t 'users.role' %></h2>
       at <%=t 'users.company' %>
     </div>
+  </div>
+  <div class="status">
+    <h2><%=t 'users.status' %></h2>
   </div>
   <div class="experience">
     <h2><%= t('users.experience').remove_accents.upcase %></h2>
