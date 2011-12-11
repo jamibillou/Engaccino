@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       @javascripts = ['sessions/sessions']
       render :new  
     else
-      sign_in user
+      sign_in(user,params[:session][:remember_me])
       redirect_back_or(user)
     end
   end

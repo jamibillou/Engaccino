@@ -4,7 +4,9 @@
 	    <%= f.text_field  :email, :value => (params[:session]) && !params[:session][:email].empty? ? params[:session][:email] : t('sessions.email'),
 	                              :id => 'email',
 	                              :class => 'field' %><br />
-      <%= f.password_field :password, :id => 'password', :class => 'field' %><br /><br />
+      <%= f.password_field :password, :id => 'password', :class => 'field' %><br />
+      <%=t 'sessions.new.remember_me' %> <%= f.check_box :remember_me %><br/><br />
       <%= f.submit t('sessions.new.signin') %>
 	<% end %>
 </div>
+<br/>
