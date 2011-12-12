@@ -14,6 +14,18 @@ describe "Users" do
         click_button
         response.should have_selector('div.flash.error', :content => I18n.t('flash.error.base'))
       end
+      
+      it "should display errors if the step II of signing up is not correctly done" do
+        visit signup_path
+        fill_in :email,                 :with => "test@example.com"
+        fill_in :password,              :with => "password"
+        fill_in :password_confirmation, :with => "password"
+        click_button
+        fill_in :first_name,            :with => ""
+        fill_in :last_name,             :with => ""
+        click_button
+        response.should have_selector('div.flash.error', :content => I18n.t('flash.error.base'))
+      end
     end
     
     describe "success" do
@@ -54,6 +66,20 @@ describe "Users" do
         fill_in :password_confirmation, :with => @attr[:password_confirmation]
         click_button
         response.should have_selector('h1', :content => I18n.t('users.edit.complete_your_profile'))
+      end
+      
+      it "should sign a user up and update his attributes once he passed step II" do
+        visit signup_path
+        fill_in :email,                 :with => "test@example.com"
+        fill_in :password,              :with => "password"
+        fill_in :password_confirmation, :with => "password"
+        click_button
+        fill_in :first_name,            :with => "Jack"
+        fill_in :last_name,             :with => "Bauer"
+        fill_in :year_of_birth,         :with => "1962"
+        fill_in :country,               :with => "United States"
+        click_button
+        response.should have_selector('div.flash.success', :content => I18n.t('flash.success.welcome'))
       end
     end
     ### to be completed ###
@@ -135,6 +161,70 @@ describe "Users" do
     end
   end
   
+  describe "edit profile" do
+    
+    describe "for non-signed users" do
+      
+      it "should redirect the user to the signin page and display a message" do
+        visit '/users/1/edit'
+        current_url.should == "http://www.example.com#{signin_path}"
+        response.should render_template(:signin_form)
+        response.should have_selector('div.flash.notice', :content => I18n.t('flash.notice.please_signin'))
+      end      
+    end
+    
+    describe "for signed users" do
+      
+      before(:each) do
+        @user = Factory(:user)
+        @user.update_attributes(:profile_completion => 10)
+        visit signin_path
+        fill_in :email,    :with => @user.email
+        fill_in :password, :with => @user.password
+        click_button
+      end
+      
+      describe "failure" do        
+                
+        it "should reject a user trying to edit another user's information" do          
+          @another_user = User.new(:first_name            => "Another",
+                                   :last_name             => "User",
+                                   :email                 => "another_user@test.com",
+                                   :password              => "another",
+                                   :password_confirmation => "another")
+          @another_user.id = 1
+          @another_user.save!
+          visit '/users/1/edit'
+          current_url.should == "http://www.example.com#{user_path(@user)}"
+          response.should have_selector('div.flash.notice', :content => I18n.t('flash.notice.other_user_page'))
+        end
+        
+        it "should reject if the user empties the first name and/or last_name" do
+          visit edit_user_path(@user)
+          fill_in :first_name, :with => ""
+          fill_in :last_name,  :with => ""
+          click_button
+          response.should have_selector('div.flash.error', :content => I18n.t('flash.error.base'))
+        end        
+      end
+      
+      describe "success" do
+        
+        it "should update the user's information and redirect to his profile" do
+          visit edit_user_path(@user)
+          fill_in :first_name,    :with => "Jon"
+          fill_in :last_name,     :with => "Von Der Mace"
+          fill_in :year_of_birth, :with => 1975
+          fill_in :country,       :with => "Netherlands" 
+          click_button
+          current_url.should == "http://www.example.com#{user_path(@user)}"
+          response.should have_selector('div.flash.success', :content => I18n.t('flash.success.profile_updated'))
+        end        
+      end
+    end
+    
+  end
+  
   describe "admin features" do
     
     before(:each) do
@@ -146,7 +236,7 @@ describe "Users" do
       click_button
     end
     
-   describe "admin users" do        
+    describe "admin users" do        
       
       before(:each) do
         @user.toggle!(:admin)
