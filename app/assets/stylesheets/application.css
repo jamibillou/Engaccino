@@ -225,9 +225,7 @@ a.button.grey_gradient:hover {
   margin-top: 10px;
   padding: 0;
 }
-.white_block.error {
-  border: 1px solid #dd7f7f;
-  color: #db6a6a;
+.white_block p {
   font-size: 12px;
 }
 
