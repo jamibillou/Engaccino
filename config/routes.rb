@@ -1,5 +1,7 @@
 Engaccino::Application.routes.draw do
     
+  require File.expand_path('../../lib/assets/routes_constraints', __FILE__)
+  
   get "sessions/new"
   get "ajax/countries"
 
@@ -12,7 +14,8 @@ Engaccino::Application.routes.draw do
     match '/signin', :to => 'sessions#new'
     match '/signout', :to => 'sessions#destroy'
   
-    root :to => 'pages#overview'
+    root :to => 'pages#overview', :constraints => SingedIn.new(false)
+    root :to => 'users#index',     :constraints => SingedIn.new(true)
     match '/tour', :to => 'pages#tour'
     match '/pricing', :to => 'pages#pricing'
     match '/about', :to => 'pages#about'
