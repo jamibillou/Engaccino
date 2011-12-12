@@ -5,8 +5,8 @@
 	                              :id => 'email',
 	                              :class => 'field' %><br />
       <%= f.password_field :password, :id => 'password', :class => 'field' %><br />
-      <%=t 'sessions.new.remember_me' %> <%= f.check_box :remember_me %><br/><br />
+      <p><%= f.check_box :remember_me %> <%=t 'sessions.new.remember_me' %></p><br />
       <%= f.submit t('sessions.new.signin') %>
+      <br />
 	<% end %>
 </div>
-<br/>
