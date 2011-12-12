@@ -2,61 +2,26 @@ class User < ActiveRecord::Base
 
   attr_accessor :password
   
-  attr_accessible :first_name, :last_name,
-                  :city, :country,
-                  :nationality, :year_of_birth,
-                  :phone, :email,
-                  :facebook_login, :linkedin_login, :twitter_login,
-                  :password, :password_confirmation,
-                  :profile_completion
+  attr_accessible :first_name, :last_name, :city, :country, :nationality, :year_of_birth, :phone, :email, :facebook_login,
+                  :linkedin_login, :twitter_login, :profile_completion, :password, :password_confirmation
   
   countries_array = Country.all.collect { |c| c[0] }
-  email_regex = /^[\w+\d\-.]+@[a-z\d\-.]+\.[a-z]{2,3}(\.[a-z]{2,3})?$/i
-  phone_regex = /^\+(?:[0-9] ?){6,14}[0-9]$/
-  twitter_regex = /^@(_|([a-z]_)|[a-z])([a-z0-9]+_?)*$/i
-  
-  validates_presence_of             :email, :first_name, :last_name
-  validates_presence_of             :password, :on => :create
+  email_regex     = /^[\w+\d\-.]+@[a-z\d\-.]+\.[a-z]{2,3}(\.[a-z]{2,3})?$/i
+  phone_regex     = /^\+(?:[0-9] ?){6,14}[0-9]$/
+  twitter_regex   = /^@(_|([a-z]_)|[a-z])([a-z0-9]+_?)*$/i
     
-  validates :first_name,            :length => { :maximum => 80 }
-                            
-  validates :last_name,             :length => { :maximum => 80 }
-                                      
-  validates :country,               :inclusion => { :in => countries_array },
-                                    :allow_blank => true
-                                    
-  validates :nationality,           :inclusion => { :in => countries_array },
-                                    :allow_blank => true
-                                    
-  validates :year_of_birth,         :inclusion => { :in => 1900..Time.now.year },
-                                    :allow_blank => true  
-                                    
-  validates :phone,                 :length => { :minimum => 7, :maximum => 20 },
-                                    :format => { :with => phone_regex },
-                                    :allow_blank => true       
-                                                  
-  validates :email,                 :format => { :with => email_regex },
-                                    :uniqueness => { :case_sensitive => false } 
-                                    
-  validates :facebook_login,        :format => { :with => email_regex },
-                                    :uniqueness => { :case_sensitive => false },
-                                    :allow_blank => true
-                                    
-  validates :linkedin_login,        :format => { :with => email_regex },
-                                    :uniqueness => { :case_sensitive => false },
-                                    :allow_blank => true
-                                    
-  validates :twitter_login,         :format => { :with => twitter_regex },
-                                    :uniqueness => { :case_sensitive => false },
-                                    :allow_blank => true
-                                    
-  validates :password,              :confirmation => true,
-  					                        :length => { :within => 6..40 },
-  					                        :on => :create
-  					                        
-  validates :profile_completion,    :inclusion => { :in => 0..100 }
-  
-  before_save :encrypt_password
+  validates :email,                      :format => { :with => email_regex },   :uniqueness => { :case_sensitive => false },     :presence => true
+  validates :password,                   :on => :create, :confirmation => true, :length => { :within => 6..40 },                 :presence => true
+  validates :first_name, :last_name,     :length => { :maximum => 80 },                                                          :presence => true
+  validates :country, :nationality,      :inclusion => { :in => countries_array },                                               :allow_blank => true
+  validates :year_of_birth,              :inclusion => { :in => 1900..Time.now.year },                                           :allow_blank => true
+  validates :phone,                      :length => { :within => 7..20 },       :format => { :with => phone_regex },             :allow_blank => true     
+  validates :facebook_login,             :format => { :with => email_regex },   :uniqueness => { :case_sensitive => false },     :allow_blank => true
+  validates :linkedin_login,             :format => { :with => email_regex },   :uniqueness => { :case_sensitive => false },     :allow_blank => true
+  validates :twitter_login,              :format => { :with => twitter_regex }, :uniqueness => { :case_sensitive => false },     :allow_blank => true
+  validates :profile_completion,         :inclusion => { :in => 0..100 }  
+                                                                  
+  before_create :encrypt_password
   
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)
@@ -79,7 +44,7 @@ class User < ActiveRecord::Base
   
     def encrypt_password
       self.salt = make_salt if new_record?
-      self.encrypted_password = encrypt(password) unless !new_record? || password.blank?
+      self.encrypted_password = encrypt(password)
     end
     
     def encrypt(string)
