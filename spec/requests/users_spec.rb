@@ -15,7 +15,16 @@ describe "Users" do
         response.should have_selector('div.flash.error', :content => I18n.t('flash.error.base'))
       end
       
-      it "should display errors if the step II of signing up is not correctly done" do
+      it "should display errors if data submitted to step 1 is invalid" do
+        visit signup_path
+        fill_in :email,                 :with => "testexample"
+        fill_in :password,              :with => "password"
+        fill_in :password_confirmation, :with => "passw"
+        click_button
+        response.should have_selector('div.flash.error', :content => I18n.t('flash.error.base'))
+      end
+      
+      it "should display errors if data submitted to step 2 is invalid" do
         visit signup_path
         fill_in :email,                 :with => "test@example.com"
         fill_in :password,              :with => "password"
@@ -54,7 +63,7 @@ describe "Users" do
         controller.should be_signed_in
       end
       
-      it "should sign a user up even after having submitted invalid fields first" do
+      it "should sign a user up even after having submitted invalid data first" do
         visit signup_path
         fill_in :email,                 :with => "test@example.com"
         fill_in :password,              :with => "password"
@@ -68,7 +77,7 @@ describe "Users" do
         response.should have_selector('h1', :content => I18n.t('users.edit.complete_your_profile'))
       end
       
-      it "should sign a user up and update his attributes once he passed step II" do
+      it "should sign a user up and update his attributes after step 2" do
         visit signup_path
         fill_in :email,                 :with => "test@example.com"
         fill_in :password,              :with => "password"
@@ -82,7 +91,6 @@ describe "Users" do
         response.should have_selector('div.flash.success', :content => I18n.t('flash.success.welcome'))
       end
     end
-    ### to be completed ###
   end
   
   describe "sign in/out" do
@@ -163,9 +171,9 @@ describe "Users" do
   
   describe "edit profile" do
     
-    describe "for non-signed users" do
+    describe "for non-signed-in users" do
       
-      it "should redirect the user to the signin page and display a message" do
+      it "should redirect to the signin page and display a message" do
         visit '/users/1/edit'
         current_url.should == "http://www.example.com#{signin_path}"
         response.should render_template(:signin_form)
@@ -173,7 +181,7 @@ describe "Users" do
       end      
     end
     
-    describe "for signed users" do
+    describe "for signed-in users" do
       
       before(:each) do
         @user = Factory(:user)
@@ -186,7 +194,7 @@ describe "Users" do
       
       describe "failure" do        
                 
-        it "should reject a user trying to edit another user's information" do          
+        it "should display an error to a user trying to edit another user's information" do          
           @another_user = User.new(:first_name            => "Another",
                                    :last_name             => "User",
                                    :email                 => "another_user@test.com",
@@ -199,7 +207,7 @@ describe "Users" do
           response.should have_selector('div.flash.notice', :content => I18n.t('flash.notice.other_user_page'))
         end
         
-        it "should reject if the user empties the first name and/or last_name" do
+        it "should display errors if the first name and/or last_name have been emptied" do
           visit edit_user_path(@user)
           fill_in :first_name, :with => ""
           fill_in :last_name,  :with => ""
@@ -222,7 +230,6 @@ describe "Users" do
         end        
       end
     end
-    
   end
   
   describe "admin features" do

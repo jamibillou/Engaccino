@@ -24,7 +24,7 @@ fr:
     status: "Statut"
     available_status: "Libre et motivé"
     looking_status: "En poste, en quête d'air frais"
-    open_status: "Changement envisageable, ouvert aux propositions"
+    open_status: "Changement envisageable, ouvert"
     listening_status: "Satisfait, en veille passive"
     happy_status: "Heureux au travail, reste fidèle"
     profile_photo: "Photo"
