@@ -50,6 +50,7 @@ class UsersController < ApplicationController
       redirect_to @user, :flash => { :success => t("flash.success.#{flash_message}") }
     else
       flash.now[:error] = flash_error_messages(@user)
+      @javascripts = ['users/edit']
       @title = completed_signup? ? t('users.edit.title') : t('users.edit.complete_your_profile')
       render :edit, :id => @user
     end

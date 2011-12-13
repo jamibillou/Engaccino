@@ -23,6 +23,16 @@ describe UsersController do
     
       before(:each) do
         test_sign_in(@user)
+        first_user = User.create!(:first_name              => "First",
+                                  :last_name               => "User",
+                                  :email                   => "firstuser@example.com",
+                                  :password                => "firstUser",
+                                  :password_confirmation   => "firstUser")
+        second_user = User.create!(:first_name             => "Second",
+                                   :last_name              => "User",
+                                   :email                  => "seconduser@example.com",
+                                   :password               => "secondUser",
+                                   :password_confirmation  => "secondUser")
       end
       
       describe "who haven't completed signup" do
@@ -57,17 +67,33 @@ describe UsersController do
         
         it "should have a card for each user" do 
           get :index
-          User.all do |user|
+          User.all.each do |user|
             response.should have_selector('div', :id => "user_#{user.id}")
           end  
         end
         
-        it "should have a destroy link for each user" do 
-          get :index
-          User.all do |user|
-            response.should have_selector('div', :id => "destroy_user_#{user.id}")
-          end  
+        describe "for admin users" do
+          
+          before(:each) do
+            @user.toggle!(:admin)
+          end
+          
+          it "should have a destroy link for each user" do 
+            get :index            
+            User.all.each do |user|
+              response.should have_selector('a', :id => "destroy_user_#{user.id}")
+            end
+          end            
         end
+        
+        describe "for non-admin users" do
+          it "shouldn't have a destroy link for each user" do 
+            get :index
+            User.all.each do |user|
+              response.should_not have_selector('a', :id => "destroy_user_#{user.id}")
+            end
+          end  
+        end                        
       end
     end
   end
