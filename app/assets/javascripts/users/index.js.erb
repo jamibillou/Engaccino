@@ -1,7 +1,11 @@
 $(document).ready(function()
 {
-  // REVEALS TRASH LINKS WHEN MOUSE OVER CARD BLOCKS
-  <% User.all.each do |user| %>
-    revealItem("destroy_user_<%= user.id %>","user_<%= user.id %>");
-  <% end %>
+  // REVEALS TRASH LINK WHEN MOUSE OVER CARD
+  $("#container div").each(function()
+  {
+	  if ($(this).attr("id") && $(this).attr("id").indexOf("user_") == 0)
+	  {
+	    revealItem("destroy_"+$(this).attr("id"), $(this).attr("id"));
+	  }
+  });
 })

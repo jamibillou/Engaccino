@@ -5,10 +5,10 @@
     <li class="round<% if "#{current_user.first_name} #{current_user.last_name}" == @title %> selected<% end %>">
       <%= link_to t(:menu_profile), user_path(current_user) %>
     </li>
-    <li class="round<% if t('user.edit.title') == @title %> selected<% end %>">
+    <li class="round<% if t('users.edit.title') == @title %> selected<% end %>">
       <%= link_to t(:menu_edit), edit_user_path(current_user) %>
     </li>
-    <li class="round<% if t('user.index.title') == @title %> selected<% end %>">
+    <li class="round<% if t('users.index.title') == @title %> selected<% end %>">
       <%= link_to t(:menu_users), users_path %>
     </li>
 </ul>

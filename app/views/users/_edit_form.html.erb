@@ -4,7 +4,7 @@
                                      :id => 'first_name', :class => 'field' %><br />
     <%= f.text_field :last_name,     :value => (@user.last_name && !@user.last_name.blank?) ? @user.last_name : t('users.last_name'),
                                      :id => 'last_name', :class => 'field' %><br />
-    <%= f.text_field :year_of_birth, :value => (@user.year_of_birth) ? @user.year_of_birth : t('users.year_of_birth'),
+    <%= f.text_field :year_of_birth, :value => (@user.year_of_birth && @user.year_of_birth != 0) ? @user.year_of_birth : t('users.year_of_birth'),
                                      :id => 'year_of_birth', :class => 'field' %><br />
     <%= f.text_field :country,       :value => (@user.country && !@user.country.blank?) ? @user.country : t('users.country'),
                                      :id => 'country', :class => 'field' %><br /><br />

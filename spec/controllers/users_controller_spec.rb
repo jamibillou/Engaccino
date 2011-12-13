@@ -50,6 +50,11 @@ describe UsersController do
           response.should have_selector('title', :content => I18n.t('users.index.title'))
         end
         
+        it "should have the right selected navigation tab" do
+          get :index
+          response.should have_selector('li', :class => 'round selected', :content => I18n.t(:menu_users))
+        end
+        
         it "should have a card for each user" do 
           get :index
           User.all do |user|
@@ -230,6 +235,11 @@ describe UsersController do
         it "should have the right title" do
           get :edit, :id => @user
           response.should have_selector('title', :content => I18n.t('users.edit.title'))
+        end
+        
+        it "should have the right selected navigation tab" do
+          get :edit, :id => @user
+          response.should have_selector('li', :class => 'round selected', :content => I18n.t(:menu_edit))
         end
               
         it "should have an edit form" do
