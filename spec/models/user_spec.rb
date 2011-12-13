@@ -109,10 +109,10 @@ describe User do
         empty_year_of_birth_user.should be_valid
       end
     
-      it "should reject birthdays of users born less than 12 years ago" do
+      it "should reject too young users" do
         too_recent_year_of_birth = 11.years.ago
-        too_recent_year_of_birth_user = User.new(@attr.merge(:year_of_birth => too_recent_year_of_birth))
-        too_recent_year_of_birth_user.should_not be_valid
+        too_young_user = User.new(@attr.merge(:year_of_birth => too_recent_year_of_birth))
+        too_young_user.should_not be_valid
       end
     end
     
@@ -290,6 +290,51 @@ describe User do
     end
   end
   
+  describe ":admin attribute" do
+        
+    it "should exist" do
+      @user.should respond_to(:admin)
+    end
+    
+    it "should not be an admin by default" do
+      @user.should_not be_admin
+    end
+    
+    it "should be convertible to admin" do
+      @user.toggle!(:admin)
+      @user.should be_admin
+    end
+  end
+  
+  describe ":profile_completion attribute" do
+  
+    it "should exist" do
+      @user.should respond_to(:profile_completion)
+    end
+    
+    it "should be 0 by default" do
+      @user.profile_completion.should == 0
+    end
+    
+    it "should reject negative values" do
+      attr = @attr.merge(:profile_completion => -1)
+      User.new(attr).should_not be_valid
+    end
+    
+    it "should reject values superior to 100" do
+      attr = @attr.merge(:profile_completion => 101)
+      User.new(attr).should_not be_valid
+    end
+    
+    it "should accept valid values" do
+      valid_profile_completions = [10, 23, 38, 45, 51, 69, 84, 92]
+      valid_profile_completions.each do |valid_profile_completion|
+        valid_profile_completion_user = User.new(@attr.merge(:profile_completion => valid_profile_completion))
+        valid_profile_completion_user.should be_valid
+      end
+    end
+  end
+  
   describe "password encryption" do
   
     it "should have an encrypted pasword attribute" do
@@ -338,33 +383,6 @@ describe User do
       end
     end
   end
-  
-  describe ":admin attribute" do
-        
-    it "should exist" do
-      @user.should respond_to(:admin)
-    end
-    
-    it "should not be an admin by default" do
-      @user.should_not be_admin
-    end
-    
-    it "should be convertible to admin" do
-      @user.toggle!(:admin)
-      @user.should be_admin
-    end
-  end
-  
-  describe ":profile_completion attribute" do
-  
-    it "should exist" do
-      @user.should respond_to(:profile_completion)
-    end
-    
-    it "should not be more than 0 by default" do
-      @user.profile_completion.should == 0
-    end
-  end
 end
 
 # == Schema Information
@@ -373,12 +391,11 @@ end
 #
 #  id                 :integer(4)      not null, primary key
 #  first_name         :string(255)
-#  middle_name        :string(255)
 #  last_name          :string(255)
 #  city               :string(255)
 #  country            :string(255)
 #  nationality        :string(255)
-#  birthdate          :date
+#  year_of_birth      :integer(4)
 #  phone              :string(255)
 #  email              :string(255)
 #  facebook_login     :string(255)
@@ -387,12 +404,11 @@ end
 #  facebook_connect   :boolean(1)      default(FALSE)
 #  linkedin_connect   :boolean(1)      default(FALSE)
 #  twitter_connect    :boolean(1)      default(FALSE)
+#  profile_completion :integer(4)      default(0)
 #  admin              :boolean(1)      default(FALSE)
+#  salt               :string(255)
 #  encrypted_password :string(255)
 #  created_at         :datetime
 #  updated_at         :datetime
-#  salt               :string(255)
-#  year_of_birth      :integer(4)
-#  profile_completion :integer(4)
 #
 
