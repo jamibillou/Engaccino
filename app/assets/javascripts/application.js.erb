@@ -17,7 +17,7 @@ $(document).ready(function()
 	})
 });
 
-// CUSTOMS ALL THE FIELDS OF THE GIVEN FORM
+// CUSTOMS ALL FIELDS OF THE GIVEN FORM
 function customForm(formId, translationPath)
 {
   $("#"+formId+" input").each(function()
@@ -26,6 +26,11 @@ function customForm(formId, translationPath)
   	  customInputField($(this).attr("id"), I18n.t(translationPath+$(this).attr("id")), formId, $(this).attr("type"));
   	  submitFormOnReturn($(this).attr("id"), formId, translationPath);
   	}
+  });
+  
+  $("#"+formId).submit(function()
+  {
+    emptyDefaultValuesForm(formId, translationPath);
   });
 }
 
