@@ -52,6 +52,7 @@ class UsersController < ApplicationController
       flash.now[:error] = flash_error_messages(@user)
       @javascripts = ['users/edit']
       @title = completed_signup? ? t('users.edit.title') : t('users.edit.complete_your_profile')
+      @javascripts = ['users/edit']
       render :edit, :id => @user
     end
   end 

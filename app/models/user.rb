@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   validates :facebook_login,             :format => { :with => email_regex },   :uniqueness => { :case_sensitive => false },     :allow_blank => true
   validates :linkedin_login,             :format => { :with => email_regex },   :uniqueness => { :case_sensitive => false },     :allow_blank => true
   validates :twitter_login,              :format => { :with => twitter_regex }, :uniqueness => { :case_sensitive => false },     :allow_blank => true
-  validates :profile_completion,         :inclusion => { :in => 0..100 }  
+  validates :profile_completion,         :inclusion => { :in => 0..100 }
                                                                   
   before_create :encrypt_password
   
@@ -66,12 +66,11 @@ end
 #
 #  id                 :integer(4)      not null, primary key
 #  first_name         :string(255)
-#  middle_name        :string(255)
 #  last_name          :string(255)
 #  city               :string(255)
 #  country            :string(255)
 #  nationality        :string(255)
-#  birthdate          :date
+#  year_of_birth      :integer(4)
 #  phone              :string(255)
 #  email              :string(255)
 #  facebook_login     :string(255)
@@ -80,12 +79,11 @@ end
 #  facebook_connect   :boolean(1)      default(FALSE)
 #  linkedin_connect   :boolean(1)      default(FALSE)
 #  twitter_connect    :boolean(1)      default(FALSE)
+#  profile_completion :integer(4)      default(0)
 #  admin              :boolean(1)      default(FALSE)
+#  salt               :string(255)
 #  encrypted_password :string(255)
 #  created_at         :datetime
 #  updated_at         :datetime
-#  salt               :string(255)
-#  year_of_birth      :integer(4)
-#  profile_completion :integer(4)      default(0)
 #
 

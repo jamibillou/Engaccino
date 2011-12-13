@@ -24,7 +24,6 @@ function customForm(formId, translationPath)
   {
   	if (!$(this).hasClass("hidden") && $(this).attr("type") != "hidden") {
   	  customInputField($(this).attr("id"), I18n.t(translationPath+$(this).attr("id")), formId, $(this).attr("type"));
-  	  submitFormOnReturn($(this).attr("id"), formId, translationPath);
   	}
   });
   
@@ -34,7 +33,7 @@ function customForm(formId, translationPath)
   });
 }
 
-// STYLES THE GIVEN FIELD AND ENABLES SUBMIT BY HITTING THE RETURN KEY
+// CUSTOMS THE GIVEN FIELD
 function customInputField(inputFieldId, inputFieldDefaultValue, formId, inputFieldType)
 {
 	if (inputFieldType == "password")
@@ -134,19 +133,6 @@ function styleInputPasswordField(inputFieldId, inputFieldDefaultValue)
 			$("#"+inputFieldId+"_placeholder").css("color", "#7c7777");
 		}		
 	});
-}
-
-// SUBMITS THE GIVEN FORM BY HITTING THE RETURN KEY
-function submitFormOnReturn(inputFieldId, formId, translationPath)
-{
-  $("#"+inputFieldId).keydown(function(e)
-  {
-    if (e.keyCode == 13)
-    {
-      emptyDefaultValuesForm(formId, translationPath);
-      $("#"+formId).submit();
-    }
-  });
 }
 
 // GIVEN A FORM, EMPTIES FIELDS THAT HAVE DEFAULT VALUES

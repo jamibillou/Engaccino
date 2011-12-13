@@ -11,16 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111210100017) do
+ActiveRecord::Schema.define(:version => 20111213210037) do
 
   create_table "users", :force => true do |t|
     t.string   "first_name"
-    t.string   "middle_name"
     t.string   "last_name"
     t.string   "city"
     t.string   "country"
     t.string   "nationality"
-    t.date     "birthdate"
+    t.integer  "year_of_birth"
     t.string   "phone"
     t.string   "email"
     t.string   "facebook_login"
@@ -29,13 +28,12 @@ ActiveRecord::Schema.define(:version => 20111210100017) do
     t.boolean  "facebook_connect",   :default => false
     t.boolean  "linkedin_connect",   :default => false
     t.boolean  "twitter_connect",    :default => false
+    t.integer  "profile_completion", :default => 0
     t.boolean  "admin",              :default => false
+    t.string   "salt"
     t.string   "encrypted_password"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "salt"
-    t.integer  "year_of_birth"
-    t.integer  "profile_completion", :default => 0
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
