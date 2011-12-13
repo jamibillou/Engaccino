@@ -5,4 +5,4 @@ require File.expand_path('../application', __FILE__)
 Engaccino::Application.initialize!
 
 # Load String extended features
-require 'string_extended'
+require 'assets/string_extended'
