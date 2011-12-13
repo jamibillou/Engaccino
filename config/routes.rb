@@ -2,10 +2,12 @@ require File.expand_path('../../lib/assets/routes_constraints', __FILE__)
 
 Engaccino::Application.routes.draw do
   
+  
   get "sessions/new"
   get "ajax/countries"
 
     resources :users
+    resources :candidates
     resources :sessions, :only => [:new, :create, :destroy]
     
     match '/users', :to => 'users#index'
