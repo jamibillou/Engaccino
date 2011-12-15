@@ -14,6 +14,23 @@ Factory.define :user do |user|
   user.password_confirmation "45Georges?"
 end
 
+Factory.define :candidate do |candidate|
+  candidate.first_name "John"
+  candidate.last_name "Doe" 
+  candidate.city "Rotterdam"         
+  candidate.country "Netherlands"     
+  candidate.nationality "Netherlands"
+  candidate.year_of_birth 1975
+  candidate.phone "+31 6 00000000"
+  candidate.email "j.doe@example.com"
+  candidate.facebook_login "j.doe@example.com"
+  candidate.linkedin_login "j.doe@example.com"
+  candidate.twitter_login "@john_d"
+  candidate.password "45Georges?"
+  candidate.password_confirmation "45Georges?"
+  candidate.status "available"  
+end
+
 Factory.sequence :email do |n|
   "user_#{n}@example.com"
 end

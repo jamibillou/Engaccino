@@ -66,5 +66,6 @@ end
 #  created_at         :datetime
 #  updated_at         :datetime
 #  status             :string(255)
+#  type               :string(255)
 #
 
