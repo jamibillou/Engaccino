@@ -1,0 +1,11 @@
+<div id="professional_experience" class="white_block">
+  <h2><%=t "candidates.professional_experience" %></h2>
+  <%= f.text_field :role,                 :value => (!params[:candidate].nil? && !params[:candidate][:role].nil? && !params[:candidate][:role].empty?) ? params[:candidate][:role] : t('candidates.role'),
+                                          :id => 'role', :class => 'field margin_right' %>
+  <%= f.text_field :company,              :value => (!params[:candidate].nil? && !params[:candidate][:company].nil? && !params[:candidate][:company].empty?) ? params[:candidate][:company] : t('candidates.company'),
+                                          :id => 'company', :class => 'field margin_right' %>
+  <%= f.text_field :experience_timeframe, :value => (!params[:candidate].nil? && !params[:candidate][:experience_timeframe].nil? && !params[:candidate][:experience_timeframe].empty?) ?
+                                                    params[:candidate][:experience_timeframe] : t('candidates.experience_timeframe'),
+                                          :id => 'experience_timeframe', :class => 'field margin_right' %>
+  <%= link_to '+', '#', :class => 'slightly_round blue button' %>
+</div>

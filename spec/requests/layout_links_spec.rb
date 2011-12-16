@@ -46,10 +46,10 @@ describe "LayoutLinks" do
   describe "for signed-in users" do
     
     before(:each) do
-      @user = Factory(:user)
+      @candidate = Factory(:candidate)
       visit signin_path
-      fill_in :email,    :with => @user.email
-      fill_in :password, :with => @user.password
+      fill_in :email,    :with => @candidate.email
+      fill_in :password, :with => @candidate.password
       click_button
     end
     
@@ -70,11 +70,11 @@ describe "LayoutLinks" do
     describe "who have completed signup" do
       
       it "should have the right links on the layout" do 
-        @user.update_attributes(:profile_completion => 10)
+        @candidate.update_attributes(:profile_completion => 10)
         visit root_path
         response.should have_selector('a', :href => '#', :content => I18n.t(:menu_dashboard))
-        response.should have_selector('a', :href => user_path(@user), :content => I18n.t(:menu_profile))
-        response.should have_selector('a', :href => edit_user_path(@user), :content => I18n.t(:menu_edit))
+        response.should have_selector('a', :href => candidate_path(@candidate), :content => I18n.t(:menu_profile))
+        response.should have_selector('a', :href => edit_candidate_path(@candidate), :content => I18n.t(:menu_edit))
         response.should have_selector('a', :href => signout_path, :content => I18n.t(:sign_out))
         response.should have_selector("a>img", :class => 'settings')
       end

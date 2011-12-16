@@ -13,7 +13,7 @@ en:
     nationality: "Nationality"
     year_of_birth: "Year of birth"
     phone: "Phone"
-    professional_experience: "Professional xperience"
+    professional_experience: "Professional experience"
     company: "Company"
     role: "Role"
     experience_timeframe: "Time frame"
@@ -37,7 +37,7 @@ en:
     contact: "Contact"
   
     index:
-      title: "List of all users"
+      title: "List of all candidates"
     show:
       title: "'s Profile"
     new:

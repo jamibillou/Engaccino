@@ -1,0 +1,40 @@
+<div id="candidate_<%= candidate.id %>" class="card_block left">
+  <div class="head">
+    <div class="identity">
+      <div class="photo left"><%=t 'candidates.profile_photo' %></div>
+      <div class="name_place">
+        <h2><a href="<%= candidate_path(candidate) %>"><%= candidate.first_name %><br /><%= candidate.last_name %></a></h2> 
+        <%= unless candidate.city.blank? then candidate.city else t('candidates.city') end %>, 
+        <%= unless candidate.country.blank? then display_country(candidate.country) else t('candidates.country') end %>        
+      </div>
+    </div>    	
+    <% if current_user.admin? %>
+    	<%= link_to trash, candidate, 	:method => :delete,
+	                             		:confirm => "#{t('candidates.destroy.title')} #{candidate.first_name} #{candidate.last_name}#{t('_?')}",
+	                             		:title => "#{t('candidates.destroy.title')} #{candidate.first_name} #{candidate.last_name}",
+	                             		:id => "destroy_candidate_#{candidate.id}",
+	                             		:class => 'hidden' %>
+    <% end %>
+    <div class="job">
+      <h2><%=t 'candidates.role' %></h2>
+      at <%=t 'candidates.company' %>
+      <div class="status">
+        <%= status_options[rand(status_options.size)] %>
+      </div>
+    </div>    	
+  </div>
+  <div class="experience">
+    <h2><%= t('candidates.experience').remove_accents.upcase %></h2>
+    <h3><%=t 'candidates.years' %></h3>
+  </div>
+  <div class="degree">
+    <h2><%= t('candidates.degree').remove_accents.upcase %></h2>
+    <%=t 'candidates.degree_name' %>
+  </div>
+  <div class="pro_skills">
+    <h2><%= t('candidates.professional_skills').remove_accents.upcase %></h2>
+    <p><%=t 'candidates.skill' %> 1</p>
+    <p><%=t 'candidates.skill' %> 2</p>
+    <p><%=t 'candidates.skill' %> 3</p>
+  </div>
+</div>

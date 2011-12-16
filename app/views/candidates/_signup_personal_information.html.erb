@@ -1,0 +1,11 @@
+<div id="personal_information" class="white_block">
+  <h2><%=t "candidates.personal_information" %></h2>
+  <%= f.text_field :first_name,        :value => (!params[:candidate].nil? && !params[:candidate][:first_name].nil? && !params[:candidate][:first_name].empty?) ? params[:candidate][:first_name] : t('candidates.first_name'),
+                                       :id => 'first_name', :class => 'field' %><br />
+  <%= f.text_field :last_name,         :value => (!params[:candidate].nil? && !params[:candidate][:last_name].nil? && !params[:candidate][:last_name].empty?) ? params[:candidate][:last_name] : t('candidates.last_name'),
+                                       :id => 'last_name', :class => 'field' %><br />
+  <%= f.text_field :year_of_birth,     :value => (!params[:candidate].nil? && !params[:candidate][:year_of_birth].nil? && !params[:candidate][:year_of_birth].empty?) ? params[:candidate][:year_of_birth] : t('candidates.year_of_birth'),
+                                       :id => 'year_of_birth', :class => 'field' %><br />
+  <%= f.text_field :country,           :value => (!params[:candidate].nil? && !params[:candidate][:country].nil? && !params[:candidate][:country].empty?) ? params[:candidate][:country] :  t('candidates.country'),
+                                       :id => 'country', :class => 'field' %>
+</div>

@@ -37,7 +37,7 @@ fr:
     contact: "Contacter"
     
     index:
-      title: "Liste des utilisateurs"
+      title: "Liste des candidats"
     show:
       title: "Profil de "
     new:

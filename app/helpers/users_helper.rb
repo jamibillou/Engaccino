@@ -1,7 +1,7 @@
 module UsersHelper
   
   def status_options
-    [ t('users.available_status'), t('users.looking_status'), t('users.open_status'), t('users.listening_status'), t('users.happy_status') ]
+    [ t('candidates.available_status'), t('candidates.looking_status'), t('candidates.open_status'), t('candidates.listening_status'), t('candidates.happy_status') ]
   end
   
   def display_country(country)

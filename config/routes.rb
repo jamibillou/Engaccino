@@ -10,14 +10,14 @@ Engaccino::Application.routes.draw do
     resources :candidates
     resources :sessions, :only => [:new, :create, :destroy]
     
-    match '/users', :to => 'users#index'
-    match '/signup', :to => 'users#new'
+    match '/candidates', :to => 'candidates#index'
+    match '/signup', :to => 'candidates#new'
     
     match '/signin', :to => 'sessions#new'
     match '/signout', :to => 'sessions#destroy'
   
     root :to => 'pages#overview', :constraints => SingedIn.new(false)
-    root :to => 'users#index',     :constraints => SingedIn.new(true)
+    root :to => 'candidates#index',     :constraints => SingedIn.new(true)
     match '/tour', :to => 'pages#tour'
     match '/pricing', :to => 'pages#pricing'
     match '/about', :to => 'pages#about'
