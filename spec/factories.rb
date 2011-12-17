@@ -41,6 +41,16 @@ Factory.define :experience do |experience|
   experience.association :candidate
 end
 
+Factory.define :company do |company|
+  company.name 'FFF'
+  company.address 'John Macey lane'
+  company.city 'London'
+  company.country 'United-Kingdom'
+  company.phone '+44 7 987654321'
+  company.email 'contact@fff.co.uk'
+  company.url 'http://www.fff.co.uk'
+end
+
 Factory.sequence :email do |n|
   "user_#{n}@example.com"
 end
