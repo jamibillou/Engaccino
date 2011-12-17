@@ -20,26 +20,26 @@ class CandidatesController < ApplicationController
   def new
     @candidate = Candidate.new
     @title = t 'candidates.new.title'
-    @javascripts = ['users/new']
+    @javascripts = ['candidates/new']
   end
   
   def create
     @candidate = Candidate.new(params[:candidate])
     unless @candidate.save
       flash.now[:error] = flash_error_messages(@candidate, [:email, :password])
-      @javascripts = ['users/new']
+      @javascripts = ['candidates/new']
       render :new
     else
       @title = t 'candidates.edit.complete_your_profile'
       sign_in @candidate
-      @javascripts = ['users/edit']
+      @javascripts = ['candidates/edit']
       render :edit, :id => @candidate
     end
   end
   
   def edit
     @title = completed_signup? ? t('candidates.edit.title') : t('candidates.edit.complete_your_profile')
-    @javascripts = ['users/edit']
+    @javascripts = ['candidates/edit']
   end
   
   def update
@@ -50,9 +50,9 @@ class CandidatesController < ApplicationController
       redirect_to @candidate, :flash => { :success => t("flash.success.#{flash_message}") }
     else
       flash.now[:error] = flash_error_messages(@candidate)
-      @javascripts = ['users/edit']
+      @javascripts = ['candidates/edit']
       @title = completed_signup? ? t('candidates.edit.title') : t('candidates.edit.complete_your_profile')
-      @javascripts = ['users/edit']
+      @javascripts = ['candidates/edit']
       render :edit, :id => @candidate
     end
   end

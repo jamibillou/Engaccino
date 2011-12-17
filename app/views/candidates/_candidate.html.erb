@@ -19,7 +19,7 @@
       <h2><%=t 'candidates.role' %></h2>
       at <%=t 'candidates.company' %>
       <div class="status">
-        <%= status_options[rand(status_options.size)] %>
+        <%=t "candidates.#{candidate.status}_status" %>
       </div>
     </div>    	
   </div>

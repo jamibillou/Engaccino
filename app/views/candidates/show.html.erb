@@ -12,7 +12,7 @@
       <h2><%=t 'candidates.role' %></h2>
       at <%=t 'candidates.company' %>
       <div class="status">
-        <%= @candidate.status %>
+        <%=t "candidates.#{@candidate.status}_status" %>
       </div>
     </div>
   </div>
