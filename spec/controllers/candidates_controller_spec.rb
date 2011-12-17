@@ -64,7 +64,7 @@ describe CandidatesController do
         
         it "should have the right selected navigation tab" do
           get :index
-          response.should have_selector('li', :class => 'round selected', :content => I18n.t(:menu_users))
+          response.should have_selector('li', :class => 'round selected', :content => I18n.t(:menu_candidates))
         end
         
         it "should have a card for each candidate" do 

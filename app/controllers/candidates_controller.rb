@@ -59,7 +59,7 @@ class CandidatesController < ApplicationController
 
   def destroy
    Candidate.find(params[:id]).destroy
-   redirect_to candidates_path, :flash => { :success => t('flash.success.user_destroyed') }
+   redirect_to candidates_path, :flash => { :success => t('flash.success.candidate_destroyed') }
   end
 
   private

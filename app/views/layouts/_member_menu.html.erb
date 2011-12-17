@@ -8,7 +8,10 @@
     <li class="round<% if t('candidates.edit.title') == @title %> selected<% end %>">
       <%= link_to t(:menu_edit), edit_candidate_path(current_user) %>
     </li>
-    <li class="round<% if t('candidates.index.title') == @title %> selected<% end %>">
+    <li class="round<% if t('users.index.title') == @title %> selected<% end %>">
       <%= link_to t(:menu_users), users_path %>
+    </li>
+    <li class="round<% if t('candidates.index.title') == @title %> selected<% end %>">
+      <%= link_to t(:menu_candidates), candidates_path %>
     </li>
 </ul>

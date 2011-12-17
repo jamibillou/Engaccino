@@ -11,6 +11,7 @@ fr:
   menu_profile: "Profil"
   menu_edit: "Editer"
   menu_users: "Utilisateurs"
+  menu_candidates: "Candidats"
   
   search_bar: "Accès rapide"
   search_bar_title: "Rechercher un contact, une entreprise, offre d'emploi, etc."
@@ -32,7 +33,7 @@ fr:
     success:
       welcome: "Bienvenue sur Engaccino !"
       profile_updated: "Vos informations ont été mis à jour."
-      user_destroyed: "L'utilisateur a été supprimé."
+      candidate_destroyed: "L'utilisateur a été supprimé."
     error: 
       base: "Erreur"
       general: "Oups, un erreur est survenue."

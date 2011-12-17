@@ -30,8 +30,8 @@ describe "Users" do
         fill_in :password,              :with => "password"
         fill_in :password_confirmation, :with => "password"
         click_button
-        fill_in :candidate_first_name,            :with => ""
-        fill_in :candidate_last_name,             :with => ""
+        fill_in :first_name,            :with => ""
+        fill_in :last_name,             :with => ""
         click_button
         response.should have_selector('div.flash.error', :content => I18n.t('flash.error.base'))
       end
@@ -83,8 +83,8 @@ describe "Users" do
         fill_in :password,              :with => "password"
         fill_in :password_confirmation, :with => "password"
         click_button
-        fill_in :candidate_first_name,  :with => "Jack"
-        fill_in :candidate_last_name,   :with => "Bauer"
+        fill_in :first_name,            :with => "Jack"
+        fill_in :last_name,             :with => "Bauer"
         fill_in :year_of_birth,         :with => "1962"
         fill_in :country,               :with => "United States"
         click_button

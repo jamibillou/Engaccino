@@ -11,6 +11,7 @@ en:
   menu_profile: "Profile"
   menu_edit: "Edit"
   menu_users: "Users"
+  menu_candidates: "Candidates"
   
   search_bar: "Search Engaccino"
   search_bar_title: "Jump to any contact, company, job, etc."
@@ -32,7 +33,7 @@ en:
     success:
       welcome: "Welcome to Engaccino!"
       profile_updated: "Your info has been updated."
-      user_destroyed: "The candidate has been deleted."
+      candidate_destroyed: "The candidate has been deleted."
     error: 
       base: "Error"
       general: "Something went wrong, sorry about that."
