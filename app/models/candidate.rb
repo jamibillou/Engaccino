@@ -2,9 +2,11 @@ class Candidate < User
   
   attr_accessible :status
   
-  status_array = ['available', 'looking', 'open', 'listening', 'happy']
+  has_many :experiences, :dependent => :destroy
   
-  validates :status, :inclusion => {:in => status_array}, :presence => true
+  status_array = [ 'available', 'looking', 'open', 'listening', 'happy' ]
+  
+  validates :status, :inclusion => { :in => status_array }, :presence => true
   
 end
 

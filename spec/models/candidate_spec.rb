@@ -18,7 +18,9 @@ describe Candidate do
       :password => "pouetpouet38",
       :password_confirmation => "pouetpouet38",
       :status => 'available'
-    }    
+    }
+    @candidate = Factory(:candidate) 
+    @experience = Factory(:experience, :candidate => @candidate)  
   end
     
   it "should create a new instance given valid attributes" do
@@ -26,7 +28,7 @@ describe Candidate do
     candidate.should be_valid
   end
   
-  describe "mandatory attribues" do
+  describe "validations" do
        
     it "should reject candidates with a blank status" do
       candidate = Candidate.new(@attr.merge(:status => ""))
@@ -39,6 +41,17 @@ describe Candidate do
     end
   end
   
+  describe "experiences associations" do
+  
+    it "should have an experiences attribute" do
+      @candidate.should respond_to(:experiences)
+    end
+    
+    it "should destroy associated experiences" do
+      @candidate.destroy
+      Experience.find_by_id(@experience.id).should be_nil
+    end
+  end  
 end
 # == Schema Information
 #

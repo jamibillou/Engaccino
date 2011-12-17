@@ -31,6 +31,16 @@ Factory.define :candidate do |candidate|
   candidate.status "available"  
 end
 
+Factory.define :experience do |experience|
+  experience.role 'Sales manager'
+  experience.start_month 6
+  experience.start_year 1999
+  experience.end_month 12
+  experience.end_year 2004
+  experience.description 'Business development, managing the sales team to reach targets, etc.'
+  experience.association :candidate
+end
+
 Factory.sequence :email do |n|
   "user_#{n}@example.com"
 end
