@@ -139,7 +139,6 @@ footer {
 }
 
 /* BUTTONS */
-
 input[type=submit] {
   padding: 9px 30px;
   margin: 0;
@@ -220,6 +219,7 @@ a.button.grey_gradient:hover {
   margin-right: 25px;
   margin-bottom: 25px;
   padding: 15px 20px 22px 20px;
+  font-size: 14px;
 }
 .white_block h2 {
   margin-top: 10px;
@@ -227,11 +227,6 @@ a.button.grey_gradient:hover {
 }
 .white_block p {
   font-size: 12px;
-}
-
-.white_block a
-{
-  color: #0b7fd2;
 }
 
 /* FIELDS */

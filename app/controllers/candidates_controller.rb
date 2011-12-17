@@ -1,10 +1,10 @@
 class CandidatesController < ApplicationController
 
-  before_filter :authenticate, :except => [:new, :create]
-  before_filter :correct_user, :only => [:edit, :update]
-  before_filter :completed_signup, :only => [:index, :show]
-  before_filter :admin_user, :only => [:destroy]
-  before_filter :new_user, :only => [:new, :create]
+  before_filter :authenticate,     :except => [:new, :create]
+  before_filter :correct_user,     :only   => [:edit, :update]
+  before_filter :completed_signup, :only   => [:index, :show]
+  before_filter :admin_user,       :only   => [:destroy]
+  before_filter :new_user,         :only   => [:new, :create]
   
   def index
     @candidates = Candidate.all
@@ -59,7 +59,7 @@ class CandidatesController < ApplicationController
 
   def destroy
    Candidate.find(params[:id]).destroy
-   redirect_to candidates_path, :flash => { :success => t('flash.success.candidate_destroyed') }
+   redirect_to candidates_path, :flash => { :success => t('flash.success.user_destroyed') }
   end
 
   private

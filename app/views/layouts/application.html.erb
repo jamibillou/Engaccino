@@ -3,9 +3,10 @@
 
   <head>
     <title><%= title %></title>
-    <%= stylesheet_link_tag    "application" %>
-    <%= stylesheet_link_tag    "user" %>
-    <%= javascript_include_tag "application" %>
+    <%= stylesheet_link_tag 'application' %>
+    <%= stylesheet_link_tag 'users' %>
+    <%= stylesheet_link_tag 'candidates' %>
+    <%= javascript_include_tag 'application' %>
     <% unless @javascripts.nil? %>
       <% @javascripts.each do |javascript| %>
     	  <%= javascript_include_tag javascript %>

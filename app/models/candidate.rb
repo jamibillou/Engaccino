@@ -7,6 +7,7 @@ class Candidate < User
   validates :status, :inclusion => {:in => status_array}, :presence => true
   
 end
+
 # == Schema Information
 #
 # Table name: users

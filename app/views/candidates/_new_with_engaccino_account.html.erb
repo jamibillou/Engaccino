@@ -7,8 +7,12 @@
     <%= f.text_field :email, :value => (params[:candidate]) && !params[:candidate][:email].empty? ? params[:candidate][:email] : t('candidates.email'),
                              :id => 'email',
                              :class => 'field' %><br />
-    <%= f.password_field :password, :value => t('candidates.password'), :id => 'password', :class => 'field' %><br />
-    <%= f.password_field :password_confirmation, :value => t('candidates.password_confirmation'), :id => 'password_confirmation', :class => 'field' %><br /><br />
+    <%= f.password_field :password, :value => t('candidates.password'),
+                                    :id => 'password',
+                                    :class => 'field' %><br />
+    <%= f.password_field :password_confirmation, :value => t('candidates.password_confirmation'),
+                                                 :id => 'password_confirmation',
+                                                 :class => 'field' %><br /><br />
     <%= f.submit t('candidates.new.set_up_profile') %>
   <% end %>
 </div>

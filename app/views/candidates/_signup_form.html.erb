@@ -1,10 +1,10 @@
 <div id="signup">
   <%= render 'signup_speed_up' %>
   <%= form_for @candidate, :html => { :id => 'candidate_signup_form' } do |f| %>
-    <%= render :partial => 'signup_personal_information', :locals => { :f => f }  %>
+    <%= render :partial => 'signup_personal_information',    :locals => { :f => f } %>
     <%= render :partial => 'signup_professional_experience', :locals => { :f => f } %>
-    <%= render :partial => 'signup_education', :locals => { :f => f } %>
-    <%= render :partial => 'signup_status', :locals => { :f => f } %>
+    <%= render :partial => 'signup_education',               :locals => { :f => f } %>
+    <%= render :partial => 'signup_status',                  :locals => { :f => f } %>
     <%= f.submit t('candidates.edit.view_profile'), :class => 'center' %>
   <% end %>
 </div>

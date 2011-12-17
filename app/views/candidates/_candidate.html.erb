@@ -9,11 +9,11 @@
       </div>
     </div>    	
     <% if current_user.admin? %>
-    	<%= link_to trash, candidate, 	:method => :delete,
-	                             		:confirm => "#{t('candidates.destroy.title')} #{candidate.first_name} #{candidate.last_name}#{t('_?')}",
-	                             		:title => "#{t('candidates.destroy.title')} #{candidate.first_name} #{candidate.last_name}",
-	                             		:id => "destroy_candidate_#{candidate.id}",
-	                             		:class => 'hidden' %>
+    	<%= link_to trash, candidate, :method => :delete,
+	                             		  :confirm => "#{t('candidates.destroy.title')} #{candidate.first_name} #{candidate.last_name}#{t('_?')}",
+	                             		  :title => "#{t('candidates.destroy.title')} #{candidate.first_name} #{candidate.last_name}",
+	                             		  :id => "destroy_candidate_#{candidate.id}",
+	                             		  :class => 'hidden' %>
     <% end %>
     <div class="job">
       <h2><%=t 'candidates.role' %></h2>
@@ -37,4 +37,16 @@
     <p><%=t 'candidates.skill' %> 2</p>
     <p><%=t 'candidates.skill' %> 3</p>
   </div>
+  <% if params[:action] == 'show' %>
+    <div class="contact">
+      <h2><%= "#{t('candidates.contact')} #{candidate.first_name}" %></h2>
+      <p><%= candidate.email %></p>
+      <p><%= candidate.phone %></p>
+      <div class="buttons">
+        <a class="small slightly_round grey button left margin_right" href="#">Fb</a>
+        <a class="small slightly_round grey button left margin_right" href="#">Li</a>
+        <a class="small slightly_round grey button left" href="#">Tw</a>
+      </div>
+    </div>
+  <% end %>
 </div>
