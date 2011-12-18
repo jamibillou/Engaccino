@@ -31,6 +31,16 @@ Factory.define :candidate do |candidate|
   candidate.status "available"  
 end
 
+Factory.define :company do |company|
+  company.name 'FFF'
+  company.address 'John Macey lane'
+  company.city 'London'
+  company.country 'United Kingdom'
+  company.phone '+44 7 987654321'
+  company.email 'contact@fff.co.uk'
+  company.url 'http://www.fff.co.uk'
+end
+
 Factory.define :experience do |experience|
   experience.role 'Sales manager'
   experience.start_month 6
@@ -39,16 +49,7 @@ Factory.define :experience do |experience|
   experience.end_year 2004
   experience.description 'Business development, managing the sales team to reach targets, etc.'
   experience.association :candidate
-end
-
-Factory.define :company do |company|
-  company.name 'FFF'
-  company.address 'John Macey lane'
-  company.city 'London'
-  company.country 'United-Kingdom'
-  company.phone '+44 7 987654321'
-  company.email 'contact@fff.co.uk'
-  company.url 'http://www.fff.co.uk'
+  experience.association :company
 end
 
 Factory.sequence :email do |n|

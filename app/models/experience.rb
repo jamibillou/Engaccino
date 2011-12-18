@@ -3,8 +3,10 @@ class Experience < ActiveRecord::Base
   attr_accessible :role, :start_month, :start_year, :end_month, :end_year, :description
   
   belongs_to :candidate
+  belongs_to :company
   
   validates :candidate_id,                                              :presence => true
+  validates :company_id,                                                :presence => true
   validates :role,        :length => { :within => 3..80 },              :presence => true
   validates :start_year,  :inclusion => { :in => 1900..Time.now.year }, :presence => true
   validates :end_year,    :inclusion => { :in => 1900..Time.now.year }, :presence => true

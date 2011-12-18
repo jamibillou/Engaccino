@@ -97,8 +97,19 @@ describe User do
       end
       
       it "should reject invalid countries" do
-        invalid_country_user = User.new(@attr.merge(:country => "SAVOIE"))
-        invalid_country_user.should_not be_valid
+        invalid_countries = [ 'SAVOIE', 'Rotterdam', '6552$%##', '__pouet_' ]
+        invalid_countries.each do |invalid_country|
+          invalid_country_user = User.new(@attr.merge(:country => invalid_country))
+          invalid_country_user.should_not be_valid
+        end
+      end
+      
+      it "should accept valid countries" do
+        valid_countries = Country.all.collect { |c| c[0] }
+        valid_countries.each do |valid_country|
+          valid_country_user = User.new(@attr.merge(:country => valid_country))
+          valid_country_user.should be_valid
+        end
       end
     end
     
@@ -145,7 +156,7 @@ describe User do
       end
       
       it "should reject invalid phone numbers" do
-        invalid_numbers = ['06 78 45 91 22', '0033 5 84 92 01 11', '+44 567', '41 (0) 456546456', '+1 98765432187898798798765434423534']
+        invalid_numbers = ['06 78 45 91 22', '0033 5 84 92 01 11', '+44 57', '41 (0) 456546456', '+1 98765432187898798798765434423534']
         invalid_numbers.each do |invalid_number|
           invalid_number_user = User.new(@attr.merge(:phone => invalid_number))
           invalid_number_user.should_not be_valid
