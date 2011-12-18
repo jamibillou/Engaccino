@@ -40,6 +40,7 @@ fr:
       could_not_save: "Nous n'avons pu enregistrer cet"
       correct_before_resubmit: "Merci de corriger avant de réessayer."
       signin: "Email/password invalides."
+      candidate_date: "La date de début doit être inférieure à la date de fin."
     notice:
       please_signin: "Merci de vous identifier pour accéder à cette page."
       other_user_page: "Vous ne pouvez pas accéder à cette page pour un autre utilisateur."

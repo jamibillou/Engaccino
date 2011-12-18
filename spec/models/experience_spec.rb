@@ -129,11 +129,17 @@ describe Experience do
       it "should accept valid end years" do
         valid_end_years = [ 1995, 2010, 1980, 2000 ]
         valid_end_years.each do |valid_end_year|
-          experience = Experience.new(@attr.merge(:end_year => valid_end_year))
+          experience = Experience.new(@attr.merge(:start_year => valid_end_year-1, :end_year => valid_end_year))
           experience.candidate = @candidate
           experience.company = @company
           experience.should be_valid
         end
+      end
+      
+      it "should reject start years greater than end years" do
+        greater_start_year_experience = Experience.new(@attr.merge(:start_year => 2009, :start_month => 5, 
+                                                                   :end_year => 2009, :end_month => 3))
+        greater_start_year_experience.should_not be_valid
       end
     end
     

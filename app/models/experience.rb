@@ -13,6 +13,13 @@ class Experience < ActiveRecord::Base
   validates :start_month, :inclusion => { :in => 1..12 },               :allow_blank => true
   validates :end_month,   :inclusion => { :in => 1..12 },               :allow_blank => true
   validates :description, :length => { :within => 20..160 },            :allow_blank => true
+  
+  validate :compare_dates
+  
+  def compare_dates
+    self.errors.add(:base, I18n.t('flash.error.candidate_date')) if (start_year.to_i > end_year.to_i || 
+                                                                     !start_month.nil? && !end_month.nil? && start_year.to_i == end_year.to_i && start_month.to_i > end_month.to_i)
+  end
 end
 
 # == Schema Information

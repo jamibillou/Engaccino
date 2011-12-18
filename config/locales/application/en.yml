@@ -40,6 +40,7 @@ en:
       could_not_save: "We couldn't save this"
       correct_before_resubmit: "Please correct this before submitting again."
       signin: "Email/password mismatch."
+      candidate_date: "The start date must be less than the end date."
     notice:
       please_signin: "Please sign in to access this page."
       other_user_page: "You can't access this page for another user."
