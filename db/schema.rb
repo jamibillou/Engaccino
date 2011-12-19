@@ -56,6 +56,8 @@ ActiveRecord::Schema.define(:version => 20111217171831) do
     t.string   "facebook_login"
     t.string   "linkedin_login"
     t.string   "twitter_login"
+    t.string   "status"
+    t.string   "type"
     t.boolean  "facebook_connect",   :default => false
     t.boolean  "linkedin_connect",   :default => false
     t.boolean  "twitter_connect",    :default => false
@@ -65,8 +67,6 @@ ActiveRecord::Schema.define(:version => 20111217171831) do
     t.string   "encrypted_password"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status"
-    t.string   "type"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

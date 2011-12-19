@@ -4,6 +4,8 @@ class Candidate < User
   
   has_many :experiences, :dependent => :destroy
   
+  accept_nested_attributes_for :experiences, :companies
+  
   status_array = [ 'available', 'looking', 'open', 'listening', 'happy' ]
   
   validates :status, :inclusion => { :in => status_array }, :presence => true
