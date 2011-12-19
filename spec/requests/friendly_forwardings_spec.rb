@@ -3,37 +3,37 @@ require 'spec_helper'
 describe "FriendlyForwardings" do
 
   before(:each) do
-    @user = Factory(:user)
+    @candidate = Factory(:candidate)
   end
   
   describe "should forward to the requested page after signin" do
     
     before(:each) do
-      @user.update_attributes(:profile_completion => 10)
+      @candidate.update_attributes(:profile_completion => 10)
     end
     
     it "profile" do
-      visit user_path(@user)
-      fill_in :email,    :with => @user.email
-      fill_in :password, :with => @user.password
+      visit candidate_path(@candidate)
+      fill_in :email,    :with => @candidate.email
+      fill_in :password, :with => @candidate.password
       click_button
-      response.should render_template('users/show')
+      response.should render_template('candidates/show')
     end
     
     it "edit" do
-      visit edit_user_path(@user)
-      fill_in :email,    :with => @user.email
-      fill_in :password, :with => @user.password
+      visit edit_candidate_path(@candidate)
+      fill_in :email,    :with => @candidate.email
+      fill_in :password, :with => @candidate.password
       click_button
-      response.should render_template('users/edit')
+      response.should render_template('candidates/edit')
     end
     
     it "users" do
-      visit users_path
-      fill_in :email,    :with => @user.email
-      fill_in :password, :with => @user.password
+      visit candidates_path
+      fill_in :email,    :with => @candidate.email
+      fill_in :password, :with => @candidate.password
       click_button
-      response.should render_template('users/index')
+      response.should render_template('candidates/index')
     end
   end
 end

@@ -12,6 +12,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string :facebook_login
       t.string :linkedin_login
       t.string :twitter_login
+      t.string :status
+      t.string :type
       t.boolean :facebook_connect, :default => false
       t.boolean :linkedin_connect, :default => false
       t.boolean :twitter_connect, :default => false
