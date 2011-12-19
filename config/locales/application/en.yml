@@ -49,4 +49,8 @@ en:
       already_registered: "Not your account? Log out and create your own!"
     
   # Actions
-  delete: "suppr."      
+  delete: "del."
+  
+  # Common words
+  from: "from"
+  to: "to"

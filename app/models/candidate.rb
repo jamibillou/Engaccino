@@ -4,7 +4,7 @@ class Candidate < User
   
   has_many :experiences, :dependent => :destroy
   
-  accept_nested_attributes_for :experiences, :companies
+  accepts_nested_attributes_for :experiences, :reject_if => lambda { |attr| attr[:content].blank? }, :allow_destroy => true
   
   status_array = [ 'available', 'looking', 'open', 'listening', 'happy' ]
   

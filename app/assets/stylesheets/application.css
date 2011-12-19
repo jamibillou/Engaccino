@@ -7,6 +7,7 @@ html {
 
 h1 { font-size: 25px; margin: 0; padding: 0; }
 h2 { font-size: 20px; font-weight: normal; }
+h2.no_margin_bottom { margin-bottom: 0; }
 p { margin: 0; padding: 0; }
 
 body {
@@ -232,13 +233,31 @@ a.button.grey_gradient:hover {
 /* FIELDS */
 .field {
   height: 35px;
-  width: 300px;
+  width: 250px;
   margin-top: 4px;
   margin-bottom: 4px;
   color: #444;
   font-style: normal;
 }
+.field.margin_left {
+  margin-left: 10px;
+}
 .field.margin_right {
+  margin-right: 10px;
+}
+
+.small_field {
+  height: 35px;
+  width: 75px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  color: #444;
+  font-style: normal;
+}
+.small_field.margin_left {
+  margin-left: 10px;
+}
+.small_field.margin_right {
   margin-right: 10px;
 }
 

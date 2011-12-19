@@ -4,6 +4,8 @@ class Company < ActiveRecord::Base
   
   has_many :experiences
   
+  accepts_nested_attributes_for :experiences, :reject_if => lambda { |attr| attr[:content].blank? }, :allow_destroy => true
+  
   countries_array = Country.all.collect { |c| c[0] }
   email_regex     = /^[\w+\d\-.]+@[a-z\d\-.]+\.[a-z]{2,3}(\.[a-z]{2,3})?$/i
   phone_regex     = /^\+(?:[0-9] ?){6,14}[0-9]$/

@@ -3,6 +3,18 @@ require File.expand_path('../../lib/assets/routes_constraints', __FILE__)
 Engaccino::Application.routes.draw do
   
   
+  get "companies/create"
+
+  get "companies/update"
+
+  get "companies/destroy"
+
+  get "experiences/create"
+
+  get "experiences/update"
+
+  get "experiences/destroy"
+
   get "sessions/new"
   get "ajax/countries"
 

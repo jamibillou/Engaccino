@@ -4,7 +4,7 @@ class Experience < ActiveRecord::Base
   
   belongs_to :candidate
   belongs_to :company
-  
+    
   validates :candidate_id,                                              :presence => true
   validates :company_id,                                                :presence => true
   validates :role,        :length => { :within => 3..80 },              :presence => true
