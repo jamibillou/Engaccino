@@ -4,21 +4,23 @@ class Experience < ActiveRecord::Base
   
   belongs_to :candidate
   belongs_to :company
-    
+  
+  accepts_nested_attributes_for :company, :reject_if => lambda { |attr| attr[:content].blank? }, :allow_destroy => true
+        
   validates :candidate_id,                                              :presence => true
   validates :company_id,                                                :presence => true
-  validates :role,        :length => { :within => 3..80 },              :presence => true
+  validates :role,        :length    => { :within => 3..80 },           :presence => true
   validates :start_year,  :inclusion => { :in => 1900..Time.now.year }, :presence => true
   validates :end_year,    :inclusion => { :in => 1900..Time.now.year }, :presence => true
   validates :start_month, :inclusion => { :in => 1..12 },               :allow_blank => true
   validates :end_month,   :inclusion => { :in => 1..12 },               :allow_blank => true
-  validates :description, :length => { :within => 20..160 },            :allow_blank => true
+  validates :description, :length    => { :within => 20..160 },         :allow_blank => true
   
   validate :compare_dates
   
   def compare_dates
     self.errors.add(:base, I18n.t('flash.error.candidate_date')) if (start_year.to_i > end_year.to_i || 
-                                                                     !start_month.nil? && !end_month.nil? && start_year.to_i == end_year.to_i && start_month.to_i > end_month.to_i)
+                                                                     start_month && end_month && start_year.to_i == end_year.to_i && start_month.to_i > end_month.to_i)
   end
 end
 

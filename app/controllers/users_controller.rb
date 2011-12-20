@@ -6,8 +6,7 @@ class UsersController < ApplicationController
   
   def index
     @users = User.all
-    @title = t 'users.index.title'
-    @javascripts = ['users/index']
+    set_title_javascripts(t('users.index.title'), ['users/index'])
   end
 
   def destroy

@@ -1,8 +1,8 @@
 <span class="fields">
   <br />
-  <%= f.text_field :role,        :value => t('candidates.role'), :id => 'role', :class => 'field margin_right' %>
-  <%= fields_for :companies do |builder| %>
-    <%= render 'company_fields', :f => builder %>
+  <%= f.text_field :role, :value => t('candidates.role'), :id => 'role', :class => 'field margin_right' %>
+  <%= fields_for :company do |company_builder| %>
+    <%= render 'company_fields', :f => company_builder %>
   <% end %>
   <%= t('from') %>
   <%= f.text_field :start_month, :value => t('candidates.start_month'), :id => 'start_month', :class => 'small_field margin_left margin_right' %>  
