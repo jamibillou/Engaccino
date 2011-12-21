@@ -24,7 +24,7 @@ class CandidatesController < ApplicationController
   def create
     @candidate = Candidate.new(params[:candidate])
     unless @candidate.save
-      render_page(:new, t('candidates.new.title'), ['candidates/new'], :flash => { :message => error_messages(@candidate, [:email, :password]), :type => :error })
+      render_page(:new, t('candidates.new.title'), ['candidates/new'], :flash => { :message => error_messages(@candidate, :only => [:email, :password]), :type => :error })
     else
       sign_in @candidate
       render_page(:edit, t('candidates.edit.complete_your_profile'), ['candidates/edit'], :id => @candidate)
@@ -37,14 +37,12 @@ class CandidatesController < ApplicationController
   end
 
   def update
+    page = if completed_signup? then { :title => 'edit.title', :message => 'profile_updated' } else { :title => 'edit.complete_your_profile', :message => 'welcome' } end
     unless @candidate.update_attributes(params[:candidate])
-      title = completed_signup? ? t('candidates.edit.title') : t('candidates.edit.complete_your_profile')
-      render_page(:edit, title, ['candidates/edit'], :flash => { :message => error_messages(@candidate), :type => :error }, :id => @candidate)
+      render_page(:edit, t("candidates.#{page[:title]}"), ['candidates/edit'], :flash => { :message => error_messages(@candidate), :type => :error }, :id => @candidate)
     else
-      @title = "#{@candidate.first_name} #{@candidate.last_name}"
-      flash[:success] = completed_signup? ? t('flash.success.profile_updated') : t('flash.success.welcome')
       @candidate.update_attributes(:profile_completion => 10) unless completed_signup?
-      redirect_to @candidate
+      redirect_to @candidate, :flash => { :success => t("flash.success.#{page[:message]}") }
     end
   end 
 

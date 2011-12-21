@@ -11,31 +11,27 @@ class ApplicationController < ActionController::Base
     I18n.locale = I18n.default_locale
   end
   
-  def error_messages(object, only_for_attributes = false)
-    errors = unduplicated_errors(object, only_for_attributes)
-    errors.map! do |error|
-      "#{object.class.human_attribute_name(error[0]).downcase} #{error[1]}#{(error != errors.last) ? ", " : "."}"
-    end.insert(0, "#{t('flash.error.base')}#{t('_:')} ").join
+  def error_messages(object, options = {})
+    errors = unduplicated_errors(object, options).map! do |attribute, message|
+      "#{object.class.human_attribute_name(attribute).downcase} #{message}"
+    end.to_sentence
+    "#{t('flash.error.base')} #{errors}."
   end
   
-  def unduplicated_errors(object, only_for_attributes = false)
+  def unduplicated_errors(object, options = {})
     object.errors.select do |attribute, message|
-      if only_for_attributes
-        only_for_attributes.include?(attribute) && message == object.errors[attribute].first
-      else
-        message == object.errors[attribute].first
-      end
+      options[:only] ? options[:only].include?(attribute) && message == object.errors[attribute].first : message == object.errors[attribute].first
     end
   end
   
-  def render_page(page, title, javascripts, options = {})
+  def render_page(page, title = '', javascripts = [], options = {})
     set_title_javascripts(title, javascripts, options)
     options[:id] ? render(page, :id => options[:id]) : render(page)
   end
   
-  def set_title_javascripts(title, javascripts, options = {})
-    @title = title
-    @javascripts = javascripts
+  def set_title_javascripts(title = '', javascripts = [], options = {})
+    @title = title unless title.blank?
+    @javascripts = javascripts 
     flash.now[options[:flash][:type]] = options[:flash][:message] if options[:flash]
   end
   

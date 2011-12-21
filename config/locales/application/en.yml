@@ -35,7 +35,7 @@ en:
       profile_updated: "Your info has been updated."
       candidate_destroyed: "The candidate has been deleted."
     error: 
-      base: "Error"
+      base: "Error:"
       general: "Something went wrong, sorry about that."
       could_not_save: "We couldn't save this"
       correct_before_resubmit: "Please correct this before submitting again."

@@ -35,7 +35,7 @@ fr:
       profile_updated: "Vos informations ont été mis à jour."
       candidate_destroyed: "L'utilisateur a été supprimé."
     error: 
-      base: "Erreur"
+      base: "Erreur :"
       general: "Oups, un erreur est survenue."
       could_not_save: "Nous n'avons pu enregistrer cet"
       correct_before_resubmit: "Merci de corriger avant de réessayer."
