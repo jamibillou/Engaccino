@@ -12,7 +12,7 @@ class CandidatesController < ApplicationController
   end
   
   def show
-    @candidate = Candidate.find(params[:id])
+    @experiences = @candidate.experiences
     @title = "#{@candidate.first_name} #{@candidate.last_name}"
   end
   
@@ -32,17 +32,20 @@ class CandidatesController < ApplicationController
   end
   
   def edit
+    @candidate.experiences.build.build_company
+    @candidate.save
     @title = completed_signup? ? t('candidates.edit.title') : t('candidates.edit.complete_your_profile')
     @javascripts = ['candidates/edit']
   end
 
   def update
-    page = if completed_signup? then { :title => 'edit.title', :message => 'profile_updated' } else { :title => 'edit.complete_your_profile', :message => 'welcome' } end
+    ### @company = @candidate.experiences.build.build_company ### PLANTE LES TESTS MAIS AU MOINS IL ESSAIE BIEN DE CONSTRUIRE LES AUTRES OBJETS, A APPROFONDIR, C'EST PLUS LOIN DU TOUT LA...
+    settings = if completed_signup? then { :title => 'edit.title', :message => 'profile_updated' } else { :title => 'edit.complete_your_profile', :message => 'welcome' } end
     unless @candidate.update_attributes(params[:candidate])
-      render_page(:edit, t("candidates.#{page[:title]}"), ['candidates/edit'], :flash => { :message => error_messages(@candidate), :type => :error }, :id => @candidate)
+      render_page(:edit, t("candidates.#{settings[:title]}"), ['candidates/edit'], :flash => { :message => error_messages(@candidate), :type => :error }, :id => @candidate)
     else
       @candidate.update_attributes(:profile_completion => 10) unless completed_signup?
-      redirect_to @candidate, :flash => { :success => t("flash.success.#{page[:message]}") }
+      redirect_to @candidate, :flash => { :success => t("flash.success.#{settings[:message]}") }
     end
   end 
 
@@ -74,8 +77,7 @@ class CandidatesController < ApplicationController
     
     def new_user
       unless current_user.nil?
-        @candidate = current_user
-        redirect_to candidate_path(@candidate), :notice => t('flash.notice.already_registered')
+        redirect_to candidate_path(current_user), :notice => t('flash.notice.already_registered')
       end
     end
     

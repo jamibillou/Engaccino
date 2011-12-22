@@ -3,19 +3,13 @@
 
   <head>
     <title><%= title %></title>
-    <%= stylesheet_link_tag 'application' %>
-    <%= stylesheet_link_tag 'users' %>
-    <%= stylesheet_link_tag 'candidates' %>
-    <%= javascript_include_tag 'application' %>
-    <% unless @javascripts.nil? %>
-      <% @javascripts.each do |javascript| %>
-    	  <%= javascript_include_tag javascript %>
-    	<% end %>
-    <% end %>
+    <%= stylesheet_link_tag 'application', 'users', 'candidates' %>
+    <%= javascript_include_tag 'application', 'nested_form' %>
     <%= javascript_tag do %>
       I18n.defaultLocale = "<%= I18n.default_locale %>";
       I18n.locale = "<%= I18n.locale %>";
     <% end %>
+    <%= javascript_include_tag @javascripts.join(', ') unless @javascripts.nil? || @javascripts.empty? %>
     <%= csrf_meta_tags %>
   </head>
   
@@ -35,6 +29,7 @@
       <% end %>
       <%= yield %>
     </div>
+    
     <footer>
       <%= debug(params) if Rails.env.development? %>
     </footer>

@@ -24,14 +24,14 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def render_page(page, title = '', javascripts = [], options = {})
+  def render_page(page, title, javascripts, options = {})
     set_title_javascripts(title, javascripts, options)
     options[:id] ? render(page, :id => options[:id]) : render(page)
   end
   
-  def set_title_javascripts(title = '', javascripts = [], options = {})
-    @title = title unless title.blank?
-    @javascripts = javascripts 
+  def set_title_javascripts(title, javascripts, options = {})
+    @title = title
+    @javascripts = javascripts
     flash.now[options[:flash][:type]] = options[:flash][:message] if options[:flash]
   end
   

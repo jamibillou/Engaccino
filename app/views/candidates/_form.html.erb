@@ -1,0 +1,11 @@
+<%= render 'import' unless completed_signup? %>
+
+<%= nested_form_for @candidate, :html => { :id => 'candidate_edit_form' } do |candidate_builder| %>
+  
+  <%= render 'personal_information_fields',    :f => candidate_builder %>
+  <%= render 'professional_experience_fields', :f => candidate_builder %>
+  <%= render 'education_fields',               :f => candidate_builder %>
+  <%= render 'status_fields',                  :f => candidate_builder %>
+  
+  <%= candidate_builder.submit t('candidates.edit.view_profile'), :class => 'center' %>
+<% end %>

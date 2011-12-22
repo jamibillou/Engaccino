@@ -248,50 +248,27 @@ describe CandidatesController do
     
       before (:each) do
         test_sign_in(@candidate)
+        @candidate.update_attributes(:profile_completion => 10)
       end
     
       it "should return http success" do
         get :edit, :id => @candidate
         response.should be_success
       end
-            
-      describe "edit page" do
       
-        before(:each) do
-          @candidate.update_attributes(:profile_completion => 10)
-        end
-        
-        it "should have the right title" do
-          get :edit, :id => @candidate
-          response.should have_selector('title', :content => I18n.t('candidates.edit.title'))
-        end
-        
-        it "should have the right selected navigation tab" do
-          get :edit, :id => @candidate
-          response.should have_selector('li', :class => 'round selected', :content => I18n.t(:menu_edit))
-        end
-              
-        it "should have an edit form" do
-          get :edit, :id => @candidate
-          response.should have_selector('form', :id => 'candidate_edit_form')
-        end
+      it "should have the right title" do
+        get :edit, :id => @candidate
+        response.should have_selector('title', :content => I18n.t('candidates.edit.title'))
       end
       
-      describe "signup page" do
-      
-        before(:each) do
-          @candidate.update_attributes(:profile_completion => 0)
-        end
-        
-        it "should have the right title" do
-          get :edit, :id => @candidate
-          response.should have_selector('title', :content => I18n.t('candidates.edit.complete_your_profile'))
-        end
-              
-        it "should have a signup form" do
-          get :edit, :id => @candidate
-          response.should have_selector('form', :id => 'candidate_signup_form')
-        end
+      it "should have the right selected navigation tab" do
+        get :edit, :id => @candidate
+        response.should have_selector('li', :class => 'round selected', :content => I18n.t(:menu_edit))
+      end
+            
+      it "should have an edit form" do
+        get :edit, :id => @candidate
+        response.should have_selector('form', :id => 'candidate_edit_form')
       end
     end
   end

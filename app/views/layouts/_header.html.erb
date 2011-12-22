@@ -1,9 +1,9 @@
 <header>
   <%= link_to logo, root_path %>
-  <%= render 'layouts/languages_menu' %>
+  <%= render 'layouts/languages' %>
   <nav>
-    <%= render 'layouts/signin_up_menu' %>
-    <%= render 'layouts/search_form' %>
+    <%= render 'layouts/signin_up' %>
+    <%= render 'layouts/search' %>
     <% unless signed_in? && completed_signup? %>
       <%= render 'layouts/public_menu' %>
     <% else %>

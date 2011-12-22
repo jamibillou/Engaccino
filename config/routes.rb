@@ -5,22 +5,27 @@ Engaccino::Application.routes.draw do
   get "sessions/new"
   get "ajax/countries"
 
-    resources :users
-    resources :candidates
-    resources :sessions, :only => [:new, :create, :destroy]
-    
-    match '/candidates', :to => 'candidates#index'
-    match '/signup', :to => 'candidates#new'
-    
-    match '/signin', :to => 'sessions#new'
-    match '/signout', :to => 'sessions#destroy'
+  resources :candidates do
+    resources :experiences do
+      resources :companies
+    end
+  end    
   
-    root :to => 'pages#overview', :constraints => SingedIn.new(false)
-    root :to => 'candidates#index',     :constraints => SingedIn.new(true)
-    match '/tour', :to => 'pages#tour'
-    match '/pricing', :to => 'pages#pricing'
-    match '/about', :to => 'pages#about'
-    match '/contact', :to => 'pages#contact'
+  resources :users, :companies
+  resources :sessions, :only => [:new, :create, :destroy]
+  
+  match '/candidates', :to => 'candidates#index'
+  match '/signup', :to => 'candidates#new'
+  
+  match '/signin', :to => 'sessions#new'
+  match '/signout', :to => 'sessions#destroy'
+
+  root :to => 'pages#overview', :constraints => SingedIn.new(false)
+  root :to => 'candidates#index',     :constraints => SingedIn.new(true)
+  match '/tour', :to => 'pages#tour'
+  match '/pricing', :to => 'pages#pricing'
+  match '/about', :to => 'pages#about'
+  match '/contact', :to => 'pages#contact'
     
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,0 +1,7 @@
+<div id="professional_experience" class="white_block">
+  <h2><%=t "candidates.professional_experience" %></h2>
+  <%= f.fields_for :experiences do |experience_builder| %>
+    <%= render 'experience_fields', :f => experience_builder %>
+  <% end %>
+  <br /><br />
+</div>
