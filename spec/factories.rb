@@ -67,6 +67,14 @@ Factory.define :school do |school|
   school.country 'France'
 end
 
+Factory.define :education do |education|
+  education.description 'Parties during 3 years and tried to learn a few things...'
+  education.year 2008
+  education.association :school
+  education.association :candidate
+  education.association :diploma
+end
+
 Factory.sequence :email do |n|
   "user_#{n}@example.com"
 end

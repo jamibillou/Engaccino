@@ -20,7 +20,8 @@ describe Candidate do
       :status => 'available'
     }
     @candidate = Factory(:candidate) 
-    @experience = Factory(:experience, :candidate => @candidate)  
+    @experience = Factory(:experience, :candidate => @candidate)
+    @education = Factory(:education, :candidate => @candidate)  
   end
     
   it "should create a new instance given valid attributes" do
@@ -50,6 +51,18 @@ describe Candidate do
     it "should destroy associated experiences" do
       @candidate.destroy
       Experience.find_by_id(@experience.id).should be_nil
+    end
+  end
+  
+  describe "educations associations" do
+    
+    it "should have an educations attribute" do
+      @candidate.should respond_to(:educations)
+    end
+    
+    it "should destroy associated educations" do
+      @candidate.destroy
+      Education.find_by_id(@education.id).should be_nil
     end
   end  
 end

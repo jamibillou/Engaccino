@@ -6,11 +6,27 @@ describe School do
     @attr = { :name     => 'Imperial College',
               :city     => 'London',
               :country  => 'United Kingdom'}
+    @school = Factory(:school)
+    @candidate = Factory(:candidate)
+    @diploma = Factory(:diploma)
+    @education = Factory(:education, :school => @school, :candidate => @candidate, :diploma => @diploma)
   end
 
   it "should create an instance given valid attributes" do
     school = School.create!(@attr)
     school.should be_valid
+  end
+  
+  describe "Educations associations" do
+    
+    it "should have an educations attribute" do
+      @school.should respond_to(:educations)
+    end
+    
+    it "should destroy associated educations" do
+      @school.destroy
+      Education.find_by_id(@education.id).should be_nil
+    end    
   end
 
   describe "attributes validations" do
@@ -65,3 +81,15 @@ describe School do
   end
 
 end
+# == Schema Information
+#
+# Table name: schools
+#
+#  id         :integer(4)      not null, primary key
+#  name       :string(255)
+#  city       :string(255)
+#  country    :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+

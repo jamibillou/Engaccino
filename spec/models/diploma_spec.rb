@@ -6,6 +6,9 @@ describe Diploma do
     @attr = { :label => 'Marketing Management' }
     @diploma = Factory(:diploma)
     @diploma_type = Factory(:diploma_type, :diploma => @diploma)
+    @school = Factory(:school)
+    @candidate = Factory(:candidate)
+    @education = Factory(:education, :school => @school, :candidate => @candidate, :diploma => @diploma)
   end
 
   it "should create an instance given valid attributes" do
@@ -19,9 +22,21 @@ describe Diploma do
       @diploma.should respond_to(:diplomaTypes)
     end
     
-    it "should not destroy associated associated diploma types" do
+    it "should not destroy associated diploma types" do
       @diploma.destroy
-      DiplomaType.find(@diploma_type).should_not be_nil
+      DiplomaType.find_by_id(@diploma_type.id).should_not be_nil
+    end
+  end
+  
+  describe "educations associations" do
+    
+    it "should have an educations attribute" do
+      @diploma.should respond_to(:educations)
+    end
+    
+    it "should destroy associated educations" do
+      @diploma.destroy
+      Education.find_by_id(@education.id).should be_nil
     end
   end
   

@@ -3,6 +3,8 @@ class Diploma < ActiveRecord::Base
   attr_accessible :label
   
   has_many :diplomaTypes
+  has_many :educations, :dependent => :destroy
+  has_many :candidates, :through => :educations
   
   validates :label, :length => { :within => 3..150 }, :presence => true
 end
