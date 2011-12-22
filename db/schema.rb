@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111217171831) do
+ActiveRecord::Schema.define(:version => 20111222204345) do
 
   create_table "candidates", :force => true do |t|
     t.string   "status"
@@ -27,6 +27,19 @@ ActiveRecord::Schema.define(:version => 20111217171831) do
     t.string   "phone"
     t.string   "email"
     t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "diploma_types", :force => true do |t|
+    t.string   "label"
+    t.integer  "diploma_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "diplomas", :force => true do |t|
+    t.string   "label"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

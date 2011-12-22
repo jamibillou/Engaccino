@@ -52,6 +52,15 @@ Factory.define :experience do |experience|
   experience.association :company
 end
 
+Factory.define :diploma do |diploma|
+  diploma.label 'Biotechnology'
+end
+
+Factory.define :diploma_type do |diplomatype|
+  diplomatype.label 'Master'
+  diplomatype.association :diploma  
+end
+
 Factory.sequence :email do |n|
   "user_#{n}@example.com"
 end
