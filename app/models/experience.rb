@@ -1,6 +1,6 @@
 class Experience < ActiveRecord::Base
 
-  attr_accessible :role, :start_month, :start_year, :end_month, :end_year, :description, :company_attributes
+  attr_accessible :role, :start_month, :start_year, :end_month, :end_year, :description
   
   belongs_to :candidate
   belongs_to :company
