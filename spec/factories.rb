@@ -61,6 +61,12 @@ Factory.define :diploma_type do |diplomatype|
   diplomatype.association :diploma  
 end
 
+Factory.define :school do |school|
+  school.name 'Polyfarce Savoie'
+  school.city 'Annecy'
+  school.country 'France'
+end
+
 Factory.sequence :email do |n|
   "user_#{n}@example.com"
 end
