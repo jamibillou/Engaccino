@@ -39,6 +39,10 @@ fr:
     skill: "Compétence"
     contact: "Contacter"
     
+    education:
+      title: "Etudes"
+      label: "Décrivez cette période d'études" 
+    
     index:
       title: "Liste des candidats"
     show:

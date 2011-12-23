@@ -1,11 +1,9 @@
-<div id="education" class="white_block">
-  <h2><%=t "candidates.education" %></h2>
-  <%= f.text_field :degree,              :value => (!params[:candidate].nil? && !params[:candidate][:degree].nil? && !params[:candidate][:degree].empty?) ? params[:candidate][:degree] : t('candidates.degree'),
-                                         :id => 'degree', :class => 'field margin_right' %>
-  <%= f.text_field :university,          :value => (!params[:candidate].nil? && !params[:candidate][:university].nil? && !params[:candidate][:university].empty?) ? params[:candidate][:university] : t('candidates.university'),
-                                         :id => 'university', :class => 'field margin_right' %>
-  <%= f.text_field :education_timeframe, :value => (!params[:candidate].nil? && !params[:candidate][:education_timeframe].nil? && !params[:candidate][:education_timeframe].empty?) ?
-                                                   params[:candidate][:education_timeframe] : t('candidates.education_timeframe'),
-                                         :id => 'education_timeframe', :class => 'field margin_right' %>
-  <%= link_to '+', '#', :class => 'slightly_round blue button' %>
-</div>
+<%= f.fields_for :school do |school_builder| %>
+  <%= render 'school_fields', :f => school_builder %>
+<% end %>
+<%= f.fields_for :diploma do |diploma_builder| %>
+  <%= render 'diploma_fields', :f => diploma_builder %>
+<% end %>
+<%= f.text_area :label, :rows  => 3,
+						:value => t('candidate.education.label'),
+						:id	   => 'label' %>

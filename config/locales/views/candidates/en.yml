@@ -38,6 +38,10 @@ en:
     professional_skills: "Professional skills"
     skill: "Skill"
     contact: "Contact"
+    
+    education: 
+      title: "Education"
+      label: "Describe your studying period"
   
     index:
       title: "List of all candidates"
