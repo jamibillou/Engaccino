@@ -38,11 +38,12 @@ en:
     professional_skills: "Professional skills"
     skill: "Skill"
     contact: "Contact"
+    diploma_type: "Type of diploma"
+    education_description: "Describe your studying period"
     
     education: 
       title: "Education"
-      label: "Describe your studying period"
-  
+        
     index:
       title: "List of all candidates"
     show:

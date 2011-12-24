@@ -7,6 +7,8 @@ class Diploma < ActiveRecord::Base
   has_many :candidates, :through => :educations
   
   validates :label, :length => { :within => 3..150 }, :presence => true
+  
+  accepts_nested_attributes_for :diplomaTypes, :reject_if => lambda { |attr| attr[:content].blank? }, :allow_destroy => true
 end
 # == Schema Information
 #

@@ -33,6 +33,8 @@ class CandidatesController < ApplicationController
   
   def edit
     @candidate.experiences.build.build_company
+    @candidate.educations.build.build_school
+    #@candidate.educations.build.build_diploma  ### AJOUTE UNE 2NDE LIGNE...
     @candidate.save
     @title = completed_signup? ? t('candidates.edit.title') : t('candidates.edit.complete_your_profile')
     @javascripts = ['candidates/edit']

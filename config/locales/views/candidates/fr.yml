@@ -38,10 +38,11 @@ fr:
     professional_skills: "Compétences professionnelles"
     skill: "Compétence"
     contact: "Contacter"
+    diploma_type: "Type de diplôme"
+    education_description: "Décrivez cette période d'études"
     
-    education:
-      title: "Etudes"
-      label: "Décrivez cette période d'études" 
+    education: 
+      title: "Education"
     
     index:
       title: "Liste des candidats"

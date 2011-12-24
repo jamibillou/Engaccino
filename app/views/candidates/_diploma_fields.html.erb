@@ -1,0 +1,6 @@
+<%= f.fields_for :diplomaType do |diplomaType_builder| %>
+  <%= render 'diploma_type_fields', :f => diplomaType_builder %>
+<% end %>
+<%= f.text_field :name, :value => t('candidates.degree'),
+                        :id => 'degree',
+                        :class => 'field margin_right' %>
