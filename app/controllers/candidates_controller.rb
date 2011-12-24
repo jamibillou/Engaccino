@@ -33,8 +33,7 @@ class CandidatesController < ApplicationController
   
   def edit
     @candidate.experiences.build.build_company
-    @candidate.educations.build.build_school
-    #@candidate.educations.build.build_diploma  ### AJOUTE UNE 2NDE LIGNE...
+    @candidate.educations.build
     @candidate.save
     @title = completed_signup? ? t('candidates.edit.title') : t('candidates.edit.complete_your_profile')
     @javascripts = ['candidates/edit']
@@ -42,6 +41,7 @@ class CandidatesController < ApplicationController
 
   def update
     ### @company = @candidate.experiences.build.build_company ### PLANTE LES TESTS MAIS AU MOINS IL ESSAIE BIEN DE CONSTRUIRE LES AUTRES OBJETS, A APPROFONDIR, C'EST PLUS LOIN DU TOUT LA...
+    #@school = @candidate.educations.build(params[:candidate][:educations_attributes]["0"][:school])
     settings = if completed_signup? then { :title => 'edit.title', :message => 'profile_updated' } else { :title => 'edit.complete_your_profile', :message => 'welcome' } end
     unless @candidate.update_attributes(params[:candidate])
       render_page(:edit, t("candidates.#{settings[:title]}"), ['candidates/edit'], :flash => { :message => error_messages(@candidate), :type => :error }, :id => @candidate)

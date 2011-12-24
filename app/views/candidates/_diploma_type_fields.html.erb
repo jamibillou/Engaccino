@@ -1,3 +1,4 @@
-<%= f.text_field :label, :value => t('candidates.diploma_type'),
+<%= f.text_field :label, :value => (!params[:candidate].nil? && !params[:candidate][:educations_attributes]["0"][:diploma][:diplomaType][:label].nil?) ? 
+									 params[:candidate][:educations_attributes]["0"][:diploma][:diplomaType][:label] : t('candidates.diploma_type'),
                          :id => 'diploma_type',
                          :class => 'small_field margin_right' %>
