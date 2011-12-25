@@ -1,6 +1,6 @@
 class Education < ActiveRecord::Base
   
-  attr_accessible :description, :year
+  attr_accessible :description, :year, :school_id, :diploma_id
   
   belongs_to :school
   belongs_to :candidate

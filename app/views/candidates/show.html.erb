@@ -1,1 +1,5 @@
 <%= render @candidate %>
+<% @educations.each do |education| %>
+  <%= education.year %> : <%= education.diploma.label %>
+  <%=t 'at' %> <%= education.school.name %><br/>
+<% end %>

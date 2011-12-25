@@ -40,6 +40,7 @@ fr:
     contact: "Contacter"
     diploma_type: "Type de diplôme"
     education_description: "Décrivez cette période d'études"
+    year_of_obtention: "Année d'obtention"
     
     education: 
       title: "Education"

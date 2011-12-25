@@ -12,7 +12,9 @@ class CandidatesController < ApplicationController
   end
   
   def show
-    @experiences = @candidate.experiences
+    @candidate = Candidate.find(params[:id])
+    @experiences = @candidate.experiences.order("year DESC")
+    @educations = @candidate.educations.order("year DESC")
     @title = "#{@candidate.first_name} #{@candidate.last_name}"
   end
   
@@ -32,7 +34,7 @@ class CandidatesController < ApplicationController
   end
   
   def edit
-    @candidate.experiences.build.build_company
+    @candidate.experiences.build
     @candidate.educations.build
     @candidate.save
     @title = completed_signup? ? t('candidates.edit.title') : t('candidates.edit.complete_your_profile')
@@ -40,8 +42,18 @@ class CandidatesController < ApplicationController
   end
 
   def update
-    ### @company = @candidate.experiences.build.build_company ### PLANTE LES TESTS MAIS AU MOINS IL ESSAIE BIEN DE CONSTRUIRE LES AUTRES OBJETS, A APPROFONDIR, C'EST PLUS LOIN DU TOUT LA...
-    #@school = @candidate.educations.build(params[:candidate][:educations_attributes]["0"][:school])
+    #@company = @candidate.experiences.build ### PLANTE LES TESTS MAIS AU MOINS IL ESSAIE BIEN DE CONSTRUIRE LES AUTRES OBJETS, A APPROFONDIR, C'EST PLUS LOIN DU TOUT LA...
+    #params[:candidate][:educations_attributes].values.each do |education|
+    #  school = School.find_or_create_by_name(education[:school][:name])
+    #  diploma = Diploma.find_or_create_by_label(education[:diploma][:name])
+    #  diplomaType = DiplomaType.find_or_create_by_diploma_id_and_label(:diploma_id => diploma.id, 
+    #                                                                   :label => education[:diploma][:diplomaType][:label])
+    #  @candidate.educations << Education.new(:school_id => school.id, 
+    #                                         :diploma_id => diploma.id,
+    #                                         :label => education[:label],
+    #                                         :year => education[:year])      
+    #end
+    
     settings = if completed_signup? then { :title => 'edit.title', :message => 'profile_updated' } else { :title => 'edit.complete_your_profile', :message => 'welcome' } end
     unless @candidate.update_attributes(params[:candidate])
       render_page(:edit, t("candidates.#{settings[:title]}"), ['candidates/edit'], :flash => { :message => error_messages(@candidate), :type => :error }, :id => @candidate)

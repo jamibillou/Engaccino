@@ -1,6 +1,6 @@
 class Candidate < User
   
-  attr_accessible :status, :experiences_attributes, :companies_attributes
+  attr_accessible :status, :experiences_attributes, :companies_attributes, :educations_attributes, :schools_attributes, :diplomas_attributes
   
   has_many :experiences, :dependent => :destroy
   has_many :companies,   :through   => :experiences
