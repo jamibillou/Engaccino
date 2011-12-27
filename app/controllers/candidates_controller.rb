@@ -34,31 +34,18 @@ class CandidatesController < ApplicationController
   end
   
   def edit
-    @candidate.experiences.build
-    @candidate.educations.build
-    @candidate.save
+    @candidate.experiences.build.build_company
     init_page(:title => (completed_signup? ? 'candidates.edit.title' : 'candidates.edit.complete_your_profile'), :javascripts => 'candidates/edit')
   end
 
   def update
-    #@company = @candidate.experiences.build ### PLANTE LES TESTS MAIS AU MOINS IL ESSAIE BIEN DE CONSTRUIRE LES AUTRES OBJETS, A APPROFONDIR, C'EST PLUS LOIN DU TOUT LA...
-    #params[:candidate][:educations_attributes].values.each do |education|
-    #  school = School.find_or_create_by_name(education[:school][:name])
-    #  diploma = Diploma.find_or_create_by_label(education[:diploma][:name])
-    #  diplomaType = DiplomaType.find_or_create_by_diploma_id_and_label(:diploma_id => diploma.id, 
-    #                                                                   :label => education[:diploma][:diplomaType][:label])
-    #  @candidate.educations << Education.new(:school_id => school.id, 
-    #                                         :diploma_id => diploma.id,
-    #                                         :label => education[:label],
-    #                                         :year => education[:year])      
-    #end
-    
-    settings = if completed_signup? then { :title => 'edit.title', :message => 'profile_updated' } else { :title => 'edit.complete_your_profile', :message => 'welcome' } end
     unless @candidate.update_attributes(params[:candidate])
-      render_page(:edit, :id => @candidate, :title => "candidates.#{settings[:title]}", :javascripts => 'candidates/edit', :flash => { :error => error_messages(@candidate) })
+      render_page(:edit, :id => @candidate, :title => "candidates.edit.#{completed_signup? ? 'title' : 'complete_your_profile'}",
+                                            :javascripts => 'candidates/edit',
+                                            :flash => { :error => error_messages(@candidate) })
     else
       @candidate.update_attributes(:profile_completion => 10) unless completed_signup?
-      redirect_to @candidate, :flash => { :success => t("flash.success.#{settings[:message]}") }
+      redirect_to @candidate, :flash => { :success => t("flash.success.#{completed_signup? ? 'profile_updated' : 'welcome'}") }
     end
   end 
 

@@ -207,12 +207,12 @@ describe CandidatesController do
           end.should change(Candidate, :count).by(1)
         end
         
-        it "should render the 2nd signup form" do
+        it "should render the 'edit' page" do
           post :create, :candidate => @attr
           response.should render_template(:edit)
         end
         
-        it "should signed the candidate in" do
+        it "should sign the candidate in" do
           post :create, :candidate => @attr
           controller.should be_signed_in
         end
@@ -293,8 +293,18 @@ describe CandidatesController do
       describe "success" do
       
         before(:each) do
-          @attr = { :first_name => "Updated",
-                    :last_name => "Candidate"}
+          @attr = { :candidate => { :first_name => "Updated",
+                                    :last_name => "Candidate",
+                                    :experiences_attributes => { '0' => { :company => { :name => "BG Corp" },
+                                                                          :role => "BG en chef",
+                                                                          :start_month => "7",
+                                                                          :start_year => "1984",
+                                                                          :end_month => "12",
+                                                                          :end_year => "2011"
+                                                                        }
+                                                                }
+                                  }
+                  }
         end
         
         it "should update the candidate's attributes" do
@@ -314,7 +324,19 @@ describe CandidatesController do
           end.should_not change(Candidate, :count)
         end
         
-        it "should redirect to the Candidate#show page" do
+#        it "should create an experience" do
+#          lambda do
+#            put :update, :candidate => @attr, :id => @candidate
+#          end.should change(Experience, :count).by(1)
+#        end
+#        
+#        it "should create a company" do
+#          lambda do
+#            put :update, :candidate => @attr, :id => @candidate
+#          end.should change(Company, :count).by(1)
+#        end
+        
+        it "should redirect to the 'show' page" do
           put :update, :candidate => @attr, :id => @candidate
           response.should redirect_to(@candidate)
         end
@@ -329,17 +351,10 @@ describe CandidatesController do
                     :country => "" }
         end
                     
-        it "should render the edit page if we come from the edit page" do
+        it "should render the 'edit' page" do
            put :update, :candidate => @attr, :id => @candidate
-           session[:edit_page] = :edit
            response.should render_template(:edit)
         end
-        
-        it "should render the 2nd signup form if we come from the sign_up page" do
-           put :update, :candidate => @attr, :id => @candidate
-           session[:edit_page] = :signup
-           response.should render_template(:edit)
-        end 
         
         it "should not create another candidate" do
           lambda do
