@@ -19,9 +19,9 @@ describe Candidate do
       :password_confirmation => "pouetpouet38",
       :status => 'available'
     }
-    @candidate = Factory(:candidate) 
+    @candidate  = Factory(:candidate) 
     @experience = Factory(:experience, :candidate => @candidate)
-    @education = Factory(:education, :candidate => @candidate)  
+    @education  = Factory(:education, :candidate => @candidate)  
   end
     
   it "should create a new instance given valid attributes" do

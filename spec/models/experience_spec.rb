@@ -10,8 +10,8 @@ describe Experience do
               :end_year => 2011,
               :description => 'Designed web-apps mostly, a bit of mobile work as well.'
             }
-    @candidate = Factory(:candidate)
-    @company = Factory(:company)
+    @candidate  = Factory(:candidate)
+    @company    = Factory(:company)
     @experience = Factory(:experience, :candidate => @candidate, :company => @company)
   end
   

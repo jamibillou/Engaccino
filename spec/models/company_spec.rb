@@ -11,8 +11,8 @@ describe Company do
               :email => 'info@engaccino.com',
               :url => 'http://www.engaccino.com'
             }  
-    @candidate = Factory(:candidate)
-    @company = Factory(:company)
+    @candidate  = Factory(:candidate)
+    @company    = Factory(:company)
     @experience = Factory(:experience, :candidate => @candidate, :company => @company) 
   end
   
