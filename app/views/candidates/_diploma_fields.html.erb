@@ -2,6 +2,6 @@
   <%= render 'diploma_type_fields', :f => diplomaType_builder %>
 <% end %>
 <%= f.text_field :name, :value => (!params[:candidate].nil? && !params[:candidate][:educations_attributes]["0"][:diploma][:name].nil?) ? 
-									params[:candidate][:educations_attributes]["0"][:diploma][:name] : t('candidates.degree'),
+									      params[:candidate][:educations_attributes]["0"][:diploma][:name] : t('candidates.degree'),
                         :id => 'degree',
                         :class => 'field margin_right' %>

@@ -24,15 +24,21 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def render_page(page, title, javascripts, options = {})
-    set_title_javascripts(title, javascripts, options)
+  def render_page(page, options = {})
+    init_page(options) unless options.empty?
     options[:id] ? render(page, :id => options[:id]) : render(page)
   end
   
-  def set_title_javascripts(title, javascripts, options = {})
-    @title = title
-    @javascripts = javascripts
-    flash.now[options[:flash][:type]] = options[:flash][:message] if options[:flash]
+  def redirect_to_page(page, options = {})
+    init_page(options) unless options.empty?
+    redirect_to(page)
   end
   
+  def init_page(options = {})
+    @title            = t(options[:title])          unless options[:title].nil?
+    @javascripts      = options[:javascripts].split unless options[:javascripts].nil?
+    flash[:success]   = options[:flash][:success]   unless options[:flash].nil? || options[:flash][:success].nil?
+    flash[:notice]    = options[:flash][:notice]    unless options[:flash].nil? || options[:flash][:notice].nil?
+    flash.now[:error] = options[:flash][:error]     unless options[:flash].nil? || options[:flash][:error].nil?
+  end
 end

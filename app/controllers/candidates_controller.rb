@@ -8,7 +8,7 @@ class CandidatesController < ApplicationController
   
   def index
     @candidates = Candidate.all
-    set_title_javascripts(t('candidates.index.title'), ['users/index'])
+    init_page(:title => 'candidates.index.title', :javascripts => 'users/index')
   end
   
   def show
@@ -20,46 +20,32 @@ class CandidatesController < ApplicationController
   
   def new
     @candidate = Candidate.new
-    set_title_javascripts(t('candidates.new.title'), ['candidates/new'])
+    init_page(:title => 'candidates.new.title', :javascripts => 'candidates/new')
   end
   
   def create
     @candidate = Candidate.new(params[:candidate])
     unless @candidate.save
-      render_page(:new, t('candidates.new.title'), ['candidates/new'], :flash => { :message => error_messages(@candidate, :only => [:email, :password]), :type => :error })
+      render_page(:new, :title => 'candidates.new.title', :javascripts => 'candidates/new', :flash => { :error => error_messages(@candidate, :only => [:email, :password]) })
     else
       sign_in @candidate
-      render_page(:edit, t('candidates.edit.complete_your_profile'), ['candidates/edit'], :id => @candidate)
+      render_page(:edit, :id => @candidate, :title => 'candidates.edit.complete_your_profile', :javascripts => 'candidates/edit')
     end
   end
   
   def edit
-    @candidate.experiences.build
-    @candidate.educations.build
-    @candidate.save
-    @title = completed_signup? ? t('candidates.edit.title') : t('candidates.edit.complete_your_profile')
-    @javascripts = ['candidates/edit']
+    @candidate.experiences.build.build_company
+    init_page(:title => (completed_signup? ? 'candidates.edit.title' : 'candidates.edit.complete_your_profile'), :javascripts => 'candidates/edit')
   end
 
   def update
-    #@company = @candidate.experiences.build ### PLANTE LES TESTS MAIS AU MOINS IL ESSAIE BIEN DE CONSTRUIRE LES AUTRES OBJETS, A APPROFONDIR, C'EST PLUS LOIN DU TOUT LA...
-    #params[:candidate][:educations_attributes].values.each do |education|
-    #  school = School.find_or_create_by_name(education[:school][:name])
-    #  diplomaType = DiplomaType.find_or_create_by_label(education[:diploma][:diplomaType][:label])
-    #  diploma = Diploma.find_or_create_by_label_and_diploma_type_id(:label => education[:diploma][:name],
-    #                                                                :diploma_type_id => diplomaType.id)
-    #  @candidate.educations.build(:school_id => school.id, 
-    #                              :diploma_id => diploma.id,
-    #                              :label => education[:label],
-    #                              :year => education[:year])      
-    #end
-    
-    settings = if completed_signup? then { :title => 'edit.title', :message => 'profile_updated' } else { :title => 'edit.complete_your_profile', :message => 'welcome' } end
     unless @candidate.update_attributes(params[:candidate])
-      render_page(:edit, t("candidates.#{settings[:title]}"), ['candidates/edit'], :flash => { :message => error_messages(@candidate), :type => :error }, :id => @candidate)
+      render_page(:edit, :id => @candidate, :title => "candidates.edit.#{completed_signup? ? 'title' : 'complete_your_profile'}",
+                                            :javascripts => 'candidates/edit',
+                                            :flash => { :error => error_messages(@candidate) })
     else
       @candidate.update_attributes(:profile_completion => 10) unless completed_signup?
-      redirect_to @candidate, :flash => { :success => t("flash.success.#{settings[:message]}") }
+      redirect_to @candidate, :flash => { :success => t("flash.success.#{completed_signup? ? 'profile_updated' : 'welcome'}") }
     end
   end 
 

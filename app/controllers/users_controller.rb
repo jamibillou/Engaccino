@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   
   def index
     @users = User.all
-    set_title_javascripts(t('users.index.title'), ['users/index'])
+    init_page(:title => 'users.index.title', :javascripts => 'users/index')
   end
 
   def destroy
