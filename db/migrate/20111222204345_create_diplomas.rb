@@ -1,7 +1,8 @@
-class CreateDiplomas < ActiveRecord::Migration
+class CreateDegrees < ActiveRecord::Migration
   def change
-    create_table :diplomas do |t|
-      t.string :label
+    create_table :degrees do |t|
+      t.string  :label
+      t.integer :degree_type_id
 
       t.timestamps
     end

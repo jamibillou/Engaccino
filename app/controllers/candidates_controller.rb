@@ -45,13 +45,13 @@ class CandidatesController < ApplicationController
     #@company = @candidate.experiences.build ### PLANTE LES TESTS MAIS AU MOINS IL ESSAIE BIEN DE CONSTRUIRE LES AUTRES OBJETS, A APPROFONDIR, C'EST PLUS LOIN DU TOUT LA...
     #params[:candidate][:educations_attributes].values.each do |education|
     #  school = School.find_or_create_by_name(education[:school][:name])
-    #  diploma = Diploma.find_or_create_by_label(education[:diploma][:name])
-    #  diplomaType = DiplomaType.find_or_create_by_diploma_id_and_label(:diploma_id => diploma.id, 
-    #                                                                   :label => education[:diploma][:diplomaType][:label])
-    #  @candidate.educations << Education.new(:school_id => school.id, 
-    #                                         :diploma_id => diploma.id,
-    #                                         :label => education[:label],
-    #                                         :year => education[:year])      
+    #  diplomaType = DiplomaType.find_or_create_by_label(education[:diploma][:diplomaType][:label])
+    #  diploma = Diploma.find_or_create_by_label_and_diploma_type_id(:label => education[:diploma][:name],
+    #                                                                :diploma_type_id => diplomaType.id)
+    #  @candidate.educations.build(:school_id => school.id, 
+    #                              :diploma_id => diploma.id,
+    #                              :label => education[:label],
+    #                              :year => education[:year])      
     #end
     
     settings = if completed_signup? then { :title => 'edit.title', :message => 'profile_updated' } else { :title => 'edit.complete_your_profile', :message => 'welcome' } end

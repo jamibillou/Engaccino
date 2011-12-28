@@ -3,7 +3,7 @@
 <% end %>
 <%=t 'at' %>
 <%= f.fields_for :school do |school_builder| %>  
-  <%= render 'school_fields', :f => school_builder %>
+  <%= render 'school_fields', :f => school_builder %>  
 <% end %>
 <%= 'in' %>
 <%= f.text_field :year,  :value => (!params[:candidate].nil? && !params[:candidate][:educations_attributes]["0"][:year].nil?) ? 

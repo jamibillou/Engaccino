@@ -1,10 +1,10 @@
-class DiplomaType < ActiveRecord::Base
+class DegreeType < ActiveRecord::Base
   
   attr_accessible :label
   
-  belongs_to :diploma
+  has_many :degrees, :dependent => :destroy
+  has_many :educations, :through => :degrees
   
-  validates :diploma_id,                              :presence => true
   validates :label, :length => { :within => 2..30 },  :presence => true
   
 end
@@ -14,7 +14,6 @@ end
 #
 #  id         :integer(4)      not null, primary key
 #  label      :string(255)
-#  diploma_id :integer(4)
 #  created_at :datetime
 #  updated_at :datetime
 #
