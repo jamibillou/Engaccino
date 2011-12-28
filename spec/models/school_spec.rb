@@ -8,8 +8,8 @@ describe School do
               :country  => 'United Kingdom'}
     @school = Factory(:school)
     @candidate = Factory(:candidate)
-    @diploma = Factory(:diploma)
-    @education = Factory(:education, :school => @school, :candidate => @candidate, :diploma => @diploma)
+    @degree = Factory(:degree)
+    @education = Factory(:education, :degree => @degree, :candidate => @candidate, :school => @school)
   end
 
   it "should create an instance given valid attributes" do
@@ -26,6 +26,18 @@ describe School do
     it "should destroy associated educations" do
       @school.destroy
       Education.find_by_id(@education.id).should be_nil
+    end    
+  end
+  
+  describe "Degrees associations" do
+    
+    it "should have a degrees attribute" do
+      @school.should respond_to(:degrees)
+    end
+    
+    it "should not destroy associated degrees" do
+      @school.destroy
+      Degree.find_by_id(@degree.id).should_not be_nil
     end    
   end
 

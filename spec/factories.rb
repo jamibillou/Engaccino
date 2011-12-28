@@ -52,13 +52,13 @@ Factory.define :experience do |experience|
   experience.association :company
 end
 
-Factory.define :diploma do |diploma|
-  diploma.label 'Biotechnology'
+Factory.define :degree_type do |degreetype|
+  degreetype.label 'Master'  
 end
 
-Factory.define :diploma_type do |diplomatype|
-  diplomatype.label 'Master'
-  diplomatype.association :diploma  
+Factory.define :degree do |degree|
+  degree.label 'Biotechnology'
+  degree.association :degree_type
 end
 
 Factory.define :school do |school|
@@ -70,9 +70,9 @@ end
 Factory.define :education do |education|
   education.description 'Parties during 3 years and tried to learn a few things...'
   education.year 2008
+  education.association :degree
   education.association :school
   education.association :candidate
-  education.association :diploma
 end
 
 Factory.sequence :email do |n|

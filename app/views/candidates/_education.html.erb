@@ -3,7 +3,5 @@
   <%= f.fields_for :educations do |education_builder| %>
     <%= render 'education_fields', :f => education_builder %>
   <% end %>
-  <% @candidate.educations.each do |education| %>
-  	<br /><br/><br />
-  <% end %>
+  <br /><br />
 </div>

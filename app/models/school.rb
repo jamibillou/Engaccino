@@ -2,6 +2,7 @@ class School < ActiveRecord::Base
   
   attr_accessible :name, :city, :country
   
+  has_and_belongs_to_many :degrees
   has_many :educations, :dependent => :destroy
   has_many :candidates, :through => :educations
   

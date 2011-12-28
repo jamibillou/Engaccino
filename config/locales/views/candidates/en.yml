@@ -44,6 +44,8 @@ en:
     
     education: 
       title: "Education"
+      add: "Add an education"
+      remove: "Remove this education"
         
     index:
       title: "List of all candidates"

@@ -32,7 +32,7 @@ describe "Candidates" do
         click_button
         fill_in :first_name,            :with => "Jack"
         fill_in :last_name,             :with => "Bauer"
-        fill_in :year_of_birth,         :with => "1962"
+        fill_in :year_of_birth,         :with => 1962
         fill_in :country,               :with => "United States"
         click_button
         response.should have_selector('div.flash.success', :content => I18n.t('flash.success.welcome'))

@@ -44,6 +44,8 @@ fr:
     
     education: 
       title: "Education"
+      add: "Ajouter une période d'étude"
+      remove: "Supprimer cette période d'étude"
     
     index:
       title: "Liste des candidats"
