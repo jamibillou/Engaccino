@@ -295,7 +295,7 @@ describe CandidatesController do
         before(:each) do
           @attr = { :candidate => { :first_name => "Updated",
                                     :last_name => "Candidate",
-                                    :experiences_attributes => { '0' => { :company => { :name => "BG Corp" },
+                                    :experiences_attributes => { '0' => { :company_attributes => { :name => "BG Corp" },
                                                                           :role => "BG en chef",
                                                                           :start_month => "7",
                                                                           :start_year => "1984",
@@ -308,7 +308,7 @@ describe CandidatesController do
         end
         
         it "should update the candidate's attributes" do
-          put :update, :candidate => @attr, :id => @candidate
+          put :update, :candidate => @attr[:candidate], :id => @candidate
           candidate = assigns(:candidate)
           @candidate.reload
           @candidate.first_name == candidate.first_name
@@ -320,24 +320,24 @@ describe CandidatesController do
         
         it "should not create a candidate" do
           lambda do
-            put :update, :candidate => @attr, :id => @candidate
+            put :update, :candidate => @attr[:candidate], :id => @candidate
           end.should_not change(Candidate, :count)
         end
         
-#        it "should create an experience" do
-#          lambda do
-#            put :update, :candidate => @attr, :id => @candidate
-#          end.should change(Experience, :count).by(1)
-#        end
-#        
-#        it "should create a company" do
-#          lambda do
-#            put :update, :candidate => @attr, :id => @candidate
-#          end.should change(Company, :count).by(1)
-#        end
+        it "should create an experience" do
+          lambda do
+            put :update, :candidate => @attr[:candidate], :id => @candidate
+          end.should change(Experience, :count).by(1)
+        end
+        
+        it "should create a company" do
+          lambda do
+            put :update, :candidate => @attr[:candidate], :id => @candidate
+          end.should change(Company, :count).by(1)
+        end
         
         it "should redirect to the 'show' page" do
-          put :update, :candidate => @attr, :id => @candidate
+          put :update, :candidate => @attr[:candidate], :id => @candidate
           response.should redirect_to(@candidate)
         end
       end
