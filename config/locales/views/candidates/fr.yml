@@ -33,12 +33,11 @@ fr:
     profile_photo: "Photo"
     experience: "Expérience"
     years: "ans"
-    degree: "Diplôme"
     degree_name: "Nom du diplôme"
     professional_skills: "Compétences professionnelles"
     skill: "Compétence"
     contact: "Contacter"
-    diploma_type: "Type de diplôme"
+    degree_type: "Type de diplôme"
     education_description: "Décrivez cette période d'études"
     year_of_obtention: "Année d'obtention"
     

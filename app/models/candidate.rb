@@ -11,8 +11,7 @@ class Candidate < User
   accepts_nested_attributes_for :experiences, :reject_if => lambda { |attr| attr[:content].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :companies,   :reject_if => lambda { |attr| attr[:content].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :educations,  :reject_if => lambda { |attr| attr[:content].blank? }, :allow_destroy => true  
-  accepts_nested_attributes_for :schools,     :reject_if => lambda { |attr| attr[:content].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :degrees,    :reject_if => lambda { |attr| attr[:content].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :degrees,     :reject_if => lambda { |attr| attr[:content].blank? }, :allow_destroy => true
   
   status_array = [ 'available', 'looking', 'open', 'listening', 'happy' ]
   validates :status, :inclusion => { :in => status_array }, :presence => true

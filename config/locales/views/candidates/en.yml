@@ -33,12 +33,11 @@ en:
     profile_photo: "Photo"
     experience: "Experience"
     years: "yrs"
-    degree: "Degree"
     degree_name: "Degree name"
     professional_skills: "Professional skills"
     skill: "Skill"
     contact: "Contact"
-    diploma_type: "Type of diploma"
+    degree_type: "Type of degree"
     education_description: "Describe your studying period"
     year_of_obtention: "Year of obtention"
     

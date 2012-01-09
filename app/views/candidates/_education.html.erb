@@ -4,8 +4,5 @@
     <%= render 'education_fields', :f => education_builder %>
     <%= education_builder.link_to_remove '-', :class => 'button blue round', :title => t('candidates.education.remove') %>
   <% end %>
-  <%= f.link_to_add '+', :educations, :class => 'button blue round', :title => t('candidates.education.add') %>
-  <% @candidate.educations.each do |education| %>
-  	<br /><br /><br />
-  <% end %>
+
 </div>

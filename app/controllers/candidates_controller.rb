@@ -34,12 +34,18 @@ class CandidatesController < ApplicationController
   end
   
   def edit
-    @candidate.experiences.build.build_company
+    #@candidate.experiences.build.build_company
+    @candidate.educations.build.build_degree
+    #@candidate.educations.build.build_school
     init_page(:title => (completed_signup? ? 'candidates.edit.title' : 'candidates.edit.complete_your_profile'), :javascripts => 'candidates/edit')
   end
 
   def update
+    
+    #@candidate.educations.build.build_degree(params[:candidate])  
+        
     unless @candidate.update_attributes(params[:candidate])
+      #@candidate.educations.build.build_school
       render_page(:edit, :id => @candidate, :title => "candidates.edit.#{completed_signup? ? 'title' : 'complete_your_profile'}",
                                             :javascripts => 'candidates/edit',
                                             :flash => { :error => error_messages(@candidate) })
