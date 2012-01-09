@@ -3,6 +3,7 @@
   <%= render 'personal_information',    :f => candidate_builder %>
   <%= render 'professional_experience', :f => candidate_builder %>
   <%= render 'education',               :f => candidate_builder %>
+  <%= render 'language',				:f => candidate_builder %>
   <%= render 'status',                  :f => candidate_builder %>
   <%= candidate_builder.submit t('candidates.edit.view_profile'), :class => 'center' %>
 <% end %>
