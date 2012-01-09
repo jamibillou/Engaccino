@@ -13,12 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20111227211615) do
 
-  create_table "candidates", :force => true do |t|
-    t.string   "status"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "companies", :force => true do |t|
     t.string   "name"
     t.string   "address"

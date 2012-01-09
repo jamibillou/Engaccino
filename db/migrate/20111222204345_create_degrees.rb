@@ -1,3 +1,4 @@
+
 class CreateDegrees < ActiveRecord::Migration
   def change
     create_table :degrees do |t|

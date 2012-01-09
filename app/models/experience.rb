@@ -1,9 +1,11 @@
 class Experience < ActiveRecord::Base
 
-  attr_accessible :role, :start_month, :start_year, :end_month, :end_year, :description
+  attr_accessible :role, :start_month, :start_year, :end_month, :end_year, :description, :company_attributes
   
   belongs_to :candidate
   belongs_to :company
+  
+  accepts_nested_attributes_for :company, :reject_if => lambda { |attr| attr[:content].blank? }, :allow_destroy => true
             
   validates :candidate_id,                                              :presence => true
   validates :company_id,                                                :presence => true
@@ -16,8 +18,8 @@ class Experience < ActiveRecord::Base
   validate  :compare_dates
     
   def compare_dates
-    self.errors.add(:base, I18n.t('flash.error.candidate_date')) if (start_year.to_i > end_year.to_i || 
-                                                                     start_month && end_month && start_year.to_i == end_year.to_i && start_month.to_i > end_month.to_i)
+    self.errors.add(:base, I18n.t('flash.error.candidate_date')) if (start_year.to_i > end_year.to_i || start_month && end_month &&
+                                                                     start_year.to_i == end_year.to_i && start_month.to_i > end_month.to_i)
   end
 
 end

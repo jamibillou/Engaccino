@@ -1,6 +1,6 @@
 class Candidate < User
   
-  attr_accessible :status
+  attr_accessible :status, :experiences_attributes
   
   has_many :experiences, :dependent => :destroy
   has_many :companies,   :through   => :experiences
@@ -9,7 +9,6 @@ class Candidate < User
   has_many :schools,     :through   => :educations
   
   accepts_nested_attributes_for :experiences, :reject_if => lambda { |attr| attr[:content].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :companies,   :reject_if => lambda { |attr| attr[:content].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :educations,  :reject_if => lambda { |attr| attr[:content].blank? }, :allow_destroy => true  
   accepts_nested_attributes_for :degrees,     :reject_if => lambda { |attr| attr[:content].blank? }, :allow_destroy => true
   

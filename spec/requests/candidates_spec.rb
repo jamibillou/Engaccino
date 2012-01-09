@@ -32,7 +32,7 @@ describe "Candidates" do
         click_button
         fill_in :first_name,            :with => "Jack"
         fill_in :last_name,             :with => "Bauer"
-        fill_in :year_of_birth,         :with => "1962"
+        fill_in :year_of_birth,         :with => 1962
         fill_in :country,               :with => "United States"
         click_button
         response.should have_selector('div.flash.success', :content => I18n.t('flash.success.welcome'))
@@ -95,7 +95,13 @@ describe "Candidates" do
       fill_in :first_name,    :with => "Jon"
       fill_in :last_name,     :with => "Von Der Mace"
       fill_in :year_of_birth, :with => 1975
-      fill_in :country,       :with => "Netherlands" 
+      fill_in :country,       :with => "Netherlands"
+      fill_in :company,       :with => "Engaccino"
+      fill_in :role,          :with => "Source of inspiration"
+      fill_in :start_month,   :with => 7
+      fill_in :start_year,    :with => 2010
+      fill_in :end_month,     :with => 12
+      fill_in :end_year,      :with => 2011
       click_button
       current_url.should == "http://www.example.com#{candidate_path(@candidate)}"
       response.should have_selector('div.flash.success', :content => I18n.t('flash.success.profile_updated'))
