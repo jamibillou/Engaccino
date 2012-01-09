@@ -5,7 +5,7 @@ class Experience < ActiveRecord::Base
   belongs_to :candidate
   belongs_to :company
   
-  accepts_nested_attributes_for :company, :reject_if => lambda { |attr| attr[:content].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :company, :allow_destroy => true
             
   validates :candidate_id,                                              :presence => true
   validates :company_id,                                                :presence => true

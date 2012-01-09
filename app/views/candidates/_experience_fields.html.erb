@@ -1,10 +1,8 @@
-<%= f.fields_for :company do |company_builder| %>
-  <%= render 'company_fields', :f => company_builder %>
-<% end %>
-<%= f.text_field :role,        :value => t('candidates.role'),        :id => 'role',        :class => 'field margin_right' %>
+<%= f.fields_for :company %>
+<%= f.text_field :role,        :id => 'role',        :class => 'field margin_right' %>
 <%=t 'from' %>
-<%= f.text_field :start_month, :value => t('candidates.start_month'), :id => 'start_month', :class => 'small_field margin_left margin_right' %>  
-<%= f.text_field :start_year,  :value => t('candidates.start_year'),  :id => 'start_year',  :class => 'small_field margin_right' %>                                    
+<%= f.text_field :start_month, :id => 'start_month', :class => 'small_field margin_left margin_right' %>  
+<%= f.text_field :start_year,  :id => 'start_year',  :class => 'small_field margin_right' %>                                    
 <%=t 'to' %>
-<%= f.text_field :end_month,   :value => t('candidates.end_month'),   :id => 'end_month',   :class => 'small_field margin_left margin_right' %>
-<%= f.text_field :end_year,    :value => t('candidates.end_year'),    :id => 'end_year',    :class => 'small_field margin_right' %>
+<%= f.text_field :end_month,   :id => 'end_month',   :class => 'small_field margin_left margin_right' %>
+<%= f.text_field :end_year,    :id => 'end_year',    :class => 'small_field margin_right' %>

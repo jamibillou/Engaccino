@@ -1,6 +1,6 @@
 class Degree < ActiveRecord::Base
   
-  attr_accessible :label
+  attr_accessible :label, :degree_type_attributes
   
   belongs_to :degree_type
   
@@ -8,7 +8,7 @@ class Degree < ActiveRecord::Base
   has_many :educations, :dependent => :destroy
   has_many :candidates, :through => :educations
   
-  accepts_nested_attributes_for :degree_type, :reject_if => lambda { |attr| attr[:content].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :degree_type, :allow_destroy => true
   
   validates :degree_type_id,                          :presence => true
   validates :label, :length => { :within => 3..150 }, :presence => true

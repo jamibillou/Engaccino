@@ -1,19 +1,19 @@
 class Education < ActiveRecord::Base
   
-  attr_accessible :description, :year
+  attr_accessible :description, :year, :school_attributes, :degree_attributes
   
   belongs_to :degree
   belongs_to :school
   belongs_to :candidate
   
-  accepts_nested_attributes_for :school,     :reject_if => lambda { |attr| attr[:content].blank? }, :allow_destroy => true
-  accepts_nested_attributes_for :degree,     :reject_if => lambda { |attr| attr[:content].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :school, :allow_destroy => true
+  accepts_nested_attributes_for :degree, :allow_destroy => true
     
-  validates :degree_id,                                                   :presence => true
-  validates :school_id,                                                   :presence => true
-  validates :candidate_id,                                                :presence => true
-  validates :description,   :length => { :within => 5..500 },             :allow_blank => true
-  validates :year,          :inclusion => { :in => 1900..Time.now.year }, :allow_blank => true
+  validates :degree_id,                                                 :presence => true
+  validates :school_id,                                                 :presence => true
+  validates :candidate_id,                                              :presence => true
+  validates :description, :length => { :within => 5..500 },             :allow_blank => true
+  validates :year,        :inclusion => { :in => 1900..Time.now.year }, :allow_blank => true
   
   def degreeType
     DegreeType.find(degree.degree_type_id).label

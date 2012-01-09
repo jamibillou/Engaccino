@@ -5,7 +5,6 @@ class CandidatesController < ApplicationController
   before_filter :correct_user,       :only   => [:edit, :update]
   before_filter :admin_user,         :only   => [:destroy]
   before_filter :completed_signup,   :only   => [:index, :show]
-  before_filter :build_associations, :only   => [:update]
   
   def index
     @candidates = Candidate.all
@@ -21,7 +20,6 @@ class CandidatesController < ApplicationController
   
   def new
     @candidate = Candidate.new
-    
     init_page(:title => 'candidates.new.title', :javascripts => 'candidates/new')
   end
   
@@ -36,15 +34,14 @@ class CandidatesController < ApplicationController
   end
   
   def edit
+    @candidate.experiences.build.build_company
+#    @candidate.educations.build.build_degree
+#    @candidate.educations.build.build_school
     @candidate.languages.build
-    #@candidate.experiences.build
-    #@candidate.educations.build.build_degree
-    #@candidate.educations.build.build_school
     init_page(:title => (completed_signup? ? 'candidates.edit.title' : 'candidates.edit.complete_your_profile'), :javascripts => 'candidates/edit')
   end
 
   def update
-    
     unless @candidate.update_attributes(params[:candidate])
       render_page(:edit, :id => @candidate, :title => "candidates.edit.#{completed_signup? ? 'title' : 'complete_your_profile'}",
                                             :javascripts => 'candidates/edit',
@@ -83,12 +80,6 @@ class CandidatesController < ApplicationController
     def new_user
       unless current_user.nil?
         redirect_to candidate_path(current_user), :notice => t('flash.notice.already_registered')
-      end
-    end
-    
-    def build_associations
-      unless params[:candidate][:experiences_attributes].nil?
-        params[:candidate][:experiences_attributes].values.each { |experience| @candidate.experiences.build(experience).create_company(experience[:company_attributes]) }
       end
     end
     
