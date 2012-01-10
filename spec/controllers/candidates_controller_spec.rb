@@ -295,12 +295,12 @@ describe CandidatesController do
         before(:each) do
           @attr = { :candidate => { :first_name => "Updated",
                                     :last_name => "Candidate",
-                                    :experiences_attributes => { '0' => { :company_attributes => { :name => "BG Corp" },
-                                                                          :role => "BG en chef",
+                                    :experiences_attributes => { '0' => { :role => "BG en chef",
                                                                           :start_month => "7",
                                                                           :start_year => "1984",
                                                                           :end_month => "12",
-                                                                          :end_year => "2011"
+                                                                          :end_year => "2011",
+                                                                          :company_attributes => { :name => "BG Corp" }
                                                                         }
                                                                 }
                                   }

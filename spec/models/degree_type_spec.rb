@@ -26,7 +26,7 @@ describe DegreeType do
     end
   end
   
-  describe "Validations" do
+  describe "validations" do
         
     it "should require a label" do
       invalid_degree_type = DegreeType.new(@attr.merge(:label => ''))

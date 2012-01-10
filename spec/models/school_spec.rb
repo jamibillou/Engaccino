@@ -17,7 +17,7 @@ describe School do
     school.should be_valid
   end
   
-  describe "Educations associations" do
+  describe "educations associations" do
     
     it "should have an educations attribute" do
       @school.should respond_to(:educations)
@@ -29,7 +29,7 @@ describe School do
     end    
   end
   
-  describe "Degrees associations" do
+  describe "eegrees associations" do
     
     it "should have a degrees attribute" do
       @school.should respond_to(:degrees)
@@ -41,7 +41,7 @@ describe School do
     end    
   end
 
-  describe "attributes validations" do
+  describe "validations" do
     
     it "should require a name" do
       invalid_school = School.new(@attr.merge(:name => ''))
