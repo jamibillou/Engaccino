@@ -18,7 +18,7 @@ describe Degree do
     degree.should be_valid
   end
   
-  describe "degree Type Associations" do
+  describe "degree type associations" do
     
     it "should have a degree type attribute" do
       @degree.should respond_to(:degree_type)  
@@ -54,7 +54,7 @@ describe Degree do
     end    
   end
   
-  describe "Candidates associations" do
+  describe "candidates associations" do
     
     it "should have a candidates attribute" do
       @degree.should respond_to(:candidates)
@@ -66,7 +66,7 @@ describe Degree do
     end    
   end
   
-  describe "attributes validations" do
+  describe "validations" do
     
     it "should require a degree type id" do
       Degree.new(@attr).should_not be_valid

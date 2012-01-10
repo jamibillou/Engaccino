@@ -46,6 +46,10 @@ class CandidatesController < ApplicationController
 
   def update
     unless @candidate.update_attributes(params[:candidate])
+      @candidate.experiences.build.build_company
+#      @candidate.educations.build.build_degree
+#      @candidate.educations.build.build_school
+      @candidate.languages.build
       render_page(:edit, :id => @candidate, :title => "candidates.edit.#{completed_signup? ? 'title' : 'complete_your_profile'}",
                                             :javascripts => 'candidates/edit',
                                             :flash => { :error => error_messages(@candidate) })
