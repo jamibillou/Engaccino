@@ -34,10 +34,13 @@ class CandidatesController < ApplicationController
   end
   
   def edit
-    @candidate.experiences.build.build_company
-#    @candidate.educations.build.build_degree
-#    @candidate.educations.build.build_school
-    @candidate.languages.build
+    #@candidate.experiences.build.build_company
+    #@candidate.educations.build.build_school
+    @education = @candidate.educations.build
+    @education.build_school
+    @degree = @education.build_degree
+    @degree.build_degree_type  
+    #@candidate.languages.build
     init_page(:title => (completed_signup? ? 'candidates.edit.title' : 'candidates.edit.complete_your_profile'), :javascripts => 'candidates/edit')
   end
 

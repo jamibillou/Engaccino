@@ -10,7 +10,7 @@ class Candidate < User
   has_many :languages,   :dependent => :destroy
   
   accepts_nested_attributes_for :experiences, :allow_destroy => true
-  accepts_nested_attributes_for :educations,  :allow_destroy => true  
+  accepts_nested_attributes_for :educations,  :reject_if => lambda { |attr| attr['year'].blank? }, :allow_destroy => true  
   accepts_nested_attributes_for :degrees,     :allow_destroy => true
   accepts_nested_attributes_for :languages,   :reject_if => lambda { |attr| attr['name'].blank? }, :allow_destroy => true
   

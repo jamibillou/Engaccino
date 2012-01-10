@@ -1,12 +1,9 @@
 <%= f.fields_for :degree do |degree_builder| %>
   <%= render 'degree_fields', :f => degree_builder %>
 <% end %>
-<%=t 'at' %>
 <%= f.fields_for :school do |school_builder| %>  
   <%= render 'school_fields', :f => school_builder %>  
 <% end %>
 <%=t 'in' %>
-<%= f.text_field :year,  :value => (!params[:candidate].nil? && !params[:candidate][:educations_attributes]["0"][:year].nil?) ? 
-									       params[:candidate][:educations_attributes]["0"][:year] : t('candidates.year_of_obtention'),
-                         :id	=> 'year_of_obtention',
-						             :class => 'small_field margin_left margin_right' %>
+<%= f.text_field :year,  :id	=> 'year_of_obtention',
+			             :class => 'small_field margin_left margin_right' %>

@@ -2,7 +2,6 @@
   <h2><%=t "candidates.education.title" %></h2>
   <%= f.fields_for :educations do |education_builder| %>
     <%= render 'education_fields', :f => education_builder %>
-    <%= education_builder.link_to_remove '-', :class => 'button blue round', :title => t('candidates.education.remove') %>
   <% end %>
   <br /><br />
 </div>

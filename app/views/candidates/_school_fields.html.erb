@@ -1,4 +1,2 @@
-<%= f.text_field :name, :value => (!params[:candidate].nil? && !params[:candidate][:educations_attributes]["0"][:school][:name].nil?) ? 
-									params[:candidate][:educations_attributes]["0"][:school][:name] : t('candidates.university'),
-                        :id => 'university',
+<%= f.text_field :name, :id => 'university',
                         :class => 'field margin_left margin_right' %>
