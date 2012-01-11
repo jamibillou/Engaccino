@@ -5,6 +5,7 @@ class CandidatesController < ApplicationController
   before_filter :correct_user,       :only   => [:edit, :update]
   before_filter :admin_user,         :only   => [:destroy]
   before_filter :completed_signup,   :only   => [:index, :show]
+  #before_filter :custom_validation,  :only   => [:update]
   
   def index
     @candidates = Candidate.all
@@ -46,15 +47,23 @@ class CandidatesController < ApplicationController
 
   def update
     unless @candidate.update_attributes(params[:candidate])
-      @candidate.experiences.build.build_company
-#      @candidate.educations.build.build_degree
-#      @candidate.educations.build.build_school
-      @candidate.languages.build
+      #@candidate.experiences.build.build_company
+      #@candidate.educations.build.build_school
+      @education = @candidate.educations.build
+      @education.build_school
+      @degree = @education.build_degree
+      @degree.build_degree_type  
+      #@candidate.languages.build
       render_page(:edit, :id => @candidate, :title => "candidates.edit.#{completed_signup? ? 'title' : 'complete_your_profile'}",
                                             :javascripts => 'candidates/edit',
                                             :flash => { :error => error_messages(@candidate) })
     else
       @candidate.update_attributes(:profile_completion => 10) unless completed_signup?
+      @candidate.educations.each do |education|
+        school = education.school
+        school.degrees.push(education.degree) unless school.degrees.include? education.degree
+        school.save!
+      end
       redirect_to @candidate, :flash => { :success => t("flash.success.#{completed_signup? ? 'profile_updated' : 'welcome'}") }
     end
   end 
@@ -88,6 +97,16 @@ class CandidatesController < ApplicationController
       unless current_user.nil?
         redirect_to candidate_path(current_user), :notice => t('flash.notice.already_registered')
       end
+    end
+    
+    def custom_validation
+      error = ""
+      for i in 0..params[:candidate][:educations_attributes].count-1
+        error += "empty degree line "+(i+1).to_s+"," if params[:candidate][:educations_attributes][i.to_s][:degree_attributes][:label].blank?
+        error += "empty school line "+(i+1).to_s+"," if params[:candidate][:educations_attributes][i.to_s][:school_attributes][:label].blank?
+      end
+      
+      redirect_to edit_candidate_path(current_user), :flash => {:error => error} unless error.blank?
     end
     
 end
