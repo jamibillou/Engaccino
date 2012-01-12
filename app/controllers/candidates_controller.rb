@@ -98,20 +98,4 @@ class CandidatesController < ApplicationController
       redirect_to edit_candidate_path(current_user), :flash => {:error => error} unless error.blank?
     end
     
-    def build_associations
-      build_experience
-      build_education
-    end
-    
-    def build_experience
-      @candidate.experiences.build.build_company
-    end
-    
-    def build_education
-      @education = @candidate.educations.build
-      @education.build_school
-      @degree = @education.build_degree
-      @degree.build_degree_type
-    end
-    
 end

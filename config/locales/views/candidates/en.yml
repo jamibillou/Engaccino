@@ -45,6 +45,11 @@ en:
       title: "Education"
       add: "Add an education"
       remove: "Remove this education"
+      
+    experience:
+      title: "Experience"
+      add: "Add an experience"
+      remove: "Remove this experience"
         
     index:
       title: "List of all candidates"

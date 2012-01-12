@@ -9,7 +9,9 @@ class Candidate < User
   has_many :schools,     :through   => :educations
   has_many :languages,   :dependent => :destroy
   
-  accepts_nested_attributes_for :experiences, :allow_destroy => true
+  accepts_nested_attributes_for :experiences,
+                                :reject_if => lambda { |attr| attr['company_attributes']['name'].blank? && attr['role'].blank? && attr['start_year'].blank? && attr['end_year'].blank? },
+                                :allow_destroy => true
   accepts_nested_attributes_for :educations,  :reject_if => lambda { |attr| attr['year'].blank? }, :allow_destroy => true  
   accepts_nested_attributes_for :degrees,     :allow_destroy => true
   accepts_nested_attributes_for :languages,   :reject_if => lambda { |attr| attr['name'].blank? }, :allow_destroy => true
