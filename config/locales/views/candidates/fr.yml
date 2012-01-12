@@ -46,6 +46,9 @@ fr:
       add: "Ajouter une période d'étude"
       remove: "Supprimer cette période d'étude"
     
+    language:
+      level: "Niveau"
+    
     index:
       title: "Liste des candidats"
     show:

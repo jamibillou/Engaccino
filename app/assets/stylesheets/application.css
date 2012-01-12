@@ -261,7 +261,7 @@ a.button.grey_gradient:hover {
   margin-right: 10px;
 }
 .fields {
-  float: left;
+  display: inline;
 }
 
 /* VISIBILITY */

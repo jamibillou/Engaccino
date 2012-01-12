@@ -1,20 +1,20 @@
 class Language < ActiveRecord::Base
   
-  attr_accessible :name
+  attr_accessible :label
   
-  belongs_to :candidate
+  has_many :language_candidates, :dependent => :destroy
+  has_many :candidates, :through => :language_candidates
   
-  validates :name, :length => { :within => 3..150 }, :presence => true
+  validates :label, :length => { :within => 3..80 }, :presence => true
   
 end
 # == Schema Information
 #
 # Table name: languages
 #
-#  id           :integer(4)      not null, primary key
-#  name         :string(255)
-#  candidate_id :integer(4)
-#  created_at   :datetime
-#  updated_at   :datetime
+#  id         :integer(4)      not null, primary key
+#  label      :string(255)
+#  created_at :datetime
+#  updated_at :datetime
 #
 

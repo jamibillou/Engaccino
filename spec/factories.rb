@@ -75,6 +75,16 @@ Factory.define :education do |education|
   education.association :candidate
 end
 
+Factory.define :language do |language|
+  language.label 'Spanish'
+end
+
+Factory.define :language_candidate do |languagecandidate|
+  languagecandidate.level :beginner
+  languagecandidate.association :language
+  languagecandidate.association :candidate
+end
+
 Factory.sequence :email do |n|
   "user_#{n}@example.com"
 end

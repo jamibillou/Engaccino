@@ -7,3 +7,6 @@
 <%=t 'in' %>
 <%= f.text_field :year,  :id	=> 'year_of_obtention',
 			             :class => 'small_field margin_left margin_right' %>
+<% unless f.object.id.nil? %>        
+  <%= f.link_to_remove "-", :class => "button blue round", :title => t('candidates.education.remove') %>
+<% end %> 
