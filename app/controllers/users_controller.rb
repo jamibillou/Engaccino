@@ -1,8 +1,10 @@
 class UsersController < ApplicationController
     
+  include UsersHelper
+  
   before_filter :authenticate
-  before_filter :completed_signup,  :only => [:index]
-  before_filter :admin_user,        :only => [:destroy]
+  before_filter :signed_up,   :only => [:index]
+  before_filter :admin_user,  :only => [:destroy]
   
   def index
     @users = User.all
@@ -20,13 +22,14 @@ class UsersController < ApplicationController
       deny_access unless signed_in?
     end
   
-    def completed_signup
+    def signed_up
       @user = current_user
-      redirect_to edit_candidate_path(@user), :notice => t('flash.notice.please_finish_signup') unless completed_signup?
+      redirect_to edit_candidate_path(@user), :notice => t('flash.notice.please_finish_signup') unless signed_up?
     end
     
     def admin_user
       @user = current_user
       redirect_to candidate_path(@user), :notice => t('flash.notice.restricted_page') unless @user.admin
     end
+    
 end

@@ -42,9 +42,14 @@ fr:
     year_of_obtention: "Année d'obtention"
     
     education: 
-      title: "Education"
-      add: "Ajouter une période d'étude"
-      remove: "Supprimer cette période d'étude"
+      title: "Formation"
+      add: "Ajouter une formation"
+      remove: "Supprimer cette formation"
+      
+    experience: 
+      title: "Expérience"
+      add: "Ajouter une expérience"
+      remove: "Supprimer cette expérience"
     
     language:
       level: "Niveau"

@@ -1,5 +1,5 @@
 <div id="professional_experience" class="white_block">
   <h2><%=t "candidates.professional_experience" %></h2>
   <%= f.fields_for :experiences %>
-  <br /><br />
+  <%= f.link_to_add '+', :experiences, :class => 'button blue round', :title => t('candidates.experience.add') %>
 </div>

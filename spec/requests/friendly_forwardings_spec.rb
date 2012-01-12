@@ -6,7 +6,7 @@ describe "FriendlyForwardings" do
     @candidate = Factory(:candidate)
   end
   
-  describe "should forward to the requested page after signin" do
+  describe "should forward to" do
     
     before(:each) do
       @candidate.update_attributes(:profile_completion => 10)

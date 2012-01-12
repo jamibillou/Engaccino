@@ -1,10 +1,12 @@
 class CandidatesController < ApplicationController
 
+  include CandidatesHelper
+  
   before_filter :authenticate,       :except => [:new, :create]
   before_filter :new_user,           :only   => [:new, :create]
   before_filter :correct_user,       :only   => [:edit, :update]
   before_filter :admin_user,         :only   => [:destroy]
-  before_filter :completed_signup,   :only   => [:index, :show]
+  before_filter :signed_up,          :only   => [:index, :show]
   #before_filter :custom_validation,  :only   => [:update]
   
   def index
@@ -36,33 +38,29 @@ class CandidatesController < ApplicationController
   
   def edit
     #@candidate.experiences.build.build_company
-    @education = @candidate.educations.build
-    @education.build_school
-    @degree = @education.build_degree
-    @degree.build_degree_type  
-    @candidate.language_candidates.build.build_language
-    init_page(:title => (completed_signup? ? 'candidates.edit.title' : 'candidates.edit.complete_your_profile'), :javascripts => 'candidates/edit')
+    #@education = @candidate.educations.build
+    #@education.build_school
+    #@degree = @education.build_degree
+    #@degree.build_degree_type  
+    #@candidate.language_candidates.build.build_language
+    build_associations
+    init_page(:title => (signed_up? ? 'candidates.edit.title' : 'candidates.edit.complete_your_profile'), :javascripts => 'candidates/edit')
   end
 
   def update
     unless @candidate.update_attributes(params[:candidate])
-      @candidate.experiences.build.build_company
-      @education = @candidate.educations.build
-      @education.build_school
-      @degree = @education.build_degree
-      @degree.build_degree_type  
-      @candidate.language_candidates.build.build_language
-      render_page(:edit, :id => @candidate, :title => "candidates.edit.#{completed_signup? ? 'title' : 'complete_your_profile'}",
+      build_associations
+      render_page(:edit, :id => @candidate, :title => "candidates.edit.#{signed_up? ? 'title' : 'complete_your_profile'}",
                                             :javascripts => 'candidates/edit',
                                             :flash => { :error => error_messages(@candidate) })
     else
-      @candidate.update_attributes(:profile_completion => 10) unless completed_signup?
+      @candidate.update_attributes(:profile_completion => 10) unless signed_up?
       @candidate.educations.each do |education|
         school = education.school
         school.degrees.push(education.degree) unless school.degrees.include? education.degree
         school.save!
       end
-      redirect_to @candidate, :flash => { :success => t("flash.success.#{completed_signup? ? 'profile_updated' : 'welcome'}") }
+      redirect_to @candidate, :flash => { :success => t("flash.success.#{signed_up? ? 'profile_updated' : 'welcome'}") }
     end
   end 
 
@@ -82,8 +80,8 @@ class CandidatesController < ApplicationController
       redirect_to candidate_path(current_user), :notice => t('flash.notice.other_user_page') unless current_user?(@candidate)
     end
     
-    def completed_signup
-      redirect_to edit_candidate_path(current_user), :notice => t('flash.notice.please_finish_signup') unless completed_signup?
+    def signed_up
+      redirect_to edit_candidate_path(current_user), :notice => t('flash.notice.please_finish_signup') unless signed_up?
     end
     
     def admin_user
@@ -103,7 +101,6 @@ class CandidatesController < ApplicationController
         error += "empty degree line "+(i+1).to_s+"," if params[:candidate][:educations_attributes][i.to_s][:degree_attributes][:label].blank?
         error += "empty school line "+(i+1).to_s+"," if params[:candidate][:educations_attributes][i.to_s][:school_attributes][:label].blank?
       end
-      
       redirect_to edit_candidate_path(current_user), :flash => {:error => error} unless error.blank?
     end
     

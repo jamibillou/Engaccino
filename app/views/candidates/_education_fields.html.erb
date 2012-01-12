@@ -1,9 +1,5 @@
-<%= f.fields_for :degree do |degree_builder| %>
-  <%= render 'degree_fields', :f => degree_builder %>
-<% end %>
-<%= f.fields_for :school do |school_builder| %>  
-  <%= render 'school_fields', :f => school_builder %>  
-<% end %>
+<%= f.fields_for :degree %>
+<%= f.fields_for :school %>
 <%=t 'in' %>
 <%= f.text_field :year,  :id	=> 'year_of_obtention',
 			             :class => 'small_field margin_left margin_right' %>
