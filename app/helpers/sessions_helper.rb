@@ -36,7 +36,7 @@ module SessionsHelper
     clear_return_to
   end
   
-  def completed_signup?
+  def signed_up?
     current_user.profile_completion > 0
   end
   
