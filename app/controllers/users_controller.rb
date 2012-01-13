@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   
   def index
     @users = User.all
-    init_page(:title => 'users.index.title', :javascripts => 'users/index')
+    init_page :title => 'users.index.title', :javascripts => 'users/index'
   end
 
   def destroy

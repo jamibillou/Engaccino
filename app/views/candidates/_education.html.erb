@@ -1,9 +1,6 @@
 <div id="education" class="white_block">
   <h2><%=t "candidates.education.title" %></h2>
-  <%= f.fields_for :educations do |education_builder| %>
-  	<br />
-    <%= render 'education_fields', :f => education_builder %> 	  	
-  <% end %>
+  <%= f.fields_for :educations %>
   <%= f.link_to_add "+", :educations, :class => "button blue round", :title => t('candidates.education.add') %>
   <br />  
 </div>

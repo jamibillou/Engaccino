@@ -75,7 +75,8 @@ ActiveRecord::Schema.define(:version => 20120112212313) do
   end
 
   create_table "languages", :force => true do |t|
-    t.string   "label"
+    t.string   "name"
+    t.integer  "candidate_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

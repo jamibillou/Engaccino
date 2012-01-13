@@ -11,6 +11,7 @@ module CandidatesHelper
   def build_associations
     build_experience
     build_education
+    build_language
   end
   
   def build_experience
@@ -22,5 +23,17 @@ module CandidatesHelper
     @education.build_school
     @degree = @education.build_degree
     @degree.build_degree_type
+  end
+  
+  def build_language
+    @candidate.language_candidates.build.build_language
+  end
+  
+  def link_schools_degrees
+    @candidate.educations.each do |education|
+      school = education.school
+      school.degrees.push(education.degree) unless school.degrees.include? education.degree
+      school.save!
+    end
   end
 end
