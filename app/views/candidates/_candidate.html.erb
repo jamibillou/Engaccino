@@ -19,8 +19,10 @@
 	                             		  :class => 'hidden' %>
     <% end %>
     <div class="job">
+      <%  unless @experiences.first.nil? %>
         <h2><%= @experiences.first.role %></h2>
         at <%= @experiences.first.company.name %>
+      <% end %>
       <div class="status">
         <%=t "candidates.#{candidate.status}_status" %>
       </div>
@@ -28,11 +30,11 @@
   </div>
   <div class="experience">
     <h2><%= t('candidates.experience.title').remove_accents.upcase %></h2>
-    <h3><%= "#{experience_total(@experiences)} #{t('candidates.years')}" %></h3>
+    <h3><%= "#{experience_total(@experiences) unless @experiences.first.nil?} #{t('candidates.years')}" %></h3>
   </div>
   <div class="degree">
     <h2><%= t('candidates.degree').remove_accents.upcase %></h2>
-    <%= "#{@educations.first.degree.degree_type.label} in #{@educations.first.degree.label}" %>
+    <%= "#{@educations.first.degree.degree_type.label unless @experiences.first.nil?} in #{@educations.first.degree.label unless @experiences.first.nil?}" %>
   </div>
   <div class="pro_skills">
     <h2><%= t('candidates.professional_skills').remove_accents.upcase %></h2>

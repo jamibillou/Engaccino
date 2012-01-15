@@ -60,6 +60,9 @@ fr:
       title: "Liste des candidats"
     show:
       title: "Profil de "
+      share_profile: "Partager profil"
+      edit_profile: "Editer profil"
+      view_profile: "Voir profil"
     new:
       title: "S'inscrire"
       create_engaccino_account: "Créer un compte Engaccino"

@@ -1,8 +1,71 @@
-/* QUICK VIEW CARD */
+/* SHARE/EDIT PROFILE, PROFILE COMPLETION HEADER */
+#share_edit {
+  padding: 10px 0px 0px 10px;
+}
+#share_edit .button {
+  width: 120px;
+  padding: 9px 0px;
+  margin-right: 5px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: bold;
+  display: inline-block;
+  text-align: center; 
+}
+#share_edit a.button:hover {
+  text-decoration: underline;
+}
+#share_edit input[type=submit] {
+  width: 120px;
+  padding: 11px 0px;
+  margin-right: 5px;
+  background-color: #DDD;
+  font-size: 13px;
+  color: #444;
+  text-decoration: none;
+  text-align: center;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  display: inline-block;
+  font-family: arial;
+}
+#share_edit input[type=submit]:hover {
+  text-decoration: underline;
+}
 
+#share_edit #completion_container {
+  width: 782px;
+  padding: 9px 0px;
+  background-color: #DDD;
+  font-size: 13px;
+  font-weight: normal;
+  display: inline-block;
+}
+#share_edit #completion_container a {
+  font-size: 13px;
+  font-weight: bold;
+  color: black;
+  margin-left: 20px;
+}
+#share_edit #completion_bar_empty {
+  width: 300px;
+  height: 10px;
+  margin-left: 10px;
+  margin-right: 20px;
+  background-color: #555;
+  display: inline-block;
+}
+#share_edit #completion_bar_full {
+  height: 10px;
+  background-color: #8bbf42;
+  display: block;
+}
+
+/* QUICK VIEW CARD */
 .card {
   width: 250px;
-  padding: 18px 0px 0px 20px;
+  padding: 20px 0px 0px 10px;
   font-size: 12px;
 }
 
@@ -136,33 +199,28 @@
 }
 
 /* RESUME */
-
 #resume {
   float: left;
   font-size: 12px;
-  width: 750px;
-  padding: 18px 0 0 20px;
+  width: 782px;
+  padding: 20px 0 0 10px;
 }
-
 #resume .timeline {
   background-color: white;
   margin-bottom: 18px;
-  padding: 12px 0px 0px 15px;
+  padding: 12px 0px 0px 10px;
 }
-
 #resume .experience {
   background-color: white;
-  margin-bottom: 18px;
-  padding: 12px 35px 0px 15px;
+  margin-bottom: 10px;
+  padding: 12px 35px 0px 10px;
   display: block;
 }
-
 #resume .education {
   background-color: white;
-  margin-bottom: 18px;
-  padding: 12px 35px 0px 15px;
+  margin-bottom: 10px;
+  padding: 12px 35px 0px 10px;
 }
-
 #resume h1 {
   color: #BBB;
   font-weight: 600;
@@ -170,12 +228,10 @@
   padding: 0;
   margin: 0 0 15px 0;
 }
-
 #resume h2 {
   font-size: 14px;
   margin: 0;
 }
-
 #resume p {
   margin-top: 10px;
 }

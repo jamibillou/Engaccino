@@ -74,7 +74,6 @@ describe "LayoutLinks" do
         visit root_path
         response.should have_selector('a', :href => '#', :content => I18n.t(:menu_dashboard))
         response.should have_selector('a', :href => candidate_path(@candidate), :content => I18n.t(:menu_profile))
-        response.should have_selector('a', :href => edit_candidate_path(@candidate), :content => I18n.t(:menu_edit))
         response.should have_selector('a', :href => signout_path, :content => I18n.t(:sign_out))
         response.should have_selector("a>img", :class => 'settings')
       end

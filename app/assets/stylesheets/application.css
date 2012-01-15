@@ -215,10 +215,11 @@ a.button.grey_gradient:hover {
 
 /* BLOCKS */
 .white_block {
+  width:  1000px;
   background: white;
-  margin-left: 25px;
+  margin-left: 10px;
   margin-right: 25px;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   padding: 15px 20px 22px 20px;
   font-size: 14px;
 }
@@ -233,7 +234,7 @@ a.button.grey_gradient:hover {
 /* FIELDS */
 .field {
   height: 35px;
-  width: 250px;
+  width: 200px;
   margin-top: 4px;
   margin-bottom: 4px;
   color: #444;
@@ -248,7 +249,7 @@ a.button.grey_gradient:hover {
 
 .small_field {
   height: 35px;
-  width: 75px;
+  width: 65px;
   margin-top: 4px;
   margin-bottom: 4px;
   color: #444;

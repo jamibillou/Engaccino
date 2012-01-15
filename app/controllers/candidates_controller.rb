@@ -30,18 +30,19 @@ class CandidatesController < ApplicationController
       render_page :new, :title => 'candidates.new.title', :javascripts => 'candidates/new', :flash => { :error => error_messages(@candidate, :only => [:email, :password]) }
     else
       sign_in @candidate
+      build_associations [:experiences, :educations]
       render_page :edit, :id => @candidate, :title => 'candidates.edit.complete_your_profile', :javascripts => 'candidates/edit'
     end
   end
   
   def edit
-    build_associations [:experiences, :educations, :languages]
+    build_associations [:experiences, :educations]
     init_page :title => (signed_up? ? 'candidates.edit.title' : 'candidates.edit.complete_your_profile'), :javascripts => 'candidates/edit'
   end
 
   def update
     unless @candidate.update_attributes(params[:candidate])
-      build_associations [:experiences, :educations, :languages]
+      build_associations [:experiences, :educations]
       init_page :title => "candidates.edit.#{signed_up? ? 'title' : 'complete_your_profile'}", :javascripts => 'candidates/edit'
       render_page :edit, :id => @candidate, :flash => { :error => error_messages(@candidate) }
     else

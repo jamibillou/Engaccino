@@ -1,0 +1,10 @@
+<div id="share_edit">
+  <%= link_to t('candidates.show.share_profile'), '#', :class => 'slightly_round blue button' %>
+  <%= link_to t('candidates.show.edit_profile'), edit_candidate_path(candidate), :class => 'slightly_round grey button margin_right' %>
+  <div id="completion_container" class="slightly_round">
+    <div id="completion_bar_empty" class="slightly_round">
+      <div id="completion_bar_full" class="slightly_round" style="width: <%= 3*candidate.profile_completion %>px;"></div>
+    </div>
+    Your profile is <%= candidate.profile_completion %>% complete<%= link_to "What's missing?", '#' %>
+  </div>
+</div>
