@@ -1,0 +1,43 @@
+<%= render 'candidate', :candidate => @candidate %>
+
+<div id="resume">
+  <div class="experience">
+    <h1>PROFESSIONAL EXPERIENCE</h1>
+    <table>
+    <% unless @experiences.nil? %>
+      <% @experiences.each do |experience| %>
+        <tr>
+          <td width="130" valign="top">
+            <h2><%= experience_period(experience) %></h2>
+          </td>
+          <td>
+            <h2><%= experience.role %> at <%= experience.company.name %></h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <br />
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+    </table>
+  </div>
+  <div class="education">
+    <h1>EDUCATION</h1>
+    <table>
+    <% unless @educations.nil? %>
+      <% @educations.each do |education| %>
+        <tr>
+          <td width="130" valign="top">
+            <h2><%= education.year %></h2>
+          </td>
+          <td>
+            <h2><%= education.degree.degree_type.label %> in <%= education.degree.label %></h2>
+            <%= education.school.name %>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <br />
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+    </table>
+  </div>
+</div>

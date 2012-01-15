@@ -49,7 +49,8 @@ fr:
       already_registered: "Ce n'est pas votre compte ? Déconnectez vous et créez le votre !"
       
   # Actions
-  delete: "suppr."
+  delete: "Supprimer"
+  add: "Ajouter"
   
   # Common words
   from: "de"

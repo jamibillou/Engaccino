@@ -1,11 +1,14 @@
-<div id="candidate_<%= candidate.id %>" class="card_block left">
+<% @experiences = candidate.experiences.order("start_year DESC") %>
+<% @educations  = candidate.educations.order("year DESC") %>
+
+<div id="candidate_<%= candidate.id %>" class="card left">
   <div class="head">
     <div class="identity">
       <div class="photo left"><%=t 'candidates.profile_photo' %></div>
       <div class="name_place">
         <h2><a href="<%= candidate_path(candidate) %>"><%= candidate.first_name %><br /><%= candidate.last_name %></a></h2> 
-        <%= unless candidate.city.blank? then candidate.city else t('candidates.city') end %>, 
-        <%= unless candidate.country.blank? then display_country(candidate.country) else t('candidates.country') end %>        
+        <%= candidate.city.blank? ? t('candidates.city') : candidate.city %>, 
+        <%= candidate.country.blank? ? t('candidates.country') : country(candidate.country) %>        
       </div>
     </div>    	
     <% if current_user.admin? %>
@@ -16,8 +19,8 @@
 	                             		  :class => 'hidden' %>
     <% end %>
     <div class="job">
-      <h2><%=t 'candidates.role' %></h2>
-      at <%=t 'candidates.company' %>
+        <h2><%= @experiences.first.role %></h2>
+        at <%= @experiences.first.company.name %>
       <div class="status">
         <%=t "candidates.#{candidate.status}_status" %>
       </div>
@@ -25,11 +28,11 @@
   </div>
   <div class="experience">
     <h2><%= t('candidates.experience.title').remove_accents.upcase %></h2>
-    <h3><%=t 'candidates.years' %></h3>
+    <h3><%= "#{experience_total(@experiences)} #{t('candidates.years')}" %></h3>
   </div>
   <div class="degree">
     <h2><%= t('candidates.degree').remove_accents.upcase %></h2>
-    <%=t 'candidates.degree_name' %>
+    <%= "#{@educations.first.degree.degree_type.label} in #{@educations.first.degree.label}" %>
   </div>
   <div class="pro_skills">
     <h2><%= t('candidates.professional_skills').remove_accents.upcase %></h2>

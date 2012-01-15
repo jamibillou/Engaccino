@@ -44,12 +44,14 @@ fr:
     education: 
       title: "Formation"
       add: "Ajouter une formation"
-      remove: "Supprimer cette formation"
+      delete: "Supprimer cette formation"
+      add: "Ajouter une formation"
       
     experience: 
       title: "Expérience"
       add: "Ajouter une expérience"
-      remove: "Supprimer cette expérience"
+      delete: "Supprimer cette expérience"
+      add: "Ajouter une expérience"
     
     language:
       level: "Niveau"

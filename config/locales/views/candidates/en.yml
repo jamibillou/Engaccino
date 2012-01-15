@@ -44,7 +44,8 @@ en:
     education: 
       title: "Education"
       add: "Add an education"
-      remove: "Remove this education"
+      delete: "Delete this education"
+      add: "Add an education"
 
     language:
       level: "Level"
@@ -52,7 +53,8 @@ en:
     experience:
       title: "Experience"
       add: "Add an experience"
-      remove: "Remove this experience"
+      delete: "Delete this experience"
+      add: "Add an experience"
         
     index:
       title: "List of all candidates"

@@ -1,18 +1,18 @@
 /* QUICK VIEW CARD */
 
-.card_block {
+.card {
   width: 250px;
   padding: 18px 0px 0px 20px;
   font-size: 12px;
 }
 
 /* Head */
-.card_block .head {
+.card .head {
   background: white;
   padding-left: 12px;
   margin-bottom: 4px;
 }
-.card_block .head .identity .photo { /* only for now */
+.card .head .identity .photo { /* only for now */
   width: 30px;
   height: 47px;
   margin-left: -3px;
@@ -25,47 +25,47 @@
   text-align: center;
   font-size: 10px;
 }
-.card_block .head .identity .name_place {
+.card .head .identity .name_place {
   float: left;
   margin-left: 85px;
   position: absolute;
   padding-top: 6px;
   max-width: 150px;
 }
-.card_block .head .identity .name_place a {
+.card .head .identity .name_place a {
   color: black;
   text-decoration: none;
 }
-.card_block .head .identity .name_place a:hover {
+.card .head .identity .name_place a:hover {
   text-decoration: underline;
 }
-.card_block .head .identity .name_place h2 {
+.card .head .identity .name_place h2 {
   padding-bottom: 2px;
   margin: 0;
   font-size: 20px;
   font-weight: bold;
   line-height: 1.2;
 }
-.card_block .head .job {
+.card .head .job {
   padding-top: 100px;
   padding-bottom: 10px;
   margin: 0;
 }
-.card_block .head .job h2 {
+.card .head .job h2 {
   font-size: 16px;
   font-weight: 400;
   margin: 0;
   padding: 0;
 }
-.card_block .head .job .status {
+.card .head .job .status {
   padding-top: 10px;
   color: green;
 }
 
 /* Experience */
-.card_block .experience {
+.card .experience {
   height: 80px;
-  width: 80px;
+  width: 90px;
   margin-right: 4px;
   padding-left: 12px;
   background: white;
@@ -73,12 +73,12 @@
   text-align: left;
   font-size: 25px;  
 }
-.card_block .experience h3 { 
+.card .experience h3 { 
   margin: 0;
   font-weight: 100;
   text-align: left;
 }
-.card_block .experience h2 {
+.card .experience h2 {
   color: #BBB;
   font-weight: 600;
   font-size: 10px;
@@ -86,23 +86,23 @@
 }
 
 /* Degree */
-.card_block .degree {
+.card .degree {
   height: 80px;
-  width: 102px;
+  width: 122px;
   padding-left: 12px;
-  padding-right: 40px;
+  padding-right: 10px;
   background: white;
   float: right;
   font-size: 13px;
 }
-.card_block .degree h2 {
+.card .degree h2 {
   color: #BBB;
   font-weight: bold;
   font-size: 10px;
 }
 
 /* Professional skills */
-.card_block .pro_skills {
+.card .pro_skills {
   height: 120px;
   padding-left: 12px;
   background: white;
@@ -111,14 +111,14 @@
   font-size: 13px;
   line-height: 2;
 }
-.card_block .pro_skills h2 {
+.card .pro_skills h2 {
   color: #BBB;
   font-weight: bold;
   font-size: 10px;
 }
 
 /* Contact information */
-.card_block .contact {
+.card .contact {
   height: 130px;
   padding-left: 12px;
   padding-top: 10px;
@@ -126,11 +126,56 @@
   background: white;
   font-size: 13px;
 }
-.card_block .contact h2 {
+.card .contact h2 {
   font-size: 17px;
   margin-top: 0;
   margin-bottom: 15px;
 }
-.card_block .contact .buttons {
+.card .contact .buttons {
+  margin-top: 10px;
+}
+
+/* RESUME */
+
+#resume {
+  float: left;
+  font-size: 12px;
+  width: 750px;
+  padding: 18px 0 0 20px;
+}
+
+#resume .timeline {
+  background-color: white;
+  margin-bottom: 18px;
+  padding: 12px 0px 0px 15px;
+}
+
+#resume .experience {
+  background-color: white;
+  margin-bottom: 18px;
+  padding: 12px 35px 0px 15px;
+  display: block;
+}
+
+#resume .education {
+  background-color: white;
+  margin-bottom: 18px;
+  padding: 12px 35px 0px 15px;
+}
+
+#resume h1 {
+  color: #BBB;
+  font-weight: 600;
+  font-size: 10px;
+  padding: 0;
+  margin: 0 0 15px 0;
+}
+
+#resume h2 {
+  font-size: 14px;
+  margin: 0;
+}
+
+#resume p {
   margin-top: 10px;
 }
