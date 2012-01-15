@@ -17,4 +17,43 @@ module ApplicationHelper
     image_tag "trash.png", :alt => t('delete'), :class => "trash"
   end
   
+  def link_to_delete(name, f, title = t('delete'))
+    f.hidden_field(:_destroy) + link_to_function(name, "delete_fields(this)", :class => 'button blue round', :title => title)
+  end
+  
+  def link_to_add(name, f, association, title = t('add'))
+    new_object = build_association(association)
+    fields = f.fields_for(association, new_object, :child_index => "new_#{association}") { |builder| render(association.to_s.singularize + "_fields", :f => builder) }
+    link_to_function(name, "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")", :class => 'button blue round', :title => title)
+  end
+  
+  def build_associations(associations = [])
+    associations.each { |association| build_association(association) }
+  end
+  
+  def build_association(association)
+    case association
+      when :experiences
+        experience = @candidate.experiences.build
+        experience.build_company
+        experience
+      when :educations
+        education = @candidate.educations.build
+        education.build_school
+        degree = education.build_degree
+        degree.build_degree_type
+        education
+      when :languages
+        language = @candidate.language_candidates.build.build_language
+        language
+    end
+  end
+  
+  def link_schools_degrees
+    @candidate.educations.each do |education|
+      school = education.school
+      school.degrees.push(education.degree) unless school.degrees.include? education.degree
+      school.save!
+    end
+  end
 end

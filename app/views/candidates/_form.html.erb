@@ -1,5 +1,5 @@
 <%= render 'import' unless signed_up? %>
-<%= nested_form_for @candidate, :html => { :id => 'candidate_edit_form' } do |candidate_builder| %>
+<%= form_for @candidate, :html => { :id => 'candidate_edit_form' } do |candidate_builder| %>
   <%= render 'personal_information',    :f => candidate_builder %>
   <%= render 'professional_experience', :f => candidate_builder %>
   <%= render 'education',               :f => candidate_builder %>

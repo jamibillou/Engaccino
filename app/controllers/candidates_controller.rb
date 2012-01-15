@@ -1,6 +1,6 @@
 class CandidatesController < ApplicationController
 
-  include CandidatesHelper
+  include ApplicationHelper
   
   before_filter :authenticate,       :except => [:new, :create]
   before_filter :new_user,           :only   => [:new, :create]
@@ -16,8 +16,6 @@ class CandidatesController < ApplicationController
   
   def show
     @candidate = Candidate.find(params[:id])
-    @experiences = @candidate.experiences.order("year DESC")
-    @educations = @candidate.educations.order("year DESC")
     @title = "#{@candidate.first_name} #{@candidate.last_name}"
   end
   
@@ -37,13 +35,13 @@ class CandidatesController < ApplicationController
   end
   
   def edit
-    build_associations
+    build_associations [:experiences, :educations, :languages]
     init_page :title => (signed_up? ? 'candidates.edit.title' : 'candidates.edit.complete_your_profile'), :javascripts => 'candidates/edit'
   end
 
   def update
     unless @candidate.update_attributes(params[:candidate])
-      build_associations
+      build_associations [:experiences, :educations, :languages]
       init_page :title => "candidates.edit.#{signed_up? ? 'title' : 'complete_your_profile'}", :javascripts => 'candidates/edit'
       render_page :edit, :id => @candidate, :flash => { :error => error_messages(@candidate) }
     else

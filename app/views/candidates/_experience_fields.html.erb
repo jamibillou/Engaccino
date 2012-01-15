@@ -1,10 +1,12 @@
-<br />
-<%= f.fields_for :company %>
-<%= f.text_field :role,        :id => 'role',        :class => 'field margin_right' %>
-<%=t 'from' %>
-<%= f.text_field :start_month, :id => 'start_month', :class => 'small_field margin_left margin_right' %>  
-<%= f.text_field :start_year,  :id => 'start_year',  :class => 'small_field margin_right' %>                                    
-<%=t 'to' %>
-<%= f.text_field :end_month,   :id => 'end_month',   :class => 'small_field margin_left margin_right' %>
-<%= f.text_field :end_year,    :id => 'end_year',    :class => 'small_field margin_right' %>
-<%= f.link_to_remove '-', :class => 'button blue round', :title => t('candidates.experience.remove') unless f.object.id.nil? %>
+<div class="fields">
+  <br />
+  <%= f.fields_for :company do |company_builder| render 'company_fields', :f => company_builder end %>
+  <%= f.text_field :role,        :id => 'role',        :class => 'field margin_right' %>
+  <%=t 'from' %>
+  <%= f.text_field :start_month, :id => 'start_month', :class => 'small_field margin_left margin_right' %>  
+  <%= f.text_field :start_year,  :id => 'start_year',  :class => 'small_field margin_right' %>                                    
+  <%=t 'to' %>
+  <%= f.text_field :end_month,   :id => 'end_month',   :class => 'small_field margin_left margin_right' %>
+  <%= f.text_field :end_year,    :id => 'end_year',    :class => 'small_field margin_right' %>
+  <%= link_to_delete '-', f, t('candidates.experience.delete') %>
+</div>

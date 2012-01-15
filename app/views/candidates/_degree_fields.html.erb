@@ -1,6 +1,4 @@
-<%= f.fields_for :degree_type do |degree_type_builder| %>
-  <%= render 'degree_type_fields', :f => degree_type_builder %>
-<% end %>
+<%= f.fields_for :degree_type do |degree_type_builder| render 'degree_type_fields', :f => degree_type_builder end %>
 <%= f.text_field :label, :id => 'degree',
                          :class => 'field margin_right' %>
 <%=t 'at' %>

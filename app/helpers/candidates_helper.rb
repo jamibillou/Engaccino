@@ -8,32 +8,16 @@ module CandidatesHelper
       t('candidates.happy_status')     => :happy }
   end
   
-  def build_associations
-    build_experience
-    build_education
-    build_language
-  end
-  
-  def build_experience
-    @candidate.experiences.build.build_company
-  end
-  
-  def build_education
-    @education = @candidate.educations.build
-    @education.build_school
-    @degree = @education.build_degree
-    @degree.build_degree_type
-  end
-  
-  def build_language
-    @candidate.language_candidates.build.build_language
-  end
-  
-  def link_schools_degrees
-    @candidate.educations.each do |education|
-      school = education.school
-      school.degrees.push(education.degree) unless school.degrees.include? education.degree
-      school.save!
+  def experience_period(experience)
+    unless experience.start_year == experience.end_year
+      "#{experience.start_year} - #{experience.end_year}"
+    else
+      "#{experience.start_month}/#{experience.start_year} - #{experience.end_month}/#{experience.end_year}"
     end
   end
+  
+  def experience_total(experiences)
+    experiences.first.end_year - experiences.last.start_year
+  end
+  
 end
