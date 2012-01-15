@@ -6,7 +6,6 @@ gem 'jquery-rails'
 gem 'will_paginate'
 gem 'countries'
 gem 'i18n-js'
-gem 'nested_form', :git => 'git://github.com/ryanb/nested_form.git'
 gem 'enum_column3'
 
 group :development do
