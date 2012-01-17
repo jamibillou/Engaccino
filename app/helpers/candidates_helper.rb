@@ -8,16 +8,16 @@ module CandidatesHelper
       t('candidates.happy_status')     => :happy }
   end
   
-  def experience_period(experience)
-    unless experience.start_year == experience.end_year
-      "#{experience.start_year} - #{experience.end_year}"
+  def display_period(object)
+    unless object.start_year == object.end_year
+      "#{object.start_year} - #{object.end_year}"
     else
-      "#{experience.start_month}/#{experience.start_year} - #{experience.end_month}/#{experience.end_year}"
+      "#{object.start_month}/#{object.start_year} - #{object.end_month}/#{object.end_year}"
     end
   end
   
   def experience_total(experiences)
     experiences.first.end_year - experiences.last.start_year
-  end
+  end  
   
 end

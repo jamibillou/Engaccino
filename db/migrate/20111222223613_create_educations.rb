@@ -5,7 +5,10 @@ class CreateEducations < ActiveRecord::Migration
       t.integer :school_id
       t.integer :candidate_id
       t.string  :description
-      t.integer :year
+      t.integer :start_month
+      t.integer :start_year
+      t.integer :end_month
+      t.integer :end_year
 
       t.timestamps
     end

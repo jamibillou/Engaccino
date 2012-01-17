@@ -1,5 +1,5 @@
 <% @experiences = candidate.experiences.order("start_year DESC") %>
-<% @educations  = candidate.educations.order("year DESC") %>
+<% @educations  = candidate.educations.order("start_year DESC") %>
 
 <div id="candidate_<%= candidate.id %>" class="card left">
   <div class="head">
@@ -13,10 +13,10 @@
     </div>    	
     <% if current_user.admin? %>
     	<%= link_to trash, candidate, :method => :delete,
-	                             		  :confirm => "#{t('candidates.destroy.title')} #{candidate.first_name} #{candidate.last_name}#{t('_?')}",
-	                             		  :title => "#{t('candidates.destroy.title')} #{candidate.first_name} #{candidate.last_name}",
-	                             		  :id => "destroy_candidate_#{candidate.id}",
-	                             		  :class => 'hidden' %>
+                             		  :confirm => "#{t('candidates.destroy.title')} #{candidate.first_name} #{candidate.last_name}#{t('_?')}",
+                             		  :title => "#{t('candidates.destroy.title')} #{candidate.first_name} #{candidate.last_name}",
+                             		  :id => "destroy_candidate_#{candidate.id}",
+                             		  :class => 'hidden' %>
     <% end %>
     <div class="job">
       <%  unless @experiences.first.nil? %>
@@ -34,7 +34,7 @@
   </div>
   <div class="degree">
     <h2><%= t('candidates.degree').remove_accents.upcase %></h2>
-    <%= "#{@educations.first.degree.degree_type.label unless @experiences.first.nil?} in #{@educations.first.degree.label unless @experiences.first.nil?}" %>
+    <%= "#{@educations.first.degree.degree_type.label unless @educations.first.nil?} in #{@educations.first.degree.label unless @educations.first.nil?}" %>
   </div>
   <div class="pro_skills">
     <h2><%= t('candidates.professional_skills').remove_accents.upcase %></h2>

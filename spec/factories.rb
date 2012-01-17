@@ -69,7 +69,10 @@ end
 
 Factory.define :education do |education|
   education.description 'Parties during 3 years and tried to learn a few things...'
-  education.year 2008
+  education.start_month 9
+  education.start_year  2005
+  education.end_month 6
+  education.end_year 2008
   education.association :degree
   education.association :school
   education.association :candidate

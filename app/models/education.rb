@@ -1,6 +1,6 @@
 class Education < ActiveRecord::Base
   
-  attr_accessible :description, :year, :school_attributes, :degree_attributes, :degree_type_attributes
+  attr_accessible :description, :start_year, :end_year, :start_month, :end_month, :school_attributes, :degree_attributes, :degree_type_attributes
   
   belongs_to :degree
   belongs_to :school
@@ -13,7 +13,10 @@ class Education < ActiveRecord::Base
   #validates :school_id,                                                 :presence => true
   #validates :candidate_id,                                              :presence => true
   validates :description, :length => { :within => 5..500 },             :allow_blank => true
-  validates :year,        :inclusion => { :in => 1900..Time.now.year }, :allow_blank => true
+  validates :start_year,  :inclusion => { :in => 1900..Time.now.year }, :presence => true
+  validates :end_year,    :inclusion => { :in => 1900..Time.now.year }, :presence => true
+  validates :start_month, :inclusion => { :in => 1..12 },               :allow_blank => true
+  validates :end_month,   :inclusion => { :in => 1..12 },               :allow_blank => true
   
   def degreeType
     DegreeType.find(degree.degree_type_id).label
@@ -30,7 +33,10 @@ end
 #  school_id    :integer(4)
 #  candidate_id :integer(4)
 #  description  :string(255)
-#  year         :integer(4)
+#  start_month  :integer(4)
+#  start_year   :integer(4)
+#  end_month    :integer(4)
+#  end_year     :integer(4)
 #  created_at   :datetime
 #  updated_at   :datetime
 #

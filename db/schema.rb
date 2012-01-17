@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120117190304) do
+ActiveRecord::Schema.define(:version => 20120112212313) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -48,7 +48,10 @@ ActiveRecord::Schema.define(:version => 20120117190304) do
     t.integer  "school_id"
     t.integer  "candidate_id"
     t.string   "description"
-    t.integer  "year"
+    t.integer  "start_month"
+    t.integer  "start_year"
+    t.integer  "end_month"
+    t.integer  "end_year"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -75,8 +78,7 @@ ActiveRecord::Schema.define(:version => 20120117190304) do
   end
 
   create_table "languages", :force => true do |t|
-    t.string   "name"
-    t.integer  "candidate_id"
+    t.string   "label"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

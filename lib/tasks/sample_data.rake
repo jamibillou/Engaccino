@@ -73,12 +73,16 @@ def make_experiences
 end
 
 def make_educations
-  education_years = (60.years.ago.year..Time.now.year).to_a
+  education_start_years = (40.years.ago.year..Time.now.year).to_a
+  education_months = (1..12).to_a
   degrees = ['Art', 'Sciences', 'Mathematics', 'Economics', 'Management', 'Sales', 'Retail', 'Languages', 'History', 'Philosophy', 'Biology', 'Software Development', 'Mecanics', 'Electronics', 'Physics']
   degree_types = ["Master's", "Bachelor's", 'Diploma', 'A Levels', 'Local degree']
   3.times do |n|
     education = @candidate.educations.build
-    education.year = education_years[rand(education_years.size)]
+    education.start_month = education_months[rand(education_months.size)]
+    education.start_year = education_start_years[rand(education_start_years.size)]
+    education.end_month = education_months[rand(education_months.size)]
+    education.end_year = education_start_years[rand(education_start_years.size)]
     school = education.build_school
     school.name = "Sample school"
     degree = education.build_degree
