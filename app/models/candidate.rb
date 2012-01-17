@@ -23,8 +23,19 @@ class Candidate < User
   validates :status, :inclusion => { :in => status_array }, :presence => true
       
   def timeline_duration
-    ordered_experiences = experiences.order("end_year ASC").order("end_month ASC")
-    12 * (ordered_experiences.last.end_year - ordered_experiences.first.start_year) + (ordered_experiences.last.end_month - ordered_experiences.first.start_month)
+    last_experience.end_year - first_experience.start_year
+  end
+  
+  def first_experience
+    experiences.order("start_year ASC").first
+  end
+  
+  def last_experience
+    experiences.order("end_year ASC").last
+  end
+  
+  def longest_experience
+    experiences.sort_by!{ |experience| experience.duration }.last
   end
   
 end

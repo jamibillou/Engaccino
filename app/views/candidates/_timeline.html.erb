@@ -1,21 +1,23 @@
-<% unit = 300 / candidate.timeline_duration %>
+<% unit = (300.0 / candidate.timeline_duration).round %>
 
-<div id="timeline">
-  <h1>TIMELINE</h1>
+<div id="timeline" style="height:<%= candidate.timeline_duration * unit + 50 %>px;">
+  <h1>TIMELINE: <%= candidate.timeline_duration %> yrs, 1 yr = <%= unit %>px, height = <%= candidate.timeline_duration * unit %>px</h1>
   <div id="timeline_container">
-    <div id="vertical_axis" style="height: <%= candidate.timeline_duration * unit %>px;">
+    <div id="vertical_axis">
+      <% (candidate.timeline_duration).times do |n| %>
+        <div class="unit_mark" style="height:<%= unit - 1 %>px;"></div>
+      <% end %>
     </div>
     <div id="events">
-      <% candidate.experiences.order("end_year DESC").order("end_month DESC").each do |experience| %>
-        <div class="start_date_mark" style="height: <%= experience.duration * unit %>px; top: <%= experience.months_before_last * unit %>px;"></div>
-        <div class="end_date_mark" style="height: <%= experience.duration * unit %>px; top: <%= experience.months_before_last * unit %>px;"></div>
-        <div class="block" style="height: <%= experience.duration * unit %>px; width: <%= experience.duration * unit * 0.75 %>px; top: <%= experience.months_before_last * unit %>px;">
+      <% candidate.experiences.order("start_year DESC").each do |experience| %>
+        <!-- <div class="start_date_mark" style="height: <%= experience.duration * unit %>px; top: <%= experience.years_before_last * unit %>px;"></div>
+        <div class="end_date_mark" style="height: <%= experience.duration * unit %>px; top: <%= experience.years_before_last * unit %>px;"></div> -->
+        <div class="block" style="height:<%= experience.duration * unit %>px; width:<%= experience.duration * unit * 0.75 %>px; top:<%= experience.years_before_last * unit %>px;">
         </div>
-        <div class="label" style="height: <%= experience.duration * unit %>px; top: <%= experience.months_before_last * unit + experience.duration * unit / 2 - 9 %>px;">
-          <%= "#{experience.role} at #{experience.company.name}" %>
+        <div class="label" style="height:<%= experience.duration * unit %>px; top:<%= experience.years_before_last * unit + experience.duration * unit / 2 - 9 %>px; left: <%= candidate.longest_experience.duration * unit * 0.75 + 60 %>px;">
+          <%= "#{experience.start_year}#{' - '+experience.end_year.to_s unless experience.duration == 0}#{' ('+pluralize(experience.duration, 'year')+')' unless experience.duration == 0}, #{experience.role} at #{experience.company.name}" %>
         </div>
       <% end %>
     </div>
   </div>
-  <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 </div>

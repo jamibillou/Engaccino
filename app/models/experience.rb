@@ -17,12 +17,11 @@ class Experience < ActiveRecord::Base
   validates :description, :length    => { :within => 20..160 },         :allow_blank => true
     
   def duration
-    12 * (end_year - start_year) + end_month - start_month
+    end_year - start_year
   end
   
-  def months_before_last
-    ordered_experiences = candidate.experiences.order("end_year ASC").order("end_month ASC")
-    12 * (ordered_experiences.last.end_year - end_year) + ordered_experiences.last.end_month - end_month
+  def years_before_last
+    candidate.last_experience.end_year - end_year
   end
 end
 
