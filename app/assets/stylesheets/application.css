@@ -7,7 +7,6 @@ html {
 
 h1 { font-size: 25px; margin: 0; padding: 0; }
 h2 { font-size: 20px; font-weight: normal; }
-h2.no_margin_bottom { margin-bottom: 0; }
 p { margin: 0; padding: 0; }
 
 body {
@@ -113,8 +112,8 @@ header #signin_signup a.button {
 
 /* CONTENT */
 #container h1 {
-  margin-top: 40px;
-  margin-left: 45px;
+  margin-top: 20px;
+  margin-left: 23px;
   margin-bottom: 10px;
 }
 
@@ -215,16 +214,15 @@ a.button.grey_gradient:hover {
 
 /* BLOCKS */
 .white_block {
-  width:  1000px;
   background: white;
   margin-left: 10px;
   margin-right: 25px;
   margin-bottom: 10px;
-  padding: 15px 20px 22px 20px;
+  padding: 15px 20px 20px 14px;
   font-size: 14px;
 }
 .white_block h2 {
-  margin-top: 10px;
+  margin-top: 0px;
   padding: 0;
 }
 .white_block p {
@@ -234,17 +232,17 @@ a.button.grey_gradient:hover {
 /* FIELDS */
 .field {
   height: 35px;
-  width: 200px;
+  width: 250px;
   margin-top: 4px;
   margin-bottom: 4px;
   color: #444;
   font-style: normal;
 }
 .field.margin_left {
-  margin-left: 10px;
+  margin-left: 5px;
 }
 .field.margin_right {
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 .small_field {
@@ -256,10 +254,10 @@ a.button.grey_gradient:hover {
   font-style: normal;
 }
 .small_field.margin_left {
-  margin-left: 10px;
+  margin-left: 5px;
 }
 .small_field.margin_right {
-  margin-right: 10px;
+  margin-right: 5px;
 }
 .fields {
   display: inline;

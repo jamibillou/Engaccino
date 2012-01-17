@@ -8,6 +8,7 @@ class DegreeType < ActiveRecord::Base
   validates :label, :length => { :within => 2..30 },  :presence => true
   
 end
+
 # == Schema Information
 #
 # Table name: diploma_types

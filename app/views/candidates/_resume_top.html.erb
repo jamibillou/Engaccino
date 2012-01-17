@@ -1,6 +1,10 @@
 <div id="share_edit">
-  <%= link_to t('candidates.show.share_profile'), '#', :class => 'slightly_round blue button' %>
-  <%= link_to t('candidates.show.edit_profile'), edit_candidate_path(candidate), :class => 'slightly_round grey button margin_right' %>
+  <% if @title == t('candidates.edit.title') %>
+    <%= f.submit t('candidates.show.view_profile') %>
+  <% else %>
+    <%= link_to t('candidates.show.edit_profile'), edit_candidate_path(candidate), :class => 'slightly_round blue button margin_right' %>
+  <% end %>
+  <%= link_to t('candidates.show.share_profile'), '#', :class => 'slightly_round grey button' %>
   <div id="completion_container" class="slightly_round">
     <div id="completion_bar_empty" class="slightly_round">
       <div id="completion_bar_full" class="slightly_round" style="width: <%= 3*candidate.profile_completion %>px;"></div>

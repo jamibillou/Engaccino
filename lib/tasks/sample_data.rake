@@ -57,11 +57,14 @@ end
 
 def make_experiences
   experience_start_years = (40.years.ago.year..Time.now.year).to_a
+  experience_months = (1..12).to_a
   positions = ['Sales', 'Engineer', 'Technician', 'Teacher', 'Customer service', 'Manager', 'Recruiter', 'Retail', 'Entrepreneur', 'Owner', 'Founder', 'CEO', 'CFO', 'Buyer', 'Merchandiser']
   3.times do |n|
     experience = @candidate.experiences.build
     experience.role = positions[rand(positions.size)]
+    experience.start_month = experience_months[rand(experience_months.size)]
     experience.start_year = experience_start_years[rand(experience_start_years.size)]
+    experience.end_month = experience_months[rand(experience_months.size)]
     experience_end_years = (experience.start_year..Time.now.year).to_a
     experience.end_year = experience_end_years[rand(experience_end_years.size)]
     company = experience.build_company

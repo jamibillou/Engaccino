@@ -17,6 +17,7 @@ class Company < ActiveRecord::Base
   validates :phone,   :length    => { :within => 7..20 }, :format => { :with => phone_regex },             :allow_blank => true
   validates :email,   :format    => { :with => email_regex }, :uniqueness => { :case_sensitive => false }, :allow_blank => true
   validates :url,     :format    => { :with => url_regex },                                                :allow_blank => true
+  
 end
 
 # == Schema Information

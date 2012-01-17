@@ -21,6 +21,11 @@ class Candidate < User
   
   status_array = [ 'available', 'looking', 'open', 'listening', 'happy' ]
   validates :status, :inclusion => { :in => status_array }, :presence => true
+      
+  def timeline_duration
+    ordered_experiences = experiences.order("end_year ASC").order("end_month ASC")
+    12 * (ordered_experiences.last.end_year - ordered_experiences.first.start_year) + (ordered_experiences.last.end_month - ordered_experiences.first.start_month)
+  end
   
 end
 

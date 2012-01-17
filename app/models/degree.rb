@@ -14,6 +14,7 @@ class Degree < ActiveRecord::Base
   validates :label, :length => { :within => 3..150 }, :presence => true
     
 end
+
 # == Schema Information
 #
 # Table name: degrees

@@ -1,0 +1,21 @@
+<% unit = 300 / candidate.timeline_duration %>
+
+<div id="timeline">
+  <h1>TIMELINE</h1>
+  <div id="timeline_container">
+    <div id="vertical_axis" style="height: <%= candidate.timeline_duration * unit %>px;">
+    </div>
+    <div id="events">
+      <% candidate.experiences.order("end_year DESC").order("end_month DESC").each do |experience| %>
+        <div class="start_date_mark" style="height: <%= experience.duration * unit %>px; top: <%= experience.months_ago * unit %>px;"></div>
+        <div class="end_date_mark" style="height: <%= experience.duration * unit %>px; top: <%= experience.months_ago * unit %>px;"></div>
+        <div class="block" style="height: <%= experience.duration * unit %>px; width: <%= experience.duration * unit * 0.75 %>px; top: <%= experience.months_ago * unit %>px;">
+        </div>
+        <div class="label" style="height: <%= experience.duration * unit %>px; top: <%= experience.months_ago * unit + experience.duration * unit / 2 - 9 %>px;">
+          <%= "#{experience.role} at #{experience.company.name}" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+</div>

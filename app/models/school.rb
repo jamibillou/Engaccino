@@ -13,6 +13,7 @@ class School < ActiveRecord::Base
   validates :country, :inclusion => { :in => countries_array }, :allow_blank => true
   
 end
+
 # == Schema Information
 #
 # Table name: schools

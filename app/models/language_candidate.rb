@@ -10,6 +10,7 @@ class LanguageCandidate < ActiveRecord::Base
   #validates_columns :level
   
 end
+
 # == Schema Information
 #
 # Table name: language_candidates
