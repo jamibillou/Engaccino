@@ -20,8 +20,9 @@ class Experience < ActiveRecord::Base
     12 * (end_year - start_year) + end_month - start_month
   end
   
-  def months_ago
-    12 * (Time.now.year - end_year) + Time.now.month - end_month
+  def months_before_last
+    ordered_experiences = candidate.experiences.order("end_year ASC").order("end_month ASC")
+    12 * (ordered_experiences.last.end_year - end_year) + ordered_experiences.last.end_month - end_month
   end
 end
 
