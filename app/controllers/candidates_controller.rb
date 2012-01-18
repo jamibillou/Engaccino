@@ -1,6 +1,8 @@
 class CandidatesController < ApplicationController
 
   include ApplicationHelper
+
+  respond_to :html, :json
   
   before_filter :authenticate,       :except => [:new, :create]
   before_filter :new_user,           :only   => [:new, :create]
@@ -46,7 +48,8 @@ class CandidatesController < ApplicationController
     else
       link_schools_degrees
       @candidate.update_attributes(:profile_completion => 10) unless signed_up?
-      redirect_to @candidate, :flash => { :success => t("flash.success.#{signed_up? ? 'profile_updated' : 'welcome'}") }
+      respond_with @candidate
+      #redirect_to @candidate, :flash => { :success => t("flash.success.#{signed_up? ? 'profile_updated' : 'welcome'}") }
     end
   end 
 

@@ -31,6 +31,9 @@ GEM
       multi_json (~> 1.0)
     annotate (2.4.1.beta1)
     arel (2.2.1)
+    best_in_place (1.0.4)
+      jquery-rails
+      rails (~> 3.1.0)
     builder (3.0.0)
     countries (0.6.2)
       currencies (= 0.4.0)
@@ -125,6 +128,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate (= 2.4.1.beta1)
+  best_in_place
   countries
   enum_column3
   factory_girl_rails
