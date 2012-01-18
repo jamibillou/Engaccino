@@ -24,6 +24,11 @@ describe Degree do
       @degree.should respond_to(:degree_type)  
     end
     
+    it "should not be valid without a degree type" do
+      degree = Degree.new(@attr)
+      degree.should_not be_valid
+    end
+    
     it "should have the right associated degree type" do
       @degree.degree_type_id.should == @degree_type.id
       @degree.degree_type.should == @degree_type

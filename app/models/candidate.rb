@@ -15,7 +15,11 @@ class Candidate < User
   accepts_nested_attributes_for :experiences,
                                 :reject_if => lambda { |attr| attr['company_attributes']['name'].blank? && attr['role'].blank? && attr['start_year'].blank? && attr['end_year'].blank? },
                                 :allow_destroy => true
-  accepts_nested_attributes_for :educations,            :reject_if => lambda { |attr| attr['start_year'].blank? && attr['end_year'].blank? }, :allow_destroy => true  
+  accepts_nested_attributes_for :educations,            :reject_if => lambda { |attr| attr['school_attributes']['label'].blank? &&
+                                                                                      attr['degree_attributes']['label'].blank? && 
+                                                                                      attr['degree_attributes']['degree_type_attributes']['label'].blank? && 
+                                                                                      attr['start_year'].blank? && attr['end_year'].blank? }, 
+                                :allow_destroy => true  
   accepts_nested_attributes_for :degrees,               :allow_destroy => true
   accepts_nested_attributes_for :language_candidates,   :allow_destroy => true
   

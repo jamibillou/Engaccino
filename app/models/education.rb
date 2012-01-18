@@ -9,9 +9,9 @@ class Education < ActiveRecord::Base
   accepts_nested_attributes_for :school, :reject_if => lambda { |attr| attr['name'].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :degree, :reject_if => lambda { |attr| attr['label'].blank? }, :allow_destroy => true
     
-  #validates :degree_id,                                                 :presence => true
-  #validates :school_id,                                                 :presence => true
-  #validates :candidate_id,                                              :presence => true
+  validates :degree,                                                    :presence => true
+  validates :school,                                                    :presence => true
+  validates :candidate_id,                                              :presence => true
   validates :description, :length => { :within => 5..500 },             :allow_blank => true
   validates :start_year,  :inclusion => { :in => 1900..Time.now.year }, :presence => true
   validates :end_year,    :inclusion => { :in => 1900..Time.now.year }, :presence => true

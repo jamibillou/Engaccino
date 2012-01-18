@@ -32,6 +32,13 @@ describe Education do
       @education.should respond_to(:degree)
     end
     
+    it "should not be valid without a degree" do
+      education_without_degree = Education.new(@attr)
+      education_without_degree.school = @school
+      education_without_degree.candidate = @candidate
+      education_without_degree.should_not be_valid
+    end
+    
     it "should have the right associated school" do
       @education.degree_id.should == @degree.id
       @education.degree.should == @degree
@@ -56,6 +63,13 @@ describe Education do
       @education.should respond_to(:school)
     end
     
+    it "should not be valid without a school" do
+      education_without_project = Education.new(@attr)
+      education_without_project.degree = @degree
+      education_without_project.candidate = @candidate
+      education_without_project.should_not be_valid      
+    end
+    
     it "should not destroy associated degrees" do
       @education.school_id.should == @school.id
       @education.school.should == @school
@@ -70,6 +84,10 @@ describe Education do
     
     it "should require a candidate id" do
       @candidate.educations.build(@attr).should_not be_valid
+    end
+    
+    it "should require a school id" do
+      @school.educations.build(@attr).should_not be_valid
     end   
       
     it "should accept empty descriptions" do

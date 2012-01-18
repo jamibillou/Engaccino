@@ -41,6 +41,12 @@ describe Experience do
       @experience.should respond_to(:company)
     end
     
+    it "should not be valid without a company" do
+      experience_without_company = Experience.new(@attr)
+      experience_without_company.candidate = @candidate
+      experience_without_company.should_not be_valid
+    end
+    
     it "should have the right associated company" do
       @experience.company_id.should == @company.id
       @experience.company.should == @company

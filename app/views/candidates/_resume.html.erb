@@ -10,7 +10,7 @@
             <h2><%= display_period(experience) %></h2>
           </td>
           <td>
-            <h2><%= experience.role %> at <%= experience.company.name %></h2>
+            <h2><b><%= experience.role %></b> <%=t 'at' %> <b><%= experience.company.name %></b></h2>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
             <br />
           </td>
@@ -29,7 +29,7 @@
             <h2><%= display_period(education) %></h2>
           </td>
           <td>
-            <h2><%= education.degree.degree_type.label %> in <%= education.degree.label %></h2>
+            <h2><b><%= education.degree.degree_type.label %></b> <%=t 'in' %> <b><%= education.degree.label %></b></h2>
             <%= education.school.name %>
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
             <br />

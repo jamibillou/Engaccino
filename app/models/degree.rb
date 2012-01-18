@@ -10,7 +10,7 @@ class Degree < ActiveRecord::Base
   
   accepts_nested_attributes_for :degree_type, :allow_destroy => true
   
-  #validates :degree_type_id,                          :presence => true
+  validates :degree_type,                             :presence => true
   validates :label, :length => { :within => 3..150 }, :presence => true
     
 end

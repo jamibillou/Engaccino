@@ -7,8 +7,8 @@ class Experience < ActiveRecord::Base
   
   accepts_nested_attributes_for :company, :allow_destroy => true
             
-#  validates :candidate_id,                                              :presence => true
-#  validates :company_id,                                                :presence => true
+  validates :candidate_id,                                              :presence => true
+  validates :company,                                                   :presence => true
   validates :role,        :length    => { :within => 3..80 },           :presence => true
   validates :start_year,  :inclusion => { :in => 1900..Time.now.year }, :presence => true
   validates :end_year,    :inclusion => { :in => 1900..Time.now.year }, :presence => true

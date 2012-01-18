@@ -7,7 +7,6 @@ class CandidatesController < ApplicationController
   before_filter :correct_user,       :only   => [:edit, :update]
   before_filter :admin_user,         :only   => [:destroy]
   before_filter :signed_up,          :only   => [:index, :show]
-#  before_filter :custom_validation,  :only   => [:update]
   
   def index
     @candidates = Candidate.all
@@ -81,14 +80,5 @@ class CandidatesController < ApplicationController
         redirect_to candidate_path(current_user), :notice => t('flash.notice.already_registered')
       end
     end
-    
-#    def custom_validation
-#      error = ""
-#      for i in 0..params[:candidate][:educations_attributes].count-1
-#        error += "empty degree line "+(i+1).to_s+"," if params[:candidate][:educations_attributes][i.to_s][:degree_attributes][:label].blank?
-#        error += "empty school line "+(i+1).to_s+"," if params[:candidate][:educations_attributes][i.to_s][:school_attributes][:label].blank?
-#      end
-#      redirect_to edit_candidate_path(current_user), :flash => {:error => error} unless error.blank?
-#    end
     
 end
