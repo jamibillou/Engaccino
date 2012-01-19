@@ -26,7 +26,7 @@
       <% @educations.each do |education| %>
         <tr>
           <td width="130" valign="top">
-            <h2><%= display_period(education) %></h2>
+              <h2><%= display_period(education) %></h2>
           </td>
           <td>
             <h2><b><%= education.degree.degree_type.label %></b> <%=t 'in' %> <b><%= education.degree.label %></b></h2>

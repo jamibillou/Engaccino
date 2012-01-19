@@ -6,9 +6,14 @@
     <div class="identity">
       <div class="photo left"><%=t 'candidates.profile_photo' %></div>
       <div class="name_place">
-        <h2><a href="<%= candidate_path(candidate) %>"><%= candidate.first_name %><br /><%= candidate.last_name %></a></h2> 
-        <%= candidate.city.blank? ? t('candidates.city') : candidate.city %>, 
-        <%= candidate.country.blank? ? t('candidates.country') : country(candidate.country) %>        
+      	<% if current_user == candidate && params[:action] == 'show' %>
+      	  <h2><%= best_in_place candidate, :first_name, :html_attrs => {:class => 'small_edit_field'} %><br />
+      	      <%= best_in_place candidate, :last_name,  :html_attrs => {:class => 'small_edit_field'} %></h2> 
+        <% else %>
+          <h2><a href="<%= candidate_path(candidate) %>"><%= candidate.first_name %><br /><%= candidate.last_name %></a></h2>	
+        <% end %>  
+          <%= candidate.city.blank? ? t('candidates.city') : candidate.city %>, 
+          <%= candidate.country.blank? ? t('candidates.country') : country(candidate.country) %>      
       </div>
     </div>    	
     <% if current_user.admin? %>
@@ -24,7 +29,11 @@
         at <%= @experiences.first.company.name %>
       <% end %>
       <div class="status">
-        <%=t "candidates.#{candidate.status}_status" %>
+      	<% if current_user == candidate && params[:action] == 'show' %>
+      	  <%= best_in_place candidate, :status, :type => :select, :collection => status_again %>
+      	<% else %>
+          <%=t "candidates.#{candidate.status}_status" %>
+      	<% end %>
       </div>
     </div>    	
   </div>
@@ -45,8 +54,8 @@
   <% if params[:action] == 'show' %>
     <div class="contact">
       <h2><%= "#{t('candidates.contact')} #{candidate.first_name}" %></h2>
-      <p><%= candidate.email %></p>
-      <p><%= candidate.phone %></p>
+      <p><%= best_in_place_if current_user == candidate, candidate, :email %></p>
+      <p><%= best_in_place_if current_user == candidate, candidate, :phone %></p>
       <div class="buttons">
         <a class="small slightly_round grey button left margin_right" href="#">Fb</a>
         <a class="small slightly_round grey button left margin_right" href="#">Li</a>

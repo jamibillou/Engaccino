@@ -286,5 +286,17 @@
   position: absolute;
 }
 
+/* Editing fields */
+.best_in_place:hover {
+  cursor: pointer;
+  background-color: #CCCCCC;
+}
 
+.small_edit_field {
+  width: 120px;
+}
+
+.edit_pic {
+  display: none;
+}
 

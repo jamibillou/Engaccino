@@ -1,6 +1,6 @@
 class Candidate < User
   
-  attr_accessible :status, :experiences_attributes, :educations_attributes, :degrees_attributes, :language_candidates_attributes
+  attr_accessible :status, :experiences_attributes, :educations_attributes, :degrees_attributes
   
   has_many :experiences,          :dependent => :destroy
   has_many :companies,            :through   => :experiences
@@ -21,7 +21,7 @@ class Candidate < User
                                                                                       attr['start_year'].blank? && attr['end_year'].blank? }, 
                                 :allow_destroy => true  
   accepts_nested_attributes_for :degrees,               :allow_destroy => true
-  accepts_nested_attributes_for :language_candidates,   :allow_destroy => true
+  #accepts_nested_attributes_for :language_candidates,   :allow_destroy => true
   
   status_array = [ 'available', 'looking', 'open', 'listening', 'happy' ]
   validates :status, :inclusion => { :in => status_array }, :presence => true
