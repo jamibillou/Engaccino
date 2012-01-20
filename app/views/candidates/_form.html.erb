@@ -5,7 +5,6 @@
   <%= render 'personal_information',    :f => candidate_builder %>
   <%= render 'professional_experience', :f => candidate_builder %>
   <%= render 'education',               :f => candidate_builder %>
-  <%= render 'language_candidate',		:f => candidate_builder %>
   <%= render 'status',                  :f => candidate_builder %>
   <%= candidate_builder.submit t('candidates.show.view_profile'), :class => 'center' unless signed_up? %>
 <% end %>

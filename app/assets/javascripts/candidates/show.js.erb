@@ -1,0 +1,10 @@
+$(document).ready(function()
+{
+  $('.best_in_place').best_in_place();
+  
+  var arrayBIP = $('span.best_in_place');
+  for(var i = 0; i < arrayBIP.length; i++)
+  {
+  	$('#'+arrayBIP[i].id).attr('title','Click to edit');
+  }
+});

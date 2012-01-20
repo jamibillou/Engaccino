@@ -61,7 +61,7 @@ def make_educations
   education_start_months = (8..10).to_a
   education_end_months = (5..7).to_a
   degrees = ['Art', 'Sciences', 'Mathematics', 'Economics', 'Management', 'Languages', 'History', 'Philosophy', 'Biology', 'Software Development', 'Mecanics', 'Electronics', 'Physics']
-  degree_types = ["Master's", "Bachelor's", 'Diploma', 'Local degree']
+  degree_types = ["Master's", "Bachelor's", 'Diploma']
   3.times do |n|
     education = Education.new
     education.start_month = education_start_months[rand(education_start_months.size)]
