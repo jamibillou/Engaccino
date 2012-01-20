@@ -22,6 +22,13 @@ class Education < ActiveRecord::Base
     DegreeType.find(degree.degree_type_id).label
   end
   
+  def duration
+    end_year - start_year
+  end
+  
+  def years_before_last
+    candidate.last_education.end_year - end_year
+  end
 end
 
 # == Schema Information

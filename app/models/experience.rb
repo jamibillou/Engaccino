@@ -17,11 +17,11 @@ class Experience < ActiveRecord::Base
   validates :description, :length    => { :within => 20..160 },         :allow_blank => true
     
   def duration
-    end_year - start_year
+    end_year - start_year - 1 + (12 - start_month + end_month) / 12.0
   end
   
   def years_before_last
-    candidate.last_experience.end_year - end_year
+    self == candidate.last_experience ? 0 : candidate.last_experience.end_year - end_year - 1 + (12 - end_month + candidate.last_experience.end_month) / 12.0
   end
 end
 

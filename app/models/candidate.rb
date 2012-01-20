@@ -27,15 +27,35 @@ class Candidate < User
   validates :status, :inclusion => { :in => status_array }, :presence => true
       
   def timeline_duration
-    last_experience.end_year - first_experience.start_year
+    experience_duration
+  end
+  
+  def education_duration
+    last_education.end_year - first_education.start_year
+  end
+  
+  def first_education
+    educations.order("start_year ASC").order("start_month ASC").first
+  end
+  
+  def last_education
+    educations.order("end_year ASC").order("end_month ASC").last
+  end
+  
+  def longest_education
+    educations.sort_by!{ |education| education.duration }.last
+  end
+  
+  def experience_duration
+    last_experience.end_year - first_experience.start_year - 1 + (12 - first_experience.start_month + last_experience.end_month) / 12.0
   end
   
   def first_experience
-    experiences.order("start_year ASC").first
+    experiences.order("start_year ASC").order("start_month ASC").first
   end
   
   def last_experience
-    experiences.order("end_year ASC").last
+    experiences.order("end_year ASC").order("end_month ASC").last
   end
   
   def longest_experience
