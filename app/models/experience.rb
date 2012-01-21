@@ -20,11 +20,11 @@ class Experience < ActiveRecord::Base
     end_year - start_year - 1 + (12 - start_month + end_month) / 12.0
   end
   
-  def years_before_latest_experience
-    self == candidate.latest_experience ? 0 : candidate.latest_experience.end_year - end_year - 1 + (12 - end_month + candidate.latest_experience.end_month) / 12.0
+  def yrs_before_last_exp
+    self == candidate.last_experience ? 0 : candidate.last_experience.end_year - end_year - 1 + (12 - end_month + candidate.last_experience.end_month) / 12.0
   end
   
-  def years_after_first_event
+  def yrs_after_first_event
     self == candidate.first_event ? 0 : start_year - candidate.first_event.start_year - 1 + (12 - candidate.first_event.start_month + start_month) / 12.0
   end
 end

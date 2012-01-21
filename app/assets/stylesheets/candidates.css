@@ -235,6 +235,26 @@
 }
 .timeline_container {
   position: absolute;
+  display: block;
+}
+#resume #timeline .horizontal_axis {
+  height: 3px;
+  bottom: -3px;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid #CCC;
+  display: block;
+  position: absolute;
+}
+#resume #timeline .horizontal_axis .unit_mark {
+  border-right: 1px solid #CCC;
+  padding-top: 3px;
+  height: 0px;
+  position: absolute;
+  display: block;
+  text-align: center;
+  color: #CCC;
+  font-size: 10px;
 }
 #resume #timeline .vertical_axis {
   width: 3px;

@@ -380,6 +380,7 @@ a.button.grey_gradient:hover {
 	-moz-transform:rotate(270deg);
 	-o-transform: rotate(270deg);
 	white-space: nowrap;
+	background-color: #EEE;
 }
 
 /* BEST IN PLACE */

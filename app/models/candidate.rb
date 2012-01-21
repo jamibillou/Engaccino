@@ -27,7 +27,7 @@ class Candidate < User
   validates :status, :inclusion => { :in => status_array }, :presence => true
       
   def timeline_duration
-    latest_event.end_year - first_event.start_year - 1 + (12 - first_event.start_month + latest_event.end_month) / 12.0
+    last_event.end_year - first_event.start_year - 1 + (12 - first_event.start_month + last_event.end_month) / 12.0
   end
   
   def first_event
@@ -38,11 +38,11 @@ class Candidate < User
     end
   end
   
-  def latest_event
-    if (latest_education.end_year == latest_experience.end_year && latest_education.end_month <= latest_experience.end_month) || latest_education.end_year < latest_experience.end_year
-      latest_experience
+  def last_event
+    if (last_education.end_year == last_experience.end_year && last_education.end_month <= last_experience.end_month) || last_education.end_year < last_experience.end_year
+      last_experience
     else
-      latest_education
+      last_education
     end
   end
   
@@ -51,14 +51,14 @@ class Candidate < User
   end
   
   def education_duration
-    latest_education.end_year - first_education.start_year
+    last_education.end_year - first_education.start_year
   end
   
   def first_education
     educations.order("start_year ASC").order("start_month ASC").first
   end
   
-  def latest_education
+  def last_education
     educations.order("end_year ASC").order("end_month ASC").last
   end
   
@@ -67,14 +67,14 @@ class Candidate < User
   end
   
   def experience_duration
-    latest_experience.end_year - first_experience.start_year - 1 + (12 - first_experience.start_month + latest_experience.end_month) / 12.0
+    last_experience.end_year - first_experience.start_year - 1 + (12 - first_experience.start_month + last_experience.end_month) / 12.0
   end
   
   def first_experience
     experiences.order("start_year ASC").order("start_month ASC").first
   end
   
-  def latest_experience
+  def last_experience
     experiences.order("end_year ASC").order("end_month ASC").last
   end
   
