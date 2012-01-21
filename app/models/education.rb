@@ -23,11 +23,15 @@ class Education < ActiveRecord::Base
   end
   
   def duration
-    end_year - start_year
+    end_year - start_year - 1 + (12 - start_month + end_month) / 12.0
   end
   
-  def years_before_last
-    candidate.last_education.end_year - end_year
+  def years_before_latest_education
+    self == candidate.latest_education ? 0 : candidate.latest_education.end_year - end_year - 1 + (12 - end_month + candidate.latest_education.end_month) / 12.0
+  end
+  
+  def years_after_first_event
+    self == candidate.first_event ? 0 : start_year - candidate.first_event.start_year - 1 + (12 - candidate.first_event.start_month + start_month) / 12.0
   end
 end
 
