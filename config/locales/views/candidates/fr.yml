@@ -52,6 +52,7 @@ fr:
       add: "Ajouter une expérience"
       delete: "Supprimer cette expérience"
       add: "Ajouter une expérience"
+      edit_description: "Aucune description pour le moment"
     
     language:
       level: "Niveau"

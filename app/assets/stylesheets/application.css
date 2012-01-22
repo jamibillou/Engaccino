@@ -396,6 +396,10 @@ a.button.grey_gradient:hover {
   padding-right: 15px;
 }
 
+.best_in_place textarea {
+  width: 450px;
+}
+
 .purr {
   font-size: 12px;
   font-weight: 100;

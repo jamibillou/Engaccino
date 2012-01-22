@@ -55,6 +55,7 @@ en:
       add: "Add an experience"
       delete: "Delete this experience"
       add: "Add an experience"
+      edit_description: "No given description"
         
     index:
       title: "List of all candidates"

@@ -227,6 +227,11 @@
   margin-top: 10px;
 }
 
+#resume .empty_field {
+  font-style: italic;
+  color: #969696;
+}
+
 /* TIMELINE */
 #resume #timeline {
   background-color: white;
