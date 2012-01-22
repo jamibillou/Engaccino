@@ -45,12 +45,17 @@ class CandidatesController < ApplicationController
   def update
     unless @candidate.update_attributes(params[:candidate])
       init_page :title => "candidates.edit.#{signed_up? ? 'title' : 'complete_your_profile'}", :javascripts => 'candidates/edit'
-      render_page :edit, :id => @candidate, :flash => { :error => error_messages(@candidate) }
+      respond_to do |format|
+        format.html { render_page :edit, :id => @candidate, :flash => { :error => error_messages(@candidate) }}
+        format.json { respond_with_bip(@candidate) }
+      end
     else
       link_schools_degrees
       @candidate.update_attributes(:profile_completion => 10) unless signed_up?
-      respond_with @candidate
-      #redirect_to @candidate, :flash => { :success => t("flash.success.#{signed_up? ? 'profile_updated' : 'welcome'}") }
+      respond_to do |format|
+        format.html { redirect_to(@candidate, :flash => { :success => t("flash.success.#{signed_up? ? 'profile_updated' : 'welcome'}") })}
+        format.json { respond_with_bip(@candidate) }
+      end
     end
   end 
 
