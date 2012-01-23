@@ -261,6 +261,10 @@ a.button.grey_gradient:hover {
   display: inline;
 }
 
+.select {
+  height: 35px;
+}
+
 /* VISIBILITY */
 .hidden {
   display: none;
@@ -391,8 +395,7 @@ a.button.grey_gradient:hover {
   cursor: pointer;
   background-image: url('pencil.png');
   background-repeat: no-repeat;
-  background-position-x: right;
-  background-position-y: center;
+  background-position: right center;
   padding-right: 15px;
 }
 
