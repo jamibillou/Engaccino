@@ -11,7 +11,7 @@ Engaccino::Application.routes.draw do
     end
   end    
   
-  resources :users, :companies
+  resources :users, :companies, :experiences, :educations, :degree_types, :degrees, :schools
   resources :sessions, :only => [:new, :create, :destroy]
   
   match '/candidates', :to => 'candidates#index'

@@ -52,6 +52,11 @@ fr:
       add: "Ajouter une expérience"
       delete: "Supprimer cette expérience"
       add: "Ajouter une expérience"
+      edit_description: "Aucune description pour le moment"
+      start_month: "Mois début"
+      start_year: "Année début"
+      end_month: "Mois fin"
+      end_year: "Année fin"
     
     language:
       level: "Niveau"

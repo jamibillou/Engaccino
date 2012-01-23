@@ -261,6 +261,10 @@ a.button.grey_gradient:hover {
   display: inline;
 }
 
+.select {
+  height: 35px;
+}
+
 /* VISIBILITY */
 .hidden {
   display: none;
@@ -381,7 +385,23 @@ a.button.grey_gradient:hover {
   cursor: pointer;
   background-image: url('pencil.png');
   background-repeat: no-repeat;
-  background-position-x: right;
-  background-position-y: center;
+  background-position: right center;
   padding-right: 15px;
+}
+
+.best_in_place textarea {
+  width: 450px;
+}
+
+.purr {
+  font-size: 12px;
+  font-weight: 100;
+  padding: 5px 6px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fa533f), to(#e44a37));
+  background: -moz-linear-gradient(top,  #fa533f,  #e44a37);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fa533f', endColorstr='#e44a37');
+  color: #74241b;
+  position: fixed;
+  top: 200px;
+  right: 10%;
 }

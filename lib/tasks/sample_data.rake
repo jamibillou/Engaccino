@@ -66,7 +66,7 @@ def make_educations
     education = Education.new
     education.start_month = education_start_months[rand(education_start_months.size)]
     education.start_year  = education_start_years[rand(education_start_years.size)]
-    education.end_month   = education_end_months[rand(education_end_months.size)]
+    education.end_month = education_end_months[rand(education_end_months.size)]
     education_end_years = (education.start_year..Time.now.year).to_a
     education.end_year  = education_end_years[rand(education_end_years.size)]
     education.candidate = @candidate

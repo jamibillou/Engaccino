@@ -10,8 +10,9 @@
             <h2><%= display_period(experience) %></h2>
           </td>
           <td>
-            <h2><%= experience.role %> <%=t 'at' %> <%= experience.company.name %></h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <h2><%= best_in_place_if current_user == candidate, experience, :role, :path => experience %> 
+            	<%=t 'at' %> <%= best_in_place_if current_user == candidate, experience.company, :name, :path => "/companies/"+experience.company.id.to_s %></h2>
+            <p><%= best_in_place_if current_user == candidate, experience, :description, :type => :textarea, :path => experience, :nil => "<span class=\"empty_field\">"+t('candidates.experience.edit_description')+"</span>" %></p>
             <br />
           </td>
         </tr>
@@ -29,9 +30,10 @@
               <h2><%= display_period(education) %></h2>
           </td>
           <td>
-            <h2><%= education.degree.degree_type.label %> <%=t 'in' %> <%= education.degree.label %></h2>
-            <%= education.school.name %>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <h2><%= best_in_place_if current_user == candidate, education.degree.degree_type, :label, :path => "/degree_types/"+education.degree.degree_type.id.to_s %> 
+            <%=t 'in' %> <%= best_in_place_if current_user == candidate, education.degree, :label, :path => "/degrees/"+education.degree.id.to_s %></h2>
+            <%= best_in_place_if current_user == candidate, education.school, :name, :path => "/schools/"+education.school.id.to_s %>
+            <p><%= best_in_place_if current_user == candidate, education, :description, :type => :textarea, :path => education, :nil => "<span class=\"empty_field\">"+t('candidates.experience.edit_description')+"</span>" %></p>
             <br />
           </td>
         </tr>

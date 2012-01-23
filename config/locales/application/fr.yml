@@ -47,6 +47,9 @@ fr:
       please_finish_signup: "Finissez d'abord votre inscription pour accéder à cette page."
       restricted_page: "Cette page est protégée, vous ne pouvez pas y accéder !"
       already_registered: "Ce n'est pas votre compte ? Déconnectez vous et créez le votre !"
+  
+  date:
+    month_names: [~, Janvier, Février, Mars, Avril, Mai, Juin, Juillet, Août, Septembre, Octobre, Novembre, Décembre]
       
   # Actions
   delete: "Supprimer"

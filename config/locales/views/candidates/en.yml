@@ -55,6 +55,11 @@ en:
       add: "Add an experience"
       delete: "Delete this experience"
       add: "Add an experience"
+      edit_description: "No given description"
+      start_month: "Start month"
+      start_year: "Start year"
+      end_month: "End month"
+      end_year: "End year"
         
     index:
       title: "List of all candidates"
