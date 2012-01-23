@@ -1,42 +1,60 @@
 <% w_unit = 964.0 / candidate.timeline_duration %>
 <% h_unit = 150 / candidate.longest_event.duration %>
 
-<div id="timeline" style="height: <%= (candidate.longest_event.duration * h_unit * 1.5).round + 55 %>px;">
+<div id="timeline" style="height: <%= (candidate.longest_event.duration * h_unit * 1.7).round + 55 %>px;">
   <h1>TIMELINE</h1>
-  <div class="timeline_container" style="height: <%= (candidate.longest_event.duration * h_unit * 1.5).round %>px;">
+  <div class="timeline_container" style="height: <%= (candidate.longest_event.duration * h_unit * 1.7).round %>px;">
     <div class="events">
       <% candidate.experiences.order("start_year DESC").each do |experience| %>
-        <div class="experience_block" style="height:<%= (experience.duration * h_unit).round %>px; width:<%= (experience.duration * w_unit).round %>px; left:<%= (experience.yrs_after_first_event * w_unit).round %>px; bottom: 0px;">
+        <div class="experience_block" style="height:<%= (experience.duration * h_unit).round %>px; width:<%= (experience.duration * w_unit).round %>px; left:<%= (experience.yrs_after_first_event * w_unit).round %>px; bottom: 1px; z-index: <%= (1000 / experience.duration).round %>;">
+          <% if experience.duration >= candidate.timeline_duration / 5 %>
+            <div class="label">
+              <%= experience.role %>
+            </div>
+          <% end %>
         </div>
-        <div class="label<%= ' vertical_text' if experience.duration < 1 %>" style="left:
-                         <% if experience.duration < 1 %>
-                           <%= "#{((experience.yrs_after_first_event + experience.duration / 2) * w_unit).round}px; width:0px; bottom:#{(experience.duration * h_unit).round}px;" %>
-                         <% else %>
-                           <%= "#{(experience.yrs_after_first_event * w_unit).round}px; width:#{(experience.duration * w_unit).round}px; bottom:#{(experience.duration * h_unit).round + 3}px;" %>
-                         <% end %>">
-          <%= experience.role %>
-        </div>
+        <% if experience.duration < candidate.timeline_duration / 5 %>
+          <div class="vertical_label" style="<%= "left:#{((experience.yrs_after_first_event + experience.duration / 2) * w_unit).round + 10}px;" %>">
+            <%= experience.role %>
+          </div>
+          <div class="vertical_line" style="<%= "left:#{((experience.yrs_after_first_event + experience.duration / 2) * w_unit).round}px; height:#{(candidate.longest_event.duration * h_unit * 1.7 - (experience.duration * h_unit).round).round}px;" %>"></div>
+        <% end %>
       <% end %>
       <% candidate.educations.order("start_year DESC").each do |education| %>
-        <div class="education_block" style="height:<%= (education.duration * h_unit).round %>px; width:<%= (education.duration * w_unit).round %>px; left:<%= (education.yrs_after_first_event * w_unit).round %>px; bottom: 0px;">
+        <div class="education_block" style="height:<%= (education.duration * h_unit).round %>px; width:<%= (education.duration * w_unit).round %>px; left:<%= (education.yrs_after_first_event * w_unit).round %>px; bottom: 1px; z-index: <%= (1000 / education.duration).round %>;">
+        <% if education.duration >= candidate.timeline_duration / 5 %>
+          <div class="label">
+            <%= education.degree.label %>
+          </div>
+        <% end %>
         </div>
-        <div class="label<%= ' vertical_text' if education.duration < 1 %>" style="left:
-                         <% if education.duration < 1 %>
-                           <%= "#{((education.yrs_after_first_event + education.duration / 2) * w_unit).round}px; width:0px; bottom:#{(education.duration * h_unit).round}px;" %>
-                         <% else %>
-                           <%= "#{(education.yrs_after_first_event * w_unit).round}px; width:#{(education.duration * w_unit).round}px; bottom:#{(education.duration * h_unit).round + 3}px;" %>
-                         <% end %>">
-          <%= education.degree.label %>
-        </div>
+        <% if education.duration < candidate.timeline_duration / 5 %>
+          <div class="vertical_label" style="<%= "left:#{((education.yrs_after_first_event + education.duration / 2) * w_unit).round + 10}px;" %>">
+            <%= education.degree.label %>
+          </div>
+          <div class="vertical_line" style="<%= "left:#{((education.yrs_after_first_event + education.duration / 2) * w_unit).round}px; height:#{(candidate.longest_event.duration * h_unit * 1.7 - (education.duration * h_unit).round).round}px;" %>"></div>
+        <% end %>
       <% end %>
     </div>
     <div class="horizontal_axis" style="width: <%= (candidate.timeline_duration * w_unit).round + 2 %>px;">
-      <span class="unit_mark" style="width:<%= ((13 - candidate.first_event.start_month) * w_unit / 12).round %>px;">
-      </span>
-      <% (candidate.timeline_duration.round - 1).times do |n| %>
-        <span class="unit_mark" style="left:<%= ((13 - candidate.first_event.start_month) * w_unit / 12).round + (n * w_unit).round %>px;width:<%= w_unit.round %>px;">
-          <%= candidate.first_event.start_year + (n+1) %>
+      <% unless candidate.timeline_duration > 30 %>
+        <span class="unit_mark" style="width:<%= ((13 - candidate.first_event.start_month) * w_unit / 12).round %>px;">
+          <%= candidate.first_event.start_year if candidate.first_event.start_month <= 6 %>
         </span>
+        <% (candidate.timeline_duration.round - 1).times do |n| %>
+          <span class="unit_mark" style="left:<%= ((13 - candidate.first_event.start_month) * w_unit / 12).round + (n * w_unit).round %>px;width:<%= w_unit.round %>px;">
+            <%= candidate.first_event.start_year + (n+1) %>
+          </span>
+        <% end %>
+      <% else %>
+        <span class="unit_mark" style="width:<%= (((13 - candidate.first_event.start_month) / 12 + (10 - candidate.first_event.start_year.modulo(10))) * w_unit ).round %>px;">
+          <%= "#{((candidate.first_event.start_year / 10).truncate * 10)} - #{((candidate.first_event.start_year / 10).truncate * 10) + 10}" if ((13 - candidate.first_event.start_month) / 12 + (10 - candidate.first_event.start_year.modulo(10))) >= 5 %>
+        </span>
+        <% (candidate.timeline_duration.round / 10).times do |n| %>
+          <span class="unit_mark" style="left:<%= ((13 - candidate.first_event.start_month) * w_unit / 12).round + (10 - candidate.first_event.start_year.modulo(10)) * w_unit + (n * w_unit * 10).round %>px;width:<%= w_unit.round * 10 %>px;">
+            <%= ((candidate.first_event.start_year / 10).truncate * 10) + n*10 + 10 %> - <%= ((candidate.first_event.start_year / 10).truncate * 10) + n*10 + 20 %>
+          </span>
+        <% end %>
       <% end %>
     </div>
   </div>

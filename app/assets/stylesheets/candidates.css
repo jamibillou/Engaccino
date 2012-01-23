@@ -233,6 +233,9 @@
   margin-bottom: 10px;
   padding: 12px 0px 0 10px;
 }
+#resume #timeline h1 {
+  margin: 0;
+}
 .timeline_container {
   position: absolute;
   display: block;
@@ -297,23 +300,52 @@
   position: absolute;
 }
 #resume #timeline .events .experience_block {
-  background-color: #f1fef3;
-  border: 1px solid #CCC;
+  background-color: #8bbf42;
+  border-top: 1px solid #EEE;
+  border-left: 1px solid #EEE;
+  border-right: 1px solid #EEE;
   display: block;
   position: absolute;
-  opacity: 0.5;
-  text-align: center;
-  line-height: 0.9;
-  font-size: 9px;
+  opacity: 0.9;
 }
 #resume #timeline .events .education_block {
-  background-color: #f1f8fe;
-  border: 1px solid #CCC;
+  background-color: #0b7fd2;
+  border-top: 1px solid #EEE;
+  border-left: 1px solid #EEE;
+  border-right: 1px solid #EEE;
   display: block;
   position: absolute;
-  opacity: 0.5;
+  opacity: 0.9;
 }
 #resume #timeline .events .label {
   position: absolute;
+  padding-left: 3px;
+  padding-right: 3px;
+  font-size: 25px;
+  font-weight: bolder;
   line-height: 1.1;
+  color: #fff;
+  opacity: inherit;
+}
+#resume #timeline .events .vertical_label {
+  width:0px;
+  top: -7px;
+  position: absolute;
+  font-size: 13px;
+  line-height: 1.1;
+  display: block;
+  writing-mode:tb-rl;
+  -webkit-transform:rotate(90deg);
+  -moz-transform:rotate(90deg);
+  -o-transform: rotate(90deg);
+  filter: flipv fliph;
+  white-space: nowrap;
+  z-index: 1;
+}
+#resume #timeline .vertical_line {
+  width: 1px;
+  display: block;
+  position: absolute;
+  background-color: #DDD;
+  z-index: 0;
 }
