@@ -1,0 +1,28 @@
+<h1>PROFESSIONAL EXPERIENCE</h1>
+<table>
+<% unless @experiences.nil? %>
+  <% @experiences.each do |experience| %>
+    <tr id='experience_line<%= experience.id %>'>
+      <td width="130" valign="top">
+        <h2><%= display_period(experience) %></h2>
+      </td>
+      <td>
+        <h2><%= experience.role %> <%=t 'at' %> <%= experience.company.name %>
+	      <% if current_user == candidate %>
+          	<a herf='#' onclick='displayEditForm'></a>
+          	<%= link_to_function 'edit', "displayEditForm('experience','#{experience.id}')" %>
+          <% end %>
+        </h2>
+        <p>
+        <% if current_user == candidate && (experience.description.nil? || experience.description.empty?) %>
+          <span class='empty_field'><%= t('candidates.experience.edit_description') %></span>
+        <% else %>
+          <%= experience.description %>
+        <% end %>
+        </p>
+        <br />
+      </td>
+    </tr>
+  <% end %>
+<% end %>
+</table>

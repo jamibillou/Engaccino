@@ -265,6 +265,23 @@ a.button.grey_gradient:hover {
   height: 35px;
 }
 
+.small_edit_field {
+  width: 45px;
+  height: 20px;
+  border: 1px solid #555555;
+}
+
+.edit_field {
+  height: 20px;
+  border: 1px solid #555555;
+}
+
+.textarea_edit {
+  width: 300px;
+  height: 45px;
+  border: 1px solid #555555;
+}
+
 /* VISIBILITY */
 .hidden {
   display: none;
