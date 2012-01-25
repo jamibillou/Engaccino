@@ -1,8 +1,0 @@
-<% education_unit = 300.0 / candidate.education_duration %>
-<% experience_unit = 300.0 / candidate.experience_duration %>
-
-<div id="timeline" style="height:350px">
-  <h1>TIMELINE</h1>
-  <%= render 'timeline_experience', :candidate => candidate, :unit => experience_unit %>
-  <%= render 'timeline_education', :candidate => candidate, :unit => education_unit %>
-</div>

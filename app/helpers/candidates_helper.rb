@@ -9,8 +9,11 @@ module CandidatesHelper
   end
   
   def status_again
-    [['available',t('candidates.available_status')],['looking',t('candidates.looking_status')],['open',t('candidates.open_status')],
-     ['listening',t('candidates.listening_status')],['happy',t('candidates.happy_status')]]
+    [ ['available', t('candidates.available_status')],
+      ['looking', t('candidates.looking_status')], 
+      ['open', t('candidates.open_status')],
+      ['listening', t('candidates.listening_status')], 
+      ['happy', t('candidates.happy_status')] ]
   end
   
   def display_period(object)

@@ -25,61 +25,49 @@ class Candidate < User
   
   status_array = [ 'available', 'looking', 'open', 'listening', 'happy' ]
   validates :status, :inclusion => { :in => status_array }, :presence => true
-      
+  
   def timeline_duration
     last_event.end_year - first_event.start_year - 1 + (12 - first_event.start_month + last_event.end_month) / 12.0
   end
   
+  def long_timeline?
+    timeline_duration > 30
+  end
+  
+  def experience_duration
+    last(experiences).end_year - first(experiences).start_year - 1 + (12 - first(experiences).start_month + last(experiences).end_month) / 12.0
+  end
+  
+  def longest_event
+     longest [longest(educations), longest(experiences)]
+  end
+  
   def first_event
-    if (first_education.start_year == first_experience.start_year && first_education.start_month <= first_experience.start_month) || first_education.start_year < first_experience.start_year
-      first_education
+    if (first(educations).start_year == first(experiences).start_year && first(educations).start_month <= first(experiences).start_month) || first(educations).start_year < first(experiences).start_year
+      first(educations)
     else
-      first_experience
+      first(experiences)
     end
   end
   
   def last_event
-    if (last_education.end_year == last_experience.end_year && last_education.end_month <= last_experience.end_month) || last_education.end_year < last_experience.end_year
-      last_experience
+    if (last(educations).end_year == last(experiences).end_year && last(educations).end_month <= last(experiences).end_month) || last(educations).end_year < last(experiences).end_year
+      last(experiences)
     else
-      last_education
+      last(educations)
     end
   end
   
-  def longest_event
-     [ longest_education, longest_experience ].sort_by!{ |event| event.duration }.last
+  def longest(collection)
+    collection.sort_by!{ |object| object.duration }.last
   end
   
-  def education_duration
-    last_education.end_year - first_education.start_year
+  def first(collection)
+    collection.order("start_year ASC").order("start_month ASC").first
   end
   
-  def first_education
-    educations.order("start_year ASC").order("start_month ASC").first
-  end
-  
-  def last_education
-    educations.order("end_year ASC").order("end_month ASC").last
-  end
-  
-  def longest_education
-    educations.sort_by!{ |education| education.duration }.last
-  end
-  
-  def experience_duration
-    last_experience.end_year - first_experience.start_year - 1 + (12 - first_experience.start_month + last_experience.end_month) / 12.0
-  end
-  
-  def first_experience
-    experiences.order("start_year ASC").order("start_month ASC").first
-  end
-  
-  def last_experience
-    experiences.order("end_year ASC").order("end_month ASC").last
-  end
-  
-  def longest_experience
-    experiences.sort_by!{ |experience| experience.duration }.last
+  def last(collection)
+    collection.order("end_year ASC").order("end_month ASC").last
   end
   
 end

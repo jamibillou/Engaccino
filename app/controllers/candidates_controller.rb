@@ -1,6 +1,7 @@
 class CandidatesController < ApplicationController
 
   include ApplicationHelper
+  include TimelineHelper
 
   respond_to :html, :json
   

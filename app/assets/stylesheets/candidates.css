@@ -38,7 +38,7 @@
 }
 
 #share_edit #completion_container {
-  width: 77.5%;
+  width: 77.55%;
   padding: 9px 0px;
   margin-left: 4px;
   background-color: #DDD;
@@ -242,6 +242,7 @@
   margin: 0;
 }
 .timeline_container {
+  width: 75%;
   position: absolute;
   display: block;
 }
@@ -305,29 +306,45 @@
   position: absolute;
 }
 #resume #timeline .events .experience_block {
-  background-color: #8bbf42;
+  background-color: #a9e752;
   border-top: 1px solid #EEE;
   border-left: 1px solid #EEE;
   border-right: 1px solid #EEE;
+  bottom: 1px;
   display: block;
   position: absolute;
   opacity: 0.9;
 }
+#resume #timeline .events .experience_block .shade {
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  display: block;
+  position: absolute;
+}
 #resume #timeline .events .education_block {
-  background-color: #0b7fd2;
+  background-color: #26a5ff;
   border-top: 1px solid #EEE;
   border-left: 1px solid #EEE;
   border-right: 1px solid #EEE;
+  bottom: 1px;
   display: block;
   position: absolute;
   opacity: 0.9;
+}
+#resume #timeline .events .education_block .shade {
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  display: block;
+  position: absolute;
 }
 #resume #timeline .events .label {
   position: absolute;
+  padding-top: 2px;
   padding-left: 3px;
   padding-right: 3px;
   font-size: 25px;
-  font-weight: bolder;
   line-height: 1.1;
   color: #fff;
   opacity: inherit;
@@ -351,6 +368,6 @@
   width: 1px;
   display: block;
   position: absolute;
-  background-color: #DDD;
+  background-color: #CCC;
   z-index: 0;
 }
