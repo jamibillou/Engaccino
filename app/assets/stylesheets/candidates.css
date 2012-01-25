@@ -227,6 +227,17 @@
   margin-top: 10px;
 }
 
+#resume a {
+  text-decoration: none;
+  color: black;
+  margin-left: 20px;
+  font-weight: bold;
+}
+
+#resume a:hover {
+  text-decoration: underline;
+}
+
 #resume .empty_field {
   font-style: italic;
   color: #969696;

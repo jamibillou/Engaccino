@@ -64,6 +64,11 @@ class CandidatesController < ApplicationController
    Candidate.find(params[:id]).destroy
    redirect_to candidates_path, :flash => { :success => t('flash.success.candidate_destroyed') }
   end
+  
+  def showpart
+    @experiences = current_user.experiences.order("start_year DESC")
+    render :partial => params[:model], :locals => { :candidate => current_user}
+  end
 
   private
 

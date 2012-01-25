@@ -1,44 +1,9 @@
 <div id="resume">
   <%= render 'timeline_horizontal', :candidate => @candidate %>
-  <div class="experience">
-    <h1>PROFESSIONAL EXPERIENCE</h1>
-    <table>
-    <% unless @experiences.nil? %>
-      <% @experiences.each do |experience| %>
-        <tr>
-          <td width="130" valign="top">
-            <h2><%= display_period(experience) %></h2>
-          </td>
-          <td>
-            <h2><%= best_in_place_if current_user == candidate, experience, :role, :path => experience %> 
-            	<%=t 'at' %> <%= best_in_place_if current_user == candidate, experience.company, :name, :path => "/companies/"+experience.company.id.to_s %></h2>
-            <p><%= best_in_place_if current_user == candidate, experience, :description, :type => :textarea, :path => experience, :nil => "<span class=\"empty_field\">"+t('candidates.experience.edit_description')+"</span>" %></p>
-            <br />
-          </td>
-        </tr>
-      <% end %>
-    <% end %>
-    </table>
+  <div class="experience" id="experiences">
+  	<%= render 'resume_experiences', :candidate => @candidate %>
   </div>
-  <div class="education">
-    <h1>EDUCATION</h1>
-    <table>
-    <% unless @educations.nil? %>
-      <% @educations.each do |education| %>
-        <tr>
-          <td width="130" valign="top">
-              <h2><%= display_period(education) %></h2>
-          </td>
-          <td>
-            <h2><%= best_in_place_if current_user == candidate, education.degree.degree_type, :label, :path => "/degree_types/"+education.degree.degree_type.id.to_s %> 
-            <%=t 'in' %> <%= best_in_place_if current_user == candidate, education.degree, :label, :path => "/degrees/"+education.degree.id.to_s %></h2>
-            <%= best_in_place_if current_user == candidate, education.school, :name, :path => "/schools/"+education.school.id.to_s %>
-            <p><%= best_in_place_if current_user == candidate, education, :description, :type => :textarea, :path => education, :nil => "<span class=\"empty_field\">"+t('candidates.experience.edit_description')+"</span>" %></p>
-            <br />
-          </td>
-        </tr>
-      <% end %>
-    <% end %>
-    </table>
+  <div class='education' id='educations'>
+  	<%= render 'resume_educations', :candidate => @candidate %>
   </div>
 </div>

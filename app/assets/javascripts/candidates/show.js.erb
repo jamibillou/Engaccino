@@ -1,5 +1,4 @@
-$(document).ready(function()
-{
+$(document).ready(function() {
   $('.best_in_place').best_in_place();
   
   var arrayBIP = $('span.best_in_place');
@@ -8,3 +7,23 @@ $(document).ready(function()
   	$('#'+arrayBIP[i].id).attr('title','Click to edit');
   }
 });
+
+function displayEditForm(model,id) {
+  $.ajax({
+	url: '../'+model+'s/'+id+'/edit',
+	success: function(data) {
+		$('#'+model+'_line'+id).html(data);
+	}
+  });
+}
+
+function cancelUpdate(model) {
+  $.ajax({
+  	url: 'showpart',
+  	type: "POST",
+  	data: {model: "resume_"+model},
+  	success: function(data) {
+  		$('#'+model).html(data);
+  	}
+  });  
+}

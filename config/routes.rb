@@ -5,6 +5,8 @@ Engaccino::Application.routes.draw do
   get "sessions/new"
   get "ajax/countries"
 
+  match 'candidates/showpart', :to => 'candidates#showpart'
+
   resources :candidates do
     resources :experiences do
       resources :companies
@@ -14,7 +16,6 @@ Engaccino::Application.routes.draw do
   resources :users, :companies, :experiences, :educations, :degree_types, :degrees, :schools
   resources :sessions, :only => [:new, :create, :destroy]
   
-  match '/candidates', :to => 'candidates#index'
   match '/signup', :to => 'candidates#new'
   
   match '/signin', :to => 'sessions#new'
