@@ -230,7 +230,7 @@
 #resume a {
   text-decoration: none;
   color: black;
-  margin-left: 20px;
+  margin-right: 5px;
   font-weight: bold;
 }
 
@@ -243,6 +243,10 @@
   color: #969696;
 }
 
+#resume input[type=submit] {
+  padding: 3px;
+  margin: 0;
+}
 /* TIMELINE */
 #resume #timeline {
   background-color: white;

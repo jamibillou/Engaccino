@@ -1,15 +1,13 @@
 <td valign="top">
-  <%= link_to_function image_tag('cancel.png'), "cancelUpdate('experiences')" %><br/>
-  <%= link_to_function image_tag('valid.png'), "validEdit('experiences','#{experience.id}')" %>
-</td>
-<td valign="top">
   <input type='text' value='<%= @experience.start_month %>' class='small_edit_field'/>
   <input type='text' value='<%= @experience.start_year %>' class='small_edit_field'/><br /><%=t 'to' %><br />
   <input type='text' value='<%= @experience.end_month %>' class='small_edit_field'/>
   <input type='text' value='<%= @experience.end_year %>' class='small_edit_field'/>
 </td>
 <td>
-  <h2><input type='text' value='<%= @experience.role %>' class='edit_field' /> <%=t 'at' %> <input type='text' value='<%= @experience.company.name %>' class='edit_field'/>	
+  <h2><input type='text' value='<%= @experience.role %>' class='edit_field' /> <%=t 'at' %> <input type='text' value='<%= @experience.company.name %>' class='edit_field'/>
+  	<%= link_to_function 'update', "validUpdateExperience('#{@experience.id}')" %>
+	<%= link_to_function 'cancel', "cancelUpdate('experiences')" %>
   </h2>
   <p>
 	<textarea class='textarea_edit'><%= @experience.description %></textarea>

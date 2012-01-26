@@ -268,18 +268,19 @@ a.button.grey_gradient:hover {
 .small_edit_field {
   width: 45px;
   height: 20px;
-  border: 1px solid #555555;
+  color: #444;
 }
 
 .edit_field {
   height: 20px;
-  border: 1px solid #555555;
+  color: #444;
 }
 
 .textarea_edit {
   width: 300px;
   height: 45px;
-  border: 1px solid #555555;
+  color: #444;
+  border-color: #999999;
 }
 
 /* VISIBILITY */

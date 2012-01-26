@@ -3,16 +3,16 @@
 <% unless @experiences.nil? %>
   <% @experiences.each do |experience| %>
     <tr id='experience_line<%= experience.id %>'>
+      <% if current_user == candidate %>
+       	<td valign="top">
+       	<%= link_to_function image_tag("pencil.png"), "displayEditForm('experience','#{experience.id}')"%>
+      	</td>
+      <% end %>
       <td width="130" valign="top">
         <h2><%= display_period(experience) %></h2>
       </td>
       <td>
-        <h2><%= experience.role %> <%=t 'at' %> <%= experience.company.name %>
-	      <% if current_user == candidate %>
-          	<a herf='#' onclick='displayEditForm'></a>
-          	<%= link_to_function 'edit', "displayEditForm('experience','#{experience.id}')" %>
-          <% end %>
-        </h2>
+        <h2><%= experience.role %> <%=t 'at' %> <%= experience.company.name %></h2>
         <p>
         <% if current_user == candidate && (experience.description.nil? || experience.description.empty?) %>
           <span class='empty_field'><%= t('candidates.experience.edit_description') %></span>
