@@ -13,6 +13,12 @@
 
 ActiveRecord::Schema.define(:version => 20120112212313) do
 
+  create_table "candidates", :force => true do |t|
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "companies", :force => true do |t|
     t.string   "name"
     t.string   "address"
@@ -103,8 +109,6 @@ ActiveRecord::Schema.define(:version => 20120112212313) do
     t.string   "facebook_login"
     t.string   "linkedin_login"
     t.string   "twitter_login"
-    t.string   "status"
-    t.string   "type"
     t.boolean  "facebook_connect",   :default => false
     t.boolean  "linkedin_connect",   :default => false
     t.boolean  "twitter_connect",    :default => false
@@ -114,6 +118,8 @@ ActiveRecord::Schema.define(:version => 20120112212313) do
     t.string   "encrypted_password"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "status"
+    t.string   "type"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

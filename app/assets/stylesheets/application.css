@@ -283,6 +283,10 @@ a.button.grey_gradient:hover {
   border-color: #999999;
 }
 
+.error_messages {
+  color: #E44A37;
+}
+
 /* VISIBILITY */
 .hidden {
   display: none;

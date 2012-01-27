@@ -2,26 +2,12 @@
 <table>
 <% unless @experiences.nil? %>
   <% @experiences.each do |experience| %>
-    <tr id='experience_line<%= experience.id %>'>
-      <% if current_user == candidate %>
-       	<td valign="top">
-       	<%= link_to_function image_tag("pencil.png"), "displayEditForm('experience','#{experience.id}')"%>
-      	</td>
-      <% end %>
-      <td width="130" valign="top">
-        <h2><%= display_period(experience) %></h2>
+    <tr id='experience_line_<%= experience.id %>'>
+		<%= render 'resume_experience_line', :experience => experience, :candidate => candidate%>
       </td>
-      <td>
-        <h2><%= experience.role %> <%=t 'at' %> <%= experience.company.name %></h2>
-        <p>
-        <% if current_user == candidate && (experience.description.nil? || experience.description.empty?) %>
-          <span class='empty_field'><%= t('candidates.experience.edit_description') %></span>
-        <% else %>
-          <%= experience.description %>
-        <% end %>
-        </p>
-        <br />
-      </td>
+    </tr>
+    <tr id='experience_edit_line_<%= experience.id %>' class='hidden'>
+		<%= render 'experiences/edit_form', :experience => experience %>   	
     </tr>
   <% end %>
 <% end %>

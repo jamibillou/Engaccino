@@ -6,34 +6,43 @@ $(document).ready(function() {
   {
   	$('#'+arrayBIP[i].id).attr('title','Click to edit');
   }
+  
+  $('.edit_experience').each(function()
+  {
+  	arrayId = $(this).attr("id").split('_');
+  	var id = arrayId[2];
+  	$('#'+$(this).attr("id"))
+  	 .bind("ajax:complete", function(evt, xhr, status){
+  	 	//alert(status);
+  	 	//$('#errors'+id).html("Good");
+  	 })
+  	 .bind("ajax:error", function(evt, xhr, status, error)
+  	 {
+  	 	//alert(status);
+  	 	try {
+  	 	  errors = $.parseJSON(xhr.responseText);
+  	 	}
+  	 	catch(err) {
+  	 	  errors = {message: "JSON Error"};
+  	 	}
+  	 	
+  	 	errorText = "Error(s): ";
+  	 	for(error in errors) {
+  	 	  errorText += error+" "+errors[error]+" ";
+  	 	}
+  	 	
+  	 	$('#errors'+id).html(errorText);
+  	 })
+  	;
+  });
 });
 
 function displayEditForm(model,id) {
-  $.ajax({
-	url: '../'+model+'s/'+id+'/edit',
-	success: function(data) {
-		$('#'+model+'_line'+id).html(data);
-	}
-  });
+  $('#'+model+'_edit_line_'+id).show();
+  $('#'+model+'_line_'+id).hide();
 }
 
-function cancelUpdate(model) {
-  $.ajax({
-  	url: 'showpart',
-  	type: "POST",
-  	data: {model: "resume_"+model},
-  	success: function(data) {
-  		$('#'+model).html(data);
-  	}
-  });  
-}
-
-function validEditExperience(id) {
-  /*$.ajax({
-  	url: '../experiences/update',
-  	type: "POST",
-  	data: {start_month: start_month},
-  	success: function(data) {
-  	}
-  });*/
+function hideEditForm(model,id) {
+  $('#'+model+'_edit_line_'+id).hide();
+  $('#'+model+'_line_'+id).show();  
 }
