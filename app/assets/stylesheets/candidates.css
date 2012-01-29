@@ -280,45 +280,8 @@
   color: #CCC;
   font-size: 10px;
 }
-#resume #timeline .vertical_axis {
-  width: 3px;
-  padding: 0;
-  margin: 0;
-  border-left: 1px solid #CCC;
-  margin-bottom: 40px;
-  display: block;
-  float: left;
-}
-#resume #timeline .vertical_axis .unit_mark {
-  border-bottom: 1px solid #CCC;
-  width: 3px;
-  margin: 0;
-  position: relative;
-  display: block;
-}
 #resume #timeline .events {
   display: block;
-}
-#resume #timeline .events .start_date_mark {
-  left: 1px;
-  border-top: 1px solid #CCC;
-  width: 3px;
-  margin: 0;
-  display: block;
-  position: absolute;
-}
-#resume #timeline .events .end_date_mark {
-  left: 1px;
-  border-bottom: 1px solid #CCC;
-  width: 3px;
-  margin: 0;
-  display: block;
-  position: absolute;
-}
-#resume #timeline .events .date {
-  width: 200px;
-  left: 0px;
-  position: absolute;
 }
 #resume #timeline .events .experience_block {
   background-color: #a9e752;
@@ -383,6 +346,6 @@
   width: 1px;
   display: block;
   position: absolute;
-  background-color: #CCC;
+  background-color: #EEE;
   z-index: 0;
 }

@@ -16,16 +16,4 @@ module CandidatesHelper
       ['happy', t('candidates.happy_status')] ]
   end
   
-  def display_period(object)
-    unless object.start_year == object.end_year
-      "#{object.start_year} - #{object.end_year}"
-    else
-      "#{object.start_month}/#{object.start_year} - #{object.end_month}/#{object.end_year}"
-    end
-  end
-  
-  def experience_total(experiences)
-    experiences.first.end_year - experiences.last.start_year
-  end  
-  
 end

@@ -39,7 +39,7 @@
   </div>
   <div class="experience">
     <h2><%= t('candidates.experience.title').remove_accents.upcase %></h2>
-    <h3><%= "#{experience_total(@experiences) unless @experiences.first.nil?} #{t('candidates.years')}" %></h3>
+    <h3><%= "#{candidate.experience_duration.round unless @experiences.first.nil?} #{t('candidates.years')}" %></h3>
   </div>
   <div class="degree">
     <h2><%= t('candidates.degree').remove_accents.upcase %></h2>

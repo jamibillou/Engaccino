@@ -17,7 +17,7 @@ class Experience < ActiveRecord::Base
   validates :description, :length    => { :within => 20..160 },         :allow_blank => true
     
   def duration
-    end_year - start_year - 1 + (12 - start_month + end_month) / 12.0
+    end_year - start_year - 1 + (13 - start_month + end_month) / 12.0
   end
   
   def yrs_before_last_exp

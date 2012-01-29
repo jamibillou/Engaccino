@@ -1,23 +1,23 @@
 <%= form_for experience, :remote => true do |f| %>
-    <td valign="top">
-    	<%= link_to_function image_tag('cancel.png'), "hideEditForm('experience','#{experience.id}')" %><br/>
-    	<%= f.submit 'OK' %>
-    </td>
-    <td valign="top">
-    	<%= f.text_field :start_month, :class => 'small_edit_field' %>
-    	<%= f.text_field :start_year, :class => 'small_edit_field' %>
-    	<br/><%=t 'to' %><br/>
-		<%= f.text_field :end_month, :class => 'small_edit_field' %>
-    	<%= f.text_field :end_year, :class => 'small_edit_field' %>
-    </td>
-    <td>
-        <%= f.text_field :role, :class => 'edit_field' %>
-        <%=t 'at' %>
-        <%= f.fields_for :company do |company_builder| %>
-        	<%= company_builder.text_field :name, :class => 'edit_field' %>
-        <% end %>
-        <br/><br/>
-        <%= f.text_area :description, :class => 'textarea_edit' %>
-        <div class="error_messages" id="errors<%= experience.id %>"></div>
-    </td>
+  <td valign="top">
+  	<%= link_to_function image_tag('cancel.png'), "hideEditForm('experience','#{experience.id}')" %><br/>
+  	<%= f.submit 'OK' %>
+  </td>
+  <td valign="top">
+  	<%= f.text_field :start_month, :class => 'small_edit_field' %>
+  	<%= f.text_field :start_year, :class => 'small_edit_field' %>
+  	<br/><%=t 'to' %><br/>
+	<%= f.text_field :end_month, :class => 'small_edit_field' %>
+  	<%= f.text_field :end_year, :class => 'small_edit_field' %>
+  </td>
+  <td>
+      <%= f.text_field :role, :class => 'edit_field' %>
+      <%=t 'at' %>
+      <%= f.fields_for :company do |company_builder| %>
+      	<%= company_builder.text_field :name, :class => 'edit_field' %>
+      <% end %>
+      <br/><br/>
+      <%= f.text_area :description, :class => 'textarea_edit' %>
+      <div class="error_messages" id="errors<%= experience.id %>"></div>
+  </td>
 <% end %> 

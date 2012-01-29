@@ -44,18 +44,18 @@ class CandidatesController < ApplicationController
   end
 
   def update
-    unless @candidate.update_attributes(params[:candidate])
+    unless @candidate.update_attributes params[:candidate]
       init_page :title => "candidates.edit.#{signed_up? ? 'title' : 'complete_your_profile'}", :javascripts => 'candidates/edit'
       respond_to do |format|
-        format.html { render_page :edit, :id => @candidate, :flash => { :error => error_messages(@candidate) }}
-        format.json { respond_with_bip(@candidate) }
+        format.html { render_page :edit, :id => @candidate, :flash => { :error => error_messages(@candidate) } }
+        format.json { respond_with_bip @candidate }
       end
     else
       link_schools_degrees
-      @candidate.update_attributes(:profile_completion => 10) unless signed_up?
+      @candidate.update_attributes :profile_completion => 10 unless signed_up?
       respond_to do |format|
-        format.html { redirect_to(@candidate, :flash => { :success => t("flash.success.#{signed_up? ? 'profile_updated' : 'welcome'}") })}
-        format.json { respond_with_bip(@candidate) }
+        format.html { redirect_to @candidate, :flash => { :success => t("flash.success.#{signed_up? ? 'profile_updated' : 'welcome'}") } }
+        format.json { respond_with_bip @candidate }
       end
     end
   end 
@@ -67,7 +67,7 @@ class CandidatesController < ApplicationController
   
   def showpart
     @experiences = current_user.experiences.order("start_year DESC")
-    render :partial => params[:model], :locals => { :candidate => current_user}
+    render :partial => params[:model], :locals => { :candidate => current_user }
   end
 
   private

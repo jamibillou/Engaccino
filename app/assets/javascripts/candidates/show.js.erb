@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  
   $('.best_in_place').best_in_place();
   
   var arrayBIP = $('span.best_in_place');
@@ -12,7 +13,8 @@ $(document).ready(function() {
   	arrayId = $(this).attr("id").split('_');
   	var id = arrayId[2];
   	$('#'+$(this).attr("id"))
-  	 .bind("ajax:complete", function(evt, xhr, status){
+  	 .bind("ajax:complete", function(evt, xhr, status)
+  	 {
   	 	//alert(status);
   	 	//$('#errors'+id).html("Good");
   	 })
@@ -38,11 +40,11 @@ $(document).ready(function() {
 });
 
 function displayEditForm(model,id) {
-  $('#'+model+'_edit_line_'+id).show();
-  $('#'+model+'_line_'+id).hide();
+  $('#'+model+'_edit_'+id).show();
+  $('#'+model+'_'+id).hide();
 }
 
 function hideEditForm(model,id) {
-  $('#'+model+'_edit_line_'+id).hide();
-  $('#'+model+'_line_'+id).show();  
+  $('#'+model+'_edit_'+id).hide();
+  $('#'+model+'_'+id).show();  
 }

@@ -15,27 +15,28 @@ class Candidate < User
   accepts_nested_attributes_for :experiences,
                                 :reject_if => lambda { |attr| attr['company_attributes']['name'].blank? && attr['role'].blank? && attr['start_year'].blank? && attr['end_year'].blank? },
                                 :allow_destroy => true
-  accepts_nested_attributes_for :educations,            :reject_if => lambda { |attr| attr['school_attributes']['label'].blank? &&
-                                                                                      attr['degree_attributes']['label'].blank? && 
-                                                                                      attr['degree_attributes']['degree_type_attributes']['label'].blank? && 
-                                                                                      attr['start_year'].blank? && attr['end_year'].blank? }, 
+  accepts_nested_attributes_for :educations,
+                                :reject_if => lambda { |attr| attr['school_attributes']['label'].blank? &&
+                                                              attr['degree_attributes']['label'].blank? && 
+                                                              attr['degree_attributes']['degree_type_attributes']['label'].blank? && 
+                                                              attr['start_year'].blank? && attr['end_year'].blank? }, 
                                 :allow_destroy => true  
   accepts_nested_attributes_for :degrees,               :allow_destroy => true
-  #accepts_nested_attributes_for :language_candidates,   :allow_destroy => true
+#  accepts_nested_attributes_for :language_candidates,   :allow_destroy => true
   
   status_array = [ 'available', 'looking', 'open', 'listening', 'happy' ]
   validates :status, :inclusion => { :in => status_array }, :presence => true
   
   def timeline_duration
-    last_event.end_year - first_event.start_year - 1 + (12 - first_event.start_month + last_event.end_month) / 12.0
+    last_event.end_year - first_event.start_year - 1 + (13 - first_event.start_month + last_event.end_month) / 12.0
+  end
+  
+  def experience_duration
+    last(experiences).end_year - first(experiences).start_year - 1 + (13 - first(experiences).start_month + last(experiences).end_month) / 12.0
   end
   
   def long_timeline?
     timeline_duration > 30
-  end
-  
-  def experience_duration
-    last(experiences).end_year - first(experiences).start_year - 1 + (12 - first(experiences).start_month + last(experiences).end_month) / 12.0
   end
   
   def longest_event
@@ -43,19 +44,11 @@ class Candidate < User
   end
   
   def first_event
-    if (first(educations).start_year == first(experiences).start_year && first(educations).start_month <= first(experiences).start_month) || first(educations).start_year < first(experiences).start_year
-      first(educations)
-    else
-      first(experiences)
-    end
+    [first(educations), first(experiences)].sort_by!{ |event| if first(educations).start_year == first(experiences).start_year then event.start_month else event.start_year end }.first
   end
   
   def last_event
-    if (last(educations).end_year == last(experiences).end_year && last(educations).end_month <= last(experiences).end_month) || last(educations).end_year < last(experiences).end_year
-      last(experiences)
-    else
-      last(educations)
-    end
+    [last(educations), last(experiences)].sort_by!{ |event| if last(educations).end_year == last(experiences).end_year then event.end_month else event.end_year end }.last
   end
   
   def longest(collection)

@@ -1,0 +1,47 @@
+<% horizontal_unit = 100 / candidate.timeline_duration %>
+<% vertical_unit = 150 / candidate.longest_event.duration %>
+<% height = (candidate.longest_event.duration * vertical_unit * 1.7).round %>
+<% axis = candidate.long_timeline? ? design_axis_w_decades(candidate, horizontal_unit, vertical_unit) : design_axis(candidate, horizontal_unit, vertical_unit) %>
+
+<div id="timeline" style="height: <%= height+55 %>px;">
+  <h1>TIMELINE</h1>
+  <div class="timeline_container" style="height: <%= height %>px;">
+  
+    <div class="events">
+      <% candidate.experiences.order("start_year DESC").each do |experience| %>
+        <% block = design_block(experience, candidate.experiences, horizontal_unit, vertical_unit) %>
+        <div class="experience_block" style="height:<%= block[:height] %>px; width:<%= block[:width] %>%; left:<%= block[:left] %>%; z-index: <%= block[:z_index] %>;">
+          <div class="shade" style="opacity:<%= block[:shade] %>;"></div>
+          <% unless block[:label][:vertical?] %><div class="label"><%= experience.role %></div><% end %>
+        </div>
+        <% if block[:label][:vertical?] %>
+          <div class="vertical_label" style="left:<%= block[:label][:left]+0.2 %>%"><%= experience.role %></div>
+          <div class="vertical_line" style="left:<%= block[:label][:left] %>%; height:<%= height %>px;"></div>
+        <% end %>
+      <% end %>
+      
+      <% candidate.educations.order("start_year DESC").each do |education| %>
+        <% block = design_block(education, candidate.educations, horizontal_unit, vertical_unit) %>
+        <div class="education_block" style="height:<%= block[:height] %>px; width:<%= block[:width] %>%; left:<%= block[:left] %>%; z-index: <%= block[:z_index] %>;">
+          <div class="shade" style="opacity:<%= block[:shade] %>;"></div>
+          <% unless block[:label][:vertical?] %><div class="label"><%= education.degree.label %></div><% end %>
+        </div>
+        <% if block[:label][:vertical?] %>
+          <div class="vertical_label" style="left:<%= block[:label][:left]+0.2 %>%"><%= education.degree.label %></div>
+          <div class="vertical_line" style="left:<%= block[:label][:left] %>%; height:<%= height %>px;"></div>
+        <% end %>
+      <% end %>
+    </div>
+    
+    <div class="horizontal_axis" style="width: <%= axis[:width] %>%;">
+      <span class="unit_mark" style="width:<%= axis[:first_unit_mark] %>%;"><%= unit_mark_label(candidate, :first) if first_unit_mark?(candidate) %></span>
+      <% axis[:unit_marks].times do |n| %>
+        <span class="unit_mark" style="left:<%= axis[:first_unit_mark]+n*axis[:unit_mark] %>%; width:<%= axis[:unit_mark] %>%;"><%= unit_mark_label(candidate, :normal, n) %></span>
+      <% end %>
+      <% if last_unit_mark?(candidate) %>
+        <span class="unit_mark" style="left: <%= axis[:first_unit_mark]+(axis[:unit_marks])*axis[:unit_mark] %>%; width:<%= axis[:last_unit_mark] %>%; border:0;"><%= unit_mark_label(candidate, :last) %></span>
+      <% end %>
+    </div>
+    
+  </div>
+</div>

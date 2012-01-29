@@ -2,9 +2,9 @@
 <table>
 <% unless @educations.nil? %>
   <% @educations.each do |education| %>
-    <tr id='education_line<%= education.id %>'>
+    <tr id='education<%= education.id %>'>
       <td width="130" valign="top">
-          <h2><%= display_period(education) %></h2>
+          <h2><%= "#{education.start_month}/#{education.start_year} - #{education.end_month}/#{education.end_year}" %></h2>
       </td>
       <td>
         <h2><%= best_in_place_if current_user == candidate, education.degree.degree_type, :label, :path => "/degree_types/"+education.degree.degree_type.id.to_s %> 

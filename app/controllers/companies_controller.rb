@@ -1,4 +1,5 @@
 class CompaniesController < ApplicationController
+  
   respond_to :json
   
   def update

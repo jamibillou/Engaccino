@@ -1,4 +1,5 @@
 class DegreesController < ApplicationController
+
   respond_to :json
   
   def update

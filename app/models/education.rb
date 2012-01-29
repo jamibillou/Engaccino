@@ -18,12 +18,12 @@ class Education < ActiveRecord::Base
   validates :start_month, :inclusion => { :in => 1..12 },               :allow_blank => true
   validates :end_month,   :inclusion => { :in => 1..12 },               :allow_blank => true
   
-  def degreeType
-    DegreeType.find(degree.degree_type_id).label
-  end
+#  def degreeType
+#    DegreeType.find(degree.degree_type_id).label
+#  end
   
   def duration
-    end_year - start_year - 1 + (12 - start_month + end_month) / 12.0
+    end_year - start_year - 1 + (13 - start_month + end_month) / 12.0
   end
   
   def yrs_before_last_edu
