@@ -15,8 +15,8 @@
           <% unless block[:label][:vertical?] %><div class="label"><%= experience.role %></div><% end %>
         </div>
         <% if block[:label][:vertical?] %>
-          <div class="vertical_label" style="left:<%= block[:label][:left]+0.2 %>%"><%= experience.role %></div>
-          <div class="vertical_line" style="left:<%= block[:label][:left] %>%; height:<%= height %>px;"></div>
+          <div class="vertical_label" style="left:<%= block[:label][:left]+0.9 %>%; z-index: <%= block[:z_index] %>;"><%= experience.role %></div>
+          <div class="vertical_line" style="left:<%= block[:label][:left] %>%; height:<%= height - block[:height] %>px;"></div>
         <% end %>
       <% end %>
       
@@ -27,8 +27,8 @@
           <% unless block[:label][:vertical?] %><div class="label"><%= education.degree.label %></div><% end %>
         </div>
         <% if block[:label][:vertical?] %>
-          <div class="vertical_label" style="left:<%= block[:label][:left]+0.2 %>%"><%= education.degree.label %></div>
-          <div class="vertical_line" style="left:<%= block[:label][:left] %>%; height:<%= height %>px;"></div>
+          <div class="vertical_label" style="left:<%= block[:label][:left]+0.9 %>%; z-index: <%= block[:z_index] %>;"><%= education.degree.label %></div>
+          <div class="vertical_line" style="left:<%= block[:label][:left] %>%; height:<%= height - block[:height] %>px;"></div>
         <% end %>
       <% end %>
     </div>

@@ -20,7 +20,7 @@ module TimelineHelper
   
   def design_axis_w_decades(candidate, horizontal_unit, vertical_unit)
     { :width            => (candidate.timeline_duration * horizontal_unit).round(2),
-      :unit_marks       => (candidate.timeline_duration / 10).round - 1, ### try calculating this from decades of first and last events
+      :unit_marks       => (decade(candidate.last_event.end_year) - decade(candidate.first_event.start_year) - 10) / 10,
       :unit_mark        => horizontal_unit.round(3) * 10,
       :first_unit_mark  => (((13 - candidate.first_event.start_month) / 12 + (10 - candidate.first_event.start_year.modulo(10))) * horizontal_unit ).round(2),
       :last_unit_mark   => (((13 - candidate.last_event.end_month) / 12 + candidate.last_event.end_year.modulo(10)) * horizontal_unit ).round(2) }
@@ -32,7 +32,7 @@ module TimelineHelper
   
   def last_unit_mark?(candidate)
     if candidate.long_timeline?
-      candidate.last_event.end_year - decade(candidate.last_event.end_year) >= 5 ### add case when end_year is the last of the decade (expression == 0)
+      candidate.last_event.end_year - decade(candidate.last_event.end_year) >= 5
     else
       candidate.last_event.end_month >= 6 && candidate.first_event.start_year + candidate.timeline_duration.round - 1 < candidate.last_event.end_year
     end

@@ -291,7 +291,7 @@
   bottom: 1px;
   display: block;
   position: absolute;
-  opacity: 0.9;
+  opacity: 0.85;
 }
 #resume #timeline .events .experience_block .shade {
   width: 100%;
@@ -308,7 +308,7 @@
   bottom: 1px;
   display: block;
   position: absolute;
-  opacity: 0.9;
+  opacity: 0.85;
 }
 #resume #timeline .events .education_block .shade {
   width: 100%;
@@ -333,6 +333,7 @@
   position: absolute;
   font-size: 13px;
   line-height: 1.1;
+  color: #444;
   display: block;
   writing-mode:tb-rl;
   -webkit-transform:rotate(90deg);
@@ -340,12 +341,11 @@
   -o-transform: rotate(90deg);
   filter: flipv fliph;
   white-space: nowrap;
-  z-index: 1;
 }
 #resume #timeline .vertical_line {
   width: 1px;
   display: block;
   position: absolute;
-  background-color: #EEE;
+  background-color: #888;
   z-index: 0;
 }
