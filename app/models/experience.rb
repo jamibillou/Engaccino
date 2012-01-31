@@ -12,17 +12,29 @@ class Experience < ActiveRecord::Base
   validates :role,        :length    => { :within => 3..80 },           :presence => true
   validates :start_year,  :inclusion => { :in => 1900..Time.now.year }, :presence => true
   validates :end_year,    :inclusion => { :in => 1900..Time.now.year }, :presence => true
-  validates :start_month, :inclusion => { :in => 1..12 },               :allow_blank => true
-  validates :end_month,   :inclusion => { :in => 1..12 },               :allow_blank => true
+  validates :start_month, :inclusion => { :in => 1..12 },               :presence => true
+  validates :end_month,   :inclusion => { :in => 1..12 },               :presence => true
   validates :description, :length    => { :within => 20..160 },         :allow_blank => true
+  
+  validate  :date_consistance
     
   def duration
-    end_year - start_year - 1 + (13 - start_month + end_month) / 12.0
+    start_year.nil? || end_year.nil? || start_month.nil? || end_month.nil? ? nil : end_year - start_year - 1 + (13 - start_month + end_month) / 12.0
   end
   
   def yrs_after_first_event
-    self == candidate.first_event ? 0 : start_year - candidate.first_event.start_year - 1 + (12 - candidate.first_event.start_month + start_month) / 12.0
+    if start_year.nil? || end_year.nil? || start_month.nil? || end_month.nil?
+      nil
+    else
+      self == candidate.first_event ? 0 : start_year - candidate.first_event.start_year - 1 + (12 - candidate.first_event.start_month + start_month) / 12.0
+    end
   end
+  
+  private
+  
+    def date_consistance
+      errors.add(:duration, I18n.t('experience.validations.duration')) if duration.nil? || duration < 0
+    end  
 end
 
 # == Schema Information

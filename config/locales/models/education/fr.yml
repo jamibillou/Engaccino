@@ -1,0 +1,5 @@
+fr:
+  education:
+  
+    validations:
+      duration: "Période invalide."

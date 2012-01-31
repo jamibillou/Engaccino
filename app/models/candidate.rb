@@ -1,17 +1,17 @@
 class Candidate < User
   
-  attr_accessible :status, :experiences_attributes, :educations_attributes, :degrees_attributes
+  attr_accessible :status, :experiences_attributes, :educations_attributes, :degrees_attributes, :languages_attributes
   
   has_many :experiences,          :dependent => :destroy
   has_many :companies,            :through   => :experiences
-
   has_many :educations,           :dependent => :destroy
   has_many :degrees,              :through   => :educations
   has_many :schools,              :through   => :educations
-  
   has_many :language_candidates,  :dependent => :destroy
   has_many :language,             :through   => :language_candidates
   
+  accepts_nested_attributes_for :degrees,               :allow_destroy => true
+  accepts_nested_attributes_for :language_candidates,   :allow_destroy => true
   accepts_nested_attributes_for :experiences,
                                 :reject_if => lambda { |attr| attr['company_attributes']['name'].blank? && attr['role'].blank? && attr['start_year'].blank? && attr['end_year'].blank? },
                                 :allow_destroy => true
@@ -21,8 +21,6 @@ class Candidate < User
                                                               attr['degree_attributes']['degree_type_attributes']['label'].blank? && 
                                                               attr['start_year'].blank? && attr['end_year'].blank? }, 
                                 :allow_destroy => true  
-  accepts_nested_attributes_for :degrees,               :allow_destroy => true
-#  accepts_nested_attributes_for :language_candidates,   :allow_destroy => true
   
   status_array = [ 'available', 'looking', 'open', 'listening', 'happy' ]
   validates :status, :inclusion => { :in => status_array }, :presence => true

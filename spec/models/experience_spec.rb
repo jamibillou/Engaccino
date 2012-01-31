@@ -23,10 +23,16 @@ describe Experience do
     experience.should be_valid
   end
   
-  describe "candidate association" do
+  describe "candidate associations" do
     
     it "should have a candidate attribute" do
       @experience.should respond_to(:candidate)
+    end
+    
+    it "should not be valid without a candidate" do
+      experience_without_candidate = Experience.new(@attr)
+      experience_without_candidate.company = @company
+      experience_without_candidate.should_not be_valid
     end
     
     it "should have the right associated candidate" do
@@ -35,7 +41,7 @@ describe Experience do
     end
   end
   
-  describe "company association" do
+  describe "company associations" do
     
     it "should have a company attribute" do
       @experience.should respond_to(:company)
@@ -55,11 +61,11 @@ describe Experience do
   
   describe "validations" do
     
-    it "should require a candidate id" do
+    it "should require a candidate" do
       @company.experiences.build(@attr).should_not be_valid
     end
     
-    it "should require a company id" do
+    it "should require a company" do
       @candidate.experiences.build(@attr).should_not be_valid
     end
     
@@ -141,16 +147,17 @@ describe Experience do
     end
     
     it "should reject start years greater than end years" do
-      greater_start_year_experience = Experience.new(@attr.merge(:start_year => 2009, :start_month => 5, 
-                                                                 :end_year => 2009, :end_month => 3))
-      greater_start_year_experience.should_not be_valid
+      experience = Experience.new(@attr.merge(:start_year => 2010, :start_month => 5, :end_year => 2009, :end_month => 3))
+      experience.candidate = @candidate
+      experience.company = @company
+      experience.should_not be_valid
     end
   
-    it "should accept empty start months" do
+    it "should require a start month" do
       experience = Experience.new(@attr.merge(:start_month => ''))
       experience.candidate = @candidate
       experience.company = @company
-      experience.should be_valid
+      experience.should_not be_valid
     end
     
     it "should reject invalid start months" do
@@ -173,11 +180,11 @@ describe Experience do
       end
     end
     
-    it "should accept empty end months" do
+    it "should require and end month" do
       experience = Experience.new(@attr.merge(:end_month => ''))
       experience.candidate = @candidate
       experience.company = @company
-      experience.should be_valid
+      experience.should_not be_valid
     end
     
     it "should reject invalid end months" do
@@ -198,6 +205,20 @@ describe Experience do
         experience.company = @company
         experience.should be_valid
       end
+    end
+    
+    it "should reject start months greater than end months when start and end years are the same" do
+      experience = Experience.new(@attr.merge(:start_year => 2009, :start_month => 5, :end_year => 2009, :end_month => 3))
+      experience.candidate = @candidate
+      experience.company = @company
+      experience.should_not be_valid
+    end
+    
+    it "should accept start months greater than end months when start and end years are different" do
+      experience = Experience.new(@attr)
+      experience.candidate = @candidate
+      experience.company = @company
+      experience.should be_valid
     end
     
     it "should accept empty descriptions" do
@@ -221,6 +242,47 @@ describe Experience do
       experience.candidate = @candidate
       experience.company = @company
       experience.should_not be_valid
+    end
+  end
+  
+  describe "duration method" do
+    
+    it "should exist" do
+      @experience.should respond_to(:duration)
+    end
+    
+    it "should be nil if a year or month is missing" do
+      Experience.new(@attr.merge(:start_year  => '')).duration.should be_nil
+      Experience.new(@attr.merge(:end_year    => '')).duration.should be_nil
+      Experience.new(@attr.merge(:start_month => '')).duration.should be_nil
+      Experience.new(@attr.merge(:end_month   => '')).duration.should be_nil
+    end
+    
+    it "should calculate the right number of years between the dates" do
+      @experience.duration.truncate.should == 5
+      @experience.duration.round.should == 6
+    end
+    
+    it "should calculate the right number of months between the dates" do
+      (@experience.duration * 12).round.should == 67
+    end
+  end
+  
+  describe "yrs_after_first_event method" do
+    
+    it "should exist" do
+      @experience.should respond_to(:yrs_after_first_event)
+    end
+    
+    it "should be nil if a year or month is missing" do
+      Experience.new(@attr.merge(:start_year  => '')).yrs_after_first_event.should be_nil
+      Experience.new(@attr.merge(:end_year    => '')).yrs_after_first_event.should be_nil
+      Experience.new(@attr.merge(:start_month => '')).yrs_after_first_event.should be_nil
+      Experience.new(@attr.merge(:end_month   => '')).yrs_after_first_event.should be_nil
+    end
+    
+    it "should be 0 if the experience is the first event" do
+      @experience.yrs_after_first_event.should == 0
     end
   end
 end
