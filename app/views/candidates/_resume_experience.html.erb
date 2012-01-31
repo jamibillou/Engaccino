@@ -7,7 +7,8 @@
   <h2><%= "#{experience.start_month}/#{experience.start_year} - #{experience.end_month}/#{experience.end_year}" %></h2>
 </td>
 <td>
-  <h2><%= experience.role %> <%=t 'at' %> <%= experience.company.name %></h2>
+  <h2><%= experience.role %></h2>
+  <%= experience.company.name %>
   <p>
   <% if current_user == candidate && (experience.description.nil? || experience.description.empty?) %>
     <span class='empty_field'><%= t('candidates.experience.edit_description') %></span>

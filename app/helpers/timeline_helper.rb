@@ -1,30 +1,30 @@
 module TimelineHelper
   
-  def design_block(object, collection, horizontal_unit, vertical_unit)
-    { :height  => (object.duration * vertical_unit).round,
-      :width   => (object.duration * horizontal_unit).round(2),
-      :left    => (object.yrs_after_first_event * horizontal_unit).round(2),
+  def design_block(object, collection, units)
+    { :height  => (object.duration * units[:y]).round,
+      :width   => (object.duration * units[:x]).round(2),
+      :left    => (object.yrs_after_first_event * units[:x]).round(2),
       :z_index => object.duration.round != 0 ? (1000 / object.duration).round : 1000,
       :shade   => (object.duration * 0.4 / object.candidate.longest(collection).duration).round(2),
-      :label   => { :left      => ((object.yrs_after_first_event + object.duration / 2) * horizontal_unit).round(2),
+      :label   => { :left      => ((object.yrs_after_first_event + object.duration / 2) * units[:x]).round(2),
                     :vertical? => object.duration < object.candidate.timeline_duration / 5,
                     :text => object.class == Education ? object.degree.label : object.role } }
   end
   
-  def design_axis(candidate, horizontal_unit, vertical_unit)
-    { :width            => (candidate.timeline_duration * horizontal_unit).round(2),
+  def design_axis(candidate, units)
+    { :width            => (candidate.timeline_duration * units[:x]).round(2),
       :unit_marks       => candidate.last_event.end_year - candidate.first_event.start_year - 1,
-      :unit_mark        => horizontal_unit.round(2),
-      :first_unit_mark  => ((13 - candidate.first_event.start_month) * horizontal_unit / 12).round(2),
-      :last_unit_mark   => (candidate.last_event.end_month * horizontal_unit / 12).round(2) }
+      :unit_mark        => units[:x].round(2),
+      :first_unit_mark  => ((13 - candidate.first_event.start_month) * units[:x] / 12).round(2),
+      :last_unit_mark   => (candidate.last_event.end_month * units[:x] / 12).round(2) }
   end
   
-  def design_axis_w_decades(candidate, horizontal_unit, vertical_unit)
-    { :width            => (candidate.timeline_duration * horizontal_unit).round(2),
+  def design_axis_w_decades(candidate, units)
+    { :width            => (candidate.timeline_duration * units[:x]).round(2),
       :unit_marks       => (decade(candidate.last_event.end_year) - decade(candidate.first_event.start_year) - 10) / 10,
-      :unit_mark        => horizontal_unit.round(3) * 10,
-      :first_unit_mark  => (((13 - candidate.first_event.start_month) / 12 + (10 - candidate.first_event.start_year.modulo(10))) * horizontal_unit ).round(2),
-      :last_unit_mark   => (((13 - candidate.last_event.end_month) / 12 + candidate.last_event.end_year.modulo(10)) * horizontal_unit ).round(2) }
+      :unit_mark        => units[:x].round(3) * 10,
+      :first_unit_mark  => (((13 - candidate.first_event.start_month) / 12 + (10 - candidate.first_event.start_year.modulo(10))) * units[:x] ).round(2),
+      :last_unit_mark   => (((13 - candidate.last_event.end_month) / 12 + candidate.last_event.end_year.modulo(10)) * units[:x] ).round(2) }
   end
   
   def first_unit_mark?(candidate)

@@ -5,9 +5,11 @@ class LanguageCandidate < ActiveRecord::Base
   belongs_to :language
   belongs_to :candidate
   
-  accepts_nested_attributes_for :language, :allow_destroy => true
+  accepts_nested_attributes_for :language,  :allow_destroy => true
 
-  #validates_columns :level
+  validates          :candidate, :language, :presence => true
+  
+  #validates_columns  :level
   
 end
 

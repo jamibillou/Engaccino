@@ -50,19 +50,19 @@ describe LanguageCandidate do
       @candidate.language_candidates.build(@attr).should_not be_valid
     end
     
-    it "should require a level" do
-      language_candidate = LanguageCandidate.new(:level => '')
-      language_candidate.language = @language
-      language_candidate.candidate = @candidate
-      language_candidate.should_not be_valid
-    end
-    
-    it "should reject invalid levels" do
-      language_candidate = LanguageCandidate.new(:level => :invalid_level)
-      language_candidate.language = @language
-      language_candidate.candidate = @candidate
-      language_candidate.should_not be_valid
-    end
+#    it "should require a level" do
+#      language_candidate = LanguageCandidate.new(:level => '')
+#      language_candidate.language = @language
+#      language_candidate.candidate = @candidate
+#      language_candidate.should_not be_valid
+#    end
+#    
+#    it "should reject invalid levels" do
+#      language_candidate = LanguageCandidate.new(:level => :invalid_level)
+#      language_candidate.language = @language
+#      language_candidate.candidate = @candidate
+#      language_candidate.should_not be_valid
+#    end
   end
 
 end

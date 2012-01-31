@@ -260,11 +260,6 @@ describe CandidatesController do
         get :edit, :id => @candidate
         response.should have_selector('title', :content => I18n.t('candidates.edit.title'))
       end
-      
-      it "should have the right selected navigation tab" do
-        get :edit, :id => @candidate
-        response.should have_selector('li', :class => 'round selected', :content => I18n.t(:menu_edit))
-      end
             
       it "should have an edit form" do
         get :edit, :id => @candidate

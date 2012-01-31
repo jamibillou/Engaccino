@@ -2,7 +2,7 @@ class DegreeType < ActiveRecord::Base
   
   attr_accessible :label
   
-  has_many :degrees, :dependent => :destroy
+  has_many :degrees
   has_many :educations, :through => :degrees
   
   validates :label, :length => { :within => 2..30 },  :presence => true

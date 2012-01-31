@@ -7,8 +7,8 @@
       <div class="photo left"><%=t 'candidates.profile_photo' %></div>
       <div class="name_place">
       	<% if current_user == candidate && params[:action] == 'show' %>
-      	  <h2><%= best_in_place candidate, :first_name, :html_attrs => {:class => 'small_edit_field'} %><br />
-      	      <%= best_in_place candidate, :last_name,  :html_attrs => {:class => 'small_edit_field'} %></h2> 
+      	  <h2><%= best_in_place candidate, :first_name, :html_attrs => {:class => 'edit_field'} %><br />
+      	      <%= best_in_place candidate, :last_name,  :html_attrs => {:class => 'edit_field'} %></h2> 
         <% else %>
           <h2><a href="<%= candidate_path(candidate) %>"><%= candidate.first_name %><br /><%= candidate.last_name %></a></h2>	
         <% end %>  
@@ -18,13 +18,13 @@
     </div>    	
     <% if current_user.admin? %>
     	<%= link_to trash, candidate, :method => :delete,
-                             		  :confirm => "#{t('candidates.destroy.title')} #{candidate.first_name} #{candidate.last_name}#{t('_?')}",
-                             		  :title => "#{t('candidates.destroy.title')} #{candidate.first_name} #{candidate.last_name}",
-                             		  :id => "destroy_candidate_#{candidate.id}",
-                             		  :class => 'hidden' %>
+                             		    :confirm => "#{t('candidates.destroy.title')} #{candidate.first_name} #{candidate.last_name}#{t('_?')}",
+                             		    :title => "#{t('candidates.destroy.title')} #{candidate.first_name} #{candidate.last_name}",
+                             		    :id => "destroy_candidate_#{candidate.id}",
+                             		    :class => 'hidden' %>
     <% end %>
     <div class="job">
-      <%  unless @experiences.first.nil? %>
+      <%  unless @experiences.empty? %>
         <h2><%= @experiences.first.role %></h2>
         at <%= @experiences.first.company.name %>
       <% end %>
@@ -39,11 +39,11 @@
   </div>
   <div class="experience">
     <h2><%= t('candidates.experience.title').remove_accents.upcase %></h2>
-    <h3><%= "#{candidate.experience_duration.round unless @experiences.first.nil?} #{t('candidates.years')}" %></h3>
+    <h3><%= "#{candidate.experience_duration.round} #{t('candidates.years')}" unless @experiences.empty? %></h3>
   </div>
   <div class="degree">
     <h2><%= t('candidates.degree').remove_accents.upcase %></h2>
-    <%= "#{@educations.first.degree.degree_type.label unless @educations.first.nil?} in #{@educations.first.degree.label unless @educations.first.nil?}" %>
+    <%= "#{@educations.first.degree.degree_type.label unless @educations.first.nil?} in #{@educations.first.degree.label}" unless @educations.empty? %>
   </div>
   <div class="pro_skills">
     <h2><%= t('candidates.professional_skills').remove_accents.upcase %></h2>

@@ -60,11 +60,6 @@ describe UsersController do
           response.should have_selector('title', :content => I18n.t('users.index.title'))
         end
         
-        it "should have the right selected navigation tab" do
-          get :index
-          response.should have_selector('li', :class => 'round selected', :content => I18n.t(:menu_users))
-        end
-        
         it "should have a card for each user" do 
           get :index
           User.all.each do |user|

@@ -20,7 +20,7 @@ describe DegreeType do
     end
     
     it "should not destroy associated degrees" do
-      @degree = Factory(:degree, :degree_type_id => @degree_type)
+      @degree = Factory(:degree, :degree_type => @degree_type)
       @degree_type.destroy
       Degree.find_by_id(@degree.id).should_not be_nil
     end

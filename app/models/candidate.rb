@@ -28,27 +28,51 @@ class Candidate < User
   validates :status, :inclusion => { :in => status_array }, :presence => true
   
   def timeline_duration
-    last_event.end_year - first_event.start_year - 1 + (13 - first_event.start_month + last_event.end_month) / 12.0
+    last_event.nil? && first_event.nil? ? nil : last_event.end_year - first_event.start_year - 1 + (13 - first_event.start_month + last_event.end_month) / 12.0
   end
   
   def experience_duration
-    last(experiences).end_year - first(experiences).start_year - 1 + (13 - first(experiences).start_month + last(experiences).end_month) / 12.0
+    experiences.empty? ? nil : last(experiences).end_year - first(experiences).start_year - 1 + (13 - first(experiences).start_month + last(experiences).end_month) / 12.0
   end
   
   def long_timeline?
-    timeline_duration > 30
+    timeline_duration.nil? ? nil : timeline_duration > 30
   end
   
   def longest_event
-     longest [longest(educations), longest(experiences)]
+    if educations.empty? && experiences.empty?
+      nil
+    elsif !educations.empty? && experiences.empty?
+      longest(educations)
+    elsif educations.empty? && !experiences.empty?
+      longest(experiences)
+    else
+      longest [longest(educations), longest(experiences)]
+    end
   end
   
   def first_event
-    [first(educations), first(experiences)].sort_by!{ |event| if first(educations).start_year == first(experiences).start_year then event.start_month else event.start_year end }.first
+    if educations.empty? && experiences.empty?
+      nil
+    elsif !educations.empty? && experiences.empty?
+      first(educations)
+    elsif educations.empty? && !experiences.empty?
+      first(experiences)
+    else
+      [first(educations), first(experiences)].sort_by!{ |event| if first(educations).start_year == first(experiences).start_year then event.start_month else event.start_year end }.first
+    end
   end
   
   def last_event
-    [last(educations), last(experiences)].sort_by!{ |event| if last(educations).end_year == last(experiences).end_year then event.end_month else event.end_year end }.last
+    if educations.empty? && experiences.empty?
+      nil
+    elsif !educations.empty? && experiences.empty?
+      last(educations)
+    elseif educations.empty? && !experiences.empty?
+      last(experiences)
+    else
+      [last(educations), last(experiences)].sort_by!{ |event| if last(educations).end_year == last(experiences).end_year then event.end_month else event.end_year end }.last
+    end
   end
   
   def longest(collection)

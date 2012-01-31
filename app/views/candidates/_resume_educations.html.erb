@@ -1,23 +1,23 @@
 <h1>EDUCATION</h1>
 <table>
-<% unless @educations.nil? %>
-  <% @educations.each do |education| %>
-    <tr id='education<%= education.id %>'>
-      <td width="130" valign="top">
-          <h2><%= "#{education.start_month}/#{education.start_year} - #{education.end_month}/#{education.end_year}" %></h2>
-      </td>
-      <td>
-        <h2><%= best_in_place_if current_user == candidate, education.degree.degree_type, :label, :path => "/degree_types/"+education.degree.degree_type.id.to_s %> 
-        <%=t 'in' %> <%= best_in_place_if current_user == candidate, education.degree, :label, :path => "/degrees/"+education.degree.id.to_s %>
-        <% if current_user == candidate %>
-          <%= link_to_function 'edit', 'alert("pouet")' %>
-        <% end %>
-        </h2>
-        <%= best_in_place_if current_user == candidate, education.school, :name, :path => "/schools/"+education.school.id.to_s %>
-        <p><%= best_in_place_if current_user == candidate, education, :description, :type => :textarea, :path => education, :nil => "<span class=\"empty_field\">"+t('candidates.experience.edit_description')+"</span>" %></p>
-        <br />
-      </td>
-    </tr>
+  <% unless @educations.empty? %>
+    <% @educations.order("start_year ASC").order("start_month ASC").each do |education| %>
+      <tr id='education_<%= education.id %>'>
+        <td width="130" valign="top">
+            <h2><%= "#{education.start_month}/#{education.start_year} - #{education.end_month}/#{education.end_year}" %></h2>
+        </td>
+        <td>
+          <h2><%= best_in_place_if current_user == candidate, education.degree.degree_type, :label, :path => "/degree_types/"+education.degree.degree_type.id.to_s %>, 
+              <%= best_in_place_if current_user == candidate, education.degree, :label, :path => "/degrees/"+education.degree.id.to_s %>
+          <% if current_user == candidate %>
+            <%= link_to_function 'edit', 'alert("pouet")' %>
+          <% end %>
+          </h2>
+          <%= best_in_place_if current_user == candidate, education.school, :name, :path => "/schools/"+education.school.id.to_s %>
+          <p><%= best_in_place_if current_user == candidate, education, :description, :type => :textarea, :path => education, :nil => "<span class=\"empty_field\">"+t('candidates.experience.edit_description')+"</span>" %></p>
+          <br />
+        </td>
+      </tr>
+    <% end %>
   <% end %>
-<% end %>
 </table>
