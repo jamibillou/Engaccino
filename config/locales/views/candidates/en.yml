@@ -68,6 +68,7 @@ en:
       share_profile: "Share profile"
       edit_profile: "Edit profile"
       view_profile: "View profile"
+      next_profile: "Next profile"
     new:
       title: "Sign up"
       create_engaccino_account: "Create an Engaccino account"

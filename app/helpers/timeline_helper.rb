@@ -12,7 +12,7 @@ module TimelineHelper
   
   def design_axis(candidate, horizontal_unit, vertical_unit)
     { :width            => (candidate.timeline_duration * horizontal_unit).round(2),
-      :unit_marks       => candidate.timeline_duration.round - 1,
+      :unit_marks       => candidate.last_event.end_year - candidate.first_event.start_year - 1,
       :unit_mark        => horizontal_unit.round(2),
       :first_unit_mark  => ((13 - candidate.first_event.start_month) * horizontal_unit / 12).round(2),
       :last_unit_mark   => (candidate.last_event.end_month * horizontal_unit / 12).round(2) }
@@ -31,11 +31,7 @@ module TimelineHelper
   end
   
   def last_unit_mark?(candidate)
-    if candidate.long_timeline?
-      candidate.last_event.end_year - decade(candidate.last_event.end_year) >= 5
-    else
-      candidate.last_event.end_month >= 6 && candidate.first_event.start_year + candidate.timeline_duration.round - 1 < candidate.last_event.end_year
-    end
+    candidate.long_timeline? ? candidate.last_event.end_year - decade(candidate.last_event.end_year) >= 5 : candidate.last_event.end_month >= 6
   end
   
   def unit_mark_label(candidate, type, year = '')

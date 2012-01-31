@@ -6,7 +6,7 @@ class Education < ActiveRecord::Base
   belongs_to :school
   belongs_to :candidate
   
-  accepts_nested_attributes_for :school, :reject_if => lambda { |attr| attr['name'].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :school, :reject_if => lambda { |attr| attr['name'].blank? },  :allow_destroy => true
   accepts_nested_attributes_for :degree, :reject_if => lambda { |attr| attr['label'].blank? }, :allow_destroy => true
     
   validates :degree,                                                    :presence => true
