@@ -12,18 +12,15 @@ class ExperiencesController < ApplicationController
     unless @experience.update_attributes(params[:experience])
       respond_to do |format|
         format.html do
-          if request.xhr? then render :json => @experience.errors, :status => :unprocessable_entity end
+          render :json => @experience.errors, :status => :unprocessable_entity if request.xhr?
         end
       end
     else
       respond_to do |format|
-        format.json do
-          respond_with_bip(@experience)
-        end
         format.html do
-          if request.xhr? then render :json => "OK", :status => :success end
+          render :json => "Everything is ok" if request.xhr?
         end
-      end  
+      end        
     end  
   end
   

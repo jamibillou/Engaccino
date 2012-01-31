@@ -67,7 +67,7 @@ class CandidatesController < ApplicationController
   
   def showpart
     @experiences = current_user.experiences.order("start_year DESC")
-    render :partial => params[:model], :locals => { :candidate => current_user }
+    render :partial => "resume_"+params[:model], :locals => { :candidate => current_user }
   end
 
   private

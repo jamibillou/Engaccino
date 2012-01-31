@@ -12,15 +12,21 @@ $(document).ready(function() {
   {
   	arrayId = $(this).attr("id").split('_');
   	var id = arrayId[2];
+  	var model = arrayId[1]+'s';
   	$('#'+$(this).attr("id"))
-  	 .bind("ajax:complete", function(evt, xhr, status)
+  	 .bind("ajax:success",function(evt,data,status,xhr)
   	 {
-  	 	//alert(status);
-  	 	//$('#errors'+id).html("Good");
+  	 	$.ajax({
+  	 		url: "showpart",
+  	 		type: "POST",
+  	 		data: {model: model},
+  	 		success: function(data){
+  	 			$('#'+model).html(data);
+  	 		}
+  	 	})
   	 })
-  	 .bind("ajax:error", function(evt, xhr, status, error)
+  	 .bind("ajax:error", function(evt, xhr, status)
   	 {
-  	 	//alert(status);
   	 	try {
   	 	  errors = $.parseJSON(xhr.responseText);
   	 	}
