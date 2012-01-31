@@ -7,7 +7,8 @@ module TimelineHelper
       :z_index => object.duration.round != 0 ? (1000 / object.duration).round : 1000,
       :shade   => (object.duration * 0.4 / object.candidate.longest(collection).duration).round(2),
       :label   => { :left      => ((object.yrs_after_first_event + object.duration / 2) * horizontal_unit).round(2),
-                    :vertical? => object.duration < object.candidate.timeline_duration / 5 } }
+                    :vertical? => object.duration < object.candidate.timeline_duration / 5,
+                    :text => object.class == Education ? object.degree.label : object.role } }
   end
   
   def design_axis(candidate, horizontal_unit, vertical_unit)

@@ -26,10 +26,6 @@ class Education < ActiveRecord::Base
     end_year - start_year - 1 + (13 - start_month + end_month) / 12.0
   end
   
-  def yrs_before_last_edu
-    self == candidate.last_education ? 0 : candidate.last_education.end_year - end_year - 1 + (12 - end_month + candidate.last_education.end_month) / 12.0
-  end
-  
   def yrs_after_first_event
     self == candidate.first_event ? 0 : start_year - candidate.first_event.start_year - 1 + (12 - candidate.first_event.start_month + start_month) / 12.0
   end
