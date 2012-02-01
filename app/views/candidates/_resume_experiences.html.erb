@@ -1,13 +1,8 @@
 <h1>PROFESSIONAL EXPERIENCE</h1>
-<table>
-  <% unless @experiences.empty? %>
-    <% @experiences.order("start_year ASC").order("start_month ASC").each do |experience| %>
-      <tr id='experience_<%= experience.id %>'>
-  		  <%= render 'resume_experience', :experience => experience, :candidate => candidate%>
-      </tr>
-      <tr id='experience_edit_<%= experience.id %>' class='hidden'>
-  		  <%= render 'experiences/edit_form', :experience => experience %>   	
-      </tr>
-    <% end %>
+<% unless @experiences.empty? %>
+  <% @experiences.order("start_year ASC").order("start_month ASC").each do |experience| %>
+    <table id='experience_block_<%= experience.id %>'>
+   	  <%= render 'resume_experience_block', :experience => experience, :candidate => candidate %>
+    </table>
   <% end %>
-</table>
+<% end %>

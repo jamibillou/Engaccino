@@ -1,0 +1,6 @@
+<tr id='experience_<%= experience.id %>'>
+  <%= render 'resume_experience', :experience => experience, :candidate => candidate %>
+</tr>
+<tr id='experience_edit_<%= experience.id %>' class='hidden'>
+  <%= render 'experiences/edit_form', :experience => experience %>   	
+</tr>

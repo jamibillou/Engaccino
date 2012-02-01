@@ -10,38 +10,7 @@ $(document).ready(function() {
   
   $('.edit_experience').each(function()
   {
-  	arrayId = $(this).attr("id").split('_');
-  	var id = arrayId[2];
-  	var model = arrayId[1]+'s';
-  	$('#'+$(this).attr("id"))
-  	 .bind("ajax:success",function(evt,data,status,xhr)
-  	 {
-  	 	$.ajax({
-  	 		url: "showpart",
-  	 		type: "POST",
-  	 		data: {model: model},
-  	 		success: function(data){
-  	 			$('#'+model).html(data);
-  	 		}
-  	 	})
-  	 })
-  	 .bind("ajax:error", function(evt, xhr, status)
-  	 {
-  	 	try {
-  	 	  errors = $.parseJSON(xhr.responseText);
-  	 	}
-  	 	catch(err) {
-  	 	  errors = {message: "JSON Error"};
-  	 	}
-  	 	
-  	 	errorText = "Error(s): ";
-  	 	for(error in errors) {
-  	 	  errorText += error+" "+errors[error]+" ";
-  	 	}
-  	 	
-  	 	$('#errors'+id).html(errorText);
-  	 })
-  	;
+    handleAjaxEdition($(this).attr("id"));
   });
 });
 
@@ -53,4 +22,40 @@ function displayEditForm(model,id) {
 function hideEditForm(model,id) {
   $('#'+model+'_edit_'+id).hide();
   $('#'+model+'_'+id).show();  
+}
+
+function handleAjaxEdition(form_id) {
+  arrayId = form_id.split('_');
+  var id = arrayId[2];
+  var model = arrayId[1];
+  $('#'+form_id)
+    .bind("ajax:success",function(evt,data,status,xhr)
+    {
+   	  $.ajax({
+  	  url: "showpart",
+  	  type: "POST",
+  	  data: {model: model, id: id},
+  	  success: function(data){
+  	 	$('#'+model+'_block_'+id).html(data);
+  	 	handleAjaxEdition(form_id);
+  	  }
+  	  })
+  	 })
+  	 .bind("ajax:error", function(evt, xhr, status)
+  	 {
+  	   try {
+  	     errors = $.parseJSON(xhr.responseText);
+  	   }
+  	   catch(err) {
+  	 	 errors = {message: "JSON Error"};
+  	   }
+  	 	
+  	   errorText = "Error(s): ";
+  	   for(error in errors) {
+  	 	 errorText += error+" "+errors[error]+" ";
+  	   }
+  	 	
+  	   $('#errors'+id).html(errorText);
+  	 })
+  	;	
 }

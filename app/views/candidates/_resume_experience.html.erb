@@ -1,12 +1,7 @@
-<% if current_user == candidate %>
-  <td valign="top">
-  <%= link_to_function image_tag("pencil.png"), "displayEditForm('experience','#{experience.id}')" %>
-  </td>
-<% end %>
 <td width="130" valign="top">
   <h2><%= "#{experience.start_month}/#{experience.start_year} - #{experience.end_month}/#{experience.end_year}" %></h2>
 </td>
-<td>
+<td width="650">
   <h2><%= experience.role %></h2>
   <%= experience.company.name %>
   <p>
@@ -18,3 +13,8 @@
   </p>
   <br />
 </td>
+<% if current_user == candidate %>
+  <td valign="top">
+  <%= link_to_function image_tag("pencil.png"), "displayEditForm('experience','#{experience.id}')" %>
+  </td>
+<% end %>

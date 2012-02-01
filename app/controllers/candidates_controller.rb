@@ -66,8 +66,8 @@ class CandidatesController < ApplicationController
   end
   
   def showpart
-    @experiences = current_user.experiences.order("start_year DESC")
-    render :partial => "resume_"+params[:model], :locals => { :candidate => current_user }
+    experience = Experience.find(params[:id])
+    render :partial => "resume_"+params[:model].to_s+"_block", :locals => { :candidate => current_user, :experience => experience }
   end
 
   private

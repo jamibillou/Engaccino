@@ -4,6 +4,8 @@ Engaccino::Application.routes.draw do
 
   get "sessions/new"
   get "ajax/countries"
+  
+  post "experiences/update", :to => 'experiences#update'
 
   match 'candidates/showpart', :to => 'candidates#showpart'
 
