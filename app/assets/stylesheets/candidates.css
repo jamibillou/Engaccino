@@ -201,16 +201,11 @@
   float: left;
   font-size: 12px;
 }
-#resume .experience {
-  background-color: white;
-  margin-bottom: 10px;
-  padding: 12px 35px 0px 10px;
-  display: block;
+#resume table {
+  border-collapse: collapse;	
 }
-#resume .education {
-  background-color: white;
-  margin-bottom: 10px;
-  padding: 12px 35px 0px 10px;
+#resume tr td {
+  padding-left: 5px;
 }
 #resume h1 {
   color: #BBB;
@@ -226,27 +221,37 @@
 #resume p {
   margin-top: 10px;
 }
-
 #resume a {
   text-decoration: none;
   color: black;
   margin-right: 5px;
   font-weight: bold;
 }
-
 #resume a:hover {
   text-decoration: underline;
-}
-
-#resume .empty_field {
-  font-style: italic;
-  color: #969696;
 }
 
 #resume input[type=submit] {
   padding: 3px;
   margin: 0;
 }
+#resume .empty_field {
+  font-style: italic;
+  color: #969696;
+}
+#resume .experience {
+  background-color: white;
+  margin-bottom: 10px;
+  padding: 12px 35px 0px 10px;
+  display: block;
+}
+#resume .education {
+  background-color: white;
+  margin-bottom: 10px;
+  padding: 12px 35px 0px 10px;
+}
+
+
 /* TIMELINE */
 #resume #timeline {
   background-color: white;
@@ -360,13 +365,4 @@
   position: absolute;
   background-color: #888;
   z-index: 0;
-}
-
-/* RESUME */
-.resume_table {
-  border-collapse: collapse;	
-}
-
-.resume_table tr td {
-  padding-left: 5px;
 }

@@ -22,8 +22,7 @@ class Candidate < User
                                                               attr['start_year'].blank? && attr['end_year'].blank? }, 
                                 :allow_destroy => true  
   
-  status_array = [ 'available', 'looking', 'open', 'listening', 'happy' ]
-  validates :status, :inclusion => { :in => status_array }, :presence => true
+  validates :status, :inclusion => { :in => [ 'available', 'looking', 'open', 'listening', 'happy' ] }, :presence => true
   
   def timeline_duration
     last_event.nil? && first_event.nil? ? nil : last_event.end_year - first_event.start_year - 1 + (13 - first_event.start_month + last_event.end_month) / 12.0

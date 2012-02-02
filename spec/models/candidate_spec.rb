@@ -32,12 +32,12 @@ describe Candidate do
   describe "validations" do
        
     it "should reject candidates with a blank status" do
-      candidate = Candidate.new(@attr.merge(:status => ""))
+      candidate = Candidate.new(@attr.merge(:status => ''))
       candidate.should_not be_valid
     end
     
     it "should reject candidates with an invalid status" do
-      candidate = Candidate.new(@attr.merge(:status => "Wrong status"))
+      candidate = Candidate.new(@attr.merge(:status => 'Wrong status'))
       candidate.should_not be_valid
     end
   end
@@ -64,7 +64,147 @@ describe Candidate do
       @candidate.destroy
       Education.find_by_id(@education.id).should be_nil
     end
-  end  
+  end
+  
+  describe "timeline_duration method" do
+    
+    it "should exist" do
+      @candidate.should respond_to(:timeline_duration)
+    end
+    
+    it "should be nil for candidates without events" do
+      candidate = Factory(:candidate)
+      candidate.timeline_duration.should be_nil
+    end
+    
+    it "should equal the duration of the event for candidates with only one event" do 
+    
+    end
+    
+    it "should equal the difference between the start date of the first event and the end date of the last event" do 
+    
+    end
+  end
+  
+  describe "experience_duration method" do
+    
+    it "should exist" do
+      @candidate.should respond_to(:experience_duration)
+    end
+    
+    it "should" do
+    
+    end
+    
+    it "should" do
+    
+    end
+  end
+  
+  describe "long_timeline? method" do
+    
+    it "should exist" do
+      @candidate.should respond_to(:long_timeline?)
+    end
+    
+    it "should" do
+    
+    end
+    
+    it "should" do
+    
+    end
+  end
+  
+  describe "longest_event method" do
+    
+    it "should exist" do
+      @candidate.should respond_to(:longest_event)
+    end
+    
+    it "should" do
+    
+    end
+    
+    it "should" do
+    
+    end
+  end
+  
+  describe "first_event method" do
+    
+    it "should exist" do
+      @candidate.should respond_to(:first_event)
+    end
+    
+    it "should" do
+    
+    end
+    
+    it "should" do
+    
+    end
+  end
+  
+  describe "last_event method" do
+    
+    it "should exist" do
+      @candidate.should respond_to(:last_event)
+    end
+    
+    it "should" do
+    
+    end
+    
+    it "should" do
+    
+    end
+  end
+  
+  describe "longest(collection) method" do
+    
+    it "should exist" do
+      @candidate.should respond_to(:longest)
+    end
+    
+    it "should" do
+    
+    end
+    
+    it "should" do
+    
+    end
+  end
+  
+  describe "first(collection) method" do
+    
+    it "should exist" do
+      @candidate.should respond_to(:first)
+    end
+    
+    it "should" do
+    
+    end
+    
+    it "should" do
+    
+    end
+  end 
+  
+  describe "last(collection) method" do
+    
+    it "should exist" do
+      @candidate.should respond_to(:last)
+    end
+    
+    it "should" do
+    
+    end
+    
+    it "should" do
+    
+    end
+  end 
 end
 # == Schema Information
 #

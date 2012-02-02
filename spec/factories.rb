@@ -22,10 +22,10 @@ Factory.define :candidate do |candidate|
   candidate.nationality "Netherlands"
   candidate.year_of_birth 1975
   candidate.phone "+31 6 00000000"
-  candidate.email "j.doe@example.com"
-  candidate.facebook_login "j.doe@example.com"
-  candidate.linkedin_login "j.doe@example.com"
-  candidate.twitter_login "@john_d"
+  candidate.email { Factory.next(:email) }
+  candidate.facebook_login { Factory.next(:facebook_login) }
+  candidate.linkedin_login { Factory.next(:linkedin_login) }
+  candidate.twitter_login { Factory.next(:twitter_login) }
   candidate.password "45Georges?"
   candidate.password_confirmation "45Georges?"
   candidate.status "available"  

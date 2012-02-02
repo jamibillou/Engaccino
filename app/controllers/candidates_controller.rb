@@ -67,12 +67,12 @@ class CandidatesController < ApplicationController
   
   def showpart
     @candidate = current_user
-    if params[:model].to_s == "experience"
+    if params[:model].to_s == 'experience'
       experience = Experience.find(params[:id])
-      render :partial => "resume_experience_block", :locals => { :candidate => @candidate, :experience => experience }
+      render :partial => 'resume_experience_block', :locals => { :candidate => @candidate, :experience => experience }
     else
       education = Education.find(params[:id])
-      render :partial => "resume_education_block",  :locals => { :candidate => @candidate, :education => education }
+      render :partial => 'resume_education_block',  :locals => { :candidate => @candidate, :education => education }
     end
   end
 
