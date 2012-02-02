@@ -6,6 +6,7 @@ Engaccino::Application.routes.draw do
   get "ajax/countries"
   
   post "experiences/update", :to => 'experiences#update'
+  post "educations/update",  :to => 'educations#update'
 
   match 'candidates/showpart', :to => 'candidates#showpart'
 

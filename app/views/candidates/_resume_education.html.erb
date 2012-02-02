@@ -4,7 +4,7 @@
 <td width="650">
   <h2><%=  education.degree.degree_type.label %>, <%=  education.degree.label %></h2>
   <%= education.school.name %>
-  <p><% if current_user == candidate && (education.description.nil? || education.description.empty?) %>
+  <p><% if current_user == @candidate && (education.description.nil? || education.description.empty?) %>
     <span class='empty_field'><%= t('candidates.experience.edit_description') %></span>
   <% else %>
     <%= education.description %>
@@ -12,7 +12,7 @@
   </p>
   <br />
 </td>
-<% if current_user == candidate %>
+<% if current_user == @candidate %>
   <td valign="top">
     <%= link_to_function image_tag("pencil.png"), "displayEditForm('education','#{education.id}')" %>
   </td>

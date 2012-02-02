@@ -1,0 +1,29 @@
+<%= form_for education, :url => educations_update_path, :html => { :method => "POST"}, :remote => true do |f| %>
+  <input type='hidden' name='id' value='<%= education.id %>'>
+  <td width="130" valign="top">
+  	<%= f.text_field :start_month, :class => 'small_edit_field' %>
+  	<%= f.text_field :start_year, :class => 'small_edit_field' %>
+  	<br/><%=t 'to' %><br/>
+	<%= f.text_field :end_month, :class => 'small_edit_field' %>
+  	<%= f.text_field :end_year, :class => 'small_edit_field' %>
+  </td>
+  <td width="650">
+  	<%= f.fields_for :degree do |degree_builder| %>
+  	  <%= degree_builder.fields_for :degree_type do |degree_type_builder| %>
+  	    <%= degree_type_builder.text_field :label, :class => 'small_edit_field' %>
+  	  <% end %>
+  	  <%= degree_builder.text_field :label, :class => 'edit_field' %>
+  	<% end %>
+  	<%=t 'at' %>
+  	<%= f.fields_for :school do |school_builder| %>
+  	  <%= school_builder.text_field :name, :class => 'edit_field' %>
+  	<% end %>
+  	<br/><br/>
+  	<%= f.text_area :description, :class => 'textarea_edit' %>
+  	<div class="error_messages" id="errors<%= education.id %>"></div>
+  </td>
+  <td valign="top">
+  	<%= link_to_function image_tag('cancel.png'), "hideEditForm('education','#{education.id}')" %>
+  	<%= image_submit_tag "valid.png" %>
+  </td>
+<% end %>
