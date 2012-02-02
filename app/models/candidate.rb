@@ -34,7 +34,7 @@ class Candidate < User
   end
   
   def long_timeline?
-    timeline_duration.nil? ? nil : timeline_duration > 30
+    timeline_duration.nil? ? nil : timeline_duration > 20
   end
   
   def longest_event

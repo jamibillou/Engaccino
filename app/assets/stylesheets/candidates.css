@@ -317,15 +317,27 @@
   display: block;
   position: absolute;
 }
+#resume #timeline .events .mini {
+  font-size: 14px;
+}
+#resume #timeline .events .small {
+  font-size: 16px;
+  font-weight: 500;
+}
+#resume #timeline .events .average {
+  font-size: 20px;
+}
+#resume #timeline .events .big {
+  font-size: 25px;
+}
 #resume #timeline .events .label {
   position: absolute;
   padding-top: 2px;
   padding-left: 3px;
   padding-right: 3px;
-  font-size: 25px;
-  line-height: 1.1;
-  color: #fff;
+  line-height: 1;
   opacity: inherit;
+  color: #fff;
 }
 #resume #timeline .events .vertical_label {
   width:0px;

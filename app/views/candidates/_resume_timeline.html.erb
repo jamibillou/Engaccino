@@ -13,9 +13,9 @@
             <% block = design_block(object, collection, units) %>
             <div class="<%= object.class.name.downcase %>_block" style="height:<%= block[:height] %>px; width:<%= block[:width] %>%; left:<%= block[:left] %>%; z-index: <%= block[:z_index] %>;">
               <div class="shade" style="opacity:<%= block[:shade] %>;"></div>
-              <% unless block[:label][:vertical?] %><div class="label"><%= block[:label][:text] %></div><% end %>
+              <% unless block[:label][:type] == 'vertical' %><div class="<%= block[:label][:type] %> label"><%= block[:label][:text] %></div><% end %>
             </div>
-            <% if block[:label][:vertical?] %>
+            <% if block[:label][:type] == 'vertical' %>
               <div class="vertical_label" style="left:<%= block[:label][:left]+0.9 %>%; z-index: <%= block[:z_index] %>;"><%= block[:label][:text] %></div>
               <div class="vertical_line" style="left:<%= block[:label][:left] %>%; height:<%= height - block[:height] %>px;"></div>
             <% end %>

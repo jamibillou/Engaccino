@@ -1,13 +1,15 @@
 module TimelineHelper
   
   def design_block(object, collection, units)
-    { :height  => (object.duration * units[:y]).round,
-      :width   => (object.duration * units[:x]).round(2),
+    duration = object.duration
+    width = (duration * units[:x]).round(2)
+    { :height  => (duration * units[:y]).round,
+      :width   => width,
       :left    => (object.yrs_after_first_event * units[:x]).round(2),
-      :z_index => object.duration.round != 0 ? (1000 / object.duration).round : 1000,
-      :shade   => (object.duration * 0.4 / object.candidate.longest(collection).duration).round(2),
-      :label   => { :left      => ((object.yrs_after_first_event + object.duration / 2) * units[:x]).round(2),
-                    :vertical? => object.duration < object.candidate.timeline_duration / 5,
+      :z_index => duration.round != 0 ? (1000 / duration).round : 1000,
+      :shade   => (duration * 0.4 / object.candidate.longest(collection).duration).round(2),
+      :label   => { :left      => ((object.yrs_after_first_event + duration / 2) * units[:x]).round(2),
+                    :type => if width < 10 then 'vertical' elsif width < 12.5 then 'mini' elsif width < 15 then 'small' elsif width < 25 then 'average' else 'big' end,
                     :text => object.class == Education ? object.degree.label : object.role } }
   end
   
