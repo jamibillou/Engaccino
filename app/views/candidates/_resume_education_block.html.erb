@@ -1,6 +1,6 @@
 <tr id='education_<%= education.id %>'>
   <%= render 'resume_education', :education => education, :candidate => :candidate%>
 </tr>
-<tr id='education_edit_<%= education.id %>'>
+<tr id='education_edit_<%= education.id %>' class="hidden">
   <%= render 'educations/edit_form', :education => education %>
 </tr>

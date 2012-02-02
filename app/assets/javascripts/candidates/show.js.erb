@@ -12,6 +12,10 @@ $(document).ready(function() {
   {
     handleAjaxEdition($(this).attr("id"));
   });
+  $('.edit_education').each(function()
+  {
+  	handleAjaxEdition($(this).attr("id"));
+  });
 });
 
 function displayEditForm(model,id) {
