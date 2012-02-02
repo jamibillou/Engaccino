@@ -1,7 +1,7 @@
 <h1>PROFESSIONAL EXPERIENCE</h1>
 <% unless @experiences.empty? %>
   <% @experiences.order("start_year ASC").order("start_month ASC").each do |experience| %>
-    <table id='experience_block_<%= experience.id %>'>
+    <table id='experience_block_<%= experience.id %>' class="resume_table">
    	  <%= render 'resume_experience_block', :experience => experience, :candidate => candidate %>
     </table>
   <% end %>

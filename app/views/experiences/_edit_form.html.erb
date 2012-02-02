@@ -1,5 +1,5 @@
-<%= form_for experience, :url => experiences_update_path, :html => {:method => "POST"}, :remote => true do |f| %>
-  <input type='hidden' name='id' value='<%= experience.id %>'>
+<%= form_for experience, :remote => true do |f| %>
+  <input type='hidden' name='_method' value='PUT' />
   <td width="130" valign="top">
   	<%= f.text_field :start_month, :class => 'small_edit_field' %>
   	<%= f.text_field :start_year, :class => 'small_edit_field' %>

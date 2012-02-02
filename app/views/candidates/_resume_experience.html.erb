@@ -15,6 +15,8 @@
 </td>
 <% if current_user == candidate %>
   <td valign="top">
-  <%= link_to_function image_tag("pencil.png"), "displayEditForm('experience','#{experience.id}')" %>
+  <%= link_to_function image_tag("pencil.png"), "displayEditForm('experience','#{experience.id}')",
+  												:onmouseover => "colorBlock('experience','#{experience.id}','#ffc')",
+    											:onmouseout => "colorBlock('experience','#{experience.id}','white')"  %>
   </td>
 <% end %>
