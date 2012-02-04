@@ -23,7 +23,7 @@ module ApplicationHelper
   
   def link_to_add(name, f, association, title = t('add'))
     new_associated_object = build_association(association, f.object)
-    fields = f.fields_for(association, new_associated_object, :child_index => "new_#{association}") { |builder| render(association.to_s.singularize + "_fields", :f => builder) }
+    fields = f.fields_for(association, new_associated_object, :child_index => "new_#{association}") { |builder| render("fields_#{association.to_s.singularize}", :f => builder) }
     link_to_function(name, "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")", :class => 'button blue round', :title => title)
   end
   

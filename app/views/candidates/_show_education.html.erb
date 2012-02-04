@@ -1,0 +1,26 @@
+<tr id='show_education_<%= education.id %>'>
+  <td width="130" valign="top">
+    <h2><%= "#{education.start_month}/#{education.start_year} - #{education.end_month}/#{education.end_year}" %></h2>
+  </td>
+  <td width="650">
+    <h2><%=  education.degree.degree_type.label %>, <%=  education.degree.label %></h2>
+    <%= education.school.name %>
+    <p><% if current_user == @candidate && (education.description.nil? || education.description.empty?) %>
+      <span class='empty_field'><%= t('candidates.experience.edit_description') %></span>
+    <% else %>
+      <%= education.description %>
+    <% end %>
+    </p>
+    <br />
+  </td>
+  <% if current_user == @candidate %>
+    <td valign="top">
+      <%= link_to_function image_tag("pencil.png"), "displayEditForm('education','#{education.id}')", 
+      											  :onmouseover => "colorBlock('education','#{education.id}','#ffc')",
+      											  :onmouseout => "colorBlock('education','#{education.id}','white')" %>
+    </td>
+  <% end %>
+</tr>
+<tr id='edit_education_<%= education.id %>' class="hidden">
+  <%= render 'educations/edit_form', :education => education %>
+</tr>

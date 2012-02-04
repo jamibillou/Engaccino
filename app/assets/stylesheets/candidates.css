@@ -252,17 +252,6 @@
   font-style: italic;
   color: #969696;
 }
-#resume .experience {
-  background-color: white;
-  margin-bottom: 10px;
-  padding: 12px 35px 0px 10px;
-  display: block;
-}
-#resume .education {
-  background-color: white;
-  margin-bottom: 10px;
-  padding: 12px 35px 0px 10px;
-}
 
 /* TIMELINE */
 #resume #timeline {

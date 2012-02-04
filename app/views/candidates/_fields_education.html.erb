@@ -1,7 +1,15 @@
 <div class="fields">
   <br />
-  <%= f.fields_for :degree do |degree_builder| render 'degree_fields', :f => degree_builder end %>
-  <%= f.fields_for :school do |school_builder| render 'school_fields', :f => school_builder end %>
+  <%= f.fields_for :degree do |degree_builder| %>
+    <%= degree_builder.fields_for :degree_type do |degree_type_builder| %>
+      <%= degree_type_builder.text_field :label, :id => 'degree_type', :class => 'small_field margin_right' %>
+    <% end %>
+    <%= degree_builder.text_field :label, :id => 'degree', :class => 'field margin_right' %>
+    <%=t 'at' %>
+  <% end %>
+  <%= f.fields_for :school do |school_builder| %>
+    <%= school_builder.text_field :name, :id => 'university', :class => 'field margin_left margin_right' %>
+  <% end %>
   <%=t 'from' %>
   <%= f.text_field :start_month, :id => 'start_month', :class => 'small_field margin_left margin_right' %>  
   <%= f.text_field :start_year,  :id => 'start_year',  :class => 'small_field margin_right' %>                                    

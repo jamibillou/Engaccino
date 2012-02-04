@@ -1,8 +1,8 @@
 <h1>EDUCATION</h1>
 <% unless @educations.empty? %>
   <% @educations.order("start_year ASC").order("start_month ASC").each do |education| %>
-  	<table id='education_block_<%= education.id %>'>
-  	  <%= render 'resume_education_block', :education => education, :candidate => candidate %>
+  	<table id='education_<%= education.id %>'>
+  	  <%= render 'show_education', :education => education, :candidate => candidate %>
   	</table>
   <% end %>  
 <% end %>

@@ -1,8 +1,8 @@
 <h1>PROFESSIONAL EXPERIENCE</h1>
 <% unless @experiences.empty? %>
   <% @experiences.order("start_year ASC").order("start_month ASC").each do |experience| %>
-    <table id='experience_block_<%= experience.id %>'>
-   	  <%= render 'resume_experience_block', :experience => experience, :candidate => candidate %>
+    <table id='experience_<%= experience.id %>'>
+   	  <%= render 'show_experience', :experience => experience, :candidate => candidate %>
     </table>
   <% end %>
 <% end %>

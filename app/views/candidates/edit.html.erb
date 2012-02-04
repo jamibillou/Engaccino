@@ -1,1 +1,11 @@
-<%= render 'form' %>
+<%= render 'edit_import' %>
+<%= form_for @candidate, :html => { :id => 'candidate_edit_form' } do |candidate_builder| %>
+  <%= render 'edit_personal',   :f => candidate_builder %>
+  <%= render 'edit_experience', :f => candidate_builder %>
+  <%= render 'edit_education',  :f => candidate_builder %>
+  <div id="status" class="white_block">
+    <h2><%=t "candidates.status" %></h2>
+    <%= select_tag :candidate_status, options_for_select(status_options) %>
+  </div>
+  <%= candidate_builder.submit t('candidates.show.view_profile'), :class => 'center' %>
+<% end %>

@@ -1,0 +1,18 @@
+<div id="resume">
+  <%= render 'show_timeline', :candidate => @candidate %>
+  <div class="block" id="experiences">
+  	<%= render 'show_experiences', :candidate => @candidate %>
+  </div>
+  <div class='block' id='educations'>
+  	<%= render 'show_educations', :candidate => @candidate %>
+  </div>
+  <div class='small_block'>
+  	<%= render 'show_certifications', :candidate => @candidate %>
+  </div>
+  <div class='small_block'>
+    <%= render 'show_languages', :candidate => @candidate %>
+  </div>
+  <div class='small_block'>
+    <%= render 'show_miscellaneous', :candidate => @candidate %>	
+  </div>   
+</div>

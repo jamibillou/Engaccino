@@ -19,13 +19,13 @@ $(document).ready(function() {
 });
 
 function displayEditForm(model,id) {
-  $('#'+model+'_edit_'+id).show();
-  $('#'+model+'_'+id).hide();
+  $('#edit_'+model+'_'+id).show();
+  $('#show_'+model+'_'+id).hide();
 }
 
 function hideEditForm(model,id) {
-  $('#'+model+'_edit_'+id).hide();
-  $('#'+model+'_'+id).show();  
+  $('#edit_'+model+'_'+id).hide();
+  $('#show_'+model+'_'+id).show();  
 }
 
 function handleAjaxEdition(form_id) {
@@ -40,7 +40,7 @@ function handleAjaxEdition(form_id) {
   	  type: "POST",
   	  data: {model: model, id: id},
   	  success: function(data){
-  	 	$('#'+model+'_block_'+id).html(data);
+  	 	$('#'+model+'_'+id).html(data);
   	 	handleAjaxEdition(form_id);
   	  }
   	  })
