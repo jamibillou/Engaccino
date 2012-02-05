@@ -10,12 +10,27 @@ $(document).ready(function() {
   
   $('.edit_experience').each(function()
   {
-    handleAjaxEdition($(this).attr("id"));
+    var formId = $(this).attr("id");
+    var arrayId = formId.split('_');
+    var experienceId = arrayId[2];
+    handleAjaxEdition(formId);
+    $('#'+"show_experience_"+experienceId).click(function()
+    {
+      displayEditForm('experience', experienceId);
+    });
   });
   $('.edit_education').each(function()
   {
-  	handleAjaxEdition($(this).attr("id"));
+  	var formId = $(this).attr("id");
+  	var arrayId = formId.split('_');
+  	var educationId = arrayId[2];
+  	handleAjaxEdition(formId);
+  	$('#'+"show_education_"+educationId).click(function()
+  	{
+  	  displayEditForm('education', educationId);
+  	});
   });
+  
 });
 
 function displayEditForm(model, id) {

@@ -2,10 +2,10 @@
 <% unless @educations.empty? %>
   <% @educations.order("start_year ASC").order("start_month ASC").each do |education| %>
   	<div id='education_<%= education.id %>'>
-  	  <div id='show_education_<%= education.id %>'>
+  	  <div <%= if current_user == candidate then "id='show_education_#{education.id}' class='show_education'" end %>>
   	    <%= render 'show_education', :education => education, :candidate => candidate %>
   	  </div>
-  	  <div id='edit_education_<%= education.id %>' class="hidden">
+  	  <div id='edit_education_<%= education.id %>' class='hidden edit_education'>
   	    <%= render 'educations/edit_form', :education => education %>
   	  </div>
   	</div>

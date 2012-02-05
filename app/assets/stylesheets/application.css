@@ -394,9 +394,6 @@ a.button.grey_gradient:hover {
 }
 .small_trash_link a {
   color: red;
-  text-decoration: none;
-}
-.small_trash_link a:hover {
   text-decoration: underline;
 }
 .settings {

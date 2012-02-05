@@ -26,8 +26,6 @@
   	<%= f.submit t('submit') %>
   	<div class="small_trash_link"><%= link_to "#{t('delete')}#{t('_?')}", education, :method => :delete,
   	                                                         		                     :confirm => "#{t('delete')}#{t('_?')}",
-  	                                                         		                     :title => "#{t('delete')}#{t('_!')}",
-  	                                                         		                     :id => "destroy_education_#{education.id}" %></div>
+  	                                                         		                     :title => "#{t('delete')}#{t('_!')}" %></div>
   </div>
-  <br />
 <% end %>

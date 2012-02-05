@@ -1,8 +1,3 @@
-<%= link_to small_trash, education, :method => :delete,
-                       		          :confirm => "#{t('delete')}#{t('_?')}",
-                       		          :title => "#{t('delete')}#{t('_!')}",
-                       		          :id => "destroy_education_#{education.id}" %>
-<%= link_to_function pencil, "displayEditForm('education','#{education.id}')" if current_user == candidate  %>
 <div class="ee_date">
   <h2><%= "#{education.start_month}/#{education.start_year} - #{education.end_month}/#{education.end_year}" %></h2>
 </div>

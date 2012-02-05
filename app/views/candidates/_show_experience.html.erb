@@ -1,8 +1,3 @@
-<%= link_to small_trash, experience, :method => :delete,
-                       		           :confirm => "#{t('delete')}#{t('_?')}",
-                       		           :title => "#{t('delete')}#{t('_!')}",
-                       		           :id => "destroy_experience_#{experience.id}" %>
-<%= link_to_function pencil, "displayEditForm('experience','#{experience.id}')" if current_user == candidate  %>
 <div class="ee_date">
   <h2><%= "#{experience.start_month}/#{experience.start_year} - #{experience.end_month}/#{experience.end_year}" %></h2>
 </div>
