@@ -21,7 +21,11 @@ class ExperiencesController < ApplicationController
   
   def destroy
    experience = Experience.find(params[:id]) ; candidate = experience.candidate
-   experience.destroy
-   redirect_to candidate_path(candidate), :flash => { :success => t('flash.success.experience_destroyed') }
+   if experience.destroy
+     respond_to do |format|
+       format.html { render :json => "Everything is ok" if request.xhr? }
+       format.js
+     end
+   end   
   end
 end
