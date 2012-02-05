@@ -1,13 +1,20 @@
-<div class="ee_date">
-  <h2><%= "#{education.start_month}/#{education.start_year} - #{education.end_month}/#{education.end_year}" %></h2>
+<div <%= if current_user == candidate then "id='show_education_#{education.id}' class='show_education'" end %>>
+  <div class="ee_date">
+    <h2><%= "#{education.start_month}/#{education.start_year} - #{education.end_month}/#{education.end_year}" %></h2>
+  </div>
+  <div class="ee_details">
+    <h2><%= education.degree.degree_type.label %>, <%= education.degree.label %></h2>
+    <%= education.school.name %>
+    <p><% if current_user == @candidate && (education.description.nil? || education.description.empty?) %>
+      <span class='default'><%= t('candidates.experience.edit_description') %></span>
+    <% else %>
+      <%= education.description %>
+    <% end %>
+    </p>
+  </div>
 </div>
-<div class="ee_details">
-  <h2><%= education.degree.degree_type.label %>, <%= education.degree.label %></h2>
-  <%= education.school.name %>
-  <p><% if current_user == @candidate && (education.description.nil? || education.description.empty?) %>
-    <span class='default'><%= t('candidates.experience.edit_description') %></span>
-  <% else %>
-    <%= education.description %>
-  <% end %>
-  </p>
-</div>
+<% if current_user == @candidate %>
+  <div id='edit_education_<%= education.id %>' class='hidden edit_education'>
+    <%= render 'educations/edit_form', :education => education %>
+  </div>
+<%end %>

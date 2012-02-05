@@ -2,13 +2,8 @@
 <% unless @experiences.empty? %>
   <% @experiences.order("start_year ASC").order("start_month ASC").each do |experience| %>
     <div id='experience_<%= experience.id %>' class="experience">
-   	  <div <%= if current_user == candidate then "id='show_experience_#{experience.id}' class='show_experience'" end %>>
-   	    <%= render 'show_experience', :experience => experience, :candidate => candidate %>
-   	  </div>
-   	  <div id='edit_experience_<%= experience.id %>' class='hidden edit_experience'>
-   	    <%= render 'experiences/edit_form', :experience => experience %>   	
-   	  </div>
-    </div>
+   	  <%= render 'show_experience', :experience => experience, :candidate => candidate %>
+   	</div>
     <br />
   <% end %>
 <% end %>

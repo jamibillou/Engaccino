@@ -349,7 +349,7 @@
   padding: 5px 10px;
 }
 #experiences .show_experience:hover {
-  background: #f8ffef url('pencil.png') no-repeat 99% 9%;
+  background: #f1ffde url('pencil.png') no-repeat 99% 9%;
   cursor: pointer;
 }
 #experiences .edit_experience {
@@ -360,7 +360,7 @@
   padding: 5px 10px;
 }
 #educations .show_education:hover {
-  background: #f9fbfd url('pencil.png') no-repeat 99% 9%;
+  background: #ecf3f9 url('pencil.png') no-repeat 99% 9%;
   cursor: pointer;
 }
 #educations .edit_education {

@@ -69,10 +69,10 @@ class CandidatesController < ApplicationController
     @candidate = current_user
     if params[:model].to_s == 'experience'
       experience = Experience.find(params[:id])
-      render :partial => 'resume_experience', :locals => { :candidate => @candidate, :experience => experience }
+      render :partial => 'show_experience', :locals => { :candidate => @candidate, :experience => experience }
     else
       education = Education.find(params[:id])
-      render :partial => 'resume_education',  :locals => { :candidate => @candidate, :education => education }
+      render :partial => 'show_education',  :locals => { :candidate => @candidate, :education => education }
     end
   end
 

@@ -10,25 +10,11 @@ $(document).ready(function() {
   
   $('.edit_experience').each(function()
   {
-    var formId = $(this).attr("id");
-    var arrayId = formId.split('_');
-    var experienceId = arrayId[2];
-    handleAjaxEdition(formId);
-    $('#'+"show_experience_"+experienceId).click(function()
-    {
-      displayEditForm('experience', experienceId);
-    });
+    handleAjaxEdition($(this).attr("id"));
   });
   $('.edit_education').each(function()
   {
-  	var formId = $(this).attr("id");
-  	var arrayId = formId.split('_');
-  	var educationId = arrayId[2];
-  	handleAjaxEdition(formId);
-  	$('#'+"show_education_"+educationId).click(function()
-  	{
-  	  displayEditForm('education', educationId);
-  	});
+	handleAjaxEdition($(this).attr("id"));
   });
   
 });
@@ -44,7 +30,13 @@ function hideEditForm(model, id) {
 }
 
 function handleAjaxEdition(form_id) {
-  arrayId = form_id.split('_'); var id = arrayId[2]; var model = arrayId[1];
+  arrayId = form_id.split('_'); 
+  var model = arrayId[1];
+  var id = arrayId[2];  
+  $('#'+"show_"+model+"_"+id).click(function()
+  {
+    displayEditForm(model,id);
+  });
   $('#'+form_id)
     .bind("ajax:success",function(evt, data, status, xhr)
     {
