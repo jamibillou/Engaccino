@@ -1,27 +1,18 @@
-<tr id='show_experience_<%= experience.id %>'>
-  <td width="130" valign="top">
-    <h2><%= "#{experience.start_month}/#{experience.start_year} - #{experience.end_month}/#{experience.end_year}" %></h2>
-  </td>
-  <td width="650">
-    <h2><%= experience.role %></h2>
-    <%= experience.company.name %>
-    <p>
-    <% if current_user == candidate && (experience.description.nil? || experience.description.empty?) %>
-      <span class='empty_field'><%= t('candidates.experience.edit_description') %></span>
-    <% else %>
-      <%= experience.description %>
-    <% end %>
-    </p>
-    <br />
-  </td>
-  <% if current_user == candidate %>
-    <td valign="top">
-    <%= link_to_function image_tag("pencil.png"), "displayEditForm('experience','#{experience.id}')",
-    												:onmouseover => "colorBlock('experience','#{experience.id}','#ffc')",
-      											:onmouseout => "colorBlock('experience','#{experience.id}','white')"  %>
-    </td>
-  <% end %>
-</tr>
-<tr id='edit_experience_<%= experience.id %>' class='hidden'>
-  <%= render 'experiences/edit_form', :experience => experience %>   	
-</tr>
+<%= link_to small_trash, experience, :method => :delete,
+                       		           :confirm => "#{t('delete')}#{t('_?')}",
+                       		           :title => "#{t('delete')}#{t('_!')}",
+                       		           :id => "destroy_experience_#{experience.id}" %>
+<%= link_to_function pencil, "displayEditForm('experience','#{experience.id}')" if current_user == candidate  %>
+<div class="ee_date">
+  <h2><%= "#{experience.start_month}/#{experience.start_year} - #{experience.end_month}/#{experience.end_year}" %></h2>
+</div>
+<div class="ee_details">
+  <h2><%= experience.role %></h2>
+  <%= experience.company.name %>
+  <p><% if current_user == candidate && (experience.description.nil? || experience.description.empty?) %>
+       <span class='default'><%=t 'candidates.experience.edit_description' %></span>
+       <% else %>
+         <%= experience.description %>
+       <% end %>
+  </p>
+</div>

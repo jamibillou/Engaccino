@@ -5,7 +5,7 @@ $(document).ready(function() {
   var arrayBIP = $('span.best_in_place');
   for(var i = 0; i < arrayBIP.length; i++)
   {
-  	$('#'+arrayBIP[i].id).attr('title','Click to edit');
+  	$('#'+arrayBIP[i].id).attr('title', 'Click to edit');
   }
   
   $('.edit_experience').each(function()
@@ -18,25 +18,23 @@ $(document).ready(function() {
   });
 });
 
-function displayEditForm(model,id) {
+function displayEditForm(model, id) {
   $('#edit_'+model+'_'+id).show();
   $('#show_'+model+'_'+id).hide();
 }
 
-function hideEditForm(model,id) {
+function hideEditForm(model, id) {
   $('#edit_'+model+'_'+id).hide();
   $('#show_'+model+'_'+id).show();  
 }
 
 function handleAjaxEdition(form_id) {
-  arrayId = form_id.split('_');
-  var id = arrayId[2];
-  var model = arrayId[1];
+  arrayId = form_id.split('_'); var id = arrayId[2]; var model = arrayId[1];
   $('#'+form_id)
-    .bind("ajax:success",function(evt,data,status,xhr)
+    .bind("ajax:success",function(evt, data, status, xhr)
     {
    	  $.ajax({
-  	  url: "showpart",
+  	  url:  "showpart",
   	  type: "POST",
   	  data: {model: model, id: id},
   	  success: function(data){
@@ -51,19 +49,13 @@ function handleAjaxEdition(form_id) {
   	     errors = $.parseJSON(xhr.responseText);
   	   }
   	   catch(err) {
-  	 	 errors = {message: "JSON Error"};
+  	 	   errors = {message: "JSON Error"};
   	   }
-  	 	
   	   errorText = "Error(s): ";
   	   for(error in errors) {
-  	 	 errorText += error+" "+errors[error]+" ";
+  	 	   errorText += error+" "+errors[error]+" ";
   	   }
-  	 	
   	   $('#errors'+id).html(errorText);
   	 })
   	;	
-}
-
-function colorBlock(model, id, color) {
-  $('#'+model+'_'+id).css("background-color",color);
 }

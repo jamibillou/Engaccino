@@ -72,7 +72,7 @@ class CandidatesController < ApplicationController
       render :partial => 'resume_experience', :locals => { :candidate => @candidate, :experience => experience }
     else
       education = Education.find(params[:id])
-      render :partial => 'resume_education_block',  :locals => { :candidate => @candidate, :education => education }
+      render :partial => 'resume_education',  :locals => { :candidate => @candidate, :education => education }
     end
   end
 

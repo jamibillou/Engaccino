@@ -17,6 +17,14 @@ module ApplicationHelper
     image_tag "trash.png", :alt => t('delete'), :class => "trash"
   end
   
+  def small_trash
+    image_tag "small_trash.png", :alt => t('delete'), :class => "small_trash"
+  end
+  
+  def pencil
+    image_tag "pencil.png", :alt => t('edit'), :class => "pencil"
+  end
+  
   def link_to_delete(name, f, title = t('delete'))
     f.hidden_field(:_destroy) + link_to_function(name, "delete_fields(this)", :class => 'button blue round', :title => title)
   end

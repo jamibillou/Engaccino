@@ -234,7 +234,6 @@ a.button.grey_gradient:hover {
   width: 250px;
   margin-top: 4px;
   margin-bottom: 4px;
-  color: #444;
   font-style: normal;
 }
 .field.margin_left {
@@ -248,7 +247,6 @@ a.button.grey_gradient:hover {
   width: 65px;
   margin-top: 4px;
   margin-bottom: 4px;
-  color: #444;
   font-style: normal;
 }
 .small_field.margin_left {
@@ -260,29 +258,20 @@ a.button.grey_gradient:hover {
 .fields {
   display: inline;
 }
-
-.select {
-  height: 35px;
-}
-
-.small_edit_field {
-  width: 45px;
-  height: 20px;
-  color: #444;
-}
-
 .edit_field {
   height: 20px;
-  color: #444;
 }
-
+.small_edit_field {
+  width: 35px;
+  height: 20px;
+}
+.mini_edit_field {
+  width: 12px;
+  height: 20px;
+}
 .textarea_edit {
-  width: 300px;
-  height: 45px;
-  color: #444;
-  border-color: #999999;
+  border-color: #BBB;
 }
-
 .error_messages {
   color: #E44A37;
 }
@@ -394,9 +383,29 @@ a.button.grey_gradient:hover {
   float:  right;
   padding: 10px;
 }
+.small_trash {
+  float:  right;
+  padding-left: 8px;
+}
+.small_trash_link {
+  background: url('small_trash.png') no-repeat left 3px;
+  padding-left: 12px;
+  float:  right;
+}
+.small_trash_link a {
+  color: red;
+  text-decoration: none;
+}
+.small_trash_link a:hover {
+  text-decoration: underline;
+}
 .settings {
   float: right;
   padding: 2px 0px 0px 16px;
+}
+.pencil {
+  padding-top: 1px;
+  float: right;
 }
 
 /* BEST IN PLACE */
@@ -405,16 +414,12 @@ a.button.grey_gradient:hover {
 }
 .best_in_place:hover {
   cursor: pointer;
-  background-image: url('pencil.png');
-  background-repeat: no-repeat;
-  background-position: right center;
+  background-image: url('pencil.png') no-repeat right center;
   padding-right: 15px;
 }
-
 .best_in_place textarea {
   width: 450px;
 }
-
 .purr {
   font-size: 12px;
   font-weight: 100;

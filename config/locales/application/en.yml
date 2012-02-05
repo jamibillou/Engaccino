@@ -34,6 +34,8 @@ en:
       welcome: "Welcome to Engaccino!"
       profile_updated: "Your info has been updated."
       candidate_destroyed: "The candidate has been deleted."
+      experience_destroyed: "The experience has been deleted."
+      education_destroyed: "The education has been deleted."
     error: 
       base: "Error:"
       general: "Something went wrong, sorry about that."
@@ -50,6 +52,9 @@ en:
   # Actions
   delete: "Delete"
   add: "Add"
+  cancel: "Cancel"
+  submit: "Submit"
+  edit: "Edit"
   
   # Common words
   from: "from"

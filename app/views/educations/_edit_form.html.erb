@@ -1,29 +1,33 @@
 <%= form_for education, :remote => true do |f| %>
   <input type='hidden' name='_method' value='PUT' />
-  <td width="130" valign="top">
-  	<%= f.text_field :start_month, :class => 'small_edit_field' %>
+  <div class="ee_date">
+  	<%= f.text_field :start_month, :class => 'mini_edit_field' %>
   	<%= f.text_field :start_year, :class => 'small_edit_field' %>
-  	<br/><%=t 'to' %><br/>
-	<%= f.text_field :end_month, :class => 'small_edit_field' %>
+  	 - 
+    <%= f.text_field :end_month, :class => 'mini_edit_field' %>
   	<%= f.text_field :end_year, :class => 'small_edit_field' %>
-  </td>
-  <td width="650">
+  </div>
+  <div class="ee_details">
   	<%= f.fields_for :degree do |degree_builder| %>
   	  <%= degree_builder.fields_for :degree_type do |degree_type_builder| %>
-  	    <%= degree_type_builder.text_field :label, :class => 'small_edit_field' %>
+  	    <%= degree_type_builder.text_field :label, :class => 'edit_field small_margin' %>
   	  <% end %>
-  	  <%= degree_builder.text_field :label, :class => 'edit_field' %>
+  	  <br />
+  	  <%= degree_builder.text_field :label, :class => 'edit_field small_margin' %>
   	<% end %>
-  	<%=t 'at' %>
+  	<br />
   	<%= f.fields_for :school do |school_builder| %>
-  	  <%= school_builder.text_field :name, :class => 'edit_field' %>
+  	  <%= school_builder.text_field :name, :class => 'edit_field margin' %>
   	<% end %>
-  	<br/><br/>
   	<%= f.text_area :description, :class => 'textarea_edit' %>
   	<div class="error_messages" id="errors<%= education.id %>"></div>
-  </td>
-  <td valign="top">
-  	<%= link_to_function image_tag('cancel.png'), "hideEditForm('education','#{education.id}')" %>
-  	<%= image_submit_tag "valid.png" %>
-  </td>
+  	<%= link_to_function t('cancel'), "hideEditForm('education','#{education.id}')", :class => 'grey button' %>
+  	&nbsp;
+  	<%= f.submit t('submit') %>
+  	<div class="small_trash_link"><%= link_to "#{t('delete')}#{t('_?')}", education, :method => :delete,
+  	                                                         		                     :confirm => "#{t('delete')}#{t('_?')}",
+  	                                                         		                     :title => "#{t('delete')}#{t('_!')}",
+  	                                                         		                     :id => "destroy_education_#{education.id}" %></div>
+  </div>
+  <br />
 <% end %>

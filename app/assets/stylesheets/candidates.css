@@ -1,4 +1,4 @@
-/* SHARE/EDIT PROFILE, PROFILE COMPLETION HEADER */
+/* SHOW TOP */
 #share_edit {
   padding: 10px 0px 0px 10px;
 }
@@ -36,7 +36,6 @@
 #share_edit input[type=submit]:hover {
   text-decoration: underline;
 }
-
 #share_edit #completion_container {
   width: 77.55%;
   padding: 9px 0px;
@@ -67,7 +66,7 @@
   display: block;
 }
 
-/* QUICK VIEW CARD */
+/* CANDIDATE */
 .card {
   width: 250px;
   padding: 20px 0px 0px 10px;
@@ -79,7 +78,7 @@
   padding-left: 12px;
   margin-bottom: 4px;
 }
-.card .head .identity .photo { /* only for now */
+.card .head .identity .photo {
   width: 30px;
   height: 47px;
   margin-left: -3px;
@@ -194,18 +193,12 @@
   margin-top: 10px;
 }
 
-/* RESUME */
+/* SHOW */
 #resume {
   width: 77%;
   padding: 20px 0 0 10px;
   float: left;
   font-size: 12px;
-}
-#resume table {
-  border-collapse: collapse;	
-}
-#resume tr td {
-  padding-left: 5px;
 }
 #resume h1 {
   color: #BBB;
@@ -221,19 +214,6 @@
 #resume p {
   margin-top: 10px;
 }
-#resume a {
-  text-decoration: none;
-  color: black;
-  margin-right: 5px;
-  font-weight: bold;
-}
-#resume a:hover {
-  text-decoration: underline;
-}
-#resume input[type=submit] {
-  padding: 3px;
-  margin: 0;
-}
 #resume .block {
   background-color: white;
   margin-bottom: 10px;
@@ -248,12 +228,8 @@
   padding: 12px 35px 0px 10px;
   float: left;
 }
-#resume .empty_field {
-  font-style: italic;
-  color: #969696;
-}
 
-/* TIMELINE */
+/* SHOW TIMELINE */
 #resume #timeline {
   background-color: white;
   margin-bottom: 10px;
@@ -366,4 +342,72 @@
   position: absolute;
   background-color: #888;
   z-index: 0;
+}
+
+/* SHOW EXPERIENCES & EDUCATIONS */
+#experiences {
+  display: block;
+}
+#educations {
+  display: block;
+}
+#resume .ee_date {
+  padding-right: 50px;
+  position: absolute;
+}
+#resume .ee_details {
+  width: 50%;
+  left: 150px;
+  position: relative;
+}
+#resume .ee_details .default {
+  color: #969696;
+  font-style: italic;
+}
+#resume .ee_details .edit_field {
+  width: 200px;
+}
+#resume .ee_details .small_edit_field {
+  width: 70px;
+}
+#resume .ee_details .margin {
+  margin-bottom: 10px;
+}
+#resume .ee_details .small_margin {
+  margin-bottom: 5px;
+}
+#resume .ee_details .textarea_edit {
+  width: 100%;
+  height: 60px;
+}
+#resume .ee_details input[type=submit] {
+  padding: 4.5px 15px;
+  margin-top: 4px;
+  text-decoration: none;
+  font-size: 11px;
+  background-color: #0b7fd2;
+  color: white;
+  border: none;
+  cursor: pointer;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+#resume .ee_details input[type=submit]:hover {
+  text-decoration: underline;
+}
+#resume .ee_details .button {
+  padding: 4.5px 15px;
+  margin-top: 4px;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+#resume .ee_details .button:hover {
+  text-decoration: underline;
 }
