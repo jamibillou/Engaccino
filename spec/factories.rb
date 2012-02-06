@@ -82,10 +82,30 @@ Factory.define :language do |language|
   language.label 'Spanish'
 end
 
-Factory.define :language_candidate do |languagecandidate|
-  languagecandidate.level :beginner
-  languagecandidate.association :language
-  languagecandidate.association :candidate
+Factory.define :language_candidate do |language_candidate|
+  language_candidate.level :beginner
+  language_candidate.association :language
+  language_candidate.association :candidate
+end
+
+Factory.define :skill do |skill|
+  skill.label 'Sample skill'
+end
+
+Factory.define :skill_perso do |skill_perso|
+  skill_perso.label 'Sample skill perso'
+end
+
+Factory.define :skill_pro do |skill_pro|
+  skill_pro.label 'Sample skill pro'
+end
+
+Factory.define :skill_candidate do |skill_candidate|
+  skill_candidate.description "I'm learning more and more everyday, I do intend to master this skill"
+  skill_candidate.level 'Intermediate'
+  skill_candidate.experience '5'
+  skill_candidate.association :skill
+  skill_candidate.association :candidate
 end
 
 Factory.sequence :email do |n|

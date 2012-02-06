@@ -1,6 +1,6 @@
 class Candidate < User
   
-  attr_accessible :status, :experiences_attributes, :educations_attributes, :degrees_attributes, :languages_attributes
+  attr_accessible :status, :experiences_attributes, :educations_attributes, :degrees_attributes, :languages_attributes, :skills_attributes
   
   has_many :experiences,          :dependent => :destroy
   has_many :companies,            :through   => :experiences
@@ -8,10 +8,10 @@ class Candidate < User
   has_many :degrees,              :through   => :educations
   has_many :schools,              :through   => :educations
   has_many :language_candidates,  :dependent => :destroy
-  has_many :language,             :through   => :language_candidates
+  has_many :languages,            :through   => :language_candidates
+  has_many :skill_candidates,     :dependent => :destroy
+  has_many :skills,               :through   => :skill_candidates
   
-  accepts_nested_attributes_for :degrees,               :allow_destroy => true
-  accepts_nested_attributes_for :language_candidates,   :allow_destroy => true
   accepts_nested_attributes_for :experiences,
                                 :reject_if => lambda { |attr| attr['company_attributes']['name'].blank? && attr['role'].blank? && attr['start_year'].blank? && attr['end_year'].blank? },
                                 :allow_destroy => true
@@ -21,6 +21,8 @@ class Candidate < User
                                                               attr['degree_attributes']['degree_type_attributes']['label'].blank? && 
                                                               attr['start_year'].blank? && attr['end_year'].blank? }, 
                                 :allow_destroy => true  
+  accepts_nested_attributes_for :degrees,               :allow_destroy => true
+  accepts_nested_attributes_for :language_candidates,   :allow_destroy => true
   
   validates :status, :inclusion => { :in => [ 'available', 'looking', 'open', 'listening', 'happy' ] }, :presence => true
   
