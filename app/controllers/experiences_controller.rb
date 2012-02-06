@@ -20,12 +20,10 @@ class ExperiencesController < ApplicationController
   end
   
   def destroy
-   experience = Experience.find(params[:id]) ; candidate = experience.candidate
-   if experience.destroy
-     respond_to do |format|
-       format.html { render :json => "Everything is ok" if request.xhr? }
-       format.js
-     end
-   end   
+    experience = Experience.find(params[:id]) ; candidate = experience.candidate
+    experience.destroy
+    respond_to do |format|
+      format.html { render :json => "Delete ok" if request.xhr? }
+    end
   end
 end

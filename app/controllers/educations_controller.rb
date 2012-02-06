@@ -20,8 +20,10 @@ class EducationsController < ApplicationController
   end
   
   def destroy
-   education = Education.find(params[:id]) ; candidate = education.candidate
-   education.destroy
-   redirect_to candidate_path(candidate), :flash => { :success => t('flash.success.education_destroyed') }
+    education = Education.find(params[:id]) ; candidate = education.candidate
+    education.destroy
+    respond_to do |format|
+      format.html { render :json => "Delete ok" if request.xhr? }
+    end
   end
 end
