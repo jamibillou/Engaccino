@@ -40,15 +40,20 @@ function handleAjaxEdition(form_id) {
   $('#'+form_id)
     .bind("ajax:success",function(evt, data, status, xhr)
     {
-   	  $.ajax({
-  	  url:  "showpart",
-  	  type: "POST",
-  	  data: {model: model, id: id},
-  	  success: function(data){
-  	 	$('#'+model+'_'+id).html(data);
-  	 	handleAjaxEdition(form_id);
-  	  }
-  	  })
+      if(xhr.responseText == "Delete ok") {
+      	$('#'+model+'_'+id).html("");
+      }
+      else {
+      	$.ajax({
+  	    url:  "showpart",
+  	    type: "POST",
+  	    data: {model: model, id: id},
+  	    success: function(data){
+  	  	  $('#'+model+'_'+id).html(data);
+  	 	  handleAjaxEdition(form_id);
+  	    }
+  	    })
+      }      
   	 })
   	 .bind("ajax:error", function(evt, xhr, status)
   	 {
