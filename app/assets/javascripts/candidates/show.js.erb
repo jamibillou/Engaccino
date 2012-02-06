@@ -19,6 +19,62 @@ $(document).ready(function() {
   
 });
 
+/* Add */
+
+function displayNewForm(model) {
+  $.ajax({
+  	url: "../"+model+"s/new",
+  	success: function(data){
+  	  $('#new_'+model).html(data);
+  	  $('#new_'+model).show();
+  	  $('#link_add_'+model).hide();
+  	  handleAjaxCreation(model);
+  	}
+  })   
+}
+
+function hideNewForm(model) {
+  $('#new_'+model).hide();
+  $('#link_add_'+model).show();
+}
+
+function handleAjaxCreation(model) {
+  $('#new_'+model)
+    .bind("ajax:success",function(evt, data, status, xhr)
+    {
+      alert("success");
+      $.ajax({
+  	  url:  "showblock",
+  	  type: "POST",
+  	  data: {model: model},
+  	  success: function(data){
+	    $('#'+model+'s').html(data);
+	      $('.edit_'+model).each(function()
+	      {
+	        handleAjaxEdition($(this).attr("id"));
+	      });
+  	  }
+  	  }) 
+  	})
+  	.bind("ajax:error", function(evt, xhr, status)
+  	{
+  	  try {
+  	    errors = $.parseJSON(xhr.responseText);
+  	  }
+  	  catch(err) {
+  	    errors = {message: "JSON Error"};
+  	  }
+  	  errorText = "Error(s): ";
+  	  for(error in errors) {
+  	    errorText += error+" "+errors[error]+" ";
+  	  }
+  	  $('#errors_new_'+model).html(errorText);
+  	})
+  	;	
+}
+
+/* Edit */
+
 function displayEditForm(model, id) {
   $('#edit_'+model+'_'+id).show();
   $('#show_'+model+'_'+id).hide();
@@ -41,7 +97,7 @@ function handleAjaxEdition(form_id) {
     .bind("ajax:success",function(evt, data, status, xhr)
     {
       if(xhr.responseText == "Delete ok") {
-      	$('#'+model+'_'+id).html("");
+      	$('#'+model+'_'+id).remove();
       }
       else {
       	$.ajax({

@@ -1,9 +1,14 @@
 <h1>PROFESSIONAL EXPERIENCE</h1>
+<% if candidate == current_user %>
+  <%= link_to_function t('add'), "displayNewForm('experience')", :id => "link_add_experience", :class => "block_link"  %>
+  <div id='new_experience' class='hidden'>
+  </div> 
+<% end %>
 <% unless @experiences.empty? %>
   <% @experiences.order("start_year ASC").order("start_month ASC").each do |experience| %>
-    <div id='experience_<%= experience.id %>' class="experience">
+    <div id='experience_<%= experience.id %>'>
    	  <%= render 'show_experience', :experience => experience, :candidate => candidate %>
+   	  <br/>
    	</div>
-    <br />
   <% end %>
 <% end %>

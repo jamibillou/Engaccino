@@ -427,3 +427,6 @@
 #resume .ee_details .button:hover {
   text-decoration: underline;
 }
+#resume .block_link {
+  color: black;
+}

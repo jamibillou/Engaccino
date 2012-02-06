@@ -75,6 +75,17 @@ class CandidatesController < ApplicationController
       render :partial => 'show_education',  :locals => { :candidate => @candidate, :education => education }
     end
   end
+  
+  def showblock
+    @candidate = current_user
+    if params[:model].to_s == 'experience'
+      @experiences  = @candidate.experiences.order("start_year DESC")
+      render :partial => 'show_experiences', :locals => { :candidate => @candidate, :experiences => @experiences }
+    else
+      @educations  = @candidate.educations.order("start_year DESC")
+      render :partial => 'show_educations', :locals => { :candidate => @candidate, :educations => @educations }
+    end
+  end
 
   private
 

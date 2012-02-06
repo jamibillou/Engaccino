@@ -5,7 +5,8 @@ Engaccino::Application.routes.draw do
   get "sessions/new"
   get "ajax/countries"
   
-  match 'candidates/showpart', :to => 'candidates#showpart'
+  match 'candidates/showpart',  :to => 'candidates#showpart'
+  match 'candidates/showblock', :to => 'candidates#showblock'
 
   resources :candidates do
     resources :experiences do
