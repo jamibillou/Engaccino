@@ -262,11 +262,11 @@ a.button.grey_gradient:hover {
   height: 20px;
 }
 .small_edit_field {
-  width: 35px;
+  width: 31px;
   height: 20px;
 }
 .mini_edit_field {
-  width: 12px;
+  width: 19px;
   height: 20px;
 }
 .textarea_edit {
@@ -411,8 +411,11 @@ a.button.grey_gradient:hover {
 }
 .best_in_place:hover {
   cursor: pointer;
-  background-image: url('pencil.png') no-repeat right center;
-  padding-right: 15px;
+  background: #EEE url('pencil.png') no-repeat 96% center;
+  padding-right: 25px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
 }
 .best_in_place textarea {
   width: 450px;
