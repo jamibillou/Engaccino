@@ -215,6 +215,7 @@
   margin-top: 10px;
 }
 #resume .block {
+  min-height: 150px;
   background-color: white;
   margin-bottom: 10px;
   padding: 12px 35px 0px 10px;
@@ -345,25 +346,37 @@
 }
 
 /* SHOW EXPERIENCES & EDUCATIONS */
-#experiences .show_experience {
+#resume #experiences .show_experience {
   padding: 5px 10px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
 }
-#experiences .show_experience:hover {
+#resume #experiences .show_experience:hover {
   background: #f1ffde url('pencil.png') no-repeat 99% 9%;
   cursor: pointer;
 }
-#experiences .edit_experience {
+#resume #experiences .edit_experience {
   background-color: #f8ffef;
   padding: 5px 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
 }
-#educations .show_education {
+#resume #educations .show_education {
   padding: 5px 10px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
 }
-#educations .show_education:hover {
+#resume #educations .show_education:hover {
   background: #ecf3f9 url('pencil.png') no-repeat 99% 9%;
   cursor: pointer;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
 }
-#educations .edit_education {
+#resume #educations .edit_education {
   background-color: #f9fbfd;
   padding: 5px 5px;
 }
@@ -373,7 +386,7 @@
 }
 #resume .ee_details {
   width: 75%;
-  left: 150px;
+  left: 160px;
   position: relative;
 }
 #resume .ee_details .default {

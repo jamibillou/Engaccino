@@ -19,9 +19,13 @@ describe Candidate do
       :password_confirmation => "pouetpouet38",
       :status => 'available'
     }
-    @candidate  = Factory(:candidate) 
-    @experience = Factory(:experience, :candidate => @candidate)
-    @education  = Factory(:education, :candidate => @candidate)  
+    @candidate          = Factory(:candidate) 
+    @experience         = Factory(:experience, :candidate => @candidate)
+    @education          = Factory(:education, :candidate => @candidate) 
+    @language           = Factory(:language)
+    @language_candidate = Factory(:language_candidate, :candidate => @candidate, :language => @language)
+    @skill              = Factory(:skill)
+    @skill_candidate    = Factory(:skill_candidate, :candidate => @candidate, :skill => @skill)
   end
     
   it "should create a new instance given valid attributes" do
@@ -63,6 +67,30 @@ describe Candidate do
     it "should destroy associated educations" do
       @candidate.destroy
       Education.find_by_id(@education.id).should be_nil
+    end
+  end
+  
+  describe "language_candidates associations" do
+    
+    it "should have a language_candidates attribute" do
+      @candidate.should respond_to(:language_candidates)
+    end
+    
+    it "should destroy associated language_candidates" do
+      @candidate.destroy
+      LanguageCandidate.find_by_id(@language_candidate.id).should be_nil
+    end
+  end
+  
+  describe "skill_candidates associations" do
+    
+    it "should have a skill_candidates attribute" do
+      @candidate.should respond_to(:skill_candidates)
+    end
+    
+    it "should destroy associated skill_candidates" do
+      @candidate.destroy
+      SkillCandidate.find_by_id(@skill_candidate.id).should be_nil
     end
   end
   
