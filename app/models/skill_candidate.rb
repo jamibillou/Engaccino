@@ -5,10 +5,11 @@ class SkillCandidate < ActiveRecord::Base
   belongs_to :skill
   belongs_to :candidate
   
-  validates :candidate, :skill,                                     :presence => true
-  validates :description,        :length => { :within => 20..160 }, :presence => true
-  validates :level, :experience,                                    :presence => true, :if => :skill_pro?
-  validates :level, :experience, :length => { :is => 0 }, :if => :skill_perso?
+  validates :candidate, :skill,                                                                                 :presence => true
+  validates :description,        :length    => { :within => 20..160 },                                          :presence => true
+  validates :level,              :inclusion => { :in => [ 'beginner', 'intermediate', 'advanced', 'expert' ] }, :presence => true, :if => :skill_pro?
+  validates :experience,         :inclusion => { :in => (1..60).to_a },                                         :presence => true, :if => :skill_pro?
+  validates :level, :experience, :length    => { :is => 0 },                                                                       :if => :skill_perso?
   
   def skill_pro?
     skill.type == 'SkillPro'

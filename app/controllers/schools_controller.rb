@@ -1,4 +1,5 @@
 class SchoolsController < ApplicationController
+  
   respond_to :json
   
   def update

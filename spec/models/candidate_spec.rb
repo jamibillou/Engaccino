@@ -35,14 +35,25 @@ describe Candidate do
   
   describe "validations" do
        
-    it "should reject candidates with a blank status" do
+    it "should reject blank statuses" do
       candidate = Candidate.new(@attr.merge(:status => ''))
       candidate.should_not be_valid
     end
     
-    it "should reject candidates with an invalid status" do
-      candidate = Candidate.new(@attr.merge(:status => 'Wrong status'))
-      candidate.should_not be_valid
+    it "should reject invalid statuses" do
+      invalid_statuses = [ 'pouet', 'invalid_status', '45346', '...' ]
+      invalid_statuses.each do |invalid_status|
+        candidate = Candidate.new(@attr.merge(:status => invalid_status))
+        candidate.should_not be_valid
+      end
+    end
+    
+    it "should accept valid statuses" do
+      valid_statuses = [ 'available', 'looking', 'open', 'listening', 'happy' ]
+      valid_statuses.each do |valid_status|
+        candidate = Candidate.new(@attr.merge(:status => valid_status))
+        candidate.should be_valid
+      end
     end
   end
   

@@ -1,4 +1,5 @@
 class PagesController < ApplicationController
+  
   def overview
     @title = t(:menu_overview)
   end
