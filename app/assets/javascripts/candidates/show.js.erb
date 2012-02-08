@@ -42,7 +42,6 @@ function handleAjaxCreation(model) {
   $('#new_'+model)
     .bind("ajax:success",function(evt, data, status, xhr)
     {
-      alert("success");
       $.ajax({
   	  url:  "showblock",
   	  type: "POST",

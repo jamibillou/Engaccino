@@ -46,4 +46,8 @@ class ExperiencesController < ApplicationController
       format.html { render :json => "Delete ok" if request.xhr? }
     end
   end
+  
+  def index
+    @experiences = candidate.educations.order("start_year DESC, start_month DESC")
+  end
 end

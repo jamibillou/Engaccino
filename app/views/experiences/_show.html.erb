@@ -1,11 +1,11 @@
-<div <%= if current_user == candidate then "id='show_experience_#{experience.id}' class='show_experience'" end %>>
+<div <%= if current_user == @candidate then "id='show_experience_#{experience.id}' class='show_experience'" end %>>
   <div class="ee_date">
     <h2><%= "#{experience.start_month}/#{experience.start_year} - #{experience.end_month}/#{experience.end_year}" %></h2>
   </div>
   <div class="ee_details">
     <h2><%= experience.role %></h2>
     <%= experience.company.name %>
-    <p><% if current_user == candidate && (experience.description.nil? || experience.description.empty?) %>
+    <p><% if current_user == @candidate && (experience.description.nil? || experience.description.empty?) %>
          <span class='default'><%=t 'candidates.experience.edit_description' %></span>
          <% else %>
            <%= experience.description %>
@@ -13,7 +13,7 @@
     </p>
   </div>
 </div>
-<% if current_user == candidate %>
+<% if current_user == @candidate %>
   <div id='edit_experience_<%= experience.id %>' class='hidden edit_experience'>
     <%= render 'experiences/edit_form', :experience => experience %>   	
   </div>

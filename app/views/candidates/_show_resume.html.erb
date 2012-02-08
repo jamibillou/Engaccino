@@ -1,16 +1,16 @@
 <div id="resume">
   <%= render 'show_timeline', :candidate => @candidate %>
   <div class="block" id="skills_pro">
-  	<%= render 'show_skills_pro', :candidate => @candidate %>
+  	<%= render 'skill_pros/index' %>
   </div>
   <div class='block' id='skills_perso'>
-  	<%= render 'show_skills_perso', :candidate => @candidate %>
+  	<%= render 'skill_persos/index' %>
   </div>
   <div class="block" id="experiences">
-  	<%= render 'show_experiences', :candidate => @candidate %>
+  	<%= render 'experiences/index' %>
   </div>
   <div class="block" id="educations">
-  	<%= render 'show_educations', :candidate => @candidate %>
+  	<%= render 'educations/index' %>
   </div>
   <div class='small_block'>
   	<%= render 'show_certifications', :candidate => @candidate %>

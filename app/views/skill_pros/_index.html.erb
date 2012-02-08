@@ -7,13 +7,14 @@
 <div class='level'>
   <h1>LEVEL</h1>
 </div>
-<% if candidate == current_user %>
+<% if @candidate == current_user %>
+  <br/>
   <%= link_to_function t('add'), "displayNewForm('skill_pro')", :id => "link_add_skill_pro", :class => "block_link"  %>
   <div id='new_skill_pro' class='hidden'>
   </div> 
 <% end %>
 <% unless @skills_pro.empty? %>
   <% @skills_pro.each do |skill_pro| %>
-   	<%= render 'show_skill_pro', :skill_pro => skill_pro, :candidate => candidate %>
+   	<%= render 'skill_pros/show', :skill_pro => skill_pro %>
   <% end %>
 <% end %>

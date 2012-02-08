@@ -1,5 +1,5 @@
-<% @experiences  = candidate.experiences.order("start_year DESC") %>
-<% @educations   = candidate.educations.order("start_year DESC") %>
+<% @experiences  = candidate.experiences.order("start_year DESC, start_month DESC") %>
+<% @educations   = candidate.educations.order("start_year DESC, start_month DESC") %>
 <% @skills_pro   = candidate.skills.order('experience DESC').select { |skill| skill.type == 'SkillPro' } %>
 <% @skills_perso = candidate.skills.select { |skill| skill.type == 'SkillPerso' } %>
 

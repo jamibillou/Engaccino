@@ -69,21 +69,21 @@ class CandidatesController < ApplicationController
     @candidate = current_user
     if params[:model].to_s == 'experience'
       experience = Experience.find(params[:id])
-      render :partial => 'show_experience', :locals => { :candidate => @candidate, :experience => experience }
+      render :partial => 'experiences/show', :locals => { :experience => experience }
     else
       education = Education.find(params[:id])
-      render :partial => 'show_education',  :locals => { :candidate => @candidate, :education => education }
+      render :partial => 'educations/show',  :locals => { :education => education }
     end
   end
   
   def showblock
     @candidate = current_user
     if params[:model].to_s == 'experience'
-      @experiences  = @candidate.experiences.order("start_year DESC")
-      render :partial => 'show_experiences', :locals => { :candidate => @candidate, :experiences => @experiences }
+      @experiences  = @candidate.experiences.order("start_year DESC, start_month DESC")
+      render :partial => 'experiences/index', :locals => { :experiences => @experiences }
     else
-      @educations  = @candidate.educations.order("start_year DESC")
-      render :partial => 'show_educations', :locals => { :candidate => @candidate, :educations => @educations }
+      @educations  = @candidate.educations.order("start_year DESC, start_month DESC")
+      render :partial => 'educations/index', :locals => { :educations => @educations }
     end
   end
 
