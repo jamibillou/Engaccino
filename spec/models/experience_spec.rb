@@ -237,7 +237,7 @@ describe Experience do
     end
     
     it "should reject too long descriptions" do
-      too_long_description = 'a'*161
+      too_long_description = 'a'*301
       experience = Experience.new(@attr.merge(:description => too_long_description))
       experience.candidate = @candidate
       experience.company = @company

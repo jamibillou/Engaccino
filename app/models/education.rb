@@ -16,7 +16,7 @@ class Education < ActiveRecord::Base
   validates :end_year,    :inclusion => { :in => 1900..Time.now.year }, :presence => true
   validates :start_month, :inclusion => { :in => 1..12 },               :presence => true
   validates :end_month,   :inclusion => { :in => 1..12 },               :presence => true
-  validates :description, :length => { :within => 5..500 },             :allow_blank => true
+  validates :description, :length    => { :within => 20..300 },         :allow_blank => true
   
   validate  :date_consistance
   

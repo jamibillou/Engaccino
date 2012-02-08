@@ -1,5 +1,7 @@
-<% @experiences = candidate.experiences.order("start_year DESC") %>
-<% @educations  = candidate.educations.order("start_year DESC") %>
+<% @experiences  = candidate.experiences.order("start_year DESC") %>
+<% @educations   = candidate.educations.order("start_year DESC") %>
+<% @skills_pro   = candidate.skills.order('experience DESC').select { |skill| skill.type == 'SkillPro' } %>
+<% @skills_perso = candidate.skills.select { |skill| skill.type == 'SkillPerso' } %>
 
 <div id="candidate_<%= candidate.id %>" class="card left">
   <div class="head">
@@ -47,9 +49,9 @@
   </div>
   <div class="pro_skills">
     <h2><%= t('candidates.professional_skills').remove_accents.upcase %></h2>
-    <p><%=t 'candidates.skill' %> 1</p>
-    <p><%=t 'candidates.skill' %> 2</p>
-    <p><%=t 'candidates.skill' %> 3</p>
+    <% @skills_pro.each do |skill_pro| %>
+      <p><%= skill_pro.label %></p>
+    <% end %>
   </div>
   <% if params[:action] == 'show' %>
     <div class="contact">

@@ -111,8 +111,17 @@ describe Education do
       empty_description_education.should be_valid
     end
     
+    it "should reject too short descriptions" do
+      short_description = 'a'*19
+      short_description_education = Education.new(@attr.merge(:description => short_description))
+      short_description_education.degree = @degree
+      short_description_education.candidate = @candidate  
+      short_description_education.school = @school
+      short_description_education.should_not be_valid
+    end
+    
     it "should reject too long descriptions" do
-      long_description = 'a' * 501
+      long_description = 'a' * 301
       long_description_education = Education.new(@attr.merge(:description => long_description))
       long_description_education.degree = @degree
       long_description_education.candidate = @candidate  

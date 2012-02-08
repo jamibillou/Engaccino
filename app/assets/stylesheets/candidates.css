@@ -218,7 +218,7 @@
   min-height: 150px;
   background-color: white;
   margin-bottom: 10px;
-  padding: 12px 35px 0px 10px;
+  padding: 12px 10px 1px 10px;
 }
 #resume .small_block {
   background-color: white;
@@ -345,7 +345,7 @@
   z-index: 0;
 }
 
-/* SHOW EXPERIENCES & EDUCATIONS */
+/* EXPERIENCES & EDUCATIONS */
 #resume #experiences .show_experience {
   padding: 5px 10px;
   -moz-border-radius: 5px;
@@ -385,7 +385,7 @@
   position: absolute;
 }
 #resume .ee_details {
-  width: 75%;
+  width: 80%;
   left: 160px;
   position: relative;
 }
@@ -443,3 +443,77 @@
 #resume .block_link {
   color: black;
 }
+
+/* SKILLS PERSO */
+#skills_perso h1 {
+  margin-bottom: 10px;
+}
+#skills_perso .skill_perso  {
+  width: 20%;
+  min-height: 100px;
+  margin-bottom: 20px;
+  margin-right: 5%;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+#skills_perso .skill_perso h2 {
+  font-size: 19px;
+  color: black;
+  margin: 0;
+}
+
+#skills_pro h1 {
+  margin-bottom: 5px;
+}
+#skills_pro .label {
+  width: 50%;
+  margin-right: 19%;
+  position: relative;
+  display: inline-block;
+}
+#skills_pro .experience {
+  width: 6%;
+  margin-right: 10%;
+  position: relative;
+  display: inline-block;
+}
+#skills_pro .level {
+  position: relative;
+  display: inline-block;
+}
+#skills_pro .skill_pro {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #EEE;
+}
+#skills_pro .skill_pro h2 {
+  font-size: 19px;
+  color: black;
+  margin: 0;
+}
+#skills_pro .skill_pro h3 {
+  font-size: 16px;
+  font-weight: normal;
+  margin: 0;
+  vertical-align: top;
+}
+#skills_pro .skill_pro .label_description {
+  width: 45%;
+  margin-right: 25%;
+  position: relative;
+  display: inline-block;
+}
+#skills_pro .skill_pro .experience {
+  width: 6%;
+  margin-right: 10%;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+#skills_pro .skill_pro .level {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+

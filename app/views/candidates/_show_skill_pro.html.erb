@@ -1,0 +1,13 @@
+<% skill_candidate = skill_pro.skill_candidates.find_by_candidate_id(candidate) %>
+<div id='skill_pro_<%= skill_pro.id %>' class='skill_pro'>
+  <div class='label_description'>
+    <h2><%= skill_pro.label %></h2>
+    <p><%= skill_candidate.description %></p>
+  </div>
+  <div class='experience'>
+    <h3><%= "#{skill_candidate.experience} #{t('candidates.years')}" %></h3>
+  </div>
+  <div class='level'>
+    <h3><%= skill_candidate.level.humanize %></h3>
+  </div>
+</div>
