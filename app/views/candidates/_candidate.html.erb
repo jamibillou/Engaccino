@@ -45,12 +45,12 @@
   </div>
   <div class="degree">
     <h2><%= t('candidates.degree').remove_accents.upcase %></h2>
-    <%= "#{@educations.first.degree.degree_type.label unless @educations.first.nil?} in #{@educations.first.degree.label}" unless @educations.empty? %>
+    <%= "#{@educations.first.degree.degree_type.label unless @educations.first.nil?}, #{@educations.first.degree.label}" unless @educations.empty? %>
   </div>
   <div class="pro_skills">
     <h2><%= t('candidates.professional_skills').remove_accents.upcase %></h2>
-    <% @skills_pro.each do |skill_pro| %>
-      <p><%= skill_pro.label %></p>
+    <% @skills_pro.each_with_index do |skill_pro, index|  %>
+      <% unless index > 2 %><p><%= skill_pro.label %></p><% end %>
     <% end %>
   </div>
   <% if params[:action] == 'show' %>
