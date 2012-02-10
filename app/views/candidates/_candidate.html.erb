@@ -9,13 +9,21 @@
       <div class="photo left"><%=t 'candidates.profile_photo' %></div>
       <div class="name_place">
       	<% if current_user == candidate && params[:action] == 'show' %>
-      	  <h2><%= best_in_place candidate, :first_name, :html_attrs => {:class => 'edit_field'} %><br />
-      	      <%= best_in_place candidate, :last_name,  :html_attrs => {:class => 'edit_field'} %></h2> 
+      	  <div class="name"><%= best_in_place candidate, :first_name, :html_attrs => { :class => 'field' } %></div>
+      	  <div class="name"><%= best_in_place candidate, :last_name,  :html_attrs => { :class => 'field' } %></div>
         <% else %>
-          <h2><a href="<%= candidate_path(candidate) %>"><%= candidate.first_name %><br /><%= candidate.last_name %></a></h2>	
+          <a href="<%= candidate_path(candidate) %>">
+            <div class="name"><%= candidate.first_name %></div>
+            <div class="name"><%= candidate.last_name %></div>
+          </a>
         <% end %>
-        <%= candidate.city.blank? ? t('candidates.city') : candidate.city %>, 
-        <%= candidate.country.blank? ? t('candidates.country') : country(candidate.country) %>      
+        <% if current_user == candidate && params[:action] == 'show' %>
+          <div class="place"><%= if candidate.city.blank? then t('candidates.city') else best_in_place_if current_user == candidate, candidate, :city, :html_attrs => { :class => 'field' } end %></div>
+          <div class="place"><%= if candidate.country.blank? then t('candidates.country') else best_in_place_if current_user == candidate, candidate, :country, :html_attrs => { :class => 'field' } end %></div>
+        <% else %>
+          <div class="place"><%= candidate.city %>,</div>
+          <div class="place"><%= candidate.country %></div>
+        <% end %>
       </div>
       <% if current_user.admin? %>
       	<%= link_to trash, candidate, :method => :delete,
@@ -27,13 +35,13 @@
     </div>    	
     <div class="job">
       <%  unless @experiences.empty? %>
-        <h2><%= @experiences.first.role %></h2>
-        at <%= @experiences.first.company.name %>
+        <h2><%= best_in_place_if current_user == candidate, @experiences.first, :role, :html_attrs => { :class => 'field' } %></h2>
+        at <%=  best_in_place_if current_user == candidate, @experiences.first.company, :name, :html_attrs => { :class => 'field' } %>
       <% end %>
     </div> 
     <div class="status">
     	<% if current_user == candidate && params[:action] == 'show' %>
-    	  <%= best_in_place candidate, :status, :type => :select, :collection => status_again %>
+    	  <%= best_in_place_if current_user == candidate, candidate, :status, :type => :select, :collection => status_options_array, :html_attrs => { :class => 'combobox' } %>
     	<% else %>
         <%=t "candidates.#{candidate.status}_status" %>
     	<% end %>
@@ -46,20 +54,26 @@
     </div>
     <div class="degree">
       <h2><%= t('candidates.degree').remove_accents.upcase %></h2>
-      <%= "#{@educations.first.degree.degree_type.label unless @educations.first.nil?}, #{@educations.first.degree.label}" unless @educations.empty? %>
+      <% if current_user == candidate && params[:action] == 'show' %>
+        <%= best_in_place @educations.first.degree.degree_type, :label, :html_attrs => { :class => 'field' } unless @educations.first.nil? %><br />
+        <%= best_in_place @educations.first.degree, :label, :html_attrs => { :class => 'field' } unless @educations.empty? %>
+      <% else %>
+        <%= @educations.first.degree.degree_type.label unless @educations.first.nil? %>,<br />
+        <%= @educations.first.degree.label unless @educations.empty? %>
+      <% end %>
     </div>
   </div>
   <div class="professional_skills">
     <h2><%= t('candidates.professional_skills').remove_accents.upcase %></h2>
     <% @professional_skills.each_with_index do |professional_skill, index|  %>
-      <% unless index > 2 %><p><%= professional_skill.label %></p><% end %>
+      <% unless index > 2 %><p><%= best_in_place_if current_user == candidate, professional_skill, :label, :html_attrs => { :class => 'field' } %></p><% end %>
     <% end %>
   </div>
   <% if params[:action] == 'show' %>
     <div class="contact">
-      <h2><%= "#{t('candidates.contact')} #{candidate.first_name}" %></h2>
-      <p><%= best_in_place_if current_user == candidate, candidate, :email %></p>
-      <p><%= best_in_place_if current_user == candidate, candidate, :phone %></p>
+      <h2><%= "#{t('candidates.contact')} " %><%= best_in_place_if current_user == candidate, candidate, :first_name, :html_attrs => { :class => 'field' } %></h2>
+      <p><%= best_in_place_if current_user == candidate, candidate, :email, :html_attrs => { :class => 'field' } %></p>
+      <p><%= best_in_place_if current_user == candidate, candidate, :phone, :html_attrs => { :class => 'field' } %></p>
       <div class="buttons">
         <a class="small slightly_round grey button left margin_right" href="#">Fb</a>
         <a class="small slightly_round grey button left margin_right" href="#">Li</a>
