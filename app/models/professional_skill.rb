@@ -1,6 +1,8 @@
-class SkillPerso < Skill
+class ProfessionalSkill < Skill
 
-end# == Schema Information
+end
+
+# == Schema Information
 #
 # Table name: skills
 #

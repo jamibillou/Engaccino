@@ -7,16 +7,16 @@ class SkillCandidate < ActiveRecord::Base
   
   validates :candidate, :skill,                                                                                 :presence => true
   validates :description,        :length    => { :within => 20..160 },                                          :presence => true
-  validates :level,              :inclusion => { :in => [ 'beginner', 'intermediate', 'advanced', 'expert' ] }, :presence => true, :if => :skill_pro?
-  validates :experience,         :inclusion => { :in => (1..60).to_a },                                         :presence => true, :if => :skill_pro?
-  validates :level, :experience, :length    => { :is => 0 },                                                                       :if => :skill_perso?
+  validates :level,              :inclusion => { :in => [ 'beginner', 'intermediate', 'advanced', 'expert' ] }, :presence => true, :if => :professional_skill?
+  validates :experience,         :inclusion => { :in => (1..60).to_a },                                         :presence => true, :if => :professional_skill?
+  validates :level, :experience, :length    => { :is => 0 },                                                                       :if => :interpersonal_skill?
   
-  def skill_pro?
-    skill.type == 'SkillPro'
+  def professional_skill?
+    skill.type == 'ProfessionalSkill'
   end
   
-  def skill_perso?
-    skill.type == 'SkillPerso'
+  def interpersonal_skill?
+    skill.type == 'InterpersonalSkill'
   end
   
 end

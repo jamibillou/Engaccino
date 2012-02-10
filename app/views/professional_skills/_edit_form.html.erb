@@ -1,0 +1,15 @@
+<%= form_for :skill_candidate, :remote => true, :html => { :id => 'professional_skill_edit_form_'+professional_skill.id.to_s , :class => 'professional_skill_edit_form'} do |f| %>
+  <input type='hidden' name='_method' value='PUT' />
+  <div class='professional_skill'>
+    <div class='label_description'>
+      <h2><%= f.text_field :label, :class => 'edit_field' %></h2>
+      <%= f.text_area :description, :class => 'textarea_edit' %>
+    </div>
+    <div class='experience'>
+      <h3><%= f.text_field :experience, :class => 'mini_edit_field' %> yrs</h3>
+    </div>
+    <div class='level'>
+      <h3><%= f.text_field :level, :class => 'small_edit_field' %></h3>
+    </div>
+  </div>
+<% end %>

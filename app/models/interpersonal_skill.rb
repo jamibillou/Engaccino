@@ -1,6 +1,8 @@
-class SkillPro < Skill
+class InterpersonalSkill < Skill
 
-end# == Schema Information
+end
+
+# == Schema Information
 #
 # Table name: skills
 #

@@ -1,9 +1,5 @@
-<h1>EDUCATION</h1>
-<% if @candidate == current_user %>
-  <%= link_to_function t('add'), "displayNewForm('education')", :id => "link_add_education", :class => "block_link"  %>
-  <div id='new_education' class='hidden'>
-  </div> 
-<% end %>	  
+<h1>EDUCATION<%= link_to_function "ADD +", "displayNewForm('education')", :id => "link_add_education", :class => "add_link" if @candidate == current_user %></h1>
+<div id='new_education' class='hidden'></div> 
 <% unless @educations.empty? %>
   <% @educations.order("start_year ASC").order("start_month ASC").each do |education| %>
   	<div id='education_<%= education.id %>'>

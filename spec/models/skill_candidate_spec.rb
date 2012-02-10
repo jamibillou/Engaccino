@@ -6,8 +6,8 @@ describe SkillCandidate do
     @attr                  = { :description => 'It is basically a fantastic skill which makes me very proud' }
     @candidate             = Factory(:candidate)
     @skill                 = Factory(:skill)
-    @skill_pro             = Factory(:skill_pro)
-    @skill_perso           = Factory(:skill_perso)
+    @professional_skill    = Factory(:professional_skill)
+    @interpersonal_skill   = Factory(:interpersonal_skill)
     @skill_candidate       = Factory(:skill_candidate, :candidate => @candidate, :skill => @skill)
   end
   
@@ -70,7 +70,7 @@ describe SkillCandidate do
       it "should require a level" do
         no_level_skill_candidate           = SkillCandidate.new @attr.merge(:experience => 3)
         no_level_skill_candidate.candidate = @candidate
-        no_level_skill_candidate.skill     = @skill_pro
+        no_level_skill_candidate.skill     = @professional_skill
         no_level_skill_candidate.should_not be_valid
       end
       
@@ -79,7 +79,7 @@ describe SkillCandidate do
         invalid_levels.each do |invalid_level|
           invalid_level_skill_candidate           = SkillCandidate.new(@attr.merge(:level => invalid_level, :experience => 3))
           invalid_level_skill_candidate.candidate = @candidate
-          invalid_level_skill_candidate.skill     = @skill_pro
+          invalid_level_skill_candidate.skill     = @professional_skill
           invalid_level_skill_candidate.should_not be_valid
         end
       end
@@ -89,7 +89,7 @@ describe SkillCandidate do
         valid_levels.each do |valid_level|
           valid_level_skill_candidate           = SkillCandidate.new(@attr.merge(:level => valid_level, :experience => 3))
           valid_level_skill_candidate.candidate = @candidate
-          valid_level_skill_candidate           = @skill_pro
+          valid_level_skill_candidate           = @professional_skill
           valid_level_skill_candidate.should be_valid
         end
       end
@@ -97,7 +97,7 @@ describe SkillCandidate do
       it "should require an experience" do
         no_experience_skill_candidate           = SkillCandidate.new @attr.merge(:level => 'beginner')
         no_experience_skill_candidate.candidate = @candidate
-        no_experience_skill_candidate.skill     = @skill_pro
+        no_experience_skill_candidate.skill     = @professional_skill
         no_experience_skill_candidate.should_not be_valid
       end
       
@@ -106,7 +106,7 @@ describe SkillCandidate do
         invalid_experiences.each do |invalid_experience|
           invalid_experience_skill_candidate           = SkillCandidate.new(@attr.merge(:experience => invalid_experience, :level => 'beginner'))
           invalid_experience_skill_candidate.candidate = @candidate
-          invalid_experience_skill_candidate.skill     = @skill_pro
+          invalid_experience_skill_candidate.skill     = @professional_skill
           invalid_experience_skill_candidate.should_not be_valid
         end
       end
@@ -116,7 +116,7 @@ describe SkillCandidate do
         valid_experiences.each do |valid_experience|
           valid_experience_skill_candidate           = SkillCandidate.new(@attr.merge(:experience => valid_experience, :level => 'beginner'))
           valid_experience_skill_candidate.candidate = @candidate
-          valid_experience_skill_candidate           = @skill_pro
+          valid_experience_skill_candidate           = @professional_skill
           valid_experience_skill_candidate.should be_valid
         end
       end
@@ -127,21 +127,21 @@ describe SkillCandidate do
       it "should allow blank levels and experiences" do
         blank_level_experience_skill_candidate           = SkillCandidate.new @attr
         blank_level_experience_skill_candidate.candidate = @candidate
-        blank_level_experience_skill_candidate.skill     = @skill_perso
+        blank_level_experience_skill_candidate.skill     = @interpersonal_skill
         blank_level_experience_skill_candidate.should be_valid
       end
       
       it "should reject non blank experiences" do
         non_blank_experience_skill_candidate           = SkillCandidate.new @attr.merge(:experience => 3)
         non_blank_experience_skill_candidate.candidate = @candidate
-        non_blank_experience_skill_candidate.skill     = @skill_perso
+        non_blank_experience_skill_candidate.skill     = @interpersonal_skill
         non_blank_experience_skill_candidate.should_not be_valid
       end
       
       it "should reject non blank levels" do
         non_blank_level_skill_candidate           = SkillCandidate.new @attr.merge(:level => 'beginner')
         non_blank_level_skill_candidate.candidate = @candidate
-        non_blank_level_skill_candidate.skill     = @skill_perso
+        non_blank_level_skill_candidate.skill     = @interpersonal_skill
         non_blank_level_skill_candidate.should_not be_valid
       end
     end

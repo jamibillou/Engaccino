@@ -411,11 +411,8 @@ a.button.grey_gradient:hover {
 }
 .best_in_place:hover {
   cursor: pointer;
-  background: #EEE url('pencil.png') no-repeat 96% center;
-  padding-right: 25px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
+  background: url('pencil.png') no-repeat right center;
+  padding-right: 15px;
 }
 .best_in_place textarea {
   width: 450px;

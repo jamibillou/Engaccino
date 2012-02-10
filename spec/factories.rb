@@ -92,12 +92,12 @@ Factory.define :skill do |skill|
   skill.label 'Sample skill'
 end
 
-Factory.define :skill_perso do |skill_perso|
-  skill_perso.label 'Sample skill perso'
+Factory.define :interpersonal_skill do |interpersonal_skill|
+  interpersonal_skill.label 'Sample interpersonal skill'
 end
 
-Factory.define :skill_pro do |skill_pro|
-  skill_pro.label 'Sample skill pro'
+Factory.define :professional_skill do |professional_skill|
+  professional_skill.label 'Sample professional skill'
 end
 
 Factory.define :skill_candidate do |skill_candidate|

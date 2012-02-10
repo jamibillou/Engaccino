@@ -2,15 +2,15 @@ class Candidate < User
   
   attr_accessible :status, :experiences_attributes, :educations_attributes, :degrees_attributes, :languages_attributes, :skills_attributes
   
-  has_many :experiences,          :dependent => :destroy
-  has_many :companies,            :through   => :experiences
-  has_many :educations,           :dependent => :destroy
-  has_many :degrees,              :through   => :educations
-  has_many :schools,              :through   => :educations
-  has_many :language_candidates,  :dependent => :destroy
-  has_many :languages,            :through   => :language_candidates
-  has_many :skill_candidates,     :dependent => :destroy
-  has_many :skills,               :through   => :skill_candidates
+  has_many :experiences,                    :dependent => :destroy
+  has_many :companies,                      :through   => :experiences
+  has_many :educations,                     :dependent => :destroy
+  has_many :degrees,                        :through   => :educations
+  has_many :schools,                        :through   => :educations
+  has_many :language_candidates,            :dependent => :destroy
+  has_many :languages,                      :through   => :language_candidates
+  has_many :skill_candidates,               :dependent => :destroy
+  has_many :skills,                         :through   => :skill_candidates
   
   accepts_nested_attributes_for :experiences,
                                 :reject_if => lambda { |attr| attr['company_attributes']['name'].blank? && attr['role'].blank? && attr['start_year'].blank? && attr['end_year'].blank? },
@@ -25,6 +25,14 @@ class Candidate < User
   accepts_nested_attributes_for :language_candidates,   :allow_destroy => true
   
   validates :status, :inclusion => { :in => [ 'available', 'looking', 'open', 'listening', 'happy' ] }, :presence => true
+  
+  def professional_skills
+    skills.select { |skill| skill.type == 'ProfessionalSkill' }
+  end
+  
+  def interpersonal_skills
+    skills.select { |skill| skill.type == 'InterpersonalSkill' }
+  end
   
   def timeline_duration
     last_event.nil? && first_event.nil? ? nil : last_event.end_year - first_event.start_year - 1 + (13 - first_event.start_month + last_event.end_month) / 12.0

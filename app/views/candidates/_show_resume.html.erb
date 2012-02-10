@@ -1,24 +1,24 @@
 <div id="resume">
-  <%= render 'show_timeline', :candidate => @candidate %>
-  <div class="block" id="skills_pro">
-  	<%= render 'skill_pros/index' %>
+  <%= render 'show_timeline',         :candidate => @candidate %>
+  <div class="block" id="professional_skills">
+  	<%= render 'show_professional_skills' %>
   </div>
-  <div class='block' id='skills_perso'>
-  	<%= render 'skill_persos/index' %>
+  <div class='block' id='interpersonal_skills'>
+  	<%= render 'show_interpersonal_skills' %>
   </div>
   <div class="block" id="experiences">
-  	<%= render 'experiences/index' %>
+  	<%= render 'show_experiences' %>
   </div>
   <div class="block" id="educations">
-  	<%= render 'educations/index' %>
+  	<%= render 'show_educations' %>
   </div>
   <div class='small_block'>
   	<%= render 'show_certifications', :candidate => @candidate %>
   </div>
   <div class='small_block'>
-    <%= render 'show_languages', :candidate => @candidate %>
+    <%= render 'show_languages',      :candidate => @candidate %>
   </div>
   <div class='small_block'>
-    <%= render 'show_miscellaneous', :candidate => @candidate %>	
+    <%= render 'show_miscellaneous',  :candidate => @candidate %>	
   </div>   
 </div>
