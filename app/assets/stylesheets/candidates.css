@@ -547,40 +547,45 @@
   position: relative;
   display: inline-block;
 }
-#professional_skills .professional_skill {
+#professional_skills .show_professional_skill {
   margin-bottom: 20px;
   padding: 15px;
   background-color: #EEE;
 }
-#professional_skills .professional_skill h2 {
+#professional_skills .show_professional_skill h2 {
   font-size: 19px;
   color: black;
   margin: 0;
 }
-#professional_skills .professional_skill h3 {
+#professional_skills .show_professional_skill h3 {
   font-size: 16px;
   font-weight: normal;
   margin: 0;
   vertical-align: top;
 }
-#professional_skills .professional_skill .label_description {
+#professional_skills .show_professional_skill .label_description {
   width: 45%;
   margin-right: 25%;
   position: relative;
   display: inline-block;
 }
-#professional_skills .professional_skill .experience {
+#professional_skills .show_professional_skill .experience {
   width: 6%;
   margin-right: 10%;
   position: relative;
   display: inline-block;
   vertical-align: top;
 }
-#professional_skills .professional_skill .level {
+#professional_skills .show_professional_skill .level {
   position: relative;
   display: inline-block;
   vertical-align: top;
 }
+#professional_skills .show_professional_skill_edit:hover {
+  background: #d5d5d5 url('pencil.png') no-repeat 99% 9%;
+  cursor: pointer;
+}
+
 #resume .interpersonal_skill .edit_field {
   width: 97%;
   margin-bottom: 10px;
@@ -589,17 +594,22 @@
   width: 97%;
   height: 80px;
 }
-#resume .professional_skill .edit_field {
+#resume .show_professional_skill .edit_field {
   width: 50%;
   margin-bottom: 10px;
 }
-#resume .professional_skill .small_edit_field {
+#resume .show_professional_skill .small_edit_field {
   width: 90px;
 }
-#resume .professional_skill .mini_edit_field {
+#resume .show_professional_skill .mini_edit_field {
   width: 19px;
 }
-#resume .professional_skill .textarea_edit {
+#resume .show_professional_skill .textarea_edit {
   width:  100%;
-  height: 40px;
+  height: 80px;
 }
+#resume .show_professional_skill .ee_details {
+  left: 0;
+  position: relative;
+}
+

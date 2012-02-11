@@ -1,5 +1,5 @@
 <% skill_candidate = professional_skill.skill_candidates.find_by_candidate_id(@candidate) %>
-<div id='professional_skill_<%= professional_skill.id %>' class='professional_skill'>
+<div <%= if @candidate == current_user then "id='show_professionalSkill_#{professional_skill.id}' class='show_professional_skill show_professional_skill_edit'" else "class='show_professional_skill'" end %>>
   <div class='label_description'>
     <h2><%= professional_skill.label %></h2>
     <p><%= skill_candidate.description %></p>
@@ -12,7 +12,7 @@
   </div>
 </div>
 <% if current_user == @candidate %>
-  <div id='edit_professional_skill_<%= professional_skill.id %>' class='hidden edit_professional_skilll'>
+  <div id='edit_professionalSkill_<%= professional_skill.id %>' class='hidden edit_professionalSkill'>
     <%= render 'professional_skills/edit_form', :professional_skill => professional_skill %>   	
   </div>
 <% end %>

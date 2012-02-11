@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'faker'
 
 namespace :db do
@@ -19,7 +20,7 @@ end
 def make_candidate
   ages       = (55.years.ago.year..25.years.ago.year).to_a
   full_name  = Faker::Name.name.split
-  email      = "#{full_name[0].sub(' ', '').sub('.','').sub("'",'').downcase}.#{full_name[1].sub(' ', '').sub('.','').sub("'",'').downcase}@gmail.com"
+  email      = "franck.sabattier@gmail.com"
   password   = 'password'
   @candidate = Candidate.new :first_name     => full_name[0],                            :last_name             => full_name[1],
                              :city           => @dutch_cities[rand(@dutch_cities.size)], :country               => 'Netherlands',     
@@ -169,8 +170,56 @@ def make_franck
                             :phone          => '+33 6 66393633',       :email             => 'franck@engaccino.com',
                             :facebook_login => 'franck@engaccino.com', :linkedin_login     => 'franck@engaccino.com',
                             :twitter_login  => '@fsabattier',          :password           => 'password', :password_confirmation => 'password',
-                            :status         => 'open',                 :profile_completion => 10
+                            :status         => 'open',                 :profile_completion => 90
   franck.toggle!(:admin)
+  px2      = { :role => 'IT Engineer',                :company => 'PX Therapeutics',        :start_month => 11, :start_year => 2010, :end_month => 2,  :end_year => 2012 }
+  london   = { :role => 'IT/Bioinformatics Engineer', :company => 'University of Perugia',  :start_month => 4,  :start_year => 2010, :end_month => 10, :end_year => 2010}
+  px1      = { :role => 'IT Engineer',                :company => 'PX Therapeutics',        :start_month => 4,  :start_year => 2009, :end_month => 3,  :end_year => 2010 }
+  acensi   = { :role => 'IT Engineer',                :company => 'Acensi Innovation',      :start_month => 9,  :start_year => 2008, :end_month => 3,  :end_year => 2009 }
+  logica   = { :role => 'IT Engineer Internal',       :company => 'Logica',                 :start_month => 3,  :start_year => 2008, :end_month => 8,  :end_year => 2008 }
+  experiences = [logica, acensi, px1, london, px2]
+  
+  polyfarce = { :degree_type => "Engineer",         :label => "Génie des Logiciels et Services",              :school => "Polytech'Savoie",
+                :start_month => 9, :start_year => 2005,    :end_month => 6,  :end_year => 2008 }
+  iut       = { :degree_type => "IUT",              :label => "Informatique option génie informatique",       :school => "UPMF Grenoble",
+                :start_month => 9, :start_year => 2003,    :end_month => 6,  :end_year => 2005 }
+  bac       = { :degree_type => "Baccalauréat",     :label => "Scientifique, option sciences de l'ingénieur", :school => "Lycée Louis Armand",
+                :start_month => 9, :start_year => 2000,    :end_month => 6,  :end_year => 2003 }
+  educations = [bac, iut, polyfarce]
+  professional_skills  = [ { :label => 'Software Development', :exp => 3, :level => 'advanced' },
+                           { :label => 'User Training',        :exp => 2, :level => 'intermediate' },
+                           { :label => 'Bioinformatics',       :exp => 1, :level => 'beginner' } ]
+  interpersonal_skills = [ 'Patience', 'Open-minded', 'Autonomy', 'Self-confidence' ]
+  experiences.each do |exp|
+    experience           = Experience.new(:role => exp[:role], :start_month => exp[:start_month], :start_year => exp[:start_year], :end_month => exp[:end_month],  :end_year => exp[:end_year],
+                                          :description => @descriptions[rand(@descriptions.size)][0..298])
+    experience.candidate = franck
+    company              = experience.build_company(:name => exp[:company])
+    [company, experience, franck].each { |object| object.save! }
+  end
+  educations.each do |edu|
+    education = Education.new(:start_month => edu[:start_month], :start_year => edu[:start_year], :end_month => edu[:end_month],  :end_year => edu[:end_year],
+                              :description => @descriptions[rand(@descriptions.size)][0..298])
+    education.candidate = franck
+    school              = education.build_school(:name => edu[:school])
+    degree              = education.build_degree(:label => edu[:label])
+    degree_type         = degree.build_degree_type(:label => edu[:degree_type])
+    [degree_type, degree, school, education, franck].each { |object| object.save! }
+  end
+  professional_skills.each do |pro_skill|
+    professional_skill          = ProfessionalSkill.new(:label => pro_skill[:label])
+    skill_candidate             = SkillCandidate.new(:level =>  pro_skill[:level], :experience => pro_skill[:exp], :description => @descriptions[rand(@descriptions.size)][0..158])
+    skill_candidate.candidate   = franck
+    skill_candidate.skill       = professional_skill
+    skill_candidate.save!
+  end
+  interpersonal_skills.each_with_index do |perso_skill, index|
+    interpersonal_skill         = InterpersonalSkill.new(:label => interpersonal_skills[index])
+    skill_candidate             = SkillCandidate.new(:description => @descriptions[rand(@descriptions.size)][0..158])
+    skill_candidate.candidate   = franck
+    skill_candidate.skill       = interpersonal_skill
+    skill_candidate.save!
+  end
 end
 
 @dutch_cities = [ 'Almere', 'Lelystad', 'Bolsward', 'Dokkum', 'Drachten', 'Franeker', 'Harlingen', 'Heerenveen', 'Hindeloopen', 'IJlst', 'Leeuwarden', 'Sloten', 'Sneek', 'Stavoren', 'Workum', 'Apeldoorn', 'Arnhem', 'Bredevoort', 'Buren', 'Culemborg', 'Dieren', 'Doetinchem', 'Ede', 'Groenlo', 'Harderwijk', 'Hattem', 'Huissen', 'Nijkerk', 'Nijmegen', 'Tiel', 'Wageningen', 'Wijchen', 'Winterswijk', 'Zaltbommel', 'Zutphen', 'Deil', 'Enspijk', 'Appingedam', 'Delfzijl', 'Groningen', 'Hoogezand-Sappemeer', 'Stadskanaal', 'Winschoten', 'Veendam', 'Geleen', 'Gennep', 'Heerlen', 'Kerkrade', 'Kessel', 'Landgraaf', 'Maastricht', 'Montfort', 'Nieuwstadt', 'Roermond', 'Sittard', 'Schin op Geul', 'Stein', 'Thorn', 'Valkenburg aan de Geul', 'Venlo', 'Weert', 'Bergen op Zoom', 'Breda', 'Den Bosch', 'Eindhoven', 'Geertruidenberg', 'Grave', 'Helmond', 'Heusden', 'Klundert', 'Oosterhout', 'Oss', 'Ravenstein', 'Roosendaal', 'Tilburg', 'Waalwijk', 'Willemstad', 'Woudrichem', 'Alkmaar', 'Amstelveen', 'Amsterdam', 'Den Helder', 'Edam, Volendam', 'Enkhuizen', 'Haarlem', 'Heerhugowaard', 'Hilversum', 'Hoofddorp', 'Hoorn', 'Laren', 'Purmerend', 'Medemblik', 'Monnickendam', 'Muiden', 'Naarden', 'Schagen', 'Weesp', 'Zaanstad', 'Almelo', 'Blokzijl', 'Deventer', 'Enschede', 'Genemuiden', 'Hasselt', 'Hengelo', 'Kampen', 'Oldenzaal', 'Steenwijk', 'Vollenhove', 'Zwolle', 'Alphen aan den Rijn', 'Delft', 'Dordrecht', 'Gorinchem', 'Gouda', 'Leiden', 'Rotterdam', 'Spijkenisse', 'Den Haag', 'Zoetermeer', 'Amersfoort', 'Houten', 'Leersum', 'Nieuwegein', 'Rhenen', 'Utrecht', 'Veenendaal', 'Vreeland', 'Woerden', 'Zeist', 'Arnemuiden', 'Goes', 'Hulst', 'Middelburg', 'Sluis', 'Terneuzen', 'Veere', 'Vlissingen (English: Flushing)', 'Zierikzee' ]
