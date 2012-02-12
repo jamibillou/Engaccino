@@ -60,6 +60,12 @@ fr:
     
     language:
       level: "Niveau"
+      
+    skill:
+      beginner_level: "Débutant"
+      intermediate_level: "Intermédiaire"
+      advanced_level: "Avancé"
+      expert_level: "Expert"
     
     index:
       title: "Liste des candidats"

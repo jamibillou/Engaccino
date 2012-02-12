@@ -14,7 +14,8 @@ Engaccino::Application.routes.draw do
     end
   end    
   
-  resources :users, :companies, :experiences, :educations, :degree_types, :degrees, :schools, :professional_skills, :interpersonal_skills
+  resources :users, :companies, :experiences, :educations, :degree_types, :degrees, :schools, 
+            :professional_skills, :interpersonal_skills, :professional_skill_candidates, :interpersonnal_skill_candidates
   resources :sessions, :only => [:new, :create, :destroy]
   
   match '/signup', :to => 'candidates#new'

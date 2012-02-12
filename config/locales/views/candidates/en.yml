@@ -50,6 +50,12 @@ en:
     language:
       level: "Level"
       
+    skill:
+      beginner_level: "Beginner"
+      intermediate_level: "Intermediate"
+      advanced_level: "Advanced"
+      expert_level: "Expert"
+      
     experience:
       title: "Experience"
       add: "Add an experience"

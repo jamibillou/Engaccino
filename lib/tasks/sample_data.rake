@@ -20,7 +20,7 @@ end
 def make_candidate
   ages       = (55.years.ago.year..25.years.ago.year).to_a
   full_name  = Faker::Name.name.split
-  email      = "franck.sabattier@gmail.com"
+  email      = "#{full_name[0].sub(' ', '').sub('.','').sub("'",'').downcase}.#{full_name[1].sub(' ', '').sub('.','').sub("'",'').downcase}@gmail.com"
   password   = 'password'
   @candidate = Candidate.new :first_name     => full_name[0],                            :last_name             => full_name[1],
                              :city           => @dutch_cities[rand(@dutch_cities.size)], :country               => 'Netherlands',     
@@ -83,22 +83,22 @@ end
 def make_professional_skills
   loops = (2..4).to_a
   loops[rand(loops.size)].times do |n|
-    skill                     = ProfessionalSkill.new(:label => @professional_skills_labels[rand(@professional_skills_labels.size)])
-    skill_candidate           = SkillCandidate.new(:level => @levels[rand(@levels.size)], :experience => @experiences[rand(@experiences.size)], :description => @descriptions[rand(@descriptions.size)][0..158])
-    skill_candidate.skill     = skill
-    skill_candidate.candidate = @candidate
-    skill_candidate.save!
+    professional_skill                                 = ProfessionalSkill.new(:label => @professional_skills_labels[rand(@professional_skills_labels.size)])
+    professional_skill_candidate                       = ProfessionalSkillCandidate.new(:level => @levels[rand(@levels.size)], :experience => @experiences[rand(@experiences.size)], :description => @descriptions[rand(@descriptions.size)][0..158])
+    professional_skill_candidate.professional_skill    = professional_skill
+    professional_skill_candidate.candidate             = @candidate
+    professional_skill_candidate.save!
   end
 end
   
 def make_interpersonal_skills
   loops = (2..4).to_a
   loops[rand(loops.size)].times do |n|
-    skill                       = InterpersonalSkill.new(:label => @interpersonal_skills_labels[rand(@interpersonal_skills_labels.size)])
-    skill_candidate             = SkillCandidate.new(:description => @descriptions[rand(@descriptions.size)][0..158])
-    skill_candidate.skill       = skill
-    skill_candidate.candidate   = @candidate
-    skill_candidate.save!
+    interpersonal_skill                       = InterpersonalSkill.new(:label => @interpersonal_skills_labels[rand(@interpersonal_skills_labels.size)])
+    interpersonal_skill_candidate             = InterpersonalSkillCandidate.new(:description => @descriptions[rand(@descriptions.size)][0..158])
+    interpersonal_skill_candidate.interpersonal_skill       = interpersonal_skill
+    interpersonal_skill_candidate.candidate   = @candidate
+    interpersonal_skill_candidate.save!
   end
 end
 
@@ -148,18 +148,18 @@ def make_dominic
     [degree_type, degree, school, education, dominic].each { |object| object.save! }
   end
   professional_skills.each do |pro_skill|
-    professional_skill          = ProfessionalSkill.new(:label => pro_skill[:label])
-    skill_candidate             = SkillCandidate.new(:level =>  pro_skill[:level], :experience => pro_skill[:exp], :description => @descriptions[rand(@descriptions.size)][0..158])
-    skill_candidate.candidate   = dominic
-    skill_candidate.skill       = professional_skill
-    skill_candidate.save!
+    professional_skill                                = ProfessionalSkill.new(:label => pro_skill[:label])
+    professional_skill_candidate                      = ProfessionalSkillCandidate.new(:level =>  pro_skill[:level], :experience => pro_skill[:exp], :description => @descriptions[rand(@descriptions.size)][0..158])
+    professional_skill_candidate.candidate            = dominic
+    professional_skill_candidate.professional_skill   = professional_skill
+    professional_skill_candidate.save!
   end
   interpersonal_skills.each_with_index do |perso_skill, index|
-    interpersonal_skill         = InterpersonalSkill.new(:label => interpersonal_skills[index])
-    skill_candidate             = SkillCandidate.new(:description => @descriptions[rand(@descriptions.size)][0..158])
-    skill_candidate.candidate   = dominic
-    skill_candidate.skill       = interpersonal_skill
-    skill_candidate.save!
+    interpersonal_skill                                 = InterpersonalSkill.new(:label => interpersonal_skills[index])
+    interpersonal_skill_candidate                       = InterpersonalSkillCandidate.new(:description => @descriptions[rand(@descriptions.size)][0..158])
+    interpersonal_skill_candidate.candidate             = dominic
+    interpersonal_skill_candidate.interpersonal_skill   = interpersonal_skill
+    interpersonal_skill_candidate.save!
   end
 end
 
@@ -207,18 +207,18 @@ def make_franck
     [degree_type, degree, school, education, franck].each { |object| object.save! }
   end
   professional_skills.each do |pro_skill|
-    professional_skill          = ProfessionalSkill.new(:label => pro_skill[:label])
-    skill_candidate             = SkillCandidate.new(:level =>  pro_skill[:level], :experience => pro_skill[:exp], :description => @descriptions[rand(@descriptions.size)][0..158])
-    skill_candidate.candidate   = franck
-    skill_candidate.skill       = professional_skill
-    skill_candidate.save!
+    professional_skill                                = ProfessionalSkill.new(:label => pro_skill[:label])
+    professional_skill_candidate                      = ProfessionalSkillCandidate.new(:level =>  pro_skill[:level], :experience => pro_skill[:exp], :description => @descriptions[rand(@descriptions.size)][0..158])
+    professional_skill_candidate.candidate            = franck
+    professional_skill_candidate.professional_skill   = professional_skill
+    professional_skill_candidate.save!
   end
   interpersonal_skills.each_with_index do |perso_skill, index|
-    interpersonal_skill         = InterpersonalSkill.new(:label => interpersonal_skills[index])
-    skill_candidate             = SkillCandidate.new(:description => @descriptions[rand(@descriptions.size)][0..158])
-    skill_candidate.candidate   = franck
-    skill_candidate.skill       = interpersonal_skill
-    skill_candidate.save!
+    interpersonal_skill                                 = InterpersonalSkill.new(:label => interpersonal_skills[index])
+    interpersonal_skill_candidate                       = InterpersonalSkillCandidate.new(:description => @descriptions[rand(@descriptions.size)][0..158])
+    interpersonal_skill_candidate.candidate             = franck
+    interpersonal_skill_candidate.interpersonal_skill   = interpersonal_skill
+    interpersonal_skill_candidate.save!
   end
 end
 

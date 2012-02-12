@@ -19,13 +19,15 @@ describe Candidate do
       :password_confirmation => "pouetpouet38",
       :status => 'available'
     }
-    @candidate          = Factory(:candidate) 
-    @experience         = Factory(:experience, :candidate => @candidate)
-    @education          = Factory(:education, :candidate => @candidate) 
-    @language           = Factory(:language)
-    @language_candidate = Factory(:language_candidate, :candidate => @candidate, :language => @language)
-    @skill              = Factory(:skill)
-    @skill_candidate    = Factory(:skill_candidate, :candidate => @candidate, :skill => @skill)
+    @candidate                      = Factory(:candidate) 
+    @experience                     = Factory(:experience, :candidate => @candidate)
+    @education                      = Factory(:education, :candidate => @candidate) 
+    @language                       = Factory(:language)
+    @language_candidate             = Factory(:language_candidate, :candidate => @candidate, :language => @language)
+    @professional_skill             = Factory(:professional_skill)
+    @interpersonal_skill            = Factory(:interpersonal_skill)
+    @professional_skill_candidate   = Factory(:professional_skill_candidate,  :candidate => @candidate, :professional_skill  => @professional_skill)
+    @interpersonal_skill_candidate  = Factory(:interpersonal_skill_candidate, :candidate => @candidate, :interpersonal_skill => @interpersonal_skill)
   end
     
   it "should create a new instance given valid attributes" do
@@ -93,15 +95,27 @@ describe Candidate do
     end
   end
   
-  describe "skill_candidates associations" do
+  describe "professional_skill_candidates associations" do
     
-    it "should have a skill_candidates attribute" do
-      @candidate.should respond_to(:skill_candidates)
+    it "should have a professional_skill_candidates attribute" do
+      @candidate.should respond_to(:professional_skill_candidates)
     end
     
-    it "should destroy associated skill_candidates" do
+    it "should destroy associated professional_skill_candidates" do
       @candidate.destroy
-      SkillCandidate.find_by_id(@skill_candidate.id).should be_nil
+      ProfessionalSkillCandidate.find_by_id(@professional_skill_candidate.id).should be_nil
+    end
+  end
+
+  describe "interpersonal_skill_candidates associations" do
+    
+    it "should have a interpersonal_skill_candidates attribute" do
+      @candidate.should respond_to(:interpersonal_skill_candidates)
+    end
+    
+    it "should destroy associated interpersonal_skill_candidates" do
+      @candidate.destroy
+      InterpersonalSkillCandidate.find_by_id(@interpersonal_skill_candidate.id).should be_nil
     end
   end
   

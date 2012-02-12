@@ -1,7 +1,7 @@
-<% @experiences          = candidate.experiences.order("start_year DESC, start_month DESC") %>
-<% @educations           = candidate.educations.order("start_year DESC, start_month DESC") %>
-<% @professional_skills  = candidate.professional_skills %>
-<% @interpersonal_skills = candidate.interpersonal_skills %>
+<% @experiences          		     = candidate.experiences.order("start_year DESC, start_month DESC") %>
+<% @educations           		     = candidate.educations.order("start_year DESC, start_month DESC") %>
+<% @professional_skill_candidates    = candidate.professional_skill_candidates %>
+<% @interpersonal_skill_candidates   = candidate.interpersonal_skill_candidates %>
 
 <div id="candidate_<%= candidate.id %>" class="card"<%= " style='height:432px;'" if params[:action] == 'index' %>>
   <div class="head">
@@ -65,8 +65,8 @@
   </div>
   <div class="professional_skills">
     <h2><%= t('candidates.professional_skills').remove_accents.upcase %></h2>
-    <% @professional_skills.each_with_index do |professional_skill, index|  %>
-      <% unless index > 2 %><p><%= best_in_place_if current_user == candidate, professional_skill, :label, :html_attrs => { :class => 'field' } %></p><% end %>
+    <% @professional_skill_candidates.each_with_index do |professional_skill_candidate, index|  %>
+      <% unless index > 2 %><p><%= best_in_place_if current_user == candidate, professional_skill_candidate.professional_skill, :label, :html_attrs => { :class => 'field' } %></p><% end %>
     <% end %>
   </div>
   <% if params[:action] == 'show' %>

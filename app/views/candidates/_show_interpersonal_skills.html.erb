@@ -1,9 +1,9 @@
 <h1>INTERPERSONAL SKILLS<%= link_to_function "ADD +", "displayNewForm('interpersonal_skill')", :id => "link_add_interpersonal_skill", :class => "add_link" if @candidate == current_user %></h1>
 <div id='new_interpersonal_skill' class='hidden'></div> 
-<% unless @interpersonal_skills.empty? %>
-  <% @interpersonal_skills.each do |interpersonal_skill| %>
-    <div id='interpersonal_skill_<%= interpersonal_skill.id %>' class='interpersonal_skill'>
-   	  <%= render 'interpersonal_skills/show', :interpersonal_skill => interpersonal_skill %>
+<% unless @interpersonal_skill_candidates.empty? %>
+  <% @interpersonal_skill_candidates.each do |interpersonal_skill_candidate| %>
+    <div id='interpersonal_skill_<%= interpersonal_skill_candidate.id %>' class='interpersonal_skill'>
+   	  <%= render 'interpersonal_skills/show', :interpersonal_skill_candidate => interpersonal_skill_candidate %>
    	</div>
   <% end %>
 <% end %>

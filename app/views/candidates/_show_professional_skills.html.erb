@@ -5,8 +5,8 @@
   <%= link_to_function "ADD +", "displayNewForm('professional_skill')", :id => "link_add_professional_skill", :class => "add_link" if @candidate == current_user %>
 </h1>
 <div id='new_professional_skill' class='hidden'></div> 
-<% unless @professional_skills.empty? %>
-  <% @professional_skills.each do |professional_skill| %>
-   	<%= render 'professional_skills/show', :professional_skill => professional_skill %>
+<% unless @professional_skill_candidates.empty? %>
+  <% @professional_skill_candidates.each do |professional_skill_candidate| %>
+   	<%= render 'professional_skills/show', :professional_skill_candidate => professional_skill_candidate %>
   <% end %>
 <% end %>

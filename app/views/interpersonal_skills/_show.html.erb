@@ -1,7 +1,7 @@
-<h2><%= interpersonal_skill.label %></h2>
-<p><%= interpersonal_skill.skill_candidates.find_by_candidate_id(@candidate).description %></p>
+<% interpersonal_skill = interpersonal_skill_candidate.interpersonal_skill %>
+<p><%= interpersonal_skill_candidate.description %></p>
 <% if current_user == @candidate %>
-  <div id='edit_interpersonal_skill_<%= interpersonal_skill.id %>' class='hidden edit_interpersonal_skill'>
-    <%= render 'interpersonal_skills/edit_form', :interpersonal_skill => interpersonal_skill %>   	
+  <div id='edit_interpersonal_skill_<%= interpersonal_skill_candidate.id %>' class='hidden edit_interpersonal_skill'>
+    <%= render 'interpersonal_skills/edit_form', :interpersonal_skill_candidate => interpersonal_skill_candidate %>   	
   </div>
 <% end %>
