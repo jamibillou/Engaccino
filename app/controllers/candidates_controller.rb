@@ -65,25 +65,12 @@ class CandidatesController < ApplicationController
    redirect_to candidates_path, :flash => { :success => t('flash.success.candidate_destroyed') }
   end
   
-  def showpart
+  def refresh
     @candidate = current_user
-    if params[:model].to_s == 'experience'
-      experience = Experience.find(params[:id])
-      render :partial => 'experiences/show', :locals => { :experience => experience }
+    if params[:model].nil?
+      render :partial => params[:partial]
     else
-      education = Education.find(params[:id])
-      render :partial => 'educations/show',  :locals => { :education => education }
-    end
-  end
-  
-  def showblock
-    @candidate = current_user
-    if params[:model].to_s == 'experience'
-      @experiences  = @candidate.experiences.order("start_year DESC, start_month DESC")
-      render :partial => 'experiences/index', :locals => { :experiences => @experiences }
-    else
-      @educations  = @candidate.educations.order("start_year DESC, start_month DESC")
-      render :partial => 'educations/index', :locals => { :educations => @educations }
+      render :partial => "candidates/show_#{params[:model].to_s}s"
     end
   end
 

@@ -1,3 +1,5 @@
+<% @experiences = @candidate.experiences.order("start_year DESC, start_month DESC") %>
+
 <h1>PROFESSIONAL EXPERIENCE<%= link_to_function "ADD +", "displayNewForm('experience')", :id => "link_add_experience", :class => "add_link" if @candidate == current_user %></h1>
 <div id='new_experience' class='hidden'></div> 
 <% unless @experiences.empty? %>

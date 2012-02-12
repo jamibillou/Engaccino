@@ -14,6 +14,7 @@ Engaccino::Application.routes.draw do
   resources :users, :companies, :experiences, :educations, :degree_types, :degrees, :schools, :professional_skills, :interpersonal_skills
   resources :sessions, :only => [:new, :create, :destroy]
   
+  match 'candidates/refresh',       :to => 'candidates#refresh'
   match 'candidates/showpart',      :to => 'candidates#showpart'
   match 'candidates/showblock',     :to => 'candidates#showblock'
   root                              :to => 'candidates#index', :constraints => SingedIn.new(true)
