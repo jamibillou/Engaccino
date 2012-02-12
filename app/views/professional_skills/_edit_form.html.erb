@@ -4,6 +4,14 @@
     <div class='label_description'>
       <h2><%= f.text_field :label, :class => 'edit_field' %></h2>
       <%= f.text_area :description, :class => 'textarea_edit' %>
+      <div class="error_messages" id="errors<%= professional_skill.id %>"></div>
+      <%= link_to_function t('cancel'), "hideEditForm('professionalSkill','#{professional_skill.id}')", :class => 'grey button' %>
+      &nbsp;
+      <%= f.submit t('submit') %>
+      <div class="small_trash_link"><%= link_to "#{t('delete')}#{t('_?')}", professional_skill, :method => :delete,
+                                                               		                              :confirm => "#{t('delete')}#{t('_?')}",
+                                                               		                              :title => "#{t('delete')}#{t('_!')}",
+                                                               		                              :remote => true %></div>
     </div>
     <div class='experience'>
       <h3><%= f.text_field :experience, :class => 'mini_edit_field' %> yrs</h3>
@@ -11,15 +19,5 @@
     <div class='level'>
       <h3><%= f.text_field :level, :class => 'small_edit_field' %></h3>
     </div>
-    <div class='ee_details'>
-	    <div class="error_messages" id="errors<%= professional_skill.id %>"></div>
-	      <%= link_to_function t('cancel'), "hideEditForm('professionalSkill','#{professional_skill.id}')", :class => 'grey button' %>
-	      &nbsp;
-	      <%= f.submit t('submit') %>
-	      <div class="small_trash_link"><%= link_to "#{t('delete')}#{t('_?')}", professional_skill, :method => :delete,
-	                                                               		                    :confirm => "#{t('delete')}#{t('_?')}",
-	                                                               		                    :title => "#{t('delete')}#{t('_!')}",
-	                                                               		                    :remote => true %></div>
-  	</div>
   </div>
 <% end %>

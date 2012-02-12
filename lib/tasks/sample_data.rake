@@ -20,7 +20,7 @@ end
 def make_candidate
   ages       = (55.years.ago.year..25.years.ago.year).to_a
   full_name  = Faker::Name.name.split
-  email      = "franck.sabattier@gmail.com"
+  email = "#{full_name[0].sub(' ', '').sub('.','').sub("'",'').downcase}.#{full_name[1].sub(' ', '').sub('.','').sub("'",'').downcase}@gmail.com"
   password   = 'password'
   @candidate = Candidate.new :first_name     => full_name[0],                            :last_name             => full_name[1],
                              :city           => @dutch_cities[rand(@dutch_cities.size)], :country               => 'Netherlands',     
@@ -165,19 +165,19 @@ end
 
 def make_franck
   franck = Candidate.create! :first_name     => 'Franck',               :last_name          => 'Sabattier',
-                            :city           => 'Grenoble',             :country            => 'France',     
-                            :nationality    => 'France',               :year_of_birth      => 1985,
-                            :phone          => '+33 6 66393633',       :email             => 'franck@engaccino.com',
-                            :facebook_login => 'franck@engaccino.com', :linkedin_login     => 'franck@engaccino.com',
-                            :twitter_login  => '@fsabattier',          :password           => 'password', :password_confirmation => 'password',
-                            :status         => 'open',                 :profile_completion => 90
+                             :city           => 'Grenoble',             :country            => 'France',     
+                             :nationality    => 'France',               :year_of_birth      => 1985,
+                             :phone          => '+33 6 66393633',       :email              => 'franck@engaccino.com',
+                             :facebook_login => 'franck@engaccino.com', :linkedin_login     => 'franck@engaccino.com',
+                             :twitter_login  => '@fsabattier',          :password           => 'password', :password_confirmation => 'password',
+                             :status         => 'open',                 :profile_completion => 90
   franck.toggle!(:admin)
   px2      = { :role => 'IT Engineer',                :company => 'PX Therapeutics',        :start_month => 11, :start_year => 2010, :end_month => 2,  :end_year => 2012 }
   london   = { :role => 'IT/Bioinformatics Engineer', :company => 'University of Perugia',  :start_month => 4,  :start_year => 2010, :end_month => 10, :end_year => 2010}
   px1      = { :role => 'IT Engineer',                :company => 'PX Therapeutics',        :start_month => 4,  :start_year => 2009, :end_month => 3,  :end_year => 2010 }
   acensi   = { :role => 'IT Engineer',                :company => 'Acensi Innovation',      :start_month => 9,  :start_year => 2008, :end_month => 3,  :end_year => 2009 }
   logica   = { :role => 'IT Engineer Internal',       :company => 'Logica',                 :start_month => 3,  :start_year => 2008, :end_month => 8,  :end_year => 2008 }
-  experiences = [logica, acensi, px1, london, px2]
+  experiences = [ logica, acensi, px1, london, px2 ]
   
   polyfarce = { :degree_type => "Engineer",         :label => "Génie des Logiciels et Services",              :school => "Polytech'Savoie",
                 :start_month => 9, :start_year => 2005,    :end_month => 6,  :end_year => 2008 }
@@ -185,7 +185,7 @@ def make_franck
                 :start_month => 9, :start_year => 2003,    :end_month => 6,  :end_year => 2005 }
   bac       = { :degree_type => "Baccalauréat",     :label => "Scientifique, option sciences de l'ingénieur", :school => "Lycée Louis Armand",
                 :start_month => 9, :start_year => 2000,    :end_month => 6,  :end_year => 2003 }
-  educations = [bac, iut, polyfarce]
+  educations = [ bac, iut, polyfarce ]
   professional_skills  = [ { :label => 'Software Development', :exp => 3, :level => 'advanced' },
                            { :label => 'User Training',        :exp => 2, :level => 'intermediate' },
                            { :label => 'Bioinformatics',       :exp => 1, :level => 'beginner' } ]
