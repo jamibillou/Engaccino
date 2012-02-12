@@ -2,29 +2,38 @@ $(document).ready(function() {
   
   $('.best_in_place').best_in_place();
   
-  var arrayBIP = $('span.best_in_place');
-  for(var i = 0; i < arrayBIP.length; i++)
+  $('span.best_in_place').each(function()
   {
-  	$('#'+arrayBIP[i].id).attr('title', 'Click to edit');
-  }
+  	$(this).attr('title', 'Click to edit');
+  });
   
   $('.edit_experience').each(function()
   {
     handleAjaxEdition($(this).attr("id"));
   });
+  
   $('.edit_education').each(function()
   {
 	handleAjaxEdition($(this).attr("id"));
   });
+  
   $('.edit_professionalSkill').each(function()
   {
   	handleAjaxEdition($(this).attr("id"));
   });
   
+  $('#edit_image').click(function()
+  {
+    $('#image_button').click();
+  });
+  
+  $('#image_button').change(function()
+  {
+    $('#image_form').submit();
+  });
 });
 
 /* Add */
-
 function displayNewForm(model) {
   $.ajax({
   	url: "../"+model+"s/new",
@@ -43,41 +52,39 @@ function hideNewForm(model) {
 }
 
 function handleAjaxCreation(model) {
-  $('#new_'+model)
-    .bind("ajax:success",function(evt, data, status, xhr)
-    {
-      $.ajax({
-  	  url:  "showblock",
-  	  type: "POST",
-  	  data: {model: model},
-  	  success: function(data){
-	    $('#'+model+'s').html(data);
-	      $('.edit_'+model).each(function()
-	      {
-	        handleAjaxEdition($(this).attr("id"));
-	      });
-  	  }
-  	  }) 
-  	})
-  	.bind("ajax:error", function(evt, xhr, status)
-  	{
-  	  try {
-  	    errors = $.parseJSON(xhr.responseText);
-  	  }
-  	  catch(err) {
-  	    errors = {message: "JSON Error"};
-  	  }
-  	  errorText = "Error(s): ";
-  	  for(error in errors) {
-  	    errorText += error+" "+errors[error]+" ";
-  	  }
-  	  $('#errors_new_'+model).html(errorText);
-  	})
-  	;	
+$('#new_'+model)
+  .bind("ajax:success",function(evt, data, status, xhr)
+  {
+    $.ajax({
+	  url:  "showblock",
+	  type: "POST",
+	  data: {model: model},
+	  success: function(data) {
+    $('#'+model+'s').html(data);
+      $('.edit_'+model).each(function()
+      {
+        handleAjaxEdition($(this).attr("id"));
+      });
+	  }
+	  }) 
+	})
+	.bind("ajax:error", function(evt, xhr, status)
+	{
+	  try {
+	    errors = $.parseJSON(xhr.responseText);
+	  }
+	  catch(err) {
+	    errors = {message: "JSON Error"};
+	  }
+	  errorText = "Error(s): ";
+	  for(error in errors) {
+	    errorText += error+" "+errors[error]+" ";
+	  }
+	  $('#errors_new_'+model).html(errorText);
+	});	
 }
 
 /* Edit */
-
 function displayEditForm(model, id) {
   $('#edit_'+model+'_'+id).show();
   $('#show_'+model+'_'+id).hide();
@@ -111,22 +118,21 @@ function handleAjaxEdition(form_id) {
   	  	  $('#'+model+'_'+id).html(data);
   	 	  handleAjaxEdition(form_id);
   	    }
-  	    })
-      }      
-  	 })
-  	 .bind("ajax:error", function(evt, xhr, status)
-  	 {
-  	   try {
-  	     errors = $.parseJSON(xhr.responseText);
-  	   }
-  	   catch(err) {
-  	 	   errors = {message: "JSON Error"};
-  	   }
-  	   errorText = "Error(s): ";
-  	   for(error in errors) {
-  	 	   errorText += error+" "+errors[error]+" ";
-  	   }
-  	   $('#errors'+id).html(errorText);
-  	 })
-  	;	
+	    })
+    }      
+	 })
+	 .bind("ajax:error", function(evt, xhr, status)
+	 {
+	   try {
+	     errors = $.parseJSON(xhr.responseText);
+	   }
+	   catch(err) {
+	 	   errors = {message: "JSON Error"};
+	   }
+	   errorText = "Error(s): ";
+	   for(error in errors) {
+	 	   errorText += error+" "+errors[error]+" ";
+	   }
+	   $('#errors'+id).html(errorText);
+	 });	
 }

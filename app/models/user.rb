@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   attr_accessor :password
   
   attr_accessible :first_name, :last_name, :city, :country, :nationality, :year_of_birth, :phone, :email, :facebook_login,
-                  :linkedin_login, :twitter_login, :profile_completion, :password, :password_confirmation
+                  :linkedin_login, :twitter_login, :profile_completion, :password, :password_confirmation, :image
   
   countries_array = Country.all.collect { |c| c[0] }
   email_regex     = /^[\w+\d\-.]+@[a-z\d\-.]+\.[a-z]{2,3}(\.[a-z]{2,3})?$/i
@@ -21,7 +21,9 @@ class User < ActiveRecord::Base
   validates :twitter_login,              :format => { :with => twitter_regex }, :uniqueness => { :case_sensitive => false },     :allow_blank => true
   validates :profile_completion,         :inclusion => { :in => 0..100 }
                                                                   
-  before_create :encrypt_password
+  before_create  :encrypt_password
+  
+  mount_uploader :image, ImageUploader
   
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)
@@ -76,6 +78,8 @@ end
 #  facebook_login     :string(255)
 #  linkedin_login     :string(255)
 #  twitter_login      :string(255)
+#  status             :string(255)
+#  type               :string(255)
 #  facebook_connect   :boolean(1)      default(FALSE)
 #  linkedin_connect   :boolean(1)      default(FALSE)
 #  twitter_connect    :boolean(1)      default(FALSE)
@@ -85,7 +89,6 @@ end
 #  encrypted_password :string(255)
 #  created_at         :datetime
 #  updated_at         :datetime
-#  status             :string(255)
-#  type               :string(255)
+#  image              :string(255)
 #
 

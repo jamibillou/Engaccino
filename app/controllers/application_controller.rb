@@ -41,4 +41,5 @@ class ApplicationController < ActionController::Base
     flash[:notice]    = options[:flash][:notice]    unless options[:flash].nil? || options[:flash][:notice].nil?
     flash.now[:error] = options[:flash][:error]     unless options[:flash].nil? || options[:flash][:error].nil?
   end
+  
 end

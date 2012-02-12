@@ -6,7 +6,16 @@
 <div id="candidate_<%= candidate.id %>" class="card"<%= " style='height:432px;'" if params[:action] == 'index' %>>
   <div class="head">
     <div class="identity">
-      <div class="photo left"><%=t 'candidates.profile_photo' %></div>
+      <% if current_user == candidate && params[:action] == 'show' %>
+        <div id="edit_image"></div>
+      <% end %>
+      <div class="image left">
+        <% unless candidate.image_url.nil? %>
+          <%= image_tag candidate.image_url.to_s, :alt => 'no pic' %>
+        <% else %>
+          <%= image_tag 'default_user.jpg', :alt => 'no pic' %>
+        <% end %>
+      </div>
       <div class="name_place">
       	<% if current_user == candidate && params[:action] == 'show' %>
       	  <div class="name"><%= best_in_place candidate, :first_name, :html_attrs => { :class => 'field' } %></div>
@@ -25,6 +34,12 @@
           <div class="place"><%= candidate.country %></div>
         <% end %>
       </div>
+      <% if current_user == candidate && params[:action] == 'show' %>
+        <%= form_for candidate, :html => { :id => 'image_form', :multipart => true } do |f| %>
+          <%= f.file_field :image, :id => 'image_button' %>
+          <%= f.submit :submit, :class => 'hidden' %>
+        <% end %>
+      <% end %>
       <% if current_user.admin? %>
       	<%= link_to trash, candidate, :method => :delete,
                                		    :confirm => "#{t('candidates.destroy.title')} #{candidate.first_name} #{candidate.last_name}#{t('_?')}",
@@ -32,8 +47,8 @@
                                		    :id => "destroy_candidate_#{candidate.id}",
                                		    :class => 'hidden trash' %>
       <% end %>
-    </div>    	
-    <div class="job">
+    </div>
+    <div class="job" <%= "style='margin-top:-20px'" if current_user == candidate && params[:action] == 'show' %>>
       <%  unless @experiences.empty? %>
         <h2><%= best_in_place_if current_user == candidate, @experiences.first, :role, :html_attrs => { :class => 'field' } %></h2>
         at <%=  best_in_place_if current_user == candidate, @experiences.first.company, :name, :html_attrs => { :class => 'field' } %>

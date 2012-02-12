@@ -64,16 +64,28 @@
 .card .head {
   padding: 8px 8px 16px 8px;
 }
-.card .head .identity .photo {
-  width: 30px;
-  height: 47px;
-  padding-left: 20px;
-  padding-top: 33px;
+.card .head #image_button {
+  opacity: 0;
+}
+.card .head .identity .image {
   background-color: #444;
+  width: 80px;
+  height: 80px;
+  padding: 0;
   color: white;
   text-align: center;
   font-size: 10px;
   display: inline-block;
+}
+.card .head .identity #edit_image {
+  width: 80px;
+  height: 80px;
+  padding: 0;
+  position: absolute;
+}
+.card .head .identity #edit_image:hover {
+  cursor: pointer;
+  background: url('pencil.png') no-repeat 90% 9%;
 }
 .card .head .identity .name_place {
   max-width: 135px;
@@ -439,36 +451,22 @@
 /* EXPERIENCES & EDUCATIONS */
 #resume #experiences .show_experience {
   padding: 5px 10px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
 }
 #resume #experiences .show_experience:hover {
   background: #f1ffde url('pencil.png') no-repeat 99% 9%;
   cursor: pointer;
 }
 #resume #experiences .edit_experience {
-  background-color: #f8ffef;
   padding: 5px 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
 }
 #resume #educations .show_education {
   padding: 5px 10px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
 }
 #resume #educations .show_education:hover {
   background: #ecf3f9 url('pencil.png') no-repeat 99% 9%;
   cursor: pointer;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
 }
 #resume #educations .edit_education {
-  background-color: #f9fbfd;
   padding: 5px 5px;
 }
 #resume .ee_date {
