@@ -149,6 +149,7 @@ ActiveRecord::Schema.define(:version => 20120212150203) do
     t.string   "encrypted_password"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "image"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

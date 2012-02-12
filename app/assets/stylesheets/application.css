@@ -274,6 +274,8 @@ a.button.grey_gradient:hover {
 }
 .error_messages {
   color: #E44A37;
+  position: relative;
+  display: inline-block;
 }
 
 /* VISIBILITY */
@@ -384,13 +386,13 @@ a.button.grey_gradient:hover {
   padding: 10px;
 }
 .small_trash {
-  float:  right;
+  position: relative;
   padding-left: 8px;
 }
 .small_trash_link {
   background: url('small_trash.png') no-repeat left 3px;
   padding-left: 12px;
-  float:  right;
+  float: right;
 }
 .small_trash_link a {
   color: red;

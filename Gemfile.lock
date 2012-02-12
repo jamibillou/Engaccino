@@ -35,6 +35,8 @@ GEM
       jquery-rails
       rails (~> 3.1.0)
     builder (3.0.0)
+    carrierwave (0.5.8)
+      activesupport (~> 3.0)
     countries (0.6.2)
       currencies (= 0.4.0)
       currencies (>= 0.2.0)
@@ -129,6 +131,7 @@ PLATFORMS
 DEPENDENCIES
   annotate (= 2.4.1.beta1)
   best_in_place
+  carrierwave
   countries
   enum_column3
   factory_girl_rails

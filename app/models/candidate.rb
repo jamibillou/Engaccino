@@ -107,6 +107,8 @@ end
 #  facebook_login     :string(255)
 #  linkedin_login     :string(255)
 #  twitter_login      :string(255)
+#  status             :string(255)
+#  type               :string(255)
 #  facebook_connect   :boolean(1)      default(FALSE)
 #  linkedin_connect   :boolean(1)      default(FALSE)
 #  twitter_connect    :boolean(1)      default(FALSE)
@@ -116,7 +118,6 @@ end
 #  encrypted_password :string(255)
 #  created_at         :datetime
 #  updated_at         :datetime
-#  status             :string(255)
-#  type               :string(255)
+#  image              :string(255)
 #
 

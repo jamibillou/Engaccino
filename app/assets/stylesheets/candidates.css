@@ -52,7 +52,7 @@
   display: block;
 }
 
-/* CANDIDATE */
+/* CARD */
 .card {
   background: white;
   width: 250px;
@@ -64,16 +64,28 @@
 .card .head {
   padding: 8px 8px 16px 8px;
 }
-.card .head .identity .photo {
-  width: 30px;
-  height: 47px;
-  padding-left: 20px;
-  padding-top: 33px;
+.card .head #image_button {
+  opacity: 0;
+}
+.card .head .identity .image {
   background-color: #444;
+  width: 80px;
+  height: 80px;
+  padding: 0;
   color: white;
   text-align: center;
   font-size: 10px;
   display: inline-block;
+}
+.card .head .identity #edit_image {
+  width: 80px;
+  height: 80px;
+  padding: 0;
+  position: absolute;
+}
+.card .head .identity #edit_image:hover {
+  cursor: pointer;
+  background: url('pencil.png') no-repeat 90% 9%;
 }
 .card .head .identity .name_place {
   max-width: 135px;
@@ -289,6 +301,37 @@
   padding: 12px 35px 0px 10px;
   float: left;
 }
+#resume input[type=submit] {
+  padding: 4.5px 15px;
+  margin-top: 4px;
+  text-decoration: none;
+  font-size: 11px;
+  background-color: #0b7fd2;
+  color: white;
+  border: none;
+  cursor: pointer;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+#resume input[type=submit]:hover {
+  text-decoration: underline;
+}
+#resume .button {
+  padding: 4.5px 15px;
+  margin-top: 4px;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+#resume .button:hover {
+  text-decoration: underline;
+}
 
 /* SHOW TIMELINE */
 #resume #timeline {
@@ -408,36 +451,22 @@
 /* EXPERIENCES & EDUCATIONS */
 #resume #experiences .show_experience {
   padding: 5px 10px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
 }
 #resume #experiences .show_experience:hover {
   background: #f1ffde url('pencil.png') no-repeat 99% 9%;
   cursor: pointer;
 }
 #resume #experiences .edit_experience {
-  background-color: #f8ffef;
   padding: 5px 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
 }
 #resume #educations .show_education {
   padding: 5px 10px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
 }
 #resume #educations .show_education:hover {
   background: #ecf3f9 url('pencil.png') no-repeat 99% 9%;
   cursor: pointer;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
 }
 #resume #educations .edit_education {
-  background-color: #f9fbfd;
   padding: 5px 5px;
 }
 #resume .ee_date {
@@ -469,37 +498,6 @@
   width: 100%;
   height: 40px;
 }
-#resume .ee_details input[type=submit] {
-  padding: 4.5px 15px;
-  margin-top: 4px;
-  text-decoration: none;
-  font-size: 11px;
-  background-color: #0b7fd2;
-  color: white;
-  border: none;
-  cursor: pointer;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-}
-#resume .ee_details input[type=submit]:hover {
-  text-decoration: underline;
-}
-#resume .ee_details .button {
-  padding: 4.5px 15px;
-  margin-top: 4px;
-  text-decoration: none;
-  font-size: 11px;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-}
-#resume .ee_details .button:hover {
-  text-decoration: underline;
-}
 #resume .add_link {
   margin-right: 2px;
   float: right;
@@ -528,6 +526,15 @@
   color: black;
   margin: 0;
 }
+#resume .interpersonal_skill .edit_field {
+  width: 97%;
+  margin-bottom: 10px;
+}
+#resume .interpersonal_skill .textarea_edit {
+  width: 97%;
+  height: 80px;
+}
+
 #professional_skills h1 {
   margin-bottom: 5px;
 }
@@ -582,17 +589,8 @@
   vertical-align: top;
 }
 #professional_skills .show_professional_skill_edit:hover {
-  background: #d5d5d5 url('pencil.png') no-repeat 99% 9%;
+  background: #DDD url('pencil.png') no-repeat 99% 9%;
   cursor: pointer;
-}
-
-#resume .interpersonal_skill .edit_field {
-  width: 97%;
-  margin-bottom: 10px;
-}
-#resume .interpersonal_skill .textarea_edit {
-  width: 97%;
-  height: 80px;
 }
 #resume .show_professional_skill .edit_field {
   width: 50%;
@@ -606,10 +604,5 @@
 }
 #resume .show_professional_skill .textarea_edit {
   width:  100%;
-  height: 80px;
+  height: 40px;
 }
-#resume .show_professional_skill .ee_details {
-  left: 0;
-  position: relative;
-}
-
