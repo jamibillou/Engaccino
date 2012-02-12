@@ -3,7 +3,7 @@
 <% unless @interpersonal_skill_candidates.empty? %>
   <% @interpersonal_skill_candidates.each do |interpersonal_skill_candidate| %>
     <div id='interpersonal_skill_<%= interpersonal_skill_candidate.id %>' class='interpersonal_skill'>
-   	  <%= render 'interpersonal_skills/show', :interpersonal_skill_candidate => interpersonal_skill_candidate %>
+   	  <%= render 'interpersonal_skill_candidates/show', :interpersonal_skill_candidate => interpersonal_skill_candidate %>
    	</div>
   <% end %>
 <% end %>

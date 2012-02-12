@@ -109,16 +109,6 @@ ActiveRecord::Schema.define(:version => 20120212150203) do
     t.datetime "updated_at"
   end
 
-  create_table "skill_candidates", :force => true do |t|
-    t.string   "level"
-    t.integer  "experience"
-    t.string   "description"
-    t.integer  "candidate_id"
-    t.integer  "skill_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "skills", :force => true do |t|
     t.string   "label"
     t.string   "type"
