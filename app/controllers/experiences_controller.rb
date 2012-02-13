@@ -12,13 +12,9 @@ class ExperiencesController < ApplicationController
     @experience = Experience.new(params[:experience])
     @experience.candidate = current_user
     unless @experience.save
-      respond_to do |format|
-        format.html { render :json => @experience.errors, :status => :unprocessable_entity if request.xhr? }
-      end
+      respond_to { |format| format.html { render :json => @experience.errors, :status => :unprocessable_entity if request.xhr? } }
     else
-      respond_to do |format|
-        format.html { render :json => "Create ok" if request.xhr? }
-      end      
+      respond_to { |format| format.html { render :json => 'create!' if request.xhr? } }
     end    
   end
   
@@ -29,22 +25,16 @@ class ExperiencesController < ApplicationController
   def update
     @experience = Experience.find(params[:id])
     unless @experience.update_attributes(params[:experience])
-      respond_to do |format|
-        format.html { render :json => @experience.errors, :status => :unprocessable_entity if request.xhr? }
-      end
+      respond_to { |format| format.html { render :json => @experience.errors, :status => :unprocessable_entity if request.xhr? } }
     else
-      respond_to do |format|
-        format.html { render :json => "Everything is ok" if request.xhr? } 
-      end        
+      respond_to { |format| format.html { render :json => 'update!' if request.xhr? } }
     end  
   end
   
   def destroy
     experience = Experience.find(params[:id]) ; candidate = experience.candidate
     experience.destroy
-    respond_to do |format|
-      format.html { render :json => "Delete ok" if request.xhr? }
-    end
+    respond_to { |format| format.html { render :json => 'destroy!' if request.xhr? } }
   end
   
   def index
