@@ -100,12 +100,18 @@ Factory.define :professional_skill do |professional_skill|
   professional_skill.label 'Sample professional skill'
 end
 
-Factory.define :skill_candidate do |skill_candidate|
-  skill_candidate.description "I'm learning more and more everyday, I do intend to master this skill"
-  skill_candidate.level 'Intermediate'
-  skill_candidate.experience '5'
-  skill_candidate.association :skill
-  skill_candidate.association :candidate
+Factory.define :interpersonal_skill_candidate do |interpersonal_skill_candidate|
+  interpersonal_skill_candidate.description "I'm learning more and more everyday, I do intend to master this skill"
+  interpersonal_skill_candidate.association :interpersonal_skill
+  interpersonal_skill_candidate.association :candidate
+end
+
+Factory.define :professional_skill_candidate do |professional_skill_candidate|
+  professional_skill_candidate.description "I'm on the way to be expert on this skill"
+  professional_skill_candidate.level 'advanced'
+  professional_skill_candidate.experience '4'
+  professional_skill_candidate.association :professional_skill
+  professional_skill_candidate.association :candidate
 end
 
 Factory.sequence :email do |n|

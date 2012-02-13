@@ -1,0 +1,15 @@
+<% @professional_skill_candidates = @candidate.professional_skill_candidates %>
+<h1>
+  <div class='label'>PROFESSIONAL SKILLS</div>
+  <div class='experience'>EXPERIENCE</div>
+  <div class='level'>LEVEL</div>
+  <%= link_to_function "ADD +", "callNew('professionalSkillCandidate')", :id => "link_add_professional_skill", :class => "add_link" if @candidate == current_user %>
+</h1>
+<div id='new_professionalSkillCandidate' class='hidden'></div> 
+<% unless @professional_skill_candidates.empty? %>
+  <% @professional_skill_candidates.each do |professional_skill_candidate| %>
+  	<div id='professionalSkillCandidate_<%= professional_skill_candidate.id %>' class='professional_skill'>
+   		<%= render 'professional_skill_candidates/show', :professional_skill_candidate => professional_skill_candidate %>
+   	</div>
+  <% end %>
+<% end %>

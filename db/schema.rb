@@ -71,6 +71,14 @@ ActiveRecord::Schema.define(:version => 20120213221756) do
     t.boolean  "current",      :default => false
   end
 
+  create_table "interpersonal_skill_candidates", :force => true do |t|
+    t.string   "description"
+    t.integer  "candidate_id"
+    t.integer  "interpersonal_skill_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "language_candidates", :force => true do |t|
     t.integer  "language_id"
     t.integer  "candidate_id"
@@ -81,6 +89,16 @@ ActiveRecord::Schema.define(:version => 20120213221756) do
 
   create_table "languages", :force => true do |t|
     t.string   "label"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "professional_skill_candidates", :force => true do |t|
+    t.string   "level"
+    t.integer  "experience"
+    t.string   "description"
+    t.integer  "candidate_id"
+    t.integer  "professional_skill_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

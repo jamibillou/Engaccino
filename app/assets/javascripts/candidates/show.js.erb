@@ -4,7 +4,8 @@ $(document).ready(function() {
   
   $('.edit_experience').each(function()        { handleAjaxEdition($(this).attr('id')); });
   $('.edit_education').each(function()         { handleAjaxEdition($(this).attr('id')); });
-  $('.edit_professionalSkill').each(function() { handleAjaxEdition($(this).attr('id')); });
+  $('.edit_professionalSkillCandidate').each(function() { handleAjaxEdition($(this).attr('id')); });
+  $('.edit_interpersonalSkillCandidate').each(function() { handleAjaxEdition($(this).attr('id')); });
   
   $('#edit_image').click(function()            { $('#image_button').click(); });
   $('#image_button').change(function()         { $('#image_form').submit(); });
@@ -25,7 +26,7 @@ function handleAjaxEdition(form_id) {
   var id    = arrayId[2];
   $('#'+'show_'+model+'_'+id).click(function() { showForm(model, id, partials); });
   $('#'+form_id).bind('ajax:success', function(evt, data, status, xhr) { (xhr.responseText == 'destroy!') ? $('#'+model+'_'+id).remove() && refreshPartials(partials) : callRefresh(model, data, partials) })
-	              .bind('ajax:error',   function(evt, xhr, status)       { $('#errors'+id).html(buildErrorMessages(xhr)); });	
+                .bind('ajax:error',   function(evt, xhr, status)       { $('#errors'+id).html(buildErrorMessages(xhr)); });	
 }
 
 /* SHOW/HIDE  FORMS */

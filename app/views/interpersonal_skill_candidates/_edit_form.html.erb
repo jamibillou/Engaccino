@@ -1,0 +1,15 @@
+<%= form_for interpersonal_skill_candidate, :remote => true, :html => { :id => 'interpersonal_skill_edit_form_'+interpersonal_skill_candidate.id.to_s , :class => 'interpersonal_skill_edit_form'} do |f| %>
+  <input type='hidden' name='_method' value='PUT' />
+  <%= f.fields_for :interpersonal_skill do |interpersonal_skill_builder| %>
+   	<h2><%= interpersonal_skill_builder.text_field :label, :class => 'edit_field' %></h2>
+  <% end %>
+  <p><%= f.text_area :description, :class => 'textarea_edit' %></p>
+  <div class="error_messages" id="errors<%= interpersonal_skill_candidate.id %>"></div>
+  <%= link_to_function t('cancel'), "hideForm('interpersonalSkillCandidate','#{interpersonal_skill_candidate.id}')", :class => 'grey button' %>
+  &nbsp;
+  <%= f.submit t('submit') %>
+  <div class="small_trash_link"><%= link_to "#{t('delete')}#{t('_?')}", interpersonal_skill_candidate, :method => :delete,
+                                                               		                              :confirm => "#{t('delete')}#{t('_?')}",
+                                                               		                              :title => "#{t('delete')}#{t('_!')}",
+                                                               		                              :remote => true %></div>
+<% end %>

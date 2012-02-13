@@ -1,0 +1,10 @@
+<% interpersonal_skill = interpersonal_skill_candidate.interpersonal_skill %>
+<div <%= if @candidate == current_user then "id='show_interpersonalSkillCandidate_#{interpersonal_skill_candidate.id}' class='show_interpersonal_skill show_interpersonal_skill_edit'" else "class='show_interpersonal_skill'" end %>>
+	<h2><%= interpersonal_skill.label %></h2>
+	<p><%= interpersonal_skill_candidate.description %></p>
+</div>
+<% if current_user == @candidate %>
+  <div id='edit_interpersonalSkillCandidate_<%= interpersonal_skill_candidate.id %>' class='hidden edit_interpersonalSkillCandidate'>
+    <%= render 'interpersonal_skill_candidates/edit_form', :interpersonal_skill_candidate => interpersonal_skill_candidate %>   	
+  </div>
+<% end %>

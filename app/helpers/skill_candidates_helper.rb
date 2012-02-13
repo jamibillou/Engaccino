@@ -1,0 +1,3 @@
+module SkillCandidatesHelper
+  
+end

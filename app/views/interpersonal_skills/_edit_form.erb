@@ -1,5 +1,0 @@
-<%= form_for :skill_candidate, :remote => true, :html => { :id => 'interpersonal_skill_edit_form_'+interpersonal_skill.id.to_s , :class => 'interpersonal_skill_edit_form'} do |f| %>
-  <input type='hidden' name='_method' value='PUT' />
-    <%= f.text_field :label, :class => 'edit_field margin' %><!-- à remplacer par un fields for :interpersonal_skill une fois le controller en place -->
-    <%= f.text_area :description, :class => 'textarea_edit' %>
-<% end %>
