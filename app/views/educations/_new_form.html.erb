@@ -1,12 +1,12 @@
 <%= form_for @education, :remote => true do |f| %>
-  <div class="ee_date">
+  <div class='ee_date'>
   	<%= f.text_field :start_month, :class => 'mini_edit_field' %>
   	<%= f.text_field :start_year, :class => 'small_edit_field' %>
   	 - 
     <%= f.text_field :end_month, :class => 'mini_edit_field' %>
   	<%= f.text_field :end_year, :class => 'small_edit_field' %>
   </div>
-  <div class="ee_details">
+  <div class='ee_details'>
   	<%= f.fields_for :degree do |degree_builder| %>
   	  <%= degree_builder.fields_for :degree_type do |degree_type_builder| %>
   	    <%= degree_type_builder.text_field :label, :class => 'edit_field small_margin' %>
@@ -19,8 +19,8 @@
   	  <%= school_builder.text_field :name, :class => 'edit_field margin' %>
   	<% end %>
   	<%= f.text_area :description, :class => 'textarea_edit' %>
-  	<div class="error_messages" id="errors_new_education"></div>
-  	<%= link_to_function t('cancel'), "hideNewForm('education')", :class => 'grey button' %>
+  	<div class='error_messages' id='errors_new_education'></div>
+  	<%= link_to_function t('cancel'), "hideForm('education')", :class => 'grey button' %>
   	&nbsp;
   	<%= f.submit t('submit') %>
   	<br/><br/>

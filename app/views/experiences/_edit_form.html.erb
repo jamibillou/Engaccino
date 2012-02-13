@@ -1,26 +1,26 @@
-<%= form_for experience, :remote => true, :html => { :id => "experience_edit_form_"+experience.id.to_s, :class => "experience_edit_form" } do |f| %>
+<%= form_for experience, :remote => true, :html => { :id => "experience_edit_form_#{experience.id.to_s}", :class => 'experience_edit_form' } do |f| %>
   <input type='hidden' name='_method' value='PUT' />
-  <div class="ee_date">
+  <div class='ee_date'>
   	<%= f.text_field :start_month, :class => 'mini_edit_field' %>
   	<%= f.text_field :start_year, :class => 'small_edit_field' %>
   	 - 
 	  <%= f.text_field :end_month, :class => 'mini_edit_field' %>
   	<%= f.text_field :end_year, :class => 'small_edit_field' %>
   </div>
-  <div class="ee_details">
+  <div class='ee_details'>
       <%= f.text_field :role, :class => 'edit_field small_margin' %>
       <br />
       <%= f.fields_for :company do |company_builder| %>
       	<%= company_builder.text_field :name, :class => 'edit_field margin' %>
       <% end %>
       <%= f.text_area :description, :class => 'textarea_edit' %>
-      <div class="error_messages" id="errors<%= experience.id %>"></div>
-      <%= link_to_function t('cancel'), "hideEditForm('experience','#{experience.id}')", :class => 'grey button' %>
+      <div class='error_messages' id='errors<%= experience.id %>'></div>
+      <%= link_to_function t('cancel'), "hideForm('experience','#{experience.id}')", :class => 'grey button' %>
       &nbsp;
       <%= f.submit t('submit') %>
-      <div class="small_trash_link"><%= link_to "#{t('delete')}#{t('_?')}", experience, :method => :delete,
-                                                               		                    :confirm => "#{t('delete')}#{t('_?')}",
-                                                               		                    :title => "#{t('delete')}#{t('_!')}",
-                                                               		                    :remote => true %></div>
+      <div class='small_trash_link'><%= link_to "#{t('delete')}#{t('_?')}", experience, :method => :delete,
+                                                               		                      :confirm => "#{t('delete')}#{t('_?')}",
+                                                               		                      :title => "#{t('delete')}#{t('_!')}",
+                                                               		                      :remote => true %></div>
   </div>
 <% end %> 

@@ -18,8 +18,7 @@ class CandidatesController < ApplicationController
   
   def show
     @candidate = Candidate.find(params[:id])
-    @title = "#{@candidate.first_name} #{@candidate.last_name}"
-    init_page :javascripts => 'candidates/show'
+    init_page :title => "#{@candidate.first_name} #{@candidate.last_name}", :javascripts => 'candidates/show'
   end
   
   def new
@@ -67,11 +66,7 @@ class CandidatesController < ApplicationController
   
   def refresh
     @candidate = current_user
-    if params[:model].nil?
-      render :partial => params[:partial]
-    else
-      render :partial => "candidates/show_#{params[:model].to_s}s"
-    end
+    params[:model].nil? ? (render :partial => params[:partial]) : (render :partial => "candidates/show_#{params[:model].to_s}s")
   end
 
   private
@@ -95,9 +90,7 @@ class CandidatesController < ApplicationController
     end
     
     def new_user
-      unless current_user.nil?
-        redirect_to candidate_path(current_user), :notice => t('flash.notice.already_registered')
-      end
+      redirect_to candidate_path(current_user), :notice => t('flash.notice.already_registered') unless current_user.nil?
     end
     
 end

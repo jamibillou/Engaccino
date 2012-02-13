@@ -20,7 +20,7 @@
   	<% end %>
   	<%= f.text_area :description, :class => 'textarea_edit' %>
   	<div class="error_messages" id="errors<%= education.id %>"></div>
-  	<%= link_to_function t('cancel'), "hideEditForm('education','#{education.id}')", :class => 'grey button' %>
+  	<%= link_to_function t('cancel'), "hideForm('education','#{education.id}')", :class => 'grey button' %>
   	&nbsp;
   	<%= f.submit t('submit') %>
   	<div class="small_trash_link"><%= link_to "#{t('delete')}#{t('_?')}", education, :method  => :delete,
