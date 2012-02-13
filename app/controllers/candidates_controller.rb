@@ -18,7 +18,8 @@ class CandidatesController < ApplicationController
   
   def show
     @candidate = Candidate.find(params[:id])
-    init_page :title => "#{@candidate.first_name} #{@candidate.last_name}", :javascripts => 'candidates/show'
+    @title = "#{@candidate.first_name} #{@candidate.last_name}"
+    init_page :javascripts => 'candidates/show'
   end
   
   def new
@@ -66,7 +67,7 @@ class CandidatesController < ApplicationController
   
   def refresh
     @candidate = current_user
-    params[:model].nil? ? (render :partial => params[:partial]) : (render :partial => "candidates/show_#{params[:model].to_s}s")
+    params[:model].nil? ? (render :partial => "candidates/#{params[:partial]}", :locals => { :candidate => @candidate }) : (render :partial => "candidates/show_#{params[:model].to_s}s")
   end
 
   private
