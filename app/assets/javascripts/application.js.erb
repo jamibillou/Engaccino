@@ -178,3 +178,8 @@ function add_fields(link, association, content) {
   var regexp = new RegExp("new_" + association, "g")
   $(link).before(content.replace(regexp, new_id));
 }
+
+function initBIP(title) {
+  $('.best_in_place').best_in_place();
+  $('span.best_in_place').each(function() { $(this).attr('title', title); });
+}
