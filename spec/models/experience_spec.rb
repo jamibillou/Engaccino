@@ -92,67 +92,6 @@ describe Experience do
       experience.should_not be_valid
     end
     
-    it "should require a start year" do
-      experience = Experience.new(@attr.merge(:start_year => ''))
-      experience.candidate = @candidate
-      experience.company = @company
-      experience.should_not be_valid
-    end
-    
-    it "should reject invalid start years" do
-      invalid_start_years = [ 'year', 12, Time.now.year+1, 1792 ]
-      invalid_start_years.each do |invalid_start_year|
-        experience = Experience.new(@attr.merge(:start_year => invalid_start_year))
-        experience.candidate = @candidate
-        experience.company = @company
-        experience.should_not be_valid
-      end
-    end
-    
-    it "should accept valid start years" do
-      valid_start_years = [ 1995, 2010, 1980, 2000 ]
-      valid_start_years.each do |valid_start_year|
-        experience = Experience.new(@attr.merge(:start_year => valid_start_year))
-        experience.candidate = @candidate
-        experience.company = @company
-        experience.should be_valid
-      end
-    end
-    
-    it "should require an end year" do
-      experience = Experience.new(@attr.merge(:end_year => ''))
-      experience.candidate = @candidate
-      experience.company = @company
-      experience.should_not be_valid
-    end
-    
-    it "should reject invalid end years" do
-      invalid_end_years = [ 'year', 12, Time.now.year+1, 1792 ]
-      invalid_end_years.each do |invalid_end_year|
-        experience = Experience.new(@attr.merge(:end_year => invalid_end_year))
-        experience.candidate = @candidate
-        experience.company = @company
-        experience.should_not be_valid
-      end
-    end
-    
-    it "should accept valid end years" do
-      valid_end_years = [ 1995, 2010, 1980, 2000 ]
-      valid_end_years.each do |valid_end_year|
-        experience = Experience.new(@attr.merge(:start_year => valid_end_year-1, :end_year => valid_end_year))
-        experience.candidate = @candidate
-        experience.company = @company
-        experience.should be_valid
-      end
-    end
-    
-    it "should reject start years greater than end years" do
-      experience = Experience.new(@attr.merge(:start_year => 2010, :start_month => 5, :end_year => 2009, :end_month => 3))
-      experience.candidate = @candidate
-      experience.company = @company
-      experience.should_not be_valid
-    end
-  
     it "should require a start month" do
       experience = Experience.new(@attr.merge(:start_month => ''))
       experience.candidate = @candidate
@@ -180,45 +119,120 @@ describe Experience do
       end
     end
     
-    it "should require and end month" do
-      experience = Experience.new(@attr.merge(:end_month => ''))
+    it "should require a start year" do
+      experience = Experience.new(@attr.merge(:start_year => ''))
       experience.candidate = @candidate
       experience.company = @company
       experience.should_not be_valid
     end
     
-    it "should reject invalid end months" do
-      invalid_end_months = [ 'march', 13, 0, '*&^%$#@' ]
-      invalid_end_months.each do |invalid_end_month|
-        experience = Experience.new(@attr.merge(:end_month => invalid_end_month))
+    it "should reject invalid start years" do
+      invalid_start_years = [ 'year', 12, Time.now.year+1, 1792 ]
+      invalid_start_years.each do |invalid_start_year|
+        experience = Experience.new(@attr.merge(:start_year => invalid_start_year))
         experience.candidate = @candidate
         experience.company = @company
         experience.should_not be_valid
       end
     end
     
-    it "should accept valid end months" do
-      valid_end_months = [ 1, 3, 9, 12 ]
-      valid_end_months.each do |valid_end_month|
-        experience = Experience.new(@attr.merge(:end_month => valid_end_month))
+    it "should accept valid start years" do
+      valid_start_years = [ 1995, 2010, 1980, 2000 ]
+      valid_start_years.each do |valid_start_year|
+        experience = Experience.new(@attr.merge(:start_year => valid_start_year))
         experience.candidate = @candidate
         experience.company = @company
         experience.should be_valid
       end
     end
     
-    it "should reject start months greater than end months when start and end years are the same" do
-      experience = Experience.new(@attr.merge(:start_year => 2009, :start_month => 5, :end_year => 2009, :end_month => 3))
-      experience.candidate = @candidate
-      experience.company = @company
-      experience.should_not be_valid
+    describe "when current" do
+    
+      it "should require neither end month nor end year" do
+        experience = Experience.new(@attr.merge(:end_month => '', :end_year => ''))
+        experience.candidate = @candidate
+        experience.company = @company
+        experience.toggle!(:current)
+        experience.should be_valid
+      end
     end
     
-    it "should accept start months greater than end months when start and end years are different" do
-      experience = Experience.new(@attr)
-      experience.candidate = @candidate
-      experience.company = @company
-      experience.should be_valid
+    describe "when not current" do
+    
+      it "should require an end year" do
+        experience = Experience.new(@attr.merge(:end_year => ''))
+        experience.candidate = @candidate
+        experience.company = @company
+        experience.should_not be_valid
+      end
+      
+      it "should reject invalid end years" do
+        invalid_end_years = [ 'year', 12, Time.now.year+1, 1792 ]
+        invalid_end_years.each do |invalid_end_year|
+          experience = Experience.new(@attr.merge(:end_year => invalid_end_year))
+          experience.candidate = @candidate
+          experience.company = @company
+          experience.should_not be_valid
+        end
+      end
+      
+      it "should accept valid end years" do
+        valid_end_years = [ 1995, 2010, 1980, 2000 ]
+        valid_end_years.each do |valid_end_year|
+          experience = Experience.new(@attr.merge(:start_year => valid_end_year-1, :end_year => valid_end_year))
+          experience.candidate = @candidate
+          experience.company = @company
+          experience.should be_valid
+        end
+      end
+      
+      it "should reject start years greater than end years" do
+        experience = Experience.new(@attr.merge(:start_year => 2010, :start_month => 5, :end_year => 2009, :end_month => 3))
+        experience.candidate = @candidate
+        experience.company = @company
+        experience.should_not be_valid
+      end
+      
+      it "should require an end month" do
+        experience = Experience.new(@attr.merge(:end_month => ''))
+        experience.candidate = @candidate
+        experience.company = @company
+        experience.should_not be_valid
+      end
+      
+      it "should reject invalid end months" do
+        invalid_end_months = [ 'march', 13, 0, '*&^%$#@' ]
+        invalid_end_months.each do |invalid_end_month|
+          experience = Experience.new(@attr.merge(:end_month => invalid_end_month))
+          experience.candidate = @candidate
+          experience.company = @company
+          experience.should_not be_valid
+        end
+      end
+      
+      it "should accept valid end months" do
+        valid_end_months = [ 1, 3, 9, 12 ]
+        valid_end_months.each do |valid_end_month|
+          experience = Experience.new(@attr.merge(:end_month => valid_end_month))
+          experience.candidate = @candidate
+          experience.company = @company
+          experience.should be_valid
+        end
+      end
+      
+      it "should reject start months greater than end months when start and end years are the same" do
+        experience = Experience.new(@attr.merge(:start_year => 2009, :start_month => 5, :end_year => 2009, :end_month => 3))
+        experience.candidate = @candidate
+        experience.company = @company
+        experience.should_not be_valid
+      end
+      
+      it "should accept start months greater than end months when start and end years are different" do
+        experience = Experience.new(@attr)
+        experience.candidate = @candidate
+        experience.company = @company
+        experience.should be_valid
+      end
     end
     
     it "should accept empty descriptions" do
@@ -242,6 +256,22 @@ describe Experience do
       experience.candidate = @candidate
       experience.company = @company
       experience.should_not be_valid
+    end
+  end
+  
+  describe "current attribute" do
+    
+    it "should exist" do
+      @experience.should respond_to(:current)
+    end
+    
+    it "should be false by default" do
+      @experience.current.should be_false
+    end
+    
+    it "should be convertible to true" do
+      @experience.toggle!(:current)
+      @experience.current.should be_true
     end
   end
   
@@ -302,5 +332,6 @@ end
 #  created_at   :datetime
 #  updated_at   :datetime
 #  role         :string(255)
+#  current      :boolean(1)      default(FALSE)
 #
 

@@ -277,6 +277,10 @@ a.button.grey_gradient:hover {
   position: relative;
   display: inline-block;
 }
+.check_box {
+  padding-top: 5px;
+  font-size: 11px;
+}
 
 /* VISIBILITY */
 .hidden {

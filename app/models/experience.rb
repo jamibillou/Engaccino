@@ -1,6 +1,6 @@
 class Experience < ActiveRecord::Base
 
-  attr_accessible :role, :start_month, :start_year, :end_month, :end_year, :description, :company_attributes, :company
+  attr_accessible :role, :start_month, :start_year, :end_month, :end_year, :description, :company_attributes, :company, :current
   
   belongs_to :candidate
   belongs_to :company
@@ -10,14 +10,13 @@ class Experience < ActiveRecord::Base
   validates :candidate_id,                                              :presence => true
   validates :company,                                                   :presence => true
   validates :role,        :length    => { :within => 3..80 },           :presence => true
-  validates :start_year,  :inclusion => { :in => 1900..Time.now.year }, :presence => true
-  validates :end_year,    :inclusion => { :in => 1900..Time.now.year }, :presence => true
   validates :start_month, :inclusion => { :in => 1..12 },               :presence => true
-  validates :end_month,   :inclusion => { :in => 1..12 },               :presence => true
+  validates :start_year,  :inclusion => { :in => 1900..Time.now.year }, :presence => true
+  validates :end_month,   :inclusion => { :in => 1..12 },               :presence => true, :unless => :current
+  validates :end_year,    :inclusion => { :in => 1900..Time.now.year }, :presence => true, :unless => :current
+  validate  :date_consistance,                                                             :unless => :current
   validates :description, :length    => { :within => 20..300 },         :allow_blank => true
   
-  validate  :date_consistance
-    
   def duration
     start_year.nil? || end_year.nil? || start_month.nil? || end_month.nil? ? nil : end_year - start_year - 1 + (13 - start_month + end_month) / 12.0
   end
@@ -31,10 +30,11 @@ class Experience < ActiveRecord::Base
   end
   
   private
-  
+    
     def date_consistance
       errors.add(:duration, I18n.t('experience.validations.duration')) if duration.nil? || duration < 0
-    end  
+    end
+    
 end
 
 # == Schema Information
@@ -52,5 +52,6 @@ end
 #  created_at   :datetime
 #  updated_at   :datetime
 #  role         :string(255)
+#  current      :boolean(1)      default(FALSE)
 #
 

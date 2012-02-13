@@ -25,7 +25,7 @@ class Candidate < User
   accepts_nested_attributes_for :language_candidates,   :allow_destroy => true
   
   validates :status, :inclusion => { :in => [ 'available', 'looking', 'open', 'listening', 'happy' ] }, :presence => true
-  
+    
   def professional_skills
     skills.select { |skill| skill.type == 'ProfessionalSkill' }
   end
@@ -40,6 +40,14 @@ class Candidate < User
   
   def experience_duration
     experiences.empty? ? nil : last(experiences).end_year - first(experiences).start_year - 1 + (13 - first(experiences).start_month + last(experiences).end_month) / 12.0
+  end
+  
+  def current_job
+    experiences.empty? ? nil : experiences.select { |experience| experience.current }.first
+  end
+  
+  def main_education
+    educations.empty? ? nil : educations.select { |education| education.main }.first
   end
   
   def long_timeline?

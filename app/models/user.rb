@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  attr_accessor :password
+  attr_accessor   :password
   
   attr_accessible :first_name, :last_name, :city, :country, :nationality, :year_of_birth, :phone, :email, :facebook_login,
                   :linkedin_login, :twitter_login, :profile_completion, :password, :password_confirmation, :image

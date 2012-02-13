@@ -42,17 +42,19 @@ function callRefresh(model, data, partials) {
     url: 'refresh', type: 'POST', data: {model: model},
     success: function(data) { $('#'+model+'s').html(data); $('.edit_'+model).each(function() { handleAjaxEdition($(this).attr('id')); }); }
   })
-  if (typeof(partials) != 'undefined') { refreshPartials(partials); }
+  refreshPartials(partials);
 }
 function callNew(model, data, partials) {
   $.ajax({
   	url: '../'+model+'s/new',
   	success: function(data) { $('#new_'+model).html(data); $('#new_'+model).show(); $('#link_add_'+model).hide(); handleAjaxCreation(model); }
   })
-  if (typeof(partials) != 'undefined') { refreshPartials(partials); }
+  refreshPartials(partials);
 }
 function refreshPartials(partials) {
-  $.each(partials, function(i) { $.ajax({ url: 'refresh', type: 'POST', data: {partial: partials[i]}, success: function(data) { $('#'+partials[i]).html(data); } }) } );
+  if (typeof(partials) != 'undefined') {
+    $.each(partials, function(i) { $.ajax({ url: 'refresh', type: 'POST', data: {partial: partials[i]}, success: function(data) { $('#'+partials[i]).html(data); } }) } );
+  }
 }
 
 function buildErrorMessages(xhr) {

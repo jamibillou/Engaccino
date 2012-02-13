@@ -58,5 +58,6 @@ end
 #  end_year     :integer(4)
 #  created_at   :datetime
 #  updated_at   :datetime
+#  main         :boolean(1)      default(FALSE)
 #
 
