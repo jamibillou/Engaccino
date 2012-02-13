@@ -189,7 +189,7 @@ def make_franck
   professional_skills  = [ { :label => 'Software Development', :exp => 3, :level => 'advanced' },
                            { :label => 'User Training',        :exp => 2, :level => 'intermediate' },
                            { :label => 'Bioinformatics',       :exp => 1, :level => 'beginner' } ]
-  interpersonal_skills = [ 'Patience', 'Open-minded', 'Autonomy', 'Self-confidence' ]
+  interpersonal_skills = [ 'Patience', 'Open Minded', 'Autonomy', 'Self Confidence' ]
   experiences.each do |exp|
     experience           = Experience.new(:role => exp[:role], :start_month => exp[:start_month], :start_year => exp[:start_year], :end_month => exp[:end_month],  :end_year => exp[:end_year],
                                           :description => @descriptions[rand(@descriptions.size)][0..298])
@@ -240,4 +240,4 @@ end
 
 @experiences  = (1..10).to_a
 
-@interpersonal_skills_labels = ['Self awareness', 'Emotion management', 'Self-confidence', 'Stress management', 'Resilience', 'Persistance', 'Perseverance', 'Patience', 'Flexibility', 'Autonomous', 'Team player', 'Drive', 'Rigorous', 'Work ethic', 'Reasoning', 'Creativity', 'Planning', 'Organizing', 'Multicultural Sensitivity', 'Leadership', 'Problem-Solving', 'Honesty', 'Integrity', 'Morality', 'Adaptability', 'Dedication', 'Tenacity', 'Loyalty', 'Reliability', 'Responsibility', 'Dependability', 'Motivation', 'Energy', 'Passion', 'Positive attitude', 'Professionalism', 'Self-Motivated', 'Ability to work with little or no supervision', 'Willingness to learn', 'Listening', 'Writing', 'Communication', 'Managing multiple priorities', 'Attention to details' ]
+@interpersonal_skills_labels = ['Self awareness', 'Emotion management', 'Self confidence', 'Stress management', 'Resilience', 'Persistance', 'Perseverance', 'Patience', 'Flexibility', 'Autonomous', 'Team player', 'Drive', 'Rigorous', 'Work ethic', 'Reasoning', 'Creativity', 'Planning', 'Organizing', 'Multicultural Sensitivity', 'Leadership', 'Problem Solving', 'Honesty', 'Integrity', 'Morality', 'Adaptability', 'Dedication', 'Tenacity', 'Loyalty', 'Reliability', 'Responsibility', 'Dependability', 'Motivation', 'Energy', 'Passion', 'Positive attitude', 'Professionalism', 'Self-Motivated', 'Ability to work with little or no supervision', 'Willingness to learn', 'Listening', 'Writing', 'Communication', 'Managing multiple priorities', 'Attention to details' ]

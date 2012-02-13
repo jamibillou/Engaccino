@@ -1,9 +1,11 @@
 class InterpersonalSkillCandidate < ActiveRecord::Base
   
-  attr_accessible :description, :interpersonal_skill_attributes
+  attr_accessible :description, :interpersonal_skill_attributes, :interpersonal_skill
     
   belongs_to :interpersonal_skill
   belongs_to :candidate
+  
+  accepts_nested_attributes_for :interpersonal_skill, :allow_destroy => true
   
   validates :candidate, :interpersonal_skill,                                                                   :presence => true
   validates :description,        :length    => { :within => 20..160 },                                          :presence => true

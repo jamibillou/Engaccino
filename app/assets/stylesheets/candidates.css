@@ -509,10 +509,10 @@
 }
 
 /* SKILLS */
-#interpersonal_skills h1 {
+#interpersonalSkillCandidates h1 {
   margin-bottom: 10px;
 }
-#interpersonal_skills .interpersonal_skill  {
+#interpersonalSkillCandidates .interpersonal_skill  {
   width: 19%;
   min-height: 100px;
   margin-bottom: 20px;
@@ -520,11 +520,16 @@
   position: relative;
   display: inline-block;
   vertical-align: top;
+  padding: 5px;
 }
-#interpersonal_skills .interpersonal_skill h2 {
+#interpersonalSkillCandidates .interpersonal_skill h2 {
   font-size: 19px;
   color: black;
   margin: 0;
+}
+#interpersonalSkillCandidates .interpersonal_skill:hover {
+  background: #DDD url('pencil.png') no-repeat 99% 9%;
+  cursor: pointer;
 }
 #resume .interpersonal_skill .edit_field {
   width: 97%;
@@ -535,60 +540,60 @@
   height: 80px;
 }
 
-#professional_skills h1 {
+#professionalSkillCandidates h1 {
   margin-bottom: 5px;
 }
-#professional_skills .label {
+#professionalSkillCandidates .label {
   width: 50%;
   margin-right: 19%;
   position: relative;
   display: inline-block;
 }
-#professional_skills .experience {
+#professionalSkillCandidates .experience {
   width: 6%;
   margin-right: 10%;
   position: relative;
   display: inline-block;
 }
-#professional_skills .level {
+#professionalSkillCandidates .level {
   position: relative;
   display: inline-block;
 }
-#professional_skills .show_professional_skill {
+#professionalSkillCandidates .show_professional_skill {
   margin-bottom: 20px;
   padding: 15px;
   background-color: #EEE;
 }
-#professional_skills .show_professional_skill h2 {
+#professionalSkillCandidates .show_professional_skill h2 {
   font-size: 19px;
   color: black;
   margin: 0;
 }
-#professional_skills .show_professional_skill h3 {
+#professionalSkillCandidates .show_professional_skill h3 {
   font-size: 16px;
   font-weight: normal;
   margin: 0;
   vertical-align: top;
 }
-#professional_skills .show_professional_skill .label_description {
+#professionalSkillCandidates .show_professional_skill .label_description {
   width: 45%;
   margin-right: 25%;
   position: relative;
   display: inline-block;
 }
-#professional_skills .show_professional_skill .experience {
+#professionalSkillCandidates .show_professional_skill .experience {
   width: 6%;
   margin-right: 10%;
   position: relative;
   display: inline-block;
   vertical-align: top;
 }
-#professional_skills .show_professional_skill .level {
+#professionalSkillCandidates .show_professional_skill .level {
   position: relative;
   display: inline-block;
   vertical-align: top;
 }
-#professional_skills .show_professional_skill_edit:hover {
+#professionalSkillCandidates .show_professional_skill_edit:hover {
   background: #DDD url('pencil.png') no-repeat 99% 9%;
   cursor: pointer;
 }

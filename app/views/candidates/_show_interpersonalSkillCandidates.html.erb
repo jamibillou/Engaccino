@@ -1,0 +1,11 @@
+<% @interpersonal_skill_candidates = @candidate.interpersonal_skill_candidates %>
+
+<h1>INTERPERSONAL SKILLS<%= link_to_function "ADD +", "callNew('interpersonalSkillCandidate')", :id => "link_add_interpersonal_skill", :class => "add_link" if @candidate == current_user %></h1>
+<div id='new_interpersonalSkillCandidate' class='hidden'></div> 
+<% unless @interpersonal_skill_candidates.empty? %>
+  <% @interpersonal_skill_candidates.each do |interpersonal_skill_candidate| %>
+    <div id='interpersonalSkillCandidate_<%= interpersonal_skill_candidate.id %>' class='interpersonal_skill'>
+   	  <%= render 'interpersonal_skill_candidates/show', :interpersonal_skill_candidate => interpersonal_skill_candidate %>
+   	</div>
+  <% end %>
+<% end %>

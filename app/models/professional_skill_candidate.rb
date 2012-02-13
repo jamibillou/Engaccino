@@ -1,9 +1,11 @@
 class ProfessionalSkillCandidate < ActiveRecord::Base
   
-  attr_accessible :level, :experience, :description, :professional_skill_attributes
+  attr_accessible :level, :experience, :description, :professional_skill_attributes, :professional_skill
     
   belongs_to :professional_skill
   belongs_to :candidate
+  
+  accepts_nested_attributes_for :professional_skill, :allow_destroy => true
   
   validates :candidate, :professional_skill,                                                                    :presence => true
   validates :description,        :length    => { :within => 20..160 },                                          :presence => true
