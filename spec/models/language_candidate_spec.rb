@@ -3,7 +3,7 @@ require 'spec_helper'
 describe LanguageCandidate do
 
   before(:each) do
-    @attr = {:role => :beginner}
+    @attr = {:level => 'fluent'}
     @candidate = Factory(:candidate)
     @language = Factory(:language)
     @language_candidate = Factory(:language_candidate, :candidate => @candidate, :language => @language)
@@ -50,19 +50,32 @@ describe LanguageCandidate do
       @candidate.language_candidates.build(@attr).should_not be_valid
     end
     
-#    it "should require a level" do
-#      language_candidate = LanguageCandidate.new(:level => '')
-#      language_candidate.language = @language
-#      language_candidate.candidate = @candidate
-#      language_candidate.should_not be_valid
-#    end
-#    
-#    it "should reject invalid levels" do
-#      language_candidate = LanguageCandidate.new(:level => :invalid_level)
-#      language_candidate.language = @language
-#      language_candidate.candidate = @candidate
-#      language_candidate.should_not be_valid
-#    end
+    it "should require a level" do
+      language_candidate = LanguageCandidate.new(:level => '')
+      language_candidate.language = @language
+      language_candidate.candidate = @candidate
+      language_candidate.should_not be_valid
+    end
+    
+    it "should reject invalid levels" do
+      invalid_levels = [ 'pouet', 'invalid_level', '45346', '...' ]
+      invalid_levels.each do |invalid_level|
+        invalid_level_language_candidate = LanguageCandidate.new(:level => invalid_level)
+        invalid_level_language_candidate.language = @language
+        invalid_level_language_candidate.candidate = @candidate
+        invalid_level_language_candidate.should_not be_valid
+      end
+    end
+    
+    it "should accept a valid levels" do
+      valid_levels = [ 'beginner', 'intermediate', 'fluent', 'native' ]
+      valid_levels.each do |valid_level|
+        valid_level_language_candidate                    = LanguageCandidate.new(:level => valid_level)
+        valid_level_language_candidate.candidate          = @candidate
+        valid_level_language_candidate.language           = @language
+        valid_level_language_candidate.should be_valid
+      end
+    end
   end
 
 end
@@ -73,7 +86,7 @@ end
 #  id           :integer(4)      not null, primary key
 #  language_id  :integer(4)
 #  candidate_id :integer(4)
-#  level        :enum([:beginner
+#  level        :string(255)
 #  created_at   :datetime
 #  updated_at   :datetime
 #

@@ -3,7 +3,7 @@ class CreateLanguageCandidates < ActiveRecord::Migration
     create_table :language_candidates do |t|
       t.integer :language_id
       t.integer :candidate_id
-      t.column  :level, :enum, :limit => [:beginner, :intermediate, :fluent, :native]
+      t.string  :level
 
       t.timestamps
     end

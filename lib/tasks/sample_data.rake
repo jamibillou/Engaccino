@@ -34,6 +34,7 @@ def make_candidate
   make_experiences
   make_professional_skills
   make_interpersonal_skills
+  make_languages
 end
 
 def make_educations
@@ -99,6 +100,17 @@ def make_interpersonal_skills
     interpersonal_skill_candidate.interpersonal_skill       = interpersonal_skill
     interpersonal_skill_candidate.candidate   = @candidate
     interpersonal_skill_candidate.save!
+  end
+end
+
+def make_languages
+  loops = (1..5).to_a
+  loops[rand(loops.size)].times do |n|
+    language            = Language.new(:label => @languages[rand(@languages.size)])
+    language_candidate  = LanguageCandidate.new(:level => @language_levels[rand(@language_levels.size)])
+    language_candidate.language = language
+    language_candidate.candidate = @candidate
+    language_candidate.save!
   end
 end
 
@@ -190,6 +202,9 @@ def make_franck
                            { :label => 'User Training',        :exp => 2, :level => 'intermediate' },
                            { :label => 'Bioinformatics',       :exp => 1, :level => 'beginner' } ]
   interpersonal_skills = [ 'Patience', 'Open Minded', 'Autonomy', 'Self Confidence' ]
+  languages = [ { :label => 'French',  :level => 'native' }, 
+                { :label => 'English', :level => 'native' },  
+                { :label => 'Spanish', :level => 'native' } ]
   experiences.each do |exp|
     experience           = Experience.new(:role => exp[:role], :start_month => exp[:start_month], :start_year => exp[:start_year], :end_month => exp[:end_month],  :end_year => exp[:end_year],
                                           :description => @descriptions[rand(@descriptions.size)][0..298])
@@ -220,6 +235,13 @@ def make_franck
     interpersonal_skill_candidate.interpersonal_skill   = interpersonal_skill
     interpersonal_skill_candidate.save!
   end
+  #languages.each do |language|
+  #  language                      = Language.new(:label => language[:label])
+  #  language_candidate            = LanguageCandidate.new(:level => language[:level])
+  #  language_candidate.candidate  = franck
+  #  language_candidate.language   = language
+  #  language_candidate.save!
+  #end  
 end
 
 @dutch_cities = [ 'Almere', 'Lelystad', 'Bolsward', 'Dokkum', 'Drachten', 'Franeker', 'Harlingen', 'Heerenveen', 'Hindeloopen', 'IJlst', 'Leeuwarden', 'Sloten', 'Sneek', 'Stavoren', 'Workum', 'Apeldoorn', 'Arnhem', 'Bredevoort', 'Buren', 'Culemborg', 'Dieren', 'Doetinchem', 'Ede', 'Groenlo', 'Harderwijk', 'Hattem', 'Huissen', 'Nijkerk', 'Nijmegen', 'Tiel', 'Wageningen', 'Wijchen', 'Winterswijk', 'Zaltbommel', 'Zutphen', 'Deil', 'Enspijk', 'Appingedam', 'Delfzijl', 'Groningen', 'Hoogezand-Sappemeer', 'Stadskanaal', 'Winschoten', 'Veendam', 'Geleen', 'Gennep', 'Heerlen', 'Kerkrade', 'Kessel', 'Landgraaf', 'Maastricht', 'Montfort', 'Nieuwstadt', 'Roermond', 'Sittard', 'Schin op Geul', 'Stein', 'Thorn', 'Valkenburg aan de Geul', 'Venlo', 'Weert', 'Bergen op Zoom', 'Breda', 'Den Bosch', 'Eindhoven', 'Geertruidenberg', 'Grave', 'Helmond', 'Heusden', 'Klundert', 'Oosterhout', 'Oss', 'Ravenstein', 'Roosendaal', 'Tilburg', 'Waalwijk', 'Willemstad', 'Woudrichem', 'Alkmaar', 'Amstelveen', 'Amsterdam', 'Den Helder', 'Edam, Volendam', 'Enkhuizen', 'Haarlem', 'Heerhugowaard', 'Hilversum', 'Hoofddorp', 'Hoorn', 'Laren', 'Purmerend', 'Medemblik', 'Monnickendam', 'Muiden', 'Naarden', 'Schagen', 'Weesp', 'Zaanstad', 'Almelo', 'Blokzijl', 'Deventer', 'Enschede', 'Genemuiden', 'Hasselt', 'Hengelo', 'Kampen', 'Oldenzaal', 'Steenwijk', 'Vollenhove', 'Zwolle', 'Alphen aan den Rijn', 'Delft', 'Dordrecht', 'Gorinchem', 'Gouda', 'Leiden', 'Rotterdam', 'Spijkenisse', 'Den Haag', 'Zoetermeer', 'Amersfoort', 'Houten', 'Leersum', 'Nieuwegein', 'Rhenen', 'Utrecht', 'Veenendaal', 'Vreeland', 'Woerden', 'Zeist', 'Arnemuiden', 'Goes', 'Hulst', 'Middelburg', 'Sluis', 'Terneuzen', 'Veere', 'Vlissingen (English: Flushing)', 'Zierikzee' ]
@@ -237,6 +259,9 @@ end
 @professional_skills_labels = [ 'Administration support', 'Auditing', 'Budgeting', 'Clerical', 'Debt collection', 'Customer service', 'Financial management', 'Management', 'Negotiation', 'Troubleshooting', 'Allergy and Immunology', 'Anesthesiology', 'Dermatology', 'Emergency Medicine', 'Family Medicine', 'Neurology', 'Neurosurgery', 'Obstetrics & Gynecology', 'Ophthalmology', 'Cardiology', 'Endocrinology', 'Gastroenterology', 'Geriatric Medicine', 'Oncology and Hematology', 'Hospice and Palliative Medicine', 'Infectious Diseases', 'Nephrology', 'Pulmonary Diseases', 'Rheumatology', 'Administrative Law', 'Admiralty Law', 'Alternative Dispute Resolution', 'Animal Rights', 'Antitrust', 'Appellate', 'Aviation Law', 'Banking Law', 'Bankruptcy Law', 'Civil Rights', 'Community Economic Development', 'Communications Law', 'Consumer Law', 'Constitutional Law', 'Corporate Law', 'Criminal Law', 'Disability Law', 'Domestic Law', 'Elder Law', 'Entertainment & Sports Law', 'Environmental Law', 'Health Care Law', 'Homeless/Housing Law', 'Insurance Law', 'Immigration Law', 'Intellectual Property', 'International Corporate Practice', 'International Human Rights', 'Litigation', 'Military Law', 'Municipal Law', 'Patent Law', 'Real Estate/Zoning', 'Securities Law', 'Taxation', 'Tort Law', 'Trusts & Estates Law', 'Security', 'Project management', 'Software development', 'Hardware development', 'Firmware development', 'Software develpment', 'Technical support', 'Web design', 'User interface design', 'User experience design', 'Interactrion design', 'Corporate identity design', 'Logo design', '3D modeling', 'Game programming', 'Network administration', 'Architecture administration', 'Database administration', 'Architecture administration', 'Data modeling', 'Test driven development', 'Copying, collating, bindinD', 'ocument management', 'Editing', 'Event coordination', 'Filing (paper and electronic)', 'Internet research', 'Meeting coordination and planning', 'Project support', 'Proofreading', 'Report compilation and writing', 'Travel planning', 'Web conferencing coordination', 'PHP', 'Ajax', 'JQuery', 'Ruby', 'Java', 'C', 'C++', 'Ada', 'Objective-C', 'Ruby on Rails', 'SQL databases', 'CSS', 'Javascript', 'Perl', '.Net', 'Basic', 'Visual Basic', 'Assembly', 'Sewing', 'Child care', 'Making clothes', 'Money management', 'Directing procedures', 'Decorating', 'Laundry skills', 'Food preparation', 'Counseling others', 'Relating to other people', 'Formulating new ideas', 'Ironing', 'Sanding', 'House painting', 'Cabinet building', 'Ornamental woodwork', 'Building additions', 'House framing', 'Paneling', 'Furniture making', 'Insulation installation', 'Furniture refinishing', 'Relating to people', 'Supervisory experience', 'Food preparation', 'Cooking food', 'Dishwashing', 'Washing pans', 'Operating a dishwasher', 'Meal planning', 'Stocking shelves', 'Hiring', 'Directing procedures', 'Group counseling', 'Individual counseling', 'Inter-agency work', 'Interviewing', 'Writing programs', 'Supervising clients', 'Directing procedures', 'Formulating new ideas', 'Researcher', 'Crisis work', 'Lawn care', 'Public speaking', 'Writing reports', 'Flower gardening', 'Landscaping', 'Tree trimming', 'Farming', 'Transporting trees', 'Vegetable gardening', 'Pruning trees', 'Grafting', 'Greenhouse work', 'Surveying', 'Farm laborer', 'Pumping gas', 'Car tune-up', 'Changing tires', 'Auto body repair', 'Minor auto repairs', 'Selling', 'Truck driving', 'Stocking shelves', 'Car driving', 'Dusting', 'Sweeping floors', 'Washing floors', 'Waxing', 'Washing windows', 'Cleaning rugs or carpets', 'Cleaning bathrooms', 'Buffing', 'Polishing furniture', 'Plumbing repairs', 'Electrical repairs', 'Window repairs', 'Carpentry work', 'Soldering', 'Assembly line work', 'Operating machinery', 'Electrical wiring', 'Stockroom work', 'Unloading or loading', 'Quality control', 'Packing', 'Filling orders', 'Welding', 'Box making', 'Supervising others', 'Parts Stocking shelves', 'Directing procedures', 'Writing lesson plans', 'Formulating new ideas', 'Writing and grading tests', 'Directing procedures', 'Decorating classrooms', 'Making assignments', 'Setting up classroom interest centers', 'Art skills related to Music skills related to Accounting', 'Using calculators', 'Using adding machines', 'Accounts payable', 'Accounts receivable', 'Payroll', 'Income tax', 'Driving small trucks', 'Driving diesel trucks', 'Hooking and unhooking trailer from tractor', 'Backing large trucks into small openings', 'Typing', 'City driving', 'Over-the-road driving', 'Receptionist', 'Mechanical repairs', 'Diesel repairs', 'Loading and unloading', 'Changing truck tires', 'Keeping on schedule', 'General repair skills', 'Servicing office machines', 'Servicing equipment', 'Mechanically inclined', 'Relating to customers', 'Answering telephone', 'Stenography', 'Typing from dictating machines', 'Making appointments', 'Running office machines', 'Clerk duties', 'Sorting, delivering mail', 'Greeting clients', 'Calling clients', 'Directing clients', 'Researcher', 'Hair cutting', 'Styling', 'Order processing', 'Shampooing hair', 'Giving permanents and body waves', 'Cosmetics consulting', 'Facials', 'Manicures/pedicures', 'Scalp treatment', 'Hair coloring', 'Hair lightening', 'Appointment', 'Attending classes and lectures', 'Studying current beauty supplies and styles', 'Concrete work', 'Maintenance repairs', 'Plumbing', 'Heavy equipment operation', 'Truck driving', 'Brick laying', 'Trenching', 'Roofing', 'Sheet-metal work', 'Heating installation', 'Refrigeration work', 'Carpentry work', 'Heavy labor', 'Cashier', 'Waitress', 'Waiter', 'Bartender', 'Busboy', 'Handling money', 'Hostess', 'Dishwashing', 'Short order cook', 'Main cook', 'Greeting customers', 'Displaying samples', 'Demonstrating products', 'Experience in the art of persuading', 'Servicing goods', 'Delivery goods', 'Greeting customers', 'Employee relations', 'Correctly filling orders', 'Directing procedures', 'Decorating a store', 'Stocking shelves', 'Money handling', 'Inventory', 'Billing', 'Sales', 'Bookkeeping', 'Clerk', 'Directing customers', 'Customer service', 'Filing', 'Ordering supplies', 'Keeping records', 'Teaching', 'Scheduling', 'Public relations', 'Customer relations' ]
 
 @levels       = [ 'beginner', 'intermediate', 'advanced', 'expert' ]
+
+@language_levels = [ 'beginner', 'intermediate', 'fluent', 'native' ]
+@languages = [ 'English' , 'French', 'Dutch', 'Spanish', 'Italian', 'German', 'Cantonese', 'Japanese', 'Portugesh', 'Arabic', 'Hindi', 'Russian', 'Swedish', 'Norwish', 'Finnish', 'Czech']
 
 @experiences  = (1..10).to_a
 

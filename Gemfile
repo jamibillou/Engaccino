@@ -7,7 +7,6 @@ gem 'best_in_place'
 gem 'will_paginate'
 gem 'countries'
 gem 'i18n-js'
-gem 'enum_column3'
 gem 'carrierwave'
 
 group :development do

@@ -7,9 +7,8 @@ class LanguageCandidate < ActiveRecord::Base
   
   accepts_nested_attributes_for :language,  :allow_destroy => true
 
-  validates          :candidate, :language, :presence => true
-  
-  #validates_columns  :level
+  validates :candidate, :language,                                                               :presence => true
+  validates :level, :inclusion => { :in => [ 'beginner', 'intermediate', 'fluent', 'native' ] }, :presence => true
   
 end
 
@@ -20,7 +19,7 @@ end
 #  id           :integer(4)      not null, primary key
 #  language_id  :integer(4)
 #  candidate_id :integer(4)
-#  level        :enum([:beginner
+#  level        :string(255)
 #  created_at   :datetime
 #  updated_at   :datetime
 #

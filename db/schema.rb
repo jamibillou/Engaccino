@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(:version => 20120213214901) do
   create_table "language_candidates", :force => true do |t|
     t.integer  "language_id"
     t.integer  "candidate_id"
-    t.enum     "level",        :limit => [:beginner, :intermediate, :fluent, :native]
+    t.string   "level"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

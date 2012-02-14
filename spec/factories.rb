@@ -83,7 +83,7 @@ Factory.define :language do |language|
 end
 
 Factory.define :language_candidate do |language_candidate|
-  language_candidate.level :beginner
+  language_candidate.level 'beginner'
   language_candidate.association :language
   language_candidate.association :candidate
 end
