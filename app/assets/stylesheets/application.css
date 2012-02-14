@@ -396,7 +396,9 @@ a.button.grey_gradient:hover {
 .small_trash_link {
   background: url('small_trash.png') no-repeat left 3px;
   padding-left: 12px;
-  float: right;
+}
+.small_trash_link.margin_top {
+  margin-top: 5px;
 }
 .small_trash_link a {
   color: red;

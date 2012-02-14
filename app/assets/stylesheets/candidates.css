@@ -319,6 +319,7 @@
 }
 #resume .button {
   padding: 4.5px 15px;
+  margin-left: -4px;
   margin-top: 4px;
   text-decoration: none;
   font-size: 11px;
@@ -449,25 +450,13 @@
 }
 
 /* EXPERIENCES & EDUCATIONS */
-#resume #experiences .show_experience {
-  padding: 5px 10px;
-}
 #resume #experiences .show_experience:hover {
-  background: #f1ffde url('pencil.png') no-repeat 99% 9%;
+  background: url('pencil.png') no-repeat 95% 7%;
   cursor: pointer;
-}
-#resume #experiences .edit_experience {
-  padding: 5px 5px;
-}
-#resume #educations .show_education {
-  padding: 5px 10px;
 }
 #resume #educations .show_education:hover {
-  background: #ecf3f9 url('pencil.png') no-repeat 99% 9%;
+  background: url('pencil.png') no-repeat 95% 7%;
   cursor: pointer;
-}
-#resume #educations .edit_education {
-  padding: 5px 5px;
 }
 #resume .ee_date {
   padding-right: 50px;
@@ -513,27 +502,25 @@
   margin-bottom: 10px;
 }
 #interpersonalSkillCandidates .interpersonal_skill  {
-  width: 19%;
+  width: 20%;
   min-height: 100px;
   margin-bottom: 20px;
-  margin-right: 5%;
-  position: relative;
+  margin-right: 4%;
   display: inline-block;
   vertical-align: top;
-  padding: 5px;
 }
 #interpersonalSkillCandidates .interpersonal_skill h2 {
   font-size: 19px;
   color: black;
   margin: 0;
 }
-#interpersonalSkillCandidates .interpersonal_skill:hover {
-  background: #DDD url('pencil.png') no-repeat 99% 9%;
+#interpersonalSkillCandidates .show_interpersonal_skill:hover {
+  background: url('pencil.png') no-repeat right 6%;
   cursor: pointer;
 }
 #resume .interpersonal_skill .edit_field {
   width: 97%;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 #resume .interpersonal_skill .textarea_edit {
   width: 97%;
@@ -594,7 +581,7 @@
   vertical-align: top;
 }
 #professionalSkillCandidates .show_professional_skill_edit:hover {
-  background: #DDD url('pencil.png') no-repeat 99% 9%;
+  background: #EEE url('pencil.png') no-repeat 99% 9%;
   cursor: pointer;
 }
 #resume .show_professional_skill .edit_field {

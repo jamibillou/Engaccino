@@ -2,9 +2,7 @@ class Skill < ActiveRecord::Base
 
   attr_accessible :label
   
-  label_regex = /^[a-zA-Z ]*$/ix
-  
-  validates :label, :format => { :with => label_regex }, :length => { :within => 2..100 },  :presence => true
+  validates :label, :length => { :within => 1..100 },  :presence => true
 end
 
 # == Schema Information
