@@ -2,10 +2,10 @@ $(document).ready(function() {
   
   initBIP('Click to edit');
   
-  $('.edit_experience').each(function()        { handleAjaxEdition($(this).attr('id')); });
-  $('.edit_education').each(function()         { handleAjaxEdition($(this).attr('id')); });
-  $('.edit_professionalSkillCandidate').each(function() { handleAjaxEdition($(this).attr('id')); });
-  $('.edit_interpersonalSkillCandidate').each(function() { handleAjaxEdition($(this).attr('id')); });
+  $('.edit_experience').each(function()        { handleAjaxEdition($(this).attr('id'),'experience'); });
+  $('.edit_education').each(function()         { handleAjaxEdition($(this).attr('id'),'education'); });
+  $('.edit_professional_skill_candidate').each(function() { handleAjaxEdition($(this).attr('id'),'professional_skill_candidate'); });
+  $('.edit_interpersonal_skill_candidate').each(function() { handleAjaxEdition($(this).attr('id'),'interpersonal_skill_candidate'); });
   
   $('#edit_image').click(function()            { $('#image_button').click(); });
   $('#image_button').change(function()         { $('#image_form').submit(); });
@@ -19,11 +19,9 @@ function handleAjaxCreation(model) {
 }
 
 /* OBJECT EDITION */
-function handleAjaxEdition(form_id) {
+function handleAjaxEdition(form_id,model) {
   var partials = ['show_timeline', 'candidate']
-  arrayId   = form_id.split('_');
-  var model = arrayId[1];
-  var id    = arrayId[2];
+  var id = form_id.substr(form_id.lastIndexOf('_')+1,form_id.length-form_id.lastIndexOf('_'));
   $('#'+'show_'+model+'_'+id).click(function() { showForm(model, id, partials); });
   $('#'+form_id).bind('ajax:success', function(evt, data, status, xhr) { (xhr.responseText == 'destroy!') ? $('#'+model+'_'+id).remove() && refreshPartials(partials) : callRefresh(model, data, partials) })
                 .bind('ajax:error',   function(evt, xhr, status)       { $('#errors'+id).html(buildErrorMessages(xhr)); });	
@@ -41,7 +39,7 @@ function hideForm(model, id) {
 function callRefresh(model, data, partials) {
   $.ajax({
     url: 'refresh', type: 'POST', data: {model: model},
-    success: function(data) { $('#'+model+'s').html(data); $('.edit_'+model).each(function() { handleAjaxEdition($(this).attr('id')); }); }
+    success: function(data) { $('#'+model+'s').html(data); $('.edit_'+model).each(function() { handleAjaxEdition($(this).attr('id'),model); }); }
   })
   refreshPartials(partials);
 }
