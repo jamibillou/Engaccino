@@ -1,0 +1,14 @@
+en:
+  experiences:
+  
+    title: "Experience"
+    add: "Add an experience"
+    delete: "Delete this experience"
+    edit_description: "No given description"
+    start_month: "Start month"
+    start_year: "Start year"
+    end_month: "End month"
+    end_year: "End year"
+    main: "Main job"
+    current: "Current job"
+    add_description: "Recruiters tend to be curious about what where your daily tasks, missions, important projects, etc."

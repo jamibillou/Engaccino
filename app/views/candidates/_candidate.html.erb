@@ -3,7 +3,7 @@
 <% @professional_skill_candidates    = candidate.professional_skill_candidates %>
 <% @interpersonal_skill_candidates   = candidate.interpersonal_skill_candidates %>
 
-<div id="candidate_<%= candidate.id %>" class="card"<%= " style='height:432px;'" if params[:action] == 'index' %>>
+<div id="candidate_<%= candidate.id %>" class="card"<%= " style='height:410px;'" if params[:action] == 'index' %>>
   <div class="head">
     <div class="identity">
       <% if current_user == candidate %>
@@ -49,9 +49,9 @@
       <% end %>
     </div>
     <div class="job" <%= "style='margin-top:-20px'" if current_user == candidate %>>
-      <%  unless @experiences.empty? %>
+      <% unless @experiences.empty? %>
         <h2><%= best_in_place_if current_user == candidate, @experiences.first, :role, :html_attrs => { :class => 'field' } %></h2>
-        at <%=  best_in_place_if current_user == candidate, @experiences.first.company, :name, :html_attrs => { :class => 'field' } %>
+        <p><%=  best_in_place_if current_user == candidate, @experiences.first.company, :name, :html_attrs => { :class => 'field' } %></p>
       <% end %>
     </div> 
     <div class="status">
@@ -64,11 +64,11 @@
   </div>
   <div class="degree_experience">
     <div class="experience">
-      <h2><%= t('candidates.experience.title').remove_accents.upcase %></h2>
-      <h3><%= "#{candidate.experience_duration.round} #{t('candidates.years')}" unless @experiences.empty? %></h3>
+      <h2><%= t('experiences.title').remove_accents.upcase %></h2>
+      <h3><%= pluralize(candidate.experience_duration.round, t('yr')) unless @experiences.empty? %></h3>
     </div>
     <div class="degree">
-      <h2><%= t('candidates.degree').remove_accents.upcase %></h2>
+      <h2><%= t('educations.main').remove_accents.upcase %></h2>
       <% if current_user == candidate %>
         <%= best_in_place @educations.first.degree.degree_type, :label, :html_attrs => { :class => 'field' } unless @educations.first.nil? %><br />
         <%= best_in_place @educations.first.degree, :label, :html_attrs => { :class => 'field' } unless @educations.empty? %>
@@ -79,14 +79,14 @@
     </div>
   </div>
   <div class="professional_skills">
-    <h2><%= t('candidates.professional_skills').remove_accents.upcase %></h2>
+    <h2><%= t('professional_skills.title').remove_accents.upcase %></h2>
     <% @professional_skill_candidates.each_with_index do |professional_skill_candidate, index|  %>
       <% unless index > 2 %><p><%= best_in_place_if current_user == candidate, professional_skill_candidate.professional_skill, :label, :html_attrs => { :class => 'field' } %></p><% end %>
     <% end %>
   </div>
   <% unless hide_contact_information? %>
     <div class="contact">
-      <h2><%= "#{t('candidates.contact')} " %><%= best_in_place_if current_user == candidate, candidate, :first_name, :html_attrs => { :class => 'field' } %></h2>
+      <h2><%= "#{t('contact')} " %><%= best_in_place_if current_user == candidate, candidate, :first_name, :html_attrs => { :class => 'field' } %></h2>
       <p><%= best_in_place_if current_user == candidate, candidate, :email, :html_attrs => { :class => 'field' } %></p>
       <p><%= best_in_place_if current_user == candidate, candidate, :phone, :html_attrs => { :class => 'field' } %></p>
       <div class="buttons">

@@ -31,41 +31,6 @@ fr:
     listening_status: "Satisfait"
     happy_status: "Heureux au travail"
     profile_photo: "Photo"
-    experience: "Expérience"
-    years: "ans"
-    degree_name: "Nom du diplôme"
-    professional_skills: "Compétences professionnelles"
-    skill: "Compétence"
-    contact: "Contacter"
-    degree_type: "Type de diplôme"
-    education_description: "Décrivez cette période d'études"
-    year_of_obtention: "Année d'obtention"
-    
-    education: 
-      title: "Formation"
-      add: "Ajouter une formation"
-      delete: "Supprimer cette formation"
-      add: "Ajouter une formation"
-      
-    experience: 
-      title: "Expérience"
-      add: "Ajouter une expérience"
-      delete: "Supprimer cette expérience"
-      add: "Ajouter une expérience"
-      edit_description: "Aucune description pour le moment"
-      start_month: "Mois début"
-      start_year: "Année début"
-      end_month: "Mois fin"
-      end_year: "Année fin"
-    
-    language:
-      level: "Niveau"
-      
-    skill:
-      beginner_level: "Débutant"
-      intermediate_level: "Intermédiaire"
-      advanced_level: "Avancé"
-      expert_level: "Expert"
     
     index:
       title: "Liste des candidats"
@@ -75,6 +40,12 @@ fr:
       edit_profile: "Editer profil"
       view_profile: "Voir profil"
       next_profile: "Profil suivant"
+      timeline:
+        title: "Chronologie"
+      profile_completion:
+        sentence: "Votre profil est complet à "
+        %complete: "%"
+        link: "Qu'est-ce qu'il manque ?"
     new:
       title: "S'inscrire"
       create_engaccino_account: "Créer un compte Engaccino"

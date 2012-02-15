@@ -61,3 +61,11 @@ en:
   to: "to"
   at: "at"
   in: "in"
+  
+  # Time
+  yr: "yr"
+  year: "year"
+  
+  # Interactions
+  contact: "Contact"
+  

@@ -31,41 +31,6 @@ en:
     listening_status: "Satisfied at work"
     happy_status: "Happily employed"
     profile_photo: "Photo"
-    experience: "Experience"
-    years: "yrs"
-    degree_name: "Degree name"
-    professional_skills: "Professional skills"
-    skill: "Skill"
-    contact: "Contact"
-    degree_type: "Type of degree"
-    education_description: "Describe your studying period"
-    year_of_obtention: "Year of obtention"
-    
-    education: 
-      title: "Education"
-      add: "Add an education"
-      delete: "Delete this education"
-      add: "Add an education"
-
-    language:
-      level: "Level"
-      
-    skill:
-      beginner_level: "Beginner"
-      intermediate_level: "Intermediate"
-      advanced_level: "Advanced"
-      expert_level: "Expert"
-      
-    experience:
-      title: "Experience"
-      add: "Add an experience"
-      delete: "Delete this experience"
-      add: "Add an experience"
-      edit_description: "No given description"
-      start_month: "Start month"
-      start_year: "Start year"
-      end_month: "End month"
-      end_year: "End year"
         
     index:
       title: "List of all candidates"
@@ -75,6 +40,12 @@ en:
       edit_profile: "Edit profile"
       view_profile: "View profile"
       next_profile: "Next profile"
+      timeline:
+        title: "Timeline"
+      profile_completion:
+        sentence: "Your profile is "
+        %complete: "% complete"
+        link: "What is missing?"
     new:
       title: "Sign up"
       create_engaccino_account: "Create an Engaccino account"

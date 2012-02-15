@@ -1,0 +1,14 @@
+fr:
+  experiences: 
+  
+    title: "Expérience"
+    add: "Ajouter une expérience"
+    delete: "Supprimer cette expérience"
+    edit_description: "Aucune description pour le moment"
+    start_month: "Mois début"
+    start_year: "Année début"
+    end_month: "Mois fin"
+    end_year: "Année fin"
+    maine: "Poste principal"
+    current: "Poste actuel"
+    add_description: "Décrire chaque poste de manière relativement détaillée aide les recruteurs à comprendre l'étendue de votre savoir faire."

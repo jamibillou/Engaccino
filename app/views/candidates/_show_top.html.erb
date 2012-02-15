@@ -7,6 +7,6 @@
     <div id="completion_bar_empty" class="slightly_round">
       <div id="completion_bar_full" class="slightly_round" style="width: <%= 3*candidate.profile_completion %>px;"></div>
     </div>
-    Your profile is <%= candidate.profile_completion %>% complete<%= link_to "What's missing?", '#' %>
+    <%=t 'candidates.show.profile_completion.sentence' %><%= candidate.profile_completion %><%=t 'candidates.show.profile_completion.%complete' %><%= link_to t('candidates.show.profile_completion.link'), '#' %>
   </div>
 </div>

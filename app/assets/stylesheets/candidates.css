@@ -131,15 +131,14 @@
   float: top right;
 }
 .card .head .job {
-  height: 14px;
   margin-left: 4px;
   margin-top: 10px;
 }
 .card .head .job h2 {
-  height: 18px;
   font-size: 16px;
   font-weight: 400;
-  margin-bottom: 2px;
+  line-height: 1;
+  margin-bottom: 5px;
 }
 .card .head .job h2 .field {
   height: 14px;
@@ -148,7 +147,10 @@
   margin-top: -3px;
   font-size: 16px;
 }
-.card .head .job .field {
+.card .head .job p {
+  
+}
+.card .head .job p .field {
   height: 10px;
   width: 100px;
   margin-left: -3px;
@@ -157,8 +159,8 @@
 }
 .card .head .status {
   height: 10px;
+  margin-top: 10px;
   margin-left: 3px;
-  margin-top: 35px;
   color: green;
 }
 .card .head .status .combobox {
@@ -171,10 +173,10 @@
 }
 .card .degree_experience .experience {
   height: 100%;
-  width: 75px;
+  width: 78px;
   padding-left: 12px;
   text-align: left;
-  font-size: 23px;
+  font-size: 20px;
   display: inline-block;
   vertical-align: top;
 }
@@ -191,12 +193,13 @@
 }
 .card .degree_experience .degree {
   min-height: 80px;
-  width: 134px;
+  width: 131px;
   border-left: 4px solid #f1f1f1;
   padding-left: 12px;
   padding-right: 10px;
   padding-bottom: 8px;
   font-size: 13px;
+  line-height: 1.4;
   display: inline-block;
 }
 .card .degree_experience .degree h2 {
@@ -216,7 +219,7 @@
   padding-top: 3px;
   padding-bottom: 6px;
   font-size: 13px;
-  line-height: 2;
+  line-height: 1.8;
 }
 .card .professional_skills h2 {
   color: #BBB;
@@ -569,8 +572,8 @@
   display: inline-block;
 }
 #professional_skill_candidates .show_professional_skill_candidate .experience {
-  width: 6%;
-  margin-right: 10%;
+  width: 7%;
+  margin-right: 9%;
   position: relative;
   display: inline-block;
   vertical-align: top;

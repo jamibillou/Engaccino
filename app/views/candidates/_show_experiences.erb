@@ -1,6 +1,6 @@
 <% @experiences = @candidate.experiences.order('start_year DESC, start_month DESC') %>
 
-<h1>PROFESSIONAL EXPERIENCE<%= link_to_function 'ADD +', "showForm('experience')", :id => 'link_add_experience', :class => 'add_link' if @candidate == current_user %></h1>
+<h1><%= t('experiences.title').remove_accents.upcase %><%= link_to_function "#{t('add').upcase} +", "showForm('experience')", :id => 'link_add_experience', :class => 'add_link' if @candidate == current_user %></h1>
 <div id='new_experience' class='hidden'></div> 
 <% unless @experiences.empty? %>
   <% @experiences.order('start_year ASC').order('start_month ASC').each do |experience| %>

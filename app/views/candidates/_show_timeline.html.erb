@@ -5,7 +5,7 @@
   <% axis = candidate.long_timeline? ? design_axis_w_decades(candidate, units) : design_axis(candidate, units) %>
 
   <div id="timeline" style="height: <%= height+55 %>px;">
-    <h1>TIMELINE</h1>
+    <h1><%= t('candidates.show.timeline.title').remove_accents.upcase %></h1>
     <div class="timeline_container" style="height: <%= height %>px;">
       <div class="events">
         <% [candidate.educations, candidate.experiences].each do |collection| %>
@@ -37,7 +37,7 @@
 <% else %>
 
   <div id="timeline">
-    <h1>TIMELINE</h1>
+    <h1><%= t('candidates.show.timeline.title').remove_accents.upcase %><</h1>
     <br />
   </div>
 

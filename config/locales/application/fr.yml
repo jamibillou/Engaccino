@@ -64,3 +64,10 @@ fr:
   to: "à"
   at: "à"
   in: "en"
+  
+  # Time
+  yr: "an"
+  year: "année"
+  
+  # Interactions
+  contact: "Contacter"

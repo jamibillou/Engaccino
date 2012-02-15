@@ -6,7 +6,7 @@
     <h2><%= experience.role %></h2>
     <%= experience.company.name %>
     <p><% if current_user == @candidate && (experience.description.nil? || experience.description.empty?) %>
-         <span class='default'><%=t 'candidates.experience.edit_description' %></span>
+         <span class='default'><%=t 'experiences.add_description' %></span>
          <% else %>
            <%= experience.description %>
          <% end %>

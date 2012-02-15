@@ -8,6 +8,7 @@
   </div>
   <div class='ee_details'>
       <%= f.text_field :role, :class => 'edit_field small_margin' %>
+      <span class='check_box'><%= f.check_box :current %><%= t('experiences.current').downcase %></span>
       <br />
       <%= f.fields_for :company do |company_builder| %>
       	<%= company_builder.text_field :name, :class => 'edit_field margin' %>

@@ -1,0 +1,8 @@
+en:
+  educations: 
+  
+    title: "Education"
+    add: "Add an education"
+    delete: "Delete this education"
+    main: "Main degree"
+    add_description: "Adding a description would help recruiters understand what is it exactly you studied."

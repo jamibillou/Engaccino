@@ -1,6 +1,6 @@
 <% @educations = @candidate.educations.order('start_year DESC, start_month DESC') %>
 
-<h1>EDUCATION<%= link_to_function 'ADD +', "showForm('education')", :id => 'link_add_education', :class => 'add_link' if @candidate == current_user %></h1>
+<h1><%= t('educations.title').remove_accents.upcase %><%= link_to_function "#{t('add').upcase} +", "showForm('education')", :id => 'link_add_education', :class => 'add_link' if @candidate == current_user %></h1>
 <div id='new_education' class='hidden'></div> 
 <% unless @educations.empty? %>
   <% @educations.order('start_year ASC').order('start_month ASC').each do |education| %>

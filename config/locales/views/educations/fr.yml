@@ -1,0 +1,8 @@
+fr:
+  educations: 
+  
+    title: "Formation"
+    add: "Ajouter une formation"
+    delete: "Supprimer cette formation"
+    main: "Diplôme principal"
+    add_description: "Une description aide les recruteurs potentiels à comprendre exactement ce que vous avez étudié."
