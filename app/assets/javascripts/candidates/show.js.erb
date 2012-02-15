@@ -1,7 +1,5 @@
 $(document).ready(function() {
-  
-  initBIP('Click to edit');
-  
+    
   $('.edit_experience').each(function()        { handleAjaxEdition($(this).attr('id'),'experience'); });
   $('.edit_education').each(function()         { handleAjaxEdition($(this).attr('id'),'education'); });
   $('.edit_professional_skill_candidate').each(function() { handleAjaxEdition($(this).attr('id'),'professional_skill_candidate'); });
@@ -52,7 +50,7 @@ function callNew(model, data, partials) {
 }
 function refreshPartials(partials) {
   if (typeof(partials) != 'undefined') {
-    $.each(partials, function(i) { $.ajax({ url: 'refresh', type: 'POST', data: {partial: partials[i]}, success: function(data) { $('#'+partials[i]).html(data); } }) } );
+    $.each(partials, function(i) { $.ajax({ url: 'refresh', type: 'POST', data: {partial: partials[i]}, success: function(data) { $('#'+partials[i]).html(data); initBIP('Click to edit'); } }) } );
   }
 }
 

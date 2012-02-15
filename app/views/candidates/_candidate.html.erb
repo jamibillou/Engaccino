@@ -1,5 +1,5 @@
-<% @experiences          		     = candidate.experiences.order("start_year DESC, start_month DESC") %>
-<% @educations           		     = candidate.educations.order("start_year DESC, start_month DESC") %>
+<% @experiences          		         = candidate.experiences.order("start_year DESC, start_month DESC") %>
+<% @educations           		         = candidate.educations.order("start_year DESC, start_month DESC") %>
 <% @professional_skill_candidates    = candidate.professional_skill_candidates %>
 <% @interpersonal_skill_candidates   = candidate.interpersonal_skill_candidates %>
 
@@ -84,7 +84,7 @@
       <% unless index > 2 %><p><%= best_in_place_if current_user == candidate, professional_skill_candidate.professional_skill, :label, :html_attrs => { :class => 'field' } %></p><% end %>
     <% end %>
   </div>
-  <% if params[:action] == 'show' %>
+  <% unless hide_contact_information? %>
     <div class="contact">
       <h2><%= "#{t('candidates.contact')} " %><%= best_in_place_if current_user == candidate, candidate, :first_name, :html_attrs => { :class => 'field' } %></h2>
       <p><%= best_in_place_if current_user == candidate, candidate, :email, :html_attrs => { :class => 'field' } %></p>

@@ -13,6 +13,7 @@ class CandidatesController < ApplicationController
   
   def index
     @candidates = Candidate.all
+    
     init_page :title => 'candidates.index.title', :javascripts => 'users/index'
   end
   

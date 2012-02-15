@@ -35,6 +35,10 @@ module ApplicationHelper
     link_to_function(name, "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")", :class => 'button blue round', :title => title)
   end
   
+  def hide_contact_information?
+    params[:action] == 'index'
+  end
+  
   def build_associations(associations, object)
     associations.each { |association| build_association(association, object) }
   end
