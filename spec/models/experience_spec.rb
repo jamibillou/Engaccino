@@ -155,6 +155,17 @@ describe Experience do
         experience.toggle!(:current)
         experience.should be_valid
       end
+      
+      it "should set the end month and year to the current date" do
+        experience = Experience.new(@attr.merge(:end_month => '', :end_year => ''))
+        experience.candidate = @candidate
+        experience.company = @company
+        experience.toggle!(:current)
+        experience.save!
+        experience.end_month.should == Time.now.month
+        experience.end_year.should == Time.now.year
+      end
+      
     end
     
     describe "when not current" do

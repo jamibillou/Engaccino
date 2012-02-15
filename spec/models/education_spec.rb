@@ -11,10 +11,7 @@ describe Education do
     @candidate = Factory(:candidate)
     @school = Factory(:school)
     @degree = Factory(:degree)
-    @education = Factory(:education, 
-                         :degree    => @degree,
-                         :candidate => @candidate,
-                         :school    => @school)
+    @education = Factory(:education, :degree => @degree, :candidate => @candidate, :school => @school)
   end
   
   it "should create an instance given valid attributes" do
@@ -288,6 +285,18 @@ describe Education do
       @education.toggle!(:main)
       @education.main.should be_true
     end
+    
+#    it "should set the former main education of the candidate to false" do
+#      school1    = Factory(:school)
+#      degree1    = Factory(:degree)
+#      school2    = Factory(:school)
+#      degree2    = Factory(:degree)
+#      education1 = Factory(:education, :degree => degree1, :candidate => @candidate, :school => school1)
+#      education2 = Factory(:education, :degree => degree2, :candidate => @candidate, :school => school2)
+#      education1.toggle!(:main)
+#      education2.toggle!(:main)
+#      education1.main.should be_false
+#    end
   end
   
   describe "duration method" do

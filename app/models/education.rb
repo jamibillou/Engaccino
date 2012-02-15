@@ -1,6 +1,6 @@
 class Education < ActiveRecord::Base
   
-  attr_accessible :description, :start_year, :end_year, :start_month, :end_month, :school_attributes, :degree_attributes, :degree_type_attributes
+  attr_accessible :description, :start_year, :end_year, :start_month, :end_month, :school_attributes, :degree_attributes, :degree_type_attributes, :main
   
   belongs_to :candidate
   belongs_to :degree
@@ -20,9 +20,7 @@ class Education < ActiveRecord::Base
   
   validate  :date_consistance
   
-#  def degreeType
-#    DegreeType.find(degree.degree_type_id).label
-#  end
+#  before_save :reset_main_education
   
   def duration
     start_year.nil? || end_year.nil? || start_month.nil? || end_month.nil? ? nil : end_year - start_year - 1 + (13 - start_month + end_month) / 12.0
@@ -40,7 +38,12 @@ class Education < ActiveRecord::Base
   
     def date_consistance
       errors.add(:duration, I18n.t('education.validations.duration')) if duration.nil? || duration < 0
-    end 
+    end
+    
+    def reset_main_education
+      candidate.main_education.toggle!(:main) unless candidate.main_education.nil? || !main
+    end  
+    
 end
 
 # == Schema Information

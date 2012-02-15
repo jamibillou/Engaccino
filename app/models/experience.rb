@@ -17,6 +17,8 @@ class Experience < ActiveRecord::Base
   validate  :date_consistance,                                                             :unless => :current
   validates :description, :length    => { :within => 20..300 },         :allow_blank => true
   
+  before_save :set_current_date
+  
   def duration
     start_year.nil? || end_year.nil? || start_month.nil? || end_month.nil? ? nil : end_year - start_year - 1 + (13 - start_month + end_month) / 12.0
   end
@@ -33,6 +35,10 @@ class Experience < ActiveRecord::Base
     
     def date_consistance
       errors.add(:duration, I18n.t('experience.validations.duration')) if duration.nil? || duration < 0
+    end
+    
+    def set_current_date
+      (self.end_month = Time.now.month ; self.end_year = Time.now.year) if current
     end
     
 end

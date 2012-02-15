@@ -258,6 +258,23 @@ describe Candidate do
     
     end
   end 
+  
+#  describe "main_education method" do
+#  
+#    it "should exist" do
+#      @candidate.should respond_to(:main_education)
+#    end
+#    
+#    it "return nil if the is no main education" do
+#      @candidate.main_education.should be_nil
+#    end
+#    
+#    it "should return the main education if there is one" do
+#      @education.toggle!(:main)
+#      @candidate.main_education.should == @education
+#    end
+#  end
+  
 end
 # == Schema Information
 #

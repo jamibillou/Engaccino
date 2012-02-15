@@ -37,14 +37,6 @@ class Candidate < User
     experiences.empty? ? nil : last(experiences).end_year - first(experiences).start_year - 1 + (13 - first(experiences).start_month + last(experiences).end_month) / 12.0
   end
   
-  def current_job
-    experiences.empty? ? nil : experiences.select { |experience| experience.current }.first
-  end
-  
-  def main_education
-    educations.empty? ? nil : educations.select { |education| education.main }.first
-  end
-  
   def long_timeline?
     timeline_duration.nil? ? nil : timeline_duration > 20
   end
