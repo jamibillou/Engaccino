@@ -5,6 +5,7 @@ $(document).ready(function() {
   $('.edit_professional_skill_candidate').each(function() { handleAjaxEdition($(this).attr('id'),'professional_skill_candidate'); });
   $('.edit_interpersonal_skill_candidate').each(function() { handleAjaxEdition($(this).attr('id'),'interpersonal_skill_candidate'); });
   $('.edit_language_candidate').each(function() { handleAjaxEdition($(this).attr('id'),'language_candidate'); });
+  $('.edit_certificate_candidate').each(function() { handleAjaxEdition($(this).attr('id'),'certificate_candidate'); });
   
   $('#edit_image').click(function()            { $('#image_button').click(); });
   $('#image_button').change(function()         { $('#image_form').submit(); });
