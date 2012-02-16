@@ -16,4 +16,8 @@ module CandidatesHelper
       [ 'happy', t('candidates.happy_status') ] ]
   end
   
+  def educations_options(candidate)
+    candidate.educations.map { |education| [ education.degree.degree_type.label, education.id ] }
+  end
+  
 end

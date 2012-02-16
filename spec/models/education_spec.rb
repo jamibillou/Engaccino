@@ -5,12 +5,12 @@ describe Education do
   before(:each) do
     @attr = {:description => 'A lot of maths, chemical and a bit of computing sciences',
              :start_month => 9,
-             :start_year => 2003,
-             :end_month => 6,
-             :end_year => 2005}
+             :start_year  => 2003,
+             :end_month   => 6,
+             :end_year    => 2005}
     @candidate = Factory(:candidate)
-    @school = Factory(:school)
-    @degree = Factory(:degree)
+    @school    = Factory(:school)
+    @degree    = Factory(:degree)
     @education = Factory(:education, :degree => @degree, :candidate => @candidate, :school => @school)
   end
   
@@ -278,24 +278,25 @@ describe Education do
     end
     
     it "should be false by default" do
-      @education.main.should be_false
+      @education.should_not be_main
     end
     
     it "should be convertible to true" do
       @education.toggle!(:main)
-      @education.main.should be_true
+      @education.should be_main
     end
     
-#    it "should set the former main education of the candidate to false" do
+#    it "should reset the former main_education of the candidate" do
+#      candidate  = Factory(:candidate)
 #      school1    = Factory(:school)
 #      degree1    = Factory(:degree)
 #      school2    = Factory(:school)
 #      degree2    = Factory(:degree)
-#      education1 = Factory(:education, :degree => degree1, :candidate => @candidate, :school => school1)
-#      education2 = Factory(:education, :degree => degree2, :candidate => @candidate, :school => school2)
+#      education1 = candidate.educations.create(:school => school1, :degree => degree1)
+#      education2 = candidate.educations.create(:school => school2, :degree => degree2)
 #      education1.toggle!(:main)
 #      education2.toggle!(:main)
-#      education1.main.should be_false
+#      education1.should_not be_main
 #    end
   end
   
@@ -303,13 +304,6 @@ describe Education do
     
     it "should exist" do
       @education.should respond_to(:duration)
-    end
-    
-    it "should be nil if a year or month is missing" do
-      Education.new(@attr.merge(:start_year  => '')).duration.should be_nil
-      Education.new(@attr.merge(:end_year    => '')).duration.should be_nil
-      Education.new(@attr.merge(:start_month => '')).duration.should be_nil
-      Education.new(@attr.merge(:end_month   => '')).duration.should be_nil
     end
     
     it "should calculate the right number of years between the dates" do
@@ -328,17 +322,11 @@ describe Education do
       @education.should respond_to(:yrs_after_first_event)
     end
     
-    it "should be nil if a year or month is missing" do
-      Education.new(@attr.merge(:start_year  => '')).yrs_after_first_event.should be_nil
-      Education.new(@attr.merge(:end_year    => '')).yrs_after_first_event.should be_nil
-      Education.new(@attr.merge(:start_month => '')).yrs_after_first_event.should be_nil
-      Education.new(@attr.merge(:end_month   => '')).yrs_after_first_event.should be_nil
-    end
-    
     it "should be 0 if the education is the first event" do
       @education.yrs_after_first_event.should == 0
     end
   end
+  
 end
 
 # == Schema Information

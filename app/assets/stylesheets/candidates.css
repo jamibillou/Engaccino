@@ -148,7 +148,7 @@
   font-size: 16px;
 }
 .card .head .job p {
-  
+  margin-top: -4px;
 }
 .card .head .job p .field {
   height: 10px;
@@ -207,7 +207,7 @@
   font-weight: bold;
   font-size: 10px;
 }
-.card .degree_experience .degree .field {
+.card .degree_experience .degree field {
   height: 10px;
   width: 125px;
   margin: -3px;
