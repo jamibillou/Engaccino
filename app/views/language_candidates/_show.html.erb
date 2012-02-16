@@ -1,0 +1,10 @@
+<% language = language_candidate.language %>
+<div <%= if @candidate == current_user then "id='show_language_candidate_#{language_candidate.id}' class='show_language_candidate'" else "class='show_language_candidate'" end %>>
+	<div class='label'><h3><%= language.label %></h3></div>
+	<div class='level'><%= t("languages.#{language_candidate.level}") %></div>
+</div>
+<% if current_user == @candidate %>
+  <div id='edit_language_candidate_<%= language_candidate.id %>' class='hidden edit_language_candidate'>
+    <%= render 'language_candidates/edit_form', :language_candidate => language_candidate %>   	
+  </div>
+<% end %>

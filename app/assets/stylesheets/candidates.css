@@ -601,3 +601,23 @@
   width:  100%;
   height: 40px;
 }
+
+/* LANGUAGES */
+#language_candidates .label {
+  width: 30%;
+  margin-right: 30%;
+  position: relative;
+  display: inline-block;
+}
+#language_candidates .level {
+  position: relative;
+  display: inline-block;
+}
+#language_candidates .show_language_candidate:hover {
+  background: url('pencil.png') no-repeat 99% 45%;
+  cursor: pointer;
+}
+#resume .language_candidate .edit_field {
+  width: 80%;
+  margin-bottom: 10px;
+}

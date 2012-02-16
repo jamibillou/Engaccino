@@ -17,8 +17,8 @@
   <div class='small_block'>
   	<%= render 'show_certificates', :candidate => @candidate %>
   </div>
-  <div class='small_block'>
-    <%= render 'show_languages',      :candidate => @candidate %>
+  <div class='small_block' id='language_candidates'>
+    <%= render 'show_language_candidates' %>
   </div>
   <div class='small_block'>
     <%= render 'show_miscellaneous',  :candidate => @candidate %>	

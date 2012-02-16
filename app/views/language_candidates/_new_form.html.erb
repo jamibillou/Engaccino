@@ -1,0 +1,14 @@
+<%= form_for @language_candidate, :remote => true do |f| %>
+  <div class='language_candidate'>
+    <div class='label'>
+      <%= f.fields_for :language do |language_builder| %>
+      	<h2><%= language_builder.text_field :label, :class => 'edit_field' %></h2>
+      <% end %>
+    </div>
+    <div class='level'>
+      <h3><%= f.select :level, language_level_options_array %></h3>
+    </div>
+    <div class="error_messages" id="errors_new_language_candidate"></div>
+    <%= f.submit t('submit') %>
+  </div>
+<% end %>

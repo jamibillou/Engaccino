@@ -3,3 +3,7 @@ fr:
   
     title: "Langages"
     level: "Niveau"
+    beginner: "Débutant"
+    intermediate: "Intermédiaire"
+    fluent: "Courant"
+    native: "Native"

@@ -6,6 +6,7 @@ $(document).ready(function() {
   $('.edit_education').each(function()                     { handleAjaxEdition($(this).attr('id'),'education'); });
   $('.edit_professional_skill_candidate').each(function()  { handleAjaxEdition($(this).attr('id'),'professional_skill_candidate'); });
   $('.edit_interpersonal_skill_candidate').each(function() { handleAjaxEdition($(this).attr('id'),'interpersonal_skill_candidate'); });
+  $('.edit_language_candidate').each(function() { handleAjaxEdition($(this).attr('id'),'language_candidate'); });
   
   /* GROS CACA */
   $('#edit_image').click(function()                        { $('#image_button').click(); });
@@ -22,6 +23,7 @@ function handleAjaxCreation(model) {
 
 /* OBJECT EDITION */
 function handleAjaxEdition(form_id,model) {
+  //alert(form_id+'#'+model);
   var partials = ['show_timeline', 'candidate']
   var id = form_id.substr(form_id.lastIndexOf('_')+1,form_id.length-form_id.lastIndexOf('_'));
   $('#'+'show_'+model+'_'+id).click(function() { showForm(model, id, partials); });

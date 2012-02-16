@@ -12,7 +12,8 @@ Engaccino::Application.routes.draw do
   end    
   
   resources :users, :companies, :experiences, :educations, :degree_types, :degrees, :schools, 
-            :professional_skills, :interpersonal_skills, :professional_skill_candidates, :interpersonal_skill_candidates
+            :professional_skills, :interpersonal_skills, :professional_skill_candidates, :interpersonal_skill_candidates,
+            :languages, :language_candidates
   resources :sessions, :only => [:new, :create, :destroy]
   
   match 'candidates/refresh',       :to => 'candidates#refresh'
