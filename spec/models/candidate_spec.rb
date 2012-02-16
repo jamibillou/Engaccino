@@ -259,23 +259,42 @@ describe Candidate do
     end
   end 
   
-#  describe "main_education method" do
-#  
-#    it "should exist" do
-#      @candidate.should respond_to(:main_education)
-#    end
-#    
-#    it "return nil if the is no main education" do
-#      @candidate.main_education.should be_nil
-#    end
-#    
-#    it "should return the main education if there is one" do
-#      @education.toggle!(:main)
-#      @candidate.main_education.should == @education
-#    end
-#  end
+  describe "main_education method" do
+  
+    it "should exist" do
+      @candidate.should respond_to(:main_education)
+    end
+    
+    it "return nil if the is no main education" do
+      candidate = Factory(:candidate)
+      candidate.main_education.should be_nil
+    end
+    
+    it "should return the main education if there is one" do
+      @education.toggle!(:main)
+      @candidate.main_education.should == @education
+    end
+  end
+  
+  describe "main_experience method" do
+  
+    it "should exist" do
+      @candidate.should respond_to(:main_experience)
+    end
+    
+    it "return nil if the is no main experience" do
+      candidate = Factory(:candidate)
+      candidate.main_experience.should be_nil
+    end
+    
+    it "should return the main education if there is one" do
+      @experience.toggle!(:main)
+      @candidate.main_experience.should == @experience
+    end
+  end
   
 end
+
 # == Schema Information
 #
 # Table name: users

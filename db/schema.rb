@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(:version => 20120216221735) do
     t.datetime "updated_at"
     t.string   "role"
     t.boolean  "current",      :default => false
+    t.boolean  "main",         :default => false
   end
 
   create_table "interpersonal_skill_candidates", :force => true do |t|
@@ -96,7 +97,7 @@ ActiveRecord::Schema.define(:version => 20120216221735) do
   create_table "language_candidates", :force => true do |t|
     t.integer  "language_id"
     t.integer  "candidate_id"
-    t.string   "level"
+    t.string   "level",        :limit => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -121,6 +122,16 @@ ActiveRecord::Schema.define(:version => 20120216221735) do
     t.string   "name"
     t.string   "city"
     t.string   "country"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "skill_candidates", :force => true do |t|
+    t.string   "level"
+    t.integer  "experience"
+    t.string   "description"
+    t.integer  "candidate_id"
+    t.integer  "skill_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
