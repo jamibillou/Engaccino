@@ -3,7 +3,8 @@
     <h2><%= "#{experience.start_month}/#{experience.start_year} - " %><%= experience.current ? t('experiences.present') : "#{experience.end_month}/#{experience.end_year}" %></h2>
   </div>
   <div class="ee_details">
-    <h2><%= experience.role %></h2>
+    <div class="right" style="color:red"><%= "main ? #{experience.main? ? 'yep' : 'nope'}" %></div>
+	<h2><%= experience.role %></h2>
     <%= experience.company.name %>
     <p><% if current_user == @candidate && (experience.description.nil? || experience.description.empty?) %>
          <span class='default'><%=t 'experiences.add_description' %></span>

@@ -259,37 +259,37 @@ describe Candidate do
     end
   end 
   
-  describe "main_education method" do
+  describe "main_education attribute" do
   
     it "should exist" do
       @candidate.should respond_to(:main_education)
     end
     
-    it "return nil if the is no main education" do
+    it "return nil if there is no education" do
       candidate = Factory(:candidate)
       candidate.main_education.should be_nil
     end
     
     it "should return the main education if there is one" do
-      @education.toggle!(:main)
-      @candidate.main_education.should == @education
+      @education.update_attributes!(:main => true)
+      @candidate.main_education.should == @education.id
     end
   end
   
-  describe "main_experience method" do
+  describe "main_experience attribute" do
   
     it "should exist" do
       @candidate.should respond_to(:main_experience)
     end
     
-    it "return nil if the is no main experience" do
+    it "return nil if there is no experience" do
       candidate = Factory(:candidate)
       candidate.main_experience.should be_nil
     end
     
     it "should return the main education if there is one" do
-      @experience.toggle!(:main)
-      @candidate.main_experience.should == @experience
+      @experience.update_attributes!(:main => true)
+      @candidate.main_experience.should == @experience.id
     end
   end
   
@@ -323,5 +323,7 @@ end
 #  created_at         :datetime
 #  updated_at         :datetime
 #  image              :string(255)
+#  main_education     :integer(4)
+#  main_experience    :integer(4)
 #
 

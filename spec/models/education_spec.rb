@@ -285,19 +285,6 @@ describe Education do
       @education.toggle!(:main)
       @education.should be_main
     end
-    
-#    it "should reset the former main_education of the candidate" do
-#      candidate  = Factory(:candidate)
-#      school1    = Factory(:school)
-#      degree1    = Factory(:degree)
-#      school2    = Factory(:school)
-#      degree2    = Factory(:degree)
-#      education1 = candidate.educations.create(:school => school1, :degree => degree1)
-#      education2 = candidate.educations.create(:school => school2, :degree => degree2)
-#      education1.toggle!(:main)
-#      education2.toggle!(:main)
-#      education1.should_not be_main
-#    end
   end
   
   describe "duration method" do

@@ -1,7 +1,7 @@
 class Candidate < User
     
   attr_accessible :status, :experiences_attributes, :educations_attributes, :degrees_attributes, :languages_attributes, 
-                  :professional_skills_attributes, :interpersonal_skills_attributes
+                  :professional_skills_attributes, :interpersonal_skills_attributes, :main_education, :main_experience
   
   has_many :experiences,                    :dependent => :destroy
   has_many :companies,                      :through   => :experiences
@@ -28,9 +28,7 @@ class Candidate < User
   accepts_nested_attributes_for :language_candidates,   :allow_destroy => true
   
   validates :status, :inclusion => { :in => [ 'available', 'looking', 'open', 'listening', 'happy' ] }, :presence => true
-  
-  before_update :set_main_education
-  
+    
   def timeline_duration
     last_event.nil? && first_event.nil? ? nil : last_event.end_year - first_event.start_year - 1 + (13 - first_event.start_month + last_event.end_month) / 12.0
   end
@@ -79,16 +77,6 @@ class Candidate < User
     end
   end
   
-  def main_education
-    main_edu = educations.select{ |education| education.main }.first
-    educations.empty? ? nil : (main_edu.nil? ? last(educations) : main_edu)
-  end
-  
-  def main_experience
-    main_exp = experiences.select{ |experience| experience.main }.first
-    experiences.empty? ? nil : (main_exp.nil? ? last(experiences) : main_exp)
-  end
-  
   def longest(collection)
     collection.sort_by!{ |object| object.duration }.last
   end
@@ -131,5 +119,7 @@ end
 #  created_at         :datetime
 #  updated_at         :datetime
 #  image              :string(255)
+#  main_education     :integer(4)
+#  main_experience    :integer(4)
 #
 

@@ -300,19 +300,6 @@ describe Experience do
       @experience.toggle!(:main)
       @experience.main.should be_true
     end
-    
-#    it "should reset the former main_experience of the candidate" do
-#      candidate  = Factory(:candidate)
-#      school1    = Factory(:school)
-#      degree1    = Factory(:degree)
-#      school2    = Factory(:school)
-#      degree2    = Factory(:degree)
-#      experience1 = candidate.experiences.create(:school => school1, :degree => degree1)
-#      experience2 = candidate.experiences.create(:school => school2, :degree => degree2)
-#      experience1.toggle!(:main)
-#      experience2.toggle!(:main)
-#      experience1.should_not be_main
-#    end
   end
   
   describe "duration method" do

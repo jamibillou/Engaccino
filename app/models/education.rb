@@ -20,7 +20,7 @@ class Education < ActiveRecord::Base
   
   validate  :date_consistance
   
-  before_update :reset_main_education
+  before_update :set_main_education
   
   def duration
     start_year.nil? || end_year.nil? || start_month.nil? || end_month.nil? ? nil : end_year - start_year - 1 + (13 - start_month + end_month) / 12.0
@@ -40,9 +40,13 @@ class Education < ActiveRecord::Base
       errors.add(:duration, I18n.t('education.validations.duration')) if duration.nil? || duration < 0
     end
     
+    def set_main_education
+      main? ? (reset_main_education ; main_education = self.id) : main_education = candidate.last(candidate.educations).id
+      candidate.update_attributes :main_education => main_education
+    end
+    
     def reset_main_education
-      main_edu = candidate.main_education
-      main_edu.toggle!(:main) unless main_edu.nil? || !main? || self == main_edu
+      candidate.educations.select { |education| education.main? }.each { |education| education.toggle!(:main) }
     end  
     
 end

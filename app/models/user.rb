@@ -90,5 +90,7 @@ end
 #  created_at         :datetime
 #  updated_at         :datetime
 #  image              :string(255)
+#  main_education     :integer(4)
+#  main_experience    :integer(4)
 #
 
