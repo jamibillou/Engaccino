@@ -54,13 +54,9 @@
         <h2 id="role_BIPcombo"><%=  best_in_place_if current_user == candidate, candidate,
 															:main_experience,
 															:type => :select,
-															:collection => main_experience_options(candidate, :role),
+															:collection => main_experience_options(candidate),
 															:html_attrs => { :class => 'combobox' } %></h2>
-        <p id="company_BIPcombo"><%=  best_in_place_if current_user == candidate, candidate,
-															:main_experience,
-															:type => :select,
-															:collection => main_experience_options(candidate, :company),
-															:html_attrs => { :class => 'combobox' } %></p>
+		<p><%= main_experience.company.name %></p>
       <% end %>
     </div> 
     <div class="status">
@@ -80,16 +76,12 @@
       <h2><%= t('educations.main').remove_accents.upcase %></h2>
       <% unless candidate.main_education.nil? %>
         <% main_education = Education.find(candidate.main_education) %>
-		<p id="degreetype_BIPcombo"><%= best_in_place_if current_user == candidate, candidate,
+		<h3 id="degreetype_BIPcombo"><%= best_in_place_if current_user == candidate, candidate,
 														:main_education,
 														:type => :select,
-														:collection => main_education_options(candidate, :degree_type),
-														:html_attrs => { :class => 'combobox' } %></p>
-		<p id="degree_BIPcombo"><%= best_in_place_if current_user == candidate, candidate,
-														:main_education,
-														:type => :select,
-														:collection => main_education_options(candidate, :degree),
-														:html_attrs => { :class => 'combobox' } %></p>
+														:collection => main_education_options(candidate),
+														:html_attrs => { :class => 'combobox' } %></h3>
+		<p><%= main_education.degree.label %></p>
         
       <% end %>
     </div>

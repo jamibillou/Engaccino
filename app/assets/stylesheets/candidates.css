@@ -189,7 +189,6 @@
   padding-left: 12px;
   padding-right: 10px;
   padding-bottom: 8px;
-  font-size: 13px;
   line-height: 1.4;
   display: inline-block;
 }
@@ -198,6 +197,18 @@
   font-weight: bold;
   font-size: 10px;
 }
+.card .degree_experience .degree h3 {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1;
+    margin-top: 0;
+	margin-bottom: 5px;
+}
+.card .degree_experience .degree h3 .combobox {
+   margin-bottom: -3px;
+}
+
+
 .card .professional_skills {
   border-top: 4px solid #f1f1f1;
   padding-left: 12px;
