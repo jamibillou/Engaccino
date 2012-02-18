@@ -1,1 +1,11 @@
-<h1><%= t('certificates.title').remove_accents.upcase %></h1>
+<% @certificate_candidates = @candidate.certificate_candidates %>
+
+<h1><%= t('certificates.title').remove_accents.upcase %><%= link_to_function "#{t('add').upcase} +", "callNew('certificate_candidate')", :id => "link_add_certificate", :class => "add_link" if @candidate == current_user %></h1>
+<div id='new_certificate_candidate' class='hidden'></div> 
+<% unless @certificate_candidates.empty? %>
+  <% @certificate_candidates.each do |certificate_candidate| %>
+    <div id='certificate_candidate_<%= certificate_candidate.id %>'>
+   	  <%= render 'certificate_candidates/show', :certificate_candidate => certificate_candidate %>
+   	</div>
+  <% end %>
+<% end %>

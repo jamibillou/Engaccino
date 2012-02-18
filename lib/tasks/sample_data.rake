@@ -205,6 +205,8 @@ def make_franck
   languages = [ { :label => 'French',  :level => 'native' }, 
                 { :label => 'English', :level => 'native' },  
                 { :label => 'Spanish', :level => 'native' } ]
+  certificates = [ { :label => 'TOEIC', :description => 'Passed on 2008 with a score of 790' },
+                   { :label => 'Driving licence', :description => 'Obtained on 2005, on the first try, so easy...' } ]
   experiences.each do |exp|
     experience           = Experience.new(:role => exp[:role], :start_month => exp[:start_month], :start_year => exp[:start_year], :end_month => exp[:end_month],  :end_year => exp[:end_year],
                                           :description => @descriptions[rand(@descriptions.size)][0..298])
@@ -236,11 +238,18 @@ def make_franck
     interpersonal_skill_candidate.save!
   end
   languages.each do |language|
+    language_candidate            = LanguageCandidate.new(:level => language[:level])
     language                      = Language.new(:label => language[:label])
-    language_candidate            = LanguageCandidate.new(:level => 'intermediate')
     language_candidate.candidate  = franck
     language_candidate.language   = language
     language_candidate.save!
+  end
+  certificates.each do |certificate|
+    certificate_candidate = CertificateCandidate.new(:description => certificate[:description])
+    certificate = Certificate.new(:label => certificate[:label])
+    certificate_candidate.candidate = franck
+    certificate_candidate.certificate = certificate
+    certificate_candidate.save!
   end  
 end
 

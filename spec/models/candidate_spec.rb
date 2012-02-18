@@ -24,6 +24,8 @@ describe Candidate do
     @education                      = Factory(:education, :candidate => @candidate) 
     @language                       = Factory(:language)
     @language_candidate             = Factory(:language_candidate, :candidate => @candidate, :language => @language)
+    @certificate                    = Factory(:certificate)
+    @certificate_candidate          = Factory(:certificate_candidate, :candidate => @candidate, :certificate => @certificate)
     @professional_skill             = Factory(:professional_skill)
     @interpersonal_skill            = Factory(:interpersonal_skill)
     @professional_skill_candidate   = Factory(:professional_skill_candidate,  :candidate => @candidate, :professional_skill  => @professional_skill)
@@ -92,6 +94,18 @@ describe Candidate do
     it "should destroy associated language_candidates" do
       @candidate.destroy
       LanguageCandidate.find_by_id(@language_candidate.id).should be_nil
+    end
+  end
+  
+  describe "certificate_candidates associations" do
+    
+    it "should have a certificate_candidates attribute" do
+      @candidate.should respond_to(:certificate_candidates)
+    end
+    
+    it "should destroy associated certificate_candidates" do
+      @candidate.destroy
+      CertificateCandidate.find_by_id(@certificate_candidate.id).should be_nil
     end
   end
   

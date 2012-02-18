@@ -1,0 +1,10 @@
+<% certificate = certificate_candidate.certificate %>
+<div <%= if @candidate == current_user then "id='show_certificate_candidate_#{certificate_candidate.id}' class='show_certificate_candidate'" else "class='show_certificate_candidate'" end %>>
+	<h2><%= certificate.label %></h2>
+	<p><%= certificate_candidate.description %></p>
+</div>
+<% if current_user == @candidate %>
+  <div id='edit_certificate_candidate_<%= certificate_candidate.id %>' class='hidden edit_certificate_candidate'>
+    <%= render 'certificate_candidates/edit_form', :certificate_candidate => certificate_candidate %>   	
+  </div>
+<% end %>

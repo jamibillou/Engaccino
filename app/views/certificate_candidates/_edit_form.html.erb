@@ -1,0 +1,17 @@
+<%= form_for certificate_candidate, :remote => true, :html => { :id => 'certificate_candidate_edit_form_#{certificate_candidate.id.to_s]', :class => 'certificate_candidate_edit_form'} do |f| %>
+  <input type='hidden' name='_method' value='PUT' />
+  <%= f.fields_for :certificate do |certificate_builder| %>
+   	<h2><%= certificate_builder.text_field :label, :class => 'edit_field' %></h2>
+  <% end %>
+  <p><%= f.text_area :description, :class => 'textarea_edit' %></p>
+  <div>
+    <div class="error_messages" id="errors<%= certificate_candidate.id %>"></div>
+    <%= link_to_function t('cancel'), "hideForm('certificate_candidate','#{certificate_candidate.id}')", :class => 'grey button' %>
+    &nbsp;
+    <%= f.submit t('submit') %>
+    <div class="small_trash_link margin_top right"><%= link_to "#{t('delete')}#{t('_?')}", certificate_candidate, :method => :delete,
+                                                           		                              					  :confirm => "#{t('delete')}#{t('_?')}",
+                                                               		                              				  :title => "#{t('delete')}#{t('_!')}",
+                                                               		                              				  :remote => true %></div>
+  </div>
+<% end %>

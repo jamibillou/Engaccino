@@ -1,0 +1,12 @@
+<%= form_for @certificate_candidate, :remote => true do |f| %>
+  <div class='show_certificate_candidate'>
+    <%= f.fields_for :certificate do |certificate_builder| %>
+  	  <h2><%= certificate_builder.text_field :label, :class => 'edit_field margin' %></h2>
+    <% end %>
+    <%= f.text_area :description, :class => 'textarea_edit' %>
+    <div class="error_messages" id="errors_new_certificate_candidate"></div>
+    <%= link_to_function t('cancel'), "hideForm('certificate_candidate')", :class => 'grey button' %>
+    &nbsp;
+    <%= f.submit t('submit') %>
+  </div>
+<% end %>

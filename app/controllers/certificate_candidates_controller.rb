@@ -1,4 +1,4 @@
-class CertificateCandidateController < ApplicationController
+class CertificateCandidatesController < ApplicationController
   
   def new
     @certificate_candidate = CertificateCandidate.new

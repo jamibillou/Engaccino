@@ -10,6 +10,8 @@ class Candidate < User
   has_many :schools,                        :through   => :educations
   has_many :language_candidates,            :dependent => :destroy
   has_many :languages,                      :through   => :language_candidates
+  has_many :certificate_candidates,         :dependent => :destroy
+  has_many :certificates,                   :through   => :certificate_candidates
   has_many :professional_skill_candidates,  :dependent => :destroy
   has_many :professional_skills,            :through   => :professional_skill_candidates
   has_many :interpersonal_skill_candidates, :dependent => :destroy
@@ -24,8 +26,9 @@ class Candidate < User
                                                               attr['degree_attributes']['degree_type_attributes']['label'].blank? && 
                                                               attr['start_year'].blank? && attr['end_year'].blank? }, 
                                 :allow_destroy => true  
-  accepts_nested_attributes_for :degrees,               :allow_destroy => true
-  accepts_nested_attributes_for :language_candidates,   :allow_destroy => true
+  accepts_nested_attributes_for :degrees,                 :allow_destroy => true
+  accepts_nested_attributes_for :language_candidates,     :allow_destroy => true
+  accepts_nested_attributes_for :certificate_candidates,  :allow_destroy => true
   
   validates :status, :inclusion => { :in => [ 'available', 'looking', 'open', 'listening', 'happy' ] }, :presence => true
     

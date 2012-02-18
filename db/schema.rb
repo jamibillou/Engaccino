@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(:version => 20120218114853) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
->>>>>>> 3cbaa38d513891d7c94af6b7d39db1085cb7d6a4
 
   create_table "companies", :force => true do |t|
     t.string   "name"
