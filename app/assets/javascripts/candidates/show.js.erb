@@ -6,8 +6,10 @@ $(document).ready(function() {
   $('.edit_education').each(function()                     { handleAjaxEdition($(this).attr('id'),'education'); });
   $('.edit_professional_skill_candidate').each(function()  { handleAjaxEdition($(this).attr('id'),'professional_skill_candidate'); });
   $('.edit_interpersonal_skill_candidate').each(function() { handleAjaxEdition($(this).attr('id'),'interpersonal_skill_candidate'); });
-  $('.edit_language_candidate').each(function() { handleAjaxEdition($(this).attr('id'),'language_candidate'); });
-  $('.edit_certificate_candidate').each(function() { handleAjaxEdition($(this).attr('id'),'certificate_candidate'); });
+  $('.edit_language_candidate').each(function()            { handleAjaxEdition($(this).attr('id'),'language_candidate'); });
+  $('.edit_certificate_candidate').each(function()         { handleAjaxEdition($(this).attr('id'),'certificate_candidate'); });
+ 
+  refreshPartialThroughBIPcombos('candidate', ['role', 'company', 'degreetype', 'degree']);
   
   /* GROS CACA */
   $('#edit_image').click(function()                        { $('#image_button').click(); });
@@ -59,6 +61,19 @@ function refreshPartials(partials) {
   if (typeof(partials) != 'undefined') {
     $.each(partials, function(i) { $.ajax({ url: 'refresh', type: 'POST', data: {partial: partials[i]}, success: function(data) { $('#'+partials[i]).html(data); initBIP('Click to edit'); } }) } );
   }
+}
+
+function refreshPartialThroughBIPcombos(partial, BIPcombos) {
+  $.each(BIPcombos, function(i) {
+	  $('#'+BIPcombos[i]+'_BIPcombo span').each(function() {
+	    $(this).change(function() {
+	      $.ajax({
+		      url: 'refresh', type: 'POST', data: {partial: partial},
+			    success: function(data) { $('#'+partial).html(data); initBIP('Click to edit'); refreshPartialThroughBIPcombos(partial, BIPcombos); }
+		    })
+	    });
+	  });
+	});
 }
 
 function buildErrorMessages(xhr) {

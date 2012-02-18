@@ -291,15 +291,6 @@ describe Experience do
     it "should exist" do
       @experience.should respond_to(:main)
     end
-    
-    it "should be false by default" do
-      @experience.main.should be_false
-    end
-    
-    it "should be convertible to true" do
-      @experience.toggle!(:main)
-      @experience.main.should be_true
-    end
   end
   
   describe "duration method" do
@@ -360,6 +351,5 @@ end
 #  updated_at   :datetime
 #  role         :string(255)
 #  current      :boolean(1)      default(FALSE)
-#  main         :boolean(1)      default(FALSE)
 #
 

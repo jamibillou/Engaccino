@@ -269,11 +269,6 @@ describe Candidate do
       candidate = Factory(:candidate)
       candidate.main_education.should be_nil
     end
-    
-    it "should return the main education if there is one" do
-      @education.update_attributes!(:main => true)
-      @candidate.main_education.should == @education.id
-    end
   end
   
   describe "main_experience attribute" do
@@ -285,11 +280,6 @@ describe Candidate do
     it "return nil if there is no experience" do
       candidate = Factory(:candidate)
       candidate.main_experience.should be_nil
-    end
-    
-    it "should return the main education if there is one" do
-      @experience.update_attributes!(:main => true)
-      @candidate.main_experience.should == @experience.id
     end
   end
   

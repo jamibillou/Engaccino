@@ -1,5 +1,7 @@
 class Experience < ActiveRecord::Base
 
+  attr_accessor   :main
+  
   attr_accessible :role, :start_month, :start_year, :end_month, :end_year, :description, :company_attributes, :company, :current, :main
   
   belongs_to :candidate
@@ -17,7 +19,7 @@ class Experience < ActiveRecord::Base
   validate  :date_consistance,                                                             :unless => :current
   validates :description, :length    => { :within => 20..300 },         :allow_blank => true
   
-  before_update :set_current_date, :set_main_experience
+  before_update :set_current_date, :set_main
   
   def duration
     start_year.nil? || end_year.nil? || start_month.nil? || end_month.nil? ? nil : end_year - start_year - 1 + (13 - start_month + end_month) / 12.0
@@ -41,13 +43,8 @@ class Experience < ActiveRecord::Base
       (self.end_month = Time.now.month ; self.end_year = Time.now.year) if current?
     end
     
-    def set_main_experience
-      main? ? (reset_main_experience ; main_experience = self.id) : main_experience = candidate.last(candidate.experiences).id
-      candidate.update_attributes :main_experience => main_experience
-    end
-    
-    def reset_main_experience
-      candidate.experiences.select { |experience| experience.main? }.each { |experience| experience.toggle!(:main) }
+    def set_main
+      candidate.update_attributes :main_experience => self.id if main == 1.to_s
     end
     
 end
@@ -68,6 +65,5 @@ end
 #  updated_at   :datetime
 #  role         :string(255)
 #  current      :boolean(1)      default(FALSE)
-#  main         :boolean(1)      default(FALSE)
 #
 

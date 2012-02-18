@@ -63,3 +63,15 @@ describe CertificateCandidate do
     end
   end
 end
+# == Schema Information
+#
+# Table name: certificate_candidates
+#
+#  id             :integer(4)      not null, primary key
+#  description    :string(255)
+#  candidate_id   :integer(4)
+#  certificate_id :integer(4)
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+

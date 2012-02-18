@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120218114853) do
+ActiveRecord::Schema.define(:version => 20120218141714) do
 
   create_table "certificate_candidates", :force => true do |t|
     t.string   "description"
@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(:version => 20120218114853) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
->>>>>>> 3cbaa38d513891d7c94af6b7d39db1085cb7d6a4
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -69,7 +68,6 @@ ActiveRecord::Schema.define(:version => 20120218114853) do
     t.integer  "end_year"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "main",         :default => false
   end
 
   create_table "experiences", :force => true do |t|
@@ -84,7 +82,6 @@ ActiveRecord::Schema.define(:version => 20120218114853) do
     t.datetime "updated_at"
     t.string   "role"
     t.boolean  "current",      :default => false
-    t.boolean  "main",         :default => false
   end
 
   create_table "interpersonal_skill_candidates", :force => true do |t|

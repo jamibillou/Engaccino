@@ -11,9 +11,7 @@
   	  <%= degree_builder.fields_for :degree_type do |degree_type_builder| %>
   	    <%= degree_type_builder.text_field :label, :class => 'edit_field small_margin' %>
   	  <% end %>
-  	  <span class='check_box'><%= f.check_box :main %><%= t('educations.main').downcase %></span>
   	  <br />
-  	  
   	  <%= degree_builder.text_field :label, :class => 'edit_field small_margin' %>
   	<% end %>
   	<br />

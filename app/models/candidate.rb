@@ -27,8 +27,8 @@ class Candidate < User
   accepts_nested_attributes_for :degrees,               :allow_destroy => true
   accepts_nested_attributes_for :language_candidates,   :allow_destroy => true
   
-  validates :status, :inclusion => { :in => [ 'available', 'looking', 'open', 'listening', 'happy' ] }, :presence => true
-    
+  validates :status, :inclusion => { :in => [ 'available', 'looking', 'open', 'listening', 'happy' ] }, :presence => true 
+        
   def timeline_duration
     last_event.nil? && first_event.nil? ? nil : last_event.end_year - first_event.start_year - 1 + (13 - first_event.start_month + last_event.end_month) / 12.0
   end

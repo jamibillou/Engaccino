@@ -276,15 +276,6 @@ describe Education do
     it "should exist" do
       @education.should respond_to(:main)
     end
-    
-    it "should be false by default" do
-      @education.should_not be_main
-    end
-    
-    it "should be convertible to true" do
-      @education.toggle!(:main)
-      @education.should be_main
-    end
   end
   
   describe "duration method" do
@@ -331,6 +322,5 @@ end
 #  end_year     :integer(4)
 #  created_at   :datetime
 #  updated_at   :datetime
-#  main         :boolean(1)      default(FALSE)
 #
 
