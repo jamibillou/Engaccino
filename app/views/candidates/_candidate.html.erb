@@ -27,8 +27,8 @@
           </a>
         <% end %>
         <% if current_user == candidate %>
-          <div class="place"><%= if candidate.city.blank?    then t('candidates.city')    else best_in_place_if current_user == candidate, candidate, :city,    :html_attrs => { :class => 'field' } end %></div>
-          <div class="place"><%= if candidate.country.blank? then t('candidates.country') else best_in_place_if current_user == candidate, candidate, :country, :html_attrs => { :class => 'field' } end %></div>
+          <div class="place"><%= candidate.city.blank?    ? t('candidates.city')    : (best_in_place_if current_user == candidate, candidate, :city,    :html_attrs => { :class => 'field' }) %></div>
+          <div class="place"><%= candidate.country.blank? ? t('candidates.country') : (best_in_place_if current_user == candidate, candidate, :country, :html_attrs => { :class => 'field' }) %></div>
         <% else %>
           <div class="place"><%= candidate.city %>,</div>
           <div class="place"><%= candidate.country %></div>
@@ -51,8 +51,12 @@
     <div class="job" <%= "style='margin-top:-20px'" if current_user == candidate %>>
       <% unless candidate.main_experience.nil? %>
 	    <% main_experience = Experience.find(candidate.main_experience) %>
-        <h2><%= main_experience.role %></h2>
-        <p><%=  main_experience.company.name %></p>
+        <h2 id="role_BIPcombo"><%=  best_in_place_if current_user == candidate, candidate,
+															:main_experience,
+															:type => :select,
+															:collection => main_experience_options(candidate),
+															:html_attrs => { :class => 'combobox' } %></h2>
+		<p><%= main_experience.company.name %></p>
       <% end %>
     </div> 
     <div class="status">
@@ -71,8 +75,14 @@
     <div class="degree">
       <h2><%= t('educations.main').remove_accents.upcase %></h2>
       <% unless candidate.main_education.nil? %>
-	    <% main_education = Education.find(candidate.main_education) %>
-		<%= "#{main_education.degree.degree_type.label} #{t('in')} #{main_education.degree.label}" %>
+        <% main_education = Education.find(candidate.main_education) %>
+		<h3 id="degreetype_BIPcombo"><%= best_in_place_if current_user == candidate, candidate,
+														:main_education,
+														:type => :select,
+														:collection => main_education_options(candidate),
+														:html_attrs => { :class => 'combobox' } %></h3>
+		<p><%= main_education.degree.label %></p>
+        
       <% end %>
     </div>
   </div>

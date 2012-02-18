@@ -16,8 +16,12 @@ module CandidatesHelper
       [ 'happy', t('candidates.happy_status') ] ]
   end
   
-  def educations_options(candidate)
-    candidate.educations.map { |education| [ education.degree.degree_type.label, education.id ] }
+  def main_experience_options(candidate)
+    candidate.experiences.map { |experience| role = experience.role ; [ experience.id, "#{role.slice(0..29)}#{'...' if role.length > 30}" ] }
+  end
+  
+  def main_education_options(candidate)
+    candidate.educations.map { |education| label = education.degree.degree_type.label ; [ education.id, label.split('(')[0] ] }
   end
   
 end

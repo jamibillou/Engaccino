@@ -3,7 +3,6 @@
     <h2><%= "#{education.start_month}/#{education.start_year} - #{education.end_month}/#{education.end_year}" %></h2>
   </div>
   <div class="ee_details">
-	<div class="right" style="color:red"><%= "main ? #{education.main? ? 'yep' : 'nope'}" %></div>
     <h2><%= "#{education.degree.degree_type.label} #{t('in')} #{education.degree.label}" %></h2>
     <%= education.school.name %>
     <p><% if current_user == @candidate && (education.description.nil? || education.description.empty?) %>
