@@ -114,6 +114,16 @@ Factory.define :professional_skill_candidate do |professional_skill_candidate|
   professional_skill_candidate.association :candidate
 end
 
+Factory.define :certificate do |certificate|
+  certificate.label 'TOEFL'
+end
+
+Factory.define :certificate_candidate do |certificate_candidate|
+  certificate_candidate.description "I passed to exam so easily !"
+  certificate_candidate.association :certificate
+  certificate_candidate.association :candidate
+end
+
 Factory.sequence :email do |n|
   "user_#{n}@example.com"
 end
