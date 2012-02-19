@@ -16,10 +16,10 @@ Engaccino::Application.routes.draw do
             :languages, :language_candidates, :certificates, :certificate_candidates
   resources :sessions, :only => [:new, :create, :destroy]
   
-  match 'candidates/refresh',       :to => 'candidates#refresh'
-  match 'candidates/showpart',      :to => 'candidates#showpart'
-  match 'candidates/showblock',     :to => 'candidates#showblock'
-  root                              :to => 'candidates#index', :constraints => SingedIn.new(true)
+  match 'candidates/refresh',           :to => 'candidates#refresh'
+  match 'candidates/showpart',          :to => 'candidates#showpart'
+  match 'candidates/showblock',         :to => 'candidates#showblock'
+  root                                  :to => 'candidates#index', :constraints => SingedIn.new(true)
   
   match '/signup',  :to => 'candidates#new'
   match '/signin',  :to => 'sessions#new'

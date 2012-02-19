@@ -6,3 +6,4 @@ fr:
     delete: "Supprimer cette formation"
     main: "Diplôme principal"
     add_description: "Une description aide les recruteurs potentiels à comprendre exactement ce que vous avez étudié."
+    missing: "Vous devriez renseigner tous vos diplômes"

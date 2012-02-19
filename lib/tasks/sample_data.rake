@@ -114,6 +114,15 @@ def make_languages
   end
 end
 
+def make_certificates
+  loops = (0..5).to_a
+  loops[rand(loops.size)].times do |n|
+    certificate = Certificate.new(:label => @certificates[rand(@certificates.size)])
+    certificate_candidate = CertificateCandidate.new(:description => @descriptions[rand(@descriptions.size)[20..150]])
+    certificate_candidate
+  end
+end
+
 def make_dominic
   dominic = Candidate.create! :first_name     => 'Dominic',               :last_name          => 'Matheron',
                               :city           => 'Rotterdam',             :country            => 'Netherlands',     
@@ -271,6 +280,8 @@ end
 
 @language_levels = [ 'beginner', 'intermediate', 'fluent', 'native' ]
 @languages = [ 'English' , 'French', 'Dutch', 'Spanish', 'Italian', 'German', 'Cantonese', 'Japanese', 'Portugesh', 'Arabic', 'Hindi', 'Russian', 'Swedish', 'Norwish', 'Finnish', 'Czech']
+
+@certificates = [ 'TOEIC', 'TOEFL', '3Com', 'Adobe', 'Adtran', 'Citrix', 'Linux Professional Institute', 'UXLabs', 'PTIT', 'CIPLE', 'DIPL', 'DALF', 'TSE']
 
 @experiences  = (1..10).to_a
 

@@ -61,6 +61,7 @@ en:
   to: "to"
   at: "at"
   in: "in"
+  hide: "hide"
   
   # Time
   yr: "yr"

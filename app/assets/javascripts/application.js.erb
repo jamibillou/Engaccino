@@ -112,3 +112,6 @@ function add_fields(link, association, content) {
 function initBIP(title) {
   $('.best_in_place').best_in_place(); $('span.best_in_place').each(function() { $(this).attr('title', title); });
 }
+
+function show(id) { $('#'+id).show(); }
+function hide(id) { $('#'+id).hide(); }

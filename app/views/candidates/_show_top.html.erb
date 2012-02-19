@@ -1,12 +1,24 @@
-<div id="share_edit">
-  <div class="buttons">
-    <%= link_to t('candidates.show.next_profile'), candidate_path(candidate.id+1), :class => 'slightly_round blue button margin_right' %>
-    <%= link_to t('candidates.show.share_profile'), '#', :class => 'slightly_round grey button' %>
+<div class="buttons">
+  <%= link_to t('candidates.show.next_profile'), candidate_path(candidate.id+1), :class => 'slightly_round blue button margin_right' %>
+  <%= link_to t('candidates.show.share_profile'), '#', :class => 'slightly_round grey button' %>
+</div>
+<div id="completion_container" class="slightly_round">
+  <div id="completion_bar_empty" class="slightly_round">
+    <div id="completion_bar_full" class="slightly_round" style="width: <%= 3*candidate.profile_completion %>px;"></div>
   </div>
-  <div id="completion_container" class="slightly_round">
-    <div id="completion_bar_empty" class="slightly_round">
-      <div id="completion_bar_full" class="slightly_round" style="width: <%= 3*candidate.profile_completion %>px;"></div>
-    </div>
-    <%=t 'candidates.show.profile_completion.sentence' %><%= candidate.profile_completion %><%=t 'candidates.show.profile_completion.%complete' %><%= link_to t('candidates.show.profile_completion.link'), '#' %>
+  <%=t 'candidates.show.profile_completion.sentence' %><%= candidate.profile_completion %><%=t 'candidates.show.profile_completion.%complete' %><%= link_to_function t('candidates.show.profile_completion.link'), "show('missing')" %>
+  <div id='missing' class='hidden'>
+  	Missing items:
+  	<ul>
+  		<% if @candidate.professional_skill_candidates.count < 3 %><li><%=t 'professional_skills.missing' %></li><% end %>
+  		<% if @candidate.interpersonal_skill_candidates.count < 3 %><li><%=t 'interpersonal_skills.missing' %></li><% end %>
+  		<% if @candidate.educations.count < 3 %><li><%=t 'educations.missing' %></li><% end %>
+  		<% if @candidate.experiences.count < 3 %><li><%=t 'experiences.missing' %></li><% end %>
+  		<% if @candidate.language_candidates.empty? %><li><%=t 'languages.missing' %></li><% end %>
+  		<% if @candidate.city.empty? || @candidate.country.empty? %><li><%=t 'candidates.missing.localisation' %></li><% end %>
+  		<% if @candidate.facebook_login.empty? && @candidate.linkedin_login.empty? && @candidate.twitter_login.empty? %><li><%=t 'candidates.missing.social_network' %></li><% end %>
+  		<% if @candidate.image.to_s.nil? %><li><%=t 'candidates.missing.profile_picture' %></li><% end %>
+  	</ul>
+  	<%= link_to_function t('hide'), "hide('missing')", :class => "right" %>
   </div>
 </div>
