@@ -1,9 +1,7 @@
-<% unless candidate.timeline_duration.nil? %>
-
-  <% units = { :x => 100 / candidate.timeline_duration, :y => 150 / candidate.longest_event.duration } %>
+<% unless timeline_duration(candidate).nil? %>
+  <% units = { :x => 100 / timeline_duration(candidate), :y => 150 / candidate.longest_event.duration } %>
   <% height = (candidate.longest_event.duration * units[:y] * 1.7).round %>
-  <% axis = candidate.long_timeline? ? design_axis_w_decades(candidate, units) : design_axis(candidate, units) %>
-
+  <% axis = long_timeline?(candidate) ? design_axis_w_decades(candidate, units) : design_axis(candidate, units) %>
   <div id="timeline" style="height: <%= height+55 %>px;">
     <h1><%= t('candidates.show.timeline.title').remove_accents.upcase %></h1>
     <div class="timeline_container" style="height: <%= height %>px;">
@@ -23,22 +21,25 @@
         <% end %>
       </div>
       <div class="horizontal_axis" style="width: <%= axis[:width] %>%;">
-        <span class="unit_mark" style="width:<%= axis[:first_unit_mark] %>%;"><%= unit_mark_label(candidate, :first) if first_unit_mark?(candidate) %></span>
+        <span class="unit_mark" style="width:<%= axis[:first_unit_mark] %>%;">
+          <%= unit_mark_label(candidate, :first) if first_unit_mark?(candidate) %>
+        </span>
         <% axis[:unit_marks].times do |n| %>
-          <span class="unit_mark" style="left:<%= axis[:first_unit_mark]+n*axis[:unit_mark] %>%; width:<%= axis[:unit_mark] %>%;"><%= unit_mark_label(candidate, :normal, n) %></span>
+          <span class="unit_mark" style="left:<%= axis[:first_unit_mark]+n*axis[:unit_mark] %>%; width:<%= axis[:unit_mark] %>%;">
+            <%= unit_mark_label(candidate, :normal, n) %>
+          </span>
         <% end %>
         <% if last_unit_mark?(candidate) %>
-          <span class="unit_mark" style="left: <%= axis[:first_unit_mark]+(axis[:unit_marks])*axis[:unit_mark] %>%; width:<%= axis[:last_unit_mark] %>%; border:0;"><%= unit_mark_label(candidate, :last) %></span>
+          <span class="unit_mark" style="left: <%= axis[:first_unit_mark]+(axis[:unit_marks])*axis[:unit_mark] %>%; width:<%= axis[:last_unit_mark] %>%; border:0;">
+            <%= unit_mark_label(candidate, :last) %>
+          </span>
         <% end %>
       </div>
     </div>
   </div>
-  
 <% else %>
-
   <div id="timeline">
     <h1><%= t('candidates.show.timeline.title').remove_accents.upcase %><</h1>
     <br />
   </div>
-
 <% end %>

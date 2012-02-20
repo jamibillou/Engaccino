@@ -278,7 +278,6 @@
   padding: 0;
   margin: 0 0 15px 0;
 }
-
 #resume h2 {
   font-size: 14px;
   margin: 0;
@@ -488,8 +487,9 @@
   height: 40px;
 }
 #resume .add_link {
-  margin-right: 2px;
-  float: right;
+  border-left: 2px solid #EEE;
+  margin-left: 10px;
+  padding-left: 13px;
   color: #BBB;
   text-decoration: none;
 }
