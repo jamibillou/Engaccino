@@ -3,13 +3,7 @@
   <% height = (candidate.longest_event.duration * units[:y] * 1.7).round %>
   <% axis = long_timeline?(candidate) ? design_axis_w_decades(candidate, units) : design_axis(candidate, units) %>
   <div id="timeline" style="height: <%= height+55 %>px;">
-    <h1>
-	    <%= t('candidates.show.timeline.title').remove_accents.upcase %>
-	    <%= form_for candidate, :html => { :id => 'timeline_checkboxes' }, :remote => :true do |f| %>
-        <%= f.check_box   :timeline_educations  %> <%=t 'educations.title' %>&nbsp;&nbsp;&nbsp;&nbsp;
-        <%= f.check_box   :timeline_experiences %> <%=t 'experiences.title' %>
-      <% end %>
-	  </h1>
+    <h1><%= t('candidates.show.timeline.title').remove_accents.upcase %></h1>
     <div class="timeline_container" style="height: <%= height %>px;">
       <div class="events">
         <% [candidate.educations, candidate.experiences].each do |collection| %>

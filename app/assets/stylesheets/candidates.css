@@ -342,10 +342,6 @@
 #resume #timeline h1 {
   margin: 0;
 }
-#timeline_checkboxes {
-  display: inline-block;
-  margin-left: 20px;
-}
 .timeline_container {
   width: 75%;
   position: absolute;
