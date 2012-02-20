@@ -1,5 +1,5 @@
-<% @experiences          		         = candidate.experiences.order("start_year DESC, start_month DESC") %>
-<% @educations           		         = candidate.educations.order("start_year DESC, start_month DESC") %>
+<% @experiences          		     = candidate.experiences.order("start_year DESC, start_month DESC") %>
+<% @educations           		     = candidate.educations.order("start_year DESC, start_month DESC") %>
 <% @professional_skill_candidates    = candidate.professional_skill_candidates %>
 <% @interpersonal_skill_candidates   = candidate.interpersonal_skill_candidates %>
 
@@ -53,9 +53,9 @@
       <% if current_user == candidate %>
         <h2 id="role_BIPcombo"><%= best_in_place candidate, :main_experience, :type => :select, :collection => main_experience_options(candidate), :html_attrs => { :class => 'combobox' } %></h2>
       <% else %>
-        <h2 id="role_BIPcombo"><%= main_experience.role %></h2>
+        <h2><%= main_experience.role %></h2>
       <% end %>
-      <p><%= main_experience.company.name %></p>
+      <p id="candidate_company"><%= render 'candidate_company', :candidate => candidate %></p>
     </div> 
     <div class="status">
     	<% if current_user == candidate %>
@@ -74,18 +74,19 @@
       <h2><%= t('educations.main').remove_accents.upcase %></h2>
       <% main_education = Education.find(candidate.main_education) %>
       <% if current_user == candidate %>
-      <h3 id="degreetype_BIPcombo"><%= best_in_place candidate, :main_education, :type => :select, :collection => main_education_options(candidate), :html_attrs => { :class => 'combobox' } %></h3>
+        <h3 id="degreetype_BIPcombo">
+          <%= best_in_place candidate, :main_education, :type => :select, :collection => main_education_options(candidate), :html_attrs => { :class => 'combobox' } %>
+        </h3>
       <% else %>
-        <h3 id="degreetype_BIPcombo"><%= main_education.degree.degree_type.label %></h3>
+        <h3 id=""><%= main_education.degree.degree_type.label %></h3>
       <% end %>
-  	  <p><%= main_education.degree.label %></p>
+  	  <p id="candidate_degree">
+        <%= render 'candidate_degree', :candidate => candidate %>
+      </p>
     </div>
   </div>
-  <div class="professional_skills">
-    <h2><%= t('professional_skills.title').remove_accents.upcase %></h2>
-    <% @professional_skill_candidates.each_with_index do |professional_skill_candidate, index|  %>
-      <% unless index > 2 %><p><%= best_in_place_if current_user == candidate, professional_skill_candidate.professional_skill, :label, :html_attrs => { :class => 'field' } %></p><% end %>
-    <% end %>
+  <div id="candidate_professional_skills" class="professional_skills">
+    <%= render 'candidate_professional_skills', :candidate => candidate %>
   </div>
   <% unless hide_contact_information? %>
     <div class="contact">

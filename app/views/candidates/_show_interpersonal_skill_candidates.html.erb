@@ -1,5 +1,4 @@
 <% @interpersonal_skill_candidates = @candidate.interpersonal_skill_candidates %>
-
 <h1>
 	<%= t('interpersonal_skills.title').remove_accents.upcase %>
   <%= link_to_function "#{t('add').upcase} +", "callNew('interpersonal_skill_candidate')", :id => "link_add_interpersonal_skill", :class => "add_link" if @candidate == current_user %>

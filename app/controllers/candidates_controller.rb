@@ -72,7 +72,8 @@ class CandidatesController < ApplicationController
   def refresh
     @candidate = current_user
     update_completion if params[:partial] == 'show_top'
-    params[:model].nil? ? (render :partial => "candidates/#{params[:partial]}", :locals => { :candidate => @candidate }) : (render :partial => "candidates/show_#{params[:model].to_s}s")
+    partial = params[:model].nil? ? "candidates/#{params[:partial]}" : "candidates/show_#{params[:model].to_s}s"
+    render :partial => partial, :locals => { :candidate => @candidate }
   end
 
   private
