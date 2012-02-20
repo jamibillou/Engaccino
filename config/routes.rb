@@ -4,12 +4,6 @@ Engaccino::Application.routes.draw do
 
   get "sessions/new"
   get "ajax/countries"
-
-  resources :candidates do
-    resources :experiences do
-      resources :companies
-    end
-  end    
   
   resources :users, :companies, :experiences, :educations, :degree_types, :degrees, :schools, 
             :professional_skills, :interpersonal_skills, :professional_skill_candidates, :interpersonal_skill_candidates,
@@ -17,8 +11,6 @@ Engaccino::Application.routes.draw do
   resources :sessions, :only => [:new, :create, :destroy]
   
   match 'candidates/refresh',           :to => 'candidates#refresh'
-  match 'candidates/showpart',          :to => 'candidates#showpart'
-  match 'candidates/showblock',         :to => 'candidates#showblock'
   root                                  :to => 'candidates#index', :constraints => SingedIn.new(true)
   
   match '/signup',  :to => 'candidates#new'
