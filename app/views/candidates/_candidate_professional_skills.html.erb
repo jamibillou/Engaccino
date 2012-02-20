@@ -1,4 +1,4 @@
 <h2><%= t('professional_skills.title').remove_accents.upcase %></h2>
   <% candidate.professional_skill_candidates.each_with_index do |professional_skill_candidate, index|  %>
-  <% unless index > 2 %><p><%= best_in_place_if current_user == candidate, professional_skill_candidate.professional_skill, :label, :html_attrs => { :class => 'field' } %></p><% end %>
+  <% unless index > 2 %><p><%= professional_skill_candidate.professional_skill.label %></p><% end %>
 <% end %>

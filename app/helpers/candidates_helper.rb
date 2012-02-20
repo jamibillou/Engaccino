@@ -21,7 +21,7 @@ module CandidatesHelper
   end
   
   def main_education_options(candidate)
-    candidate.educations.map { |education| label = education.degree.degree_type.label ; [ education.id, label.split('(')[0] ] }
+    candidate.educations.map { |education| label = education.degree.degree_type.label.split('(')[0] ; [ education.id, "#{label.slice(0..13)}#{'..' if label.length > 14}" ] }
   end
   
 end

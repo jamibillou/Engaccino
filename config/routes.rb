@@ -5,7 +5,7 @@ Engaccino::Application.routes.draw do
   get "sessions/new"
   get "ajax/countries"
   
-  resources :users, :companies, :experiences, :educations, :degree_types, :degrees, :schools, 
+  resources :users, :candidates, :experiences, :companies, :educations, :degree_types, :degrees, :schools, 
             :professional_skills, :interpersonal_skills, :professional_skill_candidates, :interpersonal_skill_candidates,
             :languages, :language_candidates, :certificates, :certificate_candidates
   resources :sessions, :only => [:new, :create, :destroy]
