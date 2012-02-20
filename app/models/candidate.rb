@@ -31,6 +31,9 @@ class Candidate < User
   accepts_nested_attributes_for :certificate_candidates,  :allow_destroy => true
   
   validates :status, :inclusion => { :in => [ 'available', 'looking', 'open', 'listening', 'happy' ] }, :presence => true 
+  
+  #after_create :update_completion
+  #after_update :update_completion
         
   def timeline_duration
     last_event.nil? && first_event.nil? ? nil : last_event.end_year - first_event.start_year - 1 + (13 - first_event.start_month + last_event.end_month) / 12.0

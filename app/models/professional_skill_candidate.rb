@@ -11,6 +11,19 @@ class ProfessionalSkillCandidate < ActiveRecord::Base
   validates :description,        :length    => { :within => 20..160 },                                          :presence => true
   validates :level,              :inclusion => { :in => [ 'beginner', 'intermediate', 'advanced', 'expert' ] }, :presence => true
   validates :experience,         :inclusion => { :in => (1..60).to_a },                                         :presence => true
+  
+  #after_create   :update_completion_new
+  #after_destroy  :update_completion_del
+  
+  private  
+  
+    def update_completion_new
+      candidate.update_attributes :profile_completion => candidate.profile_completion+5 if candidate.professional_skill_candidates.count < 4
+    end
+    
+    def update_completion_del
+      candidate.update_attributes :profile_completion => candidate.profile_completion-5 if candidate.professional_skill_candidates.count < 3
+    end
 
 end
 # == Schema Information

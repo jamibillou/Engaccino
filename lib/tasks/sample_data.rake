@@ -118,7 +118,7 @@ def make_certificates
   loops = (0..5).to_a
   loops[rand(loops.size)].times do |n|
     certificate = Certificate.new(:label => @certificates[rand(@certificates.size)])
-    certificate_candidate = CertificateCandidate.new(:description => @descriptions[rand(@descriptions.size)[20..150]])
+    certificate_candidate = CertificateCandidate.new(:level_score => rand((0..1000).to_s))
     certificate_candidate
   end
 end
@@ -214,8 +214,8 @@ def make_franck
   languages = [ { :label => 'French',  :level => 'native' }, 
                 { :label => 'English', :level => 'native' },  
                 { :label => 'Spanish', :level => 'native' } ]
-  certificates = [ { :label => 'TOEIC', :description => 'Passed on 2008 with a score of 790' },
-                   { :label => 'Driving licence', :description => 'Obtained on 2005, on the first try, so easy...' } ]
+  certificates = [ { :label => 'TOEIC', :level_score => '790' },
+                   { :label => 'Driving licence', :level_score => '' } ]
   experiences.each do |exp|
     experience           = Experience.new(:role => exp[:role], :start_month => exp[:start_month], :start_year => exp[:start_year], :end_month => exp[:end_month],  :end_year => exp[:end_year],
                                           :description => @descriptions[rand(@descriptions.size)][0..298])
@@ -254,7 +254,7 @@ def make_franck
     language_candidate.save!
   end
   certificates.each do |certificate|
-    certificate_candidate = CertificateCandidate.new(:description => certificate[:description])
+    certificate_candidate = CertificateCandidate.new(:level_score => certificate[:level_score])
     certificate = Certificate.new(:label => certificate[:label])
     certificate_candidate.candidate = franck
     certificate_candidate.certificate = certificate

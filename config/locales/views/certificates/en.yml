@@ -2,3 +2,4 @@ en:
   certificates:
   
     title: "certificates"
+    level: "level/score"

@@ -10,6 +10,19 @@ class LanguageCandidate < ActiveRecord::Base
   validates :candidate, :language,                                                               :presence => true
   validates :level, :inclusion => { :in => [ 'beginner', 'intermediate', 'fluent', 'native' ] }, :presence => true
   
+  #after_create   :update_completion_new
+  #after_destroy  :update_completion_del
+  
+  private
+  
+    def update_completion_new
+      candidate.update_attributes :profile_completion => candidate.profile_completion+10 if candidate.language_candidates.count < 2
+    end
+    
+    def update_completion_del
+      candidate.update_attributes :profile_completion => candidate.profile_completion-10 if candidate.language_candidates.empty?
+    end
+  
 end
 
 # == Schema Information

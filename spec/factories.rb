@@ -119,7 +119,7 @@ Factory.define :certificate do |certificate|
 end
 
 Factory.define :certificate_candidate do |certificate_candidate|
-  certificate_candidate.description "I passed to exam so easily !"
+  certificate_candidate.level_score "B2"
   certificate_candidate.association :certificate
   certificate_candidate.association :candidate
 end

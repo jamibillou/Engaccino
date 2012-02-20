@@ -1,7 +1,7 @@
 class CreateCertificateCandidates < ActiveRecord::Migration
   def change
     create_table :certificate_candidates do |t|
-      t.string :description
+      t.string :level_score
       t.integer :candidate_id
       t.integer :certificate_id
 

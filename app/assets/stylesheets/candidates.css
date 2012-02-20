@@ -620,24 +620,27 @@
 }
 
 /* CERTIFICATES */
-#certificate_candidates .show_certificate_candidate {
-  margin-bottom: 20px;
+#certificate_candidates .label {
+  width: 50%;
+  margin-right: 10%;
+  position: relative;
+  display: inline-block;	
 }
-#certificate_candidates .show_certificate_candidate h2 {
-  font-size: 15px;
-  color: black;
+
+#certificate_candidates .level {
+  position: relative;
+  display: inline-block;
 }
 
 #certificate_candidates .show_certificate_candidate:hover {
-  background: url('pencil.png') no-repeat 99% 9%;
+  background: url('pencil.png') no-repeat 99% 45%;
   cursor: pointer;
 }
-#certificate_candidates .edit_field {
-  width: 40%;
+#certificate_candidates .certificate_candidate .edit_field {
+  width: 100%;
   margin-bottom: 10px;
 }
 
-#certificate_candidates .textarea_edit {
-  width: 100%;
-  height: 50px;
+#certificate_candidates .certificate_candidate .small_edit_field {
+  width: 60px;
 }
