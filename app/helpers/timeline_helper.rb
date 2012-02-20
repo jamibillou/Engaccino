@@ -1,5 +1,13 @@
 module TimelineHelper
   
+  def timeline_duration(candidate)
+    candidate.neither_exp_nor_edu? ? nil : candidate.last_event.end_year - candidate.first_event.start_year - 1 + (13 - candidate.first_event.start_month + candidate.last_event.end_month) / 12.0
+  end
+  
+  def long_timeline?(candidate)
+    timeline_duration(candidate).nil? ? nil : timeline_duration(candidate) > 20
+  end
+  
   def design_block(object, collection, units)
     duration = object.duration ; width = (duration * units[:x]).round(2)
     { :height  => (duration * units[:y]).round,
@@ -13,7 +21,7 @@ module TimelineHelper
   end
   
   def design_axis(candidate, units)
-    { :width            => (candidate.timeline_duration * units[:x]).round(2),
+    { :width            => (timeline_duration(candidate) * units[:x]).round(2),
       :unit_marks       => candidate.last_event.end_year - candidate.first_event.start_year - 1,
       :unit_mark        => units[:x].round(2),
       :first_unit_mark  => ((13 - candidate.first_event.start_month) * units[:x] / 12).round(2),
@@ -21,7 +29,7 @@ module TimelineHelper
   end
   
   def design_axis_w_decades(candidate, units)
-    { :width            => (candidate.timeline_duration * units[:x]).round(2),
+    { :width            => (timeline_duration(candidate) * units[:x]).round(2),
       :unit_marks       => (decade(candidate.last_event.end_year) - decade(candidate.first_event.start_year) - 10) / 10,
       :unit_mark        => units[:x].round(3) * 10,
       :first_unit_mark  => (((13 - candidate.first_event.start_month) / 12 + (10 - candidate.first_event.start_year.modulo(10))) * units[:x] ).round(2),
@@ -29,21 +37,21 @@ module TimelineHelper
   end
   
   def first_unit_mark?(candidate)
-    candidate.long_timeline? ? candidate.first_event.start_year - decade(candidate.first_event.start_year) <= 5 : candidate.first_event.start_month <= 6
+    long_timeline?(candidate) ? candidate.first_event.start_year - decade(candidate.first_event.start_year) <= 5 : candidate.first_event.start_month <= 6
   end
   
   def last_unit_mark?(candidate)
-    candidate.long_timeline? ? candidate.last_event.end_year - decade(candidate.last_event.end_year) >= 5 : candidate.last_event.end_month >= 6
+    long_timeline?(candidate) ? candidate.last_event.end_year - decade(candidate.last_event.end_year) >= 5 : candidate.last_event.end_month >= 6
   end
   
   def unit_mark_label(candidate, type, year = '')
     case type
       when :first
-        candidate.long_timeline? ? ten_yrs_bracket(candidate.first_event.start_year, :first) : candidate.first_event.start_year
+        long_timeline?(candidate) ? ten_yrs_bracket(candidate.first_event.start_year, :first) : candidate.first_event.start_year
       when :normal
-        candidate.long_timeline? ? ten_yrs_bracket(candidate.first_event.start_year + (year + 1) * 10) : candidate.first_event.start_year + year + 1
+        long_timeline?(candidate) ? ten_yrs_bracket(candidate.first_event.start_year + (year + 1) * 10) : candidate.first_event.start_year + year + 1
       when :last
-        candidate.long_timeline? ? ten_yrs_bracket(candidate.last_event.end_year, :last) : candidate.last_event.end_year
+        long_timeline?(candidate) ? ten_yrs_bracket(candidate.last_event.end_year, :last) : candidate.last_event.end_year
     end
   end
   
@@ -54,5 +62,5 @@ module TimelineHelper
   def decade(year)
     (year / 10).truncate * 10
   end
-  
+
 end

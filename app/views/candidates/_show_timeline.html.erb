@@ -1,8 +1,8 @@
-<% unless candidate.timeline_duration.nil? %>
+<% unless timeline_duration(candidate).nil? %>
 
-  <% units = { :x => 100 / candidate.timeline_duration, :y => 150 / candidate.longest_event.duration } %>
+  <% units = { :x => 100 / timeline_duration(candidate), :y => 150 / candidate.longest_event.duration } %>
   <% height = (candidate.longest_event.duration * units[:y] * 1.7).round %>
-  <% axis = candidate.long_timeline? ? design_axis_w_decades(candidate, units) : design_axis(candidate, units) %>
+  <% axis = long_timeline?(candidate) ? design_axis_w_decades(candidate, units) : design_axis(candidate, units) %>
 
   <div id="timeline" style="height: <%= height+55 %>px;">
     <h1><%= t('candidates.show.timeline.title').remove_accents.upcase %></h1>

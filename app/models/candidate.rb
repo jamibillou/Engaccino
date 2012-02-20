@@ -31,25 +31,17 @@ class Candidate < User
   accepts_nested_attributes_for :certificate_candidates,  :allow_destroy => true
   
   validates :status, :inclusion => { :in => [ 'available', 'looking', 'open', 'listening', 'happy' ] }, :presence => true 
-        
-  def timeline_duration
-    neither_exp_nor_edu? ? nil : last_event.end_year - first_event.start_year - 1 + (13 - first_event.start_month + last_event.end_month) / 12.0
-  end
   
   def experience_duration
     no_exp? ? nil : last_experience.end_year - first_experience.start_year - 1 + (13 - first_experience.start_month + last_experience.end_month) / 12.0
   end
   
-  def long_timeline?
-    timeline_duration.nil? ? nil : timeline_duration > 20
+  def longest_event
+    if exp_and_edu? then longest [longest(educations), longest(experiences)] elsif no_exp_but_edu? then longest(educations) elsif no_edu_but_exp? then longest(experiences) else nil end
   end
   
-  def longest_event
-    if exp_and_edu?
-      longest [longest(educations), longest(experiences)]
-    else
-      if no_exp_but_edu? then longest(educations) elsif no_edu_but_exp? then longest(experiences) else nil end
-    end
+  def longest(collection)
+    collection.sort_by!{ |object| object.duration }.last
   end
   
   def first_event
@@ -60,24 +52,20 @@ class Candidate < User
     end
   end
   
-  def last_event
-    if exp_and_edu?
-      [last_education, last_experience].sort_by!{ |event| if last_education.end_year == last_experience.end_year then event.end_month else event.end_year end }.last
-    else
-      if neither_exp_nor_edu? then nil elsif no_exp_but_edu? then last_education elsif no_edu_but_exp? then last_experience end
-    end
-  end
-  
-  def longest(collection)
-    collection.sort_by!{ |object| object.duration }.last
-  end
-  
   def first_education
     educations.order("start_year ASC").order("start_month ASC").first
   end
   
   def first_experience
     experiences.order("start_year ASC").order("start_month ASC").first
+  end
+  
+  def last_event
+    if exp_and_edu?
+      [last_education, last_experience].sort_by!{ |event| if last_education.end_year == last_experience.end_year then event.end_month else event.end_year end }.last
+    else
+      if neither_exp_nor_edu? then nil elsif no_exp_but_edu? then last_education elsif no_edu_but_exp? then last_experience end
+    end
   end
   
   def last_education
