@@ -8,38 +8,35 @@ class Experience < ActiveRecord::Base
   belongs_to :company
   
   accepts_nested_attributes_for :company, :allow_destroy => true
+  
+  before_validation :set_current_date 
             
   validates :candidate_id,                                              :presence => true
   validates :company,                                                   :presence => true
   validates :role,        :length    => { :within => 3..80 },           :presence => true
   validates :start_month, :inclusion => { :in => 1..12 },               :presence => true
   validates :start_year,  :inclusion => { :in => 1900..Time.now.year }, :presence => true
-  validates :end_month,   :inclusion => { :in => 1..12 },               :presence => true, :unless => :current
-  validates :end_year,    :inclusion => { :in => 1900..Time.now.year }, :presence => true, :unless => :current
-  validate  :date_consistance,                                                             :unless => :current
+  validates :end_month,   :inclusion => { :in => 1..12 },               :presence => true
+  validates :end_year,    :inclusion => { :in => 1900..Time.now.year }, :presence => true
+  validate  :date_consistance
   validates :description, :length    => { :within => 20..300 },         :allow_blank => true
   
-  before_update :set_current_date
-  after_update  :set_main
-  after_create  :set_main
-  after_destroy :set_main
+  after_update      :set_main
+  after_create      :set_main
+  after_destroy     :set_main
   
   def duration
-    start_year.nil? || end_year.nil? || start_month.nil? || end_month.nil? ? nil : end_year - start_year - 1 + (13 - start_month + end_month) / 12.0
+    end_year - start_year - 1 + (13 - start_month + end_month) / 12.0
   end
   
   def yrs_after_first_event
-    if start_year.nil? || end_year.nil? || start_month.nil? || end_month.nil?
-      nil
-    else
-      self == candidate.first_event ? 0 : start_year - candidate.first_event.start_year - 1 + (12 - candidate.first_event.start_month + start_month) / 12.0
-    end
+    (self == candidate.first_event ? 0 : start_year - candidate.first_event.start_year - 1 + (12 - candidate.first_event.start_month + start_month) / 12.0) unless candidate.neither_exp_nor_edu?
   end
   
   private
     
     def date_consistance
-      errors.add(:duration, I18n.t('experience.validations.duration')) if duration.nil? || duration < 0
+      errors.add(:duration, I18n.t('experience.validations.duration')) if duration < 0
     end
     
     def set_current_date
@@ -47,7 +44,7 @@ class Experience < ActiveRecord::Base
     end
     
     def set_main
-      candidate.update_attributes :main_experience => candidate.last(candidate.experiences).id unless candidate.main_experience == candidate.last(candidate.experiences).id
+      candidate.update_attributes :main_experience => candidate.last_experience.id unless candidate.main_experience == candidate.last_experience.id
     end
     
 end

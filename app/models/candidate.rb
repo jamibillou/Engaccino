@@ -33,11 +33,11 @@ class Candidate < User
   validates :status, :inclusion => { :in => [ 'available', 'looking', 'open', 'listening', 'happy' ] }, :presence => true 
         
   def timeline_duration
-    last_event.nil? && first_event.nil? ? nil : last_event.end_year - first_event.start_year - 1 + (13 - first_event.start_month + last_event.end_month) / 12.0
+    neither_exp_nor_edu? ? nil : last_event.end_year - first_event.start_year - 1 + (13 - first_event.start_month + last_event.end_month) / 12.0
   end
   
   def experience_duration
-    experiences.empty? ? nil : last(experiences).end_year - first(experiences).start_year - 1 + (13 - first(experiences).start_month + last(experiences).end_month) / 12.0
+    no_exp? ? nil : last_experience.end_year - first_experience.start_year - 1 + (13 - first_experience.start_month + last_experience.end_month) / 12.0
   end
   
   def long_timeline?
@@ -45,38 +45,26 @@ class Candidate < User
   end
   
   def longest_event
-    if educations.empty? && experiences.empty?
-      nil
-    elsif !educations.empty? && experiences.empty?
-      longest(educations)
-    elsif educations.empty? && !experiences.empty?
-      longest(experiences)
-    else
+    if exp_and_edu?
       longest [longest(educations), longest(experiences)]
+    else
+      if no_exp_but_edu? then longest(educations) elsif no_edu_but_exp? then longest(experiences) else nil end
     end
   end
   
   def first_event
-    if educations.empty? && experiences.empty?
-      nil
-    elsif !educations.empty? && experiences.empty?
-      first(educations)
-    elsif educations.empty? && !experiences.empty?
-      first(experiences)
+    if exp_and_edu?
+      [first_education, first_experience].sort_by!{ |event| if first_education.start_year == first_experience.start_year then event.start_month else event.start_year end }.first
     else
-      [first(educations), first(experiences)].sort_by!{ |event| if first(educations).start_year == first(experiences).start_year then event.start_month else event.start_year end }.first
+      if neither_exp_nor_edu? then nil elsif no_exp_but_edu? then first_education elsif no_edu_but_exp? then first_experience end
     end
   end
   
   def last_event
-    if educations.empty? && experiences.empty?
-      nil
-    elsif !educations.empty? && experiences.empty?
-      last(educations)
-    elseif educations.empty? && !experiences.empty?
-      last(experiences)
+    if exp_and_edu?
+      [last_education, last_experience].sort_by!{ |event| if last_education.end_year == last_experience.end_year then event.end_month else event.end_year end }.last
     else
-      [last(educations), last(experiences)].sort_by!{ |event| if last(educations).end_year == last(experiences).end_year then event.end_month else event.end_year end }.last
+      if neither_exp_nor_edu? then nil elsif no_exp_but_edu? then last_education elsif no_edu_but_exp? then last_experience end
     end
   end
   
@@ -84,12 +72,44 @@ class Candidate < User
     collection.sort_by!{ |object| object.duration }.last
   end
   
-  def first(collection)
-    collection.order("start_year ASC").order("start_month ASC").first
+  def first_education
+    educations.order("start_year ASC").order("start_month ASC").first
   end
   
-  def last(collection)
-    collection.order("end_year ASC").order("end_month ASC").last
+  def first_experience
+    experiences.order("start_year ASC").order("start_month ASC").first
+  end
+  
+  def last_education
+    educations.order("end_year ASC").order("end_month ASC").last
+  end
+  
+  def last_experience
+    experiences.order("end_year ASC").order("end_month ASC").last
+  end
+  
+  def no_exp?
+    experiences.empty?
+  end
+  
+  def no_edu?
+    educations.empty?
+  end
+  
+  def neither_exp_nor_edu?
+    educations.empty? && experiences.empty?
+  end
+    
+  def no_edu_but_exp?
+    educations.empty? && !experiences.empty?
+  end
+    
+  def no_exp_but_edu?
+    experiences.empty? && !educations.empty?
+  end
+    
+  def exp_and_edu?
+    !experiences.empty? && !educations.empty?
   end
   
 end

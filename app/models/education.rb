@@ -27,25 +27,21 @@ class Education < ActiveRecord::Base
   after_destroy :set_main
   
   def duration
-    start_year.nil? || end_year.nil? || start_month.nil? || end_month.nil? ? nil : end_year - start_year - 1 + (13 - start_month + end_month) / 12.0
+    end_year - start_year - 1 + (13 - start_month + end_month) / 12.0
   end
   
   def yrs_after_first_event
-    if start_year.nil? || end_year.nil? || start_month.nil? || end_month.nil?
-      nil
-    else
-      self == candidate.first_event ? 0 : start_year - candidate.first_event.start_year - 1 + (12 - candidate.first_event.start_month + start_month) / 12.0
-    end
+    (self == candidate.first_event ? 0 : start_year - candidate.first_event.start_year - 1 + (12 - candidate.first_event.start_month + start_month) / 12.0) unless candidate.neither_exp_nor_edu?
   end
   
   private
   
     def date_consistance
-      errors.add(:duration, I18n.t('education.validations.duration')) if duration.nil? || duration < 0
+      errors.add(:duration, I18n.t('education.validations.duration')) if duration < 0
     end
     
     def set_main
-      candidate.update_attributes :main_education => candidate.last(candidate.educations).id unless candidate.main_education == candidate.last(candidate.educations).id
+      candidate.update_attributes :main_education => candidate.last_education.id unless candidate.main_education == candidate.last_education.id
     end
     
 end
