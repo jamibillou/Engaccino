@@ -22,7 +22,9 @@ class Education < ActiveRecord::Base
   
   validate  :date_consistance
   
-  before_update :set_main
+  after_update  :set_main
+  after_create  :set_main
+  after_destroy :set_main
   
   def duration
     start_year.nil? || end_year.nil? || start_month.nil? || end_month.nil? ? nil : end_year - start_year - 1 + (13 - start_month + end_month) / 12.0
@@ -43,8 +45,8 @@ class Education < ActiveRecord::Base
     end
     
     def set_main
-      candidate.update_attributes :main_education => self.id if main == 1.to_s
-    end  
+      candidate.update_attributes :main_education => candidate.last(candidate.educations).id unless candidate.main_education == candidate.last(candidate.educations).id
+    end
     
 end
 

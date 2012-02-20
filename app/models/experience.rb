@@ -19,7 +19,10 @@ class Experience < ActiveRecord::Base
   validate  :date_consistance,                                                             :unless => :current
   validates :description, :length    => { :within => 20..300 },         :allow_blank => true
   
-  before_update :set_current_date, :set_main
+  before_update :set_current_date
+  after_update  :set_main
+  after_create  :set_main
+  after_destroy :set_main
   
   def duration
     start_year.nil? || end_year.nil? || start_month.nil? || end_month.nil? ? nil : end_year - start_year - 1 + (13 - start_month + end_month) / 12.0
@@ -44,7 +47,7 @@ class Experience < ActiveRecord::Base
     end
     
     def set_main
-      candidate.update_attributes :main_experience => self.id if main == 1.to_s
+      candidate.update_attributes :main_experience => candidate.last(candidate.experiences).id unless candidate.main_experience == candidate.last(candidate.experiences).id
     end
     
 end

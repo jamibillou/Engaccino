@@ -145,13 +145,13 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 1;
-  margin-bottom: 5px;
+  margin-bottom: 0;
 }
 .card .head .job h2 .combobox {
   margin-bottom: -3px;
 }
 .card .head .job p {
-  margin-top: -4px;
+  margin-top: 1px;
 }
 .card .head .status {
   height: 10px;
@@ -188,7 +188,7 @@
   border-left: 4px solid #f1f1f1;
   padding-left: 12px;
   padding-right: 10px;
-  padding-bottom: 8px;
+  padding-bottom: 10px;
   line-height: 1.4;
   display: inline-block;
 }
@@ -201,14 +201,15 @@
     font-size: 16px;
     font-weight: 400;
     line-height: 1;
-    margin-top: 0;
-	margin-bottom: 5px;
+    margin: 0;
 }
 .card .degree_experience .degree h3 .combobox {
    margin-bottom: -3px;
 }
-
-
+.card .degree_experience .degree p {
+   margin-top: 5px;
+   line-height: 1.2;
+}
 .card .professional_skills {
   border-top: 4px solid #f1f1f1;
   padding-left: 12px;
