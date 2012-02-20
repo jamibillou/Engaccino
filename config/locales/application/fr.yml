@@ -64,6 +64,7 @@ fr:
   to: "à"
   at: "à"
   in: "en"
+  hide: "masquer"
   
   # Time
   yr: "an"

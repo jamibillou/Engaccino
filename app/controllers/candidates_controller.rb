@@ -11,6 +11,8 @@ class CandidatesController < ApplicationController
   before_filter :admin_user,         :only   => [:destroy]
   before_filter :signed_up,          :only   => [:index, :show]
   
+  #after_filter  :update_completion,  :only   => [:update]
+  
   def index
     @candidates = Candidate.all
     
@@ -34,6 +36,7 @@ class CandidatesController < ApplicationController
       render_page :new, :title => 'candidates.new.title', :javascripts => 'candidates/new', :flash => { :error => error_messages(@candidate, :only => [:email, :password]) }
     else
       sign_in @candidate
+      update_completion
       build_associations [:experiences, :educations], @candidate
       render_page :edit, :id => @candidate, :title => 'candidates.edit.complete_your_profile', :javascripts => 'candidates/edit'
     end
@@ -53,7 +56,7 @@ class CandidatesController < ApplicationController
       end
     else
       link_schools_degrees
-      @candidate.update_attributes :profile_completion => 10 unless signed_up?
+      update_completion
       respond_to do |format|
         format.html { redirect_to @candidate, :flash => { :success => t("flash.success.#{signed_up? ? 'profile_updated' : 'welcome'}") } }
         format.json { respond_with_bip @candidate }
@@ -68,6 +71,7 @@ class CandidatesController < ApplicationController
   
   def refresh
     @candidate = current_user
+    update_completion if params[:partial] == 'show_top'
     params[:model].nil? ? (render :partial => "candidates/#{params[:partial]}", :locals => { :candidate => @candidate }) : (render :partial => "candidates/show_#{params[:model].to_s}s")
   end
 
@@ -95,4 +99,17 @@ class CandidatesController < ApplicationController
       redirect_to candidate_path(current_user), :notice => t('flash.notice.already_registered') unless current_user.nil?
     end
     
+    def update_completion
+      profile_completion = 0
+      @candidate.professional_skill_candidates.count  >= 3 ? (profile_completion += 15) : (profile_completion += @candidate.professional_skill_candidates.count * 5)
+      @candidate.interpersonal_skill_candidates.count >= 3 ? (profile_completion += 15) : (profile_completion += @candidate.interpersonal_skill_candidates.count * 5)
+      @candidate.experiences.count                    >= 3 ? (profile_completion += 15) : (profile_completion += @candidate.experiences.count * 5)
+      @candidate.educations.count                     >= 3 ? (profile_completion += 15) : (profile_completion += @candidate.educations.count * 5)
+      profile_completion += 10 unless @candidate.language_candidates.empty?
+      profile_completion += 5  unless @candidate.city.empty?
+      profile_completion += 5  unless @candidate.country.empty?
+      profile_completion += 10 unless @candidate.facebook_login.empty? && @candidate.linkedin_login.empty? && @candidate.twitter_login.empty?
+      profile_completion += 10 unless @candidate.image.to_s.nil?
+      @candidate.update_attributes(:profile_completion => profile_completion)
+  end    
 end

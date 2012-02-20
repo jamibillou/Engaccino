@@ -1,13 +1,13 @@
 /* SHOW TOP */
-#share_edit {
+#show_top {
   margin-left: 10px;
   margin-top: 10px;
 }
-#share_edit .buttons {
+#show_top .buttons {
   width: 250px;
   float: left;
 }
-#share_edit .button {
+#show_top .button {
   width: 122px;
   padding: 9px 0px;
   text-decoration: none;
@@ -16,13 +16,13 @@
   text-align: center; 
   float: left;
 }
-#share_edit .blue {
+#show_top .blue {
   margin-right: 6px;
 }
-#share_edit a.button:hover {
+#show_top a.button:hover {
   text-decoration: underline;
 }
-#share_edit #completion_container {
+#show_top #completion_container {
   width: 77.55%;
   margin-left: 10px;
   padding: 9px 0px;
@@ -31,14 +31,14 @@
   font-weight: normal;
   display: inline-block;
 }
-#share_edit #completion_container a {
+#show_top #completion_container a {
   font-size: 13px;
   font-weight: bold;
   color: black;
   margin-right: 10px;
   margin-left: 20px;
 }
-#share_edit #completion_bar_empty {
+#show_top #completion_bar_empty {
   width: 300px;
   height: 10px;
   margin-left: 10px;
@@ -46,10 +46,18 @@
   background-color: #555;
   display: inline-block;
 }
-#share_edit #completion_bar_full {
+#show_top #completion_bar_full {
   height: 10px;
   background-color: #8bbf42;
   display: block;
+}
+
+#show_top #missing {
+  padding: 10px;	
+}
+
+#show_top #missing ul {
+  list-style: none;
 }
 
 /* CARD */

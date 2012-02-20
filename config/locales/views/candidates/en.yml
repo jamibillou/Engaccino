@@ -31,6 +31,11 @@ en:
     listening_status: "Satisfied at work"
     happy_status: "Happily employed"
     profile_photo: "Photo"
+    
+    missing:      
+      localisation: "Where are you from?"
+      social_network: "Link your Engaccino profile with others social networks (Facebook, Linkedin and/or Twitter)"
+      profile_picture: "A profile picture makes your profile sexier, don't be shy!"
         
     index:
       title: "List of all candidates"
