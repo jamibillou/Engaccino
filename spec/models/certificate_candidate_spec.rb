@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe CertificateCandidate do
   before(:each) do
-    @attr                  = { :description => 'I did it, I passed this certificate !' }
+    @attr                  = { :level_score => '550' }
     @candidate             = Factory(:candidate)
     @certificate           = Factory(:certificate)
     @certificate_candidate = Factory(:certificate_candidate, :candidate => @candidate, :certificate => @certificate)
@@ -41,25 +41,18 @@ describe CertificateCandidate do
   
   describe "validations" do
   
-    it "should require a description" do
-      no_description_certificate_candidate                       = CertificateCandidate.new @attr.merge(:description => '')
-      no_description_certificate_candidate.candidate             = @candidate
-      no_description_certificate_candidate.certificate           = @certificate
-      no_description_certificate_candidate.should_not be_valid
+    it "should allow blank level/score" do
+      no_level_score_certificate_candidate                       = CertificateCandidate.new @attr.merge(:level_score => '')
+      no_level_score_certificate_candidate.candidate             = @candidate
+      no_level_score_certificate_candidate.certificate           = @certificate
+      no_level_score_certificate_candidate.should be_valid
     end
     
-    it "should reject too short descriptions" do
-      short_description_certificate_candidate                    = CertificateCandidate.new @attr.merge(:description => 'a'*19)
-      short_description_certificate_candidate.candidate          = @candidate
-      short_description_certificate_candidate.certificate        = @certificate
-      short_description_certificate_candidate.should_not be_valid
-    end
-    
-    it "should reject too long descriptions" do
-      long_description_certificate_candidate                     = CertificateCandidate.new @attr.merge(:description => 'a'*161)
-      long_description_certificate_candidate.candidate           = @candidate
-      long_description_certificate_candidate.certificate         = @certificate
-      long_description_certificate_candidate.should_not be_valid
+    it "should reject too long level/score" do
+      long_level_score_certificate_candidate                     = CertificateCandidate.new @attr.merge(:level_score => 'a'*21)
+      long_level_score_certificate_candidate.candidate           = @candidate
+      long_level_score_certificate_candidate.certificate         = @certificate
+      long_level_score_certificate_candidate.should_not be_valid
     end
   end
 end
@@ -68,7 +61,7 @@ end
 # Table name: certificate_candidates
 #
 #  id             :integer(4)      not null, primary key
-#  description    :string(255)
+#  level_score    :string(255)
 #  candidate_id   :integer(4)
 #  certificate_id :integer(4)
 #  created_at     :datetime

@@ -47,6 +47,14 @@ class Experience < ActiveRecord::Base
       candidate.update_attributes :main_experience => candidate.last_experience.id unless candidate.main_experience == candidate.last_experience.id
     end
     
+    def update_completion_new
+      candidate.update_attributes :profile_completion => candidate.profile_completion+5 if candidate.experiences.count < 4
+    end
+  
+    def update_completion_del
+      candidate.update_attributes :profile_completion => candidate.profile_completion-5 if candidate.experiences.count < 3
+    end
+    
 end
 
 # == Schema Information

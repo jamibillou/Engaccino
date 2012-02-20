@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(:version => 20120218141714) do
 
   create_table "certificate_candidates", :force => true do |t|
-    t.string   "description"
+    t.string   "level_score"
     t.integer  "candidate_id"
     t.integer  "certificate_id"
     t.datetime "created_at"

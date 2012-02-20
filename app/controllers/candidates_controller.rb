@@ -11,8 +11,6 @@ class CandidatesController < ApplicationController
   before_filter :admin_user,         :only   => [:destroy]
   before_filter :signed_up,          :only   => [:index, :show]
   
-  #after_filter  :update_completion,  :only   => [:update]
-  
   def index
     @candidates = Candidate.all
     
@@ -36,7 +34,6 @@ class CandidatesController < ApplicationController
       render_page :new, :title => 'candidates.new.title', :javascripts => 'candidates/new', :flash => { :error => error_messages(@candidate, :only => [:email, :password]) }
     else
       sign_in @candidate
-      update_completion
       build_associations [:experiences, :educations], @candidate
       render_page :edit, :id => @candidate, :title => 'candidates.edit.complete_your_profile', :javascripts => 'candidates/edit'
     end
@@ -112,5 +109,5 @@ class CandidatesController < ApplicationController
       profile_completion += 10 unless @candidate.facebook_login.empty? && @candidate.linkedin_login.empty? && @candidate.twitter_login.empty?
       profile_completion += 10 unless @candidate.image.to_s.nil?
       @candidate.update_attributes(:profile_completion => profile_completion)
-  end    
+    end    
 end
