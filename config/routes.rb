@@ -5,9 +5,33 @@ Engaccino::Application.routes.draw do
   get "sessions/new"
   get "ajax/countries"
   
-  resources :users, :candidates, :experiences, :companies, :educations, :degree_types, :degrees, :schools, 
-            :professional_skills, :interpersonal_skills, :professional_skill_candidates, :interpersonal_skill_candidates,
-            :languages, :language_candidates, :certificates, :certificate_candidates
+  resources :candidates do
+    resources :experiences do
+      resources :companies
+    end
+    resources :educations do
+      resources :schools
+      resources :degrees do
+        resources :degree_types
+      end
+    end
+    resources :professional_skill_candidates do
+      resources :professional_skills
+    end
+    resources :interpersonal_skill_candidates do
+      resources :interpersonal_skills
+    end
+    resources :language_candidates do
+      resources :languages
+    end
+    resources :certificate_candidates do
+      resources :certificates
+    end
+  end
+  
+  resources :users
+  resources :candidates, :experiences, :companies, :educations, :schools, :degree_types, :degrees, :professional_skill_candidates, :professional_skills, 
+            :interpersonal_skill_candidates, :interpersonal_skills, :language_candidates, :languages, :certificate_candidates, :certificates
   resources :sessions, :only => [:new, :create, :destroy]
   
   match 'candidates/refresh',           :to => 'candidates#refresh'

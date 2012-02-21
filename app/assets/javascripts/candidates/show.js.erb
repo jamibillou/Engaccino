@@ -1,6 +1,6 @@
 $(document).ready(function() {
     
-  initBIP('Click to edit');
+  initBIP(I18n.t('click_to_edit'));
   
   $('.edit_experience').each(function()                    { handleAjaxEdition($(this).attr('id'), 'experience', ['show_top','show_timeline', 'candidate_company']); });
   $('.edit_education').each(function()                     { handleAjaxEdition($(this).attr('id'), 'education', ['show_top','show_timeline', 'candidate_degree']); });
@@ -59,7 +59,7 @@ function callNew(model, data, partials) {
 /* REFRESH PARTIALS */
 function refreshPartials(partials) {
   if (typeof(partials) != 'undefined') {
-    $.each(partials, function(i) { $.ajax({ url: 'refresh', type: 'POST', data: {partial: partials[i]}, success: function(data) { $('#'+partials[i]).html(data); initBIP('Click to edit'); } }) } );
+    $.each(partials, function(i) { $.ajax({ url: 'refresh', type: 'POST', data: {partial: partials[i]}, success: function(data) { $('#'+partials[i]).html(data); initBIP(I18n.t('click_to_edit')); } }) } );
   }
 }
 function refreshPartialThroughBIPcombo(partial, BIPcombo) {
@@ -67,7 +67,7 @@ function refreshPartialThroughBIPcombo(partial, BIPcombo) {
     $(this).change(function() {
       $.ajax({
 	      url: 'refresh', type: 'POST', data: {partial: partial},
-		    success: function(data) { $('#'+partial).html(data); initBIP('Click to edit'); refreshPartialThroughBIPcombo(partial, BIPcombo); }
+		    success: function(data) { $('#'+partial).html(data); initBIP(I18n.t('click_to_edit')); refreshPartialThroughBIPcombo(partial, BIPcombo); }
 	    })
     });
   });

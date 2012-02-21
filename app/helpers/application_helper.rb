@@ -25,6 +25,18 @@ module ApplicationHelper
     image_tag "pencil.png", :alt => t('edit'), :class => "pencil"
   end
   
+  def linkedin_logo
+    image_tag 'linkedin_logo.png', :alt => 'LinkedIn'
+  end
+  
+  def twitter_logo
+    image_tag 'twitter_logo.png', :alt => 'Twitter'
+  end
+  
+  def facebook_logo
+    image_tag 'facebook_logo.png', :alt => 'Facebook'
+  end
+  
   def link_to_delete(name, f, title = t('delete'))
     f.hidden_field(:_destroy) + link_to_function(name, "delete_fields(this)", :class => 'button blue round', :title => title)
   end

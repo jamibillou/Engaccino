@@ -44,7 +44,7 @@ def make_educations
   loops = (1..3).to_a
   loops[rand(loops.size)].times do |n|
     start_month = start_months[rand(start_months.size)]
-    start_year  = @candidate.educations(true).empty? ? start_yrs[rand(start_yrs.size)] : @candidate.last(@candidate.educations).end_year
+    start_year  = @candidate.educations(true).empty? ? start_yrs[rand(start_yrs.size)] : @candidate.last_education.end_year
     end_yrs     = ((start_year + 1 < Time.now.year ? start_year + 1 : Time.now.year)..(start_year + 2 < Time.now.year ? start_year + 2 : Time.now.year)).to_a
     end_year    = end_yrs[rand(end_yrs.size)]
     end_months  = start_month < 11 ? ((start_month + 1)..12).to_a : [12] if start_year == end_year
@@ -59,14 +59,14 @@ def make_educations
 end
 
 def make_experiences
-  start_yrs     = (@candidate.last(@candidate.educations).end_year..(@candidate.last(@candidate.educations).end_year+1 <= Time.now.year ? @candidate.last(@candidate.educations).end_year+1 : Time.now.year)).to_a
+  start_yrs     = (@candidate.last_education.end_year..(@candidate.last_education.end_year+1 <= Time.now.year ? @candidate.last_education.end_year+1 : Time.now.year)).to_a
   start_months  = (1..12).to_a
   end_months    = (1..12).to_a
   loops = (1..5).to_a
   loops[rand(loops.size)].times do |n|
     start_month = start_months[rand(start_months.size)]
     unless @candidate.nil? || @candidate.experiences(true).empty?
-      start_yrs = (@candidate.last(@candidate.experiences).end_year..(@candidate.last(@candidate.experiences).end_year+2 <= Time.now.year ? @candidate.last(@candidate.experiences).end_year+2 : Time.now.year)).to_a
+      start_yrs = (@candidate.last_experience.end_year..(@candidate.last_experience.end_year+2 <= Time.now.year ? @candidate.last_experience.end_year+2 : Time.now.year)).to_a
     end
     start_year  = start_yrs[rand(start_yrs.size)]
     end_years   = ((start_year+1 < Time.now.year ? start_year+1 : Time.now.year)..(start_year+10 < Time.now.year ? start_year+10 : Time.now.year)).to_a

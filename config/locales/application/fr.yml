@@ -58,6 +58,8 @@ fr:
   cancel: "Annuler"
   submit: "Valider"
   edit: "Modifier"
+  click_to_edit: "Cliquez pour modifier"
+  click_to_add: "Cliquez pour ajouter"
   
   # Common words
   from: "de"

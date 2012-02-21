@@ -1,5 +1,5 @@
-<% @experiences          		     = candidate.experiences.order("start_year DESC, start_month DESC") %>
-<% @educations           		     = candidate.educations.order("start_year DESC, start_month DESC") %>
+<% @experiences          		         = candidate.experiences.order("start_year DESC, start_month DESC") %>
+<% @educations           		         = candidate.educations.order("start_year DESC, start_month DESC") %>
 <% @professional_skill_candidates    = candidate.professional_skill_candidates %>
 <% @interpersonal_skill_candidates   = candidate.interpersonal_skill_candidates %>
 
@@ -26,13 +26,8 @@
             <div class="name"><%= candidate.last_name %></div>
           </a>
         <% end %>
-        <% if current_user == candidate %>
-          <div class="place"><%= candidate.city.blank?    ? t('candidates.city')    : (best_in_place candidate, :city,    :html_attrs => { :class => 'field' }) %></div>
-          <div class="place"><%= candidate.country.blank? ? t('candidates.country') : (best_in_place candidate, :country, :html_attrs => { :class => 'field' }) %></div>
-        <% else %>
-          <div class="place"><%= candidate.city %>,</div>
-          <div class="place"><%= candidate.country %></div>
-        <% end %>
+        <div class="place"><%= best_in_place_if current_user == candidate, candidate, :city,    :nil => t('candidates.city'), :html_attrs => { :class => 'field' } %></div>
+        <div class="place"><%= best_in_place_if current_user == candidate, candidate, :country, :nil => t('candidates.country'), :html_attrs => { :class => 'field' } %></div>
       </div>
       <% if current_user == candidate %>
         <%= form_for candidate, :html => { :id => 'image_form', :multipart => true } do |f| %>
@@ -49,13 +44,17 @@
       <% end %>
     </div>
     <div class="job" <%= "style='margin-top:-20px'" if current_user == candidate %>>
-      <% main_experience = Experience.find(candidate.main_experience) %>
-      <% if current_user == candidate %>
-        <h2 id="role_BIPcombo"><%= best_in_place candidate, :main_experience, :type => :select, :collection => main_experience_options(candidate), :html_attrs => { :class => 'combobox' } %></h2>
-      <% else %>
-        <h2><%= main_experience.role %></h2>
+      <% unless candidate.no_exp? %>
+        <% main_experience = Experience.find(candidate.main_experience) %>
+        <% if current_user == candidate %>
+          <h2 id="role_BIPcombo"><%= best_in_place candidate, :main_experience, :type => :select, :collection => main_experience_options(candidate), :html_attrs => { :class => 'combobox' } %></h2>
+        <% else %>
+          <h2><%= main_experience.role %></h2>
+        <% end %>
+        <p id="candidate_company">
+          <%= render 'candidate_company', :candidate => candidate %>
+        </p>
       <% end %>
-      <p id="candidate_company"><%= render 'candidate_company', :candidate => candidate %></p>
     </div> 
     <div class="status">
     	<% if current_user == candidate %>
@@ -68,21 +67,23 @@
   <div class="degree_experience">
     <div class="experience">
       <h2><%= t('experiences.title').remove_accents.upcase %></h2>
-      <h3><%= pluralize(candidate.experience_duration.round, t('yr')) unless @experiences.empty? %></h3>
+      <h3><%= pluralize(candidate.experience_duration.round, t('yr')) unless candidate.no_exp? %></h3>
     </div>
     <div class="degree">
-      <h2><%= t('educations.main').remove_accents.upcase %></h2>
-      <% main_education = Education.find(candidate.main_education) %>
-      <% if current_user == candidate %>
-        <h3 id="degreetype_BIPcombo">
-          <%= best_in_place candidate, :main_education, :type => :select, :collection => main_education_options(candidate), :html_attrs => { :class => 'combobox' } %>
-        </h3>
-      <% else %>
-        <h3 id=""><%= main_education.degree.degree_type.label %></h3>
+      <% unless candidate.no_edu? %>
+        <h2><%= t('educations.main').remove_accents.upcase %></h2>
+        <% main_education = Education.find(candidate.main_education) %>
+        <% if current_user == candidate %>
+          <h3 id="degreetype_BIPcombo">
+            <%= best_in_place candidate, :main_education, :type => :select, :collection => main_education_options(candidate), :html_attrs => { :class => 'combobox' } %>
+          </h3>
+        <% else %>
+          <h3><%= main_education.degree.degree_type.label %></h3>
+        <% end %>
+    	  <p id="candidate_degree">
+          <%= render 'candidate_degree', :candidate => candidate %>
+        </p>
       <% end %>
-  	  <p id="candidate_degree">
-        <%= render 'candidate_degree', :candidate => candidate %>
-      </p>
     </div>
   </div>
   <div id="candidate_professional_skills" class="professional_skills">
@@ -93,10 +94,19 @@
       <h2><%= "#{t('contact')} " %><%= best_in_place_if current_user == candidate, candidate, :first_name, :html_attrs => { :class => 'field' } %></h2>
       <p><%= best_in_place_if current_user == candidate, candidate, :email, :html_attrs => { :class => 'field' } %></p>
       <p><%= best_in_place_if current_user == candidate, candidate, :phone, :html_attrs => { :class => 'field' } %></p>
-      <div class="buttons">
-        <a class="small slightly_round grey button left margin_right" href="#">Fb</a>
-        <a class="small slightly_round grey button left margin_right" href="#">Li</a>
-        <a class="small slightly_round grey button left" href="#">Tw</a>
+      <div class="social_links">
+        <% if current_user == candidate %>
+          <p><span class='logo'><%= linkedin_logo %></span>
+             <%= best_in_place_if current_user == candidate, candidate, :linkedin_login, :nil => t('click_to_add').downcase, :html_attrs => { :class => 'field' } %></p>
+          <p><span class='logo'><%= twitter_logo %></span>
+             <%= best_in_place_if current_user == candidate, candidate,  :twitter_login,  :nil => t('click_to_add').downcase,  :html_attrs => { :class => 'field' } %></p>
+          <p><span class='logo'><%= facebook_logo %></span>
+             <%= best_in_place_if current_user == candidate, candidate, :facebook_login, :nil => t('click_to_add').downcase, :html_attrs => { :class => 'field' } %></p>
+        <% else %>
+            <% if candidate.linkedin_login %><p><span class='logo'><%= linkedin_logo %></span><%= candidate.linkedin_login %></p><% end %>
+            <% if candidate.twitter_login  %><p><span class='logo'><%=  twitter_logo %></span><%= candidate.twitter_login  %></p><% end %>
+            <% if candidate.facebook_login %><p><span class='logo'><%= facebook_logo %></span><%= candidate.facebook_login %></p><% end %>
+        <% end %>
       </div>
     </div>
   <% end %>

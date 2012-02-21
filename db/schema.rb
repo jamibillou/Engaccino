@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120218141714) do
+ActiveRecord::Schema.define(:version => 20120218103146) do
 
   create_table "certificate_candidates", :force => true do |t|
     t.string   "level_score"
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(:version => 20120218141714) do
   create_table "language_candidates", :force => true do |t|
     t.integer  "language_id"
     t.integer  "candidate_id"
-    t.string   "level",        :limit => 0
+    t.string   "level"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -55,6 +55,8 @@ en:
   cancel: "Cancel"
   submit: "Submit"
   edit: "Edit"
+  click_to_edit: "Click to edit"
+  click_to_add: "Click to add"
   
   # Common words
   from: "from"
