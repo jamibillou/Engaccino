@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(:version => 20120218141714) do
   create_table "language_candidates", :force => true do |t|
     t.integer  "language_id"
     t.integer  "candidate_id"
-    t.string   "level",        :limit => 0
+    t.string   "level"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
