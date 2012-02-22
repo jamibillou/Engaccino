@@ -19,7 +19,7 @@
   	  <%= school_builder.text_field :name, :class => 'edit_field margin' %>
   	<% end %>
   	<%= f.text_area :description, :class => 'textarea_edit' %>
-  	<div class="error_messages" id="errors<%= education.id %>"></div>
+  	<div class="error_messages" id="errors_education<%= education.id %>"></div>
   	<%= link_to_function t('cancel'), "hideForm('education','#{education.id}')", :class => 'grey button' %>
   	&nbsp;
   	<%= f.submit t('submit') %>

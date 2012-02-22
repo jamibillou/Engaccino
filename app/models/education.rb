@@ -8,8 +8,8 @@ class Education < ActiveRecord::Base
   belongs_to :degree
   belongs_to :school
   
-  accepts_nested_attributes_for :school, :reject_if => lambda { |attr| attr['name'].blank? },  :allow_destroy => true
-  accepts_nested_attributes_for :degree, :reject_if => lambda { |attr| attr['label'].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :school, :allow_destroy => true
+  accepts_nested_attributes_for :degree, :allow_destroy => true
   
   validates :candidate_id,                                              :presence => true
   validates :degree,                                                    :presence => true
@@ -27,7 +27,7 @@ class Education < ActiveRecord::Base
   after_destroy :set_main
   
   def duration
-    end_year - start_year - 1 + (13 - start_month + end_month) / 12.0
+    (end_year.to_s.empty? || start_year.to_s.empty? || start_month.to_s.empty? || end_month.to_s.empty?) ? -1 : (end_year - start_year - 1 + (13 - start_month + end_month) / 12.0)      
   end
   
   def yrs_after_first_event

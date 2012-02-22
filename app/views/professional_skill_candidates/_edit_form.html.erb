@@ -6,7 +6,7 @@
       	<h2><%= professional_skill_builder.text_field :label, :class => 'edit_field' %></h2>
       <% end %>
       <%= f.text_area :description, :class => 'textarea_edit' %>
-      <div class="error_messages" id="errors<%= professional_skill_candidate.id %>"></div>
+      <div class="error_messages" id="errors_professional_skill_candidate<%= professional_skill_candidate.id %>"></div>
       <%= link_to_function t('cancel'), "hideForm('professional_skill_candidate','#{professional_skill_candidate.id}')", :class => 'grey button' %>
       &nbsp;
       <%= f.submit t('submit') %>

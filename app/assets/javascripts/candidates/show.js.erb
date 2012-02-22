@@ -29,7 +29,7 @@ function handleAjaxEdition(form_id, model, partials) {
   var id = form_id.substr(form_id.lastIndexOf('_')+1,form_id.length-form_id.lastIndexOf('_'));
   $('#'+'show_'+model+'_'+id).click(function() { showForm(model, id, partials); });
   $('#'+form_id).bind('ajax:success', function(evt, data, status, xhr) { (xhr.responseText == 'destroy!') ? $('#'+model+'_'+id).remove() && refreshPartials(partials) : callRefresh(model, data, partials) })
-                .bind('ajax:error',   function(evt, xhr, status)       { $('#errors'+id).html(buildErrorMessages(xhr)); });	
+                .bind('ajax:error',   function(evt, xhr, status)       { $('#errors_'+model+id).html(buildErrorMessages(xhr)); });	
 }
 
 /* SHOW/HIDE  FORMS */
