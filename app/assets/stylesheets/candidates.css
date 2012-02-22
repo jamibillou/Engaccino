@@ -309,6 +309,11 @@
   padding: 12px 35px 0px 10px;
   float: left;
 }
+#resume .add_some {
+  margin-top:50px;
+  text-align: center;
+  color: #444;
+}
 #resume input[type=submit] {
   padding: 4.5px 15px;
   margin-top: 4px;
@@ -344,9 +349,18 @@
 
 /* SHOW TIMELINE */
 #resume #timeline {
+  min-height: 310px;
   background-color: white;
   margin-bottom: 10px;
   padding: 12px 0px 0 10px;
+}
+#resume .example {
+  background: url('example_timeline.png') no-repeat top left;
+}
+#resume #timeline .add_some {
+  margin-top:120px;
+  font-size: 16px;
+  color: black;
 }
 #resume #timeline h1 {
   margin: 0;
@@ -505,6 +519,12 @@
 #resume .add_link:hover {
   text-decoration: underline;
 }
+#resume .red {
+  color: #da1b1b;
+}
+#resume .underline {
+  text-decoration: underline;
+}
 
 /* SKILLS */
 #interpersonal_skill_candidates h1 {
@@ -512,7 +532,6 @@
 }
 #interpersonal_skill_candidates .show_interpersonal_skill_candidate {
   width: 20%;
-  min-height: 100px;
   margin-bottom: 20px;
   margin-right: 4%;
   display: inline-block;
@@ -535,7 +554,6 @@
   width: 98.5%;
   height: 80px;
 }
-
 #professional_skill_candidates h1 {
   margin-bottom: 5px;
 }
@@ -610,8 +628,8 @@
 
 /* LANGUAGES */
 #language_candidates .label {
-  width: 30%;
-  margin-right: 30%;
+  width: 50%;
+  margin-right: 15%;
   position: relative;
   display: inline-block;
 }
@@ -631,16 +649,14 @@
 /* CERTIFICATES */
 #certificate_candidates .label {
   width: 50%;
-  margin-right: 10%;
-  position: relative;
+	margin-right: 20%;
+	position: relative;
   display: inline-block;	
 }
-
 #certificate_candidates .level {
   position: relative;
   display: inline-block;
 }
-
 #certificate_candidates .show_certificate_candidate:hover {
   background: url('pencil.png') no-repeat 99% 45%;
   cursor: pointer;
@@ -649,7 +665,6 @@
   width: 100%;
   margin-bottom: 10px;
 }
-
 #certificate_candidates .certificate_candidate .small_edit_field {
   width: 60px;
 }

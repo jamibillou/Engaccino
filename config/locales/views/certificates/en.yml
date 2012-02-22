@@ -1,5 +1,6 @@
 en:
   certificates:
   
-    title: "certificates"
-    level: "level/score"
+    title: "Certificates"
+    level: "Level / Score"
+    add_some: "Mention your certifcates here."

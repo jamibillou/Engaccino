@@ -12,7 +12,7 @@ fr:
     city: "Ville"
     nationality: "Nationalité"
     year_of_birth: "Année de naissance"
-    phone: "Téléphone"
+    phone: "Numéro de téléphone"
     professional_experience: "Expérience professionelle"
     company: "Entreprise"
     role: "Poste"
@@ -47,6 +47,7 @@ fr:
       next_profile: "Profil suivant"
       timeline:
         title: "Chronologie"
+        add: "Détaillez votre expérience et votre formation afin d'avoir un graphique plutôt sympa ici ;)"
       profile_completion:
         sentence: "Votre profil est complet à "
         %complete: "%"

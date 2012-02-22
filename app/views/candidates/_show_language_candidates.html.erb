@@ -1,6 +1,9 @@
 <% @language_candidates = @candidate.language_candidates %>
 <h1>
-	<div class='label'><%= t('languages.title').remove_accents.upcase %><%= link_to_function "#{t('add').upcase} +", "callNew('language_candidate')", :class => "add_link" if @candidate == current_user %></div>
+	<div class='label'>
+		<%= t('languages.title').remove_accents.upcase %>
+		<%= link_to_function "#{t('add').upcase} +", "callNew('language_candidate')", :class => "add_link #{' red underline' if @language_candidates.empty?}" if @candidate == current_user %>
+	</div>
 	<div class='level'><%= t('languages.level').remove_accents.upcase %></div>
 </h1>
 <div id='new_language_candidate' class='hidden'></div>
@@ -10,4 +13,6 @@
    		<%= render 'language_candidates/show', :language_candidate => language_candidate %>
    	</div>
   <% end %>
+<% else %>
+  <div class='add_some'><%=t 'languages.add_some' %></div>
 <% end %>

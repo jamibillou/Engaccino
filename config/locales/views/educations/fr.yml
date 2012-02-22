@@ -5,5 +5,5 @@ fr:
     add: "Ajouter une formation"
     delete: "Supprimer cette formation"
     main: "Diplôme principal"
-    add_description: "Une description aide les recruteurs potentiels à comprendre exactement ce que vous avez étudié."
-    missing: "Vous devriez renseigner tous vos diplômes"
+    add_description: "Une description aide les recruteurs à comprendre exactement ce que vous avez étudié."
+    add_some: "Comprendre votre formation est vital pour les recruteurs, détaillez la ici !"

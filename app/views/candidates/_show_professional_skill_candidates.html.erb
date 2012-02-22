@@ -1,7 +1,9 @@
 <% @professional_skill_candidates = @candidate.professional_skill_candidates %>
 <h1>
   <div class='label'><%= t('professional_skills.title').remove_accents.upcase %>
-    <%= link_to_function "#{t('add').upcase} +", "callNew('professional_skill_candidate')", :id => "link_add_professional_skill", :class => "add_link" if @candidate == current_user %></div>
+    <%= link_to_function "#{t('add').upcase} +", "callNew('professional_skill_candidate')", :id => "link_add_professional_skill",
+																							:class => "add_link #{' red underline' if @professional_skill_candidates.empty?}" if @candidate == current_user %>
+  </div>
   <div class='experience'><%= t('professional_skills.experience').remove_accents.upcase %></div>
   <div class='level'><%= t('professional_skills.level').remove_accents.upcase %></div>
 </h1>
@@ -12,4 +14,6 @@
    		<%= render 'professional_skill_candidates/show', :professional_skill_candidate => professional_skill_candidate %>
    	</div>
   <% end %>
+<% else %>
+  <div class='add_some'><%=t 'professional_skills.add_some' %></div>
 <% end %>

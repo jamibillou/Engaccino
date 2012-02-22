@@ -2,7 +2,8 @@
 
 <h1>
   <%= t('experiences.title').remove_accents.upcase %>
-	<%= link_to_function "#{t('add').upcase} +", "showForm('experience')", :id => 'link_add_experience', :class => 'add_link' if @candidate == current_user %>
+	<%= link_to_function "#{t('add').upcase} +", "showForm('experience')", :id => 'link_add_experience',
+																		   :class => "add_link #{' red underline' if @experiences.empty?}" if @candidate == current_user %>
 </h1>
 <div id='new_experience' class='hidden'></div> 
 <% unless @experiences.empty? %>
@@ -12,4 +13,6 @@
    	  <br/>
    	</div>
   <% end %>
+<% else %>
+  <div class='add_some'><%=t 'experiences.add_some' %></div>
 <% end %>

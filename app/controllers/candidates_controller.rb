@@ -53,7 +53,7 @@ class CandidatesController < ApplicationController
       end
     else
       link_schools_degrees
-      update_completion
+      # update_completion
       respond_to do |format|
         format.html { redirect_to @candidate, :flash => { :success => t("flash.success.#{signed_up? ? 'profile_updated' : 'welcome'}") } }
         format.json { respond_with_bip @candidate }
@@ -68,7 +68,7 @@ class CandidatesController < ApplicationController
   
   def refresh
     @candidate = current_user
-    update_completion if params[:partial] == 'show_top'
+    #update_completion if params[:partial] == 'show_top'
     partial = params[:model].nil? ? "candidates/#{params[:partial]}" : "candidates/show_#{params[:model].to_s}s"
     render :partial => partial, :locals => { :candidate => @candidate }
   end

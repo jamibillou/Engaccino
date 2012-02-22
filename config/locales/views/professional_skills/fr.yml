@@ -1,7 +1,7 @@
 fr:
   professional_skills:
   
-    title: "Compétence professionelle"
+    title: "Compétences professionelles"
     level: "Niveau"
     experience: "Expérience"
-    missing: "Veuillez indiquer plus de compétences professionnelles"
+    add_some: "Que faites vous le mieux dans votre métier ?"

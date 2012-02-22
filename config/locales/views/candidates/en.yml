@@ -12,7 +12,7 @@ en:
     city: "City"      
     nationality: "Nationality"
     year_of_birth: "Year of birth"
-    phone: "Phone"
+    phone: "Phone number"
     professional_experience: "Professional experience"
     company: "Company"
     role: "Role"
@@ -47,6 +47,7 @@ en:
       next_profile: "Next profile"
       timeline:
         title: "Timeline"
+        add: "Detail your experience and education and it shall look nice here ;)"
       profile_completion:
         sentence: "Your profile is "
         %complete: "% complete"

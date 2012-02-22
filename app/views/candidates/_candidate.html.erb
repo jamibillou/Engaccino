@@ -64,44 +64,48 @@
     	<% end %>
     </div>   	
   </div>
-  <div class="degree_experience">
-    <div class="experience">
-      <h2><%= t('experiences.title').remove_accents.upcase %></h2>
-      <h3><%= pluralize(candidate.experience_duration.round, t('yr')) unless candidate.no_exp? %></h3>
-    </div>
-    <div class="degree">
-      <% unless candidate.no_edu? %>
-        <h2><%= t('educations.main').remove_accents.upcase %></h2>
-        <% main_education = Education.find(candidate.main_education) %>
-        <% if current_user == candidate %>
-          <h3 id="degreetype_BIPcombo">
-            <%= best_in_place candidate, :main_education, :type => :select, :collection => main_education_options(candidate), :html_attrs => { :class => 'combobox' } %>
-          </h3>
-        <% else %>
-          <h3><%= main_education.degree.degree_type.label %></h3>
+  <% unless candidate.neither_exp_nor_edu? %>
+    <div class="degree_experience">
+      <div class="experience">
+        <h2><%= t('experiences.title').remove_accents.upcase %></h2>
+        <h3><%= pluralize(candidate.experience_duration.round, t('yr')) unless candidate.no_exp? %></h3>
+      </div>
+      <div class="degree">
+        <% unless candidate.no_edu? %>
+          <h2><%= t('educations.main').remove_accents.upcase %></h2>
+          <% main_education = Education.find(candidate.main_education) %>
+          <% if current_user == candidate %>
+            <h3 id="degreetype_BIPcombo">
+              <%= best_in_place candidate, :main_education, :type => :select, :collection => main_education_options(candidate), :html_attrs => { :class => 'combobox' } %>
+            </h3>
+          <% else %>
+            <h3><%= main_education.degree.degree_type.label %></h3>
+          <% end %>
+      	  <p id="candidate_degree">
+            <%= render 'candidate_degree', :candidate => candidate %>
+          </p>
         <% end %>
-    	  <p id="candidate_degree">
-          <%= render 'candidate_degree', :candidate => candidate %>
-        </p>
-      <% end %>
+      </div>
     </div>
-  </div>
-  <div id="candidate_professional_skills" class="professional_skills">
-    <%= render 'candidate_professional_skills', :candidate => candidate %>
-  </div>
+  <% end %>
+  <% unless candidate.professional_skills.empty? %>
+    <div id="candidate_professional_skills" class="professional_skills">
+      <%= render 'candidate_professional_skills', :candidate => candidate %>
+    </div>
+  <% end %>
   <% unless hide_contact_information? %>
     <div class="contact">
       <h2><%= "#{t('contact')} " %><%= best_in_place_if current_user == candidate, candidate, :first_name, :html_attrs => { :class => 'field' } %></h2>
       <p><%= best_in_place_if current_user == candidate, candidate, :email, :html_attrs => { :class => 'field' } %></p>
-      <p><%= best_in_place_if current_user == candidate, candidate, :phone, :html_attrs => { :class => 'field' } %></p>
+      <p><%= best_in_place_if current_user == candidate, candidate, :phone, :nil => t('candidates.phone').downcase, :html_attrs => { :class => 'field' } %></p>
       <div class="social_links">
         <% if current_user == candidate %>
           <p><span class='logo'><%= linkedin_logo %></span>
-             <%= best_in_place_if current_user == candidate, candidate, :linkedin_login, :nil => t('click_to_add').downcase, :html_attrs => { :class => 'field' } %></p>
+             <%= best_in_place_if current_user == candidate, candidate, :linkedin_login, :nil => t('click_to_edit').downcase, :html_attrs => { :class => 'field' } %></p>
           <p><span class='logo'><%= twitter_logo %></span>
-             <%= best_in_place_if current_user == candidate, candidate,  :twitter_login,  :nil => t('click_to_add').downcase,  :html_attrs => { :class => 'field' } %></p>
+             <%= best_in_place_if current_user == candidate, candidate, :twitter_login,  :nil => t('click_to_edit').downcase,  :html_attrs => { :class => 'field' } %></p>
           <p><span class='logo'><%= facebook_logo %></span>
-             <%= best_in_place_if current_user == candidate, candidate, :facebook_login, :nil => t('click_to_add').downcase, :html_attrs => { :class => 'field' } %></p>
+             <%= best_in_place_if current_user == candidate, candidate, :facebook_login, :nil => t('click_to_edit').downcase, :html_attrs => { :class => 'field' } %></p>
         <% else %>
             <% if candidate.linkedin_login %><p><span class='logo'><%= linkedin_logo %></span><%= candidate.linkedin_login %></p><% end %>
             <% if candidate.twitter_login  %><p><span class='logo'><%=  twitter_logo %></span><%= candidate.twitter_login  %></p><% end %>

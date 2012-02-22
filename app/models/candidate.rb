@@ -109,6 +109,22 @@ class Candidate < User
     !experiences.empty? && !educations.empty?
   end
   
+  def no_pro_skills?
+    professional_skills.empty?
+  end
+  
+  def no_perso_skills?
+    interpersonal_skills.empty?
+  end
+  
+  def no_certif?
+    certificates.empty?
+  end
+  
+  def no_lang?
+    languages.empty?
+  end
+  
 end
 
 # == Schema Information

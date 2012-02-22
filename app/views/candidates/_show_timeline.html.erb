@@ -38,8 +38,8 @@
     </div>
   </div>
 <% else %>
-  <div id="timeline">
-    <h1><%= t('candidates.show.timeline.title').remove_accents.upcase %><</h1>
-    <br />
+  <div id="timeline" class="example">
+    <h1><%= t('candidates.show.timeline.title').remove_accents.upcase %></h1>
+	<div class='add_some'><%=t 'candidates.show.timeline.add' %></div>
   </div>
 <% end %>
