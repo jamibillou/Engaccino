@@ -1,5 +1,5 @@
 <% professional_skill = professional_skill_candidate.professional_skill %>
-<div <%= if @candidate == current_user then "id='show_professional_skill_candidate_#{professional_skill_candidate.id}' class='show_professional_skill_candidate'" else "class='show_professional_skill_candidate'" end %>>
+<div <%= if @candidate == current_user then "id='show_professional_skill_candidate_#{professional_skill_candidate.id}' class='show_professional_skill_candidate editable'" else "class='show_professional_skill_candidate'" end %>>
   <div class='label_description'>
     <h2><%= professional_skill.label %></h2>
     <p><%= professional_skill_candidate.description %></p>

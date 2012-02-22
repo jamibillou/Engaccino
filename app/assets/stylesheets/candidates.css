@@ -542,7 +542,7 @@
   color: black;
   margin: 0;
 }
-#interpersonal_skill_candidates .show_interpersonal_skill_candidate:hover {
+#interpersonal_skill_candidates .editable:hover {
   background: url('pencil.png') no-repeat right 6%;
   cursor: pointer;
 }
@@ -607,7 +607,7 @@
   display: inline-block;
   vertical-align: top;
 }
-#professional_skill_candidates .show_professional_skill_candidate:hover {
+#professional_skill_candidates .editable:hover {
   background: #EEE url('pencil.png') no-repeat 99% 9%;
   cursor: pointer;
 }
