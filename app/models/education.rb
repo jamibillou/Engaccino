@@ -41,7 +41,7 @@ class Education < ActiveRecord::Base
     end
     
     def set_main
-      unless  candidate.no_edu?
+      unless  candidate.last_education.nil?
         candidate.update_attributes :main_education => candidate.last_education.id unless candidate.main_education == candidate.last_education.id
       else
         candidate.update_attributes :main_education => nil
@@ -54,10 +54,6 @@ class Education < ActiveRecord::Base
     
     def update_completion_del
       candidate.update_attributes :profile_completion => candidate.profile_completion - 5 if candidate.educations.count < 3
-    end
-    
-    def no_edu?
-      candidate.no_edu?
     end
     
 end

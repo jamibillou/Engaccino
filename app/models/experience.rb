@@ -44,7 +44,7 @@ class Experience < ActiveRecord::Base
     end
     
     def set_main
-      unless candidate.no_exp?
+      unless candidate.last_experience.nil?
         candidate.update_attributes :main_experience => candidate.last_experience.id unless candidate.main_experience == candidate.last_experience.id
       else
         candidate.update_attributes :main_experience => nil

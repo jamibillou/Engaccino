@@ -4,12 +4,12 @@
       <%= render 'show_timeline', :candidate => candidate %>
     </div>
   <% end %>
-  <% unless candidate.no_pro_skills? && candidate != current_user %>
+  <% unless candidate.no_pro_skill? && candidate != current_user %>
     <div class="block" id="professional_skill_candidates">
     	<%= render 'show_professional_skill_candidates', :candidate => candidate %>
     </div>
   <% end %>
-  <% unless candidate.no_perso_skills? && candidate != current_user %>
+  <% unless candidate.no_perso_skill? && candidate != current_user %>
     <div class='block' id='interpersonal_skill_candidates'>
     	<%= render 'show_interpersonal_skill_candidates', :candidate => candidate %>
     </div>

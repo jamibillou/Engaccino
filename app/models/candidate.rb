@@ -107,11 +107,11 @@ class Candidate < User
     !experiences.empty? && !educations.empty?
   end
   
-  def no_pro_skills?
+  def no_pro_skill?
     professional_skills.empty?
   end
   
-  def no_perso_skills?
+  def no_perso_skill?
     interpersonal_skills.empty?
   end
   
