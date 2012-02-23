@@ -41,7 +41,11 @@ class Education < ActiveRecord::Base
     end
     
     def set_main
-      candidate.update_attributes :main_education => candidate.last_education.id unless candidate.last_education.nil? || candidate.main_education == candidate.last_education.id
+      unless  candidate.no_edu?
+        candidate.update_attributes :main_education => candidate.last_education.id unless candidate.main_education == candidate.last_education.id
+      else
+        candidate.update_attributes :main_education => nil
+      end
     end
     
     def update_completion_new

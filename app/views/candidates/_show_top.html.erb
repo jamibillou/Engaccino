@@ -10,14 +10,14 @@
   <div id='missing' class='hidden'>
   	Missing items:
   	<ul>
-  		<% if @candidate.professional_skill_candidates.count < 3 %><li><%=t 'professional_skills.add_some' %></li><% end %>
-  		<% if @candidate.interpersonal_skill_candidates.count < 3 %><li><%=t 'interpersonal_skills.add_some' %></li><% end %>
-  		<% if @candidate.educations.count < 3 %><li><%=t 'educations.add_some' %></li><% end %>
-  		<% if @candidate.experiences.count < 3 %><li><%=t 'experiences.add_some' %></li><% end %>
-  		<% if @candidate.language_candidates.empty? %><li><%=t 'languages.add_some' %></li><% end %>
-  		<% if @candidate.city.nil? || @candidate.country.nil? %><li><%=t 'candidates.missing.localisation' %></li><% end %>
-  		<% if @candidate.facebook_login.nil? && @candidate.linkedin_login.nil? && @candidate.twitter_login.nil? %><li><%=t 'candidates.missing.social_network' %></li><% end %>
-  		<% if @candidate.image.to_s.nil? %><li><%=t 'candidates.missing.profile_picture' %></li><% end %>
+  		<% if candidate.professional_skill_candidates.count < 3 %><li><%=t 'professional_skills.add_some' %></li><% end %>
+  		<% if candidate.interpersonal_skill_candidates.count < 3 %><li><%=t 'interpersonal_skills.add_some' %></li><% end %>
+  		<% if candidate.educations.count < 3 %><li><%=t 'educations.add_some' %></li><% end %>
+  		<% if candidate.experiences.count < 3 %><li><%=t 'experiences.add_some' %></li><% end %>
+  		<% if candidate.language_candidates.empty? %><li><%=t 'languages.add_some' %></li><% end %>
+  		<% if candidate.city.nil? || candidate.country.nil? %><li><%=t 'candidates.missing.localisation' %></li><% end %>
+  		<% if candidate.facebook_login.nil? && candidate.linkedin_login.nil? && candidate.twitter_login.nil? %><li><%=t 'candidates.missing.social_network' %></li><% end %>
+  		<% if candidate.image.to_s.nil? %><li><%=t 'candidates.missing.profile_picture' %></li><% end %>
   	</ul>
   	<%= link_to_function t('hide'), "hide('missing')", :class => "right" %>
   </div>

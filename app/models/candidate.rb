@@ -1,9 +1,7 @@
 class Candidate < User
   
-  attr_accessor   :timeline_educations, :timeline_experiences
-    
   attr_accessible :status, :experiences_attributes, :educations_attributes, :degrees_attributes, :languages_attributes, 
-                  :professional_skills_attributes, :interpersonal_skills_attributes, :main_education, :main_experience, :timeline_events
+                  :professional_skills_attributes, :interpersonal_skills_attributes, :main_education, :main_experience
   
   has_many :experiences,                    :dependent => :destroy
   has_many :companies,                      :through   => :experiences

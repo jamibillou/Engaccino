@@ -37,10 +37,10 @@
       <% end %>
       <% if current_user.admin? %>
       	<%= link_to trash, candidate, :method => :delete,
-                               		  :confirm => "#{t('candidates.destroy.title')} #{candidate.first_name} #{candidate.last_name}#{t('_?')}",
-                               		  :title => "#{t('candidates.destroy.title')} #{candidate.first_name} #{candidate.last_name}",
-                               		  :id => "destroy_candidate_#{candidate.id}",
-                               		  :class => 'hidden trash' %>
+                               		    :confirm => "#{t('candidates.destroy.title')} #{candidate.first_name} #{candidate.last_name}#{t('_?')}",
+                               		    :title => "#{t('candidates.destroy.title')} #{candidate.first_name} #{candidate.last_name}",
+                               		    :id => "destroy_candidate_#{candidate.id}",
+                               		    :class => 'hidden trash' %>
       <% end %>
     </div>
     <div class="job" <%= "style='margin-top:-20px'" if current_user == candidate %>>
@@ -64,35 +64,12 @@
     	<% end %>
     </div>   	
   </div>
-  <% unless candidate.neither_exp_nor_edu? %>
-    <div class="degree_experience">
-      <div class="experience">
-        <h2><%= t('experiences.title').remove_accents.upcase %></h2>
-        <h3><%= pluralize(candidate.experience_duration.round, t('yr')) unless candidate.no_exp? %></h3>
-      </div>
-      <div class="degree">
-        <% unless candidate.no_edu? %>
-          <h2><%= t('educations.main').remove_accents.upcase %></h2>
-          <% main_education = Education.find(candidate.main_education) %>
-          <% if current_user == candidate %>
-            <h3 id="degreetype_BIPcombo">
-              <%= best_in_place candidate, :main_education, :type => :select, :collection => main_education_options(candidate), :html_attrs => { :class => 'combobox' } %>
-            </h3>
-          <% else %>
-            <h3><%= main_education.degree.degree_type.label %></h3>
-          <% end %>
-      	  <p id="candidate_degree">
-            <%= render 'candidate_degree', :candidate => candidate %>
-          </p>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
-  <% unless candidate.professional_skills.empty? %>
-    <div id="candidate_professional_skills" class="professional_skills">
-      <%= render 'candidate_professional_skills', :candidate => candidate %>
-    </div>
-  <% end %>
+  <div id='candidate_degree_experience'>
+    <%= render 'candidate_degree_experience', :candidate => candidate %>
+  </div>
+  <div id="candidate_professional_skills">
+    <%= render 'candidate_professional_skills', :candidate => candidate %>
+  </div>
   <% unless hide_contact_information? %>
     <div class="contact">
       <h2><%= "#{t('contact')} " %><%= best_in_place_if current_user == candidate, candidate, :first_name, :html_attrs => { :class => 'field' } %></h2>
