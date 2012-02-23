@@ -5,7 +5,7 @@
   <% end %>
   <p><%= f.text_area :description, :class => 'textarea_edit' %></p>
   <div style="text-align:right">
-    <div class="error_messages" id="errors<%= interpersonal_skill_candidate.id %>"></div>
+    <div class="error_messages" id="errors_interpersonal_skill_candidate<%= interpersonal_skill_candidate.id %>"></div>
     <%= link_to_function t('cancel'), "hideForm('interpersonal_skill_candidate','#{interpersonal_skill_candidate.id}')", :class => 'grey button' %>
     &nbsp;
     <%= f.submit t('submit') %>

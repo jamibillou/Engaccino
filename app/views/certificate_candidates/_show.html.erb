@@ -1,5 +1,5 @@
 <% certificate = certificate_candidate.certificate %>
-<div <%= if @candidate == current_user then "id='show_certificate_candidate_#{certificate_candidate.id}' class='show_certificate_candidate'" else "class='show_certificate_candidate'" end %>>
+<div <%= if @candidate == current_user then "id='show_certificate_candidate_#{certificate_candidate.id}' class='show_certificate_candidate'" end %>>
 	<div class='label'><h3><%= certificate.label %></h3></div>
 	<div class='level'><%= certificate_candidate.level_score %></div>
 </div>

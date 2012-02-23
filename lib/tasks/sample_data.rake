@@ -104,7 +104,7 @@ def make_interpersonal_skills
 end
 
 def make_languages
-  loops = (1..5).to_a
+  loops = (0..5).to_a
   loops[rand(loops.size)].times do |n|
     language            = Language.new(:label => @languages[rand(@languages.size)])
     language_candidate  = LanguageCandidate.new(:level => @language_levels[rand(@language_levels.size)])
@@ -212,10 +212,10 @@ def make_franck
                            { :label => 'Bioinformatics',       :exp => 1, :level => 'beginner' } ]
   interpersonal_skills = [ 'Patience', 'Open Minded', 'Autonomy', 'Self Confidence' ]
   languages = [ { :label => 'French',  :level => 'native' }, 
-                { :label => 'English', :level => 'native' },  
-                { :label => 'Spanish', :level => 'native' } ]
+                { :label => 'English', :level => 'intermediate' },  
+                { :label => 'Spanish', :level => 'beginner' } ]
   certificates = [ { :label => 'TOEIC', :level_score => '790' },
-                   { :label => 'Driving licence', :level_score => '' } ]
+                   { :label => 'Driving licence', :level_score => 'Success' } ]
   experiences.each do |exp|
     experience           = Experience.new(:role => exp[:role], :start_month => exp[:start_month], :start_year => exp[:start_year], :end_month => exp[:end_month],  :end_year => exp[:end_year],
                                           :description => @descriptions[rand(@descriptions.size)][0..298])

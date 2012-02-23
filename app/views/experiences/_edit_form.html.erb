@@ -16,7 +16,7 @@
       	<%= company_builder.text_field :name, :class => 'edit_field margin' %>
       <% end %>
       <%= f.text_area :description, :class => 'textarea_edit' %>
-      <div class='error_messages' id='errors<%= experience.id %>'></div>
+      <div class='error_messages' id='errors_experience<%= experience.id %>'></div>
       <%= link_to_function t('cancel'), "hideForm('experience','#{experience.id}')", :class => 'grey button' %>
       &nbsp;
       <%= f.submit t('submit') %>
