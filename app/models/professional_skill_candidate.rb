@@ -12,8 +12,8 @@ class ProfessionalSkillCandidate < ActiveRecord::Base
   validates :level,              :inclusion => { :in => [ 'beginner', 'intermediate', 'advanced', 'expert' ] }, :presence => true
   validates :experience,         :inclusion => { :in => (1..60).to_a },                                         :presence => true
   
-  #after_create   :update_completion_new
-  #after_destroy  :update_completion_del
+  after_create   :update_completion_new
+  after_destroy  :update_completion_del
   
   private  
   

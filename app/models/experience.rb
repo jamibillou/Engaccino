@@ -22,8 +22,8 @@ class Experience < ActiveRecord::Base
   validates :description, :length    => { :within => 20..300 },         :allow_blank => true
   
   after_update      :set_main
-  after_create      :set_main
-  after_destroy     :set_main
+  after_create      :set_main, :update_completion_new
+  after_destroy     :set_main, :update_completion_del
   
   def duration
     (end_year.to_s.empty? || start_year.to_s.empty? || start_month.to_s.empty? || end_month.to_s.empty?) ? -1 : (end_year - start_year - 1 + (13 - start_month + end_month) / 12.0)      

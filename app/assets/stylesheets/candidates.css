@@ -573,6 +573,13 @@
   position: relative;
   display: inline-block;
 }
+
+#professional_skill_candidates .loader {
+  float: right;
+  display: inline-block;	
+  margin-right: 2%;
+}
+
 #professional_skill_candidates .show_professional_skill_candidate {
   margin-bottom: 20px;
   padding: 15px;

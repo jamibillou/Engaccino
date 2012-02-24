@@ -10,8 +10,8 @@ class InterpersonalSkillCandidate < ActiveRecord::Base
   validates :candidate, :interpersonal_skill,                                                                   :presence => true
   validates :description,        :length    => { :within => 20..160 },                                          :presence => true
 
-  #after_create   :update_completion_new
-  #after_destroy  :update_completion_del
+  after_create   :update_completion_new
+  after_destroy  :update_completion_del
   
   private
   

@@ -45,7 +45,9 @@ class CandidatesController < ApplicationController
   end
 
   def update
-    unless @candidate.update_attributes params[:candidate]
+    update_completion_city    unless params[:candidate][:city].nil?
+    update_completion_country unless params[:candidate][:country].nil?
+    unless @candidate.update_attributes(params[:candidate])
       init_page :title => "candidates.edit.#{signed_up? ? 'title' : 'complete_your_profile'}", :javascripts => 'candidates/edit'
       respond_to do |format|
         format.html { render_page :edit, :id => @candidate, :flash => { :error => error_messages(@candidate) } }
@@ -53,7 +55,6 @@ class CandidatesController < ApplicationController
       end
     else
       link_schools_degrees
-      # update_completion
       respond_to do |format|
         format.html { redirect_to @candidate, :flash => { :success => t("flash.success.#{signed_up? ? 'profile_updated' : 'welcome'}") } }
         format.json { respond_with_bip @candidate }
@@ -68,7 +69,6 @@ class CandidatesController < ApplicationController
   
   def refresh
     @candidate = current_user
-    #update_completion if params[:partial] == 'show_top'
     partial = params[:model].nil? ? "candidates/#{params[:partial]}" : "candidates/show_#{params[:model].to_s}s"
     render :partial => partial, :locals => { :candidate => @candidate }
   end
@@ -97,17 +97,13 @@ class CandidatesController < ApplicationController
       redirect_to candidate_path(current_user), :notice => t('flash.notice.already_registered') unless current_user.nil?
     end
     
-    def update_completion
-      profile_completion = 0
-      @candidate.professional_skill_candidates.count  >= 3 ? (profile_completion += 15) : (profile_completion += @candidate.professional_skill_candidates.count * 5)
-      @candidate.interpersonal_skill_candidates.count >= 3 ? (profile_completion += 15) : (profile_completion += @candidate.interpersonal_skill_candidates.count * 5)
-      @candidate.experiences.count                    >= 3 ? (profile_completion += 15) : (profile_completion += @candidate.experiences.count * 5)
-      @candidate.educations.count                     >= 3 ? (profile_completion += 15) : (profile_completion += @candidate.educations.count * 5)
-      profile_completion += 10 unless @candidate.language_candidates.empty?
-      profile_completion += 5  unless @candidate.city.empty?
-      profile_completion += 5  unless @candidate.country.empty?
-      profile_completion += 10 unless @candidate.facebook_login.empty? && @candidate.linkedin_login.empty? && @candidate.twitter_login.empty?
-      profile_completion += 10 unless @candidate.image.to_s.nil?
-      @candidate.update_attributes(:profile_completion => profile_completion)
-    end    
+    def update_completion_city
+      @candidate.update_attributes :profile_completion => @candidate.profile_completion+5 if @candidate.city.empty? && !params[:candidate][:city].empty?
+      @candidate.update_attributes :profile_completion => @candidate.profile_completion-5 if params[:candidate][:city].empty? && !@candidate.city.empty?
+    end
+
+    def update_completion_country
+      @candidate.update_attributes :profile_completion => @candidate.profile_completion+5 if @candidate.country.empty? && !params[:candidate][:country].empty?
+      @candidate.update_attributes :profile_completion => @candidate.profile_completion-5 if params[:candidate][:country].empty? && !@candidate.country.empty?
+    end
 end
