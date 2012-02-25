@@ -104,7 +104,7 @@ def make_interpersonal_skills
 end
 
 def make_languages
-  loops = (0..5).to_a
+  loops = (0..3).to_a
   loops[rand(loops.size)].times do |n|
     language            = Language.new(:label => @languages[rand(@languages.size)])
     language_candidate  = LanguageCandidate.new(:level => @language_levels[rand(@language_levels.size)])
@@ -127,8 +127,8 @@ def make_dominic
   dominic = Candidate.create! :first_name     => 'Dominic',               :last_name          => 'Matheron',
                               :city           => 'Rotterdam',             :country            => 'Netherlands',     
                               :nationality    => 'France',                :year_of_birth      => 1984,
-                              :phone          => '+31 6 31912261',        :email              => 'dominic@engaccino.com',
-                              :facebook_login => 'dominic@engaccino.com', :linkedin_login     => 'dominic@engaccino.com',
+                              :phone          => '+31 6 31912261',        :email              => 'dm@engaccino.com',
+                              :facebook_login => 'd.matheron@gmail.com', :linkedin_login      => 'd.matheron@gmail.com',
                               :twitter_login  => '@dominic_m',            :password           => 'password', :password_confirmation => 'password',
                               :status         => 'open',                  :profile_completion => 90
   dominic.toggle!(:admin)
@@ -136,9 +136,7 @@ def make_dominic
   tm            = { :role => 'Branch Manager',        :company => 'Transport Marketplace', :start_month => 6, :start_year => 2010, :end_month => 6,  :end_year => 2011 }
   gift_factory  = { :role => 'Export Sales Rep.',     :company => 'GiftFactory',           :start_month => 5, :start_year => 2009, :end_month => 8,  :end_year => 2009 }
   databox       = { :role => 'Sales Rep.',            :company => 'Databox',               :start_month => 1, :start_year => 2009, :end_month => 5,  :end_year => 2009 }
-  fnac          = { :role => 'Retail Sales Rep.',     :company => 'Fnac',                  :start_month => 6, :start_year => 2008, :end_month => 12, :end_year => 2008 }
-  acadomia      = { :role => 'Personal Tutor',        :company => 'Acadomia',              :start_month => 3, :start_year => 2008, :end_month => 9,  :end_year => 2008 }
-  experiences   = [ ltb, tm, gift_factory, databox, fnac, acadomia ]
+  experiences   = [ ltb, tm, gift_factory, databox ]
   master        = { :degree_type => "Master's degree",         :label => 'International Business & Relations', :school => 'University of Lille and Savoy',
                     :start_month => 9, :start_year => 2007,    :end_month => 9,  :end_year => 2009 }
   licence       = { :degree_type => "Bachelor's degree",       :label => 'Multimedia',                         :school => 'University of Franch-Comte',          
@@ -152,6 +150,8 @@ def make_dominic
                            { :label => 'Sales',                :exp => 2, :level => 'advanced' },
                            { :label => 'Customer service',     :exp => 1, :level => 'beginner' } ]
   interpersonal_skills = [ 'Patience', 'Attention to details', 'Communication skills', 'Enthusiasm' ]
+  languages = [ { :label => 'French',  :level => 'native' }, { :label => 'English', :level => 'fluent' } ]
+  certificates = [ { :label => 'Driving licence', :level_score => '' } ]
   experiences.each do |exp|
     experience           = Experience.new(:role => exp[:role], :start_month => exp[:start_month], :start_year => exp[:start_year], :end_month => exp[:end_month],  :end_year => exp[:end_year],
                                           :description => @descriptions[rand(@descriptions.size)][0..298])
@@ -181,6 +181,20 @@ def make_dominic
     interpersonal_skill_candidate.candidate             = dominic
     interpersonal_skill_candidate.interpersonal_skill   = interpersonal_skill
     interpersonal_skill_candidate.save!
+  end
+  languages.each do |language|
+    language_candidate            = LanguageCandidate.new(:level => language[:level])
+    language                      = Language.new(:label => language[:label])
+    language_candidate.candidate  = dominic
+    language_candidate.language   = language
+    language_candidate.save!
+  end
+  certificates.each do |certificate|
+    certificate_candidate = CertificateCandidate.new(:level_score => certificate[:level_score])
+    certificate = Certificate.new(:label => certificate[:label])
+    certificate_candidate.candidate = dominic
+    certificate_candidate.certificate = certificate
+    certificate_candidate.save!
   end
 end
 
@@ -279,7 +293,7 @@ end
 @levels       = [ 'beginner', 'intermediate', 'advanced', 'expert' ]
 
 @language_levels = [ 'beginner', 'intermediate', 'fluent', 'native' ]
-@languages = [ 'English' , 'French', 'Dutch', 'Spanish', 'Italian', 'German', 'Cantonese', 'Japanese', 'Portugesh', 'Arabic', 'Hindi', 'Russian', 'Swedish', 'Norwish', 'Finnish', 'Czech']
+@languages = [ 'English' , 'French', 'Dutch', 'Spanish', 'Italian', 'German', 'Cantonese', 'Japanese', 'Portugese', 'Arabic', 'Hindi', 'Russian', 'Swedish', 'Norwish', 'Finnish', 'Czech']
 
 @certificates = [ 'TOEIC', 'TOEFL', '3Com', 'Adobe', 'Adtran', 'Citrix', 'Linux Professional Institute', 'UXLabs', 'PTIT', 'CIPLE', 'DIPL', 'DALF', 'TSE']
 

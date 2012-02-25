@@ -11,7 +11,7 @@
 <% unless @language_candidates.empty? %>
   <% @language_candidates.each do |language_candidate| %>
   	<div id='language_candidate_<%= language_candidate.id %>'>
-   		<%= render 'language_candidates/show', :language_candidate => language_candidate %>
+   		<%= render 'language_candidates/show', :candidate => candidate, :language_candidate => language_candidate %>
    	</div>
   <% end %>
 <% else %>

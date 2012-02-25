@@ -11,7 +11,7 @@
 <% unless @certificate_candidates.empty? %>
   <% @certificate_candidates.each do |certificate_candidate| %>
     <div id='certificate_candidate_<%= certificate_candidate.id %>'>
-   	  <%= render 'certificate_candidates/show', :certificate_candidate => certificate_candidate %>
+   	  <%= render 'certificate_candidates/show', :candidate => candidate, :certificate_candidate => certificate_candidate %>
    	</div>
   <% end %>
 <% else %>

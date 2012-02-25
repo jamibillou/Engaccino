@@ -1,21 +1,19 @@
-<%= form_for language_candidate, :remote => true, :html => { :id => 'language_candidate_edit_form_#{language_candidate.id.to_s}' , :class => 'language_candidate_edit_form'} do |f|%>
-  <input type='hidden' name='_method' value='PUT' />
-  <div class='language_candidate'>
+<%= form_for language_candidate, :remote => true, :html => { :id => "language_candidate_edit_form_#{language_candidate.id.to_s}" } do |f|%>
+  <div class='language_candidate form'>
+  	<input type='hidden' name='_method' value='PUT' />
     <div class='label'>
       <%= f.fields_for :language do |language_builder| %>
-      	<h2><%= language_builder.text_field :label, :class => 'edit_field' %></h2>
+      	<%= language_builder.text_field :label, :class => 'edit_field' %>
       <% end %>
     </div>
     <div class='level'>
-      <h3><%= f.select :level, language_level_options_array %></h3>
+      <%= f.select :level, language_level_options_array %>
     </div>
-    <div class="error_messages" id="errors_language_candidate<%= language_candidate.id %>"></div>
-      <%= link_to_function t('cancel'), "hideForm('language_candidate','#{language_candidate.id}')", :class => 'grey button' %>
-      &nbsp;
-      <%= f.submit t('submit') %>
-      <div class="small_trash_link right"><%= link_to "#{t('delete')}#{t('_?')}", language_candidate, :method => :delete,
-                                                               		                              	  :confirm => "#{t('delete')}#{t('_?')}",
-                                                               		                                  :title => "#{t('delete')}#{t('_!')}",
-                                                               		                                  :remote => true %></div>
   </div>
+  <div class="error_messages" id="errors_language_candidate<%= language_candidate.id %>"></div>
+  <%= link_to_function t('cancel'), "hideForm('language_candidate','#{language_candidate.id}')",  :class => 'grey button' %>&nbsp;<%= f.submit t('submit') %>
+  <div class="small_trash_link right"><%= link_to "#{t('delete')}#{t('_?')}", language_candidate, :method => :delete,
+                                                           		                              	    :confirm => "#{t('delete')}#{t('_?')}",
+                                                           		                                    :title => "#{t('delete')}#{t('_!')}",
+                                                           		                                    :remote => true %></div>
 <% end %>

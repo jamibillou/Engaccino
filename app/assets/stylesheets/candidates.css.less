@@ -1,3 +1,13 @@
+/* LESS Mixins */
+.relative-inline-block {
+  position: relative; display: inline-block;
+  .top { vertical-align: top; }
+}
+.pencil(@background: #FFF, @x: top, @y :right) {
+  background: @background url('pencil.png') no-repeat @x @y;
+  cursor: pointer;
+}
+
 /* SHOW TOP */
 #show_top {
   margin-left: 10px;
@@ -306,7 +316,7 @@
   min-height: 150px;
   margin-right: 10px;
   margin-bottom: 10px;
-  padding: 12px 35px 0px 10px;
+  padding: 12px 10px 5px 10px;
   float: left;
 }
 #resume .add_some {
@@ -554,24 +564,18 @@
   width: 98.5%;
   height: 80px;
 }
-#professional_skill_candidates h1 {
-  margin-bottom: 5px;
-}
 #professional_skill_candidates .label {
   width: 50%;
   margin-right: 19%;
-  position: relative;
-  display: inline-block;
+  .relative-inline-block;
 }
 #professional_skill_candidates .experience {
   width: 6%;
   margin-right: 10%;
-  position: relative;
-  display: inline-block;
+  .relative-inline-block;
 }
 #professional_skill_candidates .level {
-  position: relative;
-  display: inline-block;
+  .relative-inline-block;
 }
 #professional_skill_candidates .show_professional_skill_candidate {
   margin-bottom: 20px;
@@ -592,20 +596,15 @@
 #professional_skill_candidates .show_professional_skill_candidate .label_description {
   width: 45%;
   margin-right: 25%;
-  position: relative;
-  display: inline-block;
+  .relative-inline-block;
 }
 #professional_skill_candidates .show_professional_skill_candidate .experience {
   width: 7%;
   margin-right: 9%;
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
+  .relative-inline-block .top;
 }
 #professional_skill_candidates .show_professional_skill_candidate .level {
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
+  .relative-inline-block .top;
 }
 #professional_skill_candidates .editable:hover {
   background: #EEE url('pencil.png') no-repeat 99% 9%;
@@ -627,44 +626,65 @@
 }
 
 /* LANGUAGES */
-#language_candidates .label {
-  width: 50%;
-  margin-right: 15%;
-  position: relative;
-  display: inline-block;
-}
-#language_candidates .level {
-  position: relative;
-  display: inline-block;
-}
-#language_candidates .show_language_candidate:hover {
-  background: url('pencil.png') no-repeat 99% 45%;
-  cursor: pointer;
-}
-#resume .language_candidate .edit_field {
-  width: 80%;
-  margin-bottom: 10px;
+#language_candidates {
+   .good { background-color: #EEE; }
+   .label {
+     width: 50%;
+     margin-right: 15%;
+     .relative-inline-block
+   }
+   .level { .relative-inline-block }
+   .editable:hover { .pencil(#EEE, 97%, 45%); }
+   .language_candidate {
+     padding: 6px 10px;
+     margin-bottom: 8px;
+     .label { font-size: 16px; }
+     .high  { font-weight: bold; }
+     .level { font-size: 15px; }
+     .edit_field {
+        width: 80%;
+        height: 13px;
+        font-size: 16px;
+      }
+   }
+   .form {
+     margin-bottom: 1px;
+     padding: 6px 6px;
+     background-color: #EEE;
+   }
+   input[type=submit] { margin-bottom: 10px; }
 }
 
 /* CERTIFICATES */
-#certificate_candidates .label {
-  width: 50%;
-	margin-right: 20%;
-	position: relative;
-  display: inline-block;	
-}
-#certificate_candidates .level {
-  position: relative;
-  display: inline-block;
-}
-#certificate_candidates .show_certificate_candidate:hover {
-  background: url('pencil.png') no-repeat 99% 45%;
-  cursor: pointer;
-}
-#certificate_candidates .certificate_candidate .edit_field {
-  width: 100%;
-  margin-bottom: 10px;
-}
-#certificate_candidates .certificate_candidate .small_edit_field {
-  width: 60px;
+#certificate_candidates {
+  .label {
+    width: 50%;
+  	margin-right: 20%;
+  	.relative-inline-block	
+  }
+  .level { .relative-inline-block }
+  .editable:hover { .pencil(#EEE, 97%, 45%); }
+  .certificate_candidate {
+    background-color: #EEE;
+    padding: 6px 10px;
+    margin-bottom: 8px;
+    .label { font-size: 16px; }
+    .level { font-size: 15px; }
+    .edit_field {
+      width: 100%;
+      height: 13px;
+      font-size: 16px;
+    }
+    .small_edit_field { 
+      width: 60px;
+      height: 13px;
+      font-size: 15px;
+    }
+  }
+  .form {
+     margin-bottom: 1px;
+     padding: 6px 6px;
+     background-color: #EEE;
+   }
+   input[type=submit] { margin-bottom: 10px; }
 }

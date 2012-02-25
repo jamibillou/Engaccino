@@ -1,9 +1,9 @@
 <% certificate = certificate_candidate.certificate %>
-<div <%= if @candidate == current_user then "id='show_certificate_candidate_#{certificate_candidate.id}' class='show_certificate_candidate'" end %>>
-	<div class='label'><h3><%= certificate.label %></h3></div>
+<div id='show_certificate_candidate_<%= certificate_candidate.id %>' class='<%= 'editable ' if current_user?(candidate) %>certificate_candidate'>
+	<div class='label'><%= certificate.label %></div>
 	<div class='level'><%= certificate_candidate.level_score %></div>
 </div>
-<% if current_user == @candidate %>
+<% if current_user?(candidate) %>
   <div id='edit_certificate_candidate_<%= certificate_candidate.id %>' class='hidden edit_certificate_candidate'>
     <%= render 'certificate_candidates/edit_form', :certificate_candidate => certificate_candidate %>   	
   </div>

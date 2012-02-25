@@ -11,7 +11,7 @@
 <% unless @professional_skill_candidates.empty? %>
   <% @professional_skill_candidates.each do |professional_skill_candidate| %>
   	<div id='professional_skill_candidate_<%= professional_skill_candidate.id %>'>
-   		<%= render 'professional_skill_candidates/show', :professional_skill_candidate => professional_skill_candidate %>
+   		<%= render 'professional_skill_candidates/show', :candidate => candidate, :professional_skill_candidate => professional_skill_candidate %>
    	</div>
   <% end %>
 <% else %>
