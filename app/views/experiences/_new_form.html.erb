@@ -1,12 +1,12 @@
 <%= form_for @experience, :remote => true do |f| %>
-  <div class='ee_date'>
+  <div class='edu_exp_date'>
   	<%= f.text_field :start_month, :class => 'mini_edit_field' %>
   	<%= f.text_field :start_year, :class => 'small_edit_field' %>
   	 - 
 	<%= f.text_field :end_month, :class => 'mini_edit_field' %>
   	<%= f.text_field :end_year, :class => 'small_edit_field' %>
   </div>
-  <div class='ee_details'>
+  <div class='edu_exp_details'>
       <%= f.text_field :role, :class => 'edit_field small_margin' %>
       <span class='check_box'><%= f.check_box :current %><%= t('experiences.current').downcase %></span>
 	  &nbsp;

@@ -1,8 +1,8 @@
 <div <%= if current_user == @candidate then "id='show_experience_#{experience.id}' class='show_experience'" end %>>
-  <div class="ee_date">
+  <div class="edu_exp_date">
     <h2><%= "#{experience.start_month}/#{experience.start_year} - " %><%= experience.current ? t('experiences.present') : "#{experience.end_month}/#{experience.end_year}" %></h2>
   </div>
-  <div class="ee_details">
+  <div class="edu_exp_details">
 	<h2><%= experience.role %></h2>
     <%= experience.company.name %>
     <p><% if current_user == @candidate && (experience.description.nil? || experience.description.empty?) %>

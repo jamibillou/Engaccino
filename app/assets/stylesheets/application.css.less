@@ -1,182 +1,101 @@
-/* GENERAL */
-html {
-  font-family: arial;
-  color: black;
+//// LESS MIXINS
+
+.radius(@val) {
+  -moz-border-radius:    @val;
+  -webkit-border-radius: @val;
+  border-radius:         @val;
 }
 
-h1 { font-size: 25px; margin: 0; padding: 0; }
-h2 { font-size: 20px; font-weight: normal; }
-p { margin: 0; padding: 0; }
 
-body {
-  line-height: 1.5;
-  background: #f1f1f1;
-  margin: 0;
-  padding: 0;
-}
+//// BASE FOR TO ALL VIWS
 
-/* HEADER */
-header {
-  padding-top: 8px;
-  font-size: 13px;
-  font-weight: bold;
-}
+// GENERAL
+html                  { font-family: arial; color: black }
+input                 { font-family: arial; color: black }
+textarea              { font-family: arial; color: black }
+h1                    { font-size: 25px;    margin: 0; padding: 0 }
+h2                    { font-size: 20px;    font-weight: normal }
+p                     { margin: 0; padding: 0 }
+body                  { line-height: 1.5;   background: #f1f1f1; margin: 0; padding: 0 }
 
-/* Logo and languages */
-header #logo {
-  width: 150px;
-  padding: 9px 8px;
-}
-header #languages
-{
-	float: right;
-	padding-right: 20px;
-	font-size: 11px;
-}
-header #languages a
-{
-	text-decoration: none;
-	color: black;
-}
-header #languages a:hover
-{
-	text-decoration: underline;
-}
-
-/* Menu */
-header nav {
-  height: 53px;
-  width:  100%;
-  background-color: #cbcbcb;
-  border-bottom: 10px solid #515151;
-}
-header nav ul {
-  margin: 0;
-  padding-left: 10px;
-}
-header nav ul li {
-  padding-top:20px;
-  list-style-type: none;
-  display: inline-block;
-  padding: 1.1em 1.1em;
-  margin-top: 11px;
-  color: #515151;
-}
-header nav ul li a {
-  text-decoration: none;
-  color: black;
-}
-header nav ul li.selected {
-  background-color: #515151;
-}
-header nav ul li.selected a {
-  color: white;
+// HEADER
+header                { padding-top: 8px; font-size: 13px; font-weight: bold;
+  #logo               { width: 150px;     padding: 9px 8px }
+  #languages          { float: right;     padding-right: 20px; font-size: 11px;
+  	a                 { text-decoration:  none; color: black;
+    	&:hover         { text-decoration:  underline }
+    }
+  }
+  nav                 { height: 53px; width:  100%; background-color: #cbcbcb; border-bottom: 10px solid #515151;
+    ul                { margin: 0; padding-left: 10px;
+      li {
+        padding-top:    20px;
+        list-style-type:none;
+        display:        inline-block;
+        padding:        1.1em 1.1em;
+        margin-top:     11px;
+        color:          #515151;
+        a             { text-decoration: none; color: black }
+        &.selected     { background-color: #515151;
+          a           { color: white }
+        }
+      }
+    }
+  }
+  #search_bar {
+  	height:             31px;
+  	width:              34%;
+  	margin-top:         9px;
+  	margin-right:       25px;
+  	padding-left:       5px;
+  	background-image:   url('search.png') no-repeat 98% 6px;
+  	border:             1px solid #969696;
+  	color:              #444;
+  	font-style:         normal;
+  	font-size:          inherit;
+  	font-weight:        500;
+  	float:              right;
+  }
+  #signin_signup      { padding-top: 17px; padding-right: 20px; font-weight: normal; float: right;
+    a                 { color: black;      font-weight: bold;
+      &.button        { color: white;      margin-left: 5px }
+    }
+  }
 }
 
-/* Search bar */
-#search_bar
-{
-	height: 31px;
-	width: 34%;
-	float: right;
-	margin-top: 9px;
-	margin-right: 25px;
-	padding-left: 5px;
-	background-image: url('search.png');
-	background-repeat: no-repeat;
-	background-position-x: 98%;
-	background-position-y: 6px;
-	border: 1px solid #969696;
-	color: #444;
-	font-style: normal;
-	font-size: inherit;
-	font-weight: 500;
+// CONTENT
+#container            { padding-bottom: 300px;
+  h1                  { margin-top: 20px; margin-left: 23px; margin-bottom: 10px }
 }
 
-/* Sign in or sign up */
-header #signin_signup {
-  float: right;
-  padding-top: 17px;
-  padding-right: 20px;
-  font-weight: normal;
-}
-header #signin_signup a {
-  color: black;
-  font-weight: bold;
-}
-header #signin_signup a.button {
-  color: white;
-  margin-left: 5px;
-}
+// FOOTER
+footer                { bottom: 0; right: 20px; padding-top: 60%; padding-right: 15px; text-align: right }
 
-/* CONTENT */
-#container {
-  padding-bottom: 300px;
-}
-#container h1 {
-  margin-top: 20px;
-  margin-left: 23px;
-  margin-bottom: 10px;
-}
+// SHAPES
+.round                { .radius(5px) }
+.slightly_round       { .radius(3px) }
 
-/* FOOTER */
-footer {
-  bottom: 0;
-  right: 20px;
-  padding-top: 60%;
-  padding-right: 15px;
-  text-align: right;
-}
+// TEXT COLORS & DECORATION
+.red                  { color: #da1b1b }
+.underline            { text-decoration: underline }
 
-/* SHAPES */
-.round {
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-}
-.slightly_round {
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-}
-
-/* TEXT COLORS & DECORATION */
-.red {
-	color: #da1b1b;
-}
-.underline {
-	text-decoration: underline;
-}
-
-/* BUTTONS */
+// BUTTONS
 input[type=submit] {
-  padding: 9px 30px;
-  margin: 0;
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: bold;
-  background-color: #0b7fd2;
-  color: white;
-  border: none;
-  cursor: pointer;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+  padding:              9px 30px;
+  margin:               0;
+  text-decoration:      none;
+  font-size:            13px;
+  font-weight:          bold;
+  background-color:     #0b7fd2;
+  color:                white;
+  border:               none;
+  cursor:               pointer;
+  .radius(5px);
+  &:hover             { text-decoration: underline }
 }
 
-input[type=submit]:hover {
-  text-decoration: underline;
-}
-
-a.button {
-  padding: 9px 30px;
-  margin: 0;
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: bold;
-}
-a.button:hover {
-  text-decoration: underline;
+a.button { padding: 9px 30px; margin: 0; text-decoration: none; font-size: 13px; font-weight: bold;
+  &:hover { text-decoration: underline }
 }
 a.button.small {
   padding: 4px 15px;
@@ -194,7 +113,7 @@ a.button.margin_right {
   margin-right: 20px;
 }
 
-/* BUTTONS COLORS */
+// BUTTONS COLORS
 a.button.blue {
   background-color: #0b7fd2;
   color: white;
@@ -222,7 +141,7 @@ a.button.grey_gradient:hover {
   text-decoration: none;
 }
 
-/* BLOCKS */
+// BLOCKS
 .white_block {
   background: white;
   margin-left: 10px;
@@ -239,13 +158,15 @@ a.button.grey_gradient:hover {
   font-size: 12px;
 }
 
-/* FIELDS */
+// FIELDS
 .field {
   height: 35px;
   width: 250px;
   margin-top: 4px;
   margin-bottom: 4px;
-  font-style: normal;
+  font-size: inherit;
+  font-style: inherit;
+  
 }
 .field.margin_left {
   margin-left: 5px;
@@ -258,7 +179,8 @@ a.button.grey_gradient:hover {
   width: 65px;
   margin-top: 4px;
   margin-bottom: 4px;
-  font-style: normal;
+  font-size: inherit;
+  font-style: inherit;
 }
 .small_field.margin_left {
   margin-left: 5px;
@@ -271,17 +193,25 @@ a.button.grey_gradient:hover {
 }
 .edit_field {
   height: 20px;
+  font-size: inherit;
+  font-style: inherit;
 }
 .small_edit_field {
   width: 31px;
   height: 20px;
+  font-size: inherit;
+  font-style: inherit;
 }
 .mini_edit_field {
   width: 19px;
   height: 20px;
+  font-size: inherit;
+  font-style: inherit;
 }
 .textarea_edit {
   border-color: #BBB;
+  font-size: inherit;
+  line-height: inherit;
 }
 .error_messages {
   color: #E44A37;
@@ -293,12 +223,12 @@ a.button.grey_gradient:hover {
   font-size: 11px;
 }
 
-/* VISIBILITY */
+// VISIBILITY
 .hidden {
   display: none;
 }
 
-/* POSITIONS */
+// POSITIONS
 .left {
   float: left;
   padding-right: 20px;
@@ -319,7 +249,7 @@ a.button.grey_gradient:hover {
   padding-left: 40px;
 }
 
-/* FLASH MESSAGES */
+// FLASH MESSAGES
 .flash {
   font-size: 12px;
   font-weight: 100;
@@ -354,7 +284,7 @@ a.button.grey_gradient:hover {
   background-position: -15px 0;
 }
 
-/* AUTOCOMPLETE */
+// AUTOCOMPLETE
 .ui-autocomplete {
   cursor: pointer;
 }
@@ -395,7 +325,7 @@ a.button.grey_gradient:hover {
   color: white;
 }
 
-/* SMALL ICONS */
+// SMALL ICONS
 .trash {
   float: right;
   padding: 10px;
@@ -424,7 +354,7 @@ a.button.grey_gradient:hover {
   float: right;
 }
 
-/* BEST IN PLACE */
+// BEST IN PLACE
 .best_in_place:hover {
   cursor: pointer;
   background: url('pencil.png') no-repeat right center;

@@ -1,12 +1,12 @@
 <%= form_for @education, :remote => true do |f| %>
-  <div class='ee_date'>
+  <div class='edu_exp_date'>
   	<%= f.text_field :start_month, :class => 'mini_edit_field' %>
   	<%= f.text_field :start_year, :class => 'small_edit_field' %>
   	 - 
     <%= f.text_field :end_month, :class => 'mini_edit_field' %>
   	<%= f.text_field :end_year, :class => 'small_edit_field' %>
   </div>
-  <div class='ee_details'>
+  <div class='edu_exp_details'>
   	<%= f.fields_for :degree do |degree_builder| %>
   	  <%= degree_builder.fields_for :degree_type do |degree_type_builder| %>
   	    <%= degree_type_builder.text_field :label, :class => 'edit_field small_margin' %>

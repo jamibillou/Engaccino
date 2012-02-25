@@ -1,690 +1,370 @@
-/* LESS Mixins */
-.relative-inline-block {
-  position: relative; display: inline-block;
-  .top { vertical-align: top; }
-}
+//// LESS MIXINS
+
 .pencil(@background: #FFF, @x: top, @y :right) {
-  background: @background url('pencil.png') no-repeat @x @y;
-  cursor: pointer;
+  background:           @background url('pencil.png') no-repeat @x @y;
+  cursor:               pointer;
+}
+.padding-margin-0     { padding: 0; margin:0 }
+.radius(@val) {
+  -moz-border-radius:    @val;
+  -webkit-border-radius: @val;
+  border-radius:         @val;
 }
 
-/* SHOW TOP */
-#show_top {
-  margin-left: 10px;
-  margin-top: 10px;
-}
-#show_top .buttons {
-  width: 250px;
-  float: left;
-}
-#show_top .button {
-  width: 122px;
-  padding: 9px 0px;
-  text-decoration: none;
-  font-size: 13px;
-  font-weight: bold;
-  text-align: center; 
-  float: left;
-}
-#show_top .blue {
-  margin-right: 6px;
-}
-#show_top a.button:hover {
-  text-decoration: underline;
-}
-#show_top #completion_container {
-  width: 77.55%;
-  margin-left: 10px;
-  padding: 9px 0px;
-  background-color: #DDD;
-  font-size: 13px;
-  font-weight: normal;
-  display: inline-block;
-}
-#show_top #completion_container a {
-  font-size: 13px;
-  font-weight: bold;
-  color: black;
-  margin-right: 10px;
-  margin-left: 20px;
-}
-#show_top #completion_bar_empty {
-  width: 300px;
-  height: 10px;
-  margin-left: 10px;
-  margin-right: 20px;
-  background-color: #555;
-  display: inline-block;
-}
-#show_top #completion_bar_full {
-  height: 10px;
-  background-color: #8bbf42;
-  display: block;
+//// SHOW VIEW
+
+// TOP BAR
+#show_top             { margin-left: 10px; margin-top: 10px; 
+  .buttons            { width: 250px; float: left }
+  .button {
+    width:              122px;
+    padding:            9px 0px;
+    text-decoration:    none;
+    font-size:          13px;
+    font-weight:        bold;
+    text-align:         center; 
+    float:              left;
+  }
+  .blue               { margin-right:    6px }
+  a.button:hover      { text-decoration: underline }
+  #completion_container {
+    width:              77.55%;
+    margin-left:        10px;
+    padding:            9px 0px;
+    background-color:   #DDD;
+    font-size:          13px;
+    font-weight:        normal;
+    display:            inline-block;
+    a                 { font-size: 13px; font-weight: bold; color: black; margin-right: 10px; margin-left: 20px }
+    #completion_bar_empty {
+      width:            300px;
+      height:           10px;
+      margin-left:      10px;
+      margin-right:     20px;
+      background-color: #555;
+      display:          inline-block;
+    }
+    #completion_bar_full {
+      height:           10px;
+      background-color: #8bbf42;
+      display:          block;
+    }
+    #missing          { padding:    10px;
+      ul              { list-style: none }
+    }
+  }
 }
 
-#show_top #missing {
-  padding: 10px;	
-}
-
-#show_top #missing ul {
-  list-style: none;
-}
-
-/* CARD */
-.card {
-  background: white;
-  width: 250px;
-  margin-left: 10px;
-  margin-top: 10px;
-  font-size: 12px;
-  float: left;
-}
-.card .field {
-  margin-left: -3px;
-  margin-top: -3px;
-  margin-bottom: 0;
-}
-.card .combobox {
-  margin-left: -7px;
-  margin-top: -7px;
-  margin-bottom: 0;
-}
-
-.card .head {
-  padding: 8px 8px 16px 8px;
-}
-.card .head #image_button {
-  opacity: 0;
-}
-.card .head .identity .image {
-  background-color: #444;
-  width: 80px;
-  height: 80px;
-  padding: 0;
-  color: white;
-  text-align: center;
-  font-size: 10px;
-  display: inline-block;
-}
-.card .head .identity #edit_image {
-  width: 80px;
-  height: 80px;
-  padding: 0;
-  position: absolute;
-}
-.card .head .identity #edit_image:hover {
-  cursor: pointer;
-  background: url('pencil.png') no-repeat 90% 9%;
-}
-.card .head .identity .name_place {
-  max-width: 135px;
-  margin-top: 0;
-  margin-left: 8px;
-  display: inline-block;
-}
-.card .head .identity .name_place a {
-  color: black;
-  text-decoration: none;
-}
-.card .head .identity .name_place a:hover {
-  text-decoration: underline;
-}
-.card .head .identity .name_place .name {
-  height: 25px;
-  margin-top: -7px;
-  margin-bottom: 7px;
-  font-size: 20px;
-  font-weight: bold;
-}
-.card .head .identity .name_place .name .field {
-  height: 17px;
-  width: 120px;
-  font-size: 19px;
-  font-weight: bold;
-}
-.card .head .identity .name_place .place {
-  height: 16px;
-}
-.card .head .identity .name_place .place .field {
-  height: 12px;
-  width: 90px;
-  font-size: 11px;
-}
-.card .head .trash {
-  margin: 0;
-  padding: 0;
-  float: top right;
-}
-.card .head .job {
-  margin-left: 4px;
-  margin-top: 10px;
-}
-.card .head .job h2 {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1;
-  margin-bottom: 0;
-}
-.card .head .job h2 .combobox {
-  margin-bottom: -3px;
-}
-.card .head .job p {
-  margin-top: 1px;
-}
-.card .head .status {
-  height: 10px;
-  margin-top: 10px;
-  margin-left: 3px;
-  color: green;
-}
-.card .degree_experience {
-  border-top: 4px solid #f1f1f1;
-}
-.card .degree_experience .experience {
-  height: 100%;
-  width: 78px;
-  padding-left: 12px;
-  text-align: left;
-  font-size: 20px;
-  display: inline-block;
-  vertical-align: top;
-}
-.card .degree_experience .experience h2 {
-  margin-bottom: 0;
-  color: #BBB;
-  font-weight: 600;
-  font-size: 10px;
-}
-.card .degree_experience .experience h3 { 
-  margin: 0;
-  font-weight: 100;
-  text-align: left;
-}
-.card .degree_experience .degree {
-  min-height: 80px;
-  width: 131px;
-  border-left: 4px solid #f1f1f1;
-  padding-left: 12px;
-  padding-right: 10px;
-  padding-bottom: 10px;
-  line-height: 1.4;
-  display: inline-block;
-}
-.card .degree_experience .degree h2 {
-  color: #BBB;
-  font-weight: bold;
-  font-size: 10px;
-}
-.card .degree_experience .degree h3 {
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 1;
-    margin: 0;
-}
-.card .degree_experience .degree h3 .combobox {
-   margin-bottom: -3px;
-}
-.card .degree_experience .degree p {
-   margin-top: 5px;
-   line-height: 1.2;
-}
-.card .professional_skills {
-  border-top: 4px solid #f1f1f1;
-  padding-left: 12px;
-  padding-top: 3px;
-  padding-bottom: 6px;
-  font-size: 13px;
-  line-height: 1.8;
-}
-.card .professional_skills h2 {
-  color: #BBB;
-  font-weight: bold;
-  font-size: 10px;
-  margin-bottom: 5px;
-}
-.card .professional_skills .field {
-  height: 12px;
-  width: 150px;
-  font-size: 12px;
-}
-.card .contact {
-  border-top: 4px solid #f1f1f1;
-  padding-top: 1px;
-  padding-left: 12px;
-  padding-bottom: 10px;
-  font-size: 13px;
-}
-.card .contact h2 {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-size: 17px;
-}
-.card .contact h2 .field {
-  height: 17px;
-  width: 100px;
-  font-size: 16px;
-}
-.card .contact .field {
-  height: 12px;
-  width: 170px;
-  font-size: 12px;
-}
-.card .contact .social_links {
-  margin-top: 10px;
-}
-.card .contact .social_links .field {
-  width: 148px;
-}
-
-.card .contact .social_links .logo {
-  width: 22px;
-  display: inline-block;
-}
-
-
-/* SHOW */
-#resume {
-  width: 77%;
-  margin-top: 10px;
-  margin-left: 10px;
-  font-size: 12px;
-  float: left;
-}
-#resume h1 {
-  color: #BBB;
-  font-weight: 600;
-  font-size: 10px;
-  padding: 0;
-  margin: 0 0 15px 0;
-}
-#resume h2 {
-  font-size: 14px;
-  margin: 0;
-}
-#resume p {
-  margin-top: 10px;
-}
-#resume .block {
-  min-height: 150px;
-  background-color: white;
-  margin-bottom: 10px;
-  padding: 12px 10px 1px 10px;
-}
-#resume .small_block {
-  background-color: white;
-  width: 35%;
-  min-height: 150px;
-  margin-right: 10px;
-  margin-bottom: 10px;
-  padding: 12px 10px 5px 10px;
-  float: left;
-}
-#resume .add_some {
-  margin-top:50px;
-  text-align: center;
-  color: #444;
-}
-#resume input[type=submit] {
-  padding: 4.5px 15px;
-  margin-top: 4px;
-  text-decoration: none;
-  font-size: 11px;
-  background-color: #0b7fd2;
-  color: white;
-  border: none;
-  cursor: pointer;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-}
-#resume input[type=submit]:hover {
-  text-decoration: underline;
-}
-#resume .button {
-  padding: 4.5px 15px;
-  margin-left: -4px;
-  margin-top: 4px;
-  text-decoration: none;
-  font-size: 11px;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-}
-#resume .button:hover {
-  text-decoration: underline;
-}
-
-/* SHOW TIMELINE */
-#resume #timeline {
-  min-height: 310px;
-  background-color: white;
-  margin-bottom: 10px;
-  padding: 12px 0px 0 10px;
-}
-#resume .example {
-  background: url('example_timeline.png') no-repeat top left;
-}
-#resume #timeline .add_some {
-  margin-top:120px;
-  font-size: 16px;
-  color: black;
-}
-#resume #timeline h1 {
-  margin: 0;
-}
-.timeline_container {
-  width: 75%;
-  position: absolute;
-  display: block;
-}
-#resume #timeline .horizontal_axis {
-  height: 3px;
-  bottom: -3px;
-  padding: 0;
-  margin: 0;
-  border-top: 1px solid #CCC;
-  display: block;
-  position: absolute;
-}
-#resume #timeline .horizontal_axis .unit_mark {
-  border-right: 1px solid #CCC;
-  padding-top: 3px;
-  height: 0px;
-  position: absolute;
-  display: block;
-  text-align: center;
-  color: #CCC;
-  font-size: 10px;
-}
-#resume #timeline .events {
-  display: block;
-}
-#resume #timeline .events .experience_block {
-  background-color: #a9e752;
-  border-top: 1px solid #EEE;
-  border-left: 1px solid #EEE;
-  border-right: 1px solid #EEE;
-  bottom: 1px;
-  display: block;
-  position: absolute;
-  opacity: 0.85;
-}
-#resume #timeline .events .experience_block .shade {
-  width: 100%;
-  height: 100%;
-  background-color: #000;
-  display: block;
-  position: absolute;
-}
-#resume #timeline .events .education_block {
-  background-color: #26a5ff;
-  border-top: 1px solid #EEE;
-  border-left: 1px solid #EEE;
-  border-right: 1px solid #EEE;
-  bottom: 1px;
-  display: block;
-  position: absolute;
-  opacity: 0.85;
-}
-#resume #timeline .events .education_block .shade {
-  width: 100%;
-  height: 100%;
-  background-color: #000;
-  display: block;
-  position: absolute;
-}
-#resume #timeline .events .mini {
-  font-size: 14px;
-}
-#resume #timeline .events .small {
-  font-size: 16px;
-  font-weight: 500;
-}
-#resume #timeline .events .average {
-  font-size: 20px;
-}
-#resume #timeline .events .big {
-  font-size: 25px;
-}
-#resume #timeline .events .label {
-  position: absolute;
-  padding-top: 2px;
-  padding-left: 3px;
-  padding-right: 3px;
-  line-height: 1;
-  opacity: inherit;
-  color: #fff;
-}
-#resume #timeline .events .vertical_label {
-  width:0px;
-  top: -7px;
-  position: absolute;
-  font-size: 13px;
-  line-height: 1.1;
-  color: #444;
-  display: block;
-  writing-mode:tb-rl;
-  -webkit-transform:rotate(90deg);
-  -moz-transform:rotate(90deg);
-  -o-transform: rotate(90deg);
-  filter: flipv fliph;
-  white-space: nowrap;
-}
-#resume #timeline .vertical_line {
-  width: 1px;
-  display: block;
-  position: absolute;
-  background-color: #888;
-  z-index: 0;
-}
-
-/* EXPERIENCES & EDUCATIONS */
-#resume #experiences .show_experience:hover {
-  background: url('pencil.png') no-repeat 95% 7%;
-  cursor: pointer;
-}
-#resume #educations .show_education:hover {
-  background: url('pencil.png') no-repeat 95% 7%;
-  cursor: pointer;
-}
-#resume .ee_date {
-  padding-right: 50px;
-  position: absolute;
-}
-#resume .ee_details {
-  width: 80%;
-  left: 160px;
-  position: relative;
-}
-#resume .ee_details .default {
-  color: #969696;
-  font-style: italic;
-}
-#resume .ee_details .edit_field {
-  width: 200px;
-}
-#resume .ee_details .small_edit_field {
-  width: 70px;
-}
-#resume .ee_details .margin {
-  margin-bottom: 10px;
-}
-#resume .ee_details .small_margin {
-  margin-bottom: 5px;
-}
-#resume .ee_details .textarea_edit {
-  width: 100%;
-  height: 40px;
-}
-#resume .add_link {
-  border-left: 2px solid #EEE;
-  margin-left: 10px;
-  padding-left: 13px;
-  color: #BBB;
-  text-decoration: none;
-}
-#resume .add_link:hover {
-  text-decoration: underline;
-}
-#resume .red {
-  color: #da1b1b;
-}
-#resume .underline {
-  text-decoration: underline;
-}
-
-/* SKILLS */
-#interpersonal_skill_candidates h1 {
-  margin-bottom: 10px;
-}
-#interpersonal_skill_candidates .show_interpersonal_skill_candidate {
-  width: 20%;
-  margin-bottom: 20px;
-  margin-right: 4%;
-  display: inline-block;
-  vertical-align: top;
-}
-#interpersonal_skill_candidates .show_interpersonal_skill_candidate h2 {
-  font-size: 19px;
-  color: black;
-  margin: 0;
-}
-#interpersonal_skill_candidates .editable:hover {
-  background: url('pencil.png') no-repeat right 6%;
-  cursor: pointer;
-}
-#resume .show_interpersonal_skill_candidate .edit_field {
-  width: 98.5%;
-  margin-bottom: 5px;
-}
-#resume .show_interpersonal_skill_candidate .textarea_edit {
-  width: 98.5%;
-  height: 80px;
-}
-#professional_skill_candidates .label {
-  width: 50%;
-  margin-right: 19%;
-  .relative-inline-block;
-}
-#professional_skill_candidates .experience {
-  width: 6%;
-  margin-right: 10%;
-  .relative-inline-block;
-}
-#professional_skill_candidates .level {
-  .relative-inline-block;
-}
-#professional_skill_candidates .show_professional_skill_candidate {
-  margin-bottom: 20px;
-  padding: 15px;
-  background-color: #EEE;
-}
-#professional_skill_candidates .show_professional_skill_candidate h2 {
-  font-size: 19px;
-  color: black;
-  margin: 0;
-}
-#professional_skill_candidates .show_professional_skill_candidate h3 {
-  font-size: 16px;
-  font-weight: normal;
-  margin: 0;
-  vertical-align: top;
-}
-#professional_skill_candidates .show_professional_skill_candidate .label_description {
-  width: 45%;
-  margin-right: 25%;
-  .relative-inline-block;
-}
-#professional_skill_candidates .show_professional_skill_candidate .experience {
-  width: 7%;
-  margin-right: 9%;
-  .relative-inline-block .top;
-}
-#professional_skill_candidates .show_professional_skill_candidate .level {
-  .relative-inline-block .top;
-}
-#professional_skill_candidates .editable:hover {
-  background: #EEE url('pencil.png') no-repeat 99% 9%;
-  cursor: pointer;
-}
-#resume .show_professional_skill_candidate .edit_field {
-  width: 50%;
-  margin-bottom: 10px;
-}
-#resume .show_professional_skill_candidate .small_edit_field {
-  width: 90px;
-}
-#resume .show_professional_skill_candidate .mini_edit_field {
-  width: 19px;
-}
-#resume .show_professional_skill_candidate .textarea_edit {
-  width:  100%;
-  height: 40px;
-}
-
-/* LANGUAGES */
-#language_candidates {
-   .good { background-color: #EEE; }
-   .label {
-     width: 50%;
-     margin-right: 15%;
-     .relative-inline-block
-   }
-   .level { .relative-inline-block }
-   .editable:hover { .pencil(#EEE, 97%, 45%); }
-   .language_candidate {
-     padding: 6px 10px;
-     margin-bottom: 8px;
-     .label { font-size: 16px; }
-     .high  { font-weight: bold; }
-     .level { font-size: 15px; }
-     .edit_field {
-        width: 80%;
-        height: 13px;
-        font-size: 16px;
+// CARD
+.card                 { background: white; width: 250px;     margin-left: 10px; margin-top: 10px; font-size: 12px; float: left;
+  .field              { margin-left: -4px; margin-top: -3px; margin-bottom: 0 }
+  .combobox           { margin-left: -7px; margin-top: -7px; margin-bottom: 0 }
+  .head               { padding: 8px 8px 16px 8px;
+    #image_button     { opacity: 0 }
+    .identity {
+      .image {
+        width:          80px;
+        height:         80px;
+        padding:        0;
+        display:        inline-block;
       }
-   }
-   .form {
-     margin-bottom: 1px;
-     padding: 6px 6px;
-     background-color: #EEE;
-   }
-   input[type=submit] { margin-bottom: 10px; }
+      #edit_image     { width: 80px; height: 80px; padding: 0; position: absolute;
+        &:hover       { background: url('pencil.png') no-repeat 90% 9%;  cursor: pointer }
+      }
+      .name_place     { max-width: 135px; margin-top: 0; margin-left: 8px; display: inline-block;
+        a             { color: black;     text-decoration: none;
+          &:hover     { text-decoration: underline }
+        }
+        .name         { height: 25px; margin-top: -7px; margin-bottom: 7px; font-size: 20px; font-weight: bold;
+          .field      { height: 18px; width: 120px;     font-weight: inherit }
+        }
+        .place        { height: 16px;
+          .field      { height: 12px; width: 90px }
+        }
+      }
+    }
+    .trash            { .padding-margin-0; float: top right }
+    .job              { margin-left: 4px;  margin-top: 10px;
+      h2              { font-size: 16px;   font-weight: 400; line-height: 1; margin-bottom: 0;
+        .combobox     { margin-bottom: -3px }
+      }
+      p               { margin-top: 1px }
+    }
+    .status           { height: 10px; margin-top: 10px; margin-left: 3px; color: green } 
+  }
+  .degree_experience  { border-top: 4px solid #f1f1f1;
+    .experience {
+      height:           100%;
+      width:            78px;
+      padding-left:     12px;
+      text-align:       left;
+      font-size:        20px;
+      display:          inline-block;
+      vertical-align:   top;
+      h2              { margin-bottom: 0; color: #BBB;      font-weight: 600; font-size: 10px }
+      h3              { margin: 0;        font-weight: 100; text-align: left }
+    }
+    .degree {
+      min-height:       80px;
+      width:            131px;
+      border-left:      4px solid #f1f1f1;
+      padding-left:     12px;
+      padding-right:    10px;
+      padding-bottom:   10px;
+      line-height:      1.4;
+      display:          inline-block;
+      h2              { color: #BBB;     font-weight: bold; font-size: 10px }
+      h3              { font-size: 16px; font-weight: 400;  line-height: 1; margin: 0;
+        .combobox     { margin-bottom: -3px }
+      }
+      p               { margin-top: 5px; line-height: 1.2 }
+    }
+  }
+  .professional_skills {
+    border-top:         4px solid #f1f1f1;
+    padding-left:       12px;
+    padding-top:        3px;
+    padding-bottom:     6px;
+    font-size:          13px;
+    line-height:        1.8;
+    h2                { color: #BBB; font-weight: bold; font-size: 10px; margin-bottom: 5px }
+    .field            { height: 12px; width: 150px; font-size: 12px }
+  }
+  .contact            { border-top: 4px solid #f1f1f1;         font-size: 13px; padding-top: 1px; padding-left: 12px; padding-bottom: 10px;
+    h2                { margin-top: 10px; margin-bottom: 10px; font-size: 17px;
+      .field          { height: 15px;     width: 100px;        font-size: inherit; }
+    }
+    .field            { height: 12px; width: 170px; }
+    .social_links     { margin-top: 10px;
+      .field          { width: 160px }
+      .logo           { width: 22px;  display: inline-block }
+    }         
+  }
 }
 
-/* CERTIFICATES */
-#certificate_candidates {
-  .label {
-    width: 50%;
-  	margin-right: 20%;
-  	.relative-inline-block	
+// RESUME
+#resume               { width: 77%;  margin-top: 10px; margin-left: 10px; font-size: 12px; float: left;
+  h1                  { color: #BBB; font-weight: 600; font-size: 10px;   padding: 0;      margin: 0 0 15px 0 }
+  h2                  { font-size: 14px; margin: 0; }
+  p                   { margin-top: 10px; }
+  .red                { color: #da1b1b; }
+  .underline          { text-decoration: underline }
+  .add_some           { margin-top:50px; text-align: center; color: #444 }
+  .block {
+    min-height:         150px;
+    background-color:   white;
+    margin-bottom:      10px;
+    padding:            12px 10px 1px 10px;
   }
-  .level { .relative-inline-block }
-  .editable:hover { .pencil(#EEE, 97%, 45%); }
-  .certificate_candidate {
-    background-color: #EEE;
-    padding: 6px 10px;
-    margin-bottom: 8px;
-    .label { font-size: 16px; }
-    .level { font-size: 15px; }
-    .edit_field {
-      width: 100%;
-      height: 13px;
-      font-size: 16px;
+  .small_block {
+    background-color:   white;
+    width:              35%;
+    min-height:         150px;
+    margin-right:       10px;
+    margin-bottom:      10px;
+    padding:            12px 10px 5px 10px;
+    float:              left;
+  }
+  input[type=submit] {
+    padding:            4.5px 15px;
+    margin-top:         4px;
+    text-decoration:    none;
+    font-size:          11px;
+    background-color:   #0b7fd2;
+    color:              white;
+    border:             none;
+    cursor:             pointer;
+    .radius(3px);
+    &:hover           { text-decoration: underline }
+  }
+  .button {
+    padding:            4.5px 15px;
+    margin-left:        -4px;
+    margin-top:         4px;
+    text-decoration:    none;
+    font-size:          11px;
+    font-weight:        bold;
+    border:             none;
+    cursor:             pointer;
+    .radius(3px);
+    &:hover           { text-decoration: underline }
+  }
+  .add_link {
+    border-left:        2px solid #EEE;
+    margin-left:        10px;
+    padding-left:       13px;
+    color: #BBB;
+    text-decoration:    none;
+    &:hover           { text-decoration: underline }
+  }
+}
+
+// TIMELINE
+#timeline             { min-height: 310px; background-color: white; margin-bottom: 10px; padding: 12px 0px 0 10px;
+  .example            { background: url('example_timeline.png') no-repeat top left  }
+  .add_some           { margin-top:120px; font-size: 16px; color: black }
+  h1                  { margin: 0; }
+  .timeline_container { width: 75%; position: absolute; display: block;
+    .horizontal_axis  {
+      height:           3px;
+      bottom:           -3px;
+      .padding-margin-0;
+      border-top:       1px solid #CCC;
+      display:          block;
+      position:         absolute;
+      .unit_mark {
+        border-right:   1px solid #CCC;
+        padding-top:    3px;
+        height:         0px;
+        position:       absolute;
+        display:        block;
+        text-align:     center;
+        color: #CCC;
+        font-size:      10px;
+      }
     }
-    .small_edit_field { 
-      width: 60px;
-      height: 13px;
-      font-size: 15px;
+    .events           { display: block;
+      .experience_block {
+        background-color: #a9e752;
+        border-top:     1px solid #EEE;
+        border-left:    1px solid #EEE;
+        border-right:   1px solid #EEE;
+        bottom:         1px;
+        display:        block;
+        position:       absolute;
+        opacity:        0.85;
+        .shade        { width: 100%; height: 100%; background-color: #000; display: block; position: absolute }
+      }
+      .education_block {
+        background-color: #26a5ff;
+        border-top:     1px solid #EEE;
+        border-left:    1px solid #EEE;
+        border-right:   1px solid #EEE;
+        bottom:         1px;
+        display:        block;
+        position:       absolute;
+        opacity:        0.85;
+        .shade        { width: 100%; height: 100%; background-color: #000; display: block; position: absolute }
+      }
+      .mini           { font-size: 14px }
+      .small          { font-size: 16px; font-weight: 500 }
+      .average        { font-size: 20px }
+      .big            { font-size: 25px }
+      .label {
+        position:       absolute;
+        padding-top:    2px;
+        padding-left:   3px;
+        padding-right:  3px;
+        line-height:    1;
+        opacity:        inherit;
+        color:          #fff;
+      }
+      .vertical_label {
+        width:          0px;
+        top:            -7px;
+        position:       absolute;
+        font-size:      13px;
+        line-height:    1.1;
+        color:          #444;
+        display:        block;
+        writing-mode:   tb-rl;
+        -webkit-transform:rotate(90deg);
+        -moz-transform:rotate(90deg);
+        -o-transform: rotate(90deg);
+        filter: flipv fliph;
+        white-space:    nowrap;
+      }
+    }
+    .vertical_line {
+      width:            1px;
+      display:          block;
+      position:         absolute;
+      background-color: #888;
+      z-index:          0;
     }
   }
-  .form {
-     margin-bottom: 1px;
-     padding: 6px 6px;
-     background-color: #EEE;
+}
+
+// EXPERIENCES & EDUCATIONS
+#experiences            { .show_experience:hover { .pencil(#FFF, 95%, 7%) } }
+#educations             { .show_education:hover  { .pencil(#FFF, 95%, 7%) } }
+.edu_exp_date           { padding-right: 50px;  position: absolute }
+.edu_exp_details        { width: 80%;           left: 160px; position: relative;
+  .default              { color: #969696;       font-style: italic }
+  .edit_field           { width: 200px  }
+  .small_edit_field     { width: 70px }
+  .margin               { margin-bottom: 10px }
+  .small_margin         { margin-bottom: 5px }
+  .textarea_edit        { width: 100%; height: 40px }
+}
+
+// INTERPERSONAL SKILLS
+#interpersonal_skill_candidates {
+   h1                   { margin-bottom: 10px }
+  .interpersonal_skill_candidate { width: 20%; margin-bottom: 20px; margin-right: 4%; display: inline-block; vertical-align: top;
+    h2                  { font-size: 19px;     color: black;        margin: 0; }
+    .editable:hover     { .pencil(#FFF, right, 6%) }
+    .bottom             { text-align: right }
+  }
+  .form                 { margin-left: -4px;
+    .edit_field         { width: 98.5%;      margin-bottom: 8px;  }
+    .textarea_edit      { padding-left: 3px; width: 98.5%; height: 90px; }
+  }
+}
+
+// PROFESSIONAL SKILLS
+#professional_skill_candidates {
+  .label                { width: 50%; margin-right: 19%;   display: inline-block }
+  .experience           { width: 6%;                       display: inline-block }
+  .level                { float: right; margin-right:39px; display: inline-block}
+  .editable:hover       { .pencil(#EEE, 98.5%, 19%) }
+  .professional_skill_candidate {     margin-bottom: 20px; padding: 15px; background-color: #EEE;
+    h2                  { margin: 0;  font-size: 19px }
+    h3                  { margin: 0;  font-size: 16px;   font-weight: normal;   vertical-align: top }
+    .label_description  { width: 45%; margin-right: 25%; display: inline-block }
+    .experience         { width: 7%;  margin-right: 9%;  display: inline-block; vertical-align: top }
+    .level              { display: inline-block;         margin-right: 22px;    vertical-align: top }
+  }
+  .form                 { margin-bottom: 1px;            padding: 15px 0px 7px 11px;
+    .level              { margin-right: 25px; }
+    .label_description  { margin-right: 23.5% }
+    .edit_field         { width: 50%;   margin-bottom: 8px }
+    .mini_edit_field    { width: 22px  }
+    .textarea_edit      { width:  100%; height: 53px; padding-left: 3px }
+  }
+  input[type=submit]    { margin-bottom: 10px }
+}
+
+// LANGUAGES
+#language_candidates {
+   .good                { background-color: #EEE }
+   .label               { width: 50%;   display: inline-block }
+   .level               { float: right; display: inline-block; margin-right: 28px}
+   .editable:hover      { .pencil(#EEE, 97%, 45%) }
+   .language_candidate  { padding: 6px 10px;  margin-bottom: 8px;
+     .label             { font-size: 16px }
+     .high              { font-weight: bold }
+     .level             { font-size: 15px;    margin-right: 20px }
    }
-   input[type=submit] { margin-bottom: 10px; }
+   .form                { margin-bottom: 1px; padding: 6px 6px; background-color: #EEE;
+     .level             { margin-right: 0px }
+     .edit_field        { width: 80%;         height: 16px; }
+   }
+   input[type=submit]   { margin-bottom: 10px }
+}
+
+// CERTIFICATES
+#certificate_candidates {
+  .label                { width: 65%;   display: inline-block }
+  .level                { float: right; display: inline-block;        margin-right: 28px }
+  .editable:hover       { .pencil(#EEE, 97%, 45%) }
+  .certificate_candidate { background-color: #EEE; padding: 6px 10px; margin-bottom: 8px;
+    .label              { font-size: 16px }
+    .level              { font-size: 15px; margin-right: 20px }
+  }
+  .form                 { margin-bottom: 1px; padding: 6px 6px;
+     .edit_field        { width: 80%;  height: 16px; }
+     .small_edit_field  { width: 60px; height: 16px; }
+   }
+   input[type=submit]   { margin-bottom: 10px }
 }

@@ -1,5 +1,5 @@
 <%= form_for @interpersonal_skill_candidate, :remote => true do |f| %>
-  <div class='show_interpersonal_skill_candidate'>
+  <div class='form'>
     <%= f.fields_for :interpersonal_skill do |interpersonal_skill_builder| %>
   	  <h2><%= interpersonal_skill_builder.text_field :label, :class => 'edit_field margin' %></h2>
     <% end %>
