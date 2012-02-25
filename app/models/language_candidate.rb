@@ -10,8 +10,8 @@ class LanguageCandidate < ActiveRecord::Base
   validates :candidate, :language,                                                               :presence => true
   validates :level, :inclusion => { :in => [ 'beginner', 'intermediate', 'fluent', 'native' ] }, :presence => true
   
-  #after_create   :update_completion_new
-  #after_destroy  :update_completion_del
+  after_create   :update_completion_new
+  after_destroy  :update_completion_del
   
   private
   

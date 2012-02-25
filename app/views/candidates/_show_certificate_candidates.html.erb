@@ -1,11 +1,12 @@
 <% @certificate_candidates = candidate.certificate_candidates %>
 <h1>
-	<div class="label">
-	  <%= t('certificates.title').remove_accents.upcase %>
-	  <%= link_to_function "#{t('add').upcase} +", "showForm('certificate_candidate', ['show_top'])",
-		                     :id => "link_add_certificate_candidate", :class => "add_link #{' red underline' if @certificate_candidates.empty?}" if candidate == current_user %>
-	</div>
-	<div class="level"><%= t('certificates.level').remove_accents.upcase %></div>
+  <div class="label">
+	<%= t('certificates.title').remove_accents.upcase %>
+	<%= link_to_function "#{t('add').upcase} +", "showForm('certificate_candidate', ['show_top'])",
+	                     :id => "link_add_certificate_candidate", :class => "add_link #{' red underline' if @certificate_candidates.empty?}" if candidate == current_user %>
+  </div>
+  <div class="level"><%= t('certificates.level').remove_accents.upcase %></div>
+  <div class='loader' id='certificate_candidate_loader'><%= image_tag "loader.gif" %></div>
 </h1>
 <div id='new_certificate_candidate' class='hidden'></div> 
 <% unless @certificate_candidates.empty? %>

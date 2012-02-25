@@ -32,9 +32,6 @@ class Candidate < User
   
   validates :status, :inclusion => { :in => [ 'available', 'looking', 'open', 'listening', 'happy' ] }, :presence => true
   
-  #after_create :update_completion
-  #after_update :update_completion
-        
   def timeline_duration
     last_event.nil? && first_event.nil? ? nil : last_event.end_year - first_event.start_year - 1 + (13 - first_event.start_month + last_event.end_month) / 12.0
   end
@@ -121,6 +118,10 @@ class Candidate < User
   
   def no_lang?
     languages.empty?
+  end
+  
+  def no_social?
+    facebook_login.empty? && linkedin_login.empty && twitter_login.empty?
   end
   
 end
