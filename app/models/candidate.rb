@@ -31,23 +31,6 @@ class Candidate < User
   accepts_nested_attributes_for :certificate_candidates,  :allow_destroy => true
   
   validates :status, :inclusion => { :in => [ 'available', 'looking', 'open', 'listening', 'happy' ] }, :presence => true 
-  
-  #after_create :update_completion
-  #after_update :update_completion
-  
-  def update_completion
-    profile_completion = 0
-    professional_skill_candidates.count  >= 3 ? (profile_completion += 15) : (profile_completion += professional_skill_candidates.count * 5)
-    interpersonal_skill_candidates.count >= 3 ? (profile_completion += 15) : (profile_completion += interpersonal_skill_candidates.count * 5)
-    experiences.count                    >= 3 ? (profile_completion += 15) : (profile_completion += experiences.count * 5)
-    educations.count                     >= 3 ? (profile_completion += 15) : (profile_completion += educations.count * 5)
-    profile_completion += 10 unless language_candidates.empty?
-    profile_completion += 5  unless city.empty?
-    profile_completion += 5  unless country.empty?
-    profile_completion += 10 unless facebook_login.empty? && linkedin_login.empty? && twitter_login.empty?
-    profile_completion += 10 unless image.to_s.nil?
-    update_attributes :profile_completion => profile_completion
-  end
        
   def timeline_duration
     last_event.nil? && first_event.nil? ? nil : last_event.end_year - first_event.start_year - 1 + (13 - first_event.start_month + last_event.end_month) / 12.0
@@ -135,6 +118,10 @@ class Candidate < User
   
   def no_lang?
     languages.empty?
+  end
+  
+  def no_social?
+    facebook_login.empty? && linkedin_login.empty && twitter_login.empty?
   end
   
 end
