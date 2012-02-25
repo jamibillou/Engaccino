@@ -271,6 +271,10 @@
   display: inline-block;
 }
 
+.card .loader {
+  margin-top: 5px;
+}
+
 
 /* SHOW */
 #resume {
@@ -574,12 +578,6 @@
   display: inline-block;
 }
 
-#professional_skill_candidates .loader {
-  float: right;
-  display: inline-block;	
-  margin-right: 2%;
-}
-
 #professional_skill_candidates .show_professional_skill_candidate {
   margin-bottom: 20px;
   padding: 15px;
@@ -644,6 +642,11 @@
   position: relative;
   display: inline-block;
 }
+
+#language_candidates .loader {
+  margin-right: -20px;
+}
+
 #language_candidates .show_language_candidate:hover {
   background: url('pencil.png') no-repeat 99% 45%;
   cursor: pointer;
@@ -656,8 +659,8 @@
 /* CERTIFICATES */
 #certificate_candidates .label {
   width: 50%;
-	margin-right: 20%;
-	position: relative;
+  margin-right: 20%;
+  position: relative;
   display: inline-block;	
 }
 #certificate_candidates .level {
@@ -674,4 +677,8 @@
 }
 #certificate_candidates .certificate_candidate .small_edit_field {
   width: 60px;
+}
+
+#certificate_candidates .loader {
+  margin-right: -20px;
 }

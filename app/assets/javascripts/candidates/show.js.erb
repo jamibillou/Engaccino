@@ -21,7 +21,7 @@ $(document).ready(function() {
 /* OBJECT CREATION */
 function handleAjaxCreation(model, partials) {
   $('#new_'+model).bind('ajax:success', function(evt, data, status, xhr) { callRefresh(model, data, partials); })
-	                .bind('ajax:error',   function(evt, xhr, status)       { $('#errors_new_'+model).html(buildErrorMessages(xhr)); });
+	              .bind('ajax:error',   function(evt, xhr, status)       { $('#errors_new_'+model).html(buildErrorMessages(xhr)); });
 }
 
 /* OBJECT EDITION */
@@ -44,20 +44,27 @@ function hideForm(model, id) {
 function callRefresh(model, data, partials) {
   $.ajax({
     url: 'refresh', type: 'POST', data: {model: model},
-    success: function(data) { $('#'+model+'s').html(data); $('.edit_'+model).each(function() { handleAjaxEdition($(this).attr('id'), model, partials); }); refreshPartials(partials); }
+  	beforeSend:  function() { show(model+"_loader"); },
+    complete:    function() { hide(model+"_loader"); },
+    success:     function(data) { $('#'+model+'s').html(data); $('.edit_'+model).each(function() { handleAjaxEdition($(this).attr('id'), model, partials); }); refreshPartials(partials); }
   })
 }
 function callNew(model, partials) {
   $.ajax({
   	url: '../'+model+'s/new',
-  	success: function(data) { $('#new_'+model).html(data); $('#new_'+model).show(); $('#link_add_'+model).hide(); handleAjaxCreation(model, partials); }
+  	beforeSend:  function() { show(model+"_loader"); },
+    complete:    function() { hide(model+"_loader"); },																	  
+  	success:     function(data) { $('#new_'+model).html(data); $('#new_'+model).show(); $('#link_add_'+model).hide(); handleAjaxCreation(model, partials); }
   })
 }
 
 /* REFRESH PARTIALS */
 function refreshPartials(partials) {
   if (typeof(partials) != 'undefined') {
-    $.each(partials, function(i) { $.ajax({ url: 'refresh', type: 'POST', data: {partial: partials[i]}, success: function(data) { $('#'+partials[i]).html(data); initBIP(I18n.t('click_to_edit')); } }) } );
+    $.each(partials, function(i) { $.ajax({ url: 'refresh', type: 'POST', data:        { partial: partials[i] },
+																		  beforeSend:  function() { show(partials[i]+"_loader"); },
+																		  complete:    function() { hide(partials[i]+"_loader"); },
+    																	  success:     function(data) { $('#'+partials[i]).html(data); initBIP(I18n.t('click_to_edit')); } }) } );
   }
 }
 function refreshPartialThroughBIPcombo(partial, BIPcombo) {

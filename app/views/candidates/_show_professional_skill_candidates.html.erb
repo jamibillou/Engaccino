@@ -6,7 +6,7 @@
   </div>
   <div class='experience'><%= t('professional_skills.experience').remove_accents.upcase %></div>
   <div class='level'><%= t('professional_skills.level').remove_accents.upcase %></div>
-  <div class='loader'><%= image_tag "loader.gif" %></div>
+  <div class='loader' id='professional_skill_candidate_loader'><%= image_tag "loader.gif" %></div>
 </h1>
 <div id='new_professional_skill_candidate' class='hidden'></div> 
 <% unless @professional_skill_candidates.empty? %>

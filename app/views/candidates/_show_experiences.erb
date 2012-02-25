@@ -3,6 +3,7 @@
   <%= t('experiences.title').remove_accents.upcase %>
   <%= link_to_function "#{t('add').upcase} +", "showForm('experience', ['show_top','show_timeline', 'candidate'])",
                        :id => 'link_add_experience', :class => "add_link #{' red underline' if @experiences.empty?}" if candidate == current_user %>
+  <div class='loader' id='experience_loader'><%= image_tag "loader.gif" %></div>
 </h1>
 <div id='new_experience' class='hidden'></div> 
 <% unless @experiences.empty? %>

@@ -4,6 +4,7 @@
 <% @interpersonal_skill_candidates   = candidate.interpersonal_skill_candidates %>
 
 <div id="candidate_<%= candidate.id %>" class="card"<%= " style='height:410px;'" if params[:action] == 'index' %>>
+  <div class='loader' id='candidate_loader'><%= image_tag "loader.gif" %></div>
   <div class="head">
     <div class="identity">
       <% if current_user == candidate %>
