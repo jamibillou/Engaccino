@@ -70,7 +70,7 @@ class CandidatesController < ApplicationController
   def refresh
     @candidate = current_user
     partial = params[:model].nil? ? "candidates/#{params[:partial]}" : "candidates/show_#{params[:model].to_s}s"
-    render :partial => partial, :locals => { :candidate => @candidate }
+    render :partial => partial, :locals => { :candidate => current_user }
   end
 
   private

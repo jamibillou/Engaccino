@@ -1,8 +1,8 @@
-<% @interpersonal_skill_candidates = @candidate.interpersonal_skill_candidates %>
+<% @interpersonal_skill_candidates = candidate.interpersonal_skill_candidates %>
 <h1>
   <%= t('interpersonal_skills.title').remove_accents.upcase %>
-  <%= link_to_function "#{t('add').upcase} +", "callNew('interpersonal_skill_candidate')", :id => "link_add_interpersonal_skill",
-  																						   :class => "add_link #{' red underline' if @interpersonal_skill_candidates.empty?}" if @candidate == current_user %>
+  <%= link_to_function "#{t('add').upcase} +", "showForm('interpersonal_skill_candidate', ['show_top'])",
+  					   :id => "link_add_interpersonal_skill_candidate", :class => "add_link #{' red underline' if @interpersonal_skill_candidates.empty?}" if candidate == current_user %>
 </h1>
 <div id='new_interpersonal_skill_candidate' class='hidden'></div> 
 <% unless @interpersonal_skill_candidates.empty? %>

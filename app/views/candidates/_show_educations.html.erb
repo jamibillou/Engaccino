@@ -1,7 +1,9 @@
-<% @educations = @candidate.educations.order('start_year DESC, start_month DESC') %>
-
-<h1><%= t('educations.title').remove_accents.upcase %><%= link_to_function "#{t('add').upcase} +", "showForm('education')", :id => 'link_add_education',
-																															:class => "add_link #{' red underline' if @educations.empty?}" if @candidate == current_user %></h1>
+<% @educations = candidate.educations.order('start_year DESC, start_month DESC') %>
+<h1>
+  <%= t('educations.title').remove_accents.upcase %>
+  <%= link_to_function "#{t('add').upcase} +", "showForm('education', ['show_top','show_timeline', 'candidate_degree_experience'])",
+                       :id => 'link_add_education', :class => "add_link #{' red underline' if @educations.empty?}" if candidate == current_user %>
+</h1>
 <div id='new_education' class='hidden'></div> 
 <% unless @educations.empty? %>
   <% @educations.order('start_year ASC').order('start_month ASC').each do |education| %>
