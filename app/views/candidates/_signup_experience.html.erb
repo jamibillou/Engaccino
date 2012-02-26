@@ -1,6 +1,6 @@
 <div id="professional_experience" class="white_block">
-  <h2><%=t "candidates.professional_experience" %></h2>
+  <h2><%=t "experiences.title" %></h2>
   <%= f.fields_for :experiences do |experience_builder| render 'fields_experience', :f => experience_builder end %>
-  <%= link_to_add '+', f, :experiences, t('candidates.experience.add') %>
+  <%= link_to_add '+', f, :experiences, t('experiences.add') %>
   <br />
 </div>

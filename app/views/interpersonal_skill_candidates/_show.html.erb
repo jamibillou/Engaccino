@@ -1,5 +1,5 @@
 <% interpersonal_skill = interpersonal_skill_candidate.interpersonal_skill %>
-<div <%= if @candidate == current_user then "id='show_interpersonal_skill_candidate_#{interpersonal_skill_candidate.id}' class='editable'" end %>>
+<div id='show_interpersonal_skill_candidate_<%= interpersonal_skill_candidate.id %>'<%= " class='editable'" if current_user?(candidate) %>>
 	<h2><%= interpersonal_skill.label %></h2>
 	<p><%= interpersonal_skill_candidate.description %></p>
 </div>

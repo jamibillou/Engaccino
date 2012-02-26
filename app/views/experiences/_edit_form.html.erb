@@ -1,21 +1,21 @@
 <%= form_for experience, :remote => true, :html => { :id => "experience_edit_form_#{experience.id.to_s}", :class => 'experience_edit_form' } do |f| %>
   <input type='hidden' name='_method' value='PUT' />
   <div class='edu_exp_date'>
-  	<%= f.text_field :start_month, :class => 'mini_edit_field' %>
-  	<%= f.text_field :start_year, :class => 'small_edit_field' %>
+  	<%= f.text_field :start_month, :class => 'micro field' %>
+  	<%= f.text_field :start_year,  :class => 'mini field' %>
   	 - 
-	  <%= f.text_field :end_month, :class => 'mini_edit_field' %>
-  	<%= f.text_field :end_year, :class => 'small_edit_field' %>
+	  <%= f.text_field :end_month, :class => 'micro field' %>
+  	<%= f.text_field :end_year,  :class => 'mini field' %>
   	<br />
   </div>
   <div class='edu_exp_details'>
-      <%= f.text_field :role, :class => 'edit_field small_margin' %>
+      <%= f.text_field :role, :class => 'field small_margin' %>
       <span class='check_box'><%= f.check_box :current %><%= t('experiences.current').downcase %></span>
       <br />
       <%= f.fields_for :company do |company_builder| %>
-      	<%= company_builder.text_field :name, :class => 'edit_field margin' %>
+      	<%= company_builder.text_field :name, :class => 'field margin' %>
       <% end %>
-      <%= f.text_area :description, :class => 'textarea_edit' %>
+      <%= f.text_area :description, :class => 'textarea' %>
       <div class='error_messages' id='errors_experience<%= experience.id %>'></div>
       <%= link_to_function t('cancel'), "hideForm('experience','#{experience.id}')", :class => 'grey button' %>
       &nbsp;

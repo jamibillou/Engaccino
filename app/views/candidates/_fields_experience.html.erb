@@ -1,14 +1,14 @@
 <div class="fields">
   <br />
   <%= f.fields_for :company do |company_builder| %>
-    <%= company_builder.text_field :name, :id => 'company', :class => 'field margin_right' %>
+    <%= company_builder.text_field :name, :id => 'company', :class => 'field' %>
   <% end %>
-  <%= f.text_field :role,        :id => 'role',        :class => 'field margin_right' %>
-  <%=t 'from' %>
-  <%= f.select :start_month, (1..12).map {|m| [t('date.month_names')[m], m]}, {:prompt => t('candidates.experience.start_month')}, :class => 'select' %>  
-  <%= f.select :start_year, (1930..Time.now.year).to_a.reverse.map {|m| [m,m]}, {:prompt => t('candidates.experience.start_year')}, :class => 'select' %>                                    
-  <%=t 'to' %>
-  <%= f.select :end_month, (1..12).map {|m| [t('date.month_names')[m], m]}, {:prompt => t('candidates.experience.end_month')}, :class => 'select' %>
-  <%= f.select :end_year, (1930..Time.now.year).to_a.reverse.map {|m| [m,m]}, {:prompt => t('candidates.experience.end_year')}, :class => 'select' %>
-  <%= link_to_delete '-', f, t('candidates.experience.delete') %>
+  <%= f.text_field                 :role, :id => 'role',    :class => 'field' %>
+  <%=t 'from' %>&nbsp;
+  <%= f.select :start_month, (1..12).map {|m| [t('date.month_names')[m], m]},   {:prompt => t('candidates.experience.start_month')},  :class => 'select' %>  
+  <%= f.select :start_year, (1930..Time.now.year).to_a.reverse.map {|m| [m,m]}, {:prompt => t('candidates.experience.start_year')},   :class => 'select' %>                                    
+  <%=t 'to' %>&nbsp;
+  <%= f.select :end_month, (1..12).map {|m| [t('date.month_names')[m], m]},   {:prompt => t('candidates.experience.end_month')},  :class => 'select' %>
+  <%= f.select :end_year, (1930..Time.now.year).to_a.reverse.map {|m| [m,m]}, {:prompt => t('candidates.experience.end_year')},   :class => 'select' %>
+  <%= link_to_delete '-', f, t('experiences.delete') %>
 </div>

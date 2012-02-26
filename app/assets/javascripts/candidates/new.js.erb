@@ -1,12 +1,3 @@
-$(document).ready(function()
-{
-  // CUSTOMS THE FORM
-  customForm("candidate_new_form","candidates.");
-  
-  $("#country").autocomplete(
-  {
-  	source:"/ajax/countries",
-    autoFocus: true,
-    minLength: 2
-  });
+$(document).ready(function() {
+  $("#country").autocomplete({ source:"/ajax/countries", autoFocus: true, minLength: 2 });
 })

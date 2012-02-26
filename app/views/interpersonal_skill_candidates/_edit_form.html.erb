@@ -2,9 +2,9 @@
   <div class='form'>
     <input type='hidden' name='_method' value='PUT' />
     <%= f.fields_for :interpersonal_skill do |interpersonal_skill_builder| %>
-     	<h2><%= interpersonal_skill_builder.text_field :label, :class => 'edit_field' %></h2>
+     	<h2><%= interpersonal_skill_builder.text_field :label, :class => 'field' %></h2>
     <% end %>
-    <%= f.text_area :description, :class => 'textarea_edit' %>
+    <%= f.text_area :description, :class => 'textarea' %>
   </div>
   <div class='bottom'>
     <div class="error_messages" id="errors_interpersonal_skill_candidate<%= interpersonal_skill_candidate.id %>"></div>

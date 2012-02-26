@@ -1,18 +1,10 @@
-<div class="left dashed">
-  <h2><%=t 'candidates.new.create_engaccino_account' %></h2>
-  <%= form_for @candidate, :url => { :action => :create }, :html => { :id => 'candidate_new_form' } do |f| %>
-    <%= f.hidden_field :first_name, :value => t('candidates.first_name') %>
-    <%= f.hidden_field :last_name, :value => t('candidates.last_name') %>
-    <%= f.hidden_field :status, :value => 'available' %>	
-    <%= f.text_field :email, :value => (params[:candidate]) && !params[:candidate][:email].empty? ? params[:candidate][:email] : t('candidates.email'),
-                             :id => 'email',
-                             :class => 'field' %><br />
-    <%= f.password_field :password, :value => t('candidates.password'),
-                                    :id => 'password',
-                                    :class => 'field' %><br />
-    <%= f.password_field :password_confirmation, :value => t('candidates.password_confirmation'),
-                                                 :id => 'password_confirmation',
-                                                 :class => 'field' %><br /><br />
-    <%= f.submit t('candidates.new.set_up_profile') %>
-  <% end %>
-</div>
+<h2><%=t 'candidates.new.create_engaccino_account' %></h2>
+<%= form_for @candidate, :url => { :action => :create }, :html => { :id => 'candidate_new_form' } do |f| %>
+  <%= f.hidden_field   :first_name, :value => t('candidates.first_name') %>
+  <%= f.hidden_field   :last_name,  :value => t('candidates.last_name') %>
+  <%= f.hidden_field   :status,     :value => 'available' %>	
+  <%= f.text_field     :email,                 :id => 'email',                 :class => 'field' %><br />
+  <%= f.password_field :password,              :id => 'password',              :class => 'field' %><br />
+  <%= f.password_field :password_confirmation, :id => 'password_confirmation', :class => 'field' %><br />
+  <%= f.submit t('candidates.new.set_up_profile') %>
+<% end %>

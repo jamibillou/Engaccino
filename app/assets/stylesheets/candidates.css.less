@@ -5,10 +5,10 @@
   cursor:               pointer;
 }
 .padding-margin-0     { padding: 0; margin:0 }
-.radius(@val) {
-  -moz-border-radius:    @val;
-  -webkit-border-radius: @val;
-  border-radius:         @val;
+.radius(@px) {
+  -moz-border-radius:    @px;
+  -webkit-border-radius: @px;
+  border-radius:         @px;
 }
 
 //// SHOW VIEW
@@ -18,7 +18,7 @@
   .buttons            { width: 250px; float: left }
   .button {
     width:              122px;
-    padding:            9px 0px;
+    padding:            9px 0;
     text-decoration:    none;
     font-size:          13px;
     font-weight:        bold;
@@ -30,7 +30,7 @@
   #completion_container {
     width:              77.55%;
     margin-left:        10px;
-    padding:            9px 0px;
+    padding:            9px 0;
     background-color:   #DDD;
     font-size:          13px;
     font-weight:        normal;
@@ -201,7 +201,7 @@
 }
 
 // TIMELINE
-#timeline             { min-height: 310px; background-color: white; margin-bottom: 10px; padding: 12px 0px 0 10px;
+#timeline             { min-height: 310px; background-color: white; margin-bottom: 10px; padding: 12px 0 0 10px;
   .example            { background: url('example_timeline.png') no-repeat top left  }
   .add_some           { margin-top:120px; font-size: 16px; color: black }
   h1                  { margin: 0; }
@@ -216,7 +216,7 @@
       .unit_mark {
         border-right:   1px solid #CCC;
         padding-top:    3px;
-        height:         0px;
+        height:         0;
         position:       absolute;
         display:        block;
         text-align:     center;
@@ -261,7 +261,7 @@
         color:          #fff;
       }
       .vertical_label {
-        width:          0px;
+        width:          0;
         top:            -7px;
         position:       absolute;
         font-size:      13px;
@@ -289,27 +289,34 @@
 // EXPERIENCES & EDUCATIONS
 #experiences            { .show_experience:hover { .pencil(#FFF, 95%, 7%) } }
 #educations             { .show_education:hover  { .pencil(#FFF, 95%, 7%) } }
-.edu_exp_date           { padding-right: 50px;  position: absolute }
+.edu_exp_date           { padding-right: 50px;  position: absolute;
+  .field                { height: 20px;
+    &.mini              { width: 31px }
+    &.micro             { width: 19px }
+  }
+}
 .edu_exp_details        { width: 80%;           left: 160px; position: relative;
   .default              { color: #969696;       font-style: italic }
-  .edit_field           { width: 200px  }
-  .small_edit_field     { width: 70px }
-  .margin               { margin-bottom: 10px }
-  .small_margin         { margin-bottom: 5px }
-  .textarea_edit        { width: 100%; height: 40px }
+  .field                { width: 200px; height: 20px;
+    &.small             { width: 70px }
+    &.margin            { margin-bottom: 10px }
+    &.small_margin      { margin-bottom: 5px }
+  }
+  .textarea             { width: 100%; height: 40px }
 }
+.editable:hover         { .pencil(#FFF, 125px, 6%) }
 
 // INTERPERSONAL SKILLS
 #interpersonal_skill_candidates {
    h1                   { margin-bottom: 10px }
-  .interpersonal_skill_candidate { width: 20%; margin-bottom: 20px; margin-right: 4%; display: inline-block; vertical-align: top;
+  .interpersonal_skill_candidate { width: 20%; margin-bottom: 15px; margin-right: 4%; display: inline-block; vertical-align: top;
     h2                  { font-size: 19px;     color: black;        margin: 0; }
     .editable:hover     { .pencil(#FFF, right, 6%) }
-    .bottom             { text-align: right }
+    .bottom             { text-align: right; }
   }
-  .form                 { margin-left: -4px;
-    .edit_field         { width: 98.5%;      margin-bottom: 8px;  }
-    .textarea_edit      { padding-left: 3px; width: 98.5%; height: 90px; }
+  .form                 { margin: -2px 0 0 -4px;
+    .field              { width: 98.5%;      margin-bottom: 7px;  }
+    .textarea           { width: 98.5%;      height: 90px; padding-left: 3px;  }
   }
 }
 
@@ -321,17 +328,18 @@
   .editable:hover       { .pencil(#EEE, 98.5%, 19%) }
   .professional_skill_candidate {     margin-bottom: 20px; padding: 15px; background-color: #EEE;
     h2                  { margin: 0;  font-size: 19px }
-    h3                  { margin: 0;  font-size: 16px;   font-weight: normal;   vertical-align: top }
-    .label_description  { width: 45%; margin-right: 25%; display: inline-block }
-    .experience         { width: 7%;  margin-right: 9%;  display: inline-block; vertical-align: top }
-    .level              { display: inline-block;         margin-right: 22px;    vertical-align: top }
+    h3                  { margin: 0;  font-size: 16px;     font-weight: normal;   vertical-align: top }
+    .label_description  { width: 45%; margin-right: 25%;   display: inline-block }
+    .experience         { width: 7%;  margin-right: 9%;    display: inline-block; vertical-align: top }
+    .level              { display: inline-block;           margin-right: 22px;    vertical-align: top }
   }
-  .form                 { margin-bottom: 1px;            padding: 15px 0px 7px 11px;
-    .level              { margin-right: 25px; }
-    .label_description  { margin-right: 23.5% }
-    .edit_field         { width: 50%;   margin-bottom: 8px }
-    .mini_edit_field    { width: 22px  }
-    .textarea_edit      { width:  100%; height: 53px; padding-left: 3px }
+  .form                 { margin-bottom: 1px;              padding: 13px 0 8px 11px;
+    .level              { margin-right:  25px; }
+    .label_description  { margin-right:  23.5% }
+    .field              { width: 50%;   margin-bottom: 7px;
+      &.mini            { width: 22px  }
+    }
+    .textarea           { width: 100%;  height: 53px; padding-left: 3px }
   }
   input[type=submit]    { margin-bottom: 10px }
 }
@@ -348,9 +356,9 @@
      .high              { font-weight: bold }
      .level             { font-size: 15px;    margin-right: 20px }
    }
-   .form                { margin-bottom: 1px; padding: 6px 6px; background-color: #EEE;
-     .level             { margin-right: 0px }
-     .edit_field        { width: 80%;         height: 16px; }
+   .form                { margin: -2px 0 1px 0; padding: 6px 6px; background-color: #EEE;
+     .level             { margin-right: 0 }
+     .field             { width: 80% }
    }
    input[type=submit]   { margin-bottom: 10px }
 }
@@ -365,9 +373,41 @@
     .label              { font-size: 16px }
     .level              { font-size: 15px; margin-right: 20px }
   }
-  .form                 { margin-bottom: 1px; padding: 6px 6px;
-     .edit_field        { width: 80%;  height: 16px; }
-     .small_edit_field  { width: 60px; height: 16px; }
+  .form                 { margin: -2px 0 1px 0; padding: 6px 6px;
+    .field              { width: 80%;
+      &.small           { width: 60px }
+    }
    }
    input[type=submit]   { margin-bottom: 10px }
+}
+
+
+//// NEW VIEWS
+
+#new                   { height: 250px }
+#new_session           { height: 215px }
+#new_engaccino_account { border-right: 2px dashed #444; padding-right: 40px; display: inline-block;
+  .field               { width: 255px; height: 35px;    margin-bottom: 10px }
+  input[type=submit]   { margin-top: 10px }
+}
+#new_social_connect    { padding-left: 40px; display: inline-block; vertical-align: top;
+  .button              { padding: 36px 60px; .radius(3px); display: inline-block;
+    &#facebook_connect { margin-right: 20px }
+  }
+}
+
+
+//// EDIT VIEW
+
+#signup                 { margin: 0;
+  #signup_import { 
+    h2                  { margin-right: 20px; float: left; }
+    .button             { padding: 18px 60px; .radius(3px); display: inline-block;
+      &#facebook_import { margin-right: 20px }
+    }  
+  }
+  .field                { height: 35px; margin: 0 3px 10px 0;
+    &.small             { width: 65px }  
+  }
+  input[type=submit]    { margin-top: 10px }
 }

@@ -1,24 +1,24 @@
 <%= form_for @education, :remote => true do |f| %>
   <div class='edu_exp_date'>
-  	<%= f.text_field :start_month, :class => 'mini_edit_field' %>
-  	<%= f.text_field :start_year, :class => 'small_edit_field' %>
+  	<%= f.text_field :start_month, :class => 'micro field' %>
+  	<%= f.text_field :start_year,  :class => 'mini field' %>
   	 - 
-    <%= f.text_field :end_month, :class => 'mini_edit_field' %>
-  	<%= f.text_field :end_year, :class => 'small_edit_field' %>
+    <%= f.text_field :end_month, :class => 'micro field' %>
+  	<%= f.text_field :end_year,  :class => 'mini field' %>
   </div>
   <div class='edu_exp_details'>
   	<%= f.fields_for :degree do |degree_builder| %>
   	  <%= degree_builder.fields_for :degree_type do |degree_type_builder| %>
-  	    <%= degree_type_builder.text_field :label, :class => 'edit_field small_margin' %>
+  	    <%= degree_type_builder.text_field :label, :class => 'field small_margin' %>
   	  <% end %>
   	  <br />
-  	  <%= degree_builder.text_field :label, :class => 'edit_field small_margin' %>
+  	  <%= degree_builder.text_field :label, :class => 'field small_margin' %>
   	<% end %>
   	<br />
   	<%= f.fields_for :school do |school_builder| %>
-  	  <%= school_builder.text_field :name, :class => 'edit_field margin' %>
+  	  <%= school_builder.text_field :name, :class => 'field margin' %>
   	<% end %>
-  	<%= f.text_area :description, :class => 'textarea_edit' %>
+  	<%= f.text_area :description, :class => 'textarea' %>
   	<div class='error_messages' id='errors_new_education'></div>
   	<%= link_to_function t('cancel'), "hideForm('education')", :class => 'grey button' %>
   	&nbsp;
