@@ -1,4 +1,5 @@
 <% @language_candidates = candidate.language_candidates %>
+<div class='loader' id='language_candidate_loader'><%= image_tag "loader.gif" %></div>
 <h1>
   <div class='label'>
 	  <%= t('languages.title').remove_accents.upcase %>
@@ -6,7 +7,6 @@
   	                     :id => "link_add_language_candidate", :class => "add_link #{' red underline' if @language_candidates.empty?}" if candidate == current_user %>
   </div>
   <div class='level'><%= t('languages.level').remove_accents.upcase %></div>
-  <div class='loader' id='language_candidate_loader'><%= image_tag "loader.gif" %></div>
 </h1>
 <div id='new_language_candidate' class='hidden'></div>
 <% unless @language_candidates.empty? %>

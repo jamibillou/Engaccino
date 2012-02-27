@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.1'
+gem 'rails', '3.2.1'
 gem 'mysql2'
 gem 'jquery-rails'
 gem 'best_in_place'
@@ -8,6 +8,7 @@ gem 'will_paginate'
 gem 'countries'
 gem 'i18n-js'
 gem 'carrierwave'
+gem 'client_side_validations'
 
 group :development do
   gem 'rspec-rails'

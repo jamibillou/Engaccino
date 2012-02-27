@@ -168,21 +168,6 @@ describe Candidate do
     end
   end
   
-  describe "long_timeline? method" do
-    
-    it "should exist" do
-      @candidate.should respond_to(:long_timeline?)
-    end
-    
-    it "should" do
-    
-    end
-    
-    it "should" do
-    
-    end
-  end
-  
   describe "longest_event method" do
     
     it "should exist" do
@@ -243,10 +228,25 @@ describe Candidate do
     end
   end
   
-  describe "first(collection) method" do
+  describe "first_education method" do
     
     it "should exist" do
-      @candidate.should respond_to(:first)
+      @candidate.should respond_to(:first_education)
+    end
+    
+    it "should" do
+    
+    end
+    
+    it "should" do
+    
+    end
+  end
+  
+  describe "first_experience method" do
+    
+    it "should exist" do
+      @candidate.should respond_to(:first_experience)
     end
     
     it "should" do
@@ -258,10 +258,25 @@ describe Candidate do
     end
   end 
   
-  describe "last(collection) method" do
+  describe "last_education method" do
     
     it "should exist" do
-      @candidate.should respond_to(:last)
+      @candidate.should respond_to(:last_education)
+    end
+    
+    it "should" do
+    
+    end
+    
+    it "should" do
+    
+    end
+  end
+  
+  describe "last_experience method" do
+    
+    it "should exist" do
+      @candidate.should respond_to(:last_experience)
     end
     
     it "should" do
