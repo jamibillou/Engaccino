@@ -8,6 +8,7 @@ gem 'will_paginate'
 gem 'countries'
 gem 'i18n-js'
 gem 'carrierwave'
+gem 'rmagick'
 gem 'client_side_validations'
 
 group :development do

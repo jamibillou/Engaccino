@@ -143,20 +143,19 @@ a.button              { padding: 9px 30px; margin: 0; text-decoration: none; fon
 }
 
 // AUTOCOMPLETE
-.ui-autocomplete      { cursor: pointer }
+.ui-autocomplete      { cursor: pointer; width: inherit }
 .ui-menu {
   list-style:           none;
   padding:              0;
   margin:               0;
-  display:              block;
+  display:              inline-block;
   background-color:     white;
-  z-index:              1000;
-  width:                200px;
+  z-index:              150;
   font-size:            13px;
   border:               1px solid #f1f1f1;
   border-bottom:        0;
   .ui-menu              { margin-top: -3px }
-  .ui-menu-item         { margin: 0; padding: 0;     width: 100%; height:  100%; border-bottom: 1px solid #f1f1f1;
+  .ui-menu-item         { margin: 0; padding: 0;     width: 100%;    height: 100%;      border-bottom: 1px solid #f1f1f1;
     a                   { text-decoration: none;     display: block; padding: 8px 10px; zoom: 1;
       &.ui-state-hover  { background-color: #0b7fd2; color: white }
       &.ui-state-active { background-color: #0b7fd2; color: white }
