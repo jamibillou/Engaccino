@@ -8,6 +8,11 @@
 //= require rails.validations
 
 $(document).ready(function() {
+  
+  /* AUTOCOMPLETE */
+  $('input.country').each(function() { $(this).autocomplete({ source:"/ajax/countries", minLength: 2, autoFocus: true }); });
+  $('input.month').each(function()   { $(this).autocomplete({ source:"/ajax/months",    minLength: 1 }); });
+  $('input.year').each(function()    { $(this).autocomplete({ source:"/ajax/years",     minLength: 2 }); });
 
 	customForm('search_bar_form', '');
 	$('#close_flash').click(function() { $('#flash').hide(); })

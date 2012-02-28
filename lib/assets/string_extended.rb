@@ -3,9 +3,7 @@
 class String
 
   def remove_accents
-  
     string = String.new(self)
-    
     accents = { 'A'  => %w(À Á Â Ã Ā Ă Ȧ Ả Ä Å Ǎ Ȁ Ȃ Ą Ạ Ḁ Ầ Ấ Ẫ Ẩ Ằ Ắ Ẵ Ẳ Ǡ Ǟ Ǻ Ậ Ặ),
                 'AE' => %w(Æ Ǽ Ǣ),
                 'B'  => %w(Ḃ Ɓ Ḅ Ḇ Ƃ Ƅ),
@@ -63,11 +61,10 @@ class String
                 'y'  => %w(ỳ ý ŷ ỹ ȳ ẏ ÿ ỷ ẙ ƴ ỵ),
                 'z'  => %w(ź ẑ ż ž ȥ ẓ ẕ ƶ),
                 ''   => %w(Ð Þ Ə Ɣ Ɩ Ƣ Ƨ Ʃ Ʊ Ʒ Ǯ Ƹ Ȝ ƿ Ȣ ð þ ə ɣ ɩ ƣ ƨ ʃ ƪ ʊ ʒ ǯ ƹ ƺ ȝ Ƿ ȣ Ǳ ǲ ǳ Ǆ ǅ ǆ Ǉ ǈ ǉ Ǌ ǋ ǌ ĸ ƍ ƛ ƾ ƻ Ƽ ƽ) }
-
     accents.each do |replacement, accent|
       string.gsub!(Regexp.new(accent.join("|")), replacement)
     end
-    
     string
   end
+  
 end

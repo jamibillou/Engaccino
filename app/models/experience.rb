@@ -1,5 +1,7 @@
 class Experience < ActiveRecord::Base
 
+  include ApplicationHelper
+  
   attr_accessor   :main
   
   attr_accessible :role, :start_month, :start_year, :end_month, :end_year, :description, :company_attributes, :company, :current, :main
