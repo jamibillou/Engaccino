@@ -7,7 +7,6 @@
     <div id="completion_bar_full" class="slightly_round" style="width: <%= 3*candidate.profile_completion %>px;"></div>
   </div>
   <%=t 'candidates.show.profile_completion.sentence' %><%= candidate.profile_completion %><%=t 'candidates.show.profile_completion.%complete' %><%= link_to_function t('candidates.show.profile_completion.link'), "show('missing')" %>
-  <div class='loader' id='show_top_loader'><%= image_tag "loader.gif" %></div>
   <div id='missing' class='hidden'>
   	Missing items:
   	<ul>

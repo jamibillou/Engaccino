@@ -1,5 +1,7 @@
 class Experience < ActiveRecord::Base
 
+  include ApplicationHelper
+  
   attr_accessor   :main
   
   attr_accessible :role, :start_month, :start_year, :end_month, :end_year, :description, :company_attributes, :company, :current, :main
@@ -26,7 +28,7 @@ class Experience < ActiveRecord::Base
   after_destroy     :set_main, :update_completion_del
   
   def duration
-    (end_year.to_s.empty? || start_year.to_s.empty? || start_month.to_s.empty? || end_month.to_s.empty?) ? -1 : (end_year - start_year - 1 + (13 - start_month + end_month) / 12.0)      
+    (end_year.to_s.empty? || start_year.to_s.empty? || start_month.to_s.empty? || end_month.to_s.empty?) ? nil : (end_year - start_year - 1 + (13 - start_month + end_month) / 12.0)      
   end
   
   def yrs_after_first_event

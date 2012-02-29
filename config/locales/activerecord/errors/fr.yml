@@ -2,7 +2,6 @@ fr:
   activerecord:
       errors:
         messages:
-          # Default messages: complete sentences
           inclusion: "incorrect(e)"
           exclusion: "a une valeur défendue"
           invalid: "invalide"
@@ -22,3 +21,5 @@ fr:
           less_than_or_equal_to : "doit être inférieur ou égal à %{count}"     
           odd: "doit être impair"
           even: "doit être pair"
+          carrierwave_processing_error: "impossilbe de redimensionner l'image'"
+          carrierwave_integrity_error: "n'est pas une image"

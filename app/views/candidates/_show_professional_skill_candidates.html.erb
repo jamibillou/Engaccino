@@ -1,4 +1,5 @@
 <% @professional_skill_candidates = candidate.professional_skill_candidates %>
+<div class='loader' id='professional_skill_candidate_loader'><%= image_tag "loader.gif" %></div>
 <h1>
   <div class='label'><%= t('professional_skills.title').remove_accents.upcase %>
     <%= link_to_function "#{t('add').upcase} +", "showForm('professional_skill_candidate', ['show_top','candidate_professional_skills'])",
@@ -6,7 +7,6 @@
   </div>
   <div class='experience'><%= t('professional_skills.experience').remove_accents.upcase %></div>
   <div class='level'><%= t('professional_skills.level').remove_accents.upcase %></div>
-  <div class='loader' id='professional_skill_candidate_loader'><%= image_tag "loader.gif" %></div>
 </h1>
 <div id='new_professional_skill_candidate' class='hidden'></div> 
 <% unless @professional_skill_candidates.empty? %>

@@ -5,10 +5,10 @@
   <% end %>
   <%= f.text_field                 :role, :id => 'role',    :class => 'field' %>
   <%=t 'from' %>&nbsp;
-  <%= f.select :start_month, (1..12).map {|m| [t('date.month_names')[m], m]},   {:prompt => t('candidates.experience.start_month')},  :class => 'select' %>  
-  <%= f.select :start_year, (1930..Time.now.year).to_a.reverse.map {|m| [m,m]}, {:prompt => t('candidates.experience.start_year')},   :class => 'select' %>                                    
+  <%= f.text_field :start_month, :class => 'month small field' %>  
+  <%= f.text_field :start_year,  :class => 'year mini field' %>                                    
   <%=t 'to' %>&nbsp;
-  <%= f.select :end_month, (1..12).map {|m| [t('date.month_names')[m], m]},   {:prompt => t('candidates.experience.end_month')},  :class => 'select' %>
-  <%= f.select :end_year, (1930..Time.now.year).to_a.reverse.map {|m| [m,m]}, {:prompt => t('candidates.experience.end_year')},   :class => 'select' %>
+  <%= f.text_field :end_month,   :class => 'month small field' %>
+  <%= f.text_field :end_year,    :class => 'year mini field' %>
   <%= link_to_delete '-', f, t('experiences.delete') %>
 </div>

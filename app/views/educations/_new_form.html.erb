@@ -1,10 +1,10 @@
 <%= form_for @education, :remote => true do |f| %>
   <div class='edu_exp_date'>
-  	<%= f.text_field :start_month, :class => 'micro field' %>
-  	<%= f.text_field :start_year,  :class => 'mini field' %>
+  	<%= f.text_field :start_month, :class => 'month micro field' %>
+  	<%= f.text_field :start_year,  :class => 'year mini field' %>
   	 - 
-    <%= f.text_field :end_month, :class => 'micro field' %>
-  	<%= f.text_field :end_year,  :class => 'mini field' %>
+    <%= f.text_field :end_month, :class => 'month micro field' %>
+  	<%= f.text_field :end_year,  :class => 'year mini field' %>
   </div>
   <div class='edu_exp_details'>
   	<%= f.fields_for :degree do |degree_builder| %>

@@ -1,5 +1,5 @@
 <h2><%=t 'candidates.new.create_engaccino_account' %></h2>
-<%= form_for @candidate, :url => { :action => :create }, :html => { :id => 'candidate_new_form' } do |f| %>
+<%= form_for @candidate, :url => { :action => :create }, :html => { :id => 'candidate_new_form' }, :validate => true do |f| %>
   <%= f.hidden_field   :first_name, :value => t('candidates.first_name') %>
   <%= f.hidden_field   :last_name,  :value => t('candidates.last_name') %>
   <%= f.hidden_field   :status,     :value => 'available' %>	
