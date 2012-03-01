@@ -9,7 +9,7 @@
   <div class="level"><%= t('certificates.level').remove_accents.upcase %></div>
 </h1>
 <div id='new_certificate_candidate' class='hidden'></div> 
-<% unless @certificate_candidates.empty? %>
+<% unless candidate.no_certif? %>
   <% @certificate_candidates.each do |certificate_candidate| %>
     <div id='certificate_candidate_<%= certificate_candidate.id %>'>
    	  <%= render 'certificate_candidates/show', :candidate => candidate, :certificate_candidate => certificate_candidate %>

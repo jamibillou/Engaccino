@@ -10,9 +10,7 @@ class Experience < ActiveRecord::Base
   belongs_to :company
   
   accepts_nested_attributes_for :company, :allow_destroy => true
-  
-  before_validation :set_current_date 
-            
+              
   validates :candidate_id,                                              :presence => true
   validates :company,                                                   :presence => true
   validates :role,        :length    => { :within => 3..80 },           :presence => true
@@ -20,15 +18,12 @@ class Experience < ActiveRecord::Base
   validates :start_year,  :inclusion => { :in => 1900..Time.now.year }, :presence => true
   validates :end_month,   :inclusion => { :in => 1..12 },               :presence => true
   validates :end_year,    :inclusion => { :in => 1900..Time.now.year }, :presence => true
-  validate  :date_consistance
   validates :description, :length    => { :within => 20..300 },         :allow_blank => true
   
-  after_update      :set_main
-  after_create      :set_main, :update_completion_new
-  after_destroy     :set_main, :update_completion_del
+  validate  :date_consistance, :unless => lambda { |proc| duration.nil? || duration > 0 }
   
   def duration
-    (end_year.to_s.empty? || start_year.to_s.empty? || start_month.to_s.empty? || end_month.to_s.empty?) ? nil : (end_year - start_year - 1 + (13 - start_month + end_month) / 12.0)      
+    end_year - start_year - 1 + (13 - start_month + end_month) / 12.0 unless end_year.to_s.empty? || start_year.to_s.empty? || start_month.to_s.empty? || end_month.to_s.empty?     
   end
   
   def yrs_after_first_event
@@ -38,27 +33,7 @@ class Experience < ActiveRecord::Base
   private
     
     def date_consistance
-      errors.add(:duration, I18n.t('experience.validations.duration')) if duration < 0
-    end
-    
-    def set_current_date
-      (self.end_month = Time.now.month ; self.end_year = Time.now.year) if current?
-    end
-    
-    def set_main
-      unless candidate.last_experience.nil?
-        candidate.update_attributes :main_experience => candidate.last_experience.id unless candidate.main_experience == candidate.last_experience.id
-      else
-        candidate.update_attributes :main_experience => nil
-      end
-    end
-    
-    def update_completion_new
-      candidate.update_attributes :profile_completion => candidate.profile_completion + 5 if candidate.experiences.count < 4
-    end
-  
-    def update_completion_del
-      candidate.update_attributes :profile_completion => candidate.profile_completion - 5 if candidate.experiences.count < 3
+      errors.add :duration, I18n.t('experience.validations.duration')
     end
     
 end

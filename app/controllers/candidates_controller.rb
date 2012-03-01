@@ -99,7 +99,7 @@ class CandidatesController < ApplicationController
     def update_profile_completion
       update_completion_city    unless params[:candidate][:city].nil?
       update_completion_country unless params[:candidate][:country].nil?
-      #update_completion_social  unless params[:candidate][:facebook_login].nil? && params[:candidate][:linkedin_login].nil? && params[:candidate][:twitter_login].nil?
+      # update_completion_social  unless params[:candidate][:facebook_login].nil? && params[:candidate][:linkedin_login].nil? && params[:candidate][:twitter_login].nil?
       update_completion_picture unless params[:candidate][:image].nil?
     end
     
@@ -109,8 +109,8 @@ class CandidatesController < ApplicationController
     end
 
     def update_completion_country
-      @candidate.update_attributes :profile_completion => @candidate.profile_completion+5 if @candidate.country.empty? && !params[:candidate][:country].empty?
-      @candidate.update_attributes :profile_completion => @candidate.profile_completion-5 if params[:candidate][:country].empty? && !@candidate.country.empty?
+      @candidate.update_attributes :profile_completion => @candidate.profile_completion+5 # if @candidate.country.empty? && !params[:candidate][:country].empty?
+      #       @candidate.update_attributes :profile_completion => @candidate.profile_completion-5 if params[:candidate][:country].empty? && !@candidate.country.empty?
     end
     
     def update_completion_social

@@ -9,7 +9,7 @@
   <div class='level'><%= t('languages.level').remove_accents.upcase %></div>
 </h1>
 <div id='new_language_candidate' class='hidden'></div>
-<% unless @language_candidates.empty? %>
+<% unless candidate.no_lang? %>
   <% @language_candidates.each do |language_candidate| %>
   	<div id='language_candidate_<%= language_candidate.id %>'>
    		<%= render 'language_candidates/show', :candidate => candidate, :language_candidate => language_candidate %>

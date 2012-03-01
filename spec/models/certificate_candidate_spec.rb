@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe CertificateCandidate do
+  
   before(:each) do
     @attr                  = { :level_score => '550' }
     @candidate             = Factory(:candidate)

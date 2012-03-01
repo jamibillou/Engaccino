@@ -21,7 +21,7 @@ $(document).ready(function() {
 /* OBJECT CREATION */
 function handleAjaxCreation(model, partials) {
   $('#new_'+model).bind('ajax:success', function(evt, data, status, xhr) { callRefresh(model, data, partials); })
-	              .bind('ajax:error',   function(evt, xhr, status)       { $('#errors_new_'+model).html(buildErrorMessages(xhr)); });
+	                .bind('ajax:error',   function(evt, xhr, status)       { $('#errors_new_'+model).html(buildErrorMessages(xhr)); });
 }
 
 /* OBJECT EDITION */

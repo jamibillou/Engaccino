@@ -322,13 +322,6 @@ describe Experience do
       @experience.should respond_to(:yrs_after_first_event)
     end
     
-    it "should be nil if a year or month is missing" do
-      Experience.new(@attr.merge(:start_year  => '')).yrs_after_first_event.should be_nil
-      Experience.new(@attr.merge(:end_year    => '')).yrs_after_first_event.should be_nil
-      Experience.new(@attr.merge(:start_month => '')).yrs_after_first_event.should be_nil
-      Experience.new(@attr.merge(:end_month   => '')).yrs_after_first_event.should be_nil
-    end
-    
     it "should be 0 if the experience is the first event" do
       @experience.yrs_after_first_event.should == 0
     end

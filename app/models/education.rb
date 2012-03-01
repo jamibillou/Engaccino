@@ -20,14 +20,10 @@ class Education < ActiveRecord::Base
   validates :end_month,   :inclusion => { :in => 1..12 },               :presence => true
   validates :description, :length    => { :within => 20..300 },         :allow_blank => true
   
-  validate  :date_consistance
-  
-  after_update  :set_main
-  after_create  :set_main, :update_completion_new
-  after_destroy :set_main, :update_completion_del
+  validate  :date_consistance, :unless => lambda { |proc| duration.nil? || duration > 0 }
   
   def duration
-    (end_year.to_s.empty? || start_year.to_s.empty? || start_month.to_s.empty? || end_month.to_s.empty?) ? nil : (end_year - start_year - 1 + (13 - start_month + end_month) / 12.0)      
+    end_year - start_year - 1 + (13 - start_month + end_month) / 12.0 unless end_year.to_s.empty? || start_year.to_s.empty? || start_month.to_s.empty? || end_month.to_s.empty?
   end
   
   def yrs_after_first_event
@@ -37,23 +33,7 @@ class Education < ActiveRecord::Base
   private
   
     def date_consistance
-      errors.add(:duration, I18n.t('education.validations.duration')) if duration < 0
-    end
-    
-    def set_main
-      unless  candidate.last_education.nil?
-        candidate.update_attributes :main_education => candidate.last_education.id unless candidate.main_education == candidate.last_education.id
-      else
-        candidate.update_attributes :main_education => nil
-      end
-    end
-    
-    def update_completion_new
-      candidate.update_attributes :profile_completion => candidate.profile_completion + 5 if candidate.educations.count < 4
-    end
-    
-    def update_completion_del
-      candidate.update_attributes :profile_completion => candidate.profile_completion - 5 if candidate.educations.count < 3
+      errors.add :duration, I18n.t('education.validations.duration')
     end
     
 end

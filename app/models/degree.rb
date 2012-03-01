@@ -5,8 +5,8 @@ class Degree < ActiveRecord::Base
   belongs_to :degree_type
   
   has_and_belongs_to_many :schools
-  has_many :educations, :dependent => :destroy
-  has_many :candidates, :through => :educations
+  has_many                :educations, :dependent => :destroy
+  has_many                :candidates, :through   => :educations
   
   accepts_nested_attributes_for :degree_type, :allow_destroy => true
   
