@@ -91,10 +91,9 @@ $ ->
 @buildErrorMessages = (xhr) ->
   try 
     errors = $.parseJSON(xhr.responseText)
-    alert(xhr.responseText)
   catch err
     errors = message: 'JSON Error'
   errorMessages = 'Error(s): '
-  errorMessages += error+' '+errors[error]+' ' for error in errors
+  errorMessages += error+' '+errors[error]+' ' for error of errors
   errorMessages
     
