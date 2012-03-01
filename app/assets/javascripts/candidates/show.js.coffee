@@ -17,16 +17,15 @@ $ ->
 
 ## OBJECT CREATION 
 @handleAjaxCreation = (model, partials) ->
-  $('#new_'+model).bind('ajax:success', function(evt, data, status, xhr) { callRefresh(model, data, partials); })
-	              .bind('ajax:error',   function(evt, xhr, status)       { $('#errors_new_'+model).html(buildErrorMessages(xhr)); });
+  $('#new_'+model).bind('ajax:success', (evt, data, status, xhr) -> callRefresh(model, data, partials))
+	                .bind('ajax:error',   (evt, xhr, status)       -> $('#errors_new_'+model).html(buildErrorMessages(xhr)))
 
 ## OBJECT EDITION
-function handleAjaxEdition(form_id, model, partials) {
-  var id = form_id.substr(form_id.lastIndexOf('_')+1,form_id.length-form_id.lastIndexOf('_'));
-  $('#'+'show_'+model+'_'+id).click(function() { showForm(model, partials, id); });
-  $('#'+form_id).bind('ajax:success', function(evt, data, status, xhr) { (xhr.responseText == 'destroy!') ? $('#'+model+'_'+id).remove() && refreshPartials(partials) : callRefresh(model, data, partials) })
-                .bind('ajax:error',   function(evt, xhr, status)       { $('#errors_'+model+id).html(buildErrorMessages(xhr)); });	
-}
+@handleAjaxEdition = (form_id, model, partials) ->
+  id = form_id.substr(form_id.lastIndexOf('_')+1,form_id.length-form_id.lastIndexOf('_'))
+  $('#'+'show_'+model+'_'+id).click -> showForm(model, partials, id)
+  $('#'+form_id).bind('ajax:success', (evt, data, status, xhr) -> if xhr.responseText is 'destroy!' then $('#'+model+'_'+id).remove() and refreshPartials(partials) else callRefresh(model, data, partials))
+                .bind('ajax:error', (evt, xhr, status) -> $('#errors_'+model+id).html(buildErrorMessages(xhr)))
 
 ## SHOW/HIDE FORMS
 @showForm = (model, partials, id) ->
@@ -36,45 +35,66 @@ function handleAjaxEdition(form_id, model, partials) {
   if (typeof(id) == 'undefined') then hide('new_'+model) && show('link_add_'+model) else hide('edit_'+model+'_'+id) and show('show_'+model+'_'+id)
 
 ## AJAX CALLS TO CONTROLLERS ACTIONS
-function callRefresh(model, data, partials) {
-  $.ajax({
-    url: 'refresh', type: 'POST', data: {model: model},
-  	beforeSend:  function() { show(model+"_loader"); },
-    complete:    function() { hide(model+"_loader"); },
-    success:     function(data) { $('#'+model+'s').html(data); $('.edit_'+model).each(function() { handleAjaxEdition($(this).attr('id'), model, partials); }); refreshPartials(partials); }
-  })
-}
-function callNew(model, partials) {
-  $.ajax({
-  	url: '../'+model+'s/new',
-  	beforeSend:  function() { show(model+"_loader"); },
-    complete:    function() { hide(model+"_loader"); },																	  
-  	success:     function(data) { $('#new_'+model).html(data); $('#new_'+model).show(); $('#link_add_'+model).hide(); handleAjaxCreation(model, partials); }
-  })
-}
+@callRefresh = (model, data, partials) ->
+  $.ajax 'refresh',
+    type: 'POST'
+    data: {model: model}
+    beforeSend: -> 
+      show(model+"_loader")
+    complete: -> 
+      hide(model+"_loader")
+    success: (data) -> 
+      $('#'+model+'s').html(data)
+      $('.edit_'+model).each -> handleAjaxEdition($(this).attr('id'), model, partials)
+      refreshPartials(partials)
+      
+@callNew = (model, partials) ->
+  $.ajax '../'+model+'s/new',
+  	beforeSend: -> 
+  	  show(model+"_loader")
+    complete: -> 
+      hide(model+"_loader")															  
+  	success: (data) -> 
+  	  $('#new_'+model).html(data)
+  	  show('new_'+model)
+  	  hide('link_add_'+model)
+  	  handleAjaxCreation(model, partials)
 
 ## REFRESH PARTIALS
-function refreshPartials(partials) {
-  if (typeof(partials) != 'undefined') {
-    $.each(partials, function(i) { $.ajax({ url: 'refresh', type: 'POST', data:        { partial: partials[i] },
-																		  beforeSend:  function() { show(partials[i]+"_loader"); },
-																		  complete:    function() { hide(partials[i]+"_loader"); },
-    																	  success:     function(data) { $('#'+partials[i]).html(data); initBIP(I18n.t('click_to_edit')); } }) } );
-  }
-}
-function refreshPartialThroughBIPcombo(partial, BIPcombo) {
-  $('#'+BIPcombo+' span').each(function() {
-    $(this).change(function() {
-      $.ajax({
-	      url: 'refresh', type: 'POST', data: {partial: partial},
-		    success: function(data) { $('#'+partial).html(data); initBIP(I18n.t('click_to_edit')); refreshPartialThroughBIPcombo(partial, BIPcombo); }
-	    })
-    });
-  });
-}
+@refreshPartials = (partials) ->
+  if typeof(partials) != 'undefined'
+    refreshPartial(partial) for partial in partials
+          
+@refreshPartial = (partial) ->
+  $.ajax 'refresh',
+  type: 'POST'
+  data: {partial: partial}
+  beforeSend: -> 
+    show(partial+"_loader")
+  complete: -> 
+    hide(partial+"_loader")
+  success: (data) ->
+    $('#'+partial).html(data)
+    initBIP(I18n.t('click_to_edit')) 
 
-function buildErrorMessages(xhr) {
-  try { errors = $.parseJSON(xhr.responseText); }
-  catch(err) { errors = { message: 'JSON Error' }; }
-  errorMessages = 'Error(s): '; for (error in errors) { errorMessages += error+' '+errors[error]+' '; } return errorMessages;
-}
+@refreshPartialThroughBIPcombo = (partial, BIPcombo) ->
+  $('#'+BIPcombo+' span').each ->
+    $(this).change ->
+      $.ajax 'refresh',
+        type: 'POST'
+        data: {partial: partial}
+        success: (data) -> 
+          $('#'+partial).html(data)
+          initBIP(I18n.t('click_to_edit'))
+          refreshPartialThroughBIPcombo(partial, BIPcombo)
+
+@buildErrorMessages = (xhr) ->
+  try 
+    errors = $.parseJSON(xhr.responseText)
+    alert(xhr.responseText)
+  catch err
+    errors = message: 'JSON Error'
+  errorMessages = 'Error(s): '
+  errorMessages += error+' '+errors[error]+' ' for error in errors
+  errorMessages
+    

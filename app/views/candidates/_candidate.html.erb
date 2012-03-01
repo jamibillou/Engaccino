@@ -1,8 +1,3 @@
-<% @experiences          		         = candidate.experiences.order("start_year DESC, start_month DESC") %>
-<% @educations           		         = candidate.educations.order("start_year DESC, start_month DESC") %>
-<% @professional_skill_candidates    = candidate.professional_skill_candidates %>
-<% @interpersonal_skill_candidates   = candidate.interpersonal_skill_candidates %>
-
 <div id="candidate_<%= candidate.id %>" class="card"<%= " style='height:410px;'" if params[:action] == 'index' %>>
   <div class='loader' id='candidate_loader'><%= image_tag "loader.gif" %></div>
   <div class="head">

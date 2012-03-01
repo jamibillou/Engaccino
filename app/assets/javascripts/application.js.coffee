@@ -5,8 +5,13 @@
 //= require best_in_place
 //= require i18n
 //= require i18n/translations
+//= require rails.validations
 
 $ ->
+  ## AUTOCOMPLETE
+  $('input.country').each -> $(this).autocomplete({ source:"/ajax/countries", minLength: 2, autoFocus: true })
+  $('input.month').each   -> $(this).autocomplete({ source:"/ajax/months",    minLength: 1 })
+  $('input.year').each    -> $(this).autocomplete({ source:"/ajax/years",     minLength: 2 })
   customForm('search_bar_form', '')
   $('#close_flash').click -> hide('flash')
     
