@@ -8,7 +8,7 @@
   </div>
   <%=t 'candidates.show.profile_completion.sentence' %><%= candidate.profile_completion %><%=t 'candidates.show.profile_completion.%complete' %><%= link_to_function t('candidates.show.profile_completion.link'), "show('missing')" %>
   <div id='missing' class='hidden'>
-  	Missing items:
+  	<%=t 'candidates.missing.missing_items' %>
   	<ul>
   		<% if candidate.professional_skill_candidates.count < 3 %><li><%=t 'professional_skills.add_some' %></li><% end %>
   		<% if candidate.interpersonal_skill_candidates.count < 3 %><li><%=t 'interpersonal_skills.add_some' %></li><% end %>

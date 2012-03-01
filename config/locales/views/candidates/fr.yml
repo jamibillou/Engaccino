@@ -32,7 +32,8 @@ fr:
     happy_status: "Heureux au travail"
     profile_photo: "Photo"
     
-    missing:      
+    missing:
+      missing_items: "Eléments manquants : "     
       localisation: "D'où venez-vous ?"
       social_network: "Faites le lien avec les autres réseaux sociaux en indiquant vos adresses Facebook, Linkedin et/ou Twitter"
       profile_picture: "Ne soyez pas timide, rendez votre profile plus sympa en mettant une photo de profil !"

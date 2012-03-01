@@ -19,6 +19,10 @@ class CandidatesController < ApplicationController
   
   def show
     @candidate = Candidate.find(params[:id])
+    @experiences = @candidate.experiences.order("start_year DESC, start_month DESC")
+    @educations = @candidate.educations.order("start_year DESC, start_month DESC") 
+    @professional_skill_candidates = @candidate.professional_skill_candidates
+    @interpersonal_skill_candidates = @candidate.interpersonal_skill_candidates 
     @title = "#{@candidate.first_name} #{@candidate.last_name}"
     init_page :javascripts => 'candidates/show'
   end

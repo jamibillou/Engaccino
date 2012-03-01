@@ -16,6 +16,7 @@ group :development do
   gem 'annotate', '2.4.1.beta1'
   gem 'faker'
   gem 'less-rails'
+  gem 'coffee-rails'
 end
 
 group :test do
