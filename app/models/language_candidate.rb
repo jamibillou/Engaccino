@@ -7,21 +7,8 @@ class LanguageCandidate < ActiveRecord::Base
   
   accepts_nested_attributes_for :language,  :allow_destroy => true
 
-  validates :candidate, :language,                                                                              :presence => true
-  validates :level,                :inclusion => { :in => [ 'beginner', 'intermediate', 'fluent', 'native' ] }, :presence => true
-  
-  after_create   :update_completion_new
-  after_destroy  :update_completion_del
-  
-  private
-  
-    def update_completion_new
-      candidate.update_attributes :profile_completion => candidate.profile_completion+10 if candidate.language_candidates.count < 2
-    end
-    
-    def update_completion_del
-      candidate.update_attributes :profile_completion => candidate.profile_completion-10 if candidate.language_candidates.empty?
-    end
+  validates :candidate, :language,                                                               :presence => true
+  validates :level, :inclusion => { :in => [ 'beginner', 'intermediate', 'fluent', 'native' ] }, :presence => true
   
 end
 

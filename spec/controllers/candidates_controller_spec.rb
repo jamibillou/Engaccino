@@ -23,18 +23,14 @@ describe CandidatesController do
     
       before(:each) do
         test_sign_in(@candidate)
-        first_candidate = Candidate.create!(  :first_name              => "First",
-                                              :last_name               => "Candidate",
-                                              :email                   => "firstcandidate@example.com",
-                                              :password                => "firstCandidate",
-                                              :password_confirmation   => "firstCandidate",
-                                              :status                  => "available")
-        second_candidate = Candidate.create!( :first_name              => "Second",
-                                              :last_name               => "Candidate",
-                                              :email                   => "secondcandidate@example.com",
-                                              :password                => "secondCandidate",
-                                              :password_confirmation   => "secondCandidate",
-                                              :status                  => "open")
+        first_candidate  = Candidate.create! :first_name  => "First",                       :last_name             => "Candidate",
+                                             :password    => "firstCandidate",              :password_confirmation => "firstCandidate",
+                                             :email       => "firstcandidate@example.com",  :status                => "available",
+                                             :city        => "Sample city",                 :country               => "Netherlands"
+        second_candidate = Candidate.create! :first_name  => "Second",                      :last_name             => "Candidate",
+                                             :password    => "secondCandidate",             :password_confirmation => "secondCandidate",
+                                             :email       => "secondcandidate@example.com", :status                => "available",
+                                             :city        => "Sample city",                 :country               => "Netherlands"
       end
       
       describe "who haven't completed signup" do
@@ -193,12 +189,10 @@ describe CandidatesController do
       describe "success" do
       
         before(:each) do
-          @attr = { :first_name             => "First name",
-                    :last_name              => "Last name",
-                    :email                  => "new_candidate@example.com", 
-                    :password               => "pouetpouet45", 
-                    :password_confirmation  => "pouetpouet45",
-                    :status                 => "available" }
+          @attr = { :first_name => "First name",                :last_name             => "Last name",
+                    :password   => "pouetpouet45",              :password_confirmation => "pouetpouet45",
+                    :email      => "new_candidate@example.com", :status                => "available",
+                    :city       => "Sample city",               :country               => "Netherlands" }
         end
         
         it "should create a candidate" do

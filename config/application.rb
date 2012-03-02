@@ -23,7 +23,8 @@ module Engaccino
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
 
     # Activate observers that should always be running.
-    config.active_record.observers = :candidate_observer, :education_observer, :experience_observer
+    config.active_record.observers = :user_observer, :education_observer, :experience_observer,
+                                     :interpersonal_skill_candidate_observer, :professional_skill_candidate_observer, :language_candidate_observer
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.

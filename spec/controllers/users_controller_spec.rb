@@ -23,16 +23,14 @@ describe UsersController do
     
       before(:each) do
         test_sign_in(@user)
-        first_user = User.create!(:first_name              => "First",
-                                  :last_name               => "User",
-                                  :email                   => "firstuser@example.com",
-                                  :password                => "firstUser",
-                                  :password_confirmation   => "firstUser")
-        second_user = User.create!(:first_name             => "Second",
-                                   :last_name              => "User",
-                                   :email                  => "seconduser@example.com",
-                                   :password               => "secondUser",
-                                   :password_confirmation  => "secondUser")
+        first_user  = User.create! :first_name => "First",   :last_name => "User",
+                                   :email => "firstuser@example.com",
+                                   :password => "firstUser", :password_confirmation => "firstUser",
+                                   :city => "Sample city",   :country => "Netherlands"
+        second_user = User.create! :first_name => "Second",   :last_name => "User",
+                                   :email => "seconduser@example.com",
+                                   :password => "secondUser", :password_confirmation => "secondUser",
+                                   :city => "Sample city",   :country => "Netherlands"
       end
       
       describe "who haven't completed signup" do

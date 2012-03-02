@@ -30,7 +30,7 @@ describe User do
   
     describe "first name and last name" do
     
-      it "should not accept empty values" do
+      it "should reject empty values" do
         empty_first_name_user = User.new(@attr.merge(:first_name => ""))
         empty_last_name_user = User.new(@attr.merge(:last_name => ""))
         empty_name_user = User.new(@attr.merge(:first_name => "", :last_name => ""))
@@ -88,9 +88,9 @@ describe User do
     
     describe "country" do
     
-      it "should accept empty values" do
+      it "should reject empty values" do
         empty_country_user = User.new(@attr.merge(:country => ""))
-        empty_country_user.should be_valid
+        empty_country_user.should_not be_valid
       end
       
       it "should reject invalid values" do
@@ -107,6 +107,14 @@ describe User do
           valid_country_user = User.new(@attr.merge(:country => valid_country))
           valid_country_user.should be_valid
         end
+      end
+    end
+    
+    describe "city" do
+    
+      it "should reject empty values" do
+        empty_city_user = User.new(@attr.merge(:city => ""))
+        empty_city_user.should_not be_valid
       end
     end
     

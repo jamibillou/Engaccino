@@ -13,7 +13,9 @@ class User < ActiveRecord::Base
   validates :email,                      :format => { :with => email_regex },   :uniqueness => { :case_sensitive => false },     :presence => true
   validates :password,                   :on => :create, :confirmation => true, :length => { :within => 6..40 },                 :presence => true
   validates :first_name, :last_name,     :length => { :maximum => 80 },                                                          :presence => true
-  validates :country, :nationality,      :inclusion => { :in => countries_array },                                               :allow_blank => true
+  validates :country,                    :inclusion => { :in => countries_array },                                               :presence => true
+  validates :city,                                                                                                               :presence => true
+  validates :nationality,                :inclusion => { :in => countries_array },                                               :allow_blank => true
   validates :year_of_birth,              :inclusion => { :in => 100.years.ago.year..Time.now.year },                             :allow_blank => true
   validates :phone,                      :length => { :within => 7..20 },       :format => { :with => phone_regex },             :allow_blank => true     
   validates :facebook_login,             :format => { :with => email_regex },   :uniqueness => { :case_sensitive => false },     :allow_blank => true
