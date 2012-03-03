@@ -22,11 +22,13 @@ class EducationObserver < ActiveRecord::Observer
     end
     
     def update_profile_completion_create(education)
-      education.candidate.update_attributes :profile_completion => education.candidate.profile_completion + (education.description.nil? ? 5 : 10) unless education.candidate.educations.count > 2
+      profile_completion = education.candidate.profile_completion + (education.description.nil? || education.description == '' ? 5 : 10)
+      education.candidate.update_attributes :profile_completion => profile_completion unless education.candidate.educations.count > 2
     end
     
     def update_profile_completion_destroy(education)
-      education.candidate.update_attributes :profile_completion => education.candidate.profile_completion - (education.description.nil? ? 5 : 10) unless education.candidate.educations.count > 1
+      profile_completion = education.candidate.profile_completion - (education.description.nil? || education.description == '' ? 5 : 10)
+      education.candidate.update_attributes :profile_completion => profile_completion unless education.candidate.educations.count > 1
     end
     
     def update_profile_completion_update(education)

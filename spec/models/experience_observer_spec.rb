@@ -3,8 +3,8 @@ require 'spec_helper'
 describe ExperienceObserver do
   
     before(:each) do
-      @candidate  = Factory(:candidate)
-      @company    = Factory(:company)
+      @candidate = Factory(:candidate)
+      @company   = Factory(:company)
     end
 
     describe "set_main method" do
@@ -129,7 +129,7 @@ describe ExperienceObserver do
       
       it "should not decrease the profile completion when candidates with more than 3 experiences delete one" do
         experience4 = Experience.new(:start_month => 4, :start_year => 2003, :end_month => 4, :end_year => 2004, :role => 'Sample postion')
-        experience4.candidate = @candidate ; experience4.company = @company
+        experience4.candidate = @candidate ; experience4.company = @company ; experience4.save!
         before_profile_completion_update = @candidate.profile_completion
         experience4.destroy
         @candidate.profile_completion.should == before_profile_completion_update
@@ -162,6 +162,12 @@ describe ExperienceObserver do
         before_profile_completion_update = @candidate.profile_completion
         @experience2.update_attributes(:description => '')
         @candidate.profile_completion.should == before_profile_completion_update - 5
-      end      
+      end
+      
+      it "should not increase or decrease the profile completion when a description is edited but not deleted" do
+        before_profile_completion_update = @candidate.profile_completion
+        @experience2.update_attributes(:description => 'Bla bla bla bla bla bla bla bla bla')
+        @candidate.profile_completion.should == before_profile_completion_update
+      end
     end
   end

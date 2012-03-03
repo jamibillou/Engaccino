@@ -28,11 +28,13 @@ class ExperienceObserver < ActiveRecord::Observer
     end
     
     def update_profile_completion_create(experience)
-      experience.candidate.update_attributes :profile_completion => experience.candidate.profile_completion + (experience.description.nil? ? 5 : 10) unless experience.candidate.experiences.count > 3
+      profile_completion = experience.candidate.profile_completion + (experience.description.nil? || experience.description == '' ? 5 : 10)
+      experience.candidate.update_attributes :profile_completion => profile_completion unless experience.candidate.experiences.count > 3
     end
     
     def update_profile_completion_destroy(experience)
-      experience.candidate.update_attributes :profile_completion => experience.candidate.profile_completion - (experience.description.nil? ? 5 : 10) unless experience.candidate.experiences.count > 2
+      profile_completion = experience.candidate.profile_completion - (experience.description.nil? || experience.description == '' ? 5 : 10)
+      experience.candidate.update_attributes :profile_completion => profile_completion unless experience.candidate.experiences.count > 2
     end
     
     def update_profile_completion_update(experience)

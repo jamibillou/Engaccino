@@ -135,6 +135,12 @@ describe EducationObserver do
       before_profile_completion_update = @candidate.profile_completion
       @education2.update_attributes(:description => '')
       @candidate.profile_completion.should == before_profile_completion_update - 5
-    end     
+    end 
+    
+    it "should not increase or decrease the profile completion when a description is edited but not deleted" do
+      before_profile_completion_update = @candidate.profile_completion
+      @education2.update_attributes(:description => 'Bla bla bla bla bla bla bla bla bla')
+      @candidate.profile_completion.should == before_profile_completion_update
+    end    
   end
 end

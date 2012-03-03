@@ -42,11 +42,11 @@ describe InterpersonalSkillCandidate do
   
   describe "validations" do
   
-    it "should require a description" do
+    it "should accept empty descriptions" do
       no_description_interpersonal_skill_candidate                      = InterpersonalSkillCandidate.new @attr.merge(:description => '')
       no_description_interpersonal_skill_candidate.candidate            = @candidate
       no_description_interpersonal_skill_candidate.interpersonal_skill  = @interpersonal_skill
-      no_description_interpersonal_skill_candidate.should_not be_valid
+      no_description_interpersonal_skill_candidate.should be_valid
     end
     
     it "should reject too short descriptions" do

@@ -43,11 +43,11 @@ describe ProfessionalSkillCandidate do
   
   describe "validations" do
   
-    it "should require a description" do
+    it "should accept empty descriptions" do
       no_description_professional_skill_candidate                      = ProfessionalSkillCandidate.new @attr.merge(:description => '')
       no_description_professional_skill_candidate.candidate            = @candidate
       no_description_professional_skill_candidate.professional_skill   = @professional_skill
-      no_description_professional_skill_candidate.should_not be_valid
+      no_description_professional_skill_candidate.should be_valid
     end
     
     it "should reject too short descriptions" do

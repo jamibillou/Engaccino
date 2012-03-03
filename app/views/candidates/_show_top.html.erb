@@ -6,19 +6,21 @@
   <div id="completion_bar_empty" class="slightly_round">
     <div id="completion_bar_full" class="slightly_round" style="width: <%= 3*candidate.profile_completion %>px;"></div>
   </div>
-  <%=t 'candidates.show.profile_completion.sentence' %><%= candidate.profile_completion %><%=t 'candidates.show.profile_completion.%complete' %><%= link_to_function t('candidates.show.profile_completion.link'), "show('missing')" %>
+  <%=t 'candidates.show.profile_completion.sentence' %>
+  <%= candidate.profile_completion %>
+  <%=t 'candidates.show.profile_completion.%complete' %>
+  <%= link_to_function t('candidates.show.profile_completion.link'), "show('missing'); show('close_missing')" %>
+  <%= link_to_function '', "hide('missing') ; hide('close_missing')", :class => 'hidden close', :id => 'close_missing' %>
   <div id='missing' class='hidden'>
-  	<%=t 'candidates.missing.missing_items' %>
   	<ul>
-  		<% if candidate.professional_skill_candidates.count < 3 %><li><%=t 'professional_skills.add_some' %></li><% end %>
-  		<% if candidate.interpersonal_skill_candidates.count < 3 %><li><%=t 'interpersonal_skills.add_some' %></li><% end %>
-  		<% if candidate.educations.count < 3 %><li><%=t 'educations.add_some' %></li><% end %>
-  		<% if candidate.experiences.count < 3 %><li><%=t 'experiences.add_some' %></li><% end %>
-  		<% if candidate.language_candidates.empty? %><li><%=t 'languages.add_some' %></li><% end %>
-  		<% if candidate.city.nil? || candidate.country.nil? %><li><%=t 'candidates.missing.localisation' %></li><% end %>
-  		<% if candidate.facebook_login.nil? && candidate.linkedin_login.nil? && candidate.twitter_login.nil? %><li><%=t 'candidates.missing.social_network' %></li><% end %>
-  		<% if candidate.image.to_s.nil? %><li><%=t 'candidates.missing.profile_picture' %></li><% end %>
+  		<% if candidate.professional_skill_candidates.count < 3 %><li><%= "#{t('professional_skills.title')}#{t('_:')} #{t('professional_skills.add_some').downcase}" %></li><% end %>
+  		<% if candidate.interpersonal_skill_candidates.count < 3 %><li><%= "#{t('interpersonal_skills.title')}#{t('_:')} #{t('interpersonal_skills.add_some').downcase}" %></li><% end %>
+  		<% if candidate.educations.count < 3 %><li><%= "#{t('educations.title')}#{t('_:')} #{t('educations.add_some').downcase}" %></li><% end %>
+  		<% if candidate.experiences.count < 3 %><li><%= "#{t('experiences.title')}#{t('_:')} #{t('experiences.add_some').downcase}" %></li><% end %>
+  		<% if candidate.language_candidates.empty? %><li><%= "#{t('languages.title')}#{t('_:')} #{t('languages.add_some').downcase}" %></li><% end %>
+  		<% if candidate.city.nil? || candidate.country.nil? %><li><%= "#{t('candidates.location')}#{t('_:')} #{t('candidates.missing.location')}" %></li><% end %>
+  		<% if candidate.facebook_login.nil? && candidate.linkedin_login.nil? && candidate.twitter_login.nil? %><li><%= "#{t('candidates.social_networks')}#{t('_:')} #{t('candidates.missing.social_networks').downcase}" %></li><% end %>
+  		<% if candidate.image.to_s.nil? %><li><%= "#{t('candidates.profile_picture')}#{t('_:')} #{t('candidates.missing.profile_picture').downcase}" %></li><% end %>
   	</ul>
-  	<%= link_to_function t('hide'), "hide('missing')", :class => "right" %>
   </div>
 </div>

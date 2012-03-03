@@ -97,7 +97,6 @@ input[type=submit] {
   .radius(5px);
   &:hover             { text-decoration: underline }
 }
-
 a.button              { padding: 9px 30px; margin: 0; text-decoration: none; font-size: 13px; font-weight: bold;
   &:hover             { text-decoration: underline }
   &.small             { padding: 4px 15px;    // TO WIPE OUT
@@ -109,6 +108,9 @@ a.button              { padding: 9px 30px; margin: 0; text-decoration: none; fon
     border:                     1px solid #cbcbcb; color: #444;    font-weight: normal;  .gradient(#fdfdfd, #ebebeb); 
     &:hover           { border: 1px solid #cbcbcb; color: inherit; font-weight: inherit; .gradient(#ebebeb, #fdfdfd); text-decoration: none; }
   }
+}
+a.close             { height: 15px; width: 15px; background-image: url('close_flash.png');
+  &:hover           { background-position: -15px 0 }
 }
 
 // BLOCKS
@@ -131,15 +133,14 @@ a.button              { padding: 9px 30px; margin: 0; text-decoration: none; fon
 .left                 { float: left }
 .right                { float: right }
 .center               { left: 45%; position: relative }
+.inline               { position: inline-block }
 
 // FLASH
 .flash                { font-size: 12px; font-weight: 100; padding: 5px 6px;
   &.success           { .gradient(#d6de23, #bfc61e); color: #6b6f11 }
   &.notice            { .gradient(#fed828, #e9c624); color: #7f6c12 }
   &.error             { .gradient(#fa533f, #e44a37); color: #74241b }
-  a.close             { height: 15px; width: 15px; float: right; background-image: url('close_flash.png');
-    &:hover           { background-position: -15px 0 }
-  }
+  a.close             { float: right }
 }
 
 // AUTOCOMPLETE

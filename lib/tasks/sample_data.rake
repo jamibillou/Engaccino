@@ -28,7 +28,7 @@ def make_candidate
                              :phone          => '+31 0 00000000',                        :email                 => email,
                              :facebook_login => email,                                   :linkedin_login        => email,
                              :password       => password,                                :password_confirmation => password,
-                             :status         => @status_array[rand(@status_array.size)], :profile_completion    => 20
+                             :status         => @status_array[rand(@status_array.size)]
   @candidate.save!
   make_educations
   make_experiences
@@ -128,9 +128,9 @@ def make_dominic
                               :city           => 'Rotterdam',             :country            => 'Netherlands',     
                               :nationality    => 'France',                :year_of_birth      => 1984,
                               :phone          => '+31 6 31912261',        :email              => 'dm@engaccino.com',
-                              :facebook_login => 'd.matheron@gmail.com', :linkedin_login      => 'd.matheron@gmail.com',
+                              :facebook_login => 'd.matheron@gmail.com',  :linkedin_login      => 'd.matheron@gmail.com',
                               :twitter_login  => '@dominic_m',            :password           => 'password', :password_confirmation => 'password',
-                              :status         => 'open',                  :profile_completion => 20
+                              :status         => 'open'
   dominic.toggle!(:admin)
   ltb           = { :role => 'Customer Service Rep.', :company => 'LTB Jeans',             :start_month => 9, :start_year => 2011, :end_month => 2,  :end_year => 2012 }
   tm            = { :role => 'Branch Manager',        :company => 'Transport Marketplace', :start_month => 6, :start_year => 2010, :end_month => 6,  :end_year => 2011 }
@@ -205,7 +205,7 @@ def make_franck
                              :phone          => '+33 6 66393633',       :email              => 'franck@engaccino.com',
                              :facebook_login => 'franck@engaccino.com', :linkedin_login     => 'franck@engaccino.com',
                              :twitter_login  => '@fsabattier',          :password           => 'password', :password_confirmation => 'password',
-                             :status         => 'open',                 :profile_completion => 20
+                             :status         => 'open'
   franck.toggle!(:admin)
   px2      = { :role => 'IT Engineer',                :company => 'PX Therapeutics',        :start_month => 11, :start_year => 2010, :end_month => 2,  :end_year => 2012 }
   london   = { :role => 'IT/Bioinformatics Engineer', :company => 'University of Perugia',  :start_month => 4,  :start_year => 2010, :end_month => 10, :end_year => 2010}

@@ -11,20 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120218141714) do
+ActiveRecord::Schema.define(:version => 20120218103146) do
 
   create_table "certificate_candidates", :force => true do |t|
     t.string   "level_score"
     t.integer  "candidate_id"
     t.integer  "certificate_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "certificates", :force => true do |t|
     t.string   "label"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "companies", :force => true do |t|
@@ -35,21 +35,21 @@ ActiveRecord::Schema.define(:version => 20120218141714) do
     t.string   "phone"
     t.string   "email"
     t.string   "url"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "degree_types", :force => true do |t|
     t.string   "label"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "degrees", :force => true do |t|
     t.string   "label"
     t.integer  "degree_type_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "degrees_schools", :id => false, :force => true do |t|
@@ -66,8 +66,8 @@ ActiveRecord::Schema.define(:version => 20120218141714) do
     t.integer  "start_year"
     t.integer  "end_month"
     t.integer  "end_year"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "experiences", :force => true do |t|
@@ -78,8 +78,8 @@ ActiveRecord::Schema.define(:version => 20120218141714) do
     t.integer  "end_month"
     t.integer  "end_year"
     t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                      :null => false
+    t.datetime "updated_at",                      :null => false
     t.string   "role"
     t.boolean  "current",      :default => false
   end
@@ -88,22 +88,22 @@ ActiveRecord::Schema.define(:version => 20120218141714) do
     t.string   "description"
     t.integer  "candidate_id"
     t.integer  "interpersonal_skill_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
   end
 
   create_table "language_candidates", :force => true do |t|
     t.integer  "language_id"
     t.integer  "candidate_id"
     t.string   "level"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "languages", :force => true do |t|
     t.string   "label"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "professional_skill_candidates", :force => true do |t|
@@ -112,16 +112,16 @@ ActiveRecord::Schema.define(:version => 20120218141714) do
     t.string   "description"
     t.integer  "candidate_id"
     t.integer  "professional_skill_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
   end
 
   create_table "schools", :force => true do |t|
     t.string   "name"
     t.string   "city"
     t.string   "country"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "skill_candidates", :force => true do |t|
@@ -130,15 +130,15 @@ ActiveRecord::Schema.define(:version => 20120218141714) do
     t.string   "description"
     t.integer  "candidate_id"
     t.integer  "skill_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "skills", :force => true do |t|
     t.string   "label"
     t.string   "type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -162,8 +162,8 @@ ActiveRecord::Schema.define(:version => 20120218141714) do
     t.boolean  "admin",              :default => false
     t.string   "salt"
     t.string   "encrypted_password"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.string   "image"
     t.integer  "main_education"
     t.integer  "main_experience"
