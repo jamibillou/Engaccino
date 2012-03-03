@@ -45,7 +45,7 @@ class CandidatesController < ApplicationController
   
   def edit
     build_associations [:experiences, :educations], @candidate
-    init_page :title => (signed_up? ? 'candidates.edit.title' : 'candidates.edit.complete_your_profile'), :javascripts => 'candidates/edit'
+    init_page :title => (signed_up? ? 'candidates.edit.title' : 'candidates.edit.complete_your_profile')
   end
 
   def update

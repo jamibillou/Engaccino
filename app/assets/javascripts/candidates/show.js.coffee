@@ -24,7 +24,7 @@ $ ->
 @handleAjaxEdition = (form_id, model, partials) ->
   id = form_id.substr(form_id.lastIndexOf('_')+1,form_id.length-form_id.lastIndexOf('_'))
   $('#'+'show_'+model+'_'+id).click -> showForm(model, partials, id)
-  $('#'+form_id).bind('ajax:success', (evt, data, status, xhr) -> if xhr.responseText is 'destroy!' then $('#'+model+'_'+id).remove() and refreshPartials(partials) else callRefresh(model, data, partials))
+  $('#'+form_id).bind('ajax:success', (evt, data, status, xhr) -> callRefresh(model, data, partials))
                 .bind('ajax:error', (evt, xhr, status) -> $('#errors_'+model+id).html(buildErrorMessages(xhr)))
 
 ## SHOW/HIDE FORMS
