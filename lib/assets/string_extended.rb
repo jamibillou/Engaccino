@@ -66,5 +66,4 @@ class String
     end
     string
   end
-  
 end

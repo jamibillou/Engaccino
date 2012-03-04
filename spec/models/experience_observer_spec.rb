@@ -76,15 +76,7 @@ describe ExperienceObserver do
          @experience2.candidate = @candidate ; @experience2.company = @company ; @experience2.save!
       end
 
-      it "should increase the profile completion by 5 when candidates with less than 3 experiences add a new one (without description)" do
-        before_profile_completion_update = @candidate.profile_completion
-        experience3 = Experience.new(:start_month => 4, :start_year => 2003, :end_month => 4, :end_year => 2004, :role => 'Sample postion')
-        experience3.candidate = @candidate ; experience3.company = @company
-        experience3.save!
-        @candidate.profile_completion.should == before_profile_completion_update + 5
-      end
-
-      it "should increase the profile completion by 10 when candidates with less than 3 experiences add a new one (with a description)" do
+      it "should increase the profile completion by 10 when candidates with less than 3 experiences add a new one" do
         before_profile_completion_update = @candidate.profile_completion
         experience3 = Experience.new(:start_month => 4, :start_year => 2003, :end_month => 4, :end_year => 2004, :role => 'Sample postion', :description => 'Lorem ipsum bla bla bla bla bla bla bla')
         experience3.candidate = @candidate ; experience3.company = @company
@@ -115,15 +107,9 @@ describe ExperienceObserver do
         @experience3.candidate = @candidate ; @experience3.company = @company ; @experience3.save!
       end
 
-      it "should decrease the profile completion by 5 when candidates with 3 or less experiences delete one (without description)" do
+      it "should decrease the profile completion by 10 when candidates with 3 or less experiences delete one" do
         before_profile_completion_update = @candidate.profile_completion
         @experience1.destroy
-        @candidate.profile_completion.should == before_profile_completion_update - 5
-      end
-
-      it "should decrease the profile completion by 10 when candidates with 3 or less experiences delete one (with a description)" do
-        before_profile_completion_update = @candidate.profile_completion
-        @experience2.destroy
         @candidate.profile_completion.should == before_profile_completion_update - 10
       end
       
@@ -132,41 +118,6 @@ describe ExperienceObserver do
         experience4.candidate = @candidate ; experience4.company = @company ; experience4.save!
         before_profile_completion_update = @candidate.profile_completion
         experience4.destroy
-        @candidate.profile_completion.should == before_profile_completion_update
-      end
-    end
-    
-    describe "update_profile_completion_update method" do
-      
-      before(:each) do
-         @experience1 = Experience.new(:start_month => 1, :start_year => 2000, :end_month => 1, :end_year => 2001, :role => 'Sample postion')
-         @experience2 = Experience.new(:start_month => 1, :start_year => 2001, :end_month => 1, :end_year => 2002, :role => 'Sample postion', :description => 'Lorem ipsum bla bla bla bla bla bla bla')
-         @experience1.candidate = @candidate ; @experience1.company = @company ; @experience1.save!
-         @experience2.candidate = @candidate ; @experience2.company = @company ; @experience2.save!
-      end
-      
-      it "should increase the profile completion by 5 when a description is added to an experience which didn't have one" do
-        before_profile_completion_update = @candidate.profile_completion
-        @experience1.update_attributes(:description => 'Lorem ipsum bla bla bla bla bla bla bla')
-        @candidate.profile_completion.should == before_profile_completion_update + 5
-      end
-      
-      it "should increase the profile completion by 5 when a description is added to an experience which first had one, and then not" do
-        before_profile_completion_update = @candidate.profile_completion
-        @experience2.update_attributes(:description => '')
-        @experience2.update_attributes(:description => 'Lorem ipsum bla bla bla bla bla bla bla')
-        @candidate.profile_completion.should == before_profile_completion_update
-      end
-      
-      it "should decrease the profile completion by 5 when a description is deleted from an experience which had one" do
-        before_profile_completion_update = @candidate.profile_completion
-        @experience2.update_attributes(:description => '')
-        @candidate.profile_completion.should == before_profile_completion_update - 5
-      end
-      
-      it "should not increase or decrease the profile completion when a description is edited but not deleted" do
-        before_profile_completion_update = @candidate.profile_completion
-        @experience2.update_attributes(:description => 'Bla bla bla bla bla bla bla bla bla')
         @candidate.profile_completion.should == before_profile_completion_update
       end
     end

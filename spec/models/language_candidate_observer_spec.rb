@@ -3,8 +3,8 @@ require 'spec_helper'
 describe LanguageCandidateObserver do
   
   before(:each) do
-    @candidate          = Factory(:candidate)
-    @language           = Factory(:language)
+    @candidate = Factory(:candidate)
+    @language  = Factory(:language)
   end
   
   describe "update_profile_completion_create method" do

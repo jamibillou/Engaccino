@@ -7,7 +7,6 @@ class EducationObserver < ActiveRecord::Observer
   
   def after_update(education)
     set_main(education)
-    update_profile_completion_update(education)
   end
   
   def after_destroy(education)
@@ -22,19 +21,11 @@ class EducationObserver < ActiveRecord::Observer
     end
     
     def update_profile_completion_create(education)
-      profile_completion = education.candidate.profile_completion + (education.description.nil? || education.description == '' ? 5 : 10)
-      education.candidate.update_attributes :profile_completion => profile_completion unless education.candidate.educations.count > 2
+      education.candidate.update_attributes :profile_completion => education.candidate.profile_completion + 10 unless education.candidate.educations.count > 2
     end
     
     def update_profile_completion_destroy(education)
-      profile_completion = education.candidate.profile_completion - (education.description.nil? || education.description == '' ? 5 : 10)
-      education.candidate.update_attributes :profile_completion => profile_completion unless education.candidate.educations.count > 1
+      education.candidate.update_attributes :profile_completion => education.candidate.profile_completion - 10 unless education.candidate.educations.count > 1
     end
     
-    def update_profile_completion_update(education)
-      if education.description_changed?
-        val = (education.description_was == nil || education.description_was == '') ? 5 : (education.description == '' ? -5 : nil)
-        education.candidate.update_attributes :profile_completion => education.candidate.profile_completion + val unless val.nil?
-      end
-    end
 end

@@ -45,12 +45,12 @@ class CandidatesController < ApplicationController
   
   def edit
     build_associations [:experiences, :educations], @candidate
-    init_page :title => (signed_up? ? 'candidates.edit.title' : 'candidates.edit.complete_your_profile'), :javascripts => 'candidates/edit'
+    init_page :title => 'candidates.edit.complete_your_profile', :javascripts => 'candidates/edit'
   end
 
   def update
     unless @candidate.update_attributes(params[:candidate])
-      init_page :title => "candidates.edit.#{signed_up? ? 'title' : 'complete_your_profile'}", :javascripts => 'candidates/edit'
+      init_page :title => 'candidates.edit.complete_your_profile', :javascripts => 'candidates/edit'
       respond_to do |format|
         format.html { render_page :edit, :id => @candidate, :flash => { :error => error_messages(@candidate) } }
         format.json { respond_with_bip @candidate }
@@ -58,7 +58,7 @@ class CandidatesController < ApplicationController
     else
       link_schools_degrees
       respond_to do |format|
-        format.html { redirect_to @candidate, :flash => { :success => t("flash.success.#{signed_up? ? 'profile_updated' : 'welcome'}") } }
+        format.html { @candidate.update_attributes :profile_completion => 5 ; redirect_to @candidate, :flash => { :success => t('flash.success.welcome') } }
         format.json { respond_with_bip @candidate }
       end
     end

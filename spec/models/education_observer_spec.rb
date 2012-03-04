@@ -55,14 +55,7 @@ describe EducationObserver do
       @education1.candidate = @candidate ; @education1.school = @school ; @education1.degree = @degree ; @education1.save!
     end
     
-    it "should increase the profile completion by 5 when candidates with less than 2 educations add a new one (without description)" do
-      before_profile_completion_update = @candidate.profile_completion
-      education2 = Education.new(:start_month => 2, :start_year => 2001, :end_month => 2, :end_year => 2002)
-      education2.candidate = @candidate ; education2.school = @school ; education2.degree = @degree ; education2.save!
-      @candidate.profile_completion.should == before_profile_completion_update + 5
-    end
-    
-    it "should increase the profile completion by 10 when candidates with less than 2 educations add a new one (with a description)" do
+    it "should increase the profile completion by 10 when candidates with less than 2 educations add a new one" do
       before_profile_completion_update = @candidate.profile_completion
       education2 = Education.new(:start_month => 2, :start_year => 2001, :end_month => 2, :end_year => 2002, :description => 'Lorem ipsum bla bla bla bla bla bla bla')
       education2.candidate = @candidate ; education2.school = @school ; education2.degree = @degree ; education2.save!
@@ -88,15 +81,9 @@ describe EducationObserver do
       @education2.candidate = @candidate ; @education2.school = @school ; @education2.degree = @degree ; @education2.save!
     end
     
-    it "should decrease the profile completion by 5 when candidates with 2 or less educations delete one (without description)" do
+    it "should decrease the profile completion by 10 when candidates with 2 or less educations delete one" do
       before_profile_completion_update = @candidate.profile_completion
       @education1.destroy
-      @candidate.profile_completion.should == before_profile_completion_update - 5
-    end
-    
-    it "should decrease the profile completion by 10 when candidates with 2 or less educations delete one (with a description)" do
-      before_profile_completion_update = @candidate.profile_completion
-      @education2.destroy
       @candidate.profile_completion.should == before_profile_completion_update - 10
     end  
     
@@ -107,40 +94,5 @@ describe EducationObserver do
       education3.destroy
       @candidate.profile_completion.should == before_profile_completion_update
     end  
-  end
-  
-  describe "update_profile_completion_update method" do
-    
-    before(:each) do
-      @education1 = Education.new(:start_month => 1, :start_year => 2000, :end_month => 1, :end_year => 2001)
-      @education2 = Education.new(:start_month => 2, :start_year => 2001, :end_month => 2, :end_year => 2002, :description => 'Lorem ipsum bla bla bla bla bla bla bla')
-      @education1.candidate = @candidate ; @education1.school = @school ; @education1.degree = @degree ; @education1.save!
-      @education2.candidate = @candidate ; @education2.school = @school ; @education2.degree = @degree ; @education2.save!
-    end
-    
-    it "should increase the profile completion by 5 when a description is added to an education which didn't have one" do
-      before_profile_completion_update = @candidate.profile_completion
-      @education1.update_attributes(:description => 'Lorem ipsum bla bla bla bla bla bla bla')
-      @candidate.profile_completion.should == before_profile_completion_update + 5
-    end
-    
-    it "should increase the profile completion by 5 when a description is added to an education which first had one, and then not" do
-      before_profile_completion_update = @candidate.profile_completion
-      @education2.update_attributes(:description => '')
-      @education2.update_attributes(:description => 'Lorem ipsum bla bla bla bla bla bla bla')
-      @candidate.profile_completion.should == before_profile_completion_update
-    end
-    
-    it "should decrease the profile completion by 5 when a description is deleted from an education which had one" do
-      before_profile_completion_update = @candidate.profile_completion
-      @education2.update_attributes(:description => '')
-      @candidate.profile_completion.should == before_profile_completion_update - 5
-    end 
-    
-    it "should not increase or decrease the profile completion when a description is edited but not deleted" do
-      before_profile_completion_update = @candidate.profile_completion
-      @education2.update_attributes(:description => 'Bla bla bla bla bla bla bla bla bla')
-      @candidate.profile_completion.should == before_profile_completion_update
-    end    
   end
 end

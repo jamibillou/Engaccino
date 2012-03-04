@@ -9,7 +9,6 @@ class ExperienceObserver < ActiveRecord::Observer
   def after_update(experience)
     set_main(experience)
     set_current_date(experience)
-    update_profile_completion_update(experience)
   end
   
   def after_destroy(experience)
@@ -28,19 +27,10 @@ class ExperienceObserver < ActiveRecord::Observer
     end
     
     def update_profile_completion_create(experience)
-      profile_completion = experience.candidate.profile_completion + (experience.description.nil? || experience.description == '' ? 5 : 10)
-      experience.candidate.update_attributes :profile_completion => profile_completion unless experience.candidate.experiences.count > 3
+      experience.candidate.update_attributes :profile_completion => experience.candidate.profile_completion + 10 unless experience.candidate.experiences.count > 3
     end
     
     def update_profile_completion_destroy(experience)
-      profile_completion = experience.candidate.profile_completion - (experience.description.nil? || experience.description == '' ? 5 : 10)
-      experience.candidate.update_attributes :profile_completion => profile_completion unless experience.candidate.experiences.count > 2
-    end
-    
-    def update_profile_completion_update(experience)
-      if experience.description_changed?
-        val = (experience.description_was == nil || experience.description_was == '') ? 5 : (experience.description == '' ? -5 : nil)
-        experience.candidate.update_attributes :profile_completion => experience.candidate.profile_completion + val unless val.nil?
-      end
+      experience.candidate.update_attributes :profile_completion => experience.candidate.profile_completion - 10 unless experience.candidate.experiences.count > 2
     end
 end
