@@ -5,10 +5,12 @@
   <% end %>
   <%= f.text_field                 :role, :id => 'role',    :class => 'field' %>
   <%=t 'from' %>&nbsp;
-  <%= f.text_field :start_month, :class => 'month small field' %>  
+  <%= f.text_field :start_month, :class => 'month small field' %> 
+  <%= f.text_field :start_month, :class => 'hidden field' %>  
   <%= f.text_field :start_year,  :class => 'year mini field' %>                                    
   <%=t 'to' %>&nbsp;
   <%= f.text_field :end_month,   :class => 'month small field' %>
+  <%= f.text_field :end_month,   :class => 'hidden field' %>
   <%= f.text_field :end_year,    :class => 'year mini field' %>
   <%= link_to_delete '-', f, t('experiences.delete') %>
 </div>

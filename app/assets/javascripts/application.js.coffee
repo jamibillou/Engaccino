@@ -7,11 +7,16 @@
 //= require i18n/translations
 //= require rails.validations
 
+months = { 1:I18n.t('months.january'), 2:I18n.t('months.february'), 3:I18n.t('months.march'), 4:I18n.t('months.april'), 5:I18n.t('months.may'), 6:I18n.t('months.june'), 7:I18n.t('months.july'), 8:I18n.t('months.august'), 9:I18n.t('months.september'), 10:I18n.t('months.october'), 11:I18n.t('months.november'), 12:I18n.t('months.december') }
+
 $ ->
   ## AUTOCOMPLETE
   $('input.country').each -> $(this).autocomplete({ source:"/ajax/countries", minLength: 2, autoFocus: true })
-  $('input.month').each   -> $(this).autocomplete({ source:"/ajax/months",    minLength: 1 })
-  $('input.year').each    -> $(this).autocomplete({ source:"/ajax/years",     minLength: 2 })
+  $('input.month').each   -> 
+    $(this).autocomplete({ source:"/ajax/months", minLength: 1, select: (event,ui) -> fillMonthInput($(this).attr("name"),ui.item.index) })
+    $(this).change -> fillMonthInput($(this).attr("name"),getKey($(this).val()))
+    $(this).val(months[$(this).val()])
+  
   customForm('search_bar_form', '')
   $('#close_flash').click -> hide('flash')
     
@@ -103,5 +108,13 @@ $ ->
   $('.best_in_place').best_in_place()
   $('span.best_in_place').each -> $(this).attr('title', title)
   
+@fillMonthInput = (name,index) ->
+  $("input[name^=candidate]").each ->
+    $(this).val(index) if $(this).attr("name") is name and $(this).hasClass("hidden")
+
+@getKey = (elem) ->
+  (return key if elem is months[key]) for key of months
+  if elem != "" then return -1 else return ""
+    
 @show = (id) -> $('#'+id).show()
 @hide = (id) -> $('#'+id).hide()

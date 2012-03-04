@@ -5,12 +5,10 @@ class AjaxController < ApplicationController
   end
   
   def months
-    render json: [ t('months.january'), t('months.february'), t('months.march'), t('months.april'), t('months.may'), t('months.june'), t('months.july'),
-                   t('months.august'), t('months.september'), t('months.october'), t('months.november'), t('months.december') ].select { |month| month.downcase.start_with? params[:term].downcase }
-  end
-  
-  def years
-    render json: (100.years.ago.year..Time.now.year).to_a.map { |year| year.to_s }.select { |year| year.downcase.start_with? params[:term].downcase }.reverse
+    render json: [ { label:t('months.january'), index:1 }, { label:t('months.february'), index:2 }, { label:t('months.march'), index:3 }, 
+                   { label:t('months.april'), index:4 }, { label:t('months.may'), index:5 }, { label:t('months.june'), index:6 }, 
+                   { label:t('months.july'), index:7 }, { label:t('months.august'), index:8 }, { label:t('months.september'), index:9 }, 
+                   { label:t('months.october'), index:10 }, { label:t('months.november'), index:11 }, { label:t('months.december'), index:12 } ].select { |month| month[:label].downcase.start_with? params[:term].downcase }
   end
   
 end
