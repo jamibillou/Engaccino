@@ -57,6 +57,7 @@ describe CertificateCandidate do
     end
   end
 end
+
 # == Schema Information
 #
 # Table name: certificate_candidates

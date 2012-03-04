@@ -26,6 +26,11 @@ describe LanguageCandidate do
       @language_candidate.language_id.should == @language.id
       @language_candidate.language.should == @language
     end    
+    
+    it "should not destroy the associated language" do
+      @language_candidate.destroy
+      Language.find_by_id(@language.id).should_not be_nil
+    end
   end
   
   describe "candidate associations" do
@@ -37,6 +42,11 @@ describe LanguageCandidate do
     it "should have the right associated candidate" do
       @language_candidate.candidate_id.should == @candidate.id
       @language_candidate.candidate.should == @candidate
+    end
+    
+    it "should not destroy the associated candidate" do
+      @language_candidate.destroy
+      Candidate.find_by_id(@candidate.id).should_not be_nil
     end
   end
   
@@ -77,8 +87,8 @@ describe LanguageCandidate do
       end
     end
   end
-
 end
+
 # == Schema Information
 #
 # Table name: language_candidates

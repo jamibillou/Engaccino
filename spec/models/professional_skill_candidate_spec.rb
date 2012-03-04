@@ -27,6 +27,11 @@ describe ProfessionalSkillCandidate do
       @professional_skill_candidate.candidate_id.should == @candidate.id
       @professional_skill_candidate.candidate.should    == @candidate
     end
+    
+    it "should not destroy associated candidate" do
+      @professional_skill_candidate.destroy
+      Candidate.find_by_id(@candidate.id).should_not be_nil
+    end
   end
   
   describe "professional_skill associations" do
@@ -38,6 +43,11 @@ describe ProfessionalSkillCandidate do
     it "should have the right associated professional_skill" do
       @professional_skill_candidate.professional_skill_id.should == @professional_skill.id
       @professional_skill_candidate.professional_skill.should    == @professional_skill
+    end
+    
+    it "should not destroy associated professional_skill" do
+      @professional_skill_candidate.destroy
+      ProfessionalSkill.find_by_id(@professional_skill.id).should_not be_nil
     end
   end
   
@@ -119,6 +129,7 @@ describe ProfessionalSkillCandidate do
     end
   end
 end
+
 # == Schema Information
 #
 # Table name: professional_skill_candidates

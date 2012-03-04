@@ -22,15 +22,27 @@ describe Company do
   end
   
   describe "experiences associations" do
-  
+    
     it "should have an experiences attribute" do
       @company.should respond_to(:experiences)
     end
     
-    it "should not destroy associated experiences" do
+    it "should destroy associated experiences" do
       @company.destroy
-      Experience.find_by_id(@experience.id).should_not be_nil
+      Experience.find_by_id(@experience.id).should be_nil
+    end    
+  end
+  
+  describe "candidates associations" do
+    
+    it "should have a candidates attribute" do
+      @company.should respond_to(:candidates)
     end
+    
+    it "should not destroy associated candidates" do
+      @company.destroy
+      Candidate.find_by_id(@candidate.id).should_not be_nil
+    end    
   end
   
   describe "validations" do
@@ -38,12 +50,6 @@ describe Company do
     it "should require a name" do
       empty_name_company = Company.new(@attr.merge(:name => ""))
       empty_name_company.should_not be_valid
-    end
-    
-    it "should reject too short names" do
-      too_short_name = 'a'
-      too_short_name_company = Company.new(@attr.merge(:name => too_short_name))
-      too_short_name_company.should_not be_valid
     end
     
     it "should reject too long names" do
@@ -57,12 +63,6 @@ describe Company do
       empty_address_company.should be_valid
     end
     
-    it "should reject too short addresses" do
-      too_short_address = 'a'*5
-      too_short_address_company = Company.new(@attr.merge(:address => too_short_address))
-      too_short_address_company.should_not be_valid
-    end
-    
     it "should reject too long addresses" do
       too_long_address = 'a'*161
       too_long_address_company = Company.new(@attr.merge(:address => too_long_address))
@@ -72,12 +72,6 @@ describe Company do
     it "should accept empty cities" do
       empty_city_company = Company.new(@attr.merge(:city => ""))
       empty_city_company.should be_valid
-    end
-    
-    it "should reject too short cities" do
-      too_short_city = 'a'
-      too_short_city_company = Company.new(@attr.merge(:city => too_short_city))
-      too_short_city_company.should_not be_valid
     end
     
     it "should reject too long cities" do
@@ -199,7 +193,6 @@ describe Company do
     end
   end
 end
-
 
 # == Schema Information
 #

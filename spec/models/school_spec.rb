@@ -6,9 +6,9 @@ describe School do
     @attr = { :name     => 'Imperial College',
               :city     => 'London',
               :country  => 'United Kingdom'}
-    @school = Factory(:school)
+    @school    = Factory(:school)
     @candidate = Factory(:candidate)
-    @degree = Factory(:degree)
+    @degree    = Factory(:degree)
     @education = Factory(:education, :degree => @degree, :candidate => @candidate, :school => @school)
   end
 
@@ -29,7 +29,7 @@ describe School do
     end    
   end
   
-  describe "eegrees associations" do
+  describe "degrees associations" do
     
     it "should have a degrees attribute" do
       @school.should respond_to(:degrees)
@@ -40,17 +40,24 @@ describe School do
       Degree.find_by_id(@degree.id).should_not be_nil
     end    
   end
+  
+  describe "candidates associations" do
+    
+    it "should have a candidates attribute" do
+      @school.should respond_to(:candidates)
+    end
+    
+    it "should not destroy associated candidates" do
+      @school.destroy
+      Candidate.find_by_id(@candidate.id).should_not be_nil
+    end    
+  end
 
   describe "validations" do
     
     it "should require a name" do
       invalid_school = School.new(@attr.merge(:name => ''))
       invalid_school.should_not be_valid
-    end
-    
-    it "should reject too short names" do
-      short_name_school = School.new(@attr.merge(:name => 'xxx'))
-      short_name_school.should_not be_valid
     end
     
     it "should reject too long names" do
@@ -91,8 +98,8 @@ describe School do
       end
     end
   end
-
 end
+
 # == Schema Information
 #
 # Table name: schools

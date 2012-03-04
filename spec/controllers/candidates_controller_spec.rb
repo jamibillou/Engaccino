@@ -149,7 +149,7 @@ describe CandidatesController do
         test_sign_in(@candidate)
         get :new
         response.should redirect_to(candidate_path(@candidate))
-        flash[:notice].should == I18n.t('flash.notice.already_registered')
+        flash[:notice].should == I18n.t('flash.notice.not_a_new_user')
       end
     end
     
@@ -175,7 +175,7 @@ describe CandidatesController do
         test_sign_in(@candidate)
         post :create
         response.should redirect_to(candidate_path(@candidate))
-        flash[:notice].should == I18n.t('flash.notice.already_registered')
+        flash[:notice].should == I18n.t('flash.notice.not_a_new_user')
       end
     end
     
@@ -239,25 +239,37 @@ describe CandidatesController do
     end
     
     describe "for signed-in users" do
-    
-      before (:each) do
+      
+      before(:each) do
         test_sign_in(@candidate)
-        @candidate.update_attributes(:profile_completion => 10)
       end
     
-      it "should return http success" do
-        get :edit, :id => @candidate
-        response.should be_success
+      describe "who have completed signup" do
+        
+        it "should deny access to 'edit'" do
+          @candidate.update_attributes(:profile_completion => 10)
+          get :edit, :id => @candidate
+          response.should redirect_to @candidate
+          flash[:notice].should == I18n.t('flash.notice.already_signed_up')
+        end
       end
       
-      it "should have the right title" do
-        get :edit, :id => @candidate
-        response.should have_selector('title', :content => I18n.t('candidates.edit.title'))
-      end
+      describe "who haven't completed signup" do
+        
+        it "should return http success" do
+          get :edit, :id => @candidate
+          response.should be_success
+        end
+      
+        it "should have the right title" do
+          get :edit, :id => @candidate
+          response.should have_selector('title', :content => I18n.t('candidates.edit.complete_your_profile'))
+        end
             
-      it "should have an edit form" do
-        get :edit, :id => @candidate
-        response.should have_selector('form', :id => 'candidate_edit_form')
+        it "should have an edit form" do
+          get :edit, :id => @candidate
+          response.should have_selector('form', :id => 'candidate_edit_form')
+        end
       end
     end
   end
@@ -289,11 +301,7 @@ describe CandidatesController do
                                                                           :start_year => "1984",
                                                                           :end_month => "12",
                                                                           :end_year => "2011",
-                                                                          :company_attributes => { :name => "BG Corp" }
-                                                                        }
-                                                                }
-                                  }
-                  }
+                                                                          :company_attributes => { :name => "BG Corp" } } } }  }
         end
         
         it "should update the candidate's attributes" do

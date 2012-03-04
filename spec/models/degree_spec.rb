@@ -73,18 +73,13 @@ describe Degree do
   
   describe "validations" do
     
-    it "should require a degree type id" do
+    it "should require a degree type" do
       Degree.new(@attr).should_not be_valid
     end
     
     it "should require a label" do
       invalid_degree = Degree.new(@attr.merge(:label => ""))
       invalid_degree.should_not be_valid
-    end
-    
-    it "should reject too short labels" do
-      short_degree = Degree.new(@attr.merge(:label => "xx"))
-      short_degree.should_not be_valid
     end
     
     it "should reject too long labels" do

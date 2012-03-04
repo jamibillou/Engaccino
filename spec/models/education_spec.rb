@@ -36,9 +36,14 @@ describe Education do
       education_without_degree.should_not be_valid
     end
     
-    it "should have the right associated school" do
+    it "should have the right associated degree" do
       @education.degree_id.should == @degree.id
       @education.degree.should == @degree
+    end
+    
+    it "should not destroy associated degrees" do
+      @education.destroy
+      Degree.find(@degree).should_not be_nil
     end
   end
 
@@ -59,6 +64,11 @@ describe Education do
       @education.candidate_id.should == @candidate.id
       @education.candidate.should == @candidate
     end
+    
+    it "should not destroy associated candidates" do
+      @education.destroy
+      Candidate.find(@candidate).should_not be_nil
+    end
   end
   
   describe "school associations" do
@@ -74,10 +84,15 @@ describe Education do
       education_without_project.should_not be_valid      
     end
     
-    it "should not destroy associated degrees" do
+    it "should not have the right associated school" do
       @education.school_id.should == @school.id
       @education.school.should == @school
-    end 
+    end
+    
+    it "should not destroy associated schools" do
+      @education.destroy
+      Candidate.find(@candidate).should_not be_nil
+    end
   end
   
   describe "validations" do
@@ -126,6 +141,36 @@ describe Education do
       long_description_education.should_not be_valid
     end
     
+    it "should require a start month" do
+      education = Education.new(@attr.merge(:start_month => ''))
+      education.candidate = @candidate
+      education.school = @school
+      education.degree = @degree
+      education.should_not be_valid
+    end
+    
+    it "should reject invalid start months" do
+      invalid_start_months = [ 'march', 13, 0, '*&^%$#@' ]
+      invalid_start_months.each do |invalid_start_month|
+        education = Education.new(@attr.merge(:start_month => invalid_start_month))
+        education.candidate = @candidate
+        education.school = @school
+        education.degree = @degree
+        education.should_not be_valid
+      end
+    end
+    
+    it "should accept valid start months" do
+      valid_start_months = [ 1, 3, 9, 12 ]
+      valid_start_months.each do |valid_start_month|
+        education = Education.new(@attr.merge(:start_month => valid_start_month))
+        education.candidate = @candidate
+        education.school = @school
+        education.degree = @degree
+        education.should be_valid
+      end
+    end
+    
     it "should require a start year" do
       education = Education.new(@attr.merge(:start_year => ''))
       education.candidate = @candidate
@@ -149,6 +194,36 @@ describe Education do
       valid_start_years = [ 1995, 1923, 1980, 2000 ]
       valid_start_years.each do |valid_start_year|
         education = Education.new(@attr.merge(:start_year => valid_start_year))
+        education.candidate = @candidate
+        education.school = @school
+        education.degree = @degree
+        education.should be_valid
+      end
+    end
+    
+    it "should require an end month" do
+      education = Education.new(@attr.merge(:end_month => ''))
+      education.candidate = @candidate
+      education.school = @school
+      education.degree = @degree
+      education.should_not be_valid
+    end
+    
+    it "should reject invalid end months" do
+      invalid_end_months = [ 'march', 13, 0, '*&^%$#@' ]
+      invalid_end_months.each do |invalid_end_month|
+        education = Education.new(@attr.merge(:end_month => invalid_end_month))
+        education.candidate = @candidate
+        education.school = @school
+        education.degree = @degree
+        education.should_not be_valid
+      end
+    end
+    
+    it "should accept valid end months" do
+      valid_end_months = [ 1, 3, 9, 12 ]
+      valid_end_months.each do |valid_end_month|
+        education = Education.new(@attr.merge(:end_month => valid_end_month))
         education.candidate = @candidate
         education.school = @school
         education.degree = @degree
@@ -192,66 +267,6 @@ describe Education do
       greater_start_year_education.school = @school
       greater_start_year_education.degree = @degree
       greater_start_year_education.should_not be_valid
-    end
-  
-    it "should require a start month" do
-      education = Education.new(@attr.merge(:start_month => ''))
-      education.candidate = @candidate
-      education.school = @school
-      education.degree = @degree
-      education.should_not be_valid
-    end
-    
-    it "should reject invalid start months" do
-      invalid_start_months = [ 'march', 13, 0, '*&^%$#@' ]
-      invalid_start_months.each do |invalid_start_month|
-        education = Education.new(@attr.merge(:start_month => invalid_start_month))
-        education.candidate = @candidate
-        education.school = @school
-        education.degree = @degree
-        education.should_not be_valid
-      end
-    end
-    
-    it "should accept valid start months" do
-      valid_start_months = [ 1, 3, 9, 12 ]
-      valid_start_months.each do |valid_start_month|
-        education = Education.new(@attr.merge(:start_month => valid_start_month))
-        education.candidate = @candidate
-        education.school = @school
-        education.degree = @degree
-        education.should be_valid
-      end
-    end
-    
-    it "should require an end month" do
-      education = Education.new(@attr.merge(:end_month => ''))
-      education.candidate = @candidate
-      education.school = @school
-      education.degree = @degree
-      education.should_not be_valid
-    end
-    
-    it "should reject invalid end months" do
-      invalid_end_months = [ 'march', 13, 0, '*&^%$#@' ]
-      invalid_end_months.each do |invalid_end_month|
-        education = Education.new(@attr.merge(:end_month => invalid_end_month))
-        education.candidate = @candidate
-        education.school = @school
-        education.degree = @degree
-        education.should_not be_valid
-      end
-    end
-    
-    it "should accept valid end months" do
-      valid_end_months = [ 1, 3, 9, 12 ]
-      valid_end_months.each do |valid_end_month|
-        education = Education.new(@attr.merge(:end_month => valid_end_month))
-        education.candidate = @candidate
-        education.school = @school
-        education.degree = @degree
-        education.should be_valid
-      end
     end
     
     it "should reject start months greater than end months when start and end years are the same" do
@@ -302,6 +317,13 @@ describe Education do
     
     it "should be 0 if the education is the first event" do
       @education.yrs_after_first_event.should == 0
+    end
+    
+    it "be the number of years between the the first event and the education" do
+      education2 = Education.new(:start_month => 1, :start_year => 1990, :end_month => 2, :end_year => 1992, :role => 'Sales administrator')
+      school = School.new(:name => 'School') ; degree = Degree.new(:label => 'Degree') ; degree_type = DegreeType.new(:label => 'Degree type')
+      education2.school = school ; education2.degree = degree ; degree.degree_type = degree_type ; education2.candidate = @candidate ; education2.save!
+      @education.yrs_after_first_event.floor.should == 15
     end
   end
   

@@ -26,6 +26,11 @@ describe InterpersonalSkillCandidate do
       @interpersonal_skill_candidate.candidate_id.should == @candidate.id
       @interpersonal_skill_candidate.candidate.should    == @candidate
     end
+    
+    it "should not destroy the associated candidate" do
+      @interpersonal_skill_candidate.destroy
+      Candidate.find(@candidate).should_not be_nil
+    end
   end
   
   describe "interpersonal_skill associations" do
@@ -37,6 +42,11 @@ describe InterpersonalSkillCandidate do
     it "should have the right associated interpersonal_skill" do
       @interpersonal_skill_candidate.interpersonal_skill_id.should == @interpersonal_skill.id
       @interpersonal_skill_candidate.interpersonal_skill.should    == @interpersonal_skill
+    end
+    
+    it "should not destroy the associated interpersonal_skill" do
+      @interpersonal_skill_candidate.destroy
+      InterpersonalSkill.find(@interpersonal_skill).should_not be_nil
     end
   end
   
@@ -64,6 +74,7 @@ describe InterpersonalSkillCandidate do
     end
   end
 end
+
 # == Schema Information
 #
 # Table name: interpersonal_skill_candidates
