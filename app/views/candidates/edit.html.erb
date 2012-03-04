@@ -14,7 +14,7 @@
     </div>
     <div id="signup_status" class="white_block">
       <h2><%=t "candidates.status" %></h2>
-      <%= select_tag :candidate_status, options_for_select(status_options_hash) %>
+      <%= candidate_builder.select :status, status_options_hash %>
     </div>
     <%= candidate_builder.submit t('candidates.show.view_profile'), :class => 'center' %>
   <% end %>
