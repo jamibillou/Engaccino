@@ -46,8 +46,9 @@ en:
       please_signin: "Please sign in to access this page."
       other_user_page: "You can't access this page for another user."
       please_finish_signup: "You've got to finish signing-up to access this page."
-      restricted_page: "This is a restricted page, you can't access it!"
-      already_registered: "Not your account? Log out and create your own!"
+      already_signed_up: "You have already finished signing up."
+      restricted_page: "This is a restricted page, you can't access it."
+      not_a_new_user: "You already have an account. Log out first to create a new one."
     
   # Actions
   delete: "Delete"

@@ -1,6 +1,4 @@
 class Experience < ActiveRecord::Base
-
-  include ApplicationHelper
   
   attr_accessor   :main
   
@@ -13,7 +11,7 @@ class Experience < ActiveRecord::Base
               
   validates :candidate_id,                                              :presence => true
   validates :company,                                                   :presence => true
-  validates :role,        :length    => { :within => 3..80 },           :presence => true
+  validates :role,        :length    => { :maximum => 80 },             :presence => true
   validates :start_month, :inclusion => { :in => 1..12 },               :presence => true
   validates :start_year,  :inclusion => { :in => 1900..Time.now.year }, :presence => true
   validates :end_month,   :inclusion => { :in => 1..12 },               :presence => true

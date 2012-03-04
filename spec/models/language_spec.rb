@@ -26,6 +26,18 @@ describe Language do
     end
   end
   
+  describe "candidates associations" do
+    
+    it "should have a candidates attributes" do
+      @language.should respond_to :candidates
+    end
+    
+    it "should not destroy associated candidates" do
+      @language.destroy
+      Candidate.find_by_id(@candidate.id).should_not be_nil
+    end
+  end
+  
   describe "validations" do
     
     it "should require a label" do
@@ -33,21 +45,14 @@ describe Language do
       empty_label_language.should_not be_valid
     end
     
-    it "should reject too short labels" do
-      too_short_label = 'a'
-      too_short_label_language = Language.new(@attr.merge(:label => too_short_label))
-      too_short_label_language.should_not be_valid
-    end
-    
     it "should reject too long labels" do
       too_long_label = 'a'*81
       too_long_label_language = Language.new(@attr.merge(:label => too_long_label))
       too_long_label_language.should_not be_valid
     end
-    
   end
-  
 end
+
 # == Schema Information
 #
 # Table name: languages

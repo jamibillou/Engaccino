@@ -7,8 +7,8 @@ class CertificateCandidate < ActiveRecord::Base
   
   accepts_nested_attributes_for :certificate, :allow_destroy => true
   
-  validates :candidate, :certificate,                                  :presence => true
-  validates :level_score,             :length => { :within => 0..20 }, :allow_blank => true  
+  validates :candidate, :certificate,                    :presence => true
+  validates :level_score, :length => { :maximum => 20 }, :allow_blank => true  
   
 end
 

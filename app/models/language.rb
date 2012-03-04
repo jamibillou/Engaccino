@@ -5,7 +5,7 @@ class Language < ActiveRecord::Base
   has_many :language_candidates, :dependent => :destroy
   has_many :candidates, :through => :language_candidates
   
-  validates :label, :length => { :within => 3..80 }, :presence => true
+  validates :label, :length => { :maximum => 80 }, :presence => true
   
 end
 

@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Skill do
 
   before(:each) do
-    @attr            = { :label => "Sample skill" }
-    @candidate       = Factory(:candidate)
+    @attr      = { :label => "Sample skill" }
+    @candidate = Factory(:candidate)
   end
   
   it "should create an instance given valid attributes" do

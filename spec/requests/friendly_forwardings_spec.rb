@@ -20,15 +20,7 @@ describe "FriendlyForwardings" do
       response.should render_template('candidates/show')
     end
     
-    it "edit" do
-      visit edit_candidate_path(@candidate)
-      fill_in :email,    :with => @candidate.email
-      fill_in :password, :with => @candidate.password
-      click_button
-      response.should render_template('candidates/edit')
-    end
-    
-    it "users" do
+    it "candidates" do
       visit candidates_path
       fill_in :email,    :with => @candidate.email
       fill_in :password, :with => @candidate.password

@@ -2,7 +2,7 @@ class Skill < ActiveRecord::Base
 
   attr_accessible :label
   
-  validates :label, :length => { :within => 1..100 },  :presence => true
+  validates :label, :length => { :maximum => 100 },  :presence => true
   
 end
 

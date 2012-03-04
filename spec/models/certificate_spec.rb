@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Certificate do
   
   before(:each) do
-    @attr            = { :label => "Sample certificate" }
-    @candidate       = Factory(:candidate)
+    @attr      = { :label => "Sample certificate" }
+    @candidate = Factory(:candidate)
   end
   
   it "should create an instance given valid attributes" do
