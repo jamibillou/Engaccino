@@ -52,12 +52,14 @@ class CandidatesController < ApplicationController
     unless @candidate.update_attributes(params[:candidate])
       init_page :title => 'candidates.edit.complete_your_profile', :javascripts => 'candidates/edit'
       respond_to do |format|
+        format.html { render :json => error_messages(@candidate) } if remotipart_submitted?
         format.html { render_page :edit, :id => @candidate, :flash => { :error => error_messages(@candidate) } }
         format.json { respond_with_bip @candidate }
       end
     else
       link_schools_degrees
       respond_to do |format|
+        format.json { render :json => 'success!' } if remotipart_submitted?
         format.html { @candidate.update_attributes :profile_completion => 5 ; redirect_to @candidate, :flash => { :success => t('flash.success.welcome') } }
         format.json { respond_with_bip @candidate }
       end
