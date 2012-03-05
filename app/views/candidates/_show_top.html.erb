@@ -1,14 +1,12 @@
-<div class="buttons">
+<div class='buttons'>
   <%= link_to t('candidates.show.next_profile'), candidate_path(candidate.id+1), :class => 'slightly_round blue button margin_right' %>
   <%= link_to t('candidates.show.share_profile'), '#', :class => 'slightly_round grey button' %>
 </div>
-<div id="completion_container" class="slightly_round">
-  <div id="completion_bar_empty" class="slightly_round">
-    <div id="completion_bar_full" class="slightly_round" style="width: <%= 3*candidate.profile_completion %>px;"></div>
+<div id='completion_container' class='slightly_round'>
+  <div id='completion_bar_empty' class='slightly_round'>
+    <div id='completion_bar_full' class='slightly_round' style='width: <%= 3*candidate.profile_completion %>px;'></div>
   </div>
-  <%=t 'candidates.show.profile_completion.sentence' %>
-  <%= candidate.profile_completion %>
-  <%=t 'candidates.show.profile_completion.%complete' %>
+  <%=t 'candidates.show.profile_completion.sentence' %><%= candidate.profile_completion %><%=t 'candidates.show.profile_completion.%complete' %>
   <%= link_to_function t('candidates.show.profile_completion.link'), "show('missing'); show('close_missing')" %>
   <%= link_to_function '', "hide('missing') ; hide('close_missing')", :class => 'hidden close', :id => 'close_missing' %>
   <div id='missing' class='hidden'>

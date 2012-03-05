@@ -11,7 +11,7 @@ class EducationsController < ApplicationController
   end
   
   def create
-    @education = Education.new(params[:education])
+    @education = Education.new params[:education]
     @education.candidate = current_user
     unless @education.save
       respond_to { |format| format.html { render :json => @education.errors, :status => :unprocessable_entity if request.xhr? } }
@@ -25,8 +25,8 @@ class EducationsController < ApplicationController
   end
   
   def update
-    @education = Education.find(params[:id])
-    unless @education.update_attributes(params[:education])
+    @education = Education.find params[:id]
+    unless @education.update_attributes params[:education]
       respond_to { |format| format.html { render :json => @education.errors, :status => :unprocessable_entity if request.xhr? } }
     else
       respond_to { |format| format.html { render :json => 'update!' if request.xhr? } }
@@ -34,8 +34,7 @@ class EducationsController < ApplicationController
   end
   
   def destroy
-    education = Education.find(params[:id]) ; candidate = education.candidate
-    education.destroy
+    Education.find(params[:id]).destroy
     respond_to { |format| format.html { render :json => 'destroy!' if request.xhr? } }
   end
 end

@@ -7,7 +7,7 @@ class InterpersonalSkillCandidatesController < ApplicationController
   end
     
   def create
-    @interpersonal_skill_candidate = InterpersonalSkillCandidate.new(params[:interpersonal_skill_candidate])
+    @interpersonal_skill_candidate = InterpersonalSkillCandidate.new params[:interpersonal_skill_candidate]
     @interpersonal_skill_candidate.candidate = current_user
     unless @interpersonal_skill_candidate.save
       respond_to { |format| format.html { render :json => @interpersonal_skill_candidate.errors, :status => :unprocessable_entity if request.xhr? } }
@@ -21,8 +21,8 @@ class InterpersonalSkillCandidatesController < ApplicationController
   end
   
   def update
-    @interpersonal_skill_candidate = InterpersonalSkillCandidate.find(params[:id])
-    unless @interpersonal_skill_candidate.update_attributes(params[:interpersonal_skill_candidate])
+    @interpersonal_skill_candidate = InterpersonalSkillCandidate.find params[:id]
+    unless @interpersonal_skill_candidate.update_attributes params[:interpersonal_skill_candidate]
       respond_to { |format| format.html { render :json => @interpersonal_skill_candidate.errors, :status => :unprocessable_entity if request.xhr? } }
     else
       respond_to { |format| format.html { render :json => 'update!' if request.xhr? } }
@@ -30,8 +30,7 @@ class InterpersonalSkillCandidatesController < ApplicationController
   end
   
   def destroy
-    interpersonal_skill_candidate = InterpersonalSkillCandidate.find(params[:id]) ; candidate = interpersonal_skill_candidate.candidate
-    interpersonal_skill_candidate.destroy
+    InterpersonalSkillCandidate.find(params[:id]).destroy
     respond_to { |format| format.html { render :json => 'destroy!' if request.xhr? } }
   end
   

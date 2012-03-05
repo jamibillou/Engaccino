@@ -1,7 +1,7 @@
 module SessionsHelper
   
-  def sign_in(user, remember_me = "0")
-    remember_me == "1" ? cookies.permanent.signed[:remember_token] = [user.id, user.salt] : cookies.signed[:remember_token] = [user.id, user.salt]
+  def sign_in(user, remember_me = '0')
+    remember_me == '1' ? cookies.permanent.signed[:remember_token] = [user.id, user.salt] : cookies.signed[:remember_token] = [user.id, user.salt]
     current_user= user
   end
   

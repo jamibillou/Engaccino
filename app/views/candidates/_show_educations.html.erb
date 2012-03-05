@@ -1,13 +1,13 @@
-<% @educations = candidate.educations.order('start_year DESC, start_month DESC') %>
-<div class='loader' id='education_loader'><%= image_tag "loader.gif" %></div>
+<% educations = candidate.educations.order('start_year DESC, start_month DESC') %>
+<div class='loader' id='education_loader'><%= image_tag 'loader.gif' %></div>
 <h1>
   <%= t('educations.title').remove_accents.upcase %>
   <%= link_to_function "#{t('add').upcase} +", "showForm('education', ['show_top','show_timeline', 'candidate_degree_experience'])",
                        :id => 'link_add_education', :class => "add_link #{' red underline' if candidate.no_edu?}" if current_user?(candidate) %>
 </h1>
 <div id='new_education' class='hidden'></div> 
-<% unless @educations.empty? %>
-  <% @educations.order('start_year ASC').order('start_month ASC').each do |education| %>
+<% unless candidate.no_edu? %>
+  <% educations.each do |education| %>
   	<div id='education_<%= education.id %>'>
   	  <%= render 'educations/show', :candidate => candidate, :education => education %>
   	  <br />

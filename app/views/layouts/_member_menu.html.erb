@@ -1,11 +1,11 @@
 <ul>
-    <li class="round<% if @title == t(:menu_dashboard) %> selected<% end %>">
+    <li class='round<% if @title == t(:menu_dashboard) %> selected<% end %>'>
       <%= link_to t(:menu_dashboard), '#' %>
     </li>
-    <li class="round<% if @title == "#{current_user.first_name} #{current_user.last_name}" || @title == t('candidates.edit.title') %> selected<% end %>">
+    <li class='round<% if @title == "#{current_user.first_name} #{current_user.last_name}" || @title == t('candidates.edit.title') %> selected<% end %>'>
       <%= link_to t(:menu_profile), candidate_path(current_user) %>
     </li>
-    <li class="round<% if @title == t('candidates.index.title') %> selected<% end %>">
+    <li class='round<% if @title == t('candidates.index.title') %> selected<% end %>'>
       <%= link_to t(:menu_candidates), candidates_path %>
     </li>
 </ul>

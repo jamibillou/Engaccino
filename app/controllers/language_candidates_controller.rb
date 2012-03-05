@@ -7,7 +7,7 @@ class LanguageCandidatesController < ApplicationController
   end
   
   def create
-    @language_candidate = LanguageCandidate.new(params[:language_candidate])
+    @language_candidate = LanguageCandidate.new params[:language_candidate]
     @language_candidate.candidate = current_user
     unless @language_candidate.save
       respond_to { |format| format.html { render :json => @language_candidate.errors, :status => :unprocessable_entity if request.xhr? } }
@@ -21,8 +21,8 @@ class LanguageCandidatesController < ApplicationController
   end
   
   def update
-    @language_candidate = LanguageCandidate.find(params[:id])
-    unless @language_candidate.update_attributes(params[:language_candidate])
+    @language_candidate = LanguageCandidate.find params[:id]
+    unless @language_candidate.update_attributes params[:language_candidate]
       respond_to { |format| format.html { render :json => @language_candidate.errors, :status => :unprocessable_entity if request.xhr? } }
     else
       respond_to { |format| format.html { render :json => 'update!' if request.xhr? } }
@@ -30,8 +30,7 @@ class LanguageCandidatesController < ApplicationController
   end
   
   def destroy
-    language_candidate = LanguageCandidate.find(params[:id]) ; candidate = language_candidate.candidate
-    language_candidate.destroy
+    LanguageCandidate.find(params[:id]).destroy
     respond_to { |format| format.html { render :json => 'destroy!' if request.xhr? } }
   end
 end

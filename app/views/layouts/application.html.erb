@@ -15,16 +15,16 @@
   
   <body>
     <% flash.each do |key, value| %>
-      <div id="flash" class="flash <%= key %>">
+      <div id='flash' class='flash <%= key %>'>
         <%= value %>
         <%= link_to '', '#', :id => 'close_flash', :class => 'close' %>
       </div>
     <% end %>
     <%= render 'layouts/header' %>	
   	
-    <div id="container">
+    <div id='container'>
       <% unless @candidate && @title == "#{@candidate.first_name} #{@candidate.last_name}" || @title == t('candidates.edit.title') %>
-        <h1 id="container_title" <% " style='margin-left: 10px;'" if signed_in? %>><%= @title %></h1>
+        <h1 id='container_title' <% " style='margin-left: 10px;'" if signed_in? %>><%= @title %></h1>
       <% end %>
       <%= yield %>
     </div>

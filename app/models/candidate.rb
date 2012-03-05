@@ -17,15 +17,18 @@ class Candidate < User
   has_many :interpersonal_skill_candidates, :dependent => :destroy
   has_many :interpersonal_skills,           :through   => :interpersonal_skill_candidates
   
-  accepts_nested_attributes_for :experiences,
-                                :reject_if => lambda { |attr| attr['company_attributes']['name'].blank? && attr['role'].blank? && attr['start_year'].blank? && attr['end_year'].blank? },
-                                :allow_destroy => true
-  accepts_nested_attributes_for :educations,
+  accepts_nested_attributes_for :experiences, :allow_destroy => true,
+                                :reject_if => lambda { |attr| attr['company_attributes']['name'].blank? &&
+                                                              attr['role'].blank? &&
+                                                              attr['start_month'].blank? && attr['start_year'].blank? &&
+                                                              attr['end_month'].blank?   && attr['end_year'].blank? }
+  accepts_nested_attributes_for :educations, :allow_destroy => true,
                                 :reject_if => lambda { |attr| attr['school_attributes']['label'].blank? &&
                                                               attr['degree_attributes']['label'].blank? && 
                                                               attr['degree_attributes']['degree_type_attributes']['label'].blank? && 
-                                                              attr['start_year'].blank? && attr['end_year'].blank? }, 
-                                :allow_destroy => true  
+                                                              attr['start_month'].blank? && attr['start_year'].blank? &&
+                                                              attr['end_month'].blank?   && attr['end_year'].blank? }
+                                                              
   accepts_nested_attributes_for :degrees,                 :allow_destroy => true
   accepts_nested_attributes_for :language_candidates,     :allow_destroy => true
   accepts_nested_attributes_for :certificate_candidates,  :allow_destroy => true
@@ -57,11 +60,11 @@ class Candidate < User
   end
   
   def first_education
-    educations.order("start_year ASC").order("start_month ASC").first
+    educations.order('start_year ASC').order('start_month ASC').first
   end
   
   def first_experience
-    experiences.order("start_year ASC").order("start_month ASC").first
+    experiences.order('start_year ASC').order('start_month ASC').first
   end
   
   def last_event
@@ -73,11 +76,11 @@ class Candidate < User
   end
   
   def last_education
-    educations.order("end_year ASC").order("end_month ASC").last
+    educations.order('end_year ASC').order('end_month ASC').last
   end
   
   def last_experience
-    experiences.order("end_year ASC").order("end_month ASC").last
+    experiences.order('end_year ASC').order('end_month ASC').last
   end
   
   def no_exp?

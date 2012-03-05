@@ -4,7 +4,7 @@
   	  <h2><%= interpersonal_skill_builder.text_field :label, :class => 'field margin' %></h2>
     <% end %>
     <%= f.text_area :description, :class => 'textarea' %>
-    <div class="error_messages" id="errors_new_interpersonal_skill_candidate"></div>
+    <div class='error_messages' id='errors_new_interpersonal_skill_candidate'></div>
     <%= link_to_function t('cancel'), "hideForm('interpersonal_skill_candidate')", :class => 'grey button' %>
     &nbsp;
     <%= f.submit t('submit') %>

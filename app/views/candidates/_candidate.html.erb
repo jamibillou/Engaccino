@@ -1,29 +1,29 @@
-<div id="candidate_<%= candidate.id %>" class="card"<%= " style='height:410px;'" if params[:action] == 'index' %>>
-  <div class='loader' id='candidate_loader'><%= image_tag "loader.gif" %></div>
-  <div class="head">
-    <div class="identity">
+<div id='candidate_<%= candidate.id %>' class='card'<%= " style='height:410px;'" if params[:action] == 'index' %>>
+  <div class='loader' id='candidate_loader'><%= image_tag 'loader.gif' %></div>
+  <div class='head'>
+    <div class='identity'>
       <% if current_user == candidate %>
-        <div id="edit_image"></div>
+        <div id='edit_image'></div>
       <% end %>
-      <div class="image left">
+      <div class='image left'>
         <% unless candidate.image_url.nil? %>
           <%= image_tag candidate.image_url(:thumb).to_s %>
         <% else %>
           <%= image_tag 'default_user.jpg' %>
         <% end %>
       </div>
-      <div class="name_place">
+      <div class='name_place'>
       	<% if current_user == candidate %>
-      	  <div class="name"><%= best_in_place candidate, :first_name, :html_attrs => { :class => 'field' } %></div>
-      	  <div class="name"><%= best_in_place candidate, :last_name,  :html_attrs => { :class => 'field' } %></div>
+      	  <div class='name'><%= best_in_place candidate, :first_name, :html_attrs => { :class => 'field' } %></div>
+      	  <div class='name'><%= best_in_place candidate, :last_name,  :html_attrs => { :class => 'field' } %></div>
         <% else %>
-          <a href="<%= candidate_path(candidate) %>">
-            <div class="name"><%= candidate.first_name %></div>
-            <div class="name"><%= candidate.last_name %></div>
+          <a href='<%= candidate_path(candidate) %>'>
+            <div class='name'><%= candidate.first_name %></div>
+            <div class='name'><%= candidate.last_name %></div>
           </a>
         <% end %>
-        <div class="place"><%= best_in_place_if current_user == candidate, candidate, :city,    :nil => t('candidates.city'), :html_attrs => { :class => 'field' } %></div>
-        <div class="place"><%= best_in_place_if current_user == candidate, candidate, :country, :nil => t('candidates.country'), :html_attrs => { :class => 'country field' } %></div>
+        <div class='place'><%= best_in_place_if current_user == candidate, candidate, :city,    :nil => t('candidates.city'), :html_attrs => { :class => 'field' } %></div>
+        <div class='place'><%= best_in_place_if current_user == candidate, candidate, :country, :nil => t('candidates.country'), :html_attrs => { :class => 'country field' } %></div>
       </div>
       <% if current_user == candidate %>
         <%= form_for candidate, :html => { :id => 'image_form', :multipart => true } do |f| %>
@@ -32,27 +32,26 @@
         <% end %>
       <% end %>
       <% if current_user.admin? %>
-      	<%= link_to trash, candidate, :method => :delete,
-                               		    :confirm => "#{t('candidates.destroy.title')} #{candidate.first_name} #{candidate.last_name}#{t('_?')}",
-                               		    :title => "#{t('candidates.destroy.title')} #{candidate.first_name} #{candidate.last_name}",
-                               		    :id => "destroy_candidate_#{candidate.id}",
-                               		    :class => 'hidden trash' %>
+      	<%= link_to image('trash', t('delete')), candidate,
+      	            :method => :delete, :id => "destroy_candidate_#{candidate.id}", :class => 'hidden',
+                    :confirm => "#{t('candidates.destroy.title')} #{candidate.first_name} #{candidate.last_name}#{t('_?')}",
+                    :title => "#{t('candidates.destroy.title')} #{candidate.first_name} #{candidate.last_name}" %>
       <% end %>
     </div>
-    <div class="job" <%= "style='margin-top:-20px'" if current_user == candidate %>>
+    <div class='job' <%= "style='margin-top:-20px'" if current_user == candidate %>>
       <% unless candidate.no_exp? %>
         <% main_experience = Experience.find(candidate.main_experience) %>
         <% if current_user == candidate %>
-          <h2 id="role_BIPcombo"><%= best_in_place candidate, :main_experience, :type => :select, :collection => main_experience_options(candidate), :html_attrs => { :class => 'combobox' } %></h2>
+          <h2 id='role_BIPcombo'><%= best_in_place candidate, :main_experience, :type => :select, :collection => main_experience_options(candidate), :html_attrs => { :class => 'combobox' } %></h2>
         <% else %>
           <h2><%= main_experience.role %></h2>
         <% end %>
-        <p id="candidate_company">
+        <p id='candidate_company'>
           <%= render 'candidate_company', :candidate => candidate %>
         </p>
       <% end %>
     </div> 
-    <div class="status">
+    <div class='status'>
     	<% if current_user == candidate %>
     	  <%= best_in_place_if current_user == candidate, candidate, :status, :type => :select, :collection => status_options_array, :html_attrs => { :class => 'combobox' } %>
     	<% else %>
@@ -63,21 +62,21 @@
   <div id='candidate_degree_experience'>
     <%= render 'candidate_degree_experience', :candidate => candidate %>
   </div>
-  <div id="candidate_professional_skills">
+  <div id='candidate_professional_skills'>
     <%= render 'candidate_professional_skills', :candidate => candidate %>
   </div>
   <% unless hide_contact_information? %>
-    <div class="contact">
+    <div class='contact'>
       <h2><%= "#{t('contact')} " %><%= best_in_place_if current_user == candidate, candidate, :first_name, :html_attrs => { :class => 'field' } %></h2>
       <p><%= best_in_place_if current_user == candidate, candidate, :email, :html_attrs => { :class => 'field' } %></p>
       <p><%= best_in_place_if current_user == candidate, candidate, :phone, :nil => t('candidates.phone').downcase, :html_attrs => { :class => 'field' } %></p>
-      <div class="social_links">
+      <div class='social_links'>
         <% if current_user == candidate %>
-          <p><span class='logo'><%= linkedin_logo %></span>
+          <p><span class='logo'><%= image('linkedin') %></span>
              <%= best_in_place_if current_user == candidate, candidate, :linkedin_login, :nil => t('click_to_edit').downcase, :html_attrs => { :class => 'field' } %></p>
-          <p><span class='logo'><%= twitter_logo %></span>
+          <p><span class='logo'><%= image('twitter') %></span>
              <%= best_in_place_if current_user == candidate, candidate, :twitter_login,  :nil => t('click_to_edit').downcase,  :html_attrs => { :class => 'field' } %></p>
-          <p><span class='logo'><%= facebook_logo %></span>
+          <p><span class='logo'><%= image('facebook') %></span>
              <%= best_in_place_if current_user == candidate, candidate, :facebook_login, :nil => t('click_to_edit').downcase, :html_attrs => { :class => 'field' } %></p>
         <% else %>
             <% if candidate.linkedin_login %><p><span class='logo'><%= linkedin_logo %></span><%= candidate.linkedin_login %></p><% end %>

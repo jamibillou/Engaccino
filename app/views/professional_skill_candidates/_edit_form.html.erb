@@ -14,12 +14,11 @@
       <h3><%= f.select :level, level_options_array %></h3>
     </div>
   </div>
-  <div class="error_messages" id="errors_professional_skill_candidate<%= professional_skill_candidate.id %>"></div>
+  <div class='error_messages' id='errors_professional_skill_candidate<%= professional_skill_candidate.id %>'></div>
   <%= link_to_function t('cancel'), "hideForm('professional_skill_candidate','#{professional_skill_candidate.id}')", :class => 'grey button' %>
   &nbsp;
   <%= f.submit t('submit') %>
-  <div class="small_trash_link right"><%= link_to "#{t('delete')}#{t('_?')}", professional_skill_candidate, :method => :delete,
-                                                           		                              :confirm => "#{t('delete')}#{t('_?')}",
-                                                           		                              :title => "#{t('delete')}#{t('_!')}",
-                                                           		                              :remote => true %></div>
+  <div class='small_trash_link'>
+    <%= link_to "#{t('delete')}#{t('_?')}", professional_skill_candidate, :method => :delete, :confirm => "#{t('delete')}#{t('_?')}", :title => "#{t('delete')}#{t('_!')}", :remote => true %>
+  </div>
 <% end %>

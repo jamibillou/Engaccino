@@ -1,83 +1,39 @@
 module ApplicationHelper
-
-  def logo
-    image_tag "logo.png", :alt => "Engaccino", :id => "logo"
-  end
   
   def title 
-    base_title = "Engaccino"
+    base_title = 'Engaccino'
     @title.nil? ? base_title : "#{base_title} | #{@title}"
   end
   
-  def settings
-    image_tag "settings.png", :alt => t('settings'), :class => "settings"
-  end
-  
-  def trash
-    image_tag "trash.png", :alt => t('delete'), :class => "trash"
-  end
-  
-  def small_trash
-    image_tag "small_trash.png", :alt => t('delete'), :class => "small_trash"
-  end
-  
-  def pencil
-    image_tag "pencil.png", :alt => t('edit'), :class => "pencil"
-  end
-  
-  def linkedin_logo
-    image_tag 'linkedin_logo.png', :alt => 'LinkedIn'
-  end
-  
-  def twitter_logo
-    image_tag 'twitter_logo.png', :alt => 'Twitter'
-  end
-  
-  def facebook_logo
-    image_tag 'facebook_logo.png', :alt => 'Facebook'
+  def image(name, alt = '')
+    image_tag "#{name}.png", :alt => (alt.blank? ? t(name).humanize : alt), :class => name
   end
   
   def link_to_delete(name, f, title = t('delete'))
-    f.hidden_field(:_destroy) + link_to_function(name, "delete_fields(this)", :class => 'button blue round', :title => title)
+    f.hidden_field(:_destroy) + link_to_function(name, 'delete_fields(this)', :class => 'button blue round', :title => title)
   end
   
   def link_to_add(name, f, association, title = t('add'))
-    new_associated_object = build_association(association, f.object)
+    new_associated_object = (association == 'education' ? build_education : build_experience)
     fields = f.fields_for(association, new_associated_object, :child_index => "new_#{association}") { |builder| render("fields_#{association.to_s.singularize}", :f => builder) }
-    link_to_function(name, "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")", :class => 'button blue round', :title => title)
+    link_to_function(name, 'add_fields(this, \'#{association}\', \'#{escape_javascript(fields)}\')', :class => 'button blue round', :title => title)
   end
   
   def hide_contact_information?
     params[:action] == 'index'
   end
   
-  def build_associations(associations, object)
-    associations.each { |association| build_association(association, object) }
+  def build_education
+    education = @candidate.educations.build ; education.build_school ; degree = education.build_degree ; degree.build_degree_type
+    education
   end
   
-  def build_association(association, object)
-    case association
-      when :experiences
-        experience = object.experiences.build
-        experience.build_company
-        experience
-      when :educations
-        education = object.educations.build
-        education.build_school
-        degree = education.build_degree
-        degree.build_degree_type
-        education
-      when :languages
-        language = object.language_candidates.build.build_language
-        language
-    end
+  def build_experience
+    experience = @candidate.experiences.build ; experience.build_company
+    experience
   end
   
-  def link_schools_degrees
-    @candidate.educations.each do |education|
-      school = education.school
-      school.degrees.push(education.degree) unless school.degrees.include? education.degree
-      school.save!
-    end
+  def associate_schools_and_degrees
+    @candidate.educations.each { |education| education.school.degrees.push! education.degree unless education.school.degrees.include? education.degree }
   end
 end

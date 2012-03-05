@@ -25,13 +25,13 @@ class ApplicationController < ActionController::Base
   end
   
   def render_page(page, options = {})
-    init_page(options) unless options.empty?
+    init_page options unless options.empty?
     options[:id] ? render(page, :id => options[:id]) : render(page)
   end
   
   def redirect_to_page(page, options = {})
-    init_page(options) unless options.empty?
-    redirect_to(page)
+    init_page options unless options.empty?
+    redirect_to page
   end
   
   def init_page(options = {})
@@ -41,5 +41,4 @@ class ApplicationController < ActionController::Base
     flash[:notice]    = options[:flash][:notice]    unless options[:flash].nil? || options[:flash][:notice].nil?
     flash.now[:error] = options[:flash][:error]     unless options[:flash].nil? || options[:flash][:error].nil?
   end
-  
 end
