@@ -72,10 +72,6 @@ class CandidatesController < ApplicationController
   end
 
   private
-
-    def authenticate
-      deny_access unless signed_in?
-    end
     
     def correct_user
       @candidate = Candidate.find params[:id]

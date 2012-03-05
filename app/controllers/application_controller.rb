@@ -41,4 +41,12 @@ class ApplicationController < ActionController::Base
     flash[:notice]    = options[:flash][:notice]    unless options[:flash].nil? || options[:flash][:notice].nil?
     flash.now[:error] = options[:flash][:error]     unless options[:flash].nil? || options[:flash][:error].nil?
   end
+  
+  def authenticate
+    deny_access unless signed_in?
+  end
+  
+  def ajax_only
+    redirect_to candidate_path(current_user), :notice => t('flash.notice.ajax_only') unless request.xhr?
+  end
 end

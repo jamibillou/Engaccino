@@ -1,5 +1,8 @@
 class CertificateCandidatesController < ApplicationController
   
+  before_filter :authenticate
+  before_filter :ajax_only, :only => [:new,:edit]
+  
   def new
     @certificate_candidate = CertificateCandidate.new
     @certificate_candidate.build_certificate
@@ -17,7 +20,7 @@ class CertificateCandidatesController < ApplicationController
   end
   
   def edit
-    render :partial => 'edit_form', :locals => { :certificate_candidate => CertificateCandidate.find(:id) }
+    render :partial => 'edit_form', :locals => { :certificate_candidate => CertificateCandidate.find(params[:id]) }
   end
   
   def update

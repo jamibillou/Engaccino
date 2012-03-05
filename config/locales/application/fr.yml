@@ -49,6 +49,7 @@ fr:
       already_signed_up: "Vous avez déjà terminé l'inscription."
       restricted_page: "Cette page est protégée, vous ne pouvez pas y accéder."
       not_a_new_user: "Vous avez déjà un profil, déconnectez vous si vous voulez en créer un autre."
+      ajax_only: "Vous ne pouvez accéder à cette page par cette méthode."
         
   # Actions
   delete: "Supprimer"
