@@ -1,12 +1,12 @@
-<% @interpersonal_skill_candidates = candidate.interpersonal_skill_candidates %>
-<div class='loader' id='professional_skill_candidate_loader'><%= image_tag "loader.gif" %></div>
+<% interpersonal_skill_candidates = candidate.interpersonal_skill_candidates %>
+<div class='loader' id='professional_skill_candidate_loader'><%= image_tag 'loader.gif' %></div>
 <h1>
   <%= t('interpersonal_skills.title').remove_accents.upcase %>
   <%= link_to_function "#{t('add').upcase} +", "showForm('interpersonal_skill_candidate', ['show_top'])",
-  					   :id => "link_add_interpersonal_skill_candidate", :class => "add_link #{' red underline' if @interpersonal_skill_candidates.empty?}" if candidate == current_user %>
+  					           :id => 'link_add_interpersonal_skill_candidate', :class => "add_link #{' red' if candidate.no_perso_skill?}" if candidate == current_user %>
 </h1>
-<% unless @interpersonal_skill_candidates.empty? %>
-  <% @interpersonal_skill_candidates.each do |interpersonal_skill_candidate| %>
+<% unless candidate.no_perso_skill? %>
+  <% interpersonal_skill_candidates.each do |interpersonal_skill_candidate| %>
     <div id='interpersonal_skill_candidate_<%= interpersonal_skill_candidate.id %>' class='interpersonal_skill_candidate'>
    	  <%= render 'interpersonal_skill_candidates/show', :candidate => candidate, :interpersonal_skill_candidate => interpersonal_skill_candidate %>
    	</div>

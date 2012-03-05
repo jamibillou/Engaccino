@@ -1,0 +1,16 @@
+.radius(@px) {
+  -moz-border-radius:    @px;
+  -webkit-border-radius: @px;
+  border-radius:         @px;
+}
+
+.gradient(@color-from, @color-to) {
+  background: -webkit-gradient(linear, left top, left bottom, from(@color-from), to(@color-to));
+  background: -moz-linear-gradient(top,  @color-from,  @color-to);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="'@{@color-from}'", endColorstr="'@{@color-to}'");
+}
+
+.pencil(@background: #FFF, @x: top, @y :right) {
+  background:           @background url('pencil.png') no-repeat @x @y;
+  cursor:               pointer;
+}

@@ -1,5 +1,5 @@
 <% if object.errors.any? %>
-  <div id="error_explanation" class="white_block error">
+  <div id='error_explanation' class='white_block error'>
       <%=t 'flash.error.could_not_save' %> <%= object.class.model_name.human.downcase %><%=t '_:' %><br />
       <ul>
       <% object.errors.each do |attribute, message| %>

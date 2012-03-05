@@ -1,16 +1,16 @@
-<% @language_candidates = candidate.language_candidates %>
-<div class='loader' id='language_candidate_loader'><%= image_tag "loader.gif" %></div>
+<% language_candidates = candidate.language_candidates %>
+<div class='loader' id='language_candidate_loader'><%= image_tag 'loader.gif' %></div>
 <h1>
   <div class='label'>
 	  <%= t('languages.title').remove_accents.upcase %>
 	  <%= link_to_function "#{t('add').upcase} +", "showForm('language_candidate', ['show_top'])",
-  	                     :id => "link_add_language_candidate", :class => "add_link #{' red underline' if @language_candidates.empty?}" if candidate == current_user %>
+  	                     :id => 'link_add_language_candidate', :class => "add_link #{' red' if candidate.no_lang?}" if candidate == current_user %>
   </div>
   <div class='level'><%= t('languages.level').remove_accents.upcase %></div>
 </h1>
 <div id='new_language_candidate' class='hidden'></div>
 <% unless candidate.no_lang? %>
-  <% @language_candidates.each do |language_candidate| %>
+  <% language_candidates.each do |language_candidate| %>
   	<div id='language_candidate_<%= language_candidate.id %>'>
    		<%= render 'language_candidates/show', :candidate => candidate, :language_candidate => language_candidate %>
    	</div>

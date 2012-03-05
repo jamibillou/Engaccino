@@ -14,17 +14,11 @@ class CandidatesController < ApplicationController
   
   def index
     @candidates = Candidate.all
-    
     init_page :title => 'candidates.index.title', :javascripts => 'users/index'
   end
   
   def show
-    @candidate                      = Candidate.find(params[:id])
-    @experiences                    = @candidate.experiences.order("start_year DESC, start_month DESC")
-    @educations                     = @candidate.educations.order("start_year DESC, start_month DESC") 
-    @professional_skill_candidates  = @candidate.professional_skill_candidates
-    @interpersonal_skill_candidates = @candidate.interpersonal_skill_candidates 
-    @title = "#{@candidate.first_name} #{@candidate.last_name}"
+    @candidate = Candidate.find params[:id] ; @title = "#{@candidate.first_name} #{@candidate.last_name}"
     init_page :javascripts => 'candidates/show'
   end
   
@@ -34,34 +28,34 @@ class CandidatesController < ApplicationController
   end
   
   def create
-    @candidate = Candidate.new(params[:candidate])
+    @candidate = Candidate.new params[:candidate]
     unless @candidate.save
       render_page :new, :title => 'candidates.new.title', :javascripts => 'candidates/new', :flash => { :error => error_messages(@candidate, :only => [:email, :password]) }
     else
       sign_in @candidate
-      build_associations [:experiences, :educations], @candidate
+      build_education ; build_experience
       render_page :edit, :id => @candidate, :title => 'candidates.edit.complete_your_profile', :javascripts => 'candidates/edit'
     end
   end
   
   def edit
-    build_associations [:experiences, :educations], @candidate
+    build_education ; build_experience
     init_page :title => 'candidates.edit.complete_your_profile', :javascripts => 'candidates/edit'
   end
 
   def update
-    unless @candidate.update_attributes(params[:candidate])
-      init_page :title => 'candidates.edit.complete_your_profile', :javascripts => 'candidates/edit'
+    unless @candidate.update_attributes params[:candidate]
+      init_page :title => 'candidates.edit.complete_your_profile', :javascripts => 'candidates/edit', :flash => { :error => error_messages(@candidate) }
       respond_to do |format|
         format.html { render :json => error_messages(@candidate) } if remotipart_submitted?
-        format.html { render_page :edit, :id => @candidate, :flash => { :error => error_messages(@candidate) } }
+        format.html { render_page :edit, :id => @candidate }
         format.json { respond_with_bip @candidate }
       end
     else
-      link_schools_degrees
+      associate_schools_and_degrees
       respond_to do |format|
         format.json { render :json => 'success!' } if remotipart_submitted?
-        format.html { @candidate.update_attributes :profile_completion => 5 ; redirect_to @candidate, :flash => { :success => t('flash.success.welcome') } }
+        format.html { @candidate.update_attributes :profile_completion => 5 ; redirect_to @candidate }
         format.json { respond_with_bip @candidate }
       end
     end
@@ -73,7 +67,6 @@ class CandidatesController < ApplicationController
   end
   
   def refresh
-    @candidate = current_user
     partial = params[:model].nil? ? "candidates/#{params[:partial]}" : "candidates/show_#{params[:model].to_s}s"
     render :partial => partial, :locals => { :candidate => current_user }
   end
@@ -85,8 +78,8 @@ class CandidatesController < ApplicationController
     end
     
     def correct_user
-      @candidate = Candidate.find(params[:id])
-      redirect_to candidate_path(current_user), :notice => t('flash.notice.other_user_page') unless current_user?(@candidate)
+      @candidate = Candidate.find params[:id]
+      redirect_to candidate_path(current_user), :notice => t('flash.notice.other_user_page') unless current_user? @candidate
     end
     
     def signed_up
@@ -98,12 +91,10 @@ class CandidatesController < ApplicationController
     end
     
     def admin_user
-      @candidate = current_user
-      redirect_to candidate_path(@candidate), :notice => t('flash.notice.restricted_page') unless @candidate.admin
+      redirect_to candidate_path(current_user), :notice => t('flash.notice.restricted_page') unless current_user.admin
     end
     
     def new_user
       redirect_to candidate_path(current_user), :notice => t('flash.notice.not_a_new_user') unless current_user.nil?
-    end
-    
+    end  
 end

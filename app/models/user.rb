@@ -6,21 +6,18 @@ class User < ActiveRecord::Base
                   :linkedin_login, :twitter_login, :profile_completion, :password, :password_confirmation, :image
   
   countries_array = Country.all.collect { |c| c[0] }
-  email_regex     = /^[\w+\d\-.]+@[a-z\d\-.]+\.[a-z]{2,3}(\.[a-z]{2,3})?$/i
-  phone_regex     = /^\+(?:[0-9] ?){6,14}[0-9]$/
-  twitter_regex   = /^@(_|([a-z]_)|[a-z])([a-z0-9]+_?)*$/i
     
-  validates :email,                      :format => { :with => email_regex },   :uniqueness => { :case_sensitive => false },     :presence => true
+  validates :email,                      :email_format => true,                 :uniqueness => { :case_sensitive => false },     :presence => true
   validates :password,                   :on => :create, :confirmation => true, :length => { :within => 6..40 },                 :presence => true
   validates :first_name, :last_name,     :length => { :maximum => 80 },                                                          :presence => true
   validates :country,                    :inclusion => { :in => countries_array },                                               :presence => true
   validates :city,                                                                                                               :presence => true
   validates :nationality,                :inclusion => { :in => countries_array },                                               :allow_blank => true
   validates :year_of_birth,              :inclusion => { :in => 100.years.ago.year..Time.now.year },                             :allow_blank => true
-  validates :phone,                      :length => { :within => 7..20 },       :format => { :with => phone_regex },             :allow_blank => true     
-  validates :facebook_login,             :format => { :with => email_regex },   :uniqueness => { :case_sensitive => false },     :allow_blank => true
-  validates :linkedin_login,             :format => { :with => email_regex },   :uniqueness => { :case_sensitive => false },     :allow_blank => true
-  validates :twitter_login,              :format => { :with => twitter_regex }, :uniqueness => { :case_sensitive => false },     :allow_blank => true
+  validates :phone,                      :phone_format => true,                 :length => { :within => 7..20 },                 :allow_blank => true     
+  validates :facebook_login,             :email_format => true,                 :uniqueness => { :case_sensitive => false },     :allow_blank => true
+  validates :linkedin_login,             :email_format => true,                 :uniqueness => { :case_sensitive => false },     :allow_blank => true
+  validates :twitter_login,              :twitter_format => true,               :uniqueness => { :case_sensitive => false },     :allow_blank => true
   validates :profile_completion,         :inclusion => { :in => 0..100 }
                                                                   
   before_create  :encrypt_password

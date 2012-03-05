@@ -1,0 +1,8 @@
+en:
+  activerecord:
+      errors:
+        messages:
+          email_format: "is not formatted properly"
+          url_format: "is not formatted properly"
+          phone_format: "is not formatted properly"
+          twitter_format: "is not formatted properly"

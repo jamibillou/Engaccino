@@ -1,34 +1,52 @@
 Factory.define :user do |user|
-  user.first_name "John"
-  user.last_name "Doe" 
-  user.city "Rotterdam"         
-  user.country "Netherlands"     
-  user.nationality "Netherlands"
+  user.first_name 'John'
+  user.last_name 'Doe' 
+  user.city 'Rotterdam'         
+  user.country 'Netherlands'     
+  user.nationality 'Netherlands'
   user.year_of_birth 1975
-  user.phone "+31 6 00000000"
-  user.email "j.doe@example.com"
-  user.facebook_login "j.doe@example.com"
-  user.linkedin_login "j.doe@example.com"
-  user.twitter_login "@john_d"
-  user.password "45Georges?"
-  user.password_confirmation "45Georges?"
+  user.phone '+31 6 00000000'
+  user.email 'j.doe@example.com'
+  user.facebook_login 'j.doe@example.com'
+  user.linkedin_login 'j.doe@example.com'
+  user.twitter_login '@john_d'
+  user.password '45Georges?'
+  user.password_confirmation '45Georges?'
 end
 
 Factory.define :candidate do |candidate|
-  candidate.first_name "John"
-  candidate.last_name "Doe" 
-  candidate.city "Rotterdam"         
-  candidate.country "Netherlands"     
-  candidate.nationality "Netherlands"
+  candidate.first_name 'John'
+  candidate.last_name 'Doe' 
+  candidate.city 'Rotterdam'         
+  candidate.country 'Netherlands'     
+  candidate.nationality 'Netherlands'
   candidate.year_of_birth 1975
-  candidate.phone "+31 6 00000000"
+  candidate.phone '+31 6 00000000'
   candidate.email { Factory.next(:email) }
   candidate.facebook_login { Factory.next(:facebook_login) }
   candidate.linkedin_login { Factory.next(:linkedin_login) }
   candidate.twitter_login { Factory.next(:twitter_login) }
-  candidate.password "45Georges?"
-  candidate.password_confirmation "45Georges?"
-  candidate.status "available"  
+  candidate.password '45Georges?'
+  candidate.password_confirmation '45Georges?'
+  candidate.status 'available'  
+end
+
+Factory.define :recruiter do |recruiter|
+  recruiter.first_name 'John'
+  recruiter.last_name 'Doe' 
+  recruiter.city 'Rotterdam'         
+  recruiter.country 'Netherlands'     
+  recruiter.nationality 'Netherlands'
+  recruiter.year_of_birth 1975
+  recruiter.phone '+31 6 00000000'
+  recruiter.email { Factory.next(:email) }
+  recruiter.facebook_login { Factory.next(:facebook_login) }
+  recruiter.linkedin_login { Factory.next(:linkedin_login) }
+  recruiter.twitter_login { Factory.next(:twitter_login) }
+  recruiter.password '54John!'
+  recruiter.password_confirmation '54John!'
+  recruiter.quote "I am a technology recruiter specialized in find developers for Web companies. I don't really believe in profile matching, just contact me and we'll see what we can do ;)"
+  recruiter.association :company
 end
 
 Factory.define :company do |company|
@@ -37,7 +55,7 @@ Factory.define :company do |company|
   company.city 'London'
   company.country 'United Kingdom'
   company.phone '+44 7 987654321'
-  company.email 'contact@fff.co.uk'
+  company.email { Factory.next(:email) }
   company.url 'http://www.fff.co.uk'
 end
 
@@ -119,7 +137,7 @@ Factory.define :certificate do |certificate|
 end
 
 Factory.define :certificate_candidate do |certificate_candidate|
-  certificate_candidate.level_score "B2"
+  certificate_candidate.level_score 'B2'
   certificate_candidate.association :certificate
   certificate_candidate.association :candidate
 end

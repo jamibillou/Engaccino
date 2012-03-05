@@ -30,9 +30,7 @@ class CertificateCandidatesController < ApplicationController
   end
   
   def destroy
-    certificate_candidate = CertificateCandidate.find params[:id]
-    candidate = certificate_candidate.candidate
-    certificate_candidate.destroy
+    CertificateCandidate.find(params[:id]).destroy
     respond_to { |format| format.html { render :json => 'destroy!' if request.xhr? } }
   end
   

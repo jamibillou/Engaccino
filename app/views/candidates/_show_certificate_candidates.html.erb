@@ -1,16 +1,16 @@
-<% @certificate_candidates = candidate.certificate_candidates %>
-<div class='loader' id='certificate_candidate_loader'><%= image_tag "loader.gif" %></div>
+<% certificate_candidates = candidate.certificate_candidates %>
+<div class='loader' id='certificate_candidate_loader'><%= image_tag 'loader.gif' %></div>
 <h1>
-  <div class="label">
+  <div class='label'>
 	<%= t('certificates.title').remove_accents.upcase %>
 	<%= link_to_function "#{t('add').upcase} +", "showForm('certificate_candidate', ['show_top'])",
-	                     :id => "link_add_certificate_candidate", :class => "add_link #{' red underline' if @certificate_candidates.empty?}" if current_user?(candidate) %>
+	                     :id => 'link_add_certificate_candidate', :class => "add_link #{' red' if candidate.no_certif?}" if current_user?(candidate) %>
   </div>
-  <div class="level"><%= t('certificates.level').remove_accents.upcase %></div>
+  <div class='level'><%= t('certificates.level').remove_accents.upcase %></div>
 </h1>
 <div id='new_certificate_candidate' class='hidden'></div> 
 <% unless candidate.no_certif? %>
-  <% @certificate_candidates.each do |certificate_candidate| %>
+  <% certificate_candidates.each do |certificate_candidate| %>
     <div id='certificate_candidate_<%= certificate_candidate.id %>'>
    	  <%= render 'certificate_candidates/show', :candidate => candidate, :certificate_candidate => certificate_candidate %>
    	</div>

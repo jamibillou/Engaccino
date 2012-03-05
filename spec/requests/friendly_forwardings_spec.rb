@@ -1,31 +1,31 @@
 require 'spec_helper'
 
-describe "FriendlyForwardings" do
+describe 'FriendlyForwardings' do
 
-  before(:each) do
-    @candidate = Factory(:candidate)
+  before :each do
+    @candidate = Factory :candidate
   end
   
-  describe "should forward to" do
+  describe 'should forward to' do
     
-    before(:each) do
-      @candidate.update_attributes(:profile_completion => 10)
+    before :each do
+      @candidate.update_attributes :profile_completion => 5
     end
     
-    it "profile" do
-      visit candidate_path(@candidate)
+    it 'profile' do
+      visit candidate_path @candidate
       fill_in :email,    :with => @candidate.email
       fill_in :password, :with => @candidate.password
       click_button
-      response.should render_template('candidates/show')
+      response.should render_template 'candidates/show'
     end
     
-    it "candidates" do
+    it 'candidates' do
       visit candidates_path
       fill_in :email,    :with => @candidate.email
       fill_in :password, :with => @candidate.password
       click_button
-      response.should render_template('candidates/index')
+      response.should render_template 'candidates/index'
     end
   end
 end

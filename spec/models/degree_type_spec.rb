@@ -2,55 +2,55 @@ require 'spec_helper'
 
 describe DegreeType do
 
-  before(:each) do
-    @attr        = { :label => "IUT" }
-    @candidate   = Factory(:candidate)
-    @degree_type = Factory(:degree_type)
-    @degree      = Factory(:degree, :degree_type => @degree_type)
-    @school      = Factory(:school)
-    @education   = Factory(:education, :candidate => @candidate, :school => @school, :degree => @degree)
+  before :each do
+    @attr        = { :label => 'IUT' }
+    @candidate   = Factory :candidate
+    @degree_type = Factory :degree_type
+    @degree      = Factory :degree, :degree_type => @degree_type
+    @school      = Factory :school
+    @education   = Factory :education, :candidate => @candidate, :school => @school, :degree => @degree
   end
 
-  it "should create an instance given valid attributes" do
-    degree_type = DegreeType.new(@attr)
+  it 'should create an instance given valid attributes' do
+    degree_type = DegreeType.new @attr
     degree_type.save!
     degree_type.should be_valid
   end
   
-  describe "degree associations" do
+  describe 'degree associations' do
     
-    it "should have degrees attribute" do
-      @degree_type.should respond_to(:degrees)
+    it 'should have degrees attribute' do
+      @degree_type.should respond_to :degrees
     end
     
-    it "should not destroy associated degrees" do
+    it 'should not destroy associated degrees' do
       @degree_type.destroy
       Degree.find_by_id(@degree.id).should_not be_nil
     end
   end
   
-  describe "educations associations" do
+  describe 'educations associations' do
     
-    it "should have an educations attribute" do
-      @degree_type.should respond_to(:educations)
+    it 'should have an educations attribute' do
+      @degree_type.should respond_to :educations
     end
     
-    it "should not destroy associated educations" do
+    it 'should not destroy associated educations' do
       @degree_type.destroy
       Education.find_by_id(@education.id).should_not be_nil
     end
   end
 
-  describe "validations" do
+  describe 'validations' do
         
-    it "should require a label" do
-      invalid_degree_type = DegreeType.new(@attr.merge(:label => ''))
+    it 'should require a label' do
+      invalid_degree_type = DegreeType.new @attr.merge :label => ''
       invalid_degree_type.should_not be_valid
     end
     
-    it "should reject too long labels" do
+    it 'should reject too long labels' do
       long_label = 'a' * 31
-      long_degree_type = DegreeType.new(@attr.merge(:label => long_label))
+      long_degree_type = DegreeType.new @attr.merge :label => long_label
       long_degree_type.should_not be_valid      
     end
   end

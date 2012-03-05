@@ -62,5 +62,4 @@ module TimelineHelper
   def decade(year)
     (year / 10).truncate * 10
   end
-
 end

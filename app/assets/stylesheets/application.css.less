@@ -1,17 +1,6 @@
-//// LESS MIXINS
+@import 'mixins';
 
-.radius(@px) {
-  -moz-border-radius:    @px;
-  -webkit-border-radius: @px;
-  border-radius:         @px;
-}
-.gradient(@color-from, @color-to) {
-  background: -webkit-gradient(linear, left top, left bottom, from(@color-from), to(@color-to));
-  background: -moz-linear-gradient(top,  @color-from,  @color-to);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="'@{@color-from}'", endColorstr="'@{@color-to}'");
-}
-
-//// BASE FOR TO ALL VIWS
+//// BASE FOR TO ALL VIEWS
 
 // GENERAL
 html                  { font-family: arial; color: black }
@@ -24,7 +13,7 @@ body                  { line-height: 1.5;   background: #f1f1f1; margin: 0; padd
 
 // HEADER
 header                { padding-top: 8px; font-size: 13px; font-weight: bold;
-  #logo               { width: 150px;     padding: 9px 8px }
+  .logo               { width: 150px;     padding: 9px 8px }
   #languages          { float: right;     padding-right: 20px; font-size: 11px;
   	a                 { text-decoration:  none; color: black;
     	&:hover         { text-decoration:  underline }
@@ -167,8 +156,7 @@ a.close             { height: 15px; width: 15px; background-image: url('close_fl
 // ICONS
 .trash                { float: right; padding: 10px }
 .small_trash          { position: relative; padding-left: 8px }
-.small_trash_link     { background: url('small_trash.png') no-repeat left 3px; padding-left: 12px;
-  &.margin_top        { margin-top: 5px } // TO WIPE OUT
+.small_trash_link     { background: url('small_trash.png') no-repeat left 3px; padding-left: 12px; float: right;
   a                   { color: red; text-decoration: underline }
 }
 .settings             { float: right;     padding: 2px 0 0 16px }
@@ -186,3 +174,5 @@ a.close             { height: 15px; width: 15px; background-image: url('close_fl
 .field_with_errors { padding-right: 5px;
   &.message        { .red }
 }
+
+@import 'candidates';

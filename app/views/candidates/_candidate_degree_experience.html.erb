@@ -1,21 +1,21 @@
 <% unless candidate.neither_exp_nor_edu? %>
-  <div class="degree_experience">
-    <div class="experience">
+  <div class='degree_experience'>
+    <div class='experience'>
       <h2><%= t('experiences.title').remove_accents.upcase %></h2>
       <h3><%= pluralize(candidate.experience_duration.round, t('yr')) unless candidate.no_exp? %></h3>
     </div>
-    <div class="degree">
+    <div class='degree'>
       <h2><%= t('educations.main').remove_accents.upcase %></h2>
 	  <% unless candidate.no_edu? %>
         <% main_education = Education.find(candidate.main_education) %>
         <% if current_user == candidate %>
-          <h3 id="degreetype_BIPcombo">
+          <h3 id='degreetype_BIPcombo'>
             <%= best_in_place candidate, :main_education, :type => :select, :collection => main_education_options(candidate), :html_attrs => { :class => 'combobox' } %>
           </h3>
         <% else %>
           <h3><%= main_education.degree.degree_type.label %></h3>
         <% end %>
-    	  <p id="candidate_degree">
+    	  <p id='candidate_degree'>
           <%= render 'candidate_degree', :candidate => candidate %>
         </p>
       <% else %>

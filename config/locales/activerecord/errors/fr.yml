@@ -23,3 +23,7 @@ fr:
           even: "doit être pair"
           carrierwave_processing_error: "impossilbe de redimensionner l'image'"
           carrierwave_integrity_error: "n'est pas une image"
+          email_format: "n'est pas au bon format"
+          url_format: "n'est pas au bon format"
+          phone_format: "n'est pas au bon format"
+          twitter_format: "n'est pas au bon format"
