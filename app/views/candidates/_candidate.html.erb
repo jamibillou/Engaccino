@@ -26,9 +26,10 @@
         <div class='place'><%= best_in_place_if current_user == candidate, candidate, :country, :nil => t('candidates.country'), :html_attrs => { :class => 'country field' } %></div>
       </div>
       <% if current_user == candidate %>
-        <%= form_for candidate, :html => { :id => 'image_form', :multipart => true } do |f| %>
+        <%= form_for candidate, :remote => true, :html => { :id => 'image_form', :multipart => true } do |f| %>
           <%= f.file_field :image, :id => 'image_button' %>
           <%= f.submit :submit, :class => 'hidden' %>
+          <div id='picture_upload_error' class='hidden error_messages'></div>
         <% end %>
       <% end %>
       <% if current_user.admin? %>

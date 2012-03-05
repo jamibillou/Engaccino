@@ -2,11 +2,11 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require jquery.purr
+//= require jquery.remotipart
 //= require best_in_place
 //= require i18n
 //= require i18n/translations
 //= require rails.validations
-
 
 $ ->
   ## AUTOCOMPLETE
