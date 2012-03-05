@@ -34,6 +34,6 @@ module ApplicationHelper
   end
   
   def associate_schools_and_degrees
-    @candidate.educations.each { |education| education.school.degrees.push! education.degree unless education.school.degrees.include? education.degree }
+    @candidate.educations.each { |education| school = education.school ; school.degrees.push education.degree ; school.save! unless school.degrees.include? education.degree }
   end
 end
