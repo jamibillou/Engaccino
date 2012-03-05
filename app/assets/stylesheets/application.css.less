@@ -107,6 +107,7 @@ a.close             { height: 15px; width: 15px; background-image: url('close_fl
   h2                  { margin-top: 0;   padding: 0 }
   p                   { font-size: 12px }
 }
+.grey_block          { background: #f1f1f1; font-size: 14px }
 
 // FIELDS
 .fields               { display: inline }
@@ -171,8 +172,9 @@ a.close             { height: 15px; width: 15px; background-image: url('close_fl
 }
 
 // CLIENT SIDE VALIDATIONS
-.field_with_errors { padding-right: 5px;
-  &.message        { .red }
+.field_with_errors   { display: inline-block;
+  .message { padding-left: 5px; .red }
 }
 
 @import 'candidates';
+@import 'recruiters';
