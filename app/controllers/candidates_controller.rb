@@ -48,7 +48,7 @@ class CandidatesController < ApplicationController
       init_page :title => 'candidates.edit.complete_your_profile', :javascripts => 'candidates/edit', :flash => { :error => error_messages(@candidate) }
       respond_to do |format|
         format.html { render :json => error_messages(@candidate) } if remotipart_submitted?
-        format.html { render_page :edit, :id => @candidate } }
+        format.html { render_page :edit, :id => @candidate }
         format.json { respond_with_bip @candidate }
       end
     else

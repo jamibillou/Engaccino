@@ -3,7 +3,7 @@
 <h1>
   <div class='label'><%= t('professional_skills.title').remove_accents.upcase %>
     <%= link_to_function "#{t('add').upcase} +", "showForm('professional_skill_candidate', ['show_top','candidate_professional_skills'])",
-						 :id => 'link_add_professional_skill_candidate', :class => "add_link #{' red underline' if candidate.no_pro_skill?}" if candidate == current_user %>
+						 :id => 'link_add_professional_skill_candidate', :class => "add_link #{' red' if candidate.no_pro_skill?}" if candidate == current_user %>
   </div>
   <div class='experience'><%= t('professional_skills.experience').remove_accents.upcase %></div>
   <div class='level'><%= t('professional_skills.level').remove_accents.upcase %></div>

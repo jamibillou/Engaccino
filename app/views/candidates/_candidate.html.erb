@@ -80,9 +80,9 @@
           <p><span class='logo'><%= image('facebook') %></span>
              <%= best_in_place_if current_user == candidate, candidate, :facebook_login, :nil => t('click_to_edit').downcase, :html_attrs => { :class => 'field' } %></p>
         <% else %>
-            <% if candidate.linkedin_login %><p><span class='logo'><%= linkedin_logo %></span><%= candidate.linkedin_login %></p><% end %>
-            <% if candidate.twitter_login  %><p><span class='logo'><%=  twitter_logo %></span><%= candidate.twitter_login  %></p><% end %>
-            <% if candidate.facebook_login %><p><span class='logo'><%= facebook_logo %></span><%= candidate.facebook_login %></p><% end %>
+            <% if candidate.linkedin_login %><p><span class='logo'><%= image('linkedin') %></span><%= candidate.linkedin_login %></p><% end %>
+            <% if candidate.twitter_login  %><p><span class='logo'><%= image('twitter') %></span><%= candidate.twitter_login  %></p><% end %>
+            <% if candidate.facebook_login %><p><span class='logo'><%= image('facebook') %></span><%= candidate.facebook_login %></p><% end %>
         <% end %>
       </div>
     </div>

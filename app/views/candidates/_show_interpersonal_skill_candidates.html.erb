@@ -3,7 +3,7 @@
 <h1>
   <%= t('interpersonal_skills.title').remove_accents.upcase %>
   <%= link_to_function "#{t('add').upcase} +", "showForm('interpersonal_skill_candidate', ['show_top'])",
-  					           :id => 'link_add_interpersonal_skill_candidate', :class => "add_link #{' red underline' if candidate.no_perso_skill?}" if candidate == current_user %>
+  					           :id => 'link_add_interpersonal_skill_candidate', :class => "add_link #{' red' if candidate.no_perso_skill?}" if candidate == current_user %>
 </h1>
 <% unless candidate.no_perso_skill? %>
   <% interpersonal_skill_candidates.each do |interpersonal_skill_candidate| %>

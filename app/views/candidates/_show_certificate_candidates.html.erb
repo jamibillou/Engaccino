@@ -4,7 +4,7 @@
   <div class='label'>
 	<%= t('certificates.title').remove_accents.upcase %>
 	<%= link_to_function "#{t('add').upcase} +", "showForm('certificate_candidate', ['show_top'])",
-	                     :id => 'link_add_certificate_candidate', :class => "add_link #{' red underline' if candidate.no_certif?}" if current_user?(candidate) %>
+	                     :id => 'link_add_certificate_candidate', :class => "add_link #{' red' if candidate.no_certif?}" if current_user?(candidate) %>
   </div>
   <div class='level'><%= t('certificates.level').remove_accents.upcase %></div>
 </h1>

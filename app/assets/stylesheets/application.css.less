@@ -1,17 +1,6 @@
-//// LESS MIXINS
+@import 'mixins';
 
-.radius(@px) {
-  -moz-border-radius:    @px;
-  -webkit-border-radius: @px;
-  border-radius:         @px;
-}
-.gradient(@color-from, @color-to) {
-  background: -webkit-gradient(linear, left top, left bottom, from(@color-from), to(@color-to));
-  background: -moz-linear-gradient(top,  @color-from,  @color-to);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="'@{@color-from}'", endColorstr="'@{@color-to}'");
-}
-
-//// BASE FOR TO ALL VIWS
+//// BASE FOR TO ALL VIEWS
 
 // GENERAL
 html                  { font-family: arial; color: black }
@@ -185,3 +174,5 @@ a.close             { height: 15px; width: 15px; background-image: url('close_fl
 .field_with_errors { padding-right: 5px;
   &.message        { .red }
 }
+
+@import 'candidates';
