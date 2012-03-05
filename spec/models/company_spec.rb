@@ -13,6 +13,7 @@ describe Company do
             }  
     @candidate  = Factory :candidate
     @company    = Factory :company
+    @recruiter  = Factory :recruiter,  :company => @company
     @experience = Factory :experience, :candidate => @candidate, :company => @company
   end
   
@@ -42,6 +43,18 @@ describe Company do
     it 'should not destroy associated candidates' do
       @company.destroy
       Candidate.find_by_id(@candidate.id).should_not be_nil
+    end    
+  end
+  
+  describe 'recruiters associations' do
+    
+    it 'should have a recruiters attribute' do
+      @company.should respond_to :candidates
+    end
+    
+    it 'should not destroy associated recruiters' do
+      @company.destroy
+      Recruiter.find_by_id(@recruiter.id).should_not be_nil
     end    
   end
   

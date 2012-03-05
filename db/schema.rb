@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120218103146) do
+ActiveRecord::Schema.define(:version => 20120305175248) do
 
   create_table "certificate_candidates", :force => true do |t|
     t.string   "level_score"
@@ -167,6 +167,8 @@ ActiveRecord::Schema.define(:version => 20120218103146) do
     t.string   "image"
     t.integer  "main_education"
     t.integer  "main_experience"
+    t.string   "quote"
+    t.integer  "company_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
