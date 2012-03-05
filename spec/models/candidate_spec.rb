@@ -72,7 +72,7 @@ describe Candidate do
       candidate.main_education.should be_nil
     end
     
-    it "should be the last education unless the canddiate chose otherwise" do
+    it "should be the last education unless the candidate chose otherwise" do
       education2 = Education.new(:start_month => 1, :start_year => 1990, :end_month => 2, :end_year => 1992, :role => 'Sales administrator')
       school = School.new(:name => 'School') ; degree = Degree.new(:label => 'Degree') ; degree_type = DegreeType.new(:label => 'Degree type')
       education2.school = school ; education2.degree = degree ; degree.degree_type = degree_type ; education2.candidate = @candidate ; education2.save!
@@ -91,7 +91,7 @@ describe Candidate do
       candidate.main_experience.should be_nil
     end
     
-    it "should be the last experience unless the canddiate chose otherwise" do
+    it "should be the last experience unless the candidate chose otherwise" do
       experience2 = Experience.new(:start_month => 1, :start_year => 1990, :end_month => 2, :end_year => 1992, :role => 'Sales administrator')
       company = Company.new(:name => 'Company') ; experience2.company = company ; experience2.candidate = @candidate ; experience2.save!
       @candidate.main_experience.should == @candidate.last_experience.id
