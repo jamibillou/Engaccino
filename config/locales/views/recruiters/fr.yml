@@ -1,0 +1,68 @@
+fr:
+  recruiters:
+    
+    personal_information: "Civilité"
+    email: "Email"
+    password: "Mot de passe"
+    password_confirmation: "Confirmez votre mot de passe"
+    first_name: "Prénom"
+    middle_name: "Deuxième prénom"
+    last_name: "Nom de famille"
+    city: "Ville"
+    country: "Pays"
+    location: "Localisation"
+    nationality: "Nationalité"
+    year_of_birth: "Année de naissance"
+    phone: "Numéro de téléphone"
+    company: "Entreprise"
+    role: "Poste"
+    start_year: "Année"
+    start_month: "Mois"
+    end_year: "Année"
+    end_month: "Mois"
+    education: "Formation"
+    degree: "Diplôme"
+    university: "Université"
+    education_timeframe: "Période"
+    social_networks: "Réseaux sociaux"
+    profile_picture: "Photo de profil"
+    
+    missing:
+      localisation: "Où vivez-vous ?"
+      social_networks: "Vos profils Facebook, Twitter ou LinkedIn permettent de mieux vous connaître."
+      profile_picture: "Ajoutez une photo de profil, le visiteurs aiment voir à qui ils s'adressent."
+    
+    index:
+      title: "Liste des recruteurs"
+    show:
+      title: "Profil de "
+      share_profile: "Partager profil"
+      edit_profile: "Editer profil"
+      view_profile: "Voir profil"
+      next_profile: "Profil suivant"
+      profile_completion:
+        sentence: "Votre profil est complet à "
+        %complete: "%"
+        link: "Qu'est-ce qu'il manque ?"
+    new:
+      title: "S'inscrire"
+      create_engaccino_account: "Créer un compte Engaccino"
+      or_use_social_connect: "Ou connectez vous avec Facebook ou Twitter"
+      connect_via: "Se connecter via"
+      set_up_profile: "Créer mon profil"
+    edit:
+      title: "Editez votre profil"
+      edit_profile: "Editer mon profil"
+      complete_your_profile: "Excellent! Maintenant, complétez votre profil."
+      view_profile: "Afficher mon profil"
+      company:
+        title: "Voulez vous également créer un profil d'entreprise ?"
+        nope: "Non, je préfère recruter sous mon propre nom uniquement."
+        yep: "Oui, je veux aussi créer un profil d'entreprise."
+        info: "Information concernant l'entreprise"
+      colleagues:
+        title: "Collègues"
+        note: "Note : Vous pouvez passez cette étape et inviter vos collègues plus tard."
+        admin: "Administrateur"
+    destroy:
+      title: "Supprimer"

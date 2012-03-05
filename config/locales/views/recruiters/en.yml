@@ -1,0 +1,69 @@
+en:
+  recruiters:
+  
+    personal_information: "Tell us about yourself"
+    email: "Email"
+    password: "Password"
+    password_confirmation: "Confirm password"
+    first_name: "First name"
+    middle_name: "Middle name"
+    last_name: "Last name"
+    city: "City"
+    country: "Country"      
+    location: "Location"
+    nationality: "Nationality"
+    year_of_birth: "Year of birth"
+    phone: "Phone number"
+    company: "Company"
+    role: "Role"
+    start_year: "Year"
+    start_month: "Month"
+    end_year: "Year"
+    end_month: "Month"
+    education: "Education"
+    degree: "Degree"
+    university: "University"
+    education_timeframe: "Time frame"
+    social_networks: "Social networks"
+
+    profile_picture: "Profile picture"
+    
+    missing:
+      localisation: "Where do you live?"
+      social_networks: "Provide your social profiles so people can learn more about you."
+      profile_picture: "Add a profile picture so recruiters have a sense of who they are talking to."
+        
+    index:
+      title: "List of all recruiters"
+    show:
+      title: "'s Profile"
+      share_profile: "Share profile"
+      edit_profile: "Edit profile"
+      view_profile: "View profile"
+      next_profile: "Next profile"
+      profile_completion:
+        sentence: "Your profile is "
+        %complete: "% complete"
+        link: "What is missing?"
+    new:
+      title: "Sign up"
+      create_engaccino_account: "Create an Engaccino account"
+      or_use_social_connect: "Or, connect using Facebook or Twitter"
+      connect_via: "Connect via"
+      set_up_profile: "Set up my profile"
+    edit:
+      title: "Edit your profile"
+      edit_profile: "Edit your profile"
+      complete_your_profile: "Great! Almost done"
+      view_profile: "View my profile"
+      company:
+        title: "Do you also want to set up a company profile?"
+        nope: "No, I want to recruit under my own name only."
+        yep: "Yes, I also want to set up a company profile."
+        info: "Company information"
+      colleagues:
+        title: "Colleagues"
+        note: "Note: You can skip this step and invite your colleagues later on."
+        admin: "Administrator"
+    destroy:
+      title: "Delete"

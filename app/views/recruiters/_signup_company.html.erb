@@ -1,0 +1,24 @@
+<div id='company' class='white_block'>
+  <h2><%=t 'recruiters.edit.company.title' %></h2>
+  <h4><%= radio_button_tag :company_profile, 'yes', true %>&nbsp;&nbsp;&nbsp;
+  <%=t 'recruiters.edit.company.nope' %></h4>
+  <h4><%= radio_button_tag :company_profile, 'no' %>&nbsp;&nbsp;&nbsp;
+  <%=t 'recruiters.edit.company.yep' %></h4><br />
+  <div id='company_information' class='hidden grey_block'>
+    <h2><%=t 'recruiters.edit.company.info' %></h2>
+    <%= f.fields_for :company do |company_builder| render 'fields_company', :f => company_builder end %>
+  </div>
+  <div id='colleagues' class='hidden grey_block'>
+    <h2><%=t 'recruiters.edit.colleagues.title' %></h2>
+    <p><%=t 'recruiters.edit.colleagues.note' %></p>
+    <%= text_field_tag :colleague, nil, :class => 'field' %>&nbsp;&nbsp;&nbsp;
+    <%= check_box_tag  :admin %>&nbsp;&nbsp;
+    <%=t 'recruiters.edit.colleagues.admin' %><br />
+    <%= text_field_tag :colleague, nil, :class => 'field' %>&nbsp;&nbsp;&nbsp;
+    <%= check_box_tag  :admin %>&nbsp;&nbsp;
+    <%=t 'recruiters.edit.colleagues.admin' %><br />
+    <%= text_field_tag :colleague, nil, :class => 'field' %>&nbsp;&nbsp;&nbsp;
+    <%= check_box_tag  :admin %>&nbsp;&nbsp;
+    <%=t 'recruiters.edit.colleagues.admin' %>
+  </div>
+</div>

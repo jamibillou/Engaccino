@@ -1,0 +1,11 @@
+<div id='signup'>
+  <%= form_for @recruiter, :html => { :id => 'recruiter_edit_form' } do |recruiter_builder| %>
+    <div id='signup_personal'>
+      <%= render 'signup_personal',   :f => recruiter_builder %>
+    </div>
+    <div id='signup_company'>
+      <%= render 'signup_company',   :f => recruiter_builder %>
+    </div>
+    <%= recruiter_builder.submit t('recruiters.show.view_profile'), :class => 'center' %>
+  <% end %>
+</div>
