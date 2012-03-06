@@ -12,7 +12,7 @@ class Company < ActiveRecord::Base
   validates :address, :length    => { :maximum => 160 },                                                   :allow_blank => true
   validates :city,    :length    => { :maximum =>  80 },                                                   :allow_blank => true
   validates :country, :inclusion => { :in => countries_array },                                            :allow_blank => true
-  validates :phone,   :phone_format => true, :length    => { :within => 7..20 },                           :allow_blank => true
+  validates :phone,   :phone_format => true, :length     => { :within => 7..20 },                          :allow_blank => true
   validates :email,   :email_format => true, :uniqueness => { :case_sensitive => false },                  :allow_blank => true
   validates :url,     :url_format   => true,                                                               :allow_blank => true
   

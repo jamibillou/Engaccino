@@ -74,7 +74,7 @@
       </div>
     </div>
   <% end %>
-  <% unless recruiter.company.nil? && !current_user?(recruiter) %>
+  <% unless recruiter.company.nil? %>
     <div class='company'>
       <h2><%= t('recruiters.show.recruiter_at').remove_accents.upcase %></h2>
       <% if current_user == recruiter && params[:action] == 'show' %>

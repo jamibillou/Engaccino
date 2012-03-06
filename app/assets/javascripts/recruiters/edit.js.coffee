@@ -4,9 +4,9 @@ $ ->
   $('#recruiter_city').val("") if $('#recruiter_city').val() is I18n.t('recruiters.city')
   $('#recruiter_country').val("") if $('#recruiter_country').val() is 'Holy See (Vatican City State)'
   
-  $('#company_profile_yes').change ->
+  $('#company_profile_no').change ->
     hide('company_information')
     hide('colleagues')                                
-  $('#company_profile_no').change ->
+  $('#company_profile_yes').change ->
     show('company_information')
     show('colleagues')
