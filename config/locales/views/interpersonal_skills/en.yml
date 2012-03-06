@@ -3,3 +3,5 @@ en:
   
     title: "Interpersonal skills"
     add_some: "What are your 3 main qualities?"
+    label: "Skill"
+    add_description: "Give examples of this ability of yours."

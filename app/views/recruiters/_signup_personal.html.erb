@@ -1,7 +1,7 @@
 <div id='personal_information' class='white_block'>
   <h2><%=t 'recruiters.personal_information' %></h2>
-  <%= f.text_field :first_name,    :id => 'first_name',    :class => 'field' %><br />
-  <%= f.text_field :last_name,     :id => 'last_name',     :class => 'field' %><br /><br />
-  <%= f.text_field :city,          :id => 'city',          :class => 'field' %><br />
-  <%= f.text_field :country,       :id => 'country',       :class => 'country field' %>
+  <%= f.text_field :first_name, :placeholder => t('recruiters.first_name'), :class => 'field' %><br />
+  <%= f.text_field :last_name,  :placeholder => t('recruiters.last_name'),  :class => 'field' %><br /><br />
+  <%= f.text_field :city,       :placeholder => t('recruiters.city'),       :class => 'field' %><br />
+  <%= f.text_field :country,    :placeholder => t('recruiters.country'),    :class => 'country field' %>
 </div>

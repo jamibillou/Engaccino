@@ -25,9 +25,14 @@ describe PagesController do
       response.should have_selector 'li', :class => 'round selected', :content => I18n.t(:menu_overview)
     end
     
-    it 'should have a sign up button' do
+    it 'should have a candidate sign up button' do
       get :overview
-      response.should have_selector 'a', :content => I18n.t(:sign_up)
+      response.should have_selector 'a', :content => I18n.t(:candidate_sign_up)
+    end
+    
+    it 'should have a recruiter sign up button' do
+      get :overview
+      response.should have_selector 'a', :content => I18n.t(:recruiter_sign_up)
     end
     
     it 'should have a sign in link' do
@@ -58,9 +63,14 @@ describe PagesController do
       response.should have_selector 'li', :class => 'round selected', :content => I18n.t(:menu_tour)
     end
     
-    it 'should have a sign up button' do
-      get :tour
-      response.should have_selector 'a', :content => I18n.t(:sign_up)
+    it 'should have a candidate sign up button' do
+      get :overview
+      response.should have_selector 'a', :content => I18n.t(:candidate_sign_up)
+    end
+    
+    it 'should have a recruiter sign up button' do
+      get :overview
+      response.should have_selector 'a', :content => I18n.t(:recruiter_sign_up)
     end
     
     it 'should have a sign in link' do
@@ -91,9 +101,14 @@ describe PagesController do
       response.should have_selector 'li', :class => 'round selected', :content => I18n.t(:menu_pricing)
     end
     
-    it 'should have a sign up button' do
-      get :pricing
-      response.should have_selector 'a', :content => I18n.t(:sign_up)
+    it 'should have a candidate sign up button' do
+      get :overview
+      response.should have_selector 'a', :content => I18n.t(:candidate_sign_up)
+    end
+    
+    it 'should have a recruiter sign up button' do
+      get :overview
+      response.should have_selector 'a', :content => I18n.t(:recruiter_sign_up)
     end
     
     it 'should have a sign in link' do
@@ -124,9 +139,14 @@ describe PagesController do
       response.should have_selector 'li', :class => 'round selected', :content => I18n.t(:menu_about)
     end
     
-    it 'should have a sign up button' do
-      get :about
-      response.should have_selector 'a', :content => I18n.t(:sign_up)
+    it 'should have a candidate sign up button' do
+      get :overview
+      response.should have_selector 'a', :content => I18n.t(:candidate_sign_up)
+    end
+    
+    it 'should have a recruiter sign up button' do
+      get :overview
+      response.should have_selector 'a', :content => I18n.t(:recruiter_sign_up)
     end
     
     it 'should have a sign in link' do
@@ -157,9 +177,14 @@ describe PagesController do
       response.should have_selector 'li', :class => 'round selected', :content => I18n.t(:menu_contact)
     end
     
-    it 'should have a sign up button' do
-      get :contact
-      response.should have_selector 'a', :content => I18n.t(:sign_up)
+    it 'should have a candidate sign up button' do
+      get :overview
+      response.should have_selector 'a', :content => I18n.t(:candidate_sign_up)
+    end
+    
+    it 'should have a recruiter sign up button' do
+      get :overview
+      response.should have_selector 'a', :content => I18n.t(:recruiter_sign_up)
     end
     
     it 'should have a sign in link' do

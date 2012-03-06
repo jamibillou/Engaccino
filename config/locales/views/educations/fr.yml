@@ -4,6 +4,8 @@ fr:
     title: "Formations"
     add: "Ajouter une formation"
     delete: "Supprimer cette formation"
+    month: "MM"
+    year: "AAAA"
     main: "Diplôme principal"
     add_description: "Une description aide les recruteurs à comprendre exactement ce que vous avez étudié."
     add_some: "Comprendre votre formation est vital pour les recruteurs, détaillez la ici !"

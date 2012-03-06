@@ -3,7 +3,7 @@ fr:
   # Header
   
   menu_overview: "Aperçu"
-  menu_tour: "Visite guidée"
+  menu_tour: "Visite"
   menu_pricing: "Tarifs"
   menu_about: "À propos"
   menu_contact: "Contact"
@@ -17,10 +17,12 @@ fr:
   search_bar: "Accès rapide"
   search_bar_title: "Rechercher un contact, une entreprise, offre d'emploi, etc."
    
-  already_member: "Déjà membre ?"
-  sign_in: "Identifiez vous"
+  already_member: "Membre ?"
+  sign_in: "S'identifiez"
   sign_out: "Se déconnecter"
   sign_up: "S'inscrire !"
+  candidate_sign_up: "Candidater !"
+  recruiter_sign_up: "Recruter !"
   settings: "Préférences"
   
   # Punctuation 
@@ -70,6 +72,8 @@ fr:
   hide: "masquer"
   
   # Dates
+  mth: "mois"
+  month: "mois"
   yr: "an"
   year: "année"
   months:

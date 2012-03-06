@@ -2,7 +2,7 @@
   <div class='language_candidate form'>
     <div class='label'>
       <%= f.fields_for :language do |language_builder| %>
-      	<%= language_builder.text_field :label, :class => 'field' %>
+      	<%= language_builder.text_field :label, :placeholder => t('languages.label'), :class => 'field' %>
       <% end %>
     </div>
     <div class='level'>

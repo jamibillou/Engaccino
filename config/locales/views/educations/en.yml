@@ -4,6 +4,8 @@ en:
     title: "Educations"
     add: "Add an education"
     delete: "Delete this education"
+    month: "MM"
+    year: "YYYY"
     main: "Main degree"
     add_description: "Adding a description would help recruiters understand what is it exactly you studied."
     add_some: "Understanding your education is essential to recruiters, add more!"

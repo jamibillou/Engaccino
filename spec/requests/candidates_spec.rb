@@ -7,10 +7,10 @@ describe 'Candidates' do
     describe 'failure' do
       
       it 'should not sign a candidate up' do
-        visit signup_path
-        fill_in :email,                 :with => 'test@example.com'
-        fill_in :password,              :with => 'password'
-        fill_in :password_confirmation, :with => 'passwordd'
+        visit candidate_signup_path
+        fill_in :candidate_email,                 :with => 'test@example.com'
+        fill_in :candidate_password,              :with => 'password'
+        fill_in :candidate_password_confirmation, :with => 'passwordd'
         click_button
         response.should have_selector 'div.flash.error', :content => I18n.t('flash.error.base')
       end
@@ -19,15 +19,15 @@ describe 'Candidates' do
     describe 'success' do
       
       it 'should sign a candidate up and set his profile completion to 5%' do
-        visit signup_path
-        fill_in :email,                 :with => 'test@example.com'
-        fill_in :password,              :with => 'password'
-        fill_in :password_confirmation, :with => 'password'
+        visit candidate_signup_path
+        fill_in :candidate_email,                 :with => 'test@example.com'
+        fill_in :candidate_password,              :with => 'password'
+        fill_in :candidate_password_confirmation, :with => 'password'
         click_button
-        fill_in :first_name,            :with => 'Jack'
-        fill_in :last_name,             :with => 'Bauer'
-        fill_in :city,                  :with => 'Washington D.C.'
-        fill_in :country,               :with => 'United States'
+        fill_in :candidate_first_name,            :with => 'Jack'
+        fill_in :candidate_last_name,             :with => 'Bauer'
+        fill_in :candidate_city,                  :with => 'Washington D.C.'
+        fill_in :candidate_country,               :with => 'United States'
         click_button
         response.should render_template 'show'
         response.should have_selector 'div', :content => "#{I18n.t('candidates.show.profile_completion.sentence')}5#{I18n.t('candidates.show.profile_completion.%complete')}"

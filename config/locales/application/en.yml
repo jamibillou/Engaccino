@@ -17,10 +17,12 @@ en:
   search_bar: "Search Engaccino"
   search_bar_title: "Jump to any contact, company, job, etc."
   
-  already_member: "Already a member?"
+  already_member: "Member?"
   sign_in: "Sign in"
   sign_out: "Sign out"
   sign_up: "Sign up!"
+  candidate_sign_up: "Apply!"
+  recruiter_sign_up: "Recruit!"
   settings: "Settings"
   
   # Punctuation 
@@ -70,6 +72,8 @@ en:
   hide: "hide"
   
   # Dates
+  mth: "mth"
+  month: "month"
   yr: "yr"
   year: "year"
   months:

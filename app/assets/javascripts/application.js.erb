@@ -14,7 +14,6 @@ $(document).ready(function() {
   $('input.month').each(function()   { $(this).autocomplete({ source:"/ajax/months",    minLength: 1 }); });
   $('input.year').each(function()    { $(this).autocomplete({ source:"/ajax/years",     minLength: 2 }); });
 
-	customForm('search_bar_form', '');
 	$('#close_flash').click(function() { $('#flash').hide(); })
 	
 });

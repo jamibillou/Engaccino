@@ -3,3 +3,5 @@ fr:
   
     title: "Qualités personnelles"
     add_some: "Quelles sont vos 3 plus grandes qualités?"
+    label: "Qualité"
+    add_description: "Décrivez ce qui illustre le mieux cette qualité."

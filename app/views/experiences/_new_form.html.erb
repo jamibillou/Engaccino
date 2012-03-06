@@ -1,20 +1,19 @@
 <%= form_for @experience, :remote => true do |f| %>
   <div class='edu_exp_date'>
-  	<%= f.text_field :start_month, :class => 'month micro field' %>
-  	<%= f.text_field :start_year,  :class => 'year mini field' %>
-  	 - 
-	  <%= f.text_field :end_month,  :class => 'month micro field' %>
-  	<%= f.text_field :end_year, :class => 'year mini field' %>
+  	<%= f.text_field :start_month, :placeholder => t('experiences.month'), :class => 'month micro field' %>
+  	<%= f.text_field :start_year,  :placeholder => t('experiences.year'), :class => 'year mini field' %> - 
+    <%= f.text_field :end_month,   :placeholder => t('experiences.month'), :class => 'month micro field' %>
+  	<%= f.text_field :end_year,    :placeholder => t('experiences.year'), :class => 'year mini field' %>
   </div>
   <div class='edu_exp_details'>
-      <%= f.text_field :role, :class => 'field small_margin' %>
+      <%= f.text_field :role, :placeholder => t('candidates.role'), :class => 'field small_margin' %>
       <span class='check_box'><%= f.check_box :current %><%= t('experiences.current').downcase %></span>
 	  &nbsp;
       <br />
       <%= f.fields_for :company do |company_builder| %>
-      	<%= company_builder.text_field :name, :class => 'field margin' %>
+      	<%= company_builder.text_field :name, :placeholder => t('candidates.company'), :class => 'field margin' %>
       <% end %>
-      <%= f.text_area :description, :class => 'textarea' %>
+      <%= f.text_area :description, :placeholder => t('experiences.add_description'), :class => 'textarea' %>
       <div class='error_messages' id='errors_new_experience'></div>
       <%= link_to_function t('cancel'), "hideForm('experience')", :class => 'grey button' %>
       &nbsp;

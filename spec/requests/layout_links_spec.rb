@@ -13,8 +13,10 @@ describe 'LayoutLinks' do
       response.should have_selector 'title', :content => I18n.t(:menu_about)
       get '/contact'
       response.should have_selector 'title', :content => I18n.t(:menu_contact)
-      get '/signup'
-      response.should have_selector 'title', :content => I18n.t('users.new.title')
+      get '/candidate_signup'
+      response.should have_selector 'title', :content => I18n.t('candidates.new.title')
+      get '/recruiter_signup'
+      response.should have_selector 'title', :content => I18n.t('recruiters.new.title')
       get '/signin'
       response.should have_selector 'title', :content => I18n.t('sessions.new.title')
     end
@@ -34,12 +36,12 @@ describe 'LayoutLinks' do
         response.should have_selector 'title', :content => I18n.t(:menu_about)
         click_link I18n.t(:menu_contact)
         response.should have_selector 'title', :content => I18n.t(:menu_contact)
-        click_link I18n.t(:sign_up)
-        response.should have_selector 'title', :content => I18n.t('users.new.title')
         click_link I18n.t(:sign_in)
         response.should have_selector 'title', :content => I18n.t('sessions.new.title')
-        click_link I18n.t(:sign_up)
-        response.should have_selector 'title', :content => I18n.t('users.new.title')
+        click_link I18n.t(:candidate_sign_up)
+        response.should have_selector 'title', :content => I18n.t('candidates.new.title')
+        click_link I18n.t(:recruiter_sign_up)
+        response.should have_selector 'title', :content => I18n.t('recruiters.new.title')
       end                                
     end
     

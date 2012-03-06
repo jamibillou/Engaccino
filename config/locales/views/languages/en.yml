@@ -7,4 +7,5 @@ en:
     intermediate: "Intermediate"
     fluent: "Fluent"
     native: "Native"
+    label: "Language"
     add_some: "Can you do your job in other languages?"

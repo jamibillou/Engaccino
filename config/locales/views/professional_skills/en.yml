@@ -5,4 +5,6 @@ en:
     level: "Level"
     experience: "Experience"
     add_some: "What do you do best in the workplace?"
+    label: "Skill"
+    add_description: "Tell us more about this know-how."
     

@@ -2,5 +2,7 @@ fr:
   certificates:
   
     title: "Certificats"
-    level: "Niveau / Score"
+    label: "Nom du certificat"
+    level: "Niveau"
+    level_score: "Niveau / Score"
     add_some: "Mettez vos certificats en évidence ici."

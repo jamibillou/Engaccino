@@ -1,10 +1,11 @@
 fr:
   languages:
   
-    title: "Langages"
+    title: "Langues"
     level: "Niveau"
     beginner: "Débutant"
     intermediate: "Intermédiaire"
     fluent: "Courant"
     native: "Native"
+    label: "Langue"
     add_some: "Parler d'autres langues est toujours un bon point."

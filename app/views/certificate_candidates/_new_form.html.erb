@@ -2,11 +2,11 @@
   <div class='certificate_candidate form'>
   	<div class='label'>
 	    <%= f.fields_for :certificate do |certificate_builder| %>
-	  	  <%= certificate_builder.text_field :label, :class => 'field' %>
+	  	  <%= certificate_builder.text_field :label, :placeholder => t('certificates.label'), :class => 'field' %>
 	    <% end %>
 	  </div>
     <div class='level'>
-    	<%= f.text_field :level_score, :class => 'small field' %>
+    	<%= f.text_field :level_score, :placeholder => t('certificates.level'), :class => 'small field' %>
     </div>
   </div>
   <div class='error_messages' id='errors_new_certificate_candidate'></div>

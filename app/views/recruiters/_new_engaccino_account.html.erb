@@ -3,9 +3,9 @@
   <%= f.hidden_field   :first_name,            :value => t('recruiters.first_name') %>
   <%= f.hidden_field   :last_name,             :value => t('recruiters.last_name') %>
   <%= f.hidden_field   :city,                  :value => t('recruiters.city') %>
-  <%= f.hidden_field   :country,               :value => 'France' %>
-  <%= f.text_field     :email,                 :id => 'email',                 :class => 'field' %><br />
-  <%= f.password_field :password,              :id => 'password',              :class => 'field' %><br />
-  <%= f.password_field :password_confirmation, :id => 'password_confirmation', :class => 'field' %><br />
+  <%= f.hidden_field   :country,               :value => 'Holy See (Vatican City State)' %>
+  <%= f.text_field     :email,                 :placeholder => t('recruiters.email'),                 :class => 'field' %><br />
+  <%= f.password_field :password,              :placeholder => t('recruiters.password'),              :class => 'field' %><br />
+  <%= f.password_field :password_confirmation, :placeholder => t('recruiters.password_confirmation'), :class => 'field' %><br />
   <%= f.submit t('recruiters.new.set_up_profile') %>
 <% end %>

@@ -3,10 +3,10 @@
   <%= f.hidden_field   :first_name,            :value => t('candidates.first_name') %>
   <%= f.hidden_field   :last_name,             :value => t('candidates.last_name') %>
   <%= f.hidden_field   :city,                  :value => t('candidates.city') %>
-  <%= f.hidden_field   :country,               :value => 'France' %>
+  <%= f.hidden_field   :country,               :value => 'Holy See (Vatican City State)' %>
   <%= f.hidden_field   :status,                :value => 'available' %>	
-  <%= f.text_field     :email,                 :id => 'email',                 :class => 'field' %><br />
-  <%= f.password_field :password,              :id => 'password',              :class => 'field' %><br />
-  <%= f.password_field :password_confirmation, :id => 'password_confirmation', :class => 'field' %><br />
+  <%= f.text_field     :email,                 :placeholder => t('candidates.email'), :class => 'field' %><br />
+  <%= f.password_field :password,              :placeholder => t('candidates.password'), :class => 'field' %><br />
+  <%= f.password_field :password_confirmation, :placeholder => t('candidates.password_confirmation'), :class => 'field' %><br />
   <%= f.submit t('candidates.new.set_up_profile') %>
 <% end %>
