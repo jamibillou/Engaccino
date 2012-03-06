@@ -64,7 +64,7 @@ fr:
         info: "Information concernant l'entreprise"
       colleagues:
         title: "Collègues"
-        note: "Note : Vous pouvez passez cette étape et inviter vos collègues plus tard."
+        note: "Vous pouvez passez cette étape et inviter vos collègues plus tard."
         admin: "Administrateur"
     destroy:
       title: "Supprimer"

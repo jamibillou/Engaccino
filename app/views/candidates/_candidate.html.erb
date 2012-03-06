@@ -39,7 +39,7 @@
                     :title => "#{t('candidates.destroy.title')} #{candidate.first_name} #{candidate.last_name}" %>
       <% end %>
     </div>
-    <div class='job' <%= "style='margin-top:-20px'" if current_user == candidate %>>
+    <div class='job'>
       <% unless candidate.no_exp? %>
         <% main_experience = Experience.find(candidate.main_experience) %>
         <% if current_user == candidate %>

@@ -31,7 +31,7 @@ class CandidatesController < ApplicationController
   def create
     @candidate = Candidate.new params[:candidate]
     unless @candidate.save
-      render_page :new, :title => 'candidates.new.title', :javascripts => 'candidates/new', :flash => { :error => error_messages(@candidate, :only => [:email, :password]) }
+      render_page :new, :title => 'candidates.new.title', :javascripts => 'candidates/new'
     else
       sign_in @candidate
       build_education ; build_experience
@@ -46,7 +46,8 @@ class CandidatesController < ApplicationController
 
   def update
     unless @candidate.update_attributes params[:candidate]
-      init_page :title => 'candidates.edit.complete_your_profile', :javascripts => 'candidates/edit', :flash => { :error => error_messages(@candidate) }
+      init_page :title => 'candidates.edit.complete_your_profile', :javascripts => 'candidates/edit'
+      build_education ; build_experience
       respond_to do |format|
         format.html { render :json => error_messages(@candidate) } if remotipart_submitted?
         format.html { render_page :edit, :id => @candidate }
