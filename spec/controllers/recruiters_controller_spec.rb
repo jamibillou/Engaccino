@@ -232,11 +232,6 @@ describe RecruitersController do
           post :create, :email => '', :password => '', :password_confirmation => '', :status => ''
           response.should render_template :new
         end
-        
-        it 'should have a flash message' do
-          post :create, :email => '', :password => '', :password_confirmation => '', :status => ''
-          response.should have_selector 'div', :class => 'flash error'
-        end
       end
     end  
   end

@@ -12,7 +12,7 @@ describe 'Candidates' do
         fill_in :candidate_password,              :with => 'password'
         fill_in :candidate_password_confirmation, :with => 'passwordd'
         click_button
-        response.should have_selector 'div.flash.error', :content => I18n.t('flash.error.base')
+        response.should render_template 'new'
       end
     end
     
