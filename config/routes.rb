@@ -37,7 +37,7 @@ Engaccino::Application.routes.draw do
   match 'candidates/refresh', :to => 'candidates#refresh'
   
   match '/candidate_signup',  :to => 'candidates#new'
-  match '/recruiter_signup',  :to => 'candidates#new'
+  match '/recruiter_signup',  :to => 'recruiters#new'
   match '/signin',  :to => 'sessions#new'
   match '/signout', :to => 'sessions#destroy'
   
