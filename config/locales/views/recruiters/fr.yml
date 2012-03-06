@@ -40,6 +40,8 @@ fr:
       edit_profile: "Editer profil"
       view_profile: "Voir profil"
       next_profile: "Profil suivant"
+      add_quote: "Écrivez quelque chose qui donne envie aux candidats de vous parler et mieux connaître votre activité."
+      recruiter_at: "Recruteur pour"
       profile_completion:
         sentence: "Votre profil est complet à "
         %complete: "%"

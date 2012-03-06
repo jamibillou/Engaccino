@@ -6,11 +6,73 @@ describe RecruitersController do
   
   before :each do
     @recruiter = Factory :recruiter
+    @candidate = Factory :candidate
+  end
+  
+  describe "GET 'index'" do
+    
+    describe 'for non-signed-in users' do
+      
+      it "should deny access to 'index'" do
+        get :index
+        response.should redirect_to signin_path
+        flash[:notice].should == I18n.t('flash.notice.please_signin')
+      end
+    end
+    
+    describe 'for signed-in candidates' do
+    
+      before :each do
+        test_sign_in @candidate
+        first_recruiter  = Factory.create :recruiter, :email => Factory.next(:email), :facebook_login => Factory.next(:facebook_login),
+                                                      :linkedin_login => Factory.next(:linkedin_login), :twitter_login => Factory.next(:twitter_login)
+        second_recruiter = Factory.create :recruiter, :email => Factory.next(:email), :facebook_login => Factory.next(:facebook_login),
+                                                      :linkedin_login => Factory.next(:linkedin_login), :twitter_login => Factory.next(:twitter_login)
+      end
+      
+      describe "who haven't completed signup" do
+        
+        it "should deny access to 'index'" do
+          get :index
+          response.should redirect_to edit_candidate_path @candidate
+          flash[:notice].should == I18n.t('flash.notice.please_finish_signup')
+        end
+      end
+      
+      describe 'who have completed signup' do
+      
+        before :each do
+          @candidate.update_attributes :profile_completion => 5
+        end
+        
+        it 'should return http success' do
+          get :index
+          response.should be_success
+        end
+        
+        it 'should have the right title' do
+          get :index
+          response.should have_selector 'title', :content => I18n.t('recruiters.index.title')
+        end
+        
+        it 'should have the right selected navigation tab' do
+          get :index
+          response.should have_selector 'li', :class => 'round selected', :content => I18n.t(:menu_recruiters)
+        end
+        
+        it 'should have a card for each recruiter' do 
+          get :index
+          Recruiter.all.each do |recruiter|
+            response.should have_selector 'div', :id => "recruiter_#{recruiter.id}"
+          end  
+        end                  
+      end
+    end
   end
   
   describe "GET 'show'" do
     
-    describe 'for non-signed-in recruiters' do
+    describe 'for non-signed-in candidates' do
       
       it "should deny access to 'show'" do
         get :show, :id => @recruiter
@@ -19,17 +81,17 @@ describe RecruitersController do
       end
     end
     
-    describe 'for signed-in recruiters' do
+    describe 'for signed-in candidates' do
     
       before  :each do
-        test_sign_in @recruiter
+        test_sign_in @candidate
       end
       
       describe "who haven't completed signup" do
         
         it "should deny access to 'show'" do
           get :show,  :id => @recruiter
-          response.should redirect_to edit_recruiter_path @recruiter
+          response.should redirect_to edit_candidate_path @candidate
           flash[:notice].should == I18n.t('flash.notice.please_finish_signup')
         end
       end
@@ -37,7 +99,7 @@ describe RecruitersController do
       describe 'who have completed signup' do
         
         before :each do
-          @recruiter.update_attributes :profile_completion => 5
+          @candidate.update_attributes :profile_completion => 5
         end
         
         it 'should return http success' do

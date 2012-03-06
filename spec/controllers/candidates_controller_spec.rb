@@ -6,11 +6,12 @@ describe CandidatesController do
 
   before :each do
     @candidate = Factory :candidate
+    @recruiter = Factory :recruiter
   end
   
   describe "GET 'index'" do
     
-    describe 'for non-signed-in candidates' do
+    describe 'for non-signed-in users' do
       
       it "should deny access to 'index'" do
         get :index
@@ -19,25 +20,21 @@ describe CandidatesController do
       end
     end
     
-    describe 'for signed-in candidates' do
+    describe 'for signed-in recruiters' do
     
       before :each do
-        test_sign_in @candidate
-        first_candidate  = Candidate.create! :first_name  => 'First',                       :last_name             => 'Candidate',
-                                             :password    => 'firstCandidate',              :password_confirmation => 'firstCandidate',
-                                             :email       => 'firstcandidate@example.com',  :status                => 'available',
-                                             :city        => 'Sample city',                 :country               => 'Netherlands'
-        second_candidate = Candidate.create! :first_name  => 'Second',                      :last_name             => 'Candidate',
-                                             :password    => 'secondCandidate',             :password_confirmation => 'secondCandidate',
-                                             :email       => 'secondcandidate@example.com', :status                => 'available',
-                                             :city        => 'Sample city',                 :country               => 'Netherlands'
+        test_sign_in @recruiter
+        first_candidate  = Factory.create :candidate, :email => Factory.next(:email), :facebook_login => Factory.next(:facebook_login),
+                                                      :linkedin_login => Factory.next(:linkedin_login), :twitter_login => Factory.next(:twitter_login)
+        second_candidate = Factory.create :candidate, :email => Factory.next(:email), :facebook_login => Factory.next(:facebook_login),
+                                                      :linkedin_login => Factory.next(:linkedin_login), :twitter_login => Factory.next(:twitter_login)
       end
       
       describe "who haven't completed signup" do
         
         it "should deny access to 'index'" do
           get :index
-          response.should redirect_to edit_candidate_path @candidate
+          response.should redirect_to edit_recruiter_path @recruiter
           flash[:notice].should == I18n.t('flash.notice.please_finish_signup')
         end
       end
@@ -45,7 +42,7 @@ describe CandidatesController do
       describe 'who have completed signup' do
       
         before :each do
-          @candidate.update_attributes :profile_completion => 5
+          @recruiter.update_attributes :profile_completion => 5
         end
         
         it 'should return http success' do
@@ -73,7 +70,7 @@ describe CandidatesController do
         describe 'for admin candidates' do
           
           before :each do
-            @candidate.toggle! :admin
+            @recruiter.toggle! :admin
           end
           
           it 'should have a destroy link for each candidate' do 
@@ -98,7 +95,7 @@ describe CandidatesController do
   
   describe "GET 'show'" do
     
-    describe 'for non-signed-in candidates' do
+    describe 'for non-signed-in recruiters' do
       
       it "should deny access to 'show'" do
         get :show, :id => @candidate
@@ -107,17 +104,17 @@ describe CandidatesController do
       end
     end
     
-    describe 'for signed-in candidates' do
+    describe 'for signed-in recruiters' do
     
       before  :each do
-        test_sign_in @candidate
+        test_sign_in @recruiter
       end
       
       describe "who haven't completed signup" do
         
         it "should deny access to 'show'" do
           get :show,  :id => @candidate
-          response.should redirect_to edit_candidate_path @candidate
+          response.should redirect_to edit_recruiter_path @recruiter
           flash[:notice].should == I18n.t('flash.notice.please_finish_signup')
         end
       end
@@ -125,7 +122,7 @@ describe CandidatesController do
       describe 'who have completed signup' do
         
         before :each do
-          @candidate.update_attributes :profile_completion => 5
+          @recruiter.update_attributes :profile_completion => 5
         end
         
         it 'should return http success' do

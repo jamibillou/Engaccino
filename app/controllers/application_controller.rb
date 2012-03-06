@@ -42,11 +42,25 @@ class ApplicationController < ActionController::Base
     flash.now[:error] = options[:flash][:error]     unless options[:flash].nil? || options[:flash][:error].nil?
   end
   
-  def authenticate
-    deny_access unless signed_in?
-  end
+  private
   
-  def ajax_only
-    redirect_to candidate_path(current_user), :notice => t('flash.notice.ajax_only') unless request.xhr?
-  end
+    def authenticate
+      deny_access unless signed_in?
+    end
+  
+    def not_signed_up
+      redirect_to current_user, :notice => t('flash.notice.already_signed_up') if signed_up?
+    end
+  
+    def admin_user
+      redirect_to current_user, :notice => t('flash.notice.restricted_page') unless current_user.admin
+    end
+  
+    def new_user
+      redirect_to current_user, :notice => t('flash.notice.not_a_new_user') unless current_user.nil?
+    end
+  
+    def ajax_only
+      redirect_to current_user, :notice => t('flash.notice.restricted_page') unless request.xhr?
+    end
 end

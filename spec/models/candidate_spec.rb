@@ -60,11 +60,12 @@ describe Candidate do
       candidate = Factory :candidate
       candidate.main_education.should be_nil
     end
-
+  
     it "should be the last education unless the candidate chose otherwise" do
       education2 = Education.new(:start_month => 1, :start_year => 1990, :end_month => 2, :end_year => 1992, :role => 'Sales administrator')
       school = School.new(:name => 'School') ; degree = Degree.new(:label => 'Degree') ; degree_type = DegreeType.new(:label => 'Degree type')
-
+    end
+  
     it 'should be the last education unless the canddiate chose otherwise' do
       education2 = Education.new :start_month => 1, :start_year => 1990, :end_month => 2, :end_year => 1992
       school = School.new :name => 'School' ; degree = Degree.new :label => 'Degree' ; degree_type = DegreeType.new :label => 'Degree type'

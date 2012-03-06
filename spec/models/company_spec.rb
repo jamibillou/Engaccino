@@ -174,15 +174,13 @@ describe Company do
     it 'shoud reject invalid URLs' do
       invalid_urls = ['invalid_url',
                       'engaccino.com',
-                      'www.com',
                       'pouetpouetpouet',
                       'http:www.engaccino.com',
                       'http//engaccino.com',
                       'http/ccino.co',
                       'htp://ccino.me',
                       'http:/www.engaccino.com',
-                      'http://j ai des espaces. fr',
-                      'http://J_ai_Des_Majuscules.Com' ]
+                      'http://j ai des espaces. fr' ]
       invalid_urls.each do |invalid_url|
         invalid_url_company = Company.new @attr.merge :url => invalid_url
         invalid_url_company.should_not be_valid

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120305175248) do
+ActiveRecord::Schema.define(:version => 20120306122849) do
 
   create_table "certificate_candidates", :force => true do |t|
     t.string   "level_score"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(:version => 20120305175248) do
     t.string   "url"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "image"
   end
 
   create_table "degree_types", :force => true do |t|

@@ -41,6 +41,8 @@ en:
       edit_profile: "Edit profile"
       view_profile: "View profile"
       next_profile: "Next profile"
+      add_quote: "Add something engaging here so candidates know you better and get to ask about your activity."
+      recruiter_at: "Recruiter at"
       profile_completion:
         sentence: "Your profile is "
         %complete: "% complete"

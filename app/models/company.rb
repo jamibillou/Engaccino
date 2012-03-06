@@ -1,6 +1,6 @@
 class Company < ActiveRecord::Base
 
-  attr_accessible :name, :address, :city, :country, :phone, :email, :url
+  attr_accessible :name, :address, :city, :country, :phone, :email, :url, :image
   
   has_many :experiences, :dependent => :destroy
   has_many :candidates,  :through => :experiences
@@ -16,6 +16,7 @@ class Company < ActiveRecord::Base
   validates :email,   :email_format => true, :uniqueness => { :case_sensitive => false },                  :allow_blank => true
   validates :url,     :url_format   => true,                                                               :allow_blank => true
   
+  mount_uploader :image, ImageUploader
 end
 
 # == Schema Information

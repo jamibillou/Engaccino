@@ -12,6 +12,7 @@ en:
   menu_edit: "Edit"
   menu_users: "Users"
   menu_candidates: "Candidates"
+  menu_recruiters: "Recruiters"
   
   search_bar: "Search Engaccino"
   search_bar_title: "Jump to any contact, company, job, etc."
@@ -49,7 +50,6 @@ en:
       already_signed_up: "You have already finished signing up."
       restricted_page: "This is a restricted page, you can't access it."
       not_a_new_user: "You already have an account. Log out first to create a new one."
-      ajax_only: "You can't access this page using this way"
     
   # Actions
   delete: "Delete"

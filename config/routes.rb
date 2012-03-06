@@ -1,5 +1,3 @@
-require File.expand_path('../../lib/assets/routes_constraints', __FILE__)
-
 Engaccino::Application.routes.draw do
 
   get 'sessions/new'
@@ -37,7 +35,6 @@ Engaccino::Application.routes.draw do
   resources :sessions, :only => [:new, :create, :destroy]
   
   match 'candidates/refresh', :to => 'candidates#refresh'
-  root                        :to => 'candidates#index', :constraints => SingedIn.new(true)
   
   match '/signup',  :to => 'candidates#new'
   match '/signin',  :to => 'sessions#new'
@@ -47,6 +44,8 @@ Engaccino::Application.routes.draw do
   match '/pricing', :to => 'pages#pricing'
   match '/about',   :to => 'pages#about'
   match '/contact', :to => 'pages#contact'
-  root              :to => 'pages#overview', :constraints => SingedIn.new(false)
+  
+  root :to => 'candidates#index', :constraints => lambda { |request| request.cookies.key?('remember_token') }
+  root :to => 'pages#overview',   :constraints => lambda { |request| !request.cookies.key?('remember_token') } 
     
 end

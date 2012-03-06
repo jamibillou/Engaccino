@@ -5,12 +5,12 @@ class CandidatesController < ApplicationController
 
   respond_to :html, :json
   
-  before_filter :authenticate,  :except => [:new, :create]
-  before_filter :new_user,      :only   => [:new, :create]
-  before_filter :correct_user,  :only   => [:edit, :update]
-  before_filter :admin_user,    :only   => :destroy
-  before_filter :signed_up,     :only   => [:index, :show]
-  before_filter :not_signed_up, :only   => :edit
+  before_filter :authenticate,      :except => [:new, :create]
+  before_filter :new_user,          :only   => [:new, :create]
+  before_filter :correct_candidate, :only   => [:edit, :update]
+  before_filter :admin_user,        :only   => :destroy
+  before_filter :signed_up,         :only   => [:index, :show]
+  before_filter :not_signed_up,     :only   => :edit
   
   def index
     @candidates = Candidate.all
@@ -73,24 +73,12 @@ class CandidatesController < ApplicationController
 
   private
     
-    def correct_user
+    def correct_candidate
       @candidate = Candidate.find params[:id]
-      redirect_to candidate_path(current_user), :notice => t('flash.notice.other_user_page') unless current_user? @candidate
+      redirect_to current_user, :notice => t('flash.notice.other_user_page') unless current_user? @candidate
     end
     
     def signed_up
-      redirect_to edit_candidate_path(current_user), :notice => t('flash.notice.please_finish_signup') unless signed_up?
+      redirect_to edit_recruiter_path(current_user), :notice => t('flash.notice.please_finish_signup') unless signed_up?
     end
-    
-    def not_signed_up
-      redirect_to candidate_path(current_user), :notice => t('flash.notice.already_signed_up') if signed_up?
-    end
-    
-    def admin_user
-      redirect_to candidate_path(current_user), :notice => t('flash.notice.restricted_page') unless current_user.admin
-    end
-    
-    def new_user
-      redirect_to candidate_path(current_user), :notice => t('flash.notice.not_a_new_user') unless current_user.nil?
-    end  
 end
