@@ -5,6 +5,7 @@ describe RecruitersController do
   render_views
   
   before :each do
+    @user      = Factory :user
     @recruiter = Factory :recruiter
     @candidate = Factory :candidate
   end
@@ -67,6 +68,45 @@ describe RecruitersController do
           end  
         end                  
       end
+    end
+    
+    describe 'for signed-in recruiters' do
+      
+      it "should deny access to 'index'" do
+        test_sign_in @recruiter
+        get :index
+        response.should redirect_to root_path
+        flash[:notice].should == I18n.t('flash.notice.candidate_only_page')
+      end
+    end
+    
+    describe 'admin features' do
+      
+      before :each do
+        @user.update_attributes :profile_completion => 5
+        test_sign_in @user
+      end
+      
+      describe 'for admin users' do
+      
+        it 'should have a destroy link for each candidate' do 
+          @user.toggle! :admin
+          get :index            
+          Recruiter.all.each do |recruiter|
+            response.should have_selector 'a', :id => "destroy_recruiter_#{recruiter.id}"
+          end
+        end
+      end
+      
+      describe 'for non-admin users' do
+      
+        it "shouldn't have a destroy link for each candidate" do 
+          get :index
+          Recruiter.all.each do |recruiter|
+            response.should_not have_selector 'a', :id => "destroy_recruiter_#{recruiter.id}"
+          end
+        end
+      end            
     end
   end
   

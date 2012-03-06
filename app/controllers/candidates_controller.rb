@@ -5,12 +5,13 @@ class CandidatesController < ApplicationController
 
   respond_to :html, :json
   
-  before_filter :authenticate,      :except => [:new, :create]
-  before_filter :new_user,          :only   => [:new, :create]
-  before_filter :correct_candidate, :only   => [:edit, :update]
-  before_filter :admin_user,        :only   => :destroy
-  before_filter :signed_up,         :only   => [:index, :show]
-  before_filter :not_signed_up,     :only   => :edit
+  before_filter :authenticate,            :except => [:new, :create]
+  before_filter :new_user,                :only   => [:new, :create]
+  before_filter :recruiter_or_admin_user, :only   => :index
+  before_filter :signed_up,               :only   => [:index, :show]
+  before_filter :not_signed_up,           :only   => :edit
+  before_filter :correct_candidate,       :only   => [:edit, :update]
+  before_filter :admin_user,              :only   => :destroy
   
   def index
     @candidates = Candidate.all
@@ -80,5 +81,9 @@ class CandidatesController < ApplicationController
     
     def signed_up
       redirect_to edit_recruiter_path(current_user), :notice => t('flash.notice.please_finish_signup') unless signed_up?
+    end
+    
+    def recruiter_or_admin_user
+      redirect_to root_path, :notice => t('flash.notice.recruiter_only_page') unless current_user.class.name.humanize == 'Recruiter' || current_user.admin
     end
 end

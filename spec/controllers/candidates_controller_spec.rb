@@ -5,6 +5,7 @@ describe CandidatesController do
   render_views
 
   before :each do
+    @user      = Factory :user
     @candidate = Factory :candidate
     @recruiter = Factory :recruiter
   end
@@ -65,32 +66,48 @@ describe CandidatesController do
           Candidate.all.each do |candidate|
             response.should have_selector 'div', :id => "candidate_#{candidate.id}"
           end  
-        end
-        
-        describe 'for admin candidates' do
-          
-          before :each do
-            @recruiter.toggle! :admin
-          end
-          
-          it 'should have a destroy link for each candidate' do 
-            get :index            
-            Candidate.all.each do |candidate|
-              response.should have_selector 'a', :id => "destroy_candidate_#{candidate.id}"
-            end
-          end            
-        end
-        
-        describe 'for non-admin candidates' do
-          it "shouldn't have a destroy link for each candidate" do 
-            get :index
-            Candidate.all.each do |candidate|
-              response.should_not have_selector 'a', :id => "destroy_candidate_#{candidate.id}"
-            end
-          end  
-        end                        
+        end                
       end
     end
+    
+    describe 'for signed-in candidates' do
+      
+      it "should deny access to 'index'" do
+        test_sign_in @candidate
+        get :index
+        response.should redirect_to root_path
+        flash[:notice].should == I18n.t('flash.notice.recruiter_only_page')
+      end
+    end
+    
+    describe 'admin features' do
+      
+      before :each do
+        @user.update_attributes :profile_completion => 5
+        test_sign_in @user
+      end
+      
+      describe 'for admin users' do
+      
+        it 'should have a destroy link for each candidate' do 
+          @user.toggle! :admin
+          get :index            
+          Candidate.all.each do |candidate|
+            response.should have_selector 'a', :id => "destroy_candidate_#{candidate.id}"
+          end
+        end
+      end
+      
+      describe 'for non-admin users' do
+      
+        it "shouldn't have a destroy link for each candidate" do 
+          get :index
+          Candidate.all.each do |candidate|
+            response.should_not have_selector 'a', :id => "destroy_candidate_#{candidate.id}"
+          end
+        end
+      end            
+    end 
   end
   
   describe "GET 'show'" do

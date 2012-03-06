@@ -50,6 +50,8 @@ fr:
       already_signed_up: "Vous avez déjà terminé l'inscription."
       restricted_page: "Cette page est protégée, vous ne pouvez pas y accéder."
       not_a_new_user: "Vous avez déjà un profil, déconnectez vous si vous voulez en créer un autre."
+      candidate_only_page: "Seuls les candidats on accés à cette page."
+      recruiter_only_page: "Seuls les recruteurs on accés à cette page."
         
   # Actions
   delete: "Supprimer"
