@@ -77,9 +77,10 @@ describe CertificateCandidatesController do
           response.should_not be_success
         end
         
-        #it 'should respond with the error messages' do
-        #  xhr :post, :create, :certificate_candidate => @attr
-        #end
+        it 'should respond with the error messages' do
+          xhr :post, :create, :certificate_candidate => @attr
+          response.body.should include("certificate.label","can't be blank")
+        end
       end
       
       describe 'success' do
@@ -201,9 +202,10 @@ describe CertificateCandidatesController do
           @attr = { :certificate_candidate => { :candidate_id => @candidate, :certificate_attributes => { :label => '' }, :level_score => '' } }
         end
         
-        #it 'should render the correct error message' do
-        #  xhr :put, :update, :certificate_candidate => @attr[:certificate_candidate], :id => @certificate_candidate
-        #end
+        it 'should render the correct error message' do
+          xhr :put, :update, :certificate_candidate => @attr[:certificate_candidate], :id => @certificate_candidate  
+          response.body.should include("certificate.label","can't be blank")
+        end
       
         it 'should not create another certificate_candidate object' do
           lambda do

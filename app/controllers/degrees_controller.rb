@@ -1,5 +1,7 @@
 class DegreesController < ApplicationController
 
+  before_filter :authenticate
+
   respond_to :json
   
   def update

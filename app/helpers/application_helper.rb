@@ -16,7 +16,7 @@ module ApplicationHelper
   def link_to_add(name, f, association, title = t('add'))
     new_associated_object = (association == 'education' ? build_education : build_experience)
     fields = f.fields_for(association, new_associated_object, :child_index => "new_#{association}") { |builder| render("fields_#{association.to_s.singularize}", :f => builder) }
-    link_to_function(name, 'add_fields(this, \'#{association}\', \'#{escape_javascript(fields)}\')', :class => 'button blue round', :title => title)
+    link_to_function(name, "add_fields(this, '#{association}', '#{escape_javascript(fields)}')", :class => 'button blue round', :title => title)
   end
   
   def hide_contact_information?

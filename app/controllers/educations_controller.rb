@@ -1,6 +1,7 @@
 class EducationsController < ApplicationController
   
-  respond_to :json, :html
+  before_filter :authenticate
+  before_filter :ajax_only, :only => [:edit]
   
   def new
     @education = Education.new
