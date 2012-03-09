@@ -21,8 +21,8 @@ en:
   sign_in: "Sign in"
   sign_out: "Sign out"
   sign_up: "Sign up!"
-  candidate_sign_up: "Apply!"
-  recruiter_sign_up: "Recruit!"
+  candidate_sign_up: "Candidate looking for work"
+  recruiter_sign_up: "Recruiter after great talent"
   settings: "Settings"
   
   # Punctuation 
@@ -92,4 +92,6 @@ en:
   
   # Interactions
   contact: "Contact"
+  send: "Send"
+  question_or_comment: "Got a question or comment"
   

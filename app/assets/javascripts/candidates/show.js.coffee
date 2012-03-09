@@ -19,7 +19,7 @@ $ ->
                     show("picture_upload_error"))
   
   ## GROS CACA
-  $('#edit_image').click    -> $('#image_button').click()
+  $('#image_edit').click    -> $('#image_button').click()
   $('#image_button').change -> $('#image_form').submit()
 
 ## OBJECT CREATION 

@@ -8,11 +8,4 @@
     <h2><%=t 'recruiters.edit.company.info' %></h2>
     <%= f.fields_for :company do |company_builder| render 'fields_company', :f => company_builder end %>
   </div>
-  <div id='colleagues' class='<%= 'hidden ' unless params[:company_profile] == 'yes' %>grey_block'>
-    <h2><%=t 'recruiters.edit.colleagues.title' %></h2>
-    <p><%=t 'recruiters.edit.colleagues.note' %></p>
-    <%= text_field_tag :colleague, nil, :placeholder => t('recruiters.email'), :class => 'field' %><br />
-    <%= text_field_tag :colleague, nil, :placeholder => t('recruiters.email'), :class => 'field' %><br />
-    <%= text_field_tag :colleague, nil, :placeholder => t('recruiters.email'), :class => 'field' %>
-  </div>
 </div>

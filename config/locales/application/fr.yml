@@ -21,8 +21,8 @@ fr:
   sign_in: "S'identifiez"
   sign_out: "Se déconnecter"
   sign_up: "S'inscrire !"
-  candidate_sign_up: "Candidater !"
-  recruiter_sign_up: "Recruter !"
+  candidate_sign_up: "Candidat à la rechercher d'un job"
+  recruiter_sign_up: "Recruteur de talents raress"
   settings: "Préférences"
   
   # Punctuation 
@@ -92,3 +92,6 @@ fr:
   
   # Interactions
   contact: "Contacter"
+  send: "Envoyer"
+  question_or_comment: "Questions ou commentaires"
+  

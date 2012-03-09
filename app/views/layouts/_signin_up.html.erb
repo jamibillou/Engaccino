@@ -4,7 +4,6 @@
 	<% else %>
 		<%=t :already_member %>
 		<%= link_to t(:sign_in), signin_path %>
-		<%= link_to t(:candidate_sign_up), candidate_signup_path, :class => 'button blue round' %>
-		<%= link_to t(:recruiter_sign_up), recruiter_signup_path, :class => 'button blue round' %>
+		<%= link_to t(:sign_up), candidate_signup_path, :class => 'button blue round' %>
 	<% end %>  
 </div>

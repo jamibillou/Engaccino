@@ -2,7 +2,6 @@ class RecruitersController < ApplicationController
   
   before_filter :authenticate,            :except => [:new, :create]
   before_filter :new_user,                :only   => [:new, :create]
-  before_filter :candidate_or_admin_user, :only   => :index
   before_filter :signed_up,               :only   => [:index, :show]
   before_filter :not_signed_up,           :only   => :edit
   before_filter :correct_recruiter,       :only   => [:edit, :update]
@@ -66,9 +65,5 @@ class RecruitersController < ApplicationController
     
     def signed_up
       redirect_to edit_candidate_path(current_user), :notice => t('flash.notice.please_finish_signup') unless signed_up?
-    end
-    
-    def candidate_or_admin_user
-      redirect_to root_path, :notice => t('flash.notice.candidate_only_page') unless current_user.class.name.humanize == 'Candidate' || current_user.admin
     end
 end

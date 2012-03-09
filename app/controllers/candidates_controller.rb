@@ -7,7 +7,6 @@ class CandidatesController < ApplicationController
   
   before_filter :authenticate,            :except => [:new, :create]
   before_filter :new_user,                :only   => [:new, :create]
-  before_filter :recruiter_or_admin_user, :only   => :index
   before_filter :signed_up,               :only   => [:index, :show]
   before_filter :not_signed_up,           :only   => :edit
   before_filter :correct_candidate,       :only   => [:edit, :update]
@@ -19,7 +18,8 @@ class CandidatesController < ApplicationController
   end
   
   def show
-    @candidate = Candidate.find params[:id] ; @title = "#{@candidate.first_name} #{@candidate.last_name}"
+    @candidate = Candidate.find params[:id]
+    @title = "#{@candidate.first_name} #{@candidate.last_name}"
     init_page :javascripts => 'candidates/show'
   end
   
@@ -82,9 +82,5 @@ class CandidatesController < ApplicationController
     
     def signed_up
       redirect_to edit_recruiter_path(current_user), :notice => t('flash.notice.please_finish_signup') unless signed_up?
-    end
-    
-    def recruiter_or_admin_user
-      redirect_to root_path, :notice => t('flash.notice.recruiter_only_page') unless current_user.class.name.humanize == 'Recruiter' || current_user.admin
     end
 end

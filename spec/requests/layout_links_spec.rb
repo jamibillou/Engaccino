@@ -38,10 +38,8 @@ describe 'LayoutLinks' do
         response.should have_selector 'title', :content => I18n.t(:menu_contact)
         click_link I18n.t(:sign_in)
         response.should have_selector 'title', :content => I18n.t('sessions.new.title')
-        click_link I18n.t(:candidate_sign_up)
+        click_link I18n.t(:sign_up)
         response.should have_selector 'title', :content => I18n.t('candidates.new.title')
-        click_link I18n.t(:recruiter_sign_up)
-        response.should have_selector 'title', :content => I18n.t('recruiters.new.title')
       end                                
     end
     

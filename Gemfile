@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.2.1'
+gem 'rails'
 gem 'mysql2'
 gem 'jquery-rails'
 gem 'best_in_place'

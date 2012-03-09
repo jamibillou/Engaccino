@@ -1,0 +1,90 @@
+.card                 { background: white; width: 250px; margin: 10px 0 0 10px; font-size: 12px; float: left;
+  .loader             { float: right; margin: 5px 5px }
+  .field              { margin-left: -4px; margin-top: -3px; margin-bottom: 0 }
+  .combobox           { margin-left: -7px; margin-top: -7px; margin-bottom: 0 }
+  .image              { width: 80px; height: 80px; padding: 0; margin: -4px 12px 0 -4px ; display: inline-block }
+  .image_button       { opacity: 0; position: absolute }
+  .image_hover        { width: 80px; height: 80px; padding: 0; position: absolute;
+    &:hover           { background: url('pencil.png') no-repeat 60px 2px;  cursor: pointer }
+  }
+  
+  .block              { padding: 12px; border-top: 4px solid #f1f1f1;
+    h2                { color: #BBB; font-weight: 600; font-size: 10px; }
+    .trash            { padding: 0; margin: 0; float: top right }
+    
+    &.identity        {
+      a               { color: black; text-decoration: none;
+       &:hover        { text-decoration: underline }
+      }
+      .title          { height: 25px; margin: -10px 0 7px 0; font-size: 20px; font-weight: bold; display: inline-block;
+        .field        { height: 18px; width: 120px;     font-weight: inherit }
+      }
+      .subtitle       { height: 16px;
+        .field        { height: 12px; width: 90px;
+          &.url       { width: 120px }
+        }
+      }
+      p               { padding: 0 15px 0 5px; margin: 20px 0 4px 0; font-size: 14px; font-style: italic;
+        textarea      { padding: 0; margin: -1px 0 0 -1px; width: 100%; line-height: 1.5 }
+      }
+      .quote          { padding: 0 15px 0 5px; margin: 10px 0 4px 0; font-size: 14px; font-style: italic;
+        textarea      { padding: 0; margin: -1px 0 0 -1px; width: 100%; line-height: 1.5 }
+      }
+      .job            { margin-left: 4px;  margin-top: 10px;
+        h2            { font-size: 16px;   font-weight: 400; line-height: 1; margin-bottom: 0; color: black;
+          .combobox   { margin-bottom: -3px }
+        }
+        p             { margin: 1px 0 0 -6px }
+      }
+      .status         { height: 10px; margin: 10px 0 12px 3px; color: green }
+      
+      &.company       { border-top: 4px solid #f1f1f1; padding: 3px 0 55px 12px;
+        .image        { margin: 0 12px 12px 0 }
+        .image_hover:hover { background-position: 63px 6px }
+        .title        { margin: -6px 0 }
+      }
+    }
+    
+    &.contact         { padding-bottom: 25px;
+      h2              { margin-top: 0; font-size: 17px; font-weight: normal; color: black }
+      .textarea       { width: 219px; margin-bottom: 8px; display: block }
+    }
+    
+    &#candidate_professional_skills { font-size: 13px;
+      h2              { margin-top: -2px }
+      p               { line-height: 1.8 }
+      .field          { height: 12px; width: 150px; font-size: 12px }
+    }
+    
+    &#candidate_degree_experience  { padding: 0;
+      .experience {
+        width:          78px;
+        padding-left:   12px;
+        font-size:      20px;
+        display:        inline-block;
+        vertical-align: top;
+        h3            { margin: 0; font-weight: 100; text-align: left }
+      }
+      .degree {
+        min-height:     80px;
+        width:          131px;
+        border-left:    4px solid #f1f1f1;
+        padding:        0 10px 10px 12px;
+        line-height:    1.4;
+        display:        inline-block;
+        h3            { font-size: 16px; font-weight: 400;  line-height: 1; margin: 0;
+          .combobox   { margin-bottom: -3px }
+        }
+        p             { margin-top: 5px; line-height: 1.2 }
+      }
+    }
+    
+    &.expertise {
+      h2              { margin-top: -2px }
+    }
+    
+    &.contact_info {
+      h2              { margin-top: -2px }
+    }
+  }
+}

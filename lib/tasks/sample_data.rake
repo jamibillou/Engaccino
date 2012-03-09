@@ -6,14 +6,24 @@ namespace :db do
   task :populate => :environment do
     Rake::Task['db:reset'].invoke
     make_candidates
+    make_recruiters
   end
 end
   
 def make_candidates
-  make_dominic
-  make_franck 
+  make_dominic_candidate
+  make_franck_candidate
   99.times do |n|
     make_candidate
+  end
+end
+
+def make_recruiters
+  @engaccino = Company.create! :name => 'Engaccino', :url => 'www.engaccino.com', :city => 'Rotterdam', :country => 'Netherlands'
+  make_dominic_recruiter
+  make_franck_recruiter
+  99.times do |n|
+    make_recruiter
   end
 end
 
@@ -35,8 +45,7 @@ def make_candidate
   make_professional_skills
   make_interpersonal_skills
   make_languages
-  @candidate.update_attributes :profile_completion => 95, :main_experience => @candidate.last_experience, :main_education => @candidate.last_education
-  
+  @candidate.update_attributes :profile_completion => 95, :main_experience => @candidate.last_experience.id, :main_education => @candidate.last_education.id
 end
 
 def make_educations
@@ -125,13 +134,13 @@ def make_certificates
   end
 end
 
-def make_dominic
+def make_dominic_candidate
   dominic = Candidate.create! :first_name     => 'Dominic',               :last_name          => 'Matheron',
                               :city           => 'Rotterdam',             :country            => 'Netherlands',     
                               :nationality    => 'France',                :year_of_birth      => 1984,
-                              :phone          => '+31 6 31912261',        :email              => 'dm@engaccino.com',
-                              :facebook_login => 'd.matheron@gmail.com',  :linkedin_login      => 'd.matheron@gmail.com',
-                              :twitter_login  => '@dominic_m',            :password           => 'password', :password_confirmation => 'password',
+                              :phone          => '+31 6 31912261',        :email              => 'dcandidate@ccino.com',
+                              :facebook_login => 'dcandidate@ccino.com',  :linkedin_login     => 'dcandidate@ccino.com',
+                              :twitter_login  => '@dcandidate',            :password           => 'password', :password_confirmation => 'password',
                               :status         => 'open'
   dominic.toggle!(:admin)
   ltb           = { :role => 'Customer Service Rep.', :company => 'LTB Jeans',             :start_month => 9, :start_year => 2011, :end_month => 2,  :end_year => 2012 }
@@ -198,16 +207,16 @@ def make_dominic
     certificate_candidate.certificate = certificate
     certificate_candidate.save!
   end
-  dominic.update_attributes :profile_completion => 95, :main_experience => dominic.last_experience, :main_education => dominic.last_education
+  dominic.update_attributes :profile_completion => 95, :main_experience => dominic.last_experience.id, :main_education => dominic.last_education.id
 end
 
-def make_franck
+def make_franck_candidate
   franck = Candidate.create! :first_name     => 'Franck',               :last_name          => 'Sabattier',
                              :city           => 'Grenoble',             :country            => 'France',     
                              :nationality    => 'France',               :year_of_birth      => 1985,
-                             :phone          => '+33 6 66393633',       :email              => 'franck@engaccino.com',
-                             :facebook_login => 'franck@engaccino.com', :linkedin_login     => 'franck@engaccino.com',
-                             :twitter_login  => '@fsabattier',          :password           => 'password', :password_confirmation => 'password',
+                             :phone          => '+33 6 66393633',       :email              => 'fcandidate@ccino.com',
+                             :facebook_login => 'fcandidate@ccino.com', :linkedin_login     => 'fcandidate@ccino.com',
+                             :twitter_login  => '@fcandidate',          :password           => 'password', :password_confirmation => 'password',
                              :status         => 'open'
   franck.toggle!(:admin)
   px2      = { :role => 'IT Engineer',                :company => 'PX Therapeutics',        :start_month => 11, :start_year => 2010, :end_month => 2,  :end_year => 2012 }
@@ -277,7 +286,48 @@ def make_franck
     certificate_candidate.certificate = certificate
     certificate_candidate.save!
   end
-  franck.update_attributes :profile_completion => 95, :main_experience => franck.last_experience, :main_education => franck.last_education
+  franck.update_attributes :profile_completion => 95, :main_experience => franck.last_experience.id, :main_education => franck.last_education.id
+end
+
+def make_recruiter
+  ages       = (55.years.ago.year..35.years.ago.year).to_a
+  full_name  = Faker::Name.name.split
+  email      = "#{full_name[0].sub(' ', '').sub('.','').sub("'",'').downcase}.#{full_name[1].sub(' ', '').sub('.','').sub("'",'').downcase}@gmail.com"
+  password   = 'password'
+  @recruiter = Recruiter.new :first_name     => full_name[0],                            :last_name             => full_name[1],
+                             :city           => @dutch_cities[rand(@dutch_cities.size)], :country               => 'Netherlands',     
+                             :nationality    => 'Netherlands',                           :year_of_birth         => ages[rand(ages.size)],
+                             :phone          => '+31 0 00000000',                        :email                 => email,
+                             :facebook_login => email,                                   :linkedin_login        => email,
+                             :password       => password,                                :password_confirmation => password,
+                             :quote          => @descriptions[rand(@descriptions.size)][0..199]
+  @company = Company.find(Company.all.map { |company| company.id }[rand(Company.all.count)])
+  @company.update_attributes :url => "www.#{@company.name.gsub(' ','').downcase}.nl"
+  @recruiter.company = @company
+  @recruiter.save!
+  @recruiter.update_attributes :profile_completion => 95
+end
+
+def make_dominic_recruiter
+  dominic = Recruiter.new :first_name     => 'Dominic',               :last_name          => 'Matheron',
+                          :city           => 'Rotterdam',             :country            => 'Netherlands',     
+                          :nationality    => 'France',                :year_of_birth      => 1984,
+                          :phone          => '+31 6 31912261',        :email              => 'drecruiter@ccino.com',
+                          :facebook_login => 'drecruiter@ccino.com',  :linkedin_login     => 'drecruiter@ccino.com',
+                          :twitter_login  => '@drecruiter',           :password           => 'password', :password_confirmation => 'password',
+                          :quote          => 'As co-founder of Engaccino, I commit to helping you get and stay in touch with potential employers. I also am a hobbyist recruiter and happen to know a lot of great companies.'
+  dominic.admin = true ; dominic.company = @engaccino ; dominic.profile_completion = 95 ; dominic.save!
+end
+
+def make_franck_recruiter
+  franck = Recruiter.new :first_name     => 'Franck',               :last_name          => 'Sabattier',
+                         :city           => 'Grenoble',             :country            => 'France',     
+                         :nationality    => 'France',               :year_of_birth      => 1985,
+                         :phone          => '+33 6 66393633',       :email              => 'frecruiter@ccino.com',
+                         :facebook_login => 'frecruiter@ccino.com', :linkedin_login     => 'frecruiter@ccino.com',
+                         :twitter_login  => '@frecruiter',          :password           => 'password', :password_confirmation => 'password',
+                         :quote          => 'As co-founder of Engaccino, I commit to helping you get and stay in touch with potential employers. I also am a hobbyist recruiter and happen to know a lot of great companies.'
+  franck.admin = true ; franck.company = @engaccino ; franck.profile_completion = 95 ; franck.save!
 end
 
 @dutch_cities = [ 'Almere', 'Lelystad', 'Bolsward', 'Dokkum', 'Drachten', 'Franeker', 'Harlingen', 'Heerenveen', 'Hindeloopen', 'IJlst', 'Leeuwarden', 'Sloten', 'Sneek', 'Stavoren', 'Workum', 'Apeldoorn', 'Arnhem', 'Bredevoort', 'Buren', 'Culemborg', 'Dieren', 'Doetinchem', 'Ede', 'Groenlo', 'Harderwijk', 'Hattem', 'Huissen', 'Nijkerk', 'Nijmegen', 'Tiel', 'Wageningen', 'Wijchen', 'Winterswijk', 'Zaltbommel', 'Zutphen', 'Deil', 'Enspijk', 'Appingedam', 'Delfzijl', 'Groningen', 'Hoogezand-Sappemeer', 'Stadskanaal', 'Winschoten', 'Veendam', 'Geleen', 'Gennep', 'Heerlen', 'Kerkrade', 'Kessel', 'Landgraaf', 'Maastricht', 'Montfort', 'Nieuwstadt', 'Roermond', 'Sittard', 'Schin op Geul', 'Stein', 'Thorn', 'Valkenburg aan de Geul', 'Venlo', 'Weert', 'Bergen op Zoom', 'Breda', 'Den Bosch', 'Eindhoven', 'Geertruidenberg', 'Grave', 'Helmond', 'Heusden', 'Klundert', 'Oosterhout', 'Oss', 'Ravenstein', 'Roosendaal', 'Tilburg', 'Waalwijk', 'Willemstad', 'Woudrichem', 'Alkmaar', 'Amstelveen', 'Amsterdam', 'Den Helder', 'Edam, Volendam', 'Enkhuizen', 'Haarlem', 'Heerhugowaard', 'Hilversum', 'Hoofddorp', 'Hoorn', 'Laren', 'Purmerend', 'Medemblik', 'Monnickendam', 'Muiden', 'Naarden', 'Schagen', 'Weesp', 'Zaanstad', 'Almelo', 'Blokzijl', 'Deventer', 'Enschede', 'Genemuiden', 'Hasselt', 'Hengelo', 'Kampen', 'Oldenzaal', 'Steenwijk', 'Vollenhove', 'Zwolle', 'Alphen aan den Rijn', 'Delft', 'Dordrecht', 'Gorinchem', 'Gouda', 'Leiden', 'Rotterdam', 'Spijkenisse', 'Den Haag', 'Zoetermeer', 'Amersfoort', 'Houten', 'Leersum', 'Nieuwegein', 'Rhenen', 'Utrecht', 'Veenendaal', 'Vreeland', 'Woerden', 'Zeist', 'Arnemuiden', 'Goes', 'Hulst', 'Middelburg', 'Sluis', 'Terneuzen', 'Veere', 'Vlissingen (English: Flushing)', 'Zierikzee' ]

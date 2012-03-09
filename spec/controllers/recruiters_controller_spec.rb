@@ -70,16 +70,6 @@ describe RecruitersController do
       end
     end
     
-    describe 'for signed-in recruiters' do
-      
-      it "should deny access to 'index'" do
-        test_sign_in @recruiter
-        get :index
-        response.should redirect_to root_path
-        flash[:notice].should == I18n.t('flash.notice.candidate_only_page')
-      end
-    end
-    
     describe 'admin features' do
       
       before :each do
@@ -149,7 +139,7 @@ describe RecruitersController do
         
         it 'should have the right selected navigation tab' do
           get :show, :id => @recruiter
-          response.should have_selector 'li', :class => 'round selected', :content => I18n.t(:menu_profile)
+          response.should have_selector 'li', :class => 'round selected', :content => I18n.t(:menu_recruiters)
         end
       end
     end

@@ -1,0 +1,35 @@
+<div id='company_<%= @company.id %>' class='card'>
+  <div class='loader' id='company_loader'><%= image_tag 'loader.gif' %></div>
+  
+  <div class='identity block'>
+    <% if current_user.company == @company && params[:action] == 'show' %><div id='image_edit' class='image_hover'></div><% end %>
+    <div class='<%= "default-company-#{rand(1..9)} " if @company.image_url.nil? %>image left'><%= image_tag @company.image_url(:thumb).to_s unless @company.image_url.nil? %></div>
+    <% if current_user.company == @company && params[:action] == 'show' %>
+  	  <div class='title'><%= best_in_place @company, :name, :html_attrs => { :class => 'field' } %></div>&nbsp;
+    <% else %>
+      <a href='<%= company_path(@company) %>'><div class='title'><%= @company.name %></div></a>
+    <% end %>
+    <div class='subtitle'><%= best_in_place @company, :url,  :html_attrs => { :class => 'field' } %></div>
+    <% if current_user.company == @company && params[:action] == 'show' %>
+      <%= form_for @company, :remote => true, :html => { :id => 'company_image_form', :multipart => true } do |f| %>
+        <%= f.file_field :image,  :id => 'image_button', :class => 'image_button' %>
+        <%= f.submit     :submit, :class => 'hidden' %>
+        <div id='company_picture_upload_error' class='hidden error_messages'></div>
+      <% end %>
+    <% end %>
+    <% if current_user.admin? %><%= link_to image('trash', t('delete')), @company, :method => :delete, :id => "destroy_company_#{@company.id}", :class => 'hidden',
+    	                                                                             :confirm => "#{t('companies.destroy.title')} #{@company.name}#{t('_?')}",
+                                                                                   :title => "#{t('companies.destroy.title')} #{@company.name}" %><% end %>
+    <br /><br /><br /><br />
+  </div>
+  
+  <div class='expertise block'>
+    <h2>FIELDS OF EXPERTISE</h2>
+    <br /><br /><br /><br />
+  </div>
+  
+  <div class='contact_info block'>
+    <h2>CONTACT INFORMATION</h2>
+    <br /><br /><br /><br />
+  </div>
+</div>

@@ -16,7 +16,7 @@ $ ->
                     show("company_picture_upload_error"))
   
   ## GROS CACA
-  $('#edit_recruiter_image').click    -> $('#recruiter_image_button').click()
-  $('#recruiter_image_button').change -> $('#recruiter_image_form').submit()
-  $('#edit_company_image').click      -> $('#company_image_button').click()
-  $('#company_image_button').change   -> $('#company_image_form').submit()
+  $('#image_edit_r').click    -> $('#image_button_r').click()
+  $('#image_button_r').change -> $('#recruiter_image_form').submit()
+  $('#image_edit_c').click    -> $('#image_button_c').click()
+  $('#image_button_c').change -> $('#company_image_form').submit()
