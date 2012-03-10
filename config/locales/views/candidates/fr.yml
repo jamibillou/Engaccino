@@ -36,7 +36,7 @@ fr:
     missing:
       localisation: "Où vivez-vous ?"
       social_networks: "Vos profils Facebook, Twitter ou LinkedIn permettent de mieux vous connaître."
-      profile_picture: "Ajoutez une photo de profil, le visiteurs aiment voir à qui ils s'adressent."
+      profile_picture: "Ajoutez une photo de profil, les visiteurs aiment voir à qui ils s'adressent."
     
     index:
       title: "Liste des candidats"
@@ -56,7 +56,7 @@ fr:
     new:
       title: "S'inscrire"
       create_engaccino_account: "Créer un compte Engaccino"
-      or_use_social_connect: "Ou connectez vous avec Facebook ou Twitter"
+      or_use_social_connect: "Ou connectez-vous avec Facebook ou Twitter"
       connect_via: "Se connecter via"
       set_up_profile: "Créer mon profil"
     edit:
