@@ -29,7 +29,6 @@ Factory.define :candidate do |candidate|
   candidate.password '45Georges?'
   candidate.password_confirmation '45Georges?'
   candidate.status 'available'
-  candidate.profile_completion 5
 end
 
 Factory.define :recruiter do |recruiter|

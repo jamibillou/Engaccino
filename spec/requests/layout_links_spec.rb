@@ -3,43 +3,43 @@ require 'spec_helper'
 describe 'LayoutLinks' do
 
   it 'should have the right pages at public URLs' do
-      get '/'
-      response.should have_selector 'title', :content => I18n.t(:menu_overview)
-      get '/tour'
-      response.should have_selector 'title', :content => I18n.t(:menu_tour)
-      get '/pricing'
-      response.should have_selector 'title', :content => I18n.t(:menu_pricing)
-      get '/about'
-      response.should have_selector 'title', :content => I18n.t(:menu_about)
-      get '/contact'
-      response.should have_selector 'title', :content => I18n.t(:menu_contact)
-      get '/candidate_signup'
-      response.should have_selector 'title', :content => I18n.t('candidates.new.title')
-      get '/recruiter_signup'
-      response.should have_selector 'title', :content => I18n.t('recruiters.new.title')
-      get '/signin'
-      response.should have_selector 'title', :content => I18n.t('sessions.new.title')
+      visit '/'
+      find('title').should have_content I18n.t(:menu_overview)
+      visit '/tour'
+      find('title').should have_content I18n.t(:menu_tour)
+      visit '/pricing'
+      find('title').should have_content I18n.t(:menu_pricing)
+      visit '/about'
+      find('title').should have_content I18n.t(:menu_about)
+      visit '/contact'
+      find('title').should have_content I18n.t(:menu_contact)
+      visit '/candidate_signup'
+      find('title').should have_content I18n.t('candidates.new.title')
+      visit '/recruiter_signup'
+      find('title').should have_content I18n.t('recruiters.new.title')
+      visit '/signin'
+      find('title').should have_content I18n.t('sessions.new.title')
     end
     
     describe 'for non-signed-in users' do
       
       it 'should have the right links on the layout' do 
         visit root_path
-        response.should have_selector 'title', :content => I18n.t(:menu_overview)
+        find('title').should have_content I18n.t(:menu_overview)
         click_link I18n.t(:menu_overview)
-        response.should have_selector 'title', :content => I18n.t(:menu_overview)
+        find('title').should have_content I18n.t(:menu_overview)
         click_link I18n.t(:menu_tour)
-        response.should have_selector 'title', :content => I18n.t(:menu_tour)
+        find('title').should have_content I18n.t(:menu_tour)
         click_link I18n.t(:menu_pricing)
-        response.should have_selector 'title', :content => I18n.t(:menu_pricing)
+        find('title').should have_content I18n.t(:menu_pricing)
         click_link I18n.t(:menu_about)
-        response.should have_selector 'title', :content => I18n.t(:menu_about)
+        find('title').should have_content I18n.t(:menu_about)
         click_link I18n.t(:menu_contact)
-        response.should have_selector 'title', :content => I18n.t(:menu_contact)
+        find('title').should have_content I18n.t(:menu_contact)
         click_link I18n.t(:sign_in)
-        response.should have_selector 'title', :content => I18n.t('sessions.new.title')
+        find('title').should have_content I18n.t('sessions.new.title')
         click_link I18n.t(:sign_up)
-        response.should have_selector 'title', :content => I18n.t('candidates.new.title')
+        find('title').should have_content I18n.t('candidates.new.title')
       end                                
     end
     
