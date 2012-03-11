@@ -7,7 +7,7 @@ gem 'best_in_place'
 gem 'will_paginate'
 gem 'countries'
 gem 'i18n-js'
-gem 'carrierwave'
+gem 'carrierwave', git: "git://github.com/jnicklas/carrierwave.git"
 gem 'rmagick'
 gem 'remotipart'
 gem 'client_side_validations'
@@ -25,4 +25,5 @@ group :test do
   gem 'spork'
   gem 'factory_girl_rails'
   gem 'webrat'
+  gem 'capybara'
 end

@@ -12,7 +12,7 @@ $ ->
   refreshPartialThroughBIPcombo('candidate_degree', 'degreetype_BIPcombo')
   
   $('#image_form').bind('ajax:success', (evt, data, status, xhr) -> 
-                    alert("success")
+                    alert("success") if ($(this).data('remotipartSubmitted'))
                     hide("picture_upload_error"))
                   .bind('ajax:error', (evt, xhr, status) -> 
                     $("#picture_upload_error").html(xhr.responseText+"<br/><br/>")
