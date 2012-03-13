@@ -94,7 +94,6 @@ describe CandidatesController do
           get :index
           Candidate.all.each do |candidate|
             response.body.should_not have_link("#{candidate.first_name} #{candidate.last_name}", :href => candidate_path(candidate))
-            #response.body.should_not have_selector 'a', :id => "destroy_candidate_#{candidate.id}"
           end
         end
       end            

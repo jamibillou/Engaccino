@@ -197,23 +197,23 @@ describe 'Candidates' do
       end        
     end
     
-    #describe "ajax creation" do
+    describe "ajax creation" do
       
-    #  before :each do
-    #    visit signin_path
-    #    fill_in 'email',    :with => @candidate.email
-    #    fill_in 'password', :with => @candidate.password
-    #    click_button "#{I18n.t('sessions.new.signin')}"
-    #  end
-      
-    #  describe "professional skills" do
+      before :each do
+        visit signin_path
+        fill_in 'email',    :with => @candidate.email
+        fill_in 'password', :with => @candidate.password
+        click_button "#{I18n.t('sessions.new.signin')}"
+      end
+    
+      describe "professional skills" do
        
-    #    it "should display an empty form when we click on 'Add'", :js => true do
-    #      click_link 'link_add_professional_skill_candidate'
-    #      page.should have_selector 'form', :id => 'new_professional_skill_candidate'
-          #find('form#new_professional_skill_candidate').find('div.professional_skill_candidate')
-    #    end        
-    #  end          
-    #end
+        it "should display an empty form when we click on 'Add'", :js => true do
+          click_link 'link_add_professional_skill_candidate'
+          page.should have_selector 'form', :id => 'new_professional_skill_candidate'
+          find('form#new_professional_skill_candidate').find('div.professional_skill_candidate')
+        end        
+      end          
+    end
   end
 end

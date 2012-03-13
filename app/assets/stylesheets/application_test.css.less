@@ -1,4 +1,4 @@
-@import 'mixins';
+//@import 'mixins';
 
 //// BASE FOR TO ALL VIEWS
 
@@ -15,8 +15,8 @@ body                  { line-height: 1.5;   background: #f1f1f1; margin: 0; padd
 header                { padding-top: 8px; font-size: 13px; font-weight: bold;
   .logo               { width: 150px;     padding: 9px 8px }
   #languages          { float: right;     padding-right: 20px; font-size: 11px;
-    a                 { text-decoration:  none; color: black;
-      &:hover         { text-decoration:  underline }
+  	a                 { text-decoration:  none; color: black;
+    	&:hover         { text-decoration:  underline }
     }
   }
   nav                 { height: 53px; width:  100%; background-color: #cbcbcb; border-bottom: 10px solid #515151;
@@ -36,18 +36,18 @@ header                { padding-top: 8px; font-size: 13px; font-weight: bold;
     }
   }
   #search_bar {
-    height:             31px;
-    width:              34%;
-    margin-top:         9px;
-    margin-right:       25px;
-    padding-left:       5px;
-    background-image:   url('search.png') no-repeat 98% 6px;
-    border:             1px solid #969696;
-    color:              #444;
-    font-style:         normal;
-    font-size:          inherit;
-    font-weight:        500;
-    float:              right;
+  	height:             31px;
+  	width:              34%;
+  	margin-top:         9px;
+  	margin-right:       25px;
+  	padding-left:       5px;
+  	background-image:   url('search.png') no-repeat 98% 6px;
+  	border:             1px solid #969696;
+  	color:              #444;
+  	font-style:         normal;
+  	font-size:          inherit;
+  	font-weight:        500;
+  	float:              right;
   }
   #signin_signup      { padding-top: 17px; padding-right: 20px; font-weight: normal; float: right;
     a                 { color: black;      font-weight: bold;
@@ -65,8 +65,8 @@ header                { padding-top: 8px; font-size: 13px; font-weight: bold;
 footer                { bottom: 0; right: 20px; padding-top: 60%; padding-right: 15px; text-align: right }
 
 // SHAPES
-.round                { .radius(5px) }
-.slightly_round       { .radius(3px) }
+.round                { }
+.slightly_round       {  }
 
 // TEXT COLORS & DECORATION
 .red                  { color: #da1b1b }
@@ -83,7 +83,6 @@ input[type=submit] {
   color:                white;
   border:               none;
   cursor:               pointer;
-  .radius(5px);
   &:hover             { text-decoration: underline }
 }
 a.button              { padding: 9px 30px; margin: 0; text-decoration: none; font-size: 13px; font-weight: bold;
@@ -95,8 +94,8 @@ a.button              { padding: 9px 30px; margin: 0; text-decoration: none; fon
   &.red               { background-color: darken(#da1b1b, 5%); color: white }
   &.grey              { background-color: #DDD;    color: #444; font-weight: normal }
   &.grey_gradient {
-    border:                     1px solid #cbcbcb; color: #444;    font-weight: normal;  .gradient(#fdfdfd, #ebebeb); 
-    &:hover           { border: 1px solid #cbcbcb; color: inherit; font-weight: inherit; .gradient(#ebebeb, #fdfdfd); text-decoration: none; }
+    border:                     1px solid #cbcbcb; color: #444;    font-weight: normal; 
+    &:hover           { border: 1px solid #cbcbcb; color: inherit; font-weight: inherit; text-decoration: none; }
   }
 }
 a.close             { height: 15px; width: 15px; background-image: url('close_flash.png');
@@ -128,9 +127,9 @@ a.close             { height: 15px; width: 15px; background-image: url('close_fl
 
 // FLASH
 .flash                { font-size: 12px; font-weight: 100; padding: 5px 6px;
-  &.success           { .gradient(#d6de23, #bfc61e); color: #6b6f11 }
-  &.notice            { .gradient(#fed828, #e9c624); color: #7f6c12 }
-  &.error             { .gradient(#fa533f, #e44a37); color: #74241b }
+  &.success           { color: #6b6f11 }
+  &.notice            { color: #7f6c12 }
+  &.error             { color: #74241b }
   a.close             { float: right }
 }
 
@@ -197,6 +196,6 @@ a.close             { height: 15px; width: 15px; background-image: url('close_fl
   .message { padding-left: 5px; .red }
 }
 
-@import 'candidates';
-@import 'recruiters';
-@import 'card';
+//@import 'candidates';
+//@import 'recruiters';
+//@import 'card';

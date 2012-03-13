@@ -57,11 +57,12 @@ $ ->
       
 @callNew = (model, partials) ->
   $.ajax '../'+model+'s/new',
-  	beforeSend: -> 
-  	  show(model+"_loader")
+    dataType: 'html'
+    beforeSend: ->
+      show(model+"_loader")
     complete: -> 
-      hide(model+"_loader")															  
-  	success: (data) -> 
+      hide(model+"_loader")
+    success: (data) -> 
   	  $('#new_'+model).html(data)
   	  show('new_'+model)
   	  hide('link_add_'+model)
