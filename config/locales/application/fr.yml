@@ -18,11 +18,11 @@ fr:
   search_bar_title: "Rechercher un contact, une entreprise, offre d'emploi, etc."
    
   already_member: "Membre ?"
-  sign_in: "S'identifiez"
+  sign_in: "S'identifier"
   sign_out: "Se déconnecter"
   sign_up: "S'inscrire !"
-  candidate_sign_up: "Candidat à la rechercher d'un job"
-  recruiter_sign_up: "Recruteur de talents raress"
+  candidate_sign_up: "Candidat à la recherche d'un job"
+  recruiter_sign_up: "Recruteur de talents rares"
   settings: "Préférences"
   
   # Punctuation 
@@ -41,7 +41,7 @@ fr:
       education_destroyed: "La formation a été supprimée."
     error: 
       base: "Erreur :"
-      general: "Oups, un erreur est survenue."
+      general: "Oups, une erreur est survenue."
       could_not_save: "Nous n'avons pu enregistrer cet"
       correct_before_resubmit: "Merci de corriger avant de réessayer."
       signin: "Email/password invalides."
@@ -51,9 +51,9 @@ fr:
       please_finish_signup: "Finissez d'abord votre inscription pour accéder à cette page."
       already_signed_up: "Vous avez déjà terminé l'inscription."
       restricted_page: "Cette page est protégée, vous ne pouvez pas y accéder."
-      not_a_new_user: "Vous avez déjà un profil, déconnectez vous si vous voulez en créer un autre."
-      candidate_only_page: "Seuls les candidats on accés à cette page."
-      recruiter_only_page: "Seuls les recruteurs on accés à cette page."
+      not_a_new_user: "Vous avez déjà un profil, déconnectez-vous si vous voulez en créer un autre."
+      candidate_only_page: "Seuls les candidats ont accès à cette page."
+      recruiter_only_page: "Seuls les recruteurs ont accès à cette page."
         
   # Actions
   delete: "Supprimer"

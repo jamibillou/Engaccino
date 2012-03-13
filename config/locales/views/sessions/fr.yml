@@ -5,10 +5,10 @@ fr:
     password: "Mot de passe"
    
     new:
-      title: "Identifiez vous"
-      signin: "Identifiez moi !"
+      title: "Identifiez-vous"
+      signin: "Identifiez-moi !"
       use_engaccino_account: "Avec votre compte Engaccino"
-      or_use_social_connect: "Ou connectez vous avec Facebook ou Twitter"
+      or_use_social_connect: "Ou connectez-vous avec Facebook ou Twitter"
       connect_via: "Ou se connecter via"
       non_member: "Pas encore membre?"
       remember_me: "se souvenir de moi"
