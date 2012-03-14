@@ -53,18 +53,18 @@ describe CandidatesController do
         
         it 'should have the right title' do
           get :index
-          response.should have_selector 'title', :content => I18n.t('candidates.index.title')
+          response.body.should have_selector 'title', :text => I18n.t('candidates.index.title')
         end
         
         it 'should have the right selected navigation tab' do
           get :index
-          response.should have_selector'li', :class => 'round selected', :content => I18n.t(:menu_candidates)
+          response.body.should have_selector 'li', :class => 'round selected', :text => I18n.t(:menu_candidates)
         end
         
         it 'should have a card for each candidate' do 
           get :index
           Candidate.all.each do |candidate|
-            response.should have_selector 'div', :id => "candidate_#{candidate.id}"
+            response.body.should have_selector 'div', :id => "candidate_#{candidate.id}"
           end  
         end                
       end
@@ -83,7 +83,7 @@ describe CandidatesController do
           @user.toggle! :admin
           get :index            
           Candidate.all.each do |candidate|
-            response.should have_selector 'a', :id => "destroy_candidate_#{candidate.id}"
+            response.body.should have_link("#{candidate.first_name} #{candidate.last_name}", :href => candidate_path(candidate))
           end
         end
       end
@@ -93,7 +93,7 @@ describe CandidatesController do
         it "shouldn't have a destroy link for each candidate" do 
           get :index
           Candidate.all.each do |candidate|
-            response.should_not have_selector 'a', :id => "destroy_candidate_#{candidate.id}"
+            response.body.should_not have_link("#{candidate.first_name} #{candidate.last_name}", :href => candidate_path(candidate))
           end
         end
       end            
@@ -139,7 +139,7 @@ describe CandidatesController do
         
         it 'should have the right selected navigation tab' do
           get :show, :id => @candidate
-          response.should have_selector 'li', :class => 'round selected', :content => I18n.t(:menu_candidates)
+          response.body.should have_selector 'li', :class => 'round selected', :text => I18n.t(:menu_candidates)
         end
       end
     end
@@ -166,7 +166,7 @@ describe CandidatesController do
       
       it 'should have the right title' do 
         get :new
-        response.should have_selector 'title', :content => I18n.t('candidates.new.title')
+        response.body.should have_selector 'title', :text => I18n.t('candidates.new.title')
       end
     end
   end
@@ -270,12 +270,12 @@ describe CandidatesController do
       
         it 'should have the right title' do
           get :edit, :id => @candidate
-          response.should have_selector 'title', :content => I18n.t('candidates.edit.complete_your_profile')
+          response.body.should have_selector 'title', :content => I18n.t('candidates.edit.complete_your_profile')
         end
             
         it 'should have an edit form' do
           get :edit, :id => @candidate
-          response.should have_selector 'form', :id => 'candidate_edit_form'
+          response.body.should have_selector 'form', :id => 'candidate_edit_form'
         end
       end
     end

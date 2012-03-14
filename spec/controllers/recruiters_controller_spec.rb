@@ -53,18 +53,18 @@ describe RecruitersController do
         
         it 'should have the right title' do
           get :index
-          response.should have_selector 'title', :content => I18n.t('recruiters.index.title')
+          response.body.should have_selector 'title', :text => I18n.t('recruiters.index.title')
         end
         
         it 'should have the right selected navigation tab' do
           get :index
-          response.should have_selector 'li', :class => 'round selected', :content => I18n.t(:menu_recruiters)
+          response.body.should have_selector 'li', :class => 'round selected', :text => I18n.t(:menu_recruiters)
         end
         
         it 'should have a card for each recruiter' do 
           get :index
           Recruiter.all.each do |recruiter|
-            response.should have_selector 'div', :id => "recruiter_#{recruiter.id}"
+            response.body.should have_selector 'div', :id => "recruiter_#{recruiter.id}"
           end  
         end                  
       end
@@ -83,7 +83,7 @@ describe RecruitersController do
           @user.toggle! :admin
           get :index            
           Recruiter.all.each do |recruiter|
-            response.should have_selector 'a', :id => "destroy_recruiter_#{recruiter.id}"
+            response.body.should have_selector 'a', :id => "destroy_recruiter_#{recruiter.id}"
           end
         end
       end
@@ -93,7 +93,7 @@ describe RecruitersController do
         it "shouldn't have a destroy link for each candidate" do 
           get :index
           Recruiter.all.each do |recruiter|
-            response.should_not have_selector 'a', :id => "destroy_recruiter_#{recruiter.id}"
+            response.body.should have_selector 'a', :id => "destroy_recruiter_#{recruiter.id}"
           end
         end
       end            
@@ -139,7 +139,7 @@ describe RecruitersController do
         
         it 'should have the right selected navigation tab' do
           get :show, :id => @recruiter
-          response.should have_selector 'li', :class => 'round selected', :content => I18n.t(:menu_recruiters)
+          response.body.should have_selector 'li', :class => 'round selected', :text => I18n.t(:menu_recruiters)
         end
       end
     end
@@ -166,7 +166,7 @@ describe RecruitersController do
       
       it 'should have the right title' do 
         get :new
-        response.should have_selector 'title', :content => I18n.t('recruiters.new.title')
+        response.body.should have_selector 'title', :text => I18n.t('recruiters.new.title')
       end
     end
   end
@@ -270,12 +270,12 @@ describe RecruitersController do
       
         it 'should have the right title' do
           get :edit, :id => @recruiter
-          response.should have_selector 'title', :content => I18n.t('recruiters.edit.complete_your_profile')
+          response.body.should have_selector 'title', :text => I18n.t('recruiters.edit.complete_your_profile')
         end
             
         it 'should have an edit form' do
           get :edit, :id => @recruiter
-          response.should have_selector 'form', :id => 'recruiter_edit_form'
+          response.body.should have_selector 'form', :id => 'recruiter_edit_form'
         end
       end
     end

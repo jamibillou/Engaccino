@@ -28,7 +28,7 @@ Factory.define :candidate do |candidate|
   candidate.twitter_login { Factory.next(:twitter_login) }
   candidate.password '45Georges?'
   candidate.password_confirmation '45Georges?'
-  candidate.status 'available'  
+  candidate.status 'available'
 end
 
 Factory.define :recruiter do |recruiter|

@@ -56,7 +56,7 @@ class CandidatesController < ApplicationController
     else
       associate_schools_and_degrees
       respond_to do |format|
-        format.json { render :json => 'success!' } if remotipart_submitted?
+        format.js { render :json => 'success!' } if remotipart_submitted?
         format.html { @candidate.update_attributes :profile_completion => 5 ; redirect_to @candidate }
         format.json { respond_with_bip @candidate }
       end

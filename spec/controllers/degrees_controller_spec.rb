@@ -52,7 +52,7 @@ describe DegreesController do
       describe 'failure' do
         
         before :each do
-          @attr = { :degree => {:label => ""} }
+          @attr = { :degree => {:label => ''} }
         end
         
         it 'should render the correct error message' do

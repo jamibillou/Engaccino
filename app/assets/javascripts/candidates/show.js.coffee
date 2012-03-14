@@ -12,7 +12,7 @@ $ ->
   refreshPartialThroughBIPcombo('candidate_degree', 'degreetype_BIPcombo')
   
   $('#image_form').bind('ajax:success', (evt, data, status, xhr) -> 
-                    alert("success")
+                    alert("success") if ($(this).data('remotipartSubmitted'))
                     hide("picture_upload_error"))
                   .bind('ajax:error', (evt, xhr, status) -> 
                     $("#picture_upload_error").html(xhr.responseText+"<br/><br/>")
@@ -57,11 +57,12 @@ $ ->
       
 @callNew = (model, partials) ->
   $.ajax '../'+model+'s/new',
-  	beforeSend: -> 
-  	  show(model+"_loader")
+    dataType: 'html'
+    beforeSend: ->
+      show(model+"_loader")
     complete: -> 
-      hide(model+"_loader")															  
-  	success: (data) -> 
+      hide(model+"_loader")
+    success: (data) -> 
   	  $('#new_'+model).html(data)
   	  show('new_'+model)
   	  hide('link_add_'+model)

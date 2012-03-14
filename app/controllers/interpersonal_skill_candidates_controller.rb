@@ -1,4 +1,7 @@
 class InterpersonalSkillCandidatesController < ApplicationController
+
+  before_filter :authenticate
+  before_filter :ajax_only, :only => [:new,:edit]
   
   def new
     @interpersonal_skill_candidate = InterpersonalSkillCandidate.new
@@ -17,7 +20,7 @@ class InterpersonalSkillCandidatesController < ApplicationController
   end
   
   def edit
-    render :partial => 'edit_form', :locals => { :interpersonal_skill_candidate => InterpersonalSkillCandidate.find(:id) }
+    render :partial => 'edit_form', :locals => { :interpersonal_skill_candidate => InterpersonalSkillCandidate.find(params[:id]) }
   end
   
   def update

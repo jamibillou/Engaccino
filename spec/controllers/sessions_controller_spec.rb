@@ -13,7 +13,7 @@ describe SessionsController do
     
     it 'should have the right title' do
       get :new
-      response.should have_selector 'title', :content => I18n.t('sessions.new.title')
+      response.body.should have_selector 'title', :text => I18n.t('sessions.new.title')
     end
   end
   
@@ -32,12 +32,12 @@ describe SessionsController do
       
       it 'should have the right title' do
         post :create, :session => @attr
-        response.should have_selector 'title', :content => I18n.t('sessions.new.title')
+        response.body.should have_selector 'title', :text => I18n.t('sessions.new.title')
       end
       
       it 'should have a flash message' do
         post :create, :session => @attr
-        response.should have_selector 'div', :class => 'flash error'
+        response.body.should have_selector 'div', :class => 'flash error'
       end
     end
     
