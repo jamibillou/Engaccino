@@ -20,11 +20,11 @@ class Company < ActiveRecord::Base
   
   mount_uploader :image, CompanyImageUploader
   
-  acts_as_gmappable
-
-  def gmaps4rails_address
-    "#{self.address}, #{self.zip}, #{self.city}, #{self.country}" 
-  end
+  # acts_as_gmappable
+  # 
+  # def gmaps4rails_address
+  #   "#{self.address}, #{self.zip}, #{self.city}, #{self.country}" 
+  # end
     
   def no_about?
     about.nil? || about.empty?

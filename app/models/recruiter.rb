@@ -8,6 +8,7 @@ class Recruiter < User
   
   validates :quote, :length => { :maximum => 200 }
 end
+
 # == Schema Information
 #
 # Table name: users

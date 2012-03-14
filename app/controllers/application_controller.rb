@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   
   include SessionsHelper
+  include ApplicationHelper
   
   protect_from_forgery
   
@@ -62,5 +63,9 @@ class ApplicationController < ActionController::Base
   
     def ajax_only
       redirect_to current_user, :notice => t('flash.notice.restricted_page') unless request.xhr?
+    end
+    
+    def authorized
+      redirect_to current_user, :notice => t('flash.notice.restricted_page') unless current_user.admin || current_user_profile? || authorized_class_of_user?
     end
 end

@@ -19,10 +19,6 @@ module ApplicationHelper
     link_to_function(name, "add_fields(this, '#{association}', '#{escape_javascript(fields)}')", :class => 'button blue round', :title => title)
   end
   
-  def hide_contact_information?
-    params[:action] == 'index'
-  end
-  
   def build_education
     education = @candidate.educations.build ; education.build_school ; degree = education.build_degree ; degree.build_degree_type
     education
@@ -35,5 +31,17 @@ module ApplicationHelper
   
   def associate_schools_and_degrees
     @candidate.educations.each { |education| school = education.school ; school.degrees.push education.degree ; school.save! unless school.degrees.include? education.degree }
+  end
+  
+  def current_user_profile?
+    params[:controller] == "#{current_user.class.name.downcase}s" && params[:action] == 'show' && params[:id] == current_user.id.to_s
+  end
+  
+  def authorized_class_of_user?
+    if current_user.class.name.downcase == 'candidate' 
+     params[:controller] == 'recruiters' || params[:controller] == 'companies'
+    else
+     params[:controller] ==  'candidates'
+    end
   end
 end

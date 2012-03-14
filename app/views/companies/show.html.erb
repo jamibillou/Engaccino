@@ -42,11 +42,11 @@
     <p><%= best_in_place_if current_user_company, @company, :email,   :nil => "#{t('companies.email').downcase}#{t('_:')}",   :html_attrs => { :class => 'field' } %></p>
     <p><%= best_in_place_if current_user_company, @company, :phone,   :nil => "#{t('companies.phone').downcase}#{t('_:')}",   :html_attrs => { :class => 'field' } %></p>
     <br />
-    <%= gmaps4rails(@location) %>
-    <br />
-    <p><%= best_in_place_if current_user_company, @company, :address, :nil => "#{t('companies.address').downcase}#{t('_:')}", :html_attrs => { :class => 'field' } %></p>
-    <p><%= best_in_place_if current_user_company, @company, :zip,     :nil => t('companies.zip').downcase,                    :html_attrs => { :class => 'field' } %>,
-       <%= best_in_place_if current_user_company, @company, :city,    :nil => "#{t('companies.city').downcase}#{t('_:')}",    :html_attrs => { :class => 'field' } %></p>
+    <p><%= best_in_place_if current_user_company, @company, :address, :nil => "#{t('companies.address').downcase}#{t('_:')}",
+                                                            :html_attrs => { :class => 'field' } %><%= ',' unless @company.address.nil? || @company.address.empty? %>
+    </p>
+    <p><%= best_in_place_if current_user_company, @company, :zip,     :nil => t('companies.zip').downcase,                    :html_attrs => { :class => 'field' } %>
+       <%= best_in_place_if current_user_company, @company, :city,    :nil => "#{t('companies.city').downcase}#{t('_:')}",    :html_attrs => { :class => 'field' } %>,</p>  
     <p><%= best_in_place_if current_user_company, @company, :country, :nil => "#{t('companies.country').downcase}#{t('_:')}", :html_attrs => { :class => 'field' } %></p>
   </div>
 </div>

@@ -78,7 +78,7 @@ describe ExperiencesController do
         
         before :each do
           @attr = { :candidate_id => @candidate, 
-            :company_attributes => { :name => 'Unilog' },
+            :company_attributes => { :name => 'Unilog', :city => 'Grenoble', :country => 'France' },
             :start_month => '4', :start_year => '2005', :end_month => '7', :end_year => '2005',
             :role => 'IT Trainee', :description => 'First training period, such a long time...' }
         end

@@ -41,7 +41,7 @@
     <div id='candidate_degree_experience' class='block'><%=   render 'candidate_degree_experience', :candidate => candidate %></div>
     <div id='candidate_professional_skills' class='block'><%= render 'candidate_professional_skills', :candidate => candidate %></div>
   
-    <% unless hide_contact_information? %>
+    <% unless current_user_profile? || params[:action] == 'index' %>
       <div class='contact block'>
         <h2><%= "#{t('contact')} #{candidate.first_name}" %></h2>
         <%= text_area_tag :message, nil, :placeholder => "#{t('question_or_comment')}#{t('_?')}", :rows => '3', :class => 'textarea' %><%= submit_tag t('send') %>

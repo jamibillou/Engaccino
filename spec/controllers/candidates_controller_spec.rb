@@ -5,9 +5,9 @@ describe CandidatesController do
   render_views
 
   before :each do
-    @user      = Factory :user
-    @candidate = Factory :candidate
-    @recruiter = Factory :recruiter
+    @candidate  = Factory :candidate
+    @candidate2 = Factory :candidate
+    @recruiter  = Factory :recruiter
   end
   
   describe "GET 'index'" do
@@ -70,17 +70,34 @@ describe CandidatesController do
       end
     end
     
+    describe 'for signed-in candidates' do
+    
+      before  :each do
+        test_sign_in @candidate2
+      end
+        
+      it "should deny access to 'show'" do
+        get :index
+        response.should redirect_to candidate_path @candidate2
+        flash[:notice].should == I18n.t('flash.notice.restricted_page')
+        @candidate2.update_attributes :profile_completion => 5
+        get :index
+        response.should redirect_to candidate_path @candidate2
+        flash[:notice].should == I18n.t('flash.notice.restricted_page')
+      end
+    end
+    
     describe 'admin features' do
       
       before :each do
-        @user.update_attributes :profile_completion => 5
-        test_sign_in @user
+        @recruiter.update_attributes :profile_completion => 5
+        test_sign_in @recruiter
       end
       
       describe 'for admin users' do
       
         it 'should have a destroy link for each candidate' do 
-          @user.toggle! :admin
+          @recruiter.toggle! :admin
           get :index            
           Candidate.all.each do |candidate|
             response.body.should have_link("#{candidate.first_name} #{candidate.last_name}", :href => candidate_path(candidate))
@@ -141,6 +158,23 @@ describe CandidatesController do
           get :show, :id => @candidate
           response.body.should have_selector 'li', :class => 'round selected', :text => I18n.t(:menu_candidates)
         end
+      end
+    end
+    
+    describe 'for signed-in candidates' do
+
+      before  :each do
+        test_sign_in @candidate2
+      end
+
+      it "should deny access to 'show'" do
+        get :show, :id => @candidate
+        response.should redirect_to candidate_path @candidate2
+        flash[:notice].should == I18n.t('flash.notice.restricted_page')
+        @candidate2.update_attributes :profile_completion => 5
+        get :show, :id => @candidate
+        response.should redirect_to candidate_path @candidate2
+        flash[:notice].should == I18n.t('flash.notice.restricted_page')
       end
     end
   end

@@ -229,22 +229,22 @@ describe Company do
       too_long_about_company = Company.new @attr.merge :about => too_long_about
       too_long_about_company.should_not be_valid
     end
+  end
+  
+  describe 'no_about? method' do
     
-    describe 'no_about? method' do
-      
-      it 'should exist' do
-        @company.should respond_to :no_about?
-      end
-      
-      it "should be true when the company doesn't have an about" do
-        no_about_company = Company.new @attr.merge :about => ''
-        no_about_company.no_about?.should be_true
-      end
-      
-      it "should be false when the company has an about" do
-        about_company = Company.new @attr.merge :about => 'Loremememememem ipsumumumumumumumumumumumum'
-        about_company.no_about?.should be_false
-      end
+    it 'should exist' do
+      @company.should respond_to :no_about?
+    end
+    
+    it "should be true when the company doesn't have an about" do
+      no_about_company = Company.new @attr.merge :about => ''
+      no_about_company.no_about?.should be_true
+    end
+    
+    it "should be false when the company has an about" do
+      about_company = Company.new @attr.merge :about => 'Loremememememem ipsumumumumumumumumumumumum'
+      about_company.no_about?.should be_false
     end
   end
 end
