@@ -27,7 +27,12 @@
       <% unless params[:action] == 'show' || params[:action] == 'edit' %>
         <h1 id='container_title' <% " style='margin-left: 10px;'" if signed_in? %>><%= @title %></h1>
       <% end %>
+      
+      <%= yield :head %>
+      
       <%= yield %>
+      
+      <%= yield :scripts %>
     </div>
     
     <footer>

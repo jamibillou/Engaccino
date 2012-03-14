@@ -11,6 +11,7 @@ gem 'carrierwave', git: "git://github.com/jnicklas/carrierwave.git"
 gem 'rmagick'
 gem 'remotipart'
 gem 'client_side_validations'
+gem 'gmaps4rails'
 
 group :development do
   gem 'rspec-rails'

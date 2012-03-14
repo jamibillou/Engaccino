@@ -266,5 +266,8 @@ end
 #  image      :string(255)
 #  zip        :string(255)
 #  about      :string(255)
+#  latitude   :float
+#  longitude  :float
+#  gmaps      :boolean(1)
 #
 
