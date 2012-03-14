@@ -55,14 +55,6 @@ describe 'Candidates' do
         @candidate.update_attributes :profile_completion => 5
       end
       
-      #it 'should sign a candidate in' do
-      #  visit signin_path
-      #  fill_in 'email',    :with => @candidate.email
-      #  fill_in 'password', :with => @candidate.password
-      #  click_button "#{I18n.t('sessions.new.signin')}"
-      #  controller.should be_signed_in
-      #end
-      
       it 'should sign redirect to the root path during a signin' do
         visit signin_path
         fill_in 'email',    :with => @candidate.email
@@ -200,20 +192,185 @@ describe 'Candidates' do
     describe "ajax creation" do
       
       before :each do
+        require 'coffee_script'
+        require 'less'
+        @candidate = Factory :candidate
+        @candidate.update_attributes :profile_completion => 5
         visit signin_path
         fill_in 'email',    :with => @candidate.email
         fill_in 'password', :with => @candidate.password
         click_button "#{I18n.t('sessions.new.signin')}"
       end
     
-      describe "professional skills" do
+      describe 'professional skills' do
        
         it "should display an empty form when we click on 'Add'", :js => true do
           click_link 'link_add_professional_skill_candidate'
-          page.should have_selector 'form', :id => 'new_professional_skill_candidate'
+          page.should have_selector 'form#new_professional_skill_candidate'
           find('form#new_professional_skill_candidate').find('div.professional_skill_candidate')
+        end
+        
+        it "should hide the form when we click on 'Cancel'", :js => true do
+          click_link 'link_add_professional_skill_candidate'
+          click_link "#{I18n.t('cancel')}"
+          find('form#new_professional_skill_candidate').visible?.should be_false
+        end
+        
+        it 'should display an error message when we submit an empty form', :js => true do
+          click_link 'link_add_professional_skill_candidate'
+          click_button "#{I18n.t('submit')}"
+          find('form#new_professional_skill_candidate').visible?.should be_true
+          find('div#errors_new_professional_skill_candidate').should have_content 'professional_skill.label'
         end        
-      end          
+      end  
+=begin        
+        describe 'item creation' do
+          
+          before :each do
+            click_link 'link_add_professional_skill_candidate'
+            fill_in 'professional_skill_candidate_professional_skill_attributes_label', :with => 'User Training'
+            fill_in 'professional_skill_candidate_experience',                          :with => '1'
+          end
+          
+          it "should create an object in the db", :js => true do
+            lambda do              
+              click_button "#{I18n.t('submit')}"              
+            end.should change(CertificateCandidate, :count).by(1)
+          end
+          
+          it "should hide the form", :js => true do
+            click_button "#{I18n.t('submit')}"
+            find('form#new_professional_skill_candidate').visible?.should be_false
+          end
+          
+          it "should display the block with the created object", :js => true do
+            click_button "#{I18n.t('submit')}"
+            professional_skill_candidate = assigns :professional_skill_candidate
+            page.should have_selector "div#professional_skill_candidate_#{professional_skill_candidate.id}"
+          end   
+        end        
+      end
+=end      
+      describe 'interpersonal skills' do
+        
+        it "should display an empty form when we click on 'Add'", :js => true do
+          click_link 'link_add_interpersonal_skill_candidate'
+          page.should have_selector 'form#new_interpersonal_skill_candidate'
+          find('form#new_interpersonal_skill_candidate').find('div#errors_new_interpersonal_skill_candidate')
+        end
+        
+        it "should hide the form when we click on 'Cancel'", :js => true do
+          click_link 'link_add_interpersonal_skill_candidate'
+          click_link "#{I18n.t('cancel')}"
+          find('form#new_interpersonal_skill_candidate').visible?.should be_false
+        end
+        
+        it 'should display an error message when we submit an empty form', :js => true do
+          click_link 'link_add_interpersonal_skill_candidate'
+          click_button "#{I18n.t('submit')}"
+          find('form#new_interpersonal_skill_candidate').visible?.should be_true
+          find('div#errors_new_interpersonal_skill_candidate').should have_content 'interpersonal_skill.label'
+        end 
+      end
+      
+      describe 'experiences' do
+        
+        it "should display an empty form when we click on 'Add'", :js => true do
+          click_link 'link_add_experience'
+          page.should have_selector 'form#new_experience'
+          find('form#new_experience').find('div.edu_exp_date')
+        end
+        
+        it "should hide the form when we click on 'Cancel'", :js => true do
+          click_link 'link_add_experience'
+          click_link "#{I18n.t('cancel')}"
+          find('form#new_experience').visible?.should be_false
+        end
+        
+        it 'should display an error message when we submit an empty form', :js => true do
+          click_link 'link_add_experience'
+          click_button "#{I18n.t('submit')}"
+          find('form#new_experience').visible?.should be_true
+          find('div#errors_new_experience').should have_content 'company.name'
+          find('div#errors_new_experience').should have_content 'role'
+          find('div#errors_new_experience').should have_content 'start_month'
+          find('div#errors_new_experience').should have_content 'start_year'
+          find('div#errors_new_experience').should have_content 'end_month'
+          find('div#errors_new_experience').should have_content 'end_year'          
+        end
+      end
+      
+      describe 'educations' do
+        
+        it "should display an empty form when we click on 'Add'", :js => true do
+          click_link 'link_add_education'
+          page.should have_selector 'form#new_education'
+          find('form#new_education').find('div.edu_exp_date')
+        end
+         
+        it "should hide the form when we click on 'Cancel'", :js => true do
+          click_link 'link_add_education'
+          click_link "#{I18n.t('cancel')}"
+          find('form#new_education').visible?.should be_false
+        end
+        
+        it 'should display an error message when we submit an empty form', :js => true do
+          click_link 'link_add_education'
+          click_button "#{I18n.t('submit')}"
+          find('form#new_education').visible?.should be_true
+          find('div#errors_new_education').should have_content 'school.name'
+          find('div#errors_new_education').should have_content 'degree.degree_type.label'
+          find('div#errors_new_education').should have_content 'degree.label'
+          find('div#errors_new_education').should have_content 'start_month'
+          find('div#errors_new_education').should have_content 'start_year'
+          find('div#errors_new_education').should have_content 'end_month'
+          find('div#errors_new_education').should have_content 'end_year'          
+        end
+      end
+      
+      describe 'certificates' do
+        
+        it "should display an empty form when we click on 'Add'", :js => true do
+          click_link 'link_add_certificate_candidate'
+          page.should have_selector 'form#new_certificate_candidate'
+          find('form#new_certificate_candidate').find('div.certificate_candidate')
+        end
+        
+        it "should hide the form when we click on 'Cancel'", :js => true do
+          click_link 'link_add_certificate_candidate'
+          click_link "#{I18n.t('cancel')}"
+          find('form#new_certificate_candidate').visible?.should be_false
+        end
+
+        it 'should display an error message when we submit an empty form', :js => true do
+          click_link 'link_add_certificate_candidate'
+          click_button "#{I18n.t('submit')}"
+          find('form#new_certificate_candidate').visible?.should be_true
+          find('div#errors_new_certificate_candidate').should have_content 'certificate.label'
+        end
+      end
+
+      describe 'languages' do
+        
+        it "should display an empty form when we click on 'Add'", :js => true do
+          click_link 'link_add_language_candidate'
+          page.should have_selector 'form#new_language_candidate'
+          find('form#new_language_candidate').find('div.language_candidate')
+        end
+        
+        it "should hide the form when we click on 'Cancel'", :js => true do
+          click_link 'link_add_language_candidate'
+          click_link "#{I18n.t('cancel')}"
+          find('form#new_language_candidate').visible?.should be_false
+        end
+        
+        it 'should display an error message when we submit an empty form', :js => true do
+          click_link 'link_add_language_candidate'
+          click_button "#{I18n.t('submit')}"
+          find('form#new_language_candidate').visible?.should be_true
+          find('div#errors_new_language_candidate').should have_content 'language.label'
+        end 
+      end                   
     end
   end
 end
