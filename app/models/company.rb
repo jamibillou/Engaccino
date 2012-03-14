@@ -19,6 +19,12 @@ class Company < ActiveRecord::Base
   validates :about,   :length       => { :within => 20..160 },                            :allow_blank => true
   
   mount_uploader :image, CompanyImageUploader
+  
+  acts_as_gmappable
+
+  def gmaps4rails_address
+    "#{self.address}, #{self.zip}, #{self.city}, #{self.country}" 
+  end
     
   def no_about?
     about.nil? || about.empty?
@@ -42,5 +48,8 @@ end
 #  image      :string(255)
 #  zip        :string(255)
 #  about      :string(255)
+#  latitude   :float
+#  longitude  :float
+#  gmaps      :boolean(1)
 #
 
