@@ -10,6 +10,7 @@ describe Candidate do
               :status => 'available' }
     @candidate                      = Factory :candidate
     @experience                     = Factory :experience, :candidate => @candidate
+    @company                        = Factory :company
     @education                      = Factory :education,  :candidate => @candidate
     @language                       = Factory :language
     @language_candidate             = Factory :language_candidate, :candidate => @candidate, :language => @language
@@ -87,7 +88,7 @@ describe Candidate do
     
     it 'should be the last experience unless the canddiate chose otherwise' do
       experience2 = Experience.new :start_month => 1, :start_year => 1990, :end_month => 2, :end_year => 1992, :role => 'Sales administrator'
-      company = Company.new :name => 'Company' ; experience2.company = company ; experience2.candidate = @candidate ; experience2.save!
+      experience2.company = @company ; experience2.candidate = @candidate ; experience2.save!
       @candidate.main_experience.should == @candidate.last_experience.id
     end
   end
@@ -198,13 +199,13 @@ describe Candidate do
     
     it 'should equal the difference between the start date of the first experience and the end date of the last experience' do
       experience2 = Experience.new :start_month => 1, :start_year => 1990, :end_month => 2, :end_year => 1992, :role => 'Sales administrator'
-      company = Company.new :name => 'Company' ; experience2.company = company ; experience2.candidate = @candidate ; experience2.save!
+      experience2.company = @company ; experience2.candidate = @candidate ; experience2.save!
       @candidate.experience_duration.should == @candidate.last_experience.end_year - @candidate.first_experience.start_year - 1 + (13 - @candidate.first_experience.start_month + @candidate.last_experience.end_month) / 12.0
     end
     
     it 'should equal the timeline_duration for candidates without education' do
       experience2 = Experience.new :start_month => 1, :start_year => 1990, :end_month => 2, :end_year => 1992, :role => 'Sales administrator'
-      company = Company.new :name => 'Company' ; experience2.company = company ; experience2.candidate = @candidate ; experience2.save!
+      experience2.company = @company ; experience2.candidate = @candidate ; experience2.save!
       @education.destroy
       @candidate.experience_duration.should == @candidate.timeline_duration
     end
@@ -249,7 +250,7 @@ describe Candidate do
     
     it 'should be the longest event of the collection' do
       longest_experience = Experience.new :start_month => 1, :start_year => 1990, :end_month => 2, :end_year => 2010, :role => 'Sales administrator'
-      company = Company.new :name => 'Company' ; longest_experience.company = company ; longest_experience.candidate = @candidate ; longest_experience.save!
+      longest_experience.company = @company ; longest_experience.candidate = @candidate ; longest_experience.save!
       @candidate.longest(@candidate.experiences).should == longest_experience
     end
   end
@@ -280,7 +281,7 @@ describe Candidate do
     
     it 'should be the first experience' do
       experience2 = Experience.new :start_month => 1, :start_year => 1990, :end_month => 2, :end_year => 1992, :role => 'Sales administrator'
-      company = Company.new :name => 'Company' ; experience2.company = company ; experience2.candidate = @candidate ; experience2.save!
+      experience2.company = @company ; experience2.candidate = @candidate ; experience2.save!
       @candidate.first_experience.should == experience2
     end
   end
@@ -326,7 +327,7 @@ describe Candidate do
     
     it 'should be the last experience' do
       experience2 = Experience.new :start_month => 1, :start_year => 1990, :end_month => 2, :end_year => 1992, :role => 'Sales administrator'
-      company = Company.new :name => 'Company' ; experience2.company = company ; experience2.candidate = @candidate ; experience2.save!
+      experience2.company = @company ; experience2.candidate = @candidate ; experience2.save!
       @candidate.last_experience.should == @experience
     end
   end
@@ -551,10 +552,12 @@ end
 #  admin              :boolean(1)      default(FALSE)
 #  salt               :string(255)
 #  encrypted_password :string(255)
-#  created_at         :datetime
-#  updated_at         :datetime
+#  created_at         :datetime        not null
+#  updated_at         :datetime        not null
 #  image              :string(255)
 #  main_education     :integer(4)
 #  main_experience    :integer(4)
+#  quote              :string(255)
+#  company_id         :integer(4)
 #
 

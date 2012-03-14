@@ -261,7 +261,7 @@ describe Experience do
     
     it 'be the number of years between the the first event and the experience' do
       experience2 = Experience.new :start_month => 1, :start_year => 1990, :end_month => 2, :end_year => 1992, :role => 'Sales administrator'
-      company = Company.new :name => 'Company' ; experience2.company = company ; experience2.candidate = @candidate ; experience2.save!
+      experience2.company = @company ; experience2.candidate = @candidate ; experience2.save!
       @experience.yrs_after_first_event.floor.should == 9
     end
   end

@@ -302,7 +302,7 @@ def make_recruiter
                              :password       => password,                                :password_confirmation => password,
                              :quote          => @descriptions[rand(@descriptions.size)][0..199]
   @company = Company.find(Company.all.map { |company| company.id }[rand(Company.all.count)])
-  @company.update_attributes :url => "www.#{@company.name.gsub(' ','').downcase}.nl"
+  @company.update_attributes :url => "www.#{@company.name.gsub(' ','').downcase}.nl", :city => @dutch_cities[rand(@dutch_cities.size)], :country => 'Netherlands'
   @recruiter.company = @company
   @recruiter.save!
   @recruiter.update_attributes :profile_completion => 95

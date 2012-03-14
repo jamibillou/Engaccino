@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class ImageUploader < CarrierWave::Uploader::Base
+class CompanyImageUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   include CarrierWave::RMagick
@@ -31,6 +31,10 @@ class ImageUploader < CarrierWave::Uploader::Base
   # Different versions the uploaded files
   version :thumb do
     process :resize_to_fill => [ 80, 80 ]
+  end
+  
+  version :profile do
+    process :resize_to_fill => [ 225, 160 ]
   end
 
   # White list of extensions which are allowed to be uploaded

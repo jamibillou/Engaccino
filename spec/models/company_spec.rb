@@ -9,8 +9,7 @@ describe Company do
               :country => 'Netherlands',
               :phone => '+31 6 00000000',
               :email => 'info@engaccino.com',
-              :url => 'http://www.engaccino.com'
-            }  
+              :url => 'http://www.engaccino.com' }  
     @candidate  = Factory :candidate
     @company    = Factory :company
     @recruiter  = Factory :recruiter,  :company => @company
@@ -82,9 +81,9 @@ describe Company do
       too_long_address_company.should_not be_valid
     end
     
-    it 'should accept empty cities' do
+    it 'should accept require a city' do
       empty_city_company = Company.new @attr.merge :city => ''
-      empty_city_company.should be_valid
+      empty_city_company.should_not be_valid
     end
     
     it 'should reject too long cities' do
@@ -93,9 +92,9 @@ describe Company do
       too_long_city_company.should_not be_valid
     end
     
-    it 'should accept empty countries' do
+    it 'should require a country' do
       empty_country_company = Company.new @attr.merge :country => ''
-      empty_country_company.should be_valid
+      empty_country_company.should_not be_valid
     end
     
     it 'should reject invalid countries' do
@@ -202,6 +201,51 @@ describe Company do
         valid_url_company.should be_valid
       end
     end
+    
+    it 'should accept empty zip codes' do
+      empty_zip_company = Company.new @attr.merge :zip => ''
+      empty_zip_company.should be_valid
+    end
+    
+    it 'should reject too long zip codes' do
+      too_long_zip = 'a' * 11
+      too_long_zip_company = Company.new @attr.merge :zip => too_long_zip
+      too_long_zip_company.should_not be_valid
+    end
+    
+    it 'should accept empty abouts' do
+      empty_about_company = Company.new @attr.merge :about => ''
+      empty_about_company.should be_valid
+    end
+      
+    it 'should reject too short abouts' do
+      too_short_about = 'a' * 19
+      too_short_about_company = Company.new @attr.merge :about => too_short_about
+      too_short_about_company.should_not be_valid
+    end
+    
+    it 'should reject too long abouts' do
+      too_long_about = 'a' * 161
+      too_long_about_company = Company.new @attr.merge :about => too_long_about
+      too_long_about_company.should_not be_valid
+    end
+    
+    describe 'no_about? method' do
+      
+      it 'should exist' do
+        @company.should respond_to :no_about?
+      end
+      
+      it "should be true when the company doesn't have an about" do
+        no_about_company = Company.new @attr.merge :about => ''
+        no_about_company.no_about?.should be_true
+      end
+      
+      it "should be false when the company has an about" do
+        about_company = Company.new @attr.merge :about => 'Loremememememem ipsumumumumumumumumumumumum'
+        about_company.no_about?.should be_false
+      end
+    end
   end
 end
 
@@ -217,7 +261,10 @@ end
 #  phone      :string(255)
 #  email      :string(255)
 #  url        :string(255)
-#  created_at :datetime
-#  updated_at :datetime
+#  created_at :datetime        not null
+#  updated_at :datetime        not null
+#  image      :string(255)
+#  zip        :string(255)
+#  about      :string(255)
 #
 

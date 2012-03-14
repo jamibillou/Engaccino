@@ -308,7 +308,9 @@ describe CandidatesController do
                                                                           :start_year => 1984,
                                                                           :end_month => 12,
                                                                           :end_year => 2011,
-                                                                          :company_attributes => { :name => 'BG Corp' } } } }  }
+                                                                          :company_attributes => { :name => 'BG Corp',
+                                                                                                   :city => 'Rotterdam',
+                                                                                                   :country => 'Netherlands' } } } }  }
         end
         
         it "should require the matching candidate" do

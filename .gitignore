@@ -7,6 +7,5 @@ doc/
 *~
 .project
 .DS_Store
-.espressostorage
-engaccino.esproj/
 .settings/
+public/uploads/

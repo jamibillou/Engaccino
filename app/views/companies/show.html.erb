@@ -1,35 +1,57 @@
+<% current_user_company = (current_user.class.name == 'Recruiter' && current_user.company == @company && params[:action] == 'show') %>
+
 <div id='company_<%= @company.id %>' class='card'>
   <div class='loader' id='company_loader'><%= image_tag 'loader.gif' %></div>
   
-  <div class='identity block'>
-    <% if current_user.company == @company && params[:action] == 'show' %><div id='image_edit' class='image_hover'></div><% end %>
-    <div class='<%= "default-company-#{rand(1..9)} " if @company.image_url.nil? %>image left'><%= image_tag @company.image_url(:thumb).to_s unless @company.image_url.nil? %></div>
-    <% if current_user.company == @company && params[:action] == 'show' %>
-  	  <div class='title'><%= best_in_place @company, :name, :html_attrs => { :class => 'field' } %></div>&nbsp;
-    <% else %>
-      <a href='<%= company_path(@company) %>'><div class='title'><%= @company.name %></div></a>
-    <% end %>
-    <div class='subtitle'><%= best_in_place @company, :url,  :html_attrs => { :class => 'field' } %></div>
-    <% if current_user.company == @company && params[:action] == 'show' %>
-      <%= form_for @company, :remote => true, :html => { :id => 'company_image_form', :multipart => true } do |f| %>
+  <div class='company identity block'>
+    <% if current_user_company %>
+      <div id='image_edit' class='image_hover'>
+      </div>
+      <%= form_for @company, :remote => true, :html => { :id => 'image_form', :multipart => true } do |f| %>
         <%= f.file_field :image,  :id => 'image_button', :class => 'image_button' %>
         <%= f.submit     :submit, :class => 'hidden' %>
         <div id='company_picture_upload_error' class='hidden error_messages'></div>
       <% end %>
     <% end %>
+    <div class='<%= "default-company-#{rand(1..4)} " if @company.image_url.nil? %>image'><%= image_tag @company.image_url(:profile).to_s unless @company.image_url.nil? %></div>
+    <% if current_user_company %>
+  	  <div class='title'><%=    best_in_place @company, :name, :html_attrs => { :class => 'field' } %></div>
+  	  <div class='subtitle'><%= best_in_place @company, :city, :nil => "#{t('companies.city').downcase}", :html_attrs => { :class => 'field' } %>,
+  	  <%= best_in_place @company, :country, :nil => "#{t('companies.country').downcase}#{t('_:')}", :html_attrs => { :class => 'field' } %></div>
+  	  <%= best_in_place @company, :url,     :nil => "#{t('companies.url').downcase}#{t('_:')}", :html_attrs => { :class => 'url field' } %>
+    <% else %>
+      <%= link_to @company.name, company_path(@company), :class => 'title' %>
+      <div class='subtitle'><%= @company.city %>, <%= @company.country %></div>
+      <%= link_to t('companies.visit_website'), @company.url, :class => 'small', :target => '_blank' %>
+    <% end %>
     <% if current_user.admin? %><%= link_to image('trash', t('delete')), @company, :method => :delete, :id => "destroy_company_#{@company.id}", :class => 'hidden',
     	                                                                             :confirm => "#{t('companies.destroy.title')} #{@company.name}#{t('_?')}",
                                                                                    :title => "#{t('companies.destroy.title')} #{@company.name}" %><% end %>
-    <br /><br /><br /><br />
   </div>
   
-  <div class='expertise block'>
-    <h2>FIELDS OF EXPERTISE</h2>
-    <br /><br /><br /><br />
-  </div>
+  <% unless !current_user_company && @company.no_about? %>
+    <div class='about block'>
+      <h2><%= t('companies.about').remove_accents.upcase %></h2>
+      <p><%= best_in_place_if current_user_company, @company, :about, :type => 'textarea', :nil => t('companies.about_nil'), :html_attrs => { :class => 'textarea' } %></p>
+    </div>
+  <% end %>
   
   <div class='contact_info block'>
-    <h2>CONTACT INFORMATION</h2>
-    <br /><br /><br /><br />
+    <h2><%= t('companies.contact_info').remove_accents.upcase %></h2>
+    <p><%= best_in_place_if current_user_company, @company, :url,     :nil => "#{t('companies.url').downcase}#{t('_:')}",     :html_attrs => { :class => 'field' } %></p>
+    <p><%= best_in_place_if current_user_company, @company, :email,   :nil => "#{t('companies.email').downcase}#{t('_:')}",   :html_attrs => { :class => 'field' } %></p>
+    <p><%= best_in_place_if current_user_company, @company, :phone,   :nil => "#{t('companies.phone').downcase}#{t('_:')}",   :html_attrs => { :class => 'field' } %></p>
+    <br />
+    <p><%= best_in_place_if current_user_company, @company, :address, :nil => "#{t('companies.address').downcase}#{t('_:')}", :html_attrs => { :class => 'field' } %></p>
+    <p><%= best_in_place_if current_user_company, @company, :zip,     :nil => t('companies.zip').downcase,                    :html_attrs => { :class => 'field' } %>,
+       <%= best_in_place_if current_user_company, @company, :city,    :nil => "#{t('companies.city').downcase}#{t('_:')}",    :html_attrs => { :class => 'field' } %></p>
+    <p><%= best_in_place_if current_user_company, @company, :country, :nil => "#{t('companies.country').downcase}#{t('_:')}", :html_attrs => { :class => 'field' } %></p>
   </div>
+</div>
+
+<div id='recruiters'>
+  <h4><%= "#{t('companies.recruiters')} (#{@company.recruiters.count})" %></h4>
+  <% @company.recruiters.each do |recruiter| %>
+    <%= render 'recruiters/recruiter', :recruiter => recruiter %>
+  <% end %>
 </div>

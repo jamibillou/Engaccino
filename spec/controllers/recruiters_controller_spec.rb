@@ -303,7 +303,9 @@ describe RecruitersController do
         before :each do
           @attr = { :recruiter => { :first_name => 'Updated',
                                     :last_name => 'Recruiter',
-                                    :company_attributes => { :name => 'BG Corp' } } }
+                                    :company_attributes => { :name => 'BG Corp',
+                                                             :city => 'Grenoble',
+                                                             :country => 'France' } } }
         end
         
         it "should require the matching recruiter" do
