@@ -1,3 +1,5 @@
+require File.expand_path('../../lib/assets/routes_constraints', __FILE__)
+
 Engaccino::Application.routes.draw do
 
   get 'sessions/new'
@@ -46,7 +48,7 @@ Engaccino::Application.routes.draw do
   match '/about',   :to => 'pages#about'
   match '/contact', :to => 'pages#contact'
   
-  root :to => 'candidates#index', :constraints => lambda { |request| request.cookies.key?('remember_token') }
-  root :to => 'pages#overview',   :constraints => lambda { |request| !request.cookies.key?('remember_token') } 
+  root :to => 'users#index',    :constraints => SingedIn.new(true)
+  root :to => 'pages#overview', :constraints => SingedIn.new(false)
     
 end

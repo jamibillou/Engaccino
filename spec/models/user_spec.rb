@@ -7,7 +7,9 @@ describe User do
               :country        => 'Spain',          :nationality   => 'Spain',          :year_of_birth  => 1984,
               :phone          => '+34 6 88888888', :email         => 'jp@example.net', :facebook_login => 'jp@example.net',
               :linkedin_login => 'jp@example.net', :twitter_login => '@j_pablo',       :password       => 'pouetpouet38', :password_confirmation => 'pouetpouet38' }
-    @user = Factory :user
+    @user      = Factory :user
+    @candidate = Factory :candidate
+    @recruiter = Factory :recruiter
   end
   
   it 'should create a new instance given valid attributes' do
@@ -379,6 +381,40 @@ describe User do
       
       it 'should return false if the passwords do not match' do
         @user.has_password?('invalid').should be_false
+      end
+    end
+    
+    describe 'candidate? method' do
+      
+      it 'should be true for candidates' do
+        @candidate.candidate?.should == true
+      end
+      
+      it 'should be false for recruiters' do
+        @recruiter.candidate?.should == false
+      end
+    end
+    
+    describe 'recruiter? method' do
+      
+      it 'should be true for recruiters' do
+        @recruiter.recruiter?.should == true
+      end
+      
+      it 'should be false for candidates' do
+        @candidate.recruiter?.should == false
+      end
+    end
+    
+    describe 'admin? method' do
+      
+      it 'should be true for admin users' do
+        @user.toggle! :admin
+        @user.admin?.should == true
+      end
+      
+      it 'should be false for non-admin users' do
+        @user.admin?.should == false
       end
     end
     

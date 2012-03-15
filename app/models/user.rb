@@ -28,6 +28,18 @@ class User < ActiveRecord::Base
     encrypted_password == encrypt(submitted_password)
   end
   
+  def candidate?
+    self.class.name.downcase == 'candidate'
+  end
+  
+  def recruiter?
+    self.class.name.downcase == 'recruiter'
+  end
+  
+  def admin?
+    self.admin
+  end
+  
   class << self
   
     def authenticate(email, submitted_password)
