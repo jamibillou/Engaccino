@@ -5,9 +5,9 @@ describe RecruitersController do
   render_views
   
   before :each do
-    @user      = Factory :user
-    @recruiter = Factory :recruiter
-    @candidate = Factory :candidate
+    @recruiter  = Factory :recruiter
+    @recruiter2 = Factory :recruiter
+    @candidate  = Factory :candidate
   end
   
   describe "GET 'index'" do
@@ -70,17 +70,34 @@ describe RecruitersController do
       end
     end
     
+    describe 'for signed-in recruiters' do
+    
+      before  :each do
+        test_sign_in @recruiter2
+      end
+        
+      it "should deny access to 'show'" do
+        get :index
+        response.should redirect_to recruiter_path @recruiter2
+        flash[:notice].should == I18n.t('flash.notice.restricted_page')
+        @recruiter2.update_attributes :profile_completion => 5
+        get :index
+        response.should redirect_to recruiter_path @recruiter2
+        flash[:notice].should == I18n.t('flash.notice.restricted_page')
+      end
+    end
+    
     describe 'admin features' do
       
       before :each do
-        @user.update_attributes :profile_completion => 5
-        test_sign_in @user
+        @candidate.update_attributes :profile_completion => 5
+        test_sign_in @candidate
       end
       
       describe 'for admin users' do
       
         it 'should have a destroy link for each candidate' do 
-          @user.toggle! :admin
+          @candidate.toggle! :admin
           get :index            
           Recruiter.all.each do |recruiter|
             response.body.should have_selector 'a', :id => "destroy_recruiter_#{recruiter.id}"
@@ -141,6 +158,23 @@ describe RecruitersController do
           get :show, :id => @recruiter
           response.body.should have_selector 'li', :class => 'round selected', :text => I18n.t(:menu_recruiters)
         end
+      end
+    end
+    
+    describe 'for signed-in recruiters' do
+    
+      before  :each do
+        test_sign_in @recruiter2
+      end
+        
+      it "should deny access to 'show'" do
+        get :show, :id => @recruiter
+        response.should redirect_to recruiter_path @recruiter2
+        flash[:notice].should == I18n.t('flash.notice.restricted_page')
+        @recruiter2.update_attributes :profile_completion => 5
+        get :show, :id => @recruiter
+        response.should redirect_to recruiter_path @recruiter2
+        flash[:notice].should == I18n.t('flash.notice.restricted_page')
       end
     end
   end
@@ -303,7 +337,9 @@ describe RecruitersController do
         before :each do
           @attr = { :recruiter => { :first_name => 'Updated',
                                     :last_name => 'Recruiter',
-                                    :company_attributes => { :name => 'BG Corp' } } }
+                                    :company_attributes => { :name => 'BG Corp',
+                                                             :city => 'Grenoble',
+                                                             :country => 'France' } } }
         end
         
         it "should require the matching recruiter" do

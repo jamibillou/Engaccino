@@ -154,10 +154,12 @@ end
 #  admin              :boolean(1)      default(FALSE)
 #  salt               :string(255)
 #  encrypted_password :string(255)
-#  created_at         :datetime
-#  updated_at         :datetime
+#  created_at         :datetime        not null
+#  updated_at         :datetime        not null
 #  image              :string(255)
 #  main_education     :integer(4)
 #  main_experience    :integer(4)
+#  quote              :string(255)
+#  company_id         :integer(4)
 #
 

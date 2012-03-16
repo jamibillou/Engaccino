@@ -87,7 +87,7 @@ def make_experiences
     experience             = Experience.new(:start_month => start_month, :start_year => start_year, :end_month => end_month, :end_year => end_year,
                                             :role => @positions[rand(@positions.size)], :description => @descriptions[rand(@descriptions.size)][0..298])
     experience.candidate   = @candidate
-    company                = experience.build_company(:name => @companies[rand(@companies.size)])
+    company                = experience.build_company :name => @companies[rand(@companies.size)], :city => @dutch_cities[rand(@dutch_cities.size)], :country => 'Netherlands'
     [company, experience, @candidate].each { |object| object.save! }
   end
 end
@@ -167,7 +167,7 @@ def make_dominic_candidate
     experience           = Experience.new(:role => exp[:role], :start_month => exp[:start_month], :start_year => exp[:start_year], :end_month => exp[:end_month],  :end_year => exp[:end_year],
                                           :description => @descriptions[rand(@descriptions.size)][0..298])
     experience.candidate = dominic
-    company              = experience.build_company(:name => exp[:company])
+    company              = experience.build_company :name => exp[:company], :city => @dutch_cities[rand(@dutch_cities.size)], :country => 'Netherlands'
     [company, experience, dominic].each { |object| object.save! }
   end
   educations.each do |edu|
@@ -246,7 +246,7 @@ def make_franck_candidate
     experience           = Experience.new(:role => exp[:role], :start_month => exp[:start_month], :start_year => exp[:start_year], :end_month => exp[:end_month],  :end_year => exp[:end_year],
                                           :description => @descriptions[rand(@descriptions.size)][0..298])
     experience.candidate = franck
-    company              = experience.build_company(:name => exp[:company])
+    company              = experience.build_company :name => exp[:company], :city => @dutch_cities[rand(@dutch_cities.size)], :country => 'Netherlands'
     [company, experience, franck].each { |object| object.save! }
   end
   educations.each do |edu|
@@ -302,7 +302,7 @@ def make_recruiter
                              :password       => password,                                :password_confirmation => password,
                              :quote          => @descriptions[rand(@descriptions.size)][0..199]
   @company = Company.find(Company.all.map { |company| company.id }[rand(Company.all.count)])
-  @company.update_attributes :url => "www.#{@company.name.gsub(' ','').downcase}.nl"
+  @company.update_attributes :url => "www.#{@company.name.gsub(' ','').downcase}.nl", :city => @dutch_cities[rand(@dutch_cities.size)], :country => 'Netherlands'
   @recruiter.company = @company
   @recruiter.save!
   @recruiter.update_attributes :profile_completion => 95

@@ -1,7 +1,17 @@
 en:
   companies:
 
-    name: "Company name"
+    name: "Name"
+    contact_info: "Contact information"
     url: "Website"
+    address: "Street"
+    zip: "Zip"
     city: "City"
     country: "Country"
+    email: "Email"
+    phone: "Phone"
+    visit_website: "Visit website"
+    about: "About"
+    about_nil: "Use this description to let candidates learn about your philosophy, culture, goals, markets, products, etc."
+    
+    recruiters: "Recruiters"

@@ -3,12 +3,12 @@
   
     <div class='identity block'>
       <% if current_user == candidate %><div id='image_edit' class='image_hover'></div><% end %>
-      <div class='<%= "default-user-#{rand(1..9)} " if candidate.image_url.nil? %>image left'><%= image_tag candidate.image_url(:thumb).to_s unless candidate.image_url.nil? %></div>
+      <div class='<%= "default-user-#{rand(1..4)} " if candidate.image_url.nil? %>image left'><%= image_tag candidate.image_url(:thumb).to_s unless candidate.image_url.nil? %></div>
       <% if current_user == candidate %>
-    	  <div class='title'><%= best_in_place candidate, :first_name, :html_attrs => { :class => 'field' } %></div>&nbsp;
+    	  <div class='title'><%= best_in_place candidate, :first_name, :html_attrs => { :class => 'field' } %></div><br />
     	  <div class='title'><%= best_in_place candidate, :last_name,  :html_attrs => { :class => 'field' } %></div>
       <% else %>
-        <a href='<%= candidate_path(candidate) %>'><div class='title'><%= candidate.first_name %></div><div class='title'><%= candidate.last_name %></div></a>
+        <a href='<%= candidate_path(candidate) %>'><div class='title'><%= candidate.first_name %></div><br /><div class='title'><%= candidate.last_name %></div></a>
       <% end %>
       <div class='subtitle'><%= best_in_place_if current_user == candidate, candidate, :city,    :nil => t('candidates.city'), :html_attrs => { :class => 'field' } %></div>
       <div class='subtitle'><%= best_in_place_if current_user == candidate, candidate, :country, :nil => t('candidates.country'), :html_attrs => { :class => 'country field' } %></div>
@@ -41,7 +41,7 @@
     <div id='candidate_degree_experience' class='block'><%=   render 'candidate_degree_experience', :candidate => candidate %></div>
     <div id='candidate_professional_skills' class='block'><%= render 'candidate_professional_skills', :candidate => candidate %></div>
   
-    <% unless hide_contact_information? %>
+    <% unless current_user_profile? || params[:action] == 'index' %>
       <div class='contact block'>
         <h2><%= "#{t('contact')} #{candidate.first_name}" %></h2>
         <%= text_area_tag :message, nil, :placeholder => "#{t('question_or_comment')}#{t('_?')}", :rows => '3', :class => 'textarea' %><%= submit_tag t('send') %>

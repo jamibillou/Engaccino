@@ -3,11 +3,12 @@ class CompaniesController < ApplicationController
   respond_to :html, :json
   
   before_filter :authenticate
-  before_filter :signed_up,   :only => [:show]
+  before_filter :authorized, :signed_up, :only => [:show]
   
   def show
-    @company = Company.find params[:id]
-    @title   = @company.name
+    @company  = Company.find params[:id]
+    @title    = @company.name
+    # @location = @company.to_gmaps4rails
     init_page :javascripts => 'companies/show'
   end
   

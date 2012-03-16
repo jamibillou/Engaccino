@@ -44,6 +44,7 @@ $ ->
 ## AJAX CALLS TO CONTROLLERS ACTIONS
 @callRefresh = (model, data, partials) ->
   $.ajax 'refresh',
+    dataType: 'html'
     type: 'POST'
     data: {model: model}
     beforeSend: -> 
@@ -57,12 +58,14 @@ $ ->
       
 @callNew = (model, partials) ->
   $.ajax '../'+model+'s/new',
-  	beforeSend: -> 
-  	  show(model+"_loader")
+    dataType: 'html'
+    beforeSend: ->
+      show(model+"_loader")
     complete: -> 
-      hide(model+"_loader")															  
-  	success: (data) -> 
-  	  $('#new_'+model).html(data)
+      hide(model+"_loader")
+    success: (data) -> 
+      $('#new_'+model).html(data)
+      #alert($('#new_'+model).html())
   	  show('new_'+model)
   	  hide('link_add_'+model)
   	  handleAjaxCreation(model, partials)
@@ -74,6 +77,7 @@ $ ->
           
 @refreshPartial = (partial) ->
   $.ajax 'refresh',
+  dataType: 'html'
   type: 'POST'
   data: {partial: partial}
   beforeSend: -> 
@@ -88,6 +92,7 @@ $ ->
   $('#'+BIPcombo+' span').each ->
     $(this).change ->
       $.ajax 'refresh',
+        dataType: 'html'
         type: 'POST'
         data: {partial: partial}
         success: (data) -> 

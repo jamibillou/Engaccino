@@ -1,7 +1,17 @@
 fr:
   companies:
 
-    name: "Nom de l'entreprise"
-    url: "Site Web"
+    name: "Nom"
+    contact_info: "Coordonnées"
+    url: "Site"
+    address: "Rue"
+    zip: "Code postal"
     city: "Ville"
     country: "Pays"
+    email: "Email"
+    phone: "Téléphone"
+    visit_website: "Visiter le site"
+    about: "Qui sommes nous ?"
+    about_nil: "Utilisez cet espace pour expliquez vos valeurs, produits, marchés, etc."
+    
+    recruiters: "Recruteurs"

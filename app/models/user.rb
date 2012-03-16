@@ -22,10 +22,22 @@ class User < ActiveRecord::Base
                                                                   
   before_create  :encrypt_password
   
-  mount_uploader :image, ImageUploader
+  mount_uploader :image, UserImageUploader
   
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)
+  end
+  
+  def candidate?
+    self.class.name.downcase == 'candidate'
+  end
+  
+  def recruiter?
+    self.class.name.downcase == 'recruiter'
+  end
+  
+  def admin?
+    self.admin
   end
   
   class << self
@@ -86,10 +98,12 @@ end
 #  admin              :boolean(1)      default(FALSE)
 #  salt               :string(255)
 #  encrypted_password :string(255)
-#  created_at         :datetime
-#  updated_at         :datetime
+#  created_at         :datetime        not null
+#  updated_at         :datetime        not null
 #  image              :string(255)
 #  main_education     :integer(4)
 #  main_experience    :integer(4)
+#  quote              :string(255)
+#  company_id         :integer(4)
 #
 

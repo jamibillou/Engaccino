@@ -1,12 +1,12 @@
 class RecruitersController < ApplicationController
   
-  before_filter :authenticate,            :except => [:new, :create]
-  before_filter :new_user,                :only   => [:new, :create]
-  before_filter :signed_up,               :only   => [:index, :show]
-  before_filter :not_signed_up,           :only   => :edit
-  before_filter :correct_recruiter,       :only   => [:edit, :update]
-  before_filter :admin_user,              :only   => :destroy
-  
+  before_filter :authenticate,           :except => [:new, :create]
+  before_filter :new_user,               :only   => [:new, :create]
+  before_filter :authorized, :signed_up, :only   => [:index, :show]
+  before_filter :not_signed_up,          :only   => :edit
+  before_filter :correct_recruiter,      :only   => [:edit, :update]
+  before_filter :admin_user,             :only   => :destroy
+    
   def index
     @recruiters = Recruiter.all
     init_page :title => 'recruiters.index.title', :javascripts => 'recruiters/index'

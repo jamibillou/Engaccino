@@ -2,17 +2,19 @@
   <div class='loader' id='recruiter_loader'><%= image_tag 'loader.gif' %></div>
   
     <div class='identity block'>
-      <% if current_user == recruiter && params[:action] == 'show' %><div id='image_edit_r' class='image_hover'></div><% end %>
-      <div class='<%= "default-user-#{rand(1..9)} " if recruiter.image_url.nil? %>image left'><%= image_tag recruiter.image_url(:thumb).to_s unless recruiter.image_url.nil? %></div>
-      <% if current_user == recruiter && params[:action] == 'show' %>
-    	  <div class='title'><%= best_in_place recruiter, :first_name, :html_attrs => { :class => 'field' } %></div>&nbsp;
+      <% if current_user_profile? && !company_profile? %>
+        <div id='image_edit_r' class='image_hover'></div>
+      <% end %>
+      <div class='<%= "default-user-#{rand(1..4)} " if recruiter.image_url.nil? %>image left'><%= image_tag recruiter.image_url(:thumb).to_s unless recruiter.image_url.nil? %></div>
+      <% if current_user_profile? && !company_profile? %>
+    	  <div class='title'><%= best_in_place recruiter, :first_name, :html_attrs => { :class => 'field' } %></div><br />
     	  <div class='title'><%= best_in_place recruiter, :last_name,  :html_attrs => { :class => 'field' } %></div>
       <% else %>
-        <a href='<%= recruiter_path(recruiter) %>'><div class='title'><%= recruiter.first_name %></div><div class='title'><%= recruiter.last_name %></div></a>
+        <a href='<%= recruiter_path(recruiter) %>'><div class='title'><%= recruiter.first_name %></div><br /><div class='title'><%= recruiter.last_name %></div></a>
       <% end %>
-      <div class='subtitle'><%= best_in_place_if current_user == recruiter && params[:action] == 'show', recruiter, :city,    :nil => t('recruiters.city'), :html_attrs => { :class => 'field' } %></div>
-      <div class='subtitle'><%= best_in_place_if current_user == recruiter && params[:action] == 'show', recruiter, :country, :nil => t('recruiters.country'), :html_attrs => { :class => 'country field' } %></div>
-      <% if current_user == recruiter && params[:action] == 'show' %>
+      <div class='subtitle'><%= best_in_place_if current_user_profile? && !company_profile?, recruiter, :city,    :nil => t('recruiters.city'), :html_attrs => { :class => 'field' } %></div>
+      <div class='subtitle'><%= best_in_place_if current_user_profile? && !company_profile?, recruiter, :country, :nil => t('recruiters.country'), :html_attrs => { :class => 'country field' } %></div>
+      <% if current_user_profile? && !company_profile? %>
         <%= form_for recruiter, :remote => true, :html => { :id => 'recruiter_image_form', :multipart => true } do |f| %>
           <%= f.file_field :image,  :id => 'image_button_r', :class => 'image_button' %>
           <%= f.submit     :submit, :class => 'hidden' %>
@@ -22,33 +24,35 @@
       <% if current_user.admin? %><%= link_to image('trash', t('delete')), recruiter, :method => :delete, :id => "destroy_recruiter_#{recruiter.id}", :class => 'hidden',
       	                                                                              :confirm => "#{t('recruiters.destroy.title')} #{recruiter.first_name} #{recruiter.last_name}#{t('_?')}",
                                                                                       :title => "#{t('recruiters.destroy.title')} #{recruiter.first_name} #{recruiter.last_name}" %><% end %>
-      <% if current_user == recruiter && params[:action] == 'show' %>
-        <p><%= best_in_place recruiter, :quote, :type => :textarea, :nil => "\"#{t('recruiters.show.add_quote').downcase}\"", :html_attrs => { :class => 'field' } %></p>
-      <% elsif !(recruiter.quote.nil? || recruiter.quote.empty?) %>
-        <p><%= "\"#{recruiter.quote}\"" %></p>
+      <% unless company_profile? %>
+        <% if current_user_profile? %>
+          <p><%= best_in_place recruiter, :quote, :type => :textarea, :nil => "\"#{t('recruiters.show.add_quote').downcase}\"", :html_attrs => { :class => 'field' } %></p>
+        <% elsif !(recruiter.quote.nil? || recruiter.quote.empty?) %>
+          <p><%= "\"#{recruiter.quote}\"" %></p>
+        <% end %>
       <% end %>
     </div>
   
-    <% unless hide_contact_information? %>
+    <% unless current_user_profile? || company_profile? || params[:action] == 'index' %>
       <div class='contact block'>
         <h2><%= "#{t('contact')} #{recruiter.first_name}" %></h2>
         <%= text_area_tag :message, nil, :placeholder => "#{t('question_or_comment')}#{t('_?')}", :rows => '3', :class => 'textarea' %><%= submit_tag t('send') %>
       </div>
     <% end %>
   
-    <% unless recruiter.company.nil? %>
-      <div class='company identity block'>
+    <% unless recruiter.company.nil? || company_profile? %>
+      <div class='company_r identity block'>
         <h2><%= t('recruiters.show.recruiter_at').remove_accents.upcase %></h2>
-        <% if current_user == recruiter && params[:action] == 'show' %><div id='image_edit_c' class='image_hover'></div><% end %>
-        <div class='<%= "default-company-#{rand(1..9)} " if recruiter.company.image_url.nil? %>image left'><%= image_tag recruiter.company.image_url(:thumb).to_s unless recruiter.company.image_url.nil? %></div>
-        	<% if current_user == recruiter && params[:action] == 'show' %>
+        <% if current_user_profile? %><div id='image_edit_c' class='image_hover'></div><% end %>
+        <div class='<%= "default-company-#{rand(1..4)} " if recruiter.company.image_url.nil? %>image left'><%= image_tag recruiter.company.image_url(:thumb).to_s unless recruiter.company.image_url.nil? %></div>
+        	<% if current_user_profile? %>
         	  <div class='title'><%= best_in_place recruiter.company, :name, :html_attrs => { :class => 'field' } %></div>
         	  <div class='subtitle'><%=  best_in_place recruiter.company, :url, :nil => t('companies.url').downcase, :html_attrs => { :class => 'url field' } %></div>
           <% else %>
             <div class='title'><%= link_to recruiter.company.name, company_path(recruiter.company) %></div>
             <div class='subtitle'><%= link_to recruiter.company.url, recruiter.company.url, :target => '_blank' %></div>
           <% end %>
-          <% if current_user == recruiter && params[:action] == 'show' %>
+          <% if current_user_profile? %>
             <%= form_for recruiter.company, :remote => true, :html => { :id => 'company_image_form', :multipart => true } do |f| %>
               <%= f.file_field :image,  :id => 'image_button_c', :class => 'image_button' %>
               <%= f.submit     :submit, :class => 'hidden' %>

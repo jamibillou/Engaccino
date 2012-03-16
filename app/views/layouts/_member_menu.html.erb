@@ -1,5 +1,5 @@
 <ul>
-<% if current_user.class.name.humanize == 'Candidate' %>
+<% if current_user.candidate? %>
   <li class='round<% if @title == t(:menu_dashboard) %> selected<% end %>'>
     <%= link_to t(:menu_dashboard), '#' %>
   </li>
@@ -9,7 +9,12 @@
   <li class='round<% if @title == t('recruiters.index.title') || (@company && @title == @company.name) || (@recruiter && @title == "#{@recruiter.first_name} #{@recruiter.last_name}") %> selected<% end %>'>
     <%= link_to t(:menu_recruiters), recruiters_path %>
   </li>
-<% elsif current_user.class.name.humanize == 'Recruiter' %>
+  <% if current_user.admin? %>
+    <li class='round<% if @title == t('candidates.index.title') %> selected<% end %>'>
+      <%= link_to t(:menu_candidates), candidates_path %>
+    </li>
+  <% end %>
+<% elsif current_user.recruiter? %>
   <li class='round<% if @title == t(:menu_dashboard) %> selected<% end %>'>
     <%= link_to t(:menu_dashboard), '#' %>
   </li>
@@ -19,5 +24,10 @@
   <li class='round<% if @title == t('candidates.index.title') || (@candidate && @title == "#{@candidate.first_name} #{@candidate.last_name}") %> selected<% end %>'>
     <%= link_to t(:menu_candidates), candidates_path %>
   </li>
+  <% if current_user.admin? %>
+    <li class='round<% if @title == t('recruiters.index.title') %> selected<% end %>'>
+      <%= link_to t(:menu_recruiters), recruiters_path %>
+    </li>
+  <% end %>
 <% end %>
 </ul>
