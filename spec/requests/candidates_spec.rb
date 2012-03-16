@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Candidates' do
-
+=begin
   describe 'signup' do
     
     describe 'failure' do
@@ -196,7 +196,7 @@ describe 'Candidates' do
         page.should have_selector 'div#language_candidate_'+language_candidate.id.to_s                                                             
       end        
     end
-    
+   
     #describe "ajax creation" do
       
     #  before :each do
@@ -215,5 +215,22 @@ describe 'Candidates' do
     #    end        
     #  end          
     #end
+  end
+=end
+  describe "ajax creation" do
+    
+    it "should go on the profile page", :js => true do
+      require 'coffee-script'
+      #require 'less'
+      @candidate = Factory :candidate
+      @candidate.update_attributes :profile_completion => 5
+      
+      visit signin_path
+      wait_until(10) do page.should have_content I18n.t('sessions.new.title') end
+      fill_in 'email',    :with => @candidate.email
+      fill_in 'password', :with => @candidate.password
+      click_button "#{I18n.t('sessions.new.signin')}"
+      current_path.should == candidate_path(@candidate)
+    end
   end
 end
