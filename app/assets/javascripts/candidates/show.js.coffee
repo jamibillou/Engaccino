@@ -44,6 +44,7 @@ $ ->
 ## AJAX CALLS TO CONTROLLERS ACTIONS
 @callRefresh = (model, data, partials) ->
   $.ajax 'refresh',
+    dataType: 'html'
     type: 'POST'
     data: {model: model}
     beforeSend: -> 
@@ -76,6 +77,7 @@ $ ->
           
 @refreshPartial = (partial) ->
   $.ajax 'refresh',
+  dataType: 'html'
   type: 'POST'
   data: {partial: partial}
   beforeSend: -> 
@@ -90,6 +92,7 @@ $ ->
   $('#'+BIPcombo+' span').each ->
     $(this).change ->
       $.ajax 'refresh',
+        dataType: 'html'
         type: 'POST'
         data: {partial: partial}
         success: (data) -> 

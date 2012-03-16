@@ -26,6 +26,7 @@ group :test do
   gem 'spork'
   gem 'factory_girl_rails'
   gem 'capybara'
+  gem 'capybara-webkit'
   gem 'launchy'
   gem 'database_cleaner'
 end
