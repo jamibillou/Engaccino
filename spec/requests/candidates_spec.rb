@@ -423,7 +423,7 @@ describe 'Candidates' do
             sleep(2)
             click_link 'link_add_interpersonal_skill_candidate'
             page.should have_selector 'form#new_interpersonal_skill_candidate'
-            find('form#new_interpersonal_skill_candidate').find('div.interpersonal_skill_candidate')
+            find('form#new_interpersonal_skill_candidate').find('div#errors_new_interpersonal_skill_candidate')
           end
         end
       end

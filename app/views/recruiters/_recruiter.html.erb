@@ -50,7 +50,7 @@
         	  <div class='subtitle'><%=  best_in_place recruiter.company, :url, :nil => t('companies.url').downcase, :html_attrs => { :class => 'url field' } %></div>
           <% else %>
             <div class='title'><%= link_to recruiter.company.name, company_path(recruiter.company) %></div>
-            <div class='subtitle'><%= link_to recruiter.company.url, recruiter.company.url, :target => '_blank' %></div>
+            <div class='subtitle'><%= link_to recruiter.company.url, "http://#{recruiter.company.url}", :target => '_blank' %></div>
           <% end %>
           <% if current_user_profile? %>
             <%= form_for recruiter.company, :remote => true, :html => { :id => 'company_image_form', :multipart => true } do |f| %>
