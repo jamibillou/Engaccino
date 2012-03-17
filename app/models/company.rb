@@ -12,22 +12,20 @@ class Company < ActiveRecord::Base
   validates :city,    :length       => { :maximum =>  80 },                               :presence    => true
   validates :country, :inclusion    => { :in => countries_array },                        :presence    => true
   validates :address, :length       => { :maximum => 160 },                               :allow_blank => true
-  validates :phone,   :phone_format => true, :length     => { :within => 7..20 },         :allow_blank => true
-  validates :email,   :email_format => true, :uniqueness => { :case_sensitive => false }, :allow_blank => true
-  validates :url,     :url_format   => true,                                              :allow_blank => true
-  validates :zip,     :length       => { :maximum =>  10 },                               :allow_blank => true
   validates :about,   :length       => { :within => 20..160 },                            :allow_blank => true
+  validates :url,     :url_format   => true,                                              :allow_blank => true
+  validates :email,   :email_format => true, :uniqueness => { :case_sensitive => false }, :allow_blank => true
+  validates :phone,   :phone_format => true, :length     => { :within => 7..20 },         :allow_blank => true
+  validates :zip,     :length       => { :maximum =>  10 },                               :allow_blank => true
   
   mount_uploader :image, CompanyImageUploader
-  
-  # acts_as_gmappable
-  # 
-  # def gmaps4rails_address
-  #   "#{self.address}, #{self.zip}, #{self.city}, #{self.country}" 
-  # end
     
   def no_about?
     about.nil? || about.empty?
+  end
+  
+  def no_contact_info?
+    (url.nil? || url.empty?) && (email.nil? || email.empty?) && (phone.nil? || phone.empty?)
   end
 end
 

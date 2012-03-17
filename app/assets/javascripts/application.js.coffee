@@ -7,11 +7,6 @@
 //= require i18n
 //= require i18n/translations
 //= require rails.validations
-//= require gmaps4rails/base
-//= require gmaps4rails/bing
-//= require gmaps4rails/googlemaps
-//= require gmaps4rails/mapquest
-//= require gmaps4rails/openlayers
 
 $ ->
   $('input.country').each -> $(this).autocomplete({ source:"/ajax/countries", minLength: 2, autoFocus: true })

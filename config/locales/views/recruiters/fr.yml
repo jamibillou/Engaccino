@@ -41,11 +41,12 @@ fr:
       view_profile: "Voir profil"
       next_profile: "Profil suivant"
       add_quote: "Écrivez quelque chose qui donne envie aux candidats de vous parler et mieux connaître votre activité."
-      recruiter_at: "Recruteur pour"
+      recruiter_at: "Recrute pour"
       profile_completion:
         sentence: "Votre profil est complet à "
         %complete: "%"
         link: "Qu'est-ce qu'il manque ?"
+      company_profile: "Profil d'entreprise"
     new:
       title: "S'inscrire"
       create_engaccino_account: "Créer un compte Engaccino"

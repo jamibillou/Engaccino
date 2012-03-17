@@ -47,6 +47,7 @@ en:
         sentence: "Your profile is "
         %complete: "% complete"
         link: "What is missing?"
+      company_profile: "Company profile"
     new:
       title: "Sign up"
       create_engaccino_account: "Create an Engaccino account"

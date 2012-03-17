@@ -3,7 +3,7 @@ fr:
 
     name: "Nom"
     contact_info: "Coordonnées"
-    url: "Site"
+    url: "Site web"
     address: "Rue"
     zip: "Code postal"
     city: "Ville"

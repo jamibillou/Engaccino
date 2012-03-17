@@ -8,7 +8,6 @@ class CompaniesController < ApplicationController
   def show
     @company  = Company.find params[:id]
     @title    = @company.name
-    # @location = @company.to_gmaps4rails
     init_page :javascripts => 'companies/show'
   end
   

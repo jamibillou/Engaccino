@@ -58,6 +58,7 @@
               <%= f.submit     :submit, :class => 'hidden' %>
               <div id='company_picture_upload_error' class='hidden error_messages'></div>
             <% end %>
+            <p><%= link_to t('recruiters.show.company_profile'), @recruiter.company, :class => 'small' %></p>
           <% end %>
       </div>
     <% end %>

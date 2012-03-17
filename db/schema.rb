@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120314200548) do
+ActiveRecord::Schema.define(:version => 20120317121331) do
 
   create_table "certificate_candidates", :force => true do |t|
     t.string   "level_score"
@@ -40,9 +40,6 @@ ActiveRecord::Schema.define(:version => 20120314200548) do
     t.string   "image"
     t.string   "zip"
     t.string   "about"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.boolean  "gmaps"
   end
 
   create_table "degree_types", :force => true do |t|
