@@ -70,7 +70,7 @@ describe ExperiencesController do
         
         it 'should respond with the error messages' do
           xhr :post, :create, :experience => @attr
-          response.body.should include('company.name','role','start_month','end_month','start_year','end_year',"can't be blank")
+          response.body.should include('company.name','role','start_month','end_month','start_year','end_year',"mandatory")
         end
       end
       
@@ -208,7 +208,7 @@ describe ExperiencesController do
         
         it 'should render the correct error message' do
           xhr :put, :update, :experience => @attr[:experience], :id => @experience  
-          response.body.should include('company.name','role','start_month','end_month','start_year','end_year',"can't be blank")
+          response.body.should include('company.name','role','start_month','end_month','start_year','end_year',"mandatory")
         end
       
         it 'should not create another experience object' do

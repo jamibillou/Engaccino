@@ -72,7 +72,7 @@ describe EducationsController do
         it 'should respond with the error messages' do
           xhr :post, :create, :education => @attr
           response.body.should include('school.name','degree.degree_type.label','degree.label','start_month','end_month',
-            'start_year','end_year',"can't be blank")
+            'start_year','end_year',"mandatory")
         end
       end
       
@@ -226,7 +226,7 @@ describe EducationsController do
         it 'should render the correct error message' do
           xhr :put, :update, :education => @attr[:education], :id => @education  
           response.body.should include('school.name','degree.degree_type.label','degree.label','start_month','end_month',
-            'start_year','end_year',"can't be blank")
+            'start_year','end_year',"mandatory")
         end
       
         it 'should not create another education object' do

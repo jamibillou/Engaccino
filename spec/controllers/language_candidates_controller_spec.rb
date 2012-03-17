@@ -78,7 +78,7 @@ describe LanguageCandidatesController do
         
         it 'should respond with the error messages' do
           xhr :post, :create, :language_candidate => @attr
-          response.body.should include("language.label","can't be blank","level","is not included in the list")
+          response.body.should include("language.label","mandatory","level","invalid")
         end
       end
       
@@ -203,7 +203,7 @@ describe LanguageCandidatesController do
         
         it 'should render the correct error message' do
           xhr :put, :update, :language_candidate => @attr[:language_candidate], :id => @language_candidate  
-          response.body.should include("language.label","can't be blank","level","is not included in the list")
+          response.body.should include("language.label","mandatory","level","invalid")
         end
       
         it 'should not create another language_candidate object' do

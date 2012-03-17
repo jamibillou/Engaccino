@@ -68,7 +68,8 @@ class RecruitersController < ApplicationController
     end
     
     def no_company_submitted?
-      params[:recruiter][:company_attributes][:name].blank? && params[:recruiter][:company_attributes][:url].blank? &&
-      params[:recruiter][:company_attributes][:city].blank? && params[:recruiter][:company_attributes][:country].blank?
+      params[:recruiter][:company_attributes].nil? ||
+      ( params[:recruiter][:company_attributes][:name].blank? && params[:recruiter][:company_attributes][:url].blank? &&
+        params[:recruiter][:company_attributes][:city].blank? && params[:recruiter][:company_attributes][:country].blank? )
     end
 end

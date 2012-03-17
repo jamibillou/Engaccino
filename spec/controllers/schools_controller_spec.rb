@@ -56,7 +56,7 @@ describe SchoolsController do
         
         it 'should render the correct error message' do
           xhr :put, :update, :school => @attr[:school], :id => @school 
-          response.body.should include "Name can't be blank"
+          response.body.should include "mandatory"
         end
       
         it 'should not create another school object' do

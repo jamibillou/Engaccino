@@ -79,7 +79,7 @@ describe CertificateCandidatesController do
         
         it 'should respond with the error messages' do
           xhr :post, :create, :certificate_candidate => @attr
-          response.body.should include("certificate.label","can't be blank")
+          response.body.should include("certificate.label","mandatory")
         end
       end
       
@@ -204,7 +204,7 @@ describe CertificateCandidatesController do
         
         it 'should render the correct error message' do
           xhr :put, :update, :certificate_candidate => @attr[:certificate_candidate], :id => @certificate_candidate  
-          response.body.should include("certificate.label","can't be blank")
+          response.body.should include("certificate.label","mandatory")
         end
       
         it 'should not create another certificate_candidate object' do

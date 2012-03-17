@@ -78,7 +78,7 @@ describe ProfessionalSkillCandidatesController do
         
         it 'should respond with the error messages' do
           xhr :post, :create, :professional_skill_candidate => @attr
-          response.body.should include("level","experience","can't be blank")
+          response.body.should include("level","experience","mandatory")
         end
       end
       
@@ -204,7 +204,7 @@ describe ProfessionalSkillCandidatesController do
         
         it 'should render the correct error message' do
           xhr :put, :update, :professional_skill_candidate => @attr[:professional_skill_candidate], :id => @professional_skill_candidate  
-          response.body.should include("level","experience","can't be blank")
+          response.body.should include("level","experience","mandatory")
         end
       
         it 'should not create another professional_skill_candidate object' do

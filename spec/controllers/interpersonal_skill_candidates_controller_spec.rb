@@ -78,7 +78,7 @@ describe InterpersonalSkillCandidatesController do
         
         it 'should respond with the error messages' do
           xhr :post, :create, :interpersonal_skill_candidate => @attr
-          response.body.should include("interpersonal_skill.label","can't be blank")
+          response.body.should include("interpersonal_skill.label","mandatory")
         end
       end
       
@@ -203,7 +203,7 @@ describe InterpersonalSkillCandidatesController do
         
         it 'should render the correct error message' do
           xhr :put, :update, :interpersonal_skill_candidate => @attr[:interpersonal_skill_candidate], :id => @interpersonal_skill_candidate  
-          response.body.should include("interpersonal_skill.label","can't be blank")
+          response.body.should include("interpersonal_skill.label","mandatory")
         end
       
         it 'should not create another interpersonal_skill_candidate object' do

@@ -57,7 +57,7 @@ describe DegreesController do
         
         it 'should render the correct error message' do
           xhr :put, :update, :degree => @attr[:degree], :id => @degree 
-          response.body.should include "Label can't be blank"
+          response.body.should include "mandatory"
         end
       
         it 'should not create another degree object' do
