@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Candidates' do
-=begin
+
   describe 'signup' do
     
     describe 'failure' do
@@ -188,7 +188,7 @@ describe 'Candidates' do
         page.should have_selector 'div#language_candidate_'+language_candidate.id.to_s                                                             
       end        
     end
-=end
+
     describe "ajax testing", :js => true do
       
       before :each do
@@ -249,13 +249,35 @@ describe 'Candidates' do
           
           it "should create an object in the db" do
             lambda do 
-              sleep(3)  
+              sleep(2)  
             end.should change(ProfessionalSkillCandidate, :count).by(1)
           end
           
           it "should hide the form" do
             page.should_not have_selector 'form#new_professional_skill_candidate'
           end                       
+        end
+        
+        describe 'item update' do
+          
+          before :each do
+            find("div#show_professional_skill_candidate_#{@professional_skill_candidate.id}").click
+          end
+          
+          it 'should display an error message if we empty a field' do
+            fill_in 'professional_skill_candidate_professional_skill_attributes_label', :with => ''
+            click_button "#{I18n.t('submit')}"
+            find("div#edit_professional_skill_candidate_#{@professional_skill_candidate.id}").visible?.should be_true
+            find("div.error_messages").should have_content 'professional_skill.label'
+          end
+          
+          it 'should display new info and hide the edit form when we submit the form correctly' do
+            fill_in 'professional_skill_candidate_professional_skill_attributes_label', :with => 'Web Development'
+            click_button "#{I18n.t('submit')}"
+            sleep(2)
+            find("div#edit_professional_skill_candidate_#{@professional_skill_candidate.id}").visible?.should be_false
+            find("div#show_professional_skill_candidate_#{@professional_skill_candidate.id}").should have_content 'Web Development'
+          end
         end
         
         describe 'item deletion' do
@@ -267,7 +289,7 @@ describe 'Candidates' do
           
           it 'should destroy the object' do
             lambda do
-              sleep(3)
+              sleep(2)
             end.should change(ProfessionalSkillCandidate,:count).by(-1)
           end
           
@@ -284,7 +306,7 @@ describe 'Candidates' do
           end
           
           it "should display the new form after a deletion and a click to the 'add' link" do
-            sleep(3)
+            sleep(2)
             click_link 'link_add_professional_skill_candidate'
             page.should have_selector 'form#new_professional_skill_candidate'
             find('form#new_professional_skill_candidate').find('div.professional_skill_candidate')
@@ -341,17 +363,35 @@ describe 'Candidates' do
           
           it "should create an object in the db" do
             lambda do              
-              sleep(3)          
+              sleep(2)          
             end.should change(InterpersonalSkillCandidate, :count).by(1)
           end
           
-          it "should hide the form" do
+          it 'should hide the form' do
             page.should_not have_selector 'form#new_interpersonal_skill_candidate'
           end                       
         end
-        
+
         describe 'item update' do
           
+          before :each do
+            find("div#show_interpersonal_skill_candidate_#{@interpersonal_skill_candidate.id}").click
+          end
+          
+          it 'should display an error message if we empty a field' do
+            fill_in 'interpersonal_skill_candidate_interpersonal_skill_attributes_label', :with => ''
+            click_button "#{I18n.t('submit')}"
+            find("div#edit_interpersonal_skill_candidate_#{@interpersonal_skill_candidate.id}").visible?.should be_true
+            find("div.error_messages").should have_content 'interpersonal_skill.label'
+          end
+          
+          it 'should display new info and hide the edit form when we submit the form correctly' do
+            fill_in 'interpersonal_skill_candidate_interpersonal_skill_attributes_label', :with => 'Self Confidence'
+            click_button "#{I18n.t('submit')}"
+            sleep(2)
+            find("div#edit_interpersonal_skill_candidate_#{@interpersonal_skill_candidate.id}").visible?.should be_false
+            find("div#show_interpersonal_skill_candidate_#{@interpersonal_skill_candidate.id}").should have_content 'Self Confidence'
+          end
         end
         
         describe 'item deletion' do
@@ -363,7 +403,7 @@ describe 'Candidates' do
           
           it 'should destroy the object' do
             lambda do
-              sleep(3)
+              sleep(2)
             end.should change(InterpersonalSkillCandidate,:count).by(-1)
           end
           
@@ -380,10 +420,10 @@ describe 'Candidates' do
           end
           
           it "should display the new form after a deletion and a click to the 'add' link" do
-            sleep(3)
+            sleep(2)
             click_link 'link_add_interpersonal_skill_candidate'
             page.should have_selector 'form#new_interpersonal_skill_candidate'
-            find('form#new_interpersonal_skill_candidate').find('div.interpersonal_skill_candidate')
+            find('form#new_interpersonal_skill_candidate').find('div#errors_new_interpersonal_skill_candidate')
           end
         end
       end
@@ -447,13 +487,35 @@ describe 'Candidates' do
           
           it "should create an object in the db" do
             lambda do              
-              sleep(3)          
+              sleep(2)          
             end.should change(Experience, :count).by(1)
           end
           
           it "should hide the form" do
             page.should_not have_selector 'form#new_experience'
           end                       
+        end
+
+        describe 'item update' do
+          
+          before :each do
+            find("div#show_experience_#{@experience.id}").click
+          end
+          
+          it 'should display an error message if we empty a field' do
+            fill_in 'experience_company_attributes_name', :with => ''
+            click_button "#{I18n.t('submit')}"
+            find("div#edit_experience_#{@experience.id}").visible?.should be_true
+            find("div.error_messages").should have_content 'company.name'
+          end
+          
+          it 'should display new info and hide the edit form when we submit the form correctly' do
+            fill_in 'experience_company_attributes_name', :with => 'PXTherapeutics'
+            click_button "#{I18n.t('submit')}"
+            sleep(2)
+            find("div#edit_experience_#{@experience.id}").visible?.should be_false
+            find("div#show_experience_#{@experience.id}").should have_content 'PXTherapeutics'
+          end
         end
         
         describe 'item deletion' do
@@ -465,7 +527,7 @@ describe 'Candidates' do
           
           it 'should destroy the object' do
             lambda do
-              sleep(3)
+              sleep(2)
             end.should change(Experience,:count).by(-1)
           end
           
@@ -482,7 +544,7 @@ describe 'Candidates' do
           end
           
           it "should display the new form after a deletion and a click to the 'add' link" do
-            sleep(3)
+            sleep(2)
             click_link 'link_add_experience'
             page.should have_selector 'form#new_experience'
             find('form#new_experience').find('div.edu_exp_date')
@@ -551,13 +613,35 @@ describe 'Candidates' do
           
           it "should create an object in the db" do
             lambda do              
-              sleep(3)          
+              sleep(2)          
             end.should change(Education, :count).by(1)
           end
           
           it "should hide the form" do
             page.should_not have_selector 'form#new_education'
           end                       
+        end
+
+        describe 'item update' do
+          
+          before :each do
+            find("div#show_education_#{@education.id}").click
+          end
+          
+          it 'should display an error message if we empty a field' do
+            fill_in 'education_school_attributes_name', :with => ''
+            click_button "#{I18n.t('submit')}"
+            find("div#edit_education_#{@education.id}").visible?.should be_true
+            find("div.error_messages").should have_content 'school.name'
+          end
+          
+          it 'should display new info and hide the edit form when we submit the form correctly' do
+            fill_in 'education_school_attributes_name', :with => 'UJF Grenoble'
+            click_button "#{I18n.t('submit')}"
+            sleep(2)
+            find("div#edit_education_#{@education.id}").visible?.should be_false
+            find("div#show_education_#{@education.id}").should have_content 'UJF Grenoble'
+          end
         end
               
         describe 'item deletion' do
@@ -569,7 +653,7 @@ describe 'Candidates' do
           
           it 'should destroy the object' do
             lambda do
-              sleep(3)
+              sleep(2)
             end.should change(Education,:count).by(-1)
           end
           
@@ -586,7 +670,7 @@ describe 'Candidates' do
           end
           
           it "should display the new form after a deletion and a click to the 'add' link" do
-            sleep(3)
+            sleep(2)
             click_link 'link_add_education'
             page.should have_selector 'form#new_education'
             find('form#new_education').find('div.edu_exp_date')
@@ -643,13 +727,35 @@ describe 'Candidates' do
           
           it "should create an object in the db" do
             lambda do              
-              sleep(3)          
+              sleep(2)          
             end.should change(CertificateCandidate, :count).by(1)
           end
           
           it "should hide the form" do
             page.should_not have_selector 'form#new_certificate_candidate'
           end                       
+        end
+
+        describe 'item update' do
+          
+          before :each do
+            find("div#show_certificate_candidate_#{@certificate_candidate.id}").click
+          end
+          
+          it 'should display an error message if we empty a field' do
+            fill_in 'certificate_candidate_certificate_attributes_label', :with => ''
+            click_button "#{I18n.t('submit')}"
+            find("div#edit_certificate_candidate_#{@certificate_candidate.id}").visible?.should be_true
+            find("div.error_messages").should have_content 'certificate.label'
+          end
+          
+          it 'should display new info and hide the edit form when we submit the form correctly' do
+            fill_in 'certificate_candidate_certificate_attributes_label', :with => 'Microsoft Certification'
+            click_button "#{I18n.t('submit')}"
+            sleep(2)
+            find("div#edit_certificate_candidate_#{@certificate_candidate.id}").visible?.should be_false
+            find("div#show_certificate_candidate_#{@certificate_candidate.id}").should have_content 'Microsoft Certification'
+          end
         end
 
         describe 'item deletion' do
@@ -661,7 +767,7 @@ describe 'Candidates' do
           
           it 'should destroy the object' do
             lambda do
-              sleep(3)
+              sleep(2)
             end.should change(CertificateCandidate,:count).by(-1)
           end
           
@@ -678,7 +784,7 @@ describe 'Candidates' do
           end
           
           it "should display the new form after a deletion and a click to the 'add' link" do
-            sleep(3)
+            sleep(2)
             click_link 'link_add_certificate_candidate'
             page.should have_selector 'form#new_certificate_candidate'
             find('form#new_certificate_candidate').find('div.certificate_candidate')
@@ -736,13 +842,35 @@ describe 'Candidates' do
           
           it "should create an object in the db" do
             lambda do              
-              sleep(3)          
+              sleep(2)          
             end.should change(LanguageCandidate, :count).by(1)
           end
           
           it "should hide the form" do
             page.should_not have_selector 'form#new_language_candidate'
           end                       
+        end
+
+        describe 'item update' do
+          
+          before :each do
+            find("div#show_language_candidate_#{@language_candidate.id}").click
+          end
+          
+          it 'should display an error message if we empty a field' do
+            fill_in 'language_candidate_language_attributes_label', :with => ''
+            click_button "#{I18n.t('submit')}"
+            find("div#edit_language_candidate_#{@language_candidate.id}").visible?.should be_true
+            find("div.error_messages").should have_content 'language.label'
+          end
+          
+          it 'should display new info and hide the edit form when we submit the form correctly' do
+            fill_in 'language_candidate_language_attributes_label', :with => 'Norwich'
+            click_button "#{I18n.t('submit')}"
+            sleep(2)
+            find("div#edit_language_candidate_#{@language_candidate.id}").visible?.should be_false
+            find("div#show_language_candidate_#{@language_candidate.id}").should have_content 'Norwich'
+          end
         end
         
         describe 'item deletion' do
@@ -754,7 +882,7 @@ describe 'Candidates' do
           
           it 'should destroy the object' do
             lambda do
-              sleep(3)
+              sleep(2)
             end.should change(LanguageCandidate,:count).by(-1)
           end
           
@@ -771,7 +899,7 @@ describe 'Candidates' do
           end
           
           it "should display the new form after a deletion and a click to the 'add' link" do
-            sleep(3)
+            sleep(2)
             click_link 'link_add_language_candidate'
             page.should have_selector 'form#new_language_candidate'
             find('form#new_language_candidate').find('div.language_candidate')
@@ -779,5 +907,5 @@ describe 'Candidates' do
         end        
       end                   
     end
-  #end
+  end
 end

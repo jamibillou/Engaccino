@@ -65,8 +65,7 @@ $ ->
       hide(model+"_loader")
     success: (data) -> 
       $('#new_'+model).html(data)
-      #alert($('#new_'+model).html())
-  	  show('new_'+model)
+      show('new_'+model)
   	  hide('link_add_'+model)
   	  handleAjaxCreation(model, partials)
 
