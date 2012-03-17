@@ -3,8 +3,8 @@ class RecruitersController < ApplicationController
   before_filter :authenticate,           :except => [:new, :create]
   before_filter :new_user,               :only   => [:new, :create]
   before_filter :authorized, :signed_up, :only   => [:index, :show]
-  before_filter :not_signed_up,          :only   => :edit
   before_filter :correct_recruiter,      :only   => [:edit, :update]
+  before_filter :not_signed_up,          :only   => :edit
   before_filter :admin_user,             :only   => :destroy
     
   def index
