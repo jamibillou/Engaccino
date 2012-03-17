@@ -10,17 +10,7 @@ $ ->
  
   refreshPartialThroughBIPcombo('candidate_company', 'role_BIPcombo')
   refreshPartialThroughBIPcombo('candidate_degree', 'degreetype_BIPcombo')
-  
-  $('#image_form').bind('ajax:success', (evt, data, status, xhr) -> 
-                    alert("success") if ($(this).data('remotipartSubmitted'))
-                    hide("picture_upload_error"))
-                  .bind('ajax:error', (evt, xhr, status) -> 
-                    $("#picture_upload_error").html(status+" : "+xhr.responseText+"<br/><br/>")
-                    show("picture_upload_error"))
-  
-  ## GROS CACA
-  $('#image_edit').click    -> $('#image_button').click()
-  $('#image_button').change -> $('#image_form').submit()
+  manageProfilePicture()
 
 ## OBJECT CREATION 
 @handleAjaxCreation = (model, partials) ->
@@ -85,7 +75,8 @@ $ ->
     hide(partial+"_loader")
   success: (data) ->
     $('#'+partial).html(data)
-    initBIP(I18n.t('click_to_edit')) 
+    initBIP(I18n.t('click_to_edit'))
+    manageProfilePicture() if partial is 'candidate'
 
 @refreshPartialThroughBIPcombo = (partial, BIPcombo) ->
   $('#'+BIPcombo+' span').each ->
@@ -107,4 +98,10 @@ $ ->
   errorMessages = 'Error(s): '
   errorMessages += error+' '+errors[error]+' ' for error of errors
   errorMessages
-    
+
+@manageProfilePicture = ->
+  $('#image_edit').click    -> $('#image_button').click()
+  $('#image_button').change -> $('#image_form').submit()
+  $('#image_form').bind('ajax:complete', (evt, xhr) -> 
+    hide("picture_upload_error")
+    refreshPartial('candidate'))    

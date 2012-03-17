@@ -196,7 +196,7 @@ DEPENDENCIES
   less-rails
   mysql2
   rails
-  remotipart
+  remotipart (~> 1.0)
   rmagick
   rspec-rails
   spork

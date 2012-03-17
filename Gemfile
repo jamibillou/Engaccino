@@ -9,7 +9,7 @@ gem 'countries'
 gem 'i18n-js'
 gem 'carrierwave', git: "git://github.com/jnicklas/carrierwave.git"
 gem 'rmagick'
-gem 'remotipart'
+gem 'remotipart', '~> 1.0'
 gem 'client_side_validations'
 gem 'gmaps4rails'
 
