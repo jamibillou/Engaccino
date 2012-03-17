@@ -2,7 +2,7 @@ fr:
   activerecord:
       errors:
         messages:
-          inclusion: "incorrect(e)"
+          inclusion: "incorrect"
           exclusion: "a une valeur défendue"
           invalid: "invalide"
           confirmation: "et confirmation différents"

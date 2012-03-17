@@ -9,7 +9,7 @@ class RecruitersController < ApplicationController
     
   def index
     @recruiters = Recruiter.all
-    init_page :title => 'recruiters.index.title', :javascripts => 'recruiters/index'
+    init_page :title => 'recruiters.index.title'
   end
   
   def show
@@ -19,13 +19,13 @@ class RecruitersController < ApplicationController
   
   def new
     @recruiter = Recruiter.new
-    init_page :title => 'recruiters.new.title', :javascripts => 'recruiters/new'
+    init_page :title => 'recruiters.new.title'
   end
   
   def create
     @recruiter = Recruiter.new params[:recruiter]
     unless @recruiter.save
-      render_page :new, :title => 'recruiters.new.title', :javascripts => 'recruiters/new'
+      render_page :new, :title => 'recruiters.new.title'
     else
       sign_in @recruiter
       @recruiter.build_company
@@ -40,8 +40,8 @@ class RecruitersController < ApplicationController
   
   def update
     unless @recruiter.update_attributes params[:recruiter]
+      @recruiter.build_company if no_company_submitted?
       init_page :title => 'recruiters.edit.complete_your_profile', :javascripts => 'recruiters/edit'
-      @recruiter.build_company
       respond_to do |format|
         format.html { render :json => error_messages(@recruiter) } if remotipart_submitted?
         format.html { render_page :edit, :id => @recruiter }
@@ -65,5 +65,10 @@ class RecruitersController < ApplicationController
     
     def signed_up
       redirect_to edit_candidate_path(current_user), :notice => t('flash.notice.please_finish_signup') unless signed_up?
+    end
+    
+    def no_company_submitted?
+      params[:recruiter][:company_attributes][:name].blank? && params[:recruiter][:company_attributes][:url].blank? &&
+      params[:recruiter][:company_attributes][:city].blank? && params[:recruiter][:company_attributes][:country].blank?
     end
 end

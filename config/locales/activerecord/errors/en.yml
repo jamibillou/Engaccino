@@ -2,6 +2,9 @@ en:
   activerecord:
       errors:
         messages:
+          inclusion: "invalid"
+          empty: "mandatory"
+          blank: "mandatory"
           email_format: "is not formatted properly"
           url_format: "is not formatted properly"
           phone_format: "is not formatted properly"
