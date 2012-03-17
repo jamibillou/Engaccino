@@ -48,14 +48,14 @@ class CandidatesController < ApplicationController
       init_page :title => 'candidates.edit.complete_your_profile', :javascripts => 'candidates/edit'
       build_education ; build_experience
       respond_to do |format|
-        format.html { render :json => error_messages(@candidate) } if remotipart_submitted?
+        format.js   { render :json => error_messages(@candidate) } if remotipart_submitted?
         format.html { render_page :edit, :id => @candidate }
         format.json { respond_with_bip @candidate }
       end
     else
       associate_schools_and_degrees
       respond_to do |format|
-        format.js { render :json => 'success!' } if remotipart_submitted?
+        format.js   { render :json => 'success!' } if remotipart_submitted?
         format.html { @candidate.update_attributes :profile_completion => 5 ; redirect_to @candidate }
         format.json { respond_with_bip @candidate }
       end

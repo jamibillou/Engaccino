@@ -81,7 +81,7 @@ describe 'Candidates' do
       @candidate.update_attributes :profile_completion => 5
     end
     
-    describe "standard and empty blocks display" do
+    describe 'standard and empty blocks display' do
       
       before :each do
         visit signin_path
@@ -92,29 +92,29 @@ describe 'Candidates' do
       
       it 'should display the top bar' do page.should have_selector 'div#show_top' end
       
-      it "should display the candidate card" do page.should have_selector 'div', :class => 'card', :id => 'candidate_'+@candidate.id.to_s end
+      it 'should display the candidate card' do page.should have_selector 'div', :class => 'card', :id => 'candidate_'+@candidate.id.to_s end
       
-      it "should display the empty timeline block" do 
+      it 'should display the empty timeline block' do 
         page.should have_css 'div#show_timeline'
         find('div#timeline').find('h1').should have_content(I18n.t('candidates.show.timeline.title').remove_accents.upcase)
       end
         
-      it "should display the empty professional_skills block" do find('div#professional_skill_candidates').should have_content I18n.t('professional_skills.add_some') end
+      it 'should display the empty professional_skills block' do find('div#professional_skill_candidates').should have_content I18n.t('professional_skills.add_some') end
         
-      it "should display the empty interpersonal_skills block" do find('div#interpersonal_skill_candidates').should have_content I18n.t('interpersonal_skills.add_some') end
+      it 'should display the empty interpersonal_skills block' do find('div#interpersonal_skill_candidates').should have_content I18n.t('interpersonal_skills.add_some') end
         
-      it "should display the empty experiences block" do find('div#experiences').should have_content I18n.t('experiences.add_some') end
+      it 'should display the empty experiences block' do find('div#experiences').should have_content I18n.t('experiences.add_some') end
         
-      it "should display the empty educations block" do find('div#educations').should have_content I18n.t('educations.add_some') end
+      it 'should display the empty educations block' do find('div#educations').should have_content I18n.t('educations.add_some') end
         
-      it "should display the empty certificates block" do find('div#certificate_candidates').should have_content I18n.t('certificates.add_some') end
+      it 'should display the empty certificates block' do find('div#certificate_candidates').should have_content I18n.t('certificates.add_some') end
       
-      it "should display the empty languages block" do find('div#language_candidates').should have_content I18n.t('languages.add_some') end              
+      it 'should display the empty languages block' do find('div#language_candidates').should have_content I18n.t('languages.add_some') end              
     end
     
-    describe "block with attributes display" do
+    describe 'block with attributes display' do
 
-      it "should display the professional_skills block with the corresponding skill" do
+      it 'should display the professional_skills block with the corresponding skill' do
         professional_skill = Factory :professional_skill        
         professional_skill_candidate = Factory :professional_skill_candidate, :candidate => @candidate, :professional_skill => professional_skill
         visit signin_path
@@ -126,7 +126,7 @@ describe 'Candidates' do
         page.should have_selector 'div#professional_skill_candidate_'+professional_skill_candidate.id.to_s                                                                
       end
       
-      it "should display the interpersonal_skills block with the corresponding skill" do
+      it 'should display the interpersonal_skills block with the corresponding skill' do
         interpersonal_skill = Factory :interpersonal_skill        
         interpersonal_skill_candidate = Factory :interpersonal_skill_candidate, :candidate => @candidate, :interpersonal_skill => interpersonal_skill
         visit signin_path
@@ -138,7 +138,7 @@ describe 'Candidates' do
         page.should have_selector 'div#interpersonal_skill_candidate_'+interpersonal_skill_candidate.id.to_s                                                                
       end
       
-      it "should display the experiences block with the corresponding experience" do
+      it 'should display the experiences block with the corresponding experience' do
         company = Factory :company        
         experience = Factory :experience, :candidate => @candidate, :company => company
         visit signin_path
@@ -150,7 +150,7 @@ describe 'Candidates' do
         page.should have_selector 'div#experience_'+experience.id.to_s                                                                
       end
       
-      it "should display the educations block with the corresponding education" do
+      it 'should display the educations block with the corresponding education' do
         school = Factory :school
         degree_type = Factory :degree_type
         degree = Factory :degree, :degree_type => degree_type
@@ -164,7 +164,7 @@ describe 'Candidates' do
         page.should have_selector 'div#education_'+education.id.to_s                                                                
       end
       
-      it "should display the certificates block with the corresponding certificate" do
+      it 'should display the certificates block with the corresponding certificate' do
         certificate = Factory :certificate        
         certificate_candidate = Factory :certificate_candidate, :candidate => @candidate, :certificate => certificate
         visit signin_path
@@ -176,7 +176,7 @@ describe 'Candidates' do
         page.should have_selector 'div#certificate_candidate_'+certificate_candidate.id.to_s                                                                
       end
       
-      it "should display the languages block with the corresponding language" do
+      it 'should display the languages block with the corresponding language' do
         language = Factory :language        
         language_candidate = Factory :language_candidate, :candidate => @candidate, :language => language
         visit signin_path
@@ -189,7 +189,7 @@ describe 'Candidates' do
       end        
     end
 
-    describe "ajax testing", :js => true do
+    describe 'ajax testing', :js => true do
       
       before :each do
         require 'coffee_script'
@@ -247,13 +247,13 @@ describe 'Candidates' do
             click_button "#{I18n.t('submit')}"
           end
           
-          it "should create an object in the db" do
+          it 'should create an object in the db' do
             lambda do 
               sleep(2)  
             end.should change(ProfessionalSkillCandidate, :count).by(1)
           end
           
-          it "should hide the form" do
+          it 'should hide the form' do
             page.should_not have_selector 'form#new_professional_skill_candidate'
           end                       
         end
@@ -361,7 +361,7 @@ describe 'Candidates' do
             click_button "#{I18n.t('submit')}"             
           end
           
-          it "should create an object in the db" do
+          it 'should create an object in the db' do
             lambda do              
               sleep(2)          
             end.should change(InterpersonalSkillCandidate, :count).by(1)
@@ -485,13 +485,13 @@ describe 'Candidates' do
             click_button "#{I18n.t('submit')}"             
           end
           
-          it "should create an object in the db" do
+          it 'should create an object in the db' do
             lambda do              
               sleep(2)          
             end.should change(Experience, :count).by(1)
           end
           
-          it "should hide the form" do
+          it 'should hide the form' do
             page.should_not have_selector 'form#new_experience'
           end                       
         end
@@ -611,13 +611,13 @@ describe 'Candidates' do
             click_button "#{I18n.t('submit')}"             
           end
           
-          it "should create an object in the db" do
+          it 'should create an object in the db' do
             lambda do              
               sleep(2)          
             end.should change(Education, :count).by(1)
           end
           
-          it "should hide the form" do
+          it 'should hide the form' do
             page.should_not have_selector 'form#new_education'
           end                       
         end
@@ -725,13 +725,13 @@ describe 'Candidates' do
             click_button "#{I18n.t('submit')}"             
           end
           
-          it "should create an object in the db" do
+          it 'should create an object in the db' do
             lambda do              
               sleep(2)          
             end.should change(CertificateCandidate, :count).by(1)
           end
           
-          it "should hide the form" do
+          it 'should hide the form' do
             page.should_not have_selector 'form#new_certificate_candidate'
           end                       
         end
@@ -840,13 +840,13 @@ describe 'Candidates' do
             click_button "#{I18n.t('submit')}"             
           end
           
-          it "should create an object in the db" do
+          it 'should create an object in the db' do
             lambda do              
               sleep(2)          
             end.should change(LanguageCandidate, :count).by(1)
           end
           
-          it "should hide the form" do
+          it 'should hide the form' do
             page.should_not have_selector 'form#new_language_candidate'
           end                       
         end

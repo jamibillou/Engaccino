@@ -1,7 +1,7 @@
 //= require jquery
 //= require jquery-ui
-//= require jquery_ujs
 //= require jquery.purr
+//= require jquery_ujs
 //= require jquery.remotipart
 //= require best_in_place
 //= require i18n
