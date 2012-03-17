@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Candidates' do
-
+=begin
   describe 'signup' do
     
     describe 'failure' do
@@ -188,7 +188,7 @@ describe 'Candidates' do
         page.should have_selector 'div#language_candidate_'+language_candidate.id.to_s                                                             
       end        
     end
-
+=end
     describe "ajax testing", :js => true do
       
       before :each do
@@ -284,6 +284,7 @@ describe 'Candidates' do
           end
           
           it "should display the new form after a deletion and a click to the 'add' link" do
+            sleep(3)
             click_link 'link_add_professional_skill_candidate'
             page.should have_selector 'form#new_professional_skill_candidate'
             find('form#new_professional_skill_candidate').find('div.professional_skill_candidate')
@@ -349,6 +350,10 @@ describe 'Candidates' do
           end                       
         end
         
+        describe 'item update' do
+          
+        end
+        
         describe 'item deletion' do
           
           before :each do
@@ -375,6 +380,7 @@ describe 'Candidates' do
           end
           
           it "should display the new form after a deletion and a click to the 'add' link" do
+            sleep(3)
             click_link 'link_add_interpersonal_skill_candidate'
             page.should have_selector 'form#new_interpersonal_skill_candidate'
             find('form#new_interpersonal_skill_candidate').find('div.interpersonal_skill_candidate')
@@ -476,6 +482,7 @@ describe 'Candidates' do
           end
           
           it "should display the new form after a deletion and a click to the 'add' link" do
+            sleep(3)
             click_link 'link_add_experience'
             page.should have_selector 'form#new_experience'
             find('form#new_experience').find('div.edu_exp_date')
@@ -579,6 +586,7 @@ describe 'Candidates' do
           end
           
           it "should display the new form after a deletion and a click to the 'add' link" do
+            sleep(3)
             click_link 'link_add_education'
             page.should have_selector 'form#new_education'
             find('form#new_education').find('div.edu_exp_date')
@@ -670,6 +678,7 @@ describe 'Candidates' do
           end
           
           it "should display the new form after a deletion and a click to the 'add' link" do
+            sleep(3)
             click_link 'link_add_certificate_candidate'
             page.should have_selector 'form#new_certificate_candidate'
             find('form#new_certificate_candidate').find('div.certificate_candidate')
@@ -762,6 +771,7 @@ describe 'Candidates' do
           end
           
           it "should display the new form after a deletion and a click to the 'add' link" do
+            sleep(3)
             click_link 'link_add_language_candidate'
             page.should have_selector 'form#new_language_candidate'
             find('form#new_language_candidate').find('div.language_candidate')
@@ -769,5 +779,5 @@ describe 'Candidates' do
         end        
       end                   
     end
-  end
+  #end
 end
