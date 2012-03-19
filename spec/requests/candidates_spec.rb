@@ -35,7 +35,7 @@ describe 'Candidates' do
     end
   end
 
-  describe 'sign in/out' do
+  describe 'signin / signout' do
   
     describe 'failure' do
     
@@ -55,33 +55,33 @@ describe 'Candidates' do
         @candidate.update_attributes :profile_completion => 5
       end
       
-      it 'should sign redirect to the root path during a signin' do
-        visit signin_path
-        fill_in 'email',    :with => @candidate.email
-        fill_in 'password', :with => @candidate.password
-        click_button "#{I18n.t('sessions.new.signin')}"
-        click_link I18n.t(:sign_out)
-        current_path.should == root_path
-      end
-      
-      it 'should redirect to the candidate profile page after a signin' do
+      it 'should sign a candidate in' do
         visit signin_path
         fill_in 'email',    :with => @candidate.email
         fill_in 'password', :with => @candidate.password
         click_button "#{I18n.t('sessions.new.signin')}"
         current_path.should == candidate_path(@candidate)
-      end      
+      end 
+      
+       it 'should sign a cnadidate out' do
+          visit signin_path
+          fill_in 'email',    :with => @candidate.email
+          fill_in 'password', :with => @candidate.password
+          click_button "#{I18n.t('sessions.new.signin')}"
+          click_link I18n.t(:sign_out)
+          current_path.should == root_path
+        end     
     end
   end
   
-  describe 'profile page' do
+  describe 'profile' do
     
     before :each do
       @candidate = Factory :candidate
       @candidate.update_attributes :profile_completion => 5
     end
     
-    describe 'standard and empty blocks display' do
+    describe 'when empty' do
       
       before :each do
         visit signin_path
@@ -90,67 +90,80 @@ describe 'Candidates' do
         click_button "#{I18n.t('sessions.new.signin')}"
       end
       
-      it 'should display the top bar' do page.should have_selector 'div#show_top' end
+      it 'should have a top bar' do
+        page.should have_selector 'div#show_top'
+      end
       
-      it 'should display the candidate card' do page.should have_selector 'div', :class => 'card', :id => 'candidate_'+@candidate.id.to_s end
+      it 'should have a candidate card' do
+        page.should have_selector 'div.card'
+      end
       
-      it 'should display the empty timeline block' do 
+      it 'should have an empty timeline' do 
         page.should have_css 'div#show_timeline'
         find('div#timeline').find('h1').should have_content(I18n.t('candidates.show.timeline.title').remove_accents.upcase)
       end
         
-      it 'should display the empty professional_skills block' do find('div#professional_skill_candidates').should have_content I18n.t('professional_skills.add_some') end
+      it 'should have an empty professional_skills block' do
+        find('div#professional_skill_candidates').should have_content I18n.t('professional_skills.add_some')
+      end
         
-      it 'should display the empty interpersonal_skills block' do find('div#interpersonal_skill_candidates').should have_content I18n.t('interpersonal_skills.add_some') end
+      it 'should have an empty interpersonal_skills block' do
+        find('div#interpersonal_skill_candidates').should have_content I18n.t('interpersonal_skills.add_some')
+      end
         
-      it 'should display the empty experiences block' do find('div#experiences').should have_content I18n.t('experiences.add_some') end
+      it 'should have an empty experiences block' do
+        find('div#experiences').should have_content I18n.t('experiences.add_some')
+      end
         
-      it 'should display the empty educations block' do find('div#educations').should have_content I18n.t('educations.add_some') end
+      it 'should have an empty educations block' do
+        find('div#educations').should have_content I18n.t('educations.add_some')
+      end
         
-      it 'should display the empty certificates block' do find('div#certificate_candidates').should have_content I18n.t('certificates.add_some') end
+      it 'should have an empty certificates block' do
+        find('div#certificate_candidates').should have_content I18n.t('certificates.add_some')
+      end
       
-      it 'should display the empty languages block' do find('div#language_candidates').should have_content I18n.t('languages.add_some') end              
+      it 'should have an empty languages block' do
+        find('div#language_candidates').should have_content I18n.t('languages.add_some')
+      end              
     end
     
-    describe 'block with attributes display' do
+    describe 'when complete' do
 
-      it 'should display the professional_skills block with the corresponding skill' do
+      it 'should have a professional_skills block with a skill' do
         professional_skill = Factory :professional_skill        
         professional_skill_candidate = Factory :professional_skill_candidate, :candidate => @candidate, :professional_skill => professional_skill
         visit signin_path
         fill_in 'email',    :with => @candidate.email
         fill_in 'password', :with => @candidate.password
         click_button "#{I18n.t('sessions.new.signin')}"
-        
         page.should have_selector 'div#professional_skill_candidates'
-        page.should have_selector 'div#professional_skill_candidate_'+professional_skill_candidate.id.to_s                                                                
+        page.should have_selector "div#professional_skill_candidate_#{professional_skill_candidate.id}"                                                                
       end
       
-      it 'should display the interpersonal_skills block with the corresponding skill' do
+      it 'should have an interpersonal_skills block with a skill' do
         interpersonal_skill = Factory :interpersonal_skill        
         interpersonal_skill_candidate = Factory :interpersonal_skill_candidate, :candidate => @candidate, :interpersonal_skill => interpersonal_skill
         visit signin_path
         fill_in 'email',    :with => @candidate.email
         fill_in 'password', :with => @candidate.password
         click_button "#{I18n.t('sessions.new.signin')}"
-        
         page.should have_selector 'div#interpersonal_skill_candidates'
-        page.should have_selector 'div#interpersonal_skill_candidate_'+interpersonal_skill_candidate.id.to_s                                                                
+        page.should have_selector "div#interpersonal_skill_candidate_#{interpersonal_skill_candidate.id}"
       end
       
-      it 'should display the experiences block with the corresponding experience' do
+      it 'should have an experiences block with an experience' do
         company = Factory :company        
         experience = Factory :experience, :candidate => @candidate, :company => company
         visit signin_path
         fill_in 'email',    :with => @candidate.email
         fill_in 'password', :with => @candidate.password
         click_button "#{I18n.t('sessions.new.signin')}"
-        
         page.should have_selector 'div#experiences'
-        page.should have_selector 'div#experience_'+experience.id.to_s                                                                
+        page.should have_selector "div#experience_#{experience.id}"
       end
       
-      it 'should display the educations block with the corresponding education' do
+      it 'should have an educations block with an education' do
         school = Factory :school
         degree_type = Factory :degree_type
         degree = Factory :degree, :degree_type => degree_type
@@ -159,37 +172,34 @@ describe 'Candidates' do
         fill_in 'email',    :with => @candidate.email
         fill_in 'password', :with => @candidate.password
         click_button "#{I18n.t('sessions.new.signin')}"
-        
         page.should have_selector 'div#educations'
-        page.should have_selector 'div#education_'+education.id.to_s                                                                
+        page.should have_selector "div#education_#{education.id}"                                                            
       end
       
-      it 'should display the certificates block with the corresponding certificate' do
+      it 'should have a certificates block with a certificate' do
         certificate = Factory :certificate        
         certificate_candidate = Factory :certificate_candidate, :candidate => @candidate, :certificate => certificate
         visit signin_path
         fill_in 'email',    :with => @candidate.email
         fill_in 'password', :with => @candidate.password
         click_button "#{I18n.t('sessions.new.signin')}"
-        
         page.should have_selector 'div#certificate_candidates'
-        page.should have_selector 'div#certificate_candidate_'+certificate_candidate.id.to_s                                                                
+        page.should have_selector "div#certificate_candidate_#{certificate_candidate.id}"                                                                
       end
       
-      it 'should display the languages block with the corresponding language' do
+      it 'should have a languages block with a language' do
         language = Factory :language        
         language_candidate = Factory :language_candidate, :candidate => @candidate, :language => language
         visit signin_path
         fill_in 'email',    :with => @candidate.email
         fill_in 'password', :with => @candidate.password
         click_button "#{I18n.t('sessions.new.signin')}"
-        
         page.should have_selector 'div#language_candidates'
-        page.should have_selector 'div#language_candidate_'+language_candidate.id.to_s                                                             
+        page.should have_selector "div#language_candidate_#{language_candidate.id}"
       end        
     end
 
-    describe 'ajax testing', :js => true do
+    describe 'ajax', :js => true do
       
       before :each do
         require 'coffee_script'
@@ -208,36 +218,32 @@ describe 'Candidates' do
           click_button "#{I18n.t('sessions.new.signin')}"
         end
        
-        it "should display an empty form when we click on 'Add'" do
+        it "should have an empty form after 'ADD +' is clicked" do
           click_link 'link_add_professional_skill_candidate'
           page.should have_selector 'form#new_professional_skill_candidate'
           find('form#new_professional_skill_candidate').find('div.professional_skill_candidate')
         end
         
-        it "should hide the form when we click on 'Cancel'" do
+        it "should have a hidden form after 'Cancel' is clicked" do
           click_link 'link_add_professional_skill_candidate'
           click_link "#{I18n.t('cancel')}"
           find('form#new_professional_skill_candidate').visible?.should be_false
         end
         
-        it 'should display an error message when we submit an empty form' do
+        it 'should have an error message when an empty form is submitted' do
           click_link 'link_add_professional_skill_candidate'
           click_button "#{I18n.t('submit')}"
           find('form#new_professional_skill_candidate').visible?.should be_true
           find('div#errors_new_professional_skill_candidate').should have_content 'professional_skill.label'
         end
         
-        it 'should display a block with the object id within the block id' do
-          page.should have_selector "div#professional_skill_candidate_#{@professional_skill_candidate.id}"
-        end
-        
-        it 'should hide the description block and display the edition block' do
+        it 'should have a hidden show block and a visible edit block when clicked' do
           find("div#show_professional_skill_candidate_#{@professional_skill_candidate.id}").click
           find("div#edit_professional_skill_candidate_#{@professional_skill_candidate.id}").visible?.should be_true
           find("div#show_professional_skill_candidate_#{@professional_skill_candidate.id}").visible?.should be_false
         end  
     
-        describe 'item creation' do
+        describe 'create' do
           
           before :each do
             click_link 'link_add_professional_skill_candidate'
@@ -247,31 +253,31 @@ describe 'Candidates' do
             click_button "#{I18n.t('submit')}"
           end
           
-          it 'should create an object in the db' do
+          it 'should create a new object' do
             lambda do 
               sleep(2)  
             end.should change(ProfessionalSkillCandidate, :count).by(1)
           end
           
-          it 'should hide the form' do
+          it "shouldn't have a new form anymore" do
             page.should_not have_selector 'form#new_professional_skill_candidate'
           end                       
         end
         
-        describe 'item update' do
+        describe 'update' do
           
           before :each do
             find("div#show_professional_skill_candidate_#{@professional_skill_candidate.id}").click
           end
           
-          it 'should display an error message if we empty a field' do
+          it 'should have an error message when a field is deleted' do
             fill_in 'professional_skill_candidate_professional_skill_attributes_label', :with => ''
             click_button "#{I18n.t('submit')}"
             find("div#edit_professional_skill_candidate_#{@professional_skill_candidate.id}").visible?.should be_true
             find("div.error_messages").should have_content 'professional_skill.label'
           end
           
-          it 'should display new info and hide the edit form when we submit the form correctly' do
+          it 'should have the updated details and a hidden edit form when correct data is submitted' do
             fill_in 'professional_skill_candidate_professional_skill_attributes_label', :with => 'Web Development'
             click_button "#{I18n.t('submit')}"
             sleep(2)
@@ -280,7 +286,7 @@ describe 'Candidates' do
           end
         end
         
-        describe 'item deletion' do
+        describe 'destroy' do
           
           before :each do
             find("div#show_professional_skill_candidate_#{@professional_skill_candidate.id}").click
@@ -293,19 +299,19 @@ describe 'Candidates' do
             end.should change(ProfessionalSkillCandidate,:count).by(-1)
           end
           
-          it 'should destroy the edit form' do
+          it "shouldn't have an edit form anymore" do
             page.should_not have_selector "div#edit_professional_skill_candidate_#{@professional_skill_candidate.id}"
           end
 
-          it 'should destroy the show block' do
+          it "shouldn't have a show block anymore" do
             page.should_not have_selector "div#show_professional_skill_candidate_#{@professional_skill_candidate.id}"
           end
           
-          it 'should display the empty block design' do
+          it 'should have an empty block' do
             find('div#professional_skill_candidates').should have_content I18n.t('professional_skills.add_some')
           end
           
-          it "should display the new form after a deletion and a click to the 'add' link" do
+          it "should have a new form when an object was just destroyed and 'ADD +' is clicked" do
             sleep(2)
             click_link 'link_add_professional_skill_candidate'
             page.should have_selector 'form#new_professional_skill_candidate'
@@ -324,36 +330,32 @@ describe 'Candidates' do
           click_button "#{I18n.t('sessions.new.signin')}"
         end
         
-        it "should display an empty form when we click on 'Add'" do
+        it "should have an empty form after 'ADD +' is clicked" do
           click_link 'link_add_interpersonal_skill_candidate'
           page.should have_selector 'form#new_interpersonal_skill_candidate'
           find('form#new_interpersonal_skill_candidate').find('div#errors_new_interpersonal_skill_candidate')
         end
         
-        it "should hide the form when we click on 'Cancel'" do
+        it "should have a hidden form after 'Cancel' is clicked" do
           click_link 'link_add_interpersonal_skill_candidate'
           click_link "#{I18n.t('cancel')}"
           find('form#new_interpersonal_skill_candidate').visible?.should be_false
         end
         
-        it 'should display an error message when we submit an empty form' do
+        it 'should have an error message when an empty form is submitted' do
           click_link 'link_add_interpersonal_skill_candidate'
           click_button "#{I18n.t('submit')}"
           find('form#new_interpersonal_skill_candidate').visible?.should be_true
           find('div#errors_new_interpersonal_skill_candidate').should have_content 'interpersonal_skill.label'
         end
         
-        it 'should display a block with the object id within the block id' do
-          page.should have_selector "div#interpersonal_skill_candidate_#{@interpersonal_skill_candidate.id}"
-        end
-        
-        it 'should hide the description block and display the edition block' do
+        it 'should have a hidden show block and a visible edit block when clicked' do
           find("div#show_interpersonal_skill_candidate_#{@interpersonal_skill_candidate.id}").click
           find("div#edit_interpersonal_skill_candidate_#{@interpersonal_skill_candidate.id}").visible?.should be_true
           find("div#show_interpersonal_skill_candidate_#{@interpersonal_skill_candidate.id}").visible?.should be_false
         end  
     
-        describe 'item creation' do
+        describe 'create' do
           
           before :each do
             click_link 'link_add_interpersonal_skill_candidate'
@@ -361,31 +363,31 @@ describe 'Candidates' do
             click_button "#{I18n.t('submit')}"             
           end
           
-          it 'should create an object in the db' do
+          it 'should create a new object' do
             lambda do              
               sleep(2)          
             end.should change(InterpersonalSkillCandidate, :count).by(1)
           end
           
-          it 'should hide the form' do
+          it "shouldn't have a new form anymore" do
             page.should_not have_selector 'form#new_interpersonal_skill_candidate'
           end                       
         end
 
-        describe 'item update' do
+        describe 'update' do
           
           before :each do
             find("div#show_interpersonal_skill_candidate_#{@interpersonal_skill_candidate.id}").click
           end
           
-          it 'should display an error message if we empty a field' do
+          it 'should have an error message when a field is deleted' do
             fill_in 'interpersonal_skill_candidate_interpersonal_skill_attributes_label', :with => ''
             click_button "#{I18n.t('submit')}"
             find("div#edit_interpersonal_skill_candidate_#{@interpersonal_skill_candidate.id}").visible?.should be_true
             find("div.error_messages").should have_content 'interpersonal_skill.label'
           end
           
-          it 'should display new info and hide the edit form when we submit the form correctly' do
+          it 'should have the updated details and a hidden edit form when correct data is submitted' do
             fill_in 'interpersonal_skill_candidate_interpersonal_skill_attributes_label', :with => 'Self Confidence'
             click_button "#{I18n.t('submit')}"
             sleep(2)
@@ -394,7 +396,7 @@ describe 'Candidates' do
           end
         end
         
-        describe 'item deletion' do
+        describe 'destroy' do
           
           before :each do
             find("div#show_interpersonal_skill_candidate_#{@interpersonal_skill_candidate.id}").click
@@ -407,19 +409,19 @@ describe 'Candidates' do
             end.should change(InterpersonalSkillCandidate,:count).by(-1)
           end
           
-          it 'should destroy the edit form' do
+          it "shouldn't have an edit form anymore" do
             page.should_not have_selector "div#edit_interpersonal_skill_candidate_#{@interpersonal_skill_candidate.id}"
           end
 
-          it 'should destroy the show block' do
+          it "shouldn't have a show block anymore" do
             page.should_not have_selector "div#show_interpersonal_skill_candidate_#{@interpersonal_skill_candidate.id}"
           end
           
-          it 'should display the empty block design' do
+          it 'should have an empty block' do
             find('div#interpersonal_skill_candidates').should have_content I18n.t('interpersonal_skills.add_some')
           end
           
-          it "should display the new form after a deletion and a click to the 'add' link" do
+          it "should have a new form when an object was just destroyed and 'ADD +' is clicked" do
             sleep(2)
             click_link 'link_add_interpersonal_skill_candidate'
             page.should have_selector 'form#new_interpersonal_skill_candidate'
@@ -438,19 +440,19 @@ describe 'Candidates' do
           click_button "#{I18n.t('sessions.new.signin')}"
         end
                 
-        it "should display an empty form when we click on 'Add'" do
+        it "should have an empty form after 'ADD +' is clicked" do
           click_link 'link_add_experience'
           page.should have_selector 'form#new_experience'
           find('form#new_experience').find('div.edu_exp_date')
         end
         
-        it "should hide the form when we click on 'Cancel'" do
+        it "should have a hidden form after 'Cancel' is clicked" do
           click_link 'link_add_experience'
           click_link "#{I18n.t('cancel')}"
           find('form#new_experience').visible?.should be_false
         end
         
-        it 'should display an error message when we submit an empty form' do
+        it 'should have an error message when an empty form is submitted' do
           click_link 'link_add_experience'
           click_button "#{I18n.t('submit')}"
           find('form#new_experience').visible?.should be_true
@@ -462,17 +464,13 @@ describe 'Candidates' do
           find('div#errors_new_experience').should have_content 'end_year'          
         end
         
-        it 'should display a block with the object id within the block id' do
-          page.should have_selector "div#experience_#{@experience.id}"
-        end
-        
-        it 'should hide the description block and display the edition block' do
+        it 'should have a hidden show block and a visible edit block when clicked' do
           find("div#show_experience_#{@experience.id}").click
           find("div#edit_experience_#{@experience.id}").visible?.should be_true
           find("div#show_experience_#{@experience.id}").visible?.should be_false
         end
         
-        describe 'item creation' do
+        describe 'create' do
           
           before :each do
             click_link 'link_add_experience'
@@ -485,31 +483,31 @@ describe 'Candidates' do
             click_button "#{I18n.t('submit')}"             
           end
           
-          it 'should create an object in the db' do
+          it 'should create a new object' do
             lambda do              
               sleep(2)          
             end.should change(Experience, :count).by(1)
           end
           
-          it 'should hide the form' do
+          it "shouldn't have a new form anymore" do
             page.should_not have_selector 'form#new_experience'
           end                       
         end
 
-        describe 'item update' do
+        describe 'update' do
           
           before :each do
             find("div#show_experience_#{@experience.id}").click
           end
           
-          it 'should display an error message if we empty a field' do
+          it 'should have an error message when a field is deleted' do
             fill_in 'experience_company_attributes_name', :with => ''
             click_button "#{I18n.t('submit')}"
             find("div#edit_experience_#{@experience.id}").visible?.should be_true
             find("div.error_messages").should have_content 'company.name'
           end
           
-          it 'should display new info and hide the edit form when we submit the form correctly' do
+          it 'should have the updated details and a hidden edit form when correct data is submitted' do
             fill_in 'experience_company_attributes_name', :with => 'PXTherapeutics'
             click_button "#{I18n.t('submit')}"
             sleep(2)
@@ -518,7 +516,7 @@ describe 'Candidates' do
           end
         end
         
-        describe 'item deletion' do
+        describe 'destroy' do
           
           before :each do
             find("div#show_experience_#{@experience.id}").click
@@ -531,19 +529,19 @@ describe 'Candidates' do
             end.should change(Experience,:count).by(-1)
           end
           
-          it 'should destroy the edit form' do
+          it "shouldn't have an edit form anymore" do
             page.should_not have_selector "div#edit_experience_#{@experience.id}"
           end
 
-          it 'should destroy the show block' do
+          it "shouldn't have a show block anymore" do
             page.should_not have_selector "div#show_experience_#{@experience.id}"
           end
           
-          it 'should display the empty block design' do
+          it 'should have an empty block' do
             find('div#experiences').should have_content I18n.t('experiences.add_some')
           end
           
-          it "should display the new form after a deletion and a click to the 'add' link" do
+          it "should have a new form when an object was just destroyed and 'ADD +' is clicked" do
             sleep(2)
             click_link 'link_add_experience'
             page.should have_selector 'form#new_experience'
@@ -562,19 +560,19 @@ describe 'Candidates' do
           click_button "#{I18n.t('sessions.new.signin')}"
         end
         
-        it "should display an empty form when we click on 'Add'" do
+        it "should have an empty form after 'ADD +' is clicked" do
           click_link 'link_add_education'
           page.should have_selector 'form#new_education'
           find('form#new_education').find('div.edu_exp_date')
         end
          
-        it "should hide the form when we click on 'Cancel'" do
+        it "should have a hidden form after 'Cancel' is clicked" do
           click_link 'link_add_education'
           click_link "#{I18n.t('cancel')}"
           find('form#new_education').visible?.should be_false
         end
         
-        it 'should display an error message when we submit an empty form' do
+        it 'should have an error message when an empty form is submitted' do
           click_link 'link_add_education'
           click_button "#{I18n.t('submit')}"
           find('form#new_education').visible?.should be_true
@@ -586,18 +584,14 @@ describe 'Candidates' do
           find('div#errors_new_education').should have_content 'end_month'
           find('div#errors_new_education').should have_content 'end_year'          
         end
-        
-        it 'should display a block with the object id within the block id' do
-          page.should have_selector "div#education_#{@education.id}"
-        end
 
-        it 'should hide the description block and display the edition block' do
+        it 'should have a hidden show block and a visible edit block when clicked' do
           find("div#show_education_#{@education.id}").click
           find("div#edit_education_#{@education.id}").visible?.should be_true
           find("div#show_education_#{@education.id}").visible?.should be_false
         end
                 
-        describe 'item creation' do
+        describe 'create' do
           
           before :each do
             click_link 'link_add_education'
@@ -611,31 +605,31 @@ describe 'Candidates' do
             click_button "#{I18n.t('submit')}"             
           end
           
-          it 'should create an object in the db' do
+          it 'should create a new object' do
             lambda do              
               sleep(2)          
             end.should change(Education, :count).by(1)
           end
           
-          it 'should hide the form' do
+          it "shouldn't have a new form anymore" do
             page.should_not have_selector 'form#new_education'
           end                       
         end
 
-        describe 'item update' do
+        describe 'update' do
           
           before :each do
             find("div#show_education_#{@education.id}").click
           end
           
-          it 'should display an error message if we empty a field' do
+          it 'should have an error message when a field is deleted' do
             fill_in 'education_school_attributes_name', :with => ''
             click_button "#{I18n.t('submit')}"
             find("div#edit_education_#{@education.id}").visible?.should be_true
             find("div.error_messages").should have_content 'school.name'
           end
           
-          it 'should display new info and hide the edit form when we submit the form correctly' do
+          it 'should have the updated details and a hidden edit form when correct data is submitted' do
             fill_in 'education_school_attributes_name', :with => 'UJF Grenoble'
             click_button "#{I18n.t('submit')}"
             sleep(2)
@@ -644,7 +638,7 @@ describe 'Candidates' do
           end
         end
               
-        describe 'item deletion' do
+        describe 'destroy' do
           
           before :each do
             find("div#show_education_#{@education.id}").click
@@ -657,19 +651,19 @@ describe 'Candidates' do
             end.should change(Education,:count).by(-1)
           end
           
-          it 'should destroy the edit form' do
+          it "shouldn't have an edit form anymore" do
             page.should_not have_selector "div#edit_education_#{@education.id}"
           end
 
-          it 'should destroy the show block' do
+          it "shouldn't have a show block anymore" do
             page.should_not have_selector "div#show_education_#{@education.id}"
           end
           
-          it 'should display the empty block design' do
+          it 'should have an empty block' do
             find('div#educations').should have_content I18n.t('educations.add_some')
           end
           
-          it "should display the new form after a deletion and a click to the 'add' link" do
+          it "should have a new form when an object was just destroyed and 'ADD +' is clicked" do
             sleep(2)
             click_link 'link_add_education'
             page.should have_selector 'form#new_education'
@@ -688,36 +682,32 @@ describe 'Candidates' do
           click_button "#{I18n.t('sessions.new.signin')}"
         end
         
-        it "should display an empty form when we click on 'Add'" do
+        it "should have an empty form after 'ADD +' is clicked" do
           click_link 'link_add_certificate_candidate'
           page.should have_selector 'form#new_certificate_candidate'
           find('form#new_certificate_candidate').find('div.certificate_candidate')
         end
         
-        it "should hide the form when we click on 'Cancel'" do
+        it "should have a hidden form after 'Cancel' is clicked" do
           click_link 'link_add_certificate_candidate'
           click_link "#{I18n.t('cancel')}"
           find('form#new_certificate_candidate').visible?.should be_false
         end
 
-        it 'should display an error message when we submit an empty form' do
+        it 'should have an error message when an empty form is submitted' do
           click_link 'link_add_certificate_candidate'
           click_button "#{I18n.t('submit')}"
           find('form#new_certificate_candidate').visible?.should be_true
           find('div#errors_new_certificate_candidate').should have_content 'certificate.label'
         end
-        
-        it 'should display a block with the object id within the block id' do
-          page.should have_selector "div#certificate_candidate_#{@certificate_candidate.id}"
-        end
 
-        it 'should hide the description block and display the edition block' do
+        it 'should have a hidden show block and a visible edit block when clicked' do
           find("div#show_certificate_candidate_#{@certificate_candidate.id}").click
           find("div#edit_certificate_candidate_#{@certificate_candidate.id}").visible?.should be_true
           find("div#show_certificate_candidate_#{@certificate_candidate.id}").visible?.should be_false
         end
                 
-        describe 'item creation' do
+        describe 'create' do
           
           before :each do
             click_link 'link_add_certificate_candidate'
@@ -725,31 +715,31 @@ describe 'Candidates' do
             click_button "#{I18n.t('submit')}"             
           end
           
-          it 'should create an object in the db' do
+          it 'should create a new object' do
             lambda do              
               sleep(2)          
             end.should change(CertificateCandidate, :count).by(1)
           end
           
-          it 'should hide the form' do
+          it "shouldn't have a new form anymore" do
             page.should_not have_selector 'form#new_certificate_candidate'
           end                       
         end
 
-        describe 'item update' do
+        describe 'update' do
           
           before :each do
             find("div#show_certificate_candidate_#{@certificate_candidate.id}").click
           end
           
-          it 'should display an error message if we empty a field' do
+          it 'should have an error message when a field is deleted' do
             fill_in 'certificate_candidate_certificate_attributes_label', :with => ''
             click_button "#{I18n.t('submit')}"
             find("div#edit_certificate_candidate_#{@certificate_candidate.id}").visible?.should be_true
             find("div.error_messages").should have_content 'certificate.label'
           end
           
-          it 'should display new info and hide the edit form when we submit the form correctly' do
+          it 'should have the updated details and a hidden edit form when correct data is submitted' do
             fill_in 'certificate_candidate_certificate_attributes_label', :with => 'Microsoft Certification'
             click_button "#{I18n.t('submit')}"
             sleep(2)
@@ -758,7 +748,7 @@ describe 'Candidates' do
           end
         end
 
-        describe 'item deletion' do
+        describe 'destroy' do
           
           before :each do
             find("div#show_certificate_candidate_#{@certificate_candidate.id}").click
@@ -771,19 +761,19 @@ describe 'Candidates' do
             end.should change(CertificateCandidate,:count).by(-1)
           end
           
-          it 'should destroy the edit form' do
+          it "shouldn't have an edit form anymore" do
             page.should_not have_selector "div#edit_certificate_candidate_#{@certificate_candidate.id}"
           end
 
-          it 'should destroy the show block' do
+          it "shouldn't have a show block anymore" do
             page.should_not have_selector "div#show_certificate_candidate_#{@certificate_candidate.id}"
           end
           
-          it 'should display the empty block design' do
+          it 'should have an empty block' do
             find('div#certificate_candidates').should have_content I18n.t('certificates.add_some')
           end
           
-          it "should display the new form after a deletion and a click to the 'add' link" do
+          it "should have a new form when an object was just destroyed and 'ADD +' is clicked" do
             sleep(2)
             click_link 'link_add_certificate_candidate'
             page.should have_selector 'form#new_certificate_candidate'
@@ -802,36 +792,32 @@ describe 'Candidates' do
           click_button "#{I18n.t('sessions.new.signin')}"
         end
         
-        it "should display an empty form when we click on 'Add'" do
+        it "should have an empty form after 'ADD +' is clicked" do
           click_link 'link_add_language_candidate'
           page.should have_selector 'form#new_language_candidate'
           find('form#new_language_candidate').find('div.language_candidate')
         end
         
-        it "should hide the form when we click on 'Cancel'" do
+        it "should have a hidden form after 'Cancel' is clicked" do
           click_link 'link_add_language_candidate'
           click_link "#{I18n.t('cancel')}"
           find('form#new_language_candidate').visible?.should be_false
         end
         
-        it 'should display an error message when we submit an empty form' do
+        it 'should have an error message when an empty form is submitted' do
           click_link 'link_add_language_candidate'
           click_button "#{I18n.t('submit')}"
           find('form#new_language_candidate').visible?.should be_true
           find('div#errors_new_language_candidate').should have_content 'language.label'
         end
-        
-        it 'should display a block with the object id within the block id' do
-          page.should have_selector "div#language_candidate_#{@language_candidate.id}"
-        end
 
-        it 'should hide the description block and display the edition block' do
+        it 'should have a hidden show block and a visible edit block when clicked' do
           find("div#show_language_candidate_#{@language_candidate.id}").click
           find("div#edit_language_candidate_#{@language_candidate.id}").visible?.should be_true
           find("div#show_language_candidate_#{@language_candidate.id}").visible?.should be_false
         end
         
-        describe 'item creation' do
+        describe 'create' do
           
           before :each do
             click_link 'link_add_language_candidate'
@@ -840,31 +826,31 @@ describe 'Candidates' do
             click_button "#{I18n.t('submit')}"             
           end
           
-          it 'should create an object in the db' do
+          it 'should create a new object' do
             lambda do              
               sleep(2)          
             end.should change(LanguageCandidate, :count).by(1)
           end
           
-          it 'should hide the form' do
+          it "shouldn't have a new form anymore" do
             page.should_not have_selector 'form#new_language_candidate'
           end                       
         end
 
-        describe 'item update' do
+        describe 'update' do
           
           before :each do
             find("div#show_language_candidate_#{@language_candidate.id}").click
           end
           
-          it 'should display an error message if we empty a field' do
+          it 'should have an error message when a field is deleted' do
             fill_in 'language_candidate_language_attributes_label', :with => ''
             click_button "#{I18n.t('submit')}"
             find("div#edit_language_candidate_#{@language_candidate.id}").visible?.should be_true
             find("div.error_messages").should have_content 'language.label'
           end
           
-          it 'should display new info and hide the edit form when we submit the form correctly' do
+          it 'should have the updated details and a hidden edit form when correct data is submitted' do
             fill_in 'language_candidate_language_attributes_label', :with => 'Norwich'
             click_button "#{I18n.t('submit')}"
             sleep(2)
@@ -873,7 +859,7 @@ describe 'Candidates' do
           end
         end
         
-        describe 'item deletion' do
+        describe 'destroy' do
           
           before :each do
             find("div#show_language_candidate_#{@language_candidate.id}").click
@@ -886,19 +872,19 @@ describe 'Candidates' do
             end.should change(LanguageCandidate,:count).by(-1)
           end
           
-          it 'should destroy the edit form' do
+          it "shouldn't have an edit form anymore" do
             page.should_not have_selector "div#edit_language_candidate_#{@language_candidate.id}"
           end
 
-          it 'should destroy the show block' do
+          it "shouldn't have a show block anymore" do
             page.should_not have_selector "div#show_language_candidate_#{@language_candidate.id}"
           end
           
-          it 'should display the empty block design' do
+          it 'should have an empty block' do
             find('div#language_candidates').should have_content I18n.t('languages.add_some')
           end
           
-          it "should display the new form after a deletion and a click to the 'add' link" do
+          it "should have a new form when an object was just destroyed and 'ADD +' is clicked" do
             sleep(2)
             click_link 'link_add_language_candidate'
             page.should have_selector 'form#new_language_candidate'
