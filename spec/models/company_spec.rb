@@ -71,9 +71,9 @@ describe Company do
       too_long_name_company.should_not be_valid
     end
     
-    it 'should accept require a city' do
+    it 'should accept empty cities' do
       empty_city_company = Company.new @attr.merge :city => ''
-      empty_city_company.should_not be_valid
+      empty_city_company.should be_valid
     end
     
     it 'should reject too long cities' do
@@ -82,9 +82,9 @@ describe Company do
       too_long_city_company.should_not be_valid
     end
     
-    it 'should require a country' do
+    it 'should accept empty countries' do
       empty_country_company = Company.new @attr.merge :country => ''
-      empty_country_company.should_not be_valid
+      empty_country_company.should be_valid
     end
     
     it 'should reject invalid countries' do

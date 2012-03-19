@@ -9,8 +9,8 @@ class Company < ActiveRecord::Base
   countries_array = Country.all.collect { |c| c[0] }
   
   validates :name,    :length       => { :maximum => 80 },                                :presence    => true
-  validates :city,    :length       => { :maximum =>  80 },                               :presence    => true
-  validates :country, :inclusion    => { :in => countries_array },                        :presence    => true
+  validates :city,    :length       => { :maximum =>  80 },                               :allow_blank => true
+  validates :country, :inclusion    => { :in => countries_array },                        :allow_blank => true
   validates :address, :length       => { :maximum => 160 },                               :allow_blank => true
   validates :about,   :length       => { :within => 20..160 },                            :allow_blank => true
   validates :url,     :url_format   => true,                                              :allow_blank => true
