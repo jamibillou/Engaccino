@@ -46,6 +46,13 @@ module Engaccino
     config.assets.version = '1.0'
     
     # Replace the field_with_error div by a span, to avoid the carriage return
-    config.action_view.field_error_proc = Proc.new { |html_tag, instance| "<span class=\"field_with_errors\">#{html_tag}</span>".html_safe}
+    config.action_view.field_error_proc = Proc.new do |html_tag, instance|
+      unless html_tag =~ /^<label/
+         %{<div class="field_with_errors">#{html_tag}<label for="#{instance.send(:tag_id)}"
+      class="message">#{instance.error_message.first}</label> </div>}.html_safe
+      else
+        %{<div class="field_with_errors">#{html_tag}</div>}.html_safe
+      end
+    end
   end
 end
