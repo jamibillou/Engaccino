@@ -1,5 +1,5 @@
 class Company < ActiveRecord::Base
-
+  
   attr_accessible :name, :address, :zip, :city, :country, :phone, :email, :url, :image, :about
   
   has_many :experiences, :dependent => :destroy
@@ -9,7 +9,7 @@ class Company < ActiveRecord::Base
   countries_array = Country.all.collect { |c| c[0] }
   
   validates :name,    :length       => { :maximum => 80 },                                :presence    => true
-  validates :city,    :length       => { :maximum =>  80 },                               :presence    => true
+  validates :city,    :length       => { :maximum =>  80 },                               :if => :city_presence?
   validates :country, :inclusion    => { :in => countries_array },                        :presence    => true
   validates :address, :length       => { :maximum => 160 },                               :allow_blank => true
   validates :about,   :length       => { :within => 20..160 },                            :allow_blank => true
@@ -27,6 +27,7 @@ class Company < ActiveRecord::Base
   def no_contact_info?
     (url.nil? || url.empty?) && (email.nil? || email.empty?) && (phone.nil? || phone.empty?)
   end
+  
 end
 
 # == Schema Information
