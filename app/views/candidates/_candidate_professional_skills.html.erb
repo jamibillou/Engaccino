@@ -1,6 +1,4 @@
-<% unless candidate.no_pro_skill? %>
-	<h2><%= t('professional_skills.title').remove_accents.upcase %></h2>
-	<% candidate.professional_skill_candidates.order('experience DESC').each_with_index do |professional_skill_candidate, index|  %>
-	  <% unless index > 2 %><p><%= professional_skill_candidate.professional_skill.label %></p><% end %>
-	<% end %>
+<h2><%= t('professional_skills.title').remove_accents.upcase %></h2>
+<% candidate.professional_skill_candidates.order('experience DESC').each_with_index do |professional_skill_candidate, index|  %>
+  <% unless index > 2 %><p><%= professional_skill_candidate.professional_skill.label %></p><% end %>
 <% end %>

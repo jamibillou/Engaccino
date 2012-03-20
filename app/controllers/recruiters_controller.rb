@@ -3,7 +3,7 @@ class RecruitersController < ApplicationController
   before_filter :authenticate,           :except => [:new, :create]
   before_filter :new_user,               :only   => [:new, :create]
   before_filter :authorized, :signed_up, :only   => [:index, :show]
-  before_filter :correct_recruiter,      :only   => [:edit, :update]
+  before_filter :correct_user,           :only   => [:edit, :update]
   before_filter :not_signed_up,          :only   => :edit
   before_filter :admin_user,             :only   => :destroy
     
@@ -34,11 +34,13 @@ class RecruitersController < ApplicationController
   end
   
   def edit
+    @recruiter = Recruiter.find params[:id]
     @recruiter.build_company
     init_page :title => 'recruiters.edit.complete_your_profile', :javascripts => 'recruiters/edit'
   end
   
   def update
+    @recruiter = Recruiter.find params[:id]
     unless @recruiter.update_attributes params[:recruiter]
       @recruiter.build_company if no_company_submitted?
       init_page :title => 'recruiters.edit.complete_your_profile', :javascripts => 'recruiters/edit'
@@ -57,19 +59,9 @@ class RecruitersController < ApplicationController
   end
   
   private
-    
-    def correct_recruiter
-      @recruiter = Recruiter.find params[:id]
-      redirect_to recruiter_path(current_user), :notice => t('flash.notice.other_user_page') unless current_user? @recruiter
-    end
-    
-    def signed_up
-      redirect_to edit_candidate_path(current_user), :notice => t('flash.notice.please_finish_signup') unless signed_up?
-    end
-    
+
     def no_company_submitted?
-      params[:recruiter][:company_attributes].nil? ||
-      ( params[:recruiter][:company_attributes][:name].blank? && params[:recruiter][:company_attributes][:url].blank? &&
-        params[:recruiter][:company_attributes][:city].blank? && params[:recruiter][:company_attributes][:country].blank? )
+      params[:recruiter][:company_attributes].nil? || ( params[:recruiter][:company_attributes][:name].blank? && params[:recruiter][:company_attributes][:url].blank? && 
+      params[:recruiter][:company_attributes][:city].blank? && params[:recruiter][:company_attributes][:country].blank? )
     end
 end
