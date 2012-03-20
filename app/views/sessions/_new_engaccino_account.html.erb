@@ -1,5 +1,5 @@
 <h2><%=t 'sessions.new.use_engaccino_account' %></h2>
-<%= form_for :session, :url => sessions_path, :html => { :id => 'signin_form' } do |f| %>
+<%= form_for :session, :url => sessions_path,  :html => { :id => 'signin_form' } do |f| %>
     <%= f.text_field     :email,    :placeholder => t('sessions.email'), :id => 'email',    :class => 'field' %><br />
     <%= f.password_field :password, :placeholder => t('sessions.password'), :id => 'password', :class => 'field' %><br />
     <div class='checkbox'><%= f.check_box :remember_me %> <%=t 'sessions.new.remember_me' %></div>

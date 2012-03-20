@@ -6,7 +6,6 @@
 //= require best_in_place
 //= require i18n
 //= require i18n/translations
-//= require rails.validations
 
 $ ->
   $('input.country').each -> $(this).autocomplete({ source:"/ajax/countries", minLength: 2, autoFocus: true })
