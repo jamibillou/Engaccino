@@ -56,6 +56,10 @@ class RecruitersController < ApplicationController
     end
   end
   
+  def refresh
+    render :partial => "recruiters/recruiter", :locals => { :recruiter => current_user }
+  end
+  
   private
     
     def correct_recruiter
