@@ -1,5 +1,5 @@
 class Company < ActiveRecord::Base
-
+  
   attr_accessible :name, :address, :zip, :city, :country, :phone, :email, :url, :image, :about
   
   has_many :experiences, :dependent => :destroy
@@ -27,6 +27,7 @@ class Company < ActiveRecord::Base
   def no_contact_info?
     (url.nil? || url.empty?) && (email.nil? || email.empty?) && (phone.nil? || phone.empty?)
   end
+  
 end
 
 # == Schema Information

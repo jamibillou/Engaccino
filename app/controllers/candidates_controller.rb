@@ -13,7 +13,7 @@ class CandidatesController < ApplicationController
   
   def index
     @candidates = Candidate.all
-    init_page :title => 'candidates.index.title', :javascripts => 'users/index'
+    init_page :title => 'candidates.index.title'
   end
   
   def show
@@ -24,13 +24,13 @@ class CandidatesController < ApplicationController
   
   def new
     @candidate = Candidate.new
-    init_page :title => 'candidates.new.title', :javascripts => 'candidates/new'
+    init_page :title => 'candidates.new.title'
   end
   
   def create
     @candidate = Candidate.new params[:candidate]
     unless @candidate.save
-      render_page :new, :title => 'candidates.new.title', :javascripts => 'candidates/new'
+      render_page :new, :title => 'candidates.new.title'
     else
       sign_in @candidate
       build_education ; build_experience
