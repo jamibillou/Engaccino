@@ -39,7 +39,10 @@
     </div>
   
     <div id='candidate_degree_experience' class='block'><%=   render 'candidate_degree_experience', :candidate => candidate %></div>
-    <div id='candidate_professional_skills' class='block'><%= render 'candidate_professional_skills', :candidate => candidate %></div>
+    
+    <% unless candidate.no_pro_skill? %>
+      <div id='candidate_professional_skills' class='block'><%= render 'candidate_professional_skills', :candidate => candidate %></div>
+    <% end %>
   
     <% unless current_user_profile? || params[:action] == 'index' || request.xhr? %>
       <div class='contact block'>

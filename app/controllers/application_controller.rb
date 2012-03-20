@@ -48,6 +48,15 @@ class ApplicationController < ActionController::Base
     def authenticate
       deny_access unless signed_in?
     end
+    
+    def correct_user
+      redirect_to current_user, :notice => t('flash.notice.other_user_page') unless current_user.id.to_s == params[:id]
+    end
+    
+    def signed_up
+      edit_path = if current_user.class.name.downcase == 'candidate' then edit_candidate_path(current_user) else edit_recruiter_path(current_user) end
+      redirect_to edit_path, :notice => t('flash.notice.please_finish_signup') unless signed_up?
+    end
   
     def not_signed_up
       redirect_to current_user, :notice => t('flash.notice.already_signed_up') if signed_up?
@@ -66,6 +75,6 @@ class ApplicationController < ActionController::Base
     end
     
     def authorized
-      redirect_to current_user, :notice => t('flash.notice.restricted_page') unless current_user.admin? || current_user_profile? || authorized_class_of_user?
+      redirect_to current_user, :notice => t('flash.notice.restricted_page') unless current_user.admin? || authorized_class_of_user? || current_user_profile? || current_user_company_profile?
     end
 end

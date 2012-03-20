@@ -7,7 +7,7 @@ class CandidatesController < ApplicationController
   before_filter :authenticate,           :except => [:new, :create]
   before_filter :new_user,               :only   => [:new, :create]
   before_filter :authorized, :signed_up, :only   => [:index, :show]
-  before_filter :correct_candidate,      :only   => [:edit, :update]
+  before_filter :correct_user,           :only   => [:edit, :update]
   before_filter :not_signed_up,          :only   => :edit
   before_filter :admin_user,             :only   => :destroy
   
@@ -39,11 +39,13 @@ class CandidatesController < ApplicationController
   end
   
   def edit
+    @candidate = Candidate.find params[:id]
     build_education ; build_experience
     init_page :title => 'candidates.edit.complete_your_profile', :javascripts => 'candidates/edit'
   end
 
   def update
+    @candidate = Candidate.find params[:id]
     unless @candidate.update_attributes params[:candidate]
       init_page :title => 'candidates.edit.complete_your_profile', :javascripts => 'candidates/edit'
       build_education ; build_experience
@@ -70,16 +72,5 @@ class CandidatesController < ApplicationController
   def refresh
     partial = params[:model].nil? ? "candidates/#{params[:partial]}" : "candidates/show_#{params[:model].to_s}s"
     render :partial => partial, :locals => { :candidate => current_user }
-  end
-
-  private
-    
-    def correct_candidate
-      @candidate = Candidate.find params[:id]
-      redirect_to current_user, :notice => t('flash.notice.other_user_page') unless current_user? @candidate
-    end
-    
-    def signed_up
-      redirect_to edit_recruiter_path(current_user), :notice => t('flash.notice.please_finish_signup') unless signed_up?
-    end
+  end    
 end

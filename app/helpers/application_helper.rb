@@ -37,6 +37,10 @@ module ApplicationHelper
     params[:controller] == "#{current_user.class.name.downcase}s" && params[:action] == 'show' && params[:id] == current_user.id.to_s
   end
   
+  def current_user_company_profile?
+    params['controller'] == 'companies' && params[:action] == 'show' && current_user.company && params[:id] == current_user.company.id.to_s
+  end
+  
   def authorized_class_of_user?
     if current_user.class.name.downcase == 'candidate' 
      params[:controller] == 'recruiters' || params[:controller] == 'companies'
