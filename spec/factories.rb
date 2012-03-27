@@ -142,6 +142,10 @@ Factory.define :certificate_candidate do |certificate_candidate|
   certificate_candidate.association :candidate
 end
 
+Factory.define :message do |message|
+  message.content 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores'
+end
+
 Factory.sequence :email do |n|
   "user_#{n}@example.com"
 end

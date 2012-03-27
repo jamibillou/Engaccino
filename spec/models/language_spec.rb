@@ -10,8 +10,7 @@ describe Language do
   end
   
   it 'should create an instance given valid attributes' do
-    language = Language.create! @attr
-    language.should be_valid
+    Language.new(@attr).should be_valid
   end
   
   describe 'language_candidates associations' do
