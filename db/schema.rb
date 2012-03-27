@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120317121331) do
+ActiveRecord::Schema.define(:version => 20120327202410) do
 
   create_table "certificate_candidates", :force => true do |t|
     t.string   "level_score"
@@ -40,6 +40,13 @@ ActiveRecord::Schema.define(:version => 20120317121331) do
     t.string   "image"
     t.string   "zip"
     t.string   "about"
+  end
+
+  create_table "conversations", :force => true do |t|
+    t.integer  "candidate_id"
+    t.integer  "recruiter_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "degree_types", :force => true do |t|
@@ -105,6 +112,12 @@ ActiveRecord::Schema.define(:version => 20120317121331) do
 
   create_table "languages", :force => true do |t|
     t.string   "label"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "messages", :force => true do |t|
+    t.string   "content"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
