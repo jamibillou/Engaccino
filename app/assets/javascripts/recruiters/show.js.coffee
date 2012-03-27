@@ -1,22 +1,17 @@
 $ ->    
   initBIP(I18n.t('click_to_edit'))
+  manageProfilePicture('image_edit_r','image_button_r','recruiter_image_form')
+  manageProfilePicture('image_edit_c','image_button_c','company_image_form')
   
-  $('#recruiter_image_form').bind('ajax:success', (evt, data, status, xhr) -> 
-                    alert("success")
-                    hide("recruiter_picture_upload_error"))
-                  .bind('ajax:error', (evt, xhr, status) -> 
-                    $("#recruiter_picture_upload_error").html(xhr.responseText+"<br/><br/>")
-                    show("recruiter_picture_upload_error"))
-                    
-  $('#company_image_form').bind('ajax:success', (evt, data, status, xhr) -> 
-                    alert("success")
-                    hide("company_picture_upload_error"))
-                  .bind('ajax:error', (evt, xhr, status) -> 
-                    $("#company_picture_upload_error").html(xhr.responseText+"<br/><br/>")
-                    show("company_picture_upload_error"))
-  
-  ## GROS CACA
-  $('#image_edit_r').click    -> $('#image_button_r').click()
-  $('#image_button_r').change -> $('#recruiter_image_form').submit()
-  $('#image_edit_c').click    -> $('#image_button_c').click()
-  $('#image_button_c').change -> $('#company_image_form').submit()
+@manageProfilePicture = (image_id,button_id,form_id) ->
+  $('#'+image_id).click    -> $('#'+button_id).click()
+  $('#'+button_id).change -> $('#'+form_id).submit()
+  $('#'+form_id).bind('ajax:complete', (evt, xhr) -> 
+    $.ajax 'refresh',
+    dataType: 'html',
+    type: 'POST',
+    success: (data) ->
+      $('#recruiter').html(data)
+      initBIP(I18n.t('click_to_edit'))
+      manageProfilePicture('image_edit_r','image_button_r','recruiter_image_form')
+      manageProfilePicture('image_edit_c','image_button_c','company_image_form'))

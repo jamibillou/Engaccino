@@ -13,8 +13,14 @@ class CompaniesController < ApplicationController
   
   def update
     @company = Company.find params[:id]
-    @company.update_attributes params[:company]
-    respond_to { |format| format.json { respond_with_bip @company } }
+    unless @company.update_attributes params[:company]
+      respond_to { |format| format.js { render :json => error_messages(@candidate) } if remotipart_submitted? }  
+    else
+      respond_to do |format|
+        format.js   { render :json => 'success!' } if remotipart_submitted?
+        format.json { respond_with_bip @company }
+      end
+    end    
   end
   
   private

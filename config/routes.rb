@@ -36,7 +36,8 @@ Engaccino::Application.routes.draw do
   resources :recruiters
   resources :sessions, :only => [:new, :create, :destroy]
   
-  match 'candidates/refresh', :to => 'candidates#refresh'
+  match 'candidates/refresh', :to => 'candidates#refresh'  
+  match 'recruiters/refresh', :to => 'recruiters#refresh'
   
   match '/candidate_signup',  :to => 'candidates#new'
   match '/recruiter_signup',  :to => 'recruiters#new'
