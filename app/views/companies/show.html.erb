@@ -13,7 +13,7 @@
         <div id='company_picture_upload_error' class='hidden error_messages'></div>
       <% end %>
     <% end %>
-    <div class='<%= "default-company-#{rand(1..4)} " if @company.image_url.nil? %>image'><%= image_tag @company.image_url(:profile).to_s unless @company.image_url.nil? %></div>
+    <div id='profile_picture' class='<%= "default-company-#{rand(1..4)} " if @company.image_url.nil? %>image'><%= image_tag @company.image_url(:profile).to_s unless @company.image_url.nil? %></div>
     <% if current_user_company %>
   	  <div class='title'><%=    best_in_place @company, :name, :html_attrs => { :class => 'field' } %></div>
   	  <div class='subtitle'><%= best_in_place @company, :city, :nil => "#{t('companies.city').downcase}", :html_attrs => { :class => 'field' } %>,

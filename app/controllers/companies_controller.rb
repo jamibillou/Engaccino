@@ -23,6 +23,11 @@ class CompaniesController < ApplicationController
     end    
   end
   
+  def up_picture
+    @company  = Company.find params[:id]
+    render :partial => "companies/up_picture"
+  end  
+  
   private
   
     def signed_up
