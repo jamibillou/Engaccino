@@ -11,4 +11,13 @@ class AjaxController < ApplicationController
                    { label:t('months.october'), index:10 }, { label:t('months.november'), index:11 }, { label:t('months.december'), index:12 } ].select { |month| month[:label].downcase.start_with? params[:term].downcase }
   end
   
+  def companies
+    hash_companies = []
+    Company.all.each do |company|
+      hash_companies << {"id" => company.id,"name" => company.name,"city" => company.city,"country" => company.country} if company.name.downcase.include? params[:term].downcase
+    end
+    render json: hash
+    #render json: Company.all.map { |company| Hash[ id: company.id, name: company.name, city: company.city, country: company.country] }.select { |company| company.downcase.include? params[:term].downcase }.sort
+  end
+  
 end
