@@ -17,6 +17,21 @@ describe User do
     user.should be_valid
   end
   
+  describe 'messages associations' do
+    
+    it 'should have a messages attribute' do
+      @user.should respond_to :messages
+    end
+    
+    it 'should have a message_authors attribute' do
+      @user.should respond_to :message_authors
+    end
+    
+    it 'should have a message_recipients attribute' do
+      @user.should respond_to :message_recipients
+    end
+  end
+  
   describe 'validation of' do
   
     describe 'first name and last name' do

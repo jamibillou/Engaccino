@@ -5,6 +5,10 @@ class User < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :city, :country, :nationality, :year_of_birth, :phone, :email, :facebook_login,
                   :linkedin_login, :twitter_login, :profile_completion, :password, :password_confirmation, :image
   
+  has_many :messages
+  has_many :message_recipients, :through => :messages, :class_name => 'User', :foreign_key => :recipient_id
+  has_many :message_authors,    :through => :messages, :class_name => 'User', :foreign_key => :author_id
+  
   countries_array = Country.all.collect { |c| c[0] }
     
   validates :email,                      :email_format => true,                 :uniqueness => { :case_sensitive => false },     :presence => true
