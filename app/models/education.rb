@@ -20,7 +20,7 @@ class Education < ActiveRecord::Base
   validates :end_month,   :inclusion => { :in => 1..12 },               :presence => true
   validates :description, :length    => { :within => 20..300 },         :allow_blank => true
   
-  validate  :date_consistance, :unless => lambda { |proc| duration.nil? || duration > 0 }
+  validate  :date_consistance, :unless => lambda { |proc| duration.nil? }
   
   def duration
     end_year - start_year - 1 + (13 - start_month + end_month) / 12.0 unless end_year.to_s.empty? || start_year.to_s.empty? || start_month.to_s.empty? || end_month.to_s.empty?
@@ -33,7 +33,7 @@ class Education < ActiveRecord::Base
   private
   
     def date_consistance
-      errors.add :duration, I18n.t('education.validations.duration')
+      errors.add :duration, I18n.t('education.validations.duration') if duration < 0
     end
     
 end

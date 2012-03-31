@@ -18,7 +18,7 @@ class Experience < ActiveRecord::Base
   validates :end_year,    :inclusion => { :in => 1900..Time.now.year }, :presence => true
   validates :description, :length    => { :within => 20..300 },         :allow_blank => true
   
-  validate  :date_consistance, :unless => lambda { |proc| duration.nil? || duration > 0 }
+  validate  :date_consistance, :unless => lambda { |proc| duration.nil? }
   
   def duration
     end_year - start_year - 1 + (13 - start_month + end_month) / 12.0 unless end_year.to_s.empty? || start_year.to_s.empty? || start_month.to_s.empty? || end_month.to_s.empty?     
@@ -31,7 +31,7 @@ class Experience < ActiveRecord::Base
   private
     
     def date_consistance
-      errors.add :duration, I18n.t('experience.validations.duration')
+      errors.add :duration, I18n.t('experience.validations.duration') if duration < 0
     end
     
 end
