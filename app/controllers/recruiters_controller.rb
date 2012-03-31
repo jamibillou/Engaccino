@@ -62,6 +62,10 @@ class RecruitersController < ApplicationController
     render :partial => "recruiters/recruiter", :locals => { :recruiter => current_user }
   end
   
+  def company_details
+    render :partial => "recruiters/company_details", :locals => { :company => Company.find_by_id(params[:id]), :recruiters => Recruiter.where(:company_id => params[:id])}
+  end
+  
   private
 
     def no_company_submitted?

@@ -5,7 +5,7 @@ Engaccino::Application.routes.draw do
   get 'sessions/new'
   get 'ajax/countries'
   get 'ajax/months'
-  get 'ajax/years'
+  get 'ajax/companies'
   
   resources :candidates do
     resources :experiences do
@@ -36,9 +36,10 @@ Engaccino::Application.routes.draw do
   resources :recruiters
   resources :sessions, :only => [:new, :create, :destroy]
   
-  match 'candidates/refresh',   :to => 'candidates#refresh'  
-  match 'recruiters/refresh',   :to => 'recruiters#refresh'
-  match 'companies/up_picture', :to => 'companies#up_picture'
+  match 'candidates/refresh',         :to => 'candidates#refresh'  
+  match 'recruiters/refresh',         :to => 'recruiters#refresh'
+  match 'recruiters/company_details', :to => 'recruiters#company_details'
+  match 'companies/up_picture',       :to => 'companies#up_picture'
   
   match '/candidate_signup',  :to => 'candidates#new'
   match '/recruiter_signup',  :to => 'recruiters#new'
