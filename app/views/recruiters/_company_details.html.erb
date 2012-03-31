@@ -1,0 +1,13 @@
+<h2><%= company.name %></h2>
+<%= company.city %>, <%= company.country %><br/>
+<%= link_to company.url, "http://#{company.url}", :class => 'small', :target => '_blank' unless company.url.nil? %>
+<% unless company.about.nil? %><div class='italic'>"<%= company.about %>"</div><% end %>
+<h3><%=t 'companies.recruiters' %></h3>
+<% recruiters.each do |recruiter| %>
+  <div style='border: 1px solid black;width: 85px;margin-left:10px;display:inline'>
+    <div style='width: 80px; height: 80px;' class='<%= "default-user-#{rand(1..4)} " if recruiter.image_url.nil? %>image'>
+  	  <%= image_tag recruiter.image_url(:thumb).to_s unless recruiter.image_url.nil? %>
+    </div>
+    <span style='padding-top: 85px;'><%= "#{recruiter.first_name.first}. #{recruiter.last_name}" %></span>
+  </div>
+<% end %>
