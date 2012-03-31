@@ -2,8 +2,8 @@ class Message < ActiveRecord::Base
   
   attr_accessible :content
     
-  belongs_to :author,    :class_name => 'User'
-  belongs_to :recipient, :class_name => 'User'
+  belongs_to :author,    :class_name => 'User', :foreign_key => :author_id
+  belongs_to :recipient, :class_name => 'User', :foreign_key => :recipient_id
     
   validates :content, :length => { :maximum => 140 }, :presence => true
   validates :author_id,                               :presence => true
@@ -14,9 +14,11 @@ end
 #
 # Table name: messages
 #
-#  id         :integer(4)      not null, primary key
-#  content    :string(255)
-#  created_at :datetime        not null
-#  updated_at :datetime        not null
+#  id           :integer(4)      not null, primary key
+#  content      :string(255)
+#  created_at   :datetime        not null
+#  updated_at   :datetime        not null
+#  author_id    :integer(4)
+#  recipient_id :integer(4)
 #
 

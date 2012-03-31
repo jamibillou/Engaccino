@@ -7,9 +7,10 @@ describe User do
               :country        => 'Spain',          :nationality   => 'Spain',          :year_of_birth  => 1984,
               :phone          => '+34 6 88888888', :email         => 'jp@example.net', :facebook_login => 'jp@example.net',
               :linkedin_login => 'jp@example.net', :twitter_login => '@j_pablo',       :password       => 'pouetpouet38', :password_confirmation => 'pouetpouet38' }
-    @user      = Factory :user
-    @candidate = Factory :candidate
-    @recruiter = Factory :recruiter
+    @user              = Factory :user
+    @candidate         = Factory :candidate
+    @recruiter         = Factory :recruiter
+    @message           = Factory :message, :author => @candidate, :recipient => @recruiter
   end
   
   it 'should create a new instance given valid attributes' do
@@ -20,7 +21,11 @@ describe User do
   describe 'messages associations' do
     
     it 'should have a messages attribute' do
-      @user.should respond_to :messages
+      @user.should respond_to :authored_messages
+    end
+    
+    it 'should have a messages attribute' do
+      @user.should respond_to :received_messages
     end
     
     it 'should have a message_authors attribute' do
@@ -29,6 +34,19 @@ describe User do
     
     it 'should have a message_recipients attribute' do
       @user.should respond_to :message_recipients
+    end
+    
+    it 'should have the right associated message' do
+      @candidate.authored_messages.first.should == @message
+      @recruiter.received_messages.first.should == @message
+    end
+    
+    it 'should have the right associated message_authors' do
+      @candidate.message_recipients.first.should == @recruiter
+    end
+    
+    it 'should have the right associated message_recipients' do
+      @recruiter.message_authors.first.should == @candidate
     end
   end
   
