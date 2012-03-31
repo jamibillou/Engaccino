@@ -59,11 +59,11 @@ class RecruitersController < ApplicationController
   end
   
   def refresh
-    render :partial => "recruiters/recruiter", :locals => { :recruiter => current_user }
+    render :partial => 'recruiters/recruiter', :locals => { :recruiter => current_user }
   end
   
   def company_details
-    render :partial => "recruiters/company_details", :locals => { :company => Company.find_by_id(params[:id]), :recruiters => Recruiter.where(:company_id => params[:id])}
+    render :partial => 'recruiters/company_details', :locals => { :company => Company.find_by_id(params[:id]), :recruiters => Recruiter.where(:company_id => params[:id]) }
   end
   
   private

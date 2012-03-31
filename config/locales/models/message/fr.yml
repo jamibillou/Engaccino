@@ -1,0 +1,6 @@
+fr:
+  message:
+  
+    validations:
+      author_recipient: "L'auteur ne peut pas aussi être le destinataire."
+      author_recipient_class: "L'auteur et le destinataire ne peuvent pas avoir le même rôle dans Engaccino."

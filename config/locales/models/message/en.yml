@@ -1,0 +1,6 @@
+eb:
+  message:
+  
+    validations:
+      author_recipient: "The author can't be the recipient too."
+      author_recipient_class: "The author and the recipient can't have the same Engaccino roles."

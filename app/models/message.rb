@@ -5,9 +5,22 @@ class Message < ActiveRecord::Base
   belongs_to :author,    :class_name => 'User', :foreign_key => :author_id
   belongs_to :recipient, :class_name => 'User', :foreign_key => :recipient_id
     
-  validates :content, :length => { :maximum => 140 }, :presence => true
-  validates :author_id,                               :presence => true
-  validates :recipient_id,                            :presence => true
+  validates :content,    :length => { :maximum => 140 }, :presence => true
+  validates :author_id,                                  :presence => true
+  validates :recipient_id,                               :presence => true
+  
+  validate  :author_recipient
+  validate  :author_recipient_class
+  
+  private
+  
+    def author_recipient
+      errors.add :author_recipient, I18n.t('message.validations.author_recipient') if author == recipient
+    end
+    
+    def author_recipient_class
+      errors.add :author_recipient, I18n.t('message.validations.author_recipient_class') if author.class == recipient.class
+    end
 end
 
 # == Schema Information
