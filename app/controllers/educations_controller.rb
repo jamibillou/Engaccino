@@ -6,8 +6,7 @@ class EducationsController < ApplicationController
   def new
     @education = Education.new
     @education.build_school
-    degree = @education.build_degree
-    degree.build_degree_type
+    @education.build_degree.build_degree_type
     render :partial => 'new_form'
   end
   
