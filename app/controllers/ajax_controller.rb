@@ -14,7 +14,7 @@ class AjaxController < ApplicationController
   def companies
     hash_companies = []
     Company.all.each do |company|
-      hash_companies << {"id" => company.id, "value" => "#{company.name}", "label" => "#{company.name}  (#{company.city}, #{company.country})"} if company.name.downcase.include? params[:term].downcase
+      hash_companies << {"id" => company.id, "value" => "#{company.name}", "label" => "#{company.name}  (#{company.city}, #{company.country})", "url" => company.url, "city" => company.city, "country" => company.country} if company.name.downcase.include? params[:term].downcase
     end
     render json: hash_companies
   end  

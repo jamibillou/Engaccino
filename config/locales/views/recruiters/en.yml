@@ -25,7 +25,6 @@ en:
     university: "University"
     education_timeframe: "Time frame"
     social_networks: "Social networks"
-
     profile_picture: "Profile picture"
     
     missing:
@@ -64,6 +63,8 @@ en:
         nope: "No, I want to recruit under my own name only."
         yep: "Yes, I also want to set up a company profile."
         info: "Company information"
+        recruitment_agency: "Recruitment agency"
+        wrong_company: "Not my company"
       colleagues:
         title: "Colleagues"
         note: "You can skip this step and invite your colleagues later."

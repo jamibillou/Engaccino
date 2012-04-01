@@ -63,6 +63,8 @@ fr:
         nope: "Non, je préfère recruter sous mon propre nom uniquement."
         yep: "Oui, je veux aussi créer un profil d'entreprise."
         info: "Information concernant l'entreprise"
+        recruitment_agency: "Cabinet de recrutement"
+        wrong_company: "Ce n'est pas mon entreprise"
       colleagues:
         title: "Collègues"
         note: "Vous pouvez passez cette étape et inviter vos collègues plus tard."

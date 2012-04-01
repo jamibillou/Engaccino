@@ -1,13 +1,9 @@
 <div id='company' class='white_block'>
-  <h2><%=t 'recruiters.edit.company.title' %></h2>
-  <h4><%= radio_button_tag :company_profile, 'no', (params[:company_profile].nil? || params[:company_profile] == 'no') %>&nbsp;&nbsp;&nbsp;
-  <%=t 'recruiters.edit.company.nope' %></h4>
-  <h4><%= radio_button_tag :company_profile, 'yes', (params[:company_profile] == 'yes') %>&nbsp;&nbsp;&nbsp;
-  <%=t 'recruiters.edit.company.yep' %></h4><br />
   <div id='company_details' class='hidden grey_block' style='float: right; margin-right: 20%'>
   </div>
-  <div id='company_information' class='<%= 'hidden ' unless params[:company_profile] == 'yes' %>grey_block'>
+  <div id='company_information'>
     <h2><%=t 'recruiters.edit.company.info' %></h2>
     <%= f.fields_for :company do |company_builder| render 'fields_company', :f => company_builder end %>
   </div>
+  <br/></br/>
 </div>

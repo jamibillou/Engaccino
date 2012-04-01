@@ -3,14 +3,15 @@ require 'spec_helper'
 describe Company do
 
   before :each do
-    @attr = { :name    => 'Engaccino',
-              :address => 'Rochussenstraat 243b',
-              :zip     => '3021 NV', 
-              :city    => 'Rotterdam',
-              :country => 'Netherlands',
-              :phone   => '+31 6 00000000',
-              :email   => 'info@engaccino.com',
-              :url     => 'http://www.engaccino.com' }  
+    @attr = { :name             => 'Engaccino',
+              :address          => 'Rochussenstraat 243b',
+              :zip              => '3021 NV', 
+              :city             => 'Rotterdam',
+              :country          => 'Netherlands',
+              :phone            => '+31 6 00000000',
+              :email            => 'info@engaccino.com',
+              :url              => 'http://www.engaccino.com',
+              :recruiter_agency => false }  
     @candidate  = Factory :candidate
     @company    = Factory :company
     @recruiter  = Factory :recruiter,  :company => @company
@@ -230,6 +231,11 @@ describe Company do
       too_long_zip_company = Company.new @attr.merge :zip => too_long_zip
       too_long_zip_company.should_not be_valid
     end
+    
+    it 'should require the recruiter_agency attribute' do
+      no_recruiter_agency_company = Company.new @attr.merge :recruiter_agency => ''
+      no_recruiter_agency_company.should_not be_valid
+    end
   end
   
   describe 'no_about? method' do
@@ -283,18 +289,19 @@ end
 #
 # Table name: companies
 #
-#  id         :integer(4)      not null, primary key
-#  name       :string(255)
-#  address    :string(255)
-#  city       :string(255)
-#  country    :string(255)
-#  phone      :string(255)
-#  email      :string(255)
-#  url        :string(255)
-#  created_at :datetime        not null
-#  updated_at :datetime        not null
-#  image      :string(255)
-#  zip        :string(255)
-#  about      :string(255)
+#  id               :integer(4)      not null, primary key
+#  name             :string(255)
+#  address          :string(255)
+#  city             :string(255)
+#  country          :string(255)
+#  phone            :string(255)
+#  email            :string(255)
+#  url              :string(255)
+#  created_at       :datetime        not null
+#  updated_at       :datetime        not null
+#  image            :string(255)
+#  zip              :string(255)
+#  about            :string(255)
+#  recruiter_agency :boolean(1)      default(FALSE)
 #
 

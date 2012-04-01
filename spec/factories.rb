@@ -57,6 +57,7 @@ Factory.define :company do |company|
   company.phone '+44 7 987654321'
   company.email { Factory.next(:email) }
   company.url 'http://www.fff.co.uk'
+  company.recruiter_agency false
 end
 
 Factory.define :experience do |experience|

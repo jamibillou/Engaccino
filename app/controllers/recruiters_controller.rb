@@ -46,10 +46,10 @@ class RecruitersController < ApplicationController
       init_page :title => 'recruiters.edit.complete_your_profile', :javascripts => 'recruiters/edit'
       respond_to do |format|
         format.html { render :json => error_messages(@recruiter) } if remotipart_submitted?
-        format.html { render_page :edit, :id => @recruiter }
+        format.html { flash[:error] = error_messages(@recruiter) ; render_page :edit, :id => @recruiter }
         format.json { respond_with_bip @recruiter }
       end
-    else
+    else      
       respond_to do |format|
         format.json { render :json => 'success!' } if remotipart_submitted?
         format.html { @recruiter.update_attributes :profile_completion => 5 ; redirect_to @recruiter }

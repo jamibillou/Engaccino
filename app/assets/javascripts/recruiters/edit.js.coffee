@@ -10,12 +10,15 @@ $ ->
     formatItem: (item) ->
       item.name+' ('+item.city+', '+item.country+')'
     select: (event,ui) ->
-      $.ajax '../company_details',
+      $.ajax '/recruiters/company_details',
       dataType: 'html',
       type: 'POST',
       data: { id: ui.item.id},
       success: (data) -> 
         $('#recruiter_company_attributes_id').val(ui.item.id)
+        $('#recruiter_company_attributes_url').val(ui.item.url)
+        $('#recruiter_company_attributes_city').val(ui.item.city)
+        $('#recruiter_company_attributes_country').val(ui.item.country)
         $('#company_details').html(data)
         show('company_details')})
   
@@ -26,5 +29,13 @@ $ ->
     show('company_information')
     show('colleagues')
   $('#recruiter_company_attributes_name').change ->
-    hide('company_details') if $('#recruiter_company_attributes_name').val() is ''
+    deleteCompanyDetails() if $('#recruiter_company_attributes_name').val() is ''
+    
+@deleteCompanyDetails = ->
+  $('#recruiter_company_attributes_name').val('')
+  $('#recruiter_company_attributes_id').val('')
+  $('#recruiter_company_attributes_url').val('')
+  $('#recruiter_company_attributes_city').val('')
+  $('#recruiter_company_attributes_country').val('')
+  hide('company_details')
   

@@ -4,9 +4,20 @@ class Recruiter < User
   
   belongs_to :company
   
-  accepts_nested_attributes_for :company, :reject_if => lambda { |attr| attr[:name].blank? && attr[:url].blank? && attr[:city].blank? && attr[:country].blank? }
+  accepts_nested_attributes_for :company
   
   validates :quote, :length => { :maximum => 200 }
+  
+  private
+  
+    def check_company(attr)
+      if company = Company.find_by_id(attr[:id])
+        self.company = company
+        return true
+      else
+        return false  
+      end
+    end  
 end
 
 # == Schema Information
