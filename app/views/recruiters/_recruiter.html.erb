@@ -36,7 +36,13 @@
     <% unless current_user_profile? || company_profile? || params[:action] == 'index' || request.xhr? %>
       <div class='contact block'>
         <h2><%= "#{t('contact')} #{recruiter.first_name}" %></h2>
-        <%= text_area_tag :message, nil, :placeholder => "#{t('question_or_comment')}#{t('_?')}", :rows => '3', :class => 'textarea' %><%= submit_tag t('send') %>
+            <%= form_for @message, :remote => true do |f| %>
+        	<%= f.text_area :content, :placeholder => "#{t('question_or_comment')}#{t('_?')}", :rows => '3', :class => 'textarea' %>
+        	<%= f.hidden_field :author_id, :value => current_user.id %>
+        	<%= f.hidden_field :recipient_id, :value => recruiter.id %>
+        	<%= f.submit t('send') %>
+      	<% end %>
+      	<div id='message_status' class='hidden'></div>
       </div>
     <% end %>
   

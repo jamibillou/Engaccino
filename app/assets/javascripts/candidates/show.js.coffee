@@ -11,6 +11,10 @@ $ ->
   refreshPartialThroughBIPcombo('candidate_company', 'role_BIPcombo')
   refreshPartialThroughBIPcombo('candidate_degree', 'degreetype_BIPcombo')
   manageProfilePicture()
+  
+  $('#new_message').submit -> show('message_status')
+  $('#new_message').bind('ajax:success', (evt, data, status, xhr) -> $('#message_content').val('') ; $('#message_status').html('Message sent !'))
+                   .bind('ajax:error',   (evt, xhr, status)       -> $('#message_status').html(buildErrorMessages(xhr)))
 
 ## OBJECT CREATION 
 @handleAjaxCreation = (model, partials) ->
@@ -89,15 +93,6 @@ $ ->
           $('#'+partial).html(data)
           initBIP(I18n.t('click_to_edit'))
           refreshPartialThroughBIPcombo(partial, BIPcombo)
-
-@buildErrorMessages = (xhr) ->
-  try 
-    errors = $.parseJSON(xhr.responseText)
-  catch err
-    errors = message: 'JSON Error'
-  errorMessages = 'Error(s): '
-  errorMessages += error+' '+errors[error]+' ' for error of errors
-  errorMessages
 
 @manageProfilePicture = ->
   $('#image_edit').click    -> $('#image_button').click()

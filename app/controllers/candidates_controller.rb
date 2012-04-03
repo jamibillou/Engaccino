@@ -18,6 +18,7 @@ class CandidatesController < ApplicationController
   
   def show
     @candidate = Candidate.find params[:id]
+    @message = Message.new
     @title = "#{@candidate.first_name} #{@candidate.last_name}"
     init_page :javascripts => 'candidates/show'
   end

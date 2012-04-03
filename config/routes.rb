@@ -33,7 +33,7 @@ Engaccino::Application.routes.draw do
   
   resources :candidates, :experiences, :companies, :educations, :schools, :degree_types, :degrees, :professional_skill_candidates, :professional_skills, 
             :interpersonal_skill_candidates, :interpersonal_skills, :language_candidates, :languages, :certificate_candidates, :certificates
-  resources :recruiters
+  resources :recruiters, :messages
   resources :sessions, :only => [:new, :create, :destroy]
   
   match 'candidates/refresh',         :to => 'candidates#refresh'  

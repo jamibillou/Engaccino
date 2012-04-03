@@ -44,6 +44,15 @@ $ ->
 @initBIP = (title) ->
   $('.best_in_place').best_in_place()
   $('span.best_in_place').each -> $(this).attr('title', title)
+
+@buildErrorMessages = (xhr) ->
+  try 
+    errors = $.parseJSON(xhr.responseText)
+  catch err
+    errors = message: 'JSON Error'
+  errorMessages = 'Error(s): '
+  errorMessages += error+' '+errors[error]+' ' for error of errors
+  errorMessages
     
 @show = (id) -> $('#'+id).show()
 @hide = (id) -> $('#'+id).hide()
