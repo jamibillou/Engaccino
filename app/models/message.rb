@@ -8,6 +8,7 @@ class Message < ActiveRecord::Base
   validates :content,    :length => { :maximum => 140 }, :presence => true
   validates :author_id,                                  :presence => true
   validates :recipient_id,                               :presence => true
+  validates :read, :inclusion => { :in => [true, false] }
   
   validate  :author_recipient
   validate  :author_recipient_class
@@ -33,5 +34,6 @@ end
 #  updated_at   :datetime        not null
 #  author_id    :integer(4)
 #  recipient_id :integer(4)
+#  read         :boolean(1)      default(FALSE)
 #
 

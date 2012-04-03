@@ -145,6 +145,7 @@ end
 
 Factory.define :message do |message|
   message.content 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores'
+  message.read false
   message.association :author
   message.association :recipient
 end

@@ -71,6 +71,13 @@ describe Message do
       same_class_message = Message.new @attr ; same_class_message.author = @recruiter1 ; same_class_message.recipient = @recruiter2 ; 
       same_class_message.should_not be_valid
     end
+    
+    it 'should reject invalid/empty read attributes' do
+      invalid_reads = ['aaa',12,'']
+      invalid_reads.each do |invalid_read|
+        Message.new(:content => 'Bla bla', :read => invalid_read).should_not be_valid
+      end      
+    end
   end
 end
 
@@ -84,5 +91,6 @@ end
 #  updated_at   :datetime        not null
 #  author_id    :integer(4)
 #  recipient_id :integer(4)
+#  read         :boolean(1)      default(FALSE)
 #
 
