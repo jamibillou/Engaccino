@@ -10,7 +10,8 @@ describe User do
     @user              = Factory :user
     @candidate         = Factory :candidate
     @recruiter         = Factory :recruiter
-    @message           = Factory :message, :author => @candidate, :recipient => @recruiter
+    @candidate_message = Factory :message, :author => @candidate, :recipient => @recruiter
+    @recruiter_message = Factory :message, :author => @recruiter, :recipient => @candidate
   end
   
   it 'should create a new instance given valid attributes' do
@@ -37,8 +38,8 @@ describe User do
     end
     
     it 'should have the right associated message' do
-      @candidate.authored_messages.first.should == @message
-      @recruiter.received_messages.first.should == @message
+      @candidate.authored_messages.first.should == @candidate_message
+      @recruiter.received_messages.first.should == @candidate_message
     end
     
     it 'should have the right associated message_authors' do
@@ -417,40 +418,6 @@ describe User do
       end
     end
     
-    describe 'candidate? method' do
-      
-      it 'should be true for candidates' do
-        @candidate.candidate?.should == true
-      end
-      
-      it 'should be false for recruiters' do
-        @recruiter.candidate?.should == false
-      end
-    end
-    
-    describe 'recruiter? method' do
-      
-      it 'should be true for recruiters' do
-        @recruiter.recruiter?.should == true
-      end
-      
-      it 'should be false for candidates' do
-        @candidate.recruiter?.should == false
-      end
-    end
-    
-    describe 'admin? method' do
-      
-      it 'should be true for admin users' do
-        @user.toggle! :admin
-        @user.admin?.should == true
-      end
-      
-      it 'should be false for non-admin users' do
-        @user.admin?.should == false
-      end
-    end
-    
     describe 'authenticate method' do
       
       it 'should exist' do
@@ -468,6 +435,53 @@ describe User do
       it 'should return the user on email/password match' do
         User.authenticate(@user.email, @user.password).should == @user
       end
+    end
+  end
+  
+  describe 'candidate? method' do
+    
+    it 'should be true for candidates' do
+      @candidate.candidate?.should == true
+    end
+    
+    it 'should be false for recruiters' do
+      @recruiter.candidate?.should == false
+    end
+  end
+  
+  describe 'recruiter? method' do
+    
+    it 'should be true for recruiters' do
+      @recruiter.recruiter?.should == true
+    end
+    
+    it 'should be false for candidates' do
+      @candidate.recruiter?.should == false
+    end
+  end
+  
+  describe 'admin? method' do
+    
+    it 'should be true for admin users' do
+      @user.toggle! :admin
+      @user.admin?.should == true
+    end
+    
+    it 'should be false for non-admin users' do
+      @user.admin?.should == false
+    end
+  end
+  
+  describe 'authored?(message) method' do
+    
+    it 'should be true for authored messages' do
+      @recruiter.authored?(@recruiter_message).should be_true
+      @candidate.authored?(@candidate_message).should be_true
+    end
+    
+    it 'should be false for received messages' do
+      @recruiter.authored?(@candidate_message).should be_false
+      @candidate.authored?(@recruiter_message).should be_false
     end
   end
 end

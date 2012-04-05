@@ -45,6 +45,10 @@ class User < ActiveRecord::Base
     self.admin
   end
   
+  def authored?(message)
+    self.id == message.author_id
+  end
+  
   class << self
   
     def authenticate(email, submitted_password)

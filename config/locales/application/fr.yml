@@ -13,6 +13,7 @@ fr:
   menu_users: "Utilisateurs"
   menu_candidates: "Candidats"
   menu_recruiters: "Recruteurs"
+  menu_messages: "Messages"
   
   search_bar: "Accès rapide"
   search_bar_title: "Rechercher un contact, une entreprise, offre d'emploi, etc."

@@ -1,8 +1,8 @@
 <ul>
-<% if current_user.candidate? %>
   <li class='round<% if @title == t(:menu_dashboard) %> selected<% end %>'>
     <%= link_to t(:menu_dashboard), '#' %>
   </li>
+<% if current_user.candidate? %>
   <li class='round<% if current_user_profile? %> selected<% end %>'>
     <%= link_to t(:menu_profile), candidate_path(current_user) %>
   </li>
@@ -15,9 +15,6 @@
     </li>
   <% end %>
 <% elsif current_user.recruiter? %>
-  <li class='round<% if @title == t(:menu_dashboard) %> selected<% end %>'>
-    <%= link_to t(:menu_dashboard), '#' %>
-  </li>
   <li class='round<% if current_user_profile? %> selected<% end %>'>
     <%= link_to t(:menu_profile), recruiter_path(current_user) %>
   </li>
@@ -30,4 +27,7 @@
     </li>
   <% end %>
 <% end %>
+  <li class='round<% if @title == t(:menu_messages) %> selected<% end %>'>
+    <%= link_to t(:menu_messages), messages_path %>
+  </li>
 </ul>

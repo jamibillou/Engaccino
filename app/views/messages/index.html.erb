@@ -1,0 +1,10 @@
+<div class='white_block'>
+<% @messages.each do |message| %>
+  <% message_user = current_user.authored?(message) ? User.find(message.recipient_id) : User.find(message.author_id) %>
+  <p><%= "#{message_user.first_name} #{message_user.last_name}" %></p>
+  <p><%= message.created_at.to_formatted_s :short %></p>
+  <p><%= message.content %></p>
+  <% unless message == @messages.last %><br /><% end %>
+<% end %>
+</div>
+
