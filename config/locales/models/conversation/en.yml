@@ -1,0 +1,6 @@
+en:
+  conversation:
+  
+    validations:
+      different_users: "The author can't be the recipient too."
+      different_classes_of_user: "The author and the recipient can't have the same Engaccino roles."
