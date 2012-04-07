@@ -13,6 +13,7 @@ class ProfessionalSkillCandidate < ActiveRecord::Base
   validates :experience,  :inclusion => { :in => (1..60).to_a },                                         :presence    => true
 
 end
+
 # == Schema Information
 #
 # Table name: professional_skill_candidates

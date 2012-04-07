@@ -10,17 +10,17 @@ class Message < ActiveRecord::Base
   validates :recipient_id,                               :presence => true
   validates :read, :inclusion => { :in => [true, false] }
   
-  validate  :author_recipient
-  validate  :author_recipient_class
+  validate  :different_users
+  validate  :different_classes_of_user
   
   private
   
-    def author_recipient
-      errors.add :author_recipient, I18n.t('message.validations.author_recipient') if author == recipient
+    def different_users
+      errors.add :users, I18n.t('message.validations.different_users') if author == recipient
     end
     
-    def author_recipient_class
-      errors.add :author_recipient, I18n.t('message.validations.author_recipient_class') if author.class == recipient.class
+    def different_classes_of_user
+      errors.add :users, I18n.t('message.validations.different_classes_of_user') if author.class == recipient.class
     end
 end
 

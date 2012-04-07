@@ -2,5 +2,5 @@ en:
   message:
   
     validations:
-      author_recipient: "The author can't be the recipient too."
-      author_recipient_class: "The author and the recipient can't have the same Engaccino roles."
+      different_users: "The author can't be the recipient too."
+      different_classes_of_user: "The author and the recipient can't have the same Engaccino roles."
