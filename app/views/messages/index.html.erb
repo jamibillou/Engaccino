@@ -1,10 +1,19 @@
-<div class='white_block'>
-<% @messages.each do |message| %>
-  <% message_user = current_user.authored?(message) ? User.find(message.recipient_id) : User.find(message.author_id) %>
-  <p><%= "#{message_user.first_name} #{message_user.last_name}" %></p>
-  <p><%= message.created_at.to_formatted_s :short %></p>
-  <p><%= message.content %></p>
-  <% unless message == @messages.last %><br /><% end %>
+<% unless @contacts.nil? %>
+  <% @contacts.each do |contact| %>
+    <div class='conversation'>
+      <% messages = @messages.select { |message| message.author_id == contact.id || message.recipient_id == contact.id } %>
+      <h4><%= "#{t('messages.conversation')} #{t('messages.with').downcase}" %> <%= link_to "#{contact.first_name} #{contact.last_name}", contact, :class => 'black' %> <%= "(#{messages.count})" %><%=t '_:' %></h4>
+      <% messages.each do |message| %>
+        <div class='<%= if current_user.authored?(message) then 'authored' else 'received' end %> message'>
+          <p>
+            <span class='title'><%= current_user.authored?(message) ? t('messages.you_said') : "#{contact.first_name} #{t('messages.other_said').downcase}" %><%=t '_:' %></span>
+            <br />
+            <%= message.content %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+<% else %>
+  <%=t 'messages.no_message' %>
 <% end %>
-</div>
-

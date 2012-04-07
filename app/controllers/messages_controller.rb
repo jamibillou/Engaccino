@@ -13,6 +13,7 @@ class MessagesController < ApplicationController
   
   def index
     @title    = I18n.t 'menu_messages'
-    @messages = Message.where "author_id = #{current_user.id} OR recipient_id = #{current_user.id}"
+    @contacts = current_user.contacts_id.map { |contact_id| User.find contact_id }
+    @messages = current_user.messages
   end
 end

@@ -49,6 +49,14 @@ class User < ActiveRecord::Base
     self.id == message.author_id
   end
   
+  def messages
+    Message.where "author_id = #{self.id} OR recipient_id = #{self.id}"
+  end
+  
+  def contacts_id
+    Message.where("author_id = #{self.id} OR recipient_id = #{self.id}").map { |message| message.author_id == self.id ? message.recipient_id : message.author_id }.uniq
+  end
+  
   class << self
   
     def authenticate(email, submitted_password)
