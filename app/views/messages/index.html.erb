@@ -1,17 +1,25 @@
 <% unless @contacts.nil? %>
   <% @contacts.each do |contact| %>
-    <div class='conversation'>
+    <div id='conversation_<%= contact.id %>' class='conversation'>
       <% messages = @messages.select { |message| message.author_id == contact.id || message.recipient_id == contact.id } %>
-      <h4><%= "#{t('messages.conversation')} #{t('messages.with').downcase}" %> <%= link_to "#{contact.first_name} #{contact.last_name}", contact, :class => 'black' %> <%= "(#{messages.count})" %><%=t '_:' %></h4>
-      <% messages.each do |message| %>
-        <div class='<%= if current_user.authored?(message) then 'authored' else 'received' end %> message'>
-          <p>
-            <span class='title'><%= current_user.authored?(message) ? t('messages.you_said') : "#{contact.first_name} #{t('messages.other_said').downcase}" %><%=t '_:' %></span>
-            <br />
-            <%= message.content %>
-          </p>
+      <div class='head' onclick="show('messages_<%= contact.id %>')">
+        <div class='<%= "default-user-#{rand(1..4)} " if contact.image_url.nil? %>image left'>
+          <%= image_tag contact.image_url(:small_thumb).to_s unless contact.image_url.nil? %>
         </div>
-      <% end %>
+        <h4><%= link_to "#{contact.first_name} #{contact.last_name}", contact, :class => 'black' %></h4>
+        <p><%= "#{t('messages.last_message').downcase}#{t('_:')}" %> <%= time_ago_in_words messages.sort_by { |message| message.created_at }.last.created_at %></p>
+      </div>
+      <div id='messages_<%= contact.id %>' class='hidden'>
+        <% messages.each do |message| %>
+          <div id='message_<%= message.id %>' class='<%= if current_user.authored?(message) then 'authored' else 'received' end %> message'>
+            <p>
+              <span class='title'><%= current_user.authored?(message) ? t('messages.you_said') : "#{contact.first_name} #{t('messages.other_said').downcase}" %><%=t '_:' %></span>
+              <br />
+              <%= message.content %>
+            </p>
+          </div>
+        <% end %>
+      </div>
     </div>
   <% end %>
 <% else %>

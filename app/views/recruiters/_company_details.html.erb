@@ -5,10 +5,8 @@
 <% unless company.about.nil? %><div class='italic'>"<%= company.about %>"</div><% end %>
 <h3><%=t 'companies.recruiters' %></h3>
 <% recruiters.each do |recruiter| %>
-  <div style='width: 80px;float:left;margin-left:10px;'>
-    <div style='width: 80px; height: 80px;' class='<%= "default-user-#{rand(1..4)} " if recruiter.image_url.nil? %>image'>
-  	  <%= image_tag recruiter.image_url(:thumb).to_s unless recruiter.image_url.nil? %>
-    </div>
+  <div style='width: 80px; float:left; margin-left:10px;'>
+    <div class='<%= "default-user-#{rand(1..4)} " if recruiter.image_url.nil? %>image'><%= image_tag recruiter.image_url(:thumb).to_s unless recruiter.image_url.nil? %></div>
     <span style='padding-top: 85px;'><%= "#{recruiter.first_name.first}. #{recruiter.last_name}" %></span>
   </div>
 <% end %>

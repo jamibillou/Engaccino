@@ -2,7 +2,6 @@ fr:
   messages:
   
     no_message: "Vous n'avez pas de message."
-    conversation: "Conversation"
-    with: "Avec"
+    last_message: "Dernier message"
     you_said: "Vous avez dit"
     other_said: "Said"

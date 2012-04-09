@@ -5,7 +5,9 @@
       <% if current_user?(recruiter) && !company_profile? %>
         <div id='image_edit_r' class='image_hover'></div>
       <% end %>
-      <div class='<%= "default-user-#{rand(1..4)} " if recruiter.image_url.nil? %>image left'><%= image_tag recruiter.image_url(:thumb).to_s unless recruiter.image_url.nil? %></div>
+      <div class='<%= "default-user-#{rand(1..4)} " if recruiter.image_url.nil? %>image left'>
+        <%= image_tag recruiter.image_url(:thumb).to_s unless recruiter.image_url.nil? %>
+      </div>
       <% if current_user?(recruiter) && !company_profile? %>
     	  <div class='title'><%= best_in_place recruiter, :first_name, :html_attrs => { :class => 'field' } %></div><br />
     	  <div class='title'><%= best_in_place recruiter, :last_name,  :html_attrs => { :class => 'field' } %></div>
@@ -50,22 +52,24 @@
       <div class='company_r identity block' id="company_<%= recruiter.company.id %>">
         <h2><%= t('recruiters.show.recruiter_at').remove_accents.upcase %></h2>
         <% if current_user?(recruiter) %><div id='image_edit_c' class='image_hover'></div><% end %>
-        <div class='<%= "default-company-#{rand(1..4)} " if recruiter.company.image_url.nil? %>image left'><%= image_tag recruiter.company.image_url(:thumb).to_s unless recruiter.company.image_url.nil? %></div>
-        	<% if current_user?(recruiter) %>
-        	  <div class='title'><%= best_in_place recruiter.company, :name, :html_attrs => { :class => 'field' } %></div>
-        	  <div class='subtitle'><%=  best_in_place recruiter.company, :url, :nil => t('companies.url').downcase, :html_attrs => { :class => 'url field' } %></div>
-          <% else %>
-            <div class='title'><%= link_to recruiter.company.name, company_path(recruiter.company) %></div>
-            <div class='subtitle'><%= link_to recruiter.company.url, "http://#{recruiter.company.url}", :target => '_blank' %></div>
+        <div class='<%= "default-company-#{rand(1..4)} " if recruiter.company.image_url.nil? %>image left'>
+          <%= image_tag recruiter.company.image_url(:thumb).to_s unless recruiter.company.image_url.nil? %>
+        </div>
+        <% if current_user?(recruiter) %>
+      	  <div class='title'><%= best_in_place recruiter.company, :name, :html_attrs => { :class => 'field' } %></div>
+      	  <div class='subtitle'><%=  best_in_place recruiter.company, :url, :nil => t('companies.url').downcase, :html_attrs => { :class => 'url field' } %></div>
+        <% else %>
+          <div class='title'><%= link_to recruiter.company.name, company_path(recruiter.company) %></div>
+          <div class='subtitle'><%= link_to recruiter.company.url, "http://#{recruiter.company.url}", :target => '_blank' %></div>
+        <% end %>
+        <% if current_user?(recruiter) %>
+          <%= form_for recruiter.company, :remote => true, :html => { :id => 'company_image_form', :multipart => true } do |f| %>
+            <%= f.file_field :image,  :id => 'image_button_c', :class => 'image_button' %>
+            <%= f.submit     :submit, :class => 'hidden' %>
+            <div id='company_picture_upload_error' class='hidden error_messages'></div>
           <% end %>
-          <% if current_user?(recruiter) %>
-            <%= form_for recruiter.company, :remote => true, :html => { :id => 'company_image_form', :multipart => true } do |f| %>
-              <%= f.file_field :image,  :id => 'image_button_c', :class => 'image_button' %>
-              <%= f.submit     :submit, :class => 'hidden' %>
-              <div id='company_picture_upload_error' class='hidden error_messages'></div>
-            <% end %>
-            <p><%= link_to t('recruiters.show.company_profile'), recruiter.company, :class => 'small' %></p>
-          <% end %>
+          <p><%= link_to t('recruiters.show.company_profile'), recruiter.company, :class => 'small' %></p>
+        <% end %>
       </div>
     <% end %>  
 </div>

@@ -1,0 +1,44 @@
+fr:
+  datetime:
+      distance_in_words:
+        half_a_minute: "il y a une demi minute"
+        less_than_x_seconds:
+          one:   "il y a 1 seconde"
+          other: "il y a moins de %{count} secondes"
+        x_seconds:
+          one:   "il y a 1 seconde"
+          other: "il y a %{count} secondes"
+        less_than_x_minutes:
+          one:   "il y a moins d'une minute"
+          other: "il y a moins de %{count} minutes"
+        x_minutes:
+          one:   "il y a 1 minute"
+          other: "il y a %{count} minutes"
+        about_x_hours:
+          one:   "il y a environ 1 heure"
+          other: "il y a environ %{count} heures"
+        x_days:
+          one:   "il y a 1 jour"
+          other: "il y a %{count} jours"
+        about_x_months:
+          one:   "il y a environ 1 mois"
+          other: "il y a environ %{count} mois"
+        x_months:
+          one:   "il y a 1 mois"
+          other: "il y a %{count} mois"
+        about_x_years:
+          one:   "il y a environ 1 an"
+          other: "il y a environ %{count} ans"
+        over_x_years:
+          one:   "il y a plus de 1 an"
+          other: "il y a plus de %{count} ans"
+        almost_x_years:
+          one:   "il y a presque 1 an"
+          other: "il y a presque %{count} ans"
+      prompts:
+        year:   "Année"
+        month:  "Mois"
+        day:    "Jour"
+        hour:   "Heure"
+        minute: "Minute"
+        second: "Secondes"

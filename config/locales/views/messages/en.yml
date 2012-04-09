@@ -2,8 +2,7 @@ en:
   messages:
   
     no_message: "You haven't got any message."
-    conversation: "Conversation"
-    with: "With"
+    last_message: "Last message"
     you_said: "You said"
     other_said: "Said"
     

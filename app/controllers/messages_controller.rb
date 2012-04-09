@@ -12,7 +12,7 @@ class MessagesController < ApplicationController
   end
   
   def index
-    @title    = I18n.t 'menu_messages'
+    init_page :title => 'menu_messages'
     @contacts = current_user.contacts_id.map { |contact_id| User.find contact_id }
     @messages = current_user.messages
   end
