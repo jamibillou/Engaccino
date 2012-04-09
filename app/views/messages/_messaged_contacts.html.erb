@@ -1,0 +1,10 @@
+<% contacts.each do |contact| %>
+  <% messages = @messages.select { |message| message.author_id == contact.id || message.recipient_id == contact.id } %>
+  <div id='messaged_contact_<%= contact.id %>' class='messaged_contact' onclick="show_conversation('<%= contact.id %>')">
+    <div class='<%= "default-user-#{rand(1..4)} " if contact.image_url.nil? %>image left'>
+      <%= image_tag contact.image_url(:small_thumb).to_s unless contact.image_url.nil? %>
+    </div>
+    <h4><%= link_to "#{contact.first_name} #{contact.last_name}", contact, :class => 'black' %></h4>
+    <p><%= time_ago_in_words messages.sort_by { |message| message.created_at }.last.created_at %></p>
+  </div>
+<% end %>

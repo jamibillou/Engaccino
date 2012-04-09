@@ -67,7 +67,7 @@ $ ->
 @refreshPartials = (partials) ->
   if typeof(partials) != 'undefined'
     refreshPartial(partial) for partial in partials
-          
+
 @refreshPartial = (partial) ->
   $.ajax 'refresh',
   dataType: 'html'

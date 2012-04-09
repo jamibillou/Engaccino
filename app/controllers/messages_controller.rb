@@ -12,8 +12,16 @@ class MessagesController < ApplicationController
   end
   
   def index
-    init_page :title => 'menu_messages'
+    init_page :title => 'menu_messages', :javascripts => 'messages'
     @contacts = current_user.messaged_contacts
     @messages = current_user.messages
+    @message  = Message.new
+  end
+  
+  def show
+    init_page :javascripts => 'messages'
+    @messages = current_user.messages
+    @message  = Message.new
+    render :partial => 'messages/conversation', :locals => { :contact => User.find(params[:contact_id]) }
   end
 end
