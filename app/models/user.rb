@@ -53,8 +53,10 @@ class User < ActiveRecord::Base
     Message.where "author_id = #{self.id} OR recipient_id = #{self.id}"
   end
   
-  def contacts_id
-    Message.where("author_id = #{self.id} OR recipient_id = #{self.id}").map { |message| message.author_id == self.id ? message.recipient_id : message.author_id }.uniq
+  def messaged_contacts
+    Message.where("author_id = #{self.id} OR recipient_id = #{self.id}").sort_by { |message| message.created_at }.reverse.map do |message|
+      message.author_id == self.id ? User.find(message.recipient_id) : User.find(message.author_id)
+    end.uniq
   end
   
   class << self

@@ -13,7 +13,7 @@ class MessagesController < ApplicationController
   
   def index
     init_page :title => 'menu_messages'
-    @contacts = current_user.contacts_id.map { |contact_id| User.find contact_id }
+    @contacts = current_user.messaged_contacts
     @messages = current_user.messages
   end
 end
