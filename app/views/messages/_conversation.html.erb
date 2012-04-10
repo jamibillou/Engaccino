@@ -1,4 +1,4 @@
-<div class='loader' id='messages_loader'><%= image_tag 'loader.gif' %></div>
+<div class='loader' id='conversation_loader'><%= image_tag 'loader.gif' %></div>
 <% @messages.select { |message| message.author_id == contact.id || message.recipient_id == contact.id }.each do |message| %>
   <div id='message_<%= message.id %>' class='<%= if current_user.authored?(message) then 'authored' else 'received' end %> message'>
     <p>
