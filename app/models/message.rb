@@ -1,6 +1,6 @@
 class Message < ActiveRecord::Base
   
-  attr_accessible :content, :author_id, :recipient_id
+  attr_accessible :content, :author_id, :recipient_id, :read
     
   belongs_to :author,    :class_name => 'User', :foreign_key => :author_id
   belongs_to :recipient, :class_name => 'User', :foreign_key => :recipient_id

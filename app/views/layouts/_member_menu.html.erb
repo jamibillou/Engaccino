@@ -28,6 +28,6 @@
   <% end %>
 <% end %>
   <li class='round<% if @title == t(:menu_messages) %> selected<% end %>'>
-    <%= link_to t(:menu_messages), messages_path %>
+    <%= link_to t(:menu_messages)+get_unread_messages(), messages_path, { :id => 'messages_menu'} %>   
   </li>
 </ul>

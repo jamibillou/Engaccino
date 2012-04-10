@@ -1,6 +1,7 @@
 class MessagesController < ApplicationController
   
   before_filter :authenticate
+  after_filter  :read_messages, :only => [:show]
   
   def create
     @message = Message.new params[:message]
@@ -24,4 +25,15 @@ class MessagesController < ApplicationController
     @message  = Message.new
     render :partial => 'messages/conversation', :locals => { :contact => User.find(params[:contact_id]) }
   end
+  
+  def refresh_menu
+    render :partial => 'messages/refresh_menu'
+  end
+  
+  private
+    def read_messages
+      Message.where(:author_id => params[:contact_id], :recipient_id => current_user, :read => false).each do |message|
+        message.update_attribute(:read,true)
+      end
+    end
 end
