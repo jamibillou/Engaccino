@@ -1,9 +1,8 @@
 <div id='company' class='white_block'>
-  <div id='company_details' class='hidden grey_block' style='float: right; margin-right: 20%'>
+  <div id='company_details' class='hidden grey_block'>
   </div>
   <div id='company_information'>
     <h2><%=t 'recruiters.edit.company.info' %></h2>
     <%= f.fields_for :company do |company_builder| render 'fields_company', :f => company_builder end %>
   </div>
-  <br/></br/>
 </div>

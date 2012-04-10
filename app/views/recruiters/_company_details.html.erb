@@ -1,12 +1,11 @@
-<%= link_to_function t('recruiters.edit.company.wrong_company'), "deleteCompanyDetails()", :class => 'black right' %>
-<h2><%= company.name %></h2>
+<%= link_to_function '', "deleteCompanyDetails()", :class => 'close' %>
+<h2><%= company.url.nil? ? company.name : (link_to company.name, "http://#{company.url}", :class => 'black link', :target => '_blank') %></h2>
 <%= company.city %>, <%= company.country %><br/>
-<%= link_to company.url, "http://#{company.url}", :class => 'black', :target => '_blank' unless company.url.nil? %>
-<% unless company.about.nil? %><div class='italic'>"<%= company.about %>"</div><% end %>
-<h3><%=t 'companies.recruiters' %></h3>
+<h4><%= "#{t('companies.recruiters')}#{t('_:')}" %></h4>
+<% recruiters = recruiters[0..2] if recruiters.count > 3 %>
 <% recruiters.each do |recruiter| %>
-  <div style='width: 80px; float:left; margin-left:10px;'>
-    <div class='<%= "default-user-#{rand(1..4)} " if recruiter.image_url.nil? %>image'><%= image_tag recruiter.image_url(:thumb).to_s unless recruiter.image_url.nil? %></div>
-    <span style='padding-top: 85px;'><%= "#{recruiter.first_name.first}. #{recruiter.last_name}" %></span>
-  </div>
+    <div class='recruiter'>
+      <div class='<%= "default-user-#{rand(1..4)} " if recruiter.image_url.nil? %>image'><%= image_tag recruiter.image_url(:thumb).to_s unless recruiter.image_url.nil? %></div>
+      <p><%= "#{recruiter.first_name.first.upcase}. #{recruiter.last_name[0..8].humanize}" %></p>
+    </div>
 <% end %>
