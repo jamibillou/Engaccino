@@ -1,5 +1,5 @@
 @show_conversation = (contact_id) ->
-  $.ajax 'messages/conversation',
+  $.ajax 'messages/show',
   dataType: 'html'
   type: 'GET'
   data: {contact_id: contact_id}
@@ -9,3 +9,11 @@
     hide("messages_loader")
   success: (data) ->
     $('#conversation').html(data)
+    refresh_menu()
+    
+@refresh_menu = ->
+  $.ajax 'messages/refresh_menu',
+  dataType: 'html',
+  type: 'POST',
+  success: (data) ->
+    $('#messages_menu').html(data)
