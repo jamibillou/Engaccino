@@ -5,7 +5,6 @@
       <span class='title'>
       	<%= current_user.authored?(message) ? t('messages.you_said') : "#{contact.first_name} #{t('messages.other_said').downcase}" %><%=t '_:' %>
       </span>
-      <%= image_tag 'mail.png', :title => t('messages.new_message'), :class => 'unread' unless message.read? || current_user.authored?(message) %>
       <br /><%= message.content %>
     </p>
   </div>

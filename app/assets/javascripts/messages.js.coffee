@@ -12,8 +12,9 @@ $ ->
     hide("conversation_loader")
   success: (data) ->
     $('#conversation').html(data)
-    $('#new_message').bind('ajax:success', (evt, data, status, xhr) -> show_conversation($.parseJSON(xhr.responseText)))
+    hide('unread_'+contact_id)
     refresh_menu()
+    $('#new_message').bind('ajax:success', (evt, data, status, xhr) -> show_conversation($.parseJSON(xhr.responseText)))
     
 @refresh_menu = ->
   $.ajax 'messages/refresh_menu',
