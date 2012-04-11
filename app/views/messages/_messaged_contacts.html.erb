@@ -1,3 +1,4 @@
+<%= link_to_function 'New message', 'add_message()', :class => 'black' %><br/><br/>
 <% contacts.each do |contact| %>
   <% messages = @messages.select { |message| message.author_id == contact.id || message.recipient_id == contact.id } %>
   <div id='messaged_contact_<%= contact.id %>' class='messaged_contact' onclick="show_conversation('<%= contact.id %>')">

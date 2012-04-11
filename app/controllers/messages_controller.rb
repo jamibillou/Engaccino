@@ -12,6 +12,11 @@ class MessagesController < ApplicationController
     end 
   end
   
+  def new
+    @message = Message.new
+    render :partial => 'messages/new_from_menu'
+  end
+  
   def index
     init_page :title => 'menu_messages', :javascripts => 'messages'
     @contacts = current_user.messaged_contacts
