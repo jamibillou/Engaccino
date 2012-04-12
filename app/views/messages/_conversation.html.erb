@@ -1,7 +1,10 @@
 <% messages = @messages.select { |message| message.author_id == contact.id || message.recipient_id == contact.id } %>
 <div class='loader' id='conversation_loader'><%= image_tag 'loader.gif' %></div>
+<% if messages.count > 10 %>
+  <p id='all' onclick='show_all_messages()'><%= t('messages.display_all').downcase %></p>
+<% end %>
 <% messages.each_with_index do |message, index| %>
-  <div id='message_<%= message.id %>' class='<%= if current_user.authored?(message) then 'authored' else 'received' end %> message'>
+  <div id='message_<%= message.id %>' class='<%= 'hidden ' if messages.count > 10 && index < messages.count - 10 %><%= current_user.authored?(message) ? 'authored' : 'received' %> message'>
     <p>
       <span class='title'>
       	<%= current_user.authored?(message) ? t('messages.you_said') : "#{contact.first_name} #{t('messages.other_said').downcase}" %><%=t '_:' %>

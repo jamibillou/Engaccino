@@ -43,7 +43,7 @@ Engaccino::Application.routes.draw do
   match 'recruiters/company_details', :to => 'recruiters#company_details'
   match 'companies/up_picture',       :to => 'companies#up_picture'
   match 'messages/conversation',      :to => 'messages#conversation'
-  match 'messages/refresh_menu',      :to => 'messages#refresh_menu'
+  match 'messages/menu_top',          :to => 'messages#menu_top'
   
   match '/candidate_signup',  :to => 'candidates#new'
   match '/recruiter_signup',  :to => 'recruiters#new'

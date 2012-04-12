@@ -9,4 +9,6 @@ en:
     new_message: "New message"
     new_conversation: "New conversation"
     recipient: "Recipient"
+    display_all: "Display all messages"
+    
     

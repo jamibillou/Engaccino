@@ -13,11 +13,11 @@ $ ->
   success: (data) ->
     $('#conversation').html(data)
     hide('unread_'+contact_id)
-    refresh_menu()
+    refresh_menu_top()
     $('#new_message').bind('ajax:success', (evt, data, status, xhr) -> show_conversation($.parseJSON(xhr.responseText)))
     
-@refresh_menu = ->
-  $.ajax 'messages/refresh_menu',
+@refresh_menu_top = ->
+  $.ajax 'messages/menu_top',
   dataType: 'html'
   type: 'POST'
   success: (data) ->
@@ -38,4 +38,7 @@ $ ->
     })
     $('#new_message').bind('ajax:success', (evt, data, status, xhr) -> show_conversation($.parseJSON(xhr.responseText)))
                      .bind('ajax:error', (evt, xhr, status)         -> $('#message_errors').html(buildErrorMessages(xhr)))
-  
+                     
+@show_all_messages = ->
+  $('#conversation .message').each ->
+    if $(this).hasClass("hidden") then $(this).show() and $('#all').hide()

@@ -32,8 +32,8 @@ class MessagesController < ApplicationController
     render :partial => 'messages/conversation', :locals => { :contact => User.find(params[:contact_id]) }
   end
   
-  def refresh_menu
-    render :partial => 'messages/refresh_menu'
+  def menu_top
+    render :partial => 'messages/menu_top'
   end
   
   private
