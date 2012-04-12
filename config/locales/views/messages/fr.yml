@@ -6,5 +6,7 @@ fr:
     you_said: "Vous avez dit"
     other_said: "A dit"
     type_your_message: "Saisissez votre message"
-    new_message: "Nouveau(x) message(s)"
+    new_message: "Nouveau message"
+    new_conversation: "Nouvelle conversation"
     recipient: "Destinataire"
+    

@@ -1,8 +1,0 @@
-<%= form_for @message, :remote => true do |f| %>
-  <%= text_field_tag :recipient, '' ,:placeholder => t('messages.recipient'), :class => 'field', :id => 'recipient' %>
-  <%= f.text_area    :content,       :placeholder => t('messages.type_your_message'), :rows => '3', :class => 'textarea' %><br/>
-  <%= f.hidden_field :author_id,     :value => current_user.id %>
-  <%= f.hidden_field :recipient_id,  :value => current_user.id %>
-  <%= f.submit t('send') %>
-<% end %>
-<div id='message_errors'></div>

@@ -1,7 +1,7 @@
 class MessagesController < ApplicationController
   
   before_filter :authenticate
-  after_filter  :read_messages, :only => [:show,:create]
+  after_filter  :read_messages!, :only => [:show,:create]
   
   def create
     @message = Message.new params[:message]
@@ -14,7 +14,7 @@ class MessagesController < ApplicationController
   
   def new
     @message = Message.new
-    render :partial => 'messages/new_from_menu'
+    render :partial => 'messages/new_conversation'
   end
   
   def index
@@ -22,7 +22,7 @@ class MessagesController < ApplicationController
     @contacts = current_user.messaged_contacts
     @messages = current_user.messages
     @message  = Message.new
-    read_messages(@contacts.first)
+    read_messages! @contacts.first
   end
   
   def show
@@ -37,9 +37,7 @@ class MessagesController < ApplicationController
   end
   
   private
-    def read_messages(contact_id = params[:contact_id])
-      Message.where(:author_id => contact_id, :recipient_id => current_user, :read => false).each do |message|
-        message.update_attribute(:read,true)
-      end
+    def read_messages!(contact_id = params[:contact_id])
+      Message.where(:author_id => contact_id, :recipient_id => current_user, :read => false).each { |message| message.update_attribute :read, true }
     end
 end

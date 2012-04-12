@@ -1,1 +1,2 @@
-<%= t(:menu_messages)+get_unread_messages() %>
+<% if unread_messages? %><span class='unread'></span><% end %>
+<%= link_to "#{t(:menu_messages)}", messages_path %>
