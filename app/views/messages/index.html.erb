@@ -1,6 +1,6 @@
 <% unless @contacts.nil? %>
   <div id='menu_left'>  
-    <%= render :partial => 'menu_left', :locals => { :contacts => @contacts, :messages => @messages, :contact_id => @contacts.first.id } %>
+    <%= render :partial => 'menu_left', :locals => { :contacts => @contacts, :messages => @messages, :contact_id => @contact_id } %>
   </div>
   <div id='conversation'>
     <%= render 'conversation', :contact => @contacts.first %>

@@ -8,6 +8,7 @@ fr:
     type_your_message: "Saisissez votre message"
     new_message: "Nouveau message"
     new_conversation: "Nouvelle conversation"
+    delete_conversation: "Supprimer la conversation"
     recipient: "Destinataire"
     display_all: "Afficher tous les messages"
     
