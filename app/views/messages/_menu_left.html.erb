@@ -1,7 +1,7 @@
 <% contacts.each do |contact| %>
   <div id='contact_<%= contact.id %>' class='contact <%= 'selected' if contact.id == contact_id %>' onclick="show_conversation('<%= contact.id %>')">
-    <div class='<%= "default-user-small-#{rand(1..4)} " if contact.image_url.nil? %>image_small left'>      
-      <%= image_tag contact.image_url(:small_thumb).to_s unless contact.image_url.nil? %>
+    <div class='small default image <%= "color-#{rand(1..4)} " if contact.image_url.nil? %>left'>      
+      <%= image_tag (contact.image_url.nil? ? 'default_user_s.png' : contact.image_url(:small_thumb).to_s) %>
     </div>
     <% if unread_messages_from?(contact) %><span class='unread' id='unread_<%= contact.id %>'></span><% end %>
     <h4><%= link_to "#{contact.first_name} #{contact.last_name}", contact, :class => 'black' %></h4>
@@ -9,4 +9,3 @@
   </div>
 <% end %>
 <%= link_to_function t('messages.new_conversation'), 'new_conversation()', :class => 'small black round button' %>
-

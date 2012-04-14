@@ -3,8 +3,8 @@
   
     <div class='identity block'>
       <% if current_user == candidate %><div id='image_edit' class='image_hover'></div><% end %>
-      <div class='<%= "default-user-#{rand(1..4)} " if candidate.image_url.nil? %>image left'>
-        <%= image_tag candidate.image_url(:thumb).to_s unless candidate.image_url.nil? %>
+      <div class='default image <%= "color-#{rand(1..4)} " if candidate.image_url.nil? %>left'>
+        <%= image_tag (candidate.image_url.nil? ? 'default_user.png' : candidate.image_url(:thumb).to_s) %>
       </div>
       <% if current_user == candidate %>
     	  <div class='title'><%= best_in_place candidate, :first_name, :html_attrs => { :class => 'field' } %></div><br />

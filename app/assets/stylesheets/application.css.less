@@ -170,20 +170,15 @@ a.link                { text-decoration: none;
 .pencil               { padding-top: 1px; float: right }
 
 // DEFAULT AVATARS
-.image                { width: 80px; height: 80px; display: inline-block; background-repeat: no-repeat; background-position: center center }
-.default-user-1       { background: #AEF0FF url('default_user.png') }
-.default-user-2       { background: #FFF8B1 url('default_user.png') }
-.default-user-3       { background: #FFC288 url('default_user.png') }
-.default-user-4       { background: #E3F2AB url('default_user.png') }
-.default-company-1    { background: #AEF0FF url('default_company.png') }
-.default-company-2    { background: #FFF8B1 url('default_company.png') }
-.default-company-3    { background: #FFC288 url('default_company.png') }
-.default-company-4    { background: #E3F2AB url('default_company.png') }
-.image_small          { width: 50px; height: 50px; display: inline-block; background-repeat: no-repeat; background-position: center center; margin-right: 5px;}
-.default-user-small-1 { background: #AEF0FF url('default_user_small.png') }
-.default-user-small-2 { background: #FFF8B1 url('default_user_small.png') }
-.default-user-small-3 { background: #FFC288 url('default_user_small.png') }
-.default-user-small-4 { background: #E3F2AB url('default_user_small.png') }
+.default {
+  &.image             { width: 80px; height: 80px; display: inline-block; background-repeat: no-repeat; background-position: center center;
+    &.small           { width: 50px; height: 50px }
+    &.color-1         { background-color: #AEF0FF }
+    &.color-2         { background-color: #FFF8B1 }
+    &.color-3         { background-color: #FFC288 }
+    &.color-4         { background-color: #E3F2AB }
+  }
+}
 
 // LOADER
 .loader               { float: right; display: none; }

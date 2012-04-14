@@ -5,7 +5,9 @@
 <% recruiters = recruiters[0..2] if recruiters.count > 3 %>
 <% recruiters.each do |recruiter| %>
     <div class='recruiter'>
-      <div class='<%= "default-user-#{rand(1..4)} " if recruiter.image_url.nil? %>image'><%= image_tag recruiter.image_url(:thumb).to_s unless recruiter.image_url.nil? %></div>
+      <div class='default image <%= "color-#{rand(1..4)} " if recruiter.image_url.nil? %>'>      
+        <%= image_tag (recruiter.image_url.nil? ? 'default_user.png' : recruiter.image_url(:thumb).to_s) %>
+      </div>
       <p><%= "#{recruiter.first_name.first.upcase}. #{recruiter.last_name[0..8].humanize}" %></p>
     </div>
 <% end %>

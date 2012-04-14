@@ -5,8 +5,8 @@
       <% if current_user?(recruiter) && !company_profile? %>
         <div id='image_edit_r' class='image_hover'></div>
       <% end %>
-      <div class='<%= "default-user-#{rand(1..4)} " if recruiter.image_url.nil? %>image left'>
-        <%= image_tag recruiter.image_url(:thumb).to_s unless recruiter.image_url.nil? %>
+      <div class='default image <%= "color-#{rand(1..4)} " if recruiter.image_url.nil? %>left'>
+        <%= image_tag (recruiter.image_url.nil? ? 'default_user.png' : recruiter.image_url(:thumb).to_s) %>
       </div>
       <% if current_user?(recruiter) && !company_profile? %>
     	  <div class='title'><%= best_in_place recruiter, :first_name, :html_attrs => { :class => 'field' } %></div><br />
@@ -52,8 +52,8 @@
       <div class='company_r identity block' id="company_<%= recruiter.company.id %>">
         <h2><%= t('recruiters.show.recruiter_at').remove_accents.upcase %></h2>
         <% if current_user?(recruiter) %><div id='image_edit_c' class='image_hover'></div><% end %>
-        <div class='<%= "default-company-#{rand(1..4)} " if recruiter.company.image_url.nil? %>image left'>
-          <%= image_tag recruiter.company.image_url(:thumb).to_s unless recruiter.company.image_url.nil? %>
+        <div class='default image <%= "color-#{rand(1..4)} " if recruiter.company.image_url.nil? %>left'>
+          <%= image_tag (recruiter.company.image_url.nil? ? 'default_company.png' : recruiter.company.image_url(:thumb).to_s) %>
         </div>
         <% if current_user?(recruiter) %>
       	  <div class='title'><%= best_in_place recruiter.company, :name, :html_attrs => { :class => 'field' } %></div>
