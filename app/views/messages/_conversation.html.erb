@@ -16,4 +16,8 @@
     <p class='last'><%= "#{t('messages.last_message').downcase}#{t('_:')} #{time_ago_in_words message.created_at}" %></p>
   <% end %>
 <% end %>
-<%= render 'new', :contact => contact %>
+<% unless messages.empty? %>
+  <%= render 'new', :contact => contact %>
+<% else %>
+  No conversations yet
+<% end %>

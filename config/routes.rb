@@ -45,6 +45,7 @@ Engaccino::Application.routes.draw do
   match 'messages/conversation',      :to => 'messages#conversation'
   match 'messages/menu_top',          :to => 'messages#menu_top'
   match 'messages/menu_left',         :to => 'messages#menu_left'
+  match 'messages/archive',           :to => 'messages#archive'
   
   match '/candidate_signup',  :to => 'candidates#new'
   match '/recruiter_signup',  :to => 'recruiters#new'

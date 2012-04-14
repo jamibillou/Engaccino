@@ -8,6 +8,7 @@ en:
     type_your_message: "Type your message here"
     new_message: "New message"
     new_conversation: "New conversation"
+    delete_conversation: "Delete conversation"
     recipient: "Recipient"
     display_all: "Display all messages"
     

@@ -47,6 +47,15 @@ $ ->
     })
     $('#new_message').bind('ajax:success', (evt, data, status, xhr) -> show_conversation($.parseJSON(xhr.responseText)))
                      .bind('ajax:error', (evt, xhr, status)         -> $('#message_errors').html(buildErrorMessages(xhr)))
+
+@archive_conversation = (contact_id) ->
+  if(confirm(I18n.t('delete')+I18n.t('_?')))
+    $.ajax 'messages/archive',
+    dataType: 'html'
+    type: 'POST'
+    data: { contact_id : contact_id}
+    success: (data) ->
+      show_conversation()
                      
 @show_all_messages = ->
   $('#conversation .message').each ->
