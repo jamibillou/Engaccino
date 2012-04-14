@@ -36,6 +36,12 @@ class MessagesController < ApplicationController
     render :partial => 'messages/menu_top'
   end
   
+  def menu_left
+    @contacts = current_user.messaged_contacts
+    @messages = current_user.messages
+    render :partial => 'messages/menu_left', :locals => { :contacts => @contacts, :messages => @messages, :contact_id => params[:contact_id].to_i }
+  end
+  
   private
     def read_messages!(contact_id = params[:contact_id])
       Message.where(:author_id => contact_id, :recipient_id => current_user, :read => false).each { |message| message.update_attribute :read, true }

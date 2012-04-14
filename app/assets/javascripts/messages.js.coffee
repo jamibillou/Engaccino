@@ -2,6 +2,7 @@ $ ->
   $('#new_message').bind('ajax:success', (evt, data, status, xhr) -> show_conversation($.parseJSON(xhr.responseText)))
 
 @show_conversation = (contact_id) ->
+  refresh_menu_left(contact_id)
   $.ajax 'messages/show',
   dataType: 'html'
   type: 'GET'
@@ -18,10 +19,18 @@ $ ->
     
 @refresh_menu_top = ->
   $.ajax 'messages/menu_top',
-  dataType: 'html'
+  dataType: 'html'  
   type: 'POST'
   success: (data) ->
     $('#messages_menu').html(data)
+    
+@refresh_menu_left = (contact_id) ->
+  $.ajax 'messages/menu_left',
+  dataType: 'html'
+  type: 'POST'
+  data: { contact_id: contact_id }
+  success: (data) ->
+    $('#menu_left').html(data)
 
 @new_conversation = ->
   $.ajax 'messages/new',

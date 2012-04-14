@@ -1,5 +1,5 @@
 <% contacts.each do |contact| %>
-  <div id='contact_<%= contact.id %>' class='contact' onclick="show_conversation('<%= contact.id %>')">
+  <div id='contact_<%= contact.id %>' class='contact <%= 'selected' if contact.id == contact_id %>' onclick="show_conversation('<%= contact.id %>')">
     <div class='<%= "default-user-#{rand(1..4)} " if contact.image_url.nil? %>image left'>      
       <%= image_tag contact.image_url(:small_thumb).to_s unless contact.image_url.nil? %>
     </div>
