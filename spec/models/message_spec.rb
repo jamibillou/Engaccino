@@ -78,6 +78,20 @@ describe Message do
         Message.new(:content => 'Bla bla', :read => invalid_read).should_not be_valid
       end      
     end
+    
+    it 'should reject invalid/empty archived_author attributes' do
+      invalid_archived_authors = ['aaa',12,'']
+      invalid_archived_authors.each do |invalid_archived_author|
+        Message.new(:content => 'Bla bla', :archived_author => invalid_archived_author).should_not be_valid
+      end       
+    end
+    
+    it 'should reject invalid/empty archived_recipient attributes' do
+      invalid_archived_recipients = ['aaa',12,'']
+      invalid_archived_recipients.each do |invalid_archived_recipient|
+        Message.new(:content => 'Bla bla', :archived_recipient => invalid_archived_recipient).should_not be_valid
+      end       
+    end
   end
 end
 
@@ -85,12 +99,14 @@ end
 #
 # Table name: messages
 #
-#  id           :integer(4)      not null, primary key
-#  content      :string(255)
-#  created_at   :datetime        not null
-#  updated_at   :datetime        not null
-#  author_id    :integer(4)
-#  recipient_id :integer(4)
-#  read         :boolean(1)      default(FALSE)
+#  id                 :integer(4)      not null, primary key
+#  content            :string(255)
+#  created_at         :datetime        not null
+#  updated_at         :datetime        not null
+#  author_id          :integer(4)
+#  recipient_id       :integer(4)
+#  read               :boolean(1)      default(FALSE)
+#  archived_author    :boolean(1)      default(FALSE)
+#  archived_recipient :boolean(1)      default(FALSE)
 #
 

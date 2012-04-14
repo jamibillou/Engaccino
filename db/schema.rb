@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120403200801) do
+ActiveRecord::Schema.define(:version => 20120414173603) do
 
   create_table "certificate_candidates", :force => true do |t|
     t.string   "level_score"
@@ -112,11 +112,13 @@ ActiveRecord::Schema.define(:version => 20120403200801) do
 
   create_table "messages", :force => true do |t|
     t.string   "content"
-    t.datetime "created_at",                      :null => false
-    t.datetime "updated_at",                      :null => false
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
     t.integer  "author_id"
     t.integer  "recipient_id"
-    t.boolean  "read",         :default => false
+    t.boolean  "read",               :default => false
+    t.boolean  "archived_author",    :default => false
+    t.boolean  "archived_recipient", :default => false
   end
 
   create_table "professional_skill_candidates", :force => true do |t|
