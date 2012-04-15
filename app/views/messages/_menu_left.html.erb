@@ -1,12 +1,12 @@
 <% contacts.each do |contact| %>
-  <div id='contact_<%= contact.id %>' class='contact <%= 'selected' if contact.id == contact_id %>' onclick="show_conversation('<%= contact.id %>')">
+  <div id='contact_<%= contact.id %>' class='contact <%= 'selected' if contact.id == current_contact %>' onclick="show_conversation('<%= contact.id %>')">
     <div class='small default image <%= "color-#{rand(1..4)} " if contact.image_url.nil? %>left'>      
       <%= image_tag (contact.image_url.nil? ? 'default_user_s.png' : contact.image_url(:small_thumb).to_s) %>
     </div>
     <% if unread_messages_from?(contact) %><span class='unread' id='unread_<%= contact.id %>'></span><% end %>
     <h4><%= link_to "#{contact.first_name} #{contact.last_name}", contact, :class => 'black' %></h4>
     <%= link_to_function image_tag('cross.png'), "archive_conversation(#{contact.id})", :title => t('messages.delete_conversation') , :class => 'right' %>
-    <p><%= time_ago_in_words messages.select { |message| message.author_id == contact.id || message.recipient_id == contact.id }.sort_by { |message| message.created_at }.last.created_at %></p>
+    <p><%= time_ago_in_words current_user.messages.select { |message| message.author_id == contact.id || message.recipient_id == contact.id }.sort_by { |message| message.created_at }.last.created_at %></p>
   </div>
 <% end %>
 <%= link_to_function t('messages.new_conversation'), 'new_conversation()', :class => 'small black round button' %>
