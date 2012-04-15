@@ -49,7 +49,7 @@ $ ->
                      .bind('ajax:error', (evt, xhr, status)         -> $('#message_errors').html(buildErrorMessages(xhr)))
 
 @archive_conversation = (contact_id) ->
-  if(confirm(I18n.t('delete')+I18n.t('_?')))
+  if(confirm(I18n.t('messages.delete_conversation')+I18n.t('_?')))
     $.ajax 'messages/archive',
     dataType: 'html'
     type: 'POST'

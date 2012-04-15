@@ -42,14 +42,14 @@ class MessagesController < ApplicationController
     @contacts = current_user.messaged_contacts
     @messages = current_user.messages
     @contact_id = params[:contact_id].nil? ? @contacts.first.id : params[:contact_id].to_i
-    destroy_archives
+    destroy_archives!
     render :partial => 'messages/menu_left', :locals => { :contacts => @contacts, :messages => @messages, :contact_id => @contact_id }
   end
   
   def archive
     contact_id = params[:contact_id]
-    Message.where(:author_id => current_user, :recipient_id => contact_id).each { |message| message.update_attribute :archived_author, true }
-    Message.where(:author_id => contact_id, :recipient_id => current_user).each { |message| message.update_attribute :archived_recipient, true }
+    Message.where(:author_id => current_user, :recipient_id => contact_id).each   { |message| message.update_attribute :archived_author,    true }
+    Message.where(:author_id => contact_id,   :recipient_id => current_user).each { |message| message.update_attribute :archived_recipient, true }
     respond_to { |format| format.html { render :json => 'archive!' if request.xhr? } }
   end
   
@@ -58,7 +58,7 @@ class MessagesController < ApplicationController
       Message.where(:author_id => contact_id, :recipient_id => current_user, :read => false).each { |message| message.update_attribute :read, true }
     end
     
-    def destroy_archives
+    def destroy_archives!
       Message.where(:archived_author => true, :archived_recipient => true).each { |message| message.destroy }
     end
 end
