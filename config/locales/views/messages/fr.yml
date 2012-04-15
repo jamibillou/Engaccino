@@ -1,6 +1,7 @@
 fr:
   messages:
-  
+    
+    title: "Messages"
     no_message: "Vous n'avez pas de message."
     last_message: "Dernier message"
     you_said: "Vous avez dit"

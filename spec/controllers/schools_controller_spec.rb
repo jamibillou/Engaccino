@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe SchoolsController do
+  
   before :each do
     @candidate = Factory :candidate
     @school = Factory :school

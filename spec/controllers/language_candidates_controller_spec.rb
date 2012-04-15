@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe LanguageCandidatesController do
+  
   render_views
 
   before :each do

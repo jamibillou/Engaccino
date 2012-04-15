@@ -1,6 +1,7 @@
 class MessagesController < ApplicationController
   
   before_filter :authenticate
+  before_filter :ajax_only, :only => [:new, :show, :menu_top, :menu_left]
   after_filter  :read_messages!, :only => [:show,:create]
   
   def new
@@ -18,7 +19,7 @@ class MessagesController < ApplicationController
   end
   
   def index
-    init_page :title => 'menu_messages', :javascripts => 'messages'
+    init_page :title => 'messages.title', :javascripts => 'messages'
     @contacts = current_user.messaged_contacts
     @contact_id = @contacts.empty? ? 0 : @contacts.first.id
     @messages = current_user.messages
