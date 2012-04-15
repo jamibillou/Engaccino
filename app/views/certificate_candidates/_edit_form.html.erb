@@ -12,7 +12,7 @@
   </div>
   <div class='error_messages' id='errors_certificate_candidate<%= certificate_candidate.id %>'></div>
   <%= link_to_function t('cancel'), "hideForm('certificate_candidate','#{certificate_candidate.id}')", :class => 'grey button' %>&nbsp;<%= f.submit t('submit') %>
-  <div class='small_trash_link'>
+  <div class='small_trash_link left'>
     <%= link_to "#{t('delete')}#{t('_?')}", certificate_candidate, :method => :delete, :confirm => "#{t('delete')}#{t('_?')}", :title => "#{t('delete')}#{t('_!')}", :remote => true %>
   </div>
 <% end %>

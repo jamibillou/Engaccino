@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   
-  before_filter :destroy_archives, :only => [:menu_left]
+  before_filter :destroy_archives!, :only => [:menu_left]
   before_filter :authenticate
   after_filter  :read_messages!,   :only => [:show,:create]
   
@@ -50,6 +50,14 @@ class MessagesController < ApplicationController
     current_contact = params[:current_contact]
     Message.where(:author_id => current_user, :recipient_id => current_contact).each { |message| message.update_attribute :archived_author, true }
     Message.where(:author_id => current_contact, :recipient_id => current_user).each { |message| message.update_attribute :archived_recipient, true }
+    @current_contact = params[:current_contact].nil? ? @contacts.first.id : params[:current_contact].to_i
+    render :partial => 'messages/menu_left', :locals => { :contacts => @contacts, :messages => @messages, :current_contact => @current_contact }
+  end
+  
+  def archive
+    current_contact = params[:current_contact]
+    Message.where(:author_id => current_user, :recipient_id => current_contact).each   { |message| message.update_attribute :archived_author,    true }
+    Message.where(:author_id => current_contact,   :recipient_id => current_user).each { |message| message.update_attribute :archived_recipient, true }
     respond_to { |format| format.html { render :json => 'archive!' if request.xhr? } }
   end
   
@@ -58,7 +66,7 @@ class MessagesController < ApplicationController
       Message.where(:author_id => current_contact, :recipient_id => current_user, :read => false).each { |message| message.update_attribute :read, true }
     end
     
-    def destroy_archives
+    def destroy_archives!
       Message.where(:archived_author => true, :archived_recipient => true).each { |message| message.destroy }
     end
 end
