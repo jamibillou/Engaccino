@@ -1,36 +1,27 @@
 $ ->
   $('#new_message').bind('ajax:success', (evt, data, status, xhr) -> show_conversation($.parseJSON(xhr.responseText)))
 
-@show_conversation = (contact_id) ->
-  refresh_menu_left(contact_id)
+@show_conversation = (current_contact) ->
+  refresh_menu_left(current_contact)
   $.ajax 'messages/show',
   dataType: 'html'
   type: 'GET'
-  data: {contact_id: contact_id}
+  data: {current_contact: current_contact}
   beforeSend: -> 
     show("conversation_loader")
   complete: -> 
     hide("conversation_loader")
   success: (data) ->
     $('#conversation').html(data)
-    hide('unread_'+contact_id)
+    hide('unread_'+current_contact)
     refresh_menu_top()
     $('#new_message').bind('ajax:success', (evt, data, status, xhr) -> show_conversation($.parseJSON(xhr.responseText)))
     
 @refresh_menu_top = ->
-  $.ajax 'messages/menu_top',
-  dataType: 'html'  
-  type: 'POST'
-  success: (data) ->
-    $('#messages_menu').html(data)
+  ajax_call('messages/menu_top','POST',{}, (data) -> $('#messages_menu').html(data))
     
-@refresh_menu_left = (contact_id) ->
-  $.ajax 'messages/menu_left',
-  dataType: 'html'
-  type: 'POST'
-  data: { contact_id: contact_id }
-  success: (data) ->
-    $('#menu_left').html(data)
+@refresh_menu_left = (current_contact) ->
+  ajax_call('messages/menu_left','POST',{ current_contact: current_contact}, (data) -> $('#menu_left').html(data))
 
 @new_conversation = ->
   $.ajax 'messages/new',
@@ -48,12 +39,12 @@ $ ->
     $('#new_message').bind('ajax:success', (evt, data, status, xhr) -> show_conversation($.parseJSON(xhr.responseText)))
                      .bind('ajax:error', (evt, xhr, status)         -> $('#message_errors').html(buildErrorMessages(xhr)))
 
-@archive_conversation = (contact_id) ->
+@archive_conversation = (current_contact) ->
   if(confirm(I18n.t('messages.delete_conversation')+I18n.t('_?')))
     $.ajax 'messages/archive',
     dataType: 'html'
     type: 'POST'
-    data: { contact_id : contact_id}
+    data: { current_contact : current_contact}
     success: (data) ->
       show_conversation()
                      

@@ -53,6 +53,14 @@ $ ->
   errorMessages = 'Error(s): '
   errorMessages += error+' '+errors[error]+' ' for error of errors
   errorMessages
-    
+
+@ajax_call = (url,type,data,success_function) ->
+  $.ajax url,
+  dataType: 'html'
+  data: data
+  type: type
+  success: (data) ->
+    success_function(data)
+      
 @show = (id) -> $('#'+id).show()
 @hide = (id) -> $('#'+id).hide()

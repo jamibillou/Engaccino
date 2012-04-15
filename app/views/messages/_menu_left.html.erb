@@ -1,5 +1,5 @@
 <% contacts.each do |contact| %>
-  <div id='contact_<%= contact.id %>' class='contact <%= 'selected' if contact.id == contact_id %>' onclick="show_conversation('<%= contact.id %>')" onmouseover="show('archive_<%= contact.id %>')" onmouseout="hide('archive_<%= contact.id %>')")>
+  <div id='contact_<%= contact.id %>' class='contact <%= 'selected' if contact.id == current_contact %>' onclick="show_conversation('<%= contact.id %>')" onmouseover="show('archive_<%= contact.id %>')" onmouseout="hide('archive_<%= contact.id %>')")>
     <div class='small default image <%= "color-#{rand(1..4)} " if contact.image_url.nil? %>left'>      
       <%= image_tag (contact.image_url.nil? ? 'default_user_s.png' : contact.image_url(:small_thumb).to_s) %>
     </div>
