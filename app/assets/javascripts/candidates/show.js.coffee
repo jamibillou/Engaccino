@@ -37,31 +37,17 @@ $ ->
 
 ## AJAX CALLS TO CONTROLLERS ACTIONS
 @callRefresh = (model, data, partials) ->
-  $.ajax 'refresh',
-    dataType: 'html'
-    type: 'POST'
-    data: {model: model}
-    beforeSend: -> 
-      show(model+"_loader")
-    complete: -> 
-      hide(model+"_loader")
-    success: (data) -> 
-      $('#'+model+'s').html(data)
-      $('.edit_'+model).each -> handleAjaxEdition($(this).attr('id'), model, partials)
-      refreshPartials(partials)
+  ajax_call('refresh','POST',{model: model},model+'_loader', (data) -> 
+    $('#'+model+'s').html(data)
+    $('.edit_'+model).each -> handleAjaxEdition($(this).attr('id'), model, partials)
+    refreshPartials(partials))      
       
 @callNew = (model, partials) ->
-  $.ajax '../'+model+'s/new',
-    dataType: 'html'
-    beforeSend: ->
-      show(model+"_loader")
-    complete: -> 
-      hide(model+"_loader")
-    success: (data) -> 
-      $('#new_'+model).html(data)
-      show('new_'+model)
-  	  hide('link_add_'+model)
-  	  handleAjaxCreation(model, partials)
+  ajax_call('../'+model+'s/new','GET',{},model+'_loader', (data) ->
+    $('#new_'+model).html(data)
+    show('new_'+model)
+  	hide('link_add_'+model)
+  	handleAjaxCreation(model, partials))
 
 ## REFRESH PARTIALS
 @refreshPartials = (partials) ->
@@ -69,30 +55,18 @@ $ ->
     refreshPartial(partial) for partial in partials
 
 @refreshPartial = (partial) ->
-  $.ajax 'refresh',
-  dataType: 'html'
-  type: 'POST'
-  data: {partial: partial}
-  beforeSend: -> 
-    show(partial+"_loader")
-  complete: -> 
-    hide(partial+"_loader")
-  success: (data) ->
+  ajax_call('refresh','POST',{partial: partial},partial+'_loader', (data) ->
     $('#'+partial).html(data)
     initBIP(I18n.t('click_to_edit'))
-    manageProfilePicture() if partial is 'candidate'
+    manageProfilePicture() if partial is 'candidate')
 
 @refreshPartialThroughBIPcombo = (partial, BIPcombo) ->
   $('#'+BIPcombo+' span').each ->
     $(this).change ->
-      $.ajax 'refresh',
-        dataType: 'html'
-        type: 'POST'
-        data: {partial: partial}
-        success: (data) -> 
-          $('#'+partial).html(data)
-          initBIP(I18n.t('click_to_edit'))
-          refreshPartialThroughBIPcombo(partial, BIPcombo)
+      ajax_call('refresh','POST',{partial: partial},'', (data) ->
+        $('#'+partial).html(data)
+        initBIP(I18n.t('click_to_edit'))
+        refreshPartialThroughBIPcombo(partial, BIPcombo))
 
 @manageProfilePicture = ->
   $('#image_edit').click    -> $('#image_button').click()

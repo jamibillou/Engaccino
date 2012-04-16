@@ -9,18 +9,14 @@ $ ->
     autoFocus: true,
     formatItem: (item) ->
       item.name+' ('+item.city+', '+item.country+')'
-    select: (event,ui) ->
-      $.ajax '/recruiters/company_details',
-      dataType: 'html',
-      type: 'POST',
-      data: { id: ui.item.id},
-      success: (data) -> 
+    select: (event,ui) -> 
+      ajax_call('recruiters/company_details','POST',{ id: ui.item.id },'',(data) ->
         $('#recruiter_company_attributes_id').val(ui.item.id)
         $('#recruiter_company_attributes_url').val(ui.item.url)
         $('#recruiter_company_attributes_city').val(ui.item.city)
         $('#recruiter_company_attributes_country').val(ui.item.country)
         $('#company_details').html(data)
-        show('company_details')})
+        show('company_details'))})
   
   $('#company_profile_no').change ->
     hide('company_information')
