@@ -54,13 +54,17 @@ $ ->
   errorMessages += error+' '+errors[error]+' ' for error of errors
   errorMessages
 
-@ajax_call = (url,type,data,success_function) ->
+@ajax_call = (url,type,data,loader,success_function) ->
   $.ajax url,
   dataType: 'html'
   data: data
   type: type
   success: (data) ->
-    success_function(data)
+    success_function(data) if success_function?
+  beforeSend: ->
+    show(loader) unless loader is ''
+  complete: ->
+    hide(loader) unless loader is ''
       
 @show = (id) -> $('#'+id).show()
 @hide = (id) -> $('#'+id).hide()
