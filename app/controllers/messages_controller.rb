@@ -4,20 +4,6 @@ class MessagesController < ApplicationController
   before_filter :ajax_only,         :only => [:new, :show, :menu_top, :menu_left]
   before_filter :destroy_archives!, :only => [:menu_left]
   after_filter  :read_messages!,    :only => [:show,:create]
-
-  def new
-    @message = Message.new
-    render :partial => 'messages/new_conversation'
-  end
-  
-  def create
-    @message = Message.new params[:message]
-    unless @message.save
-      respond_to { |format| format.html { render :json => @message.errors, :status => :unprocessable_entity if request.xhr? } }
-    else
-      respond_to { |format| format.html { render :json => @message.recipient_id.to_s if request.xhr? } }
-    end 
-  end
   
   def index
     init_page :title => 'messages.title', :javascripts => 'messages'
@@ -34,6 +20,20 @@ class MessagesController < ApplicationController
     @message  = Message.new
     current_contact = params[:current_contact].nil? ? current_user.messaged_contacts.first.id : params[:current_contact].to_i
     render :partial => 'messages/conversation', :locals => { :contact => User.find(current_contact) }
+  end
+  
+  def new
+    @message = Message.new
+    render :partial => 'messages/new_conversation'
+  end
+  
+  def create
+    @message = Message.new params[:message]
+    unless @message.save
+      respond_to { |format| format.html { render :json => @message.errors, :status => :unprocessable_entity if request.xhr? } }
+    else
+      respond_to { |format| format.html { render :json => @message.recipient_id.to_s if request.xhr? } }
+    end 
   end
   
   def menu_top
