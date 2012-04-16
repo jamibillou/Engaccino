@@ -1,6 +1,7 @@
 en:
   messages:
-  
+    
+    title: "Messages"
     no_message: "You haven't got any message."
     last_message: "Last message"
     you_said: "You said"

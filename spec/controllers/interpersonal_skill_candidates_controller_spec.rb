@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe InterpersonalSkillCandidatesController do
+  
   render_views
 
   before :each do
@@ -35,6 +36,7 @@ describe InterpersonalSkillCandidatesController do
       end
       
       describe 'success' do
+        
         it 'should respond http success' do
           xhr :get, :new
           response.should be_success
@@ -134,6 +136,7 @@ describe InterpersonalSkillCandidatesController do
       end
       
       describe 'success' do
+        
         it 'should respond http success' do
           xhr :get, :edit, :id => @interpersonal_skill_candidate
           response.should be_success

@@ -27,7 +27,7 @@
     </li>
   <% end %>
 <% end %>
-  <li id='messages_menu' class='round<% if @title == t(:menu_messages) %> selected<% end %>'>
+  <li id='messages_menu' class='round<% if @title == t('messages.title') %> selected<% end %>'>
     <% if unread_messages? %><span class='unread'></span><% end %>
     <%= link_to "#{t(:menu_messages)}", messages_path %>   
   </li>

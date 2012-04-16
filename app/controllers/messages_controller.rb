@@ -1,9 +1,10 @@
 class MessagesController < ApplicationController
   
-  before_filter :destroy_archives!, :only => [:menu_left]
   before_filter :authenticate
-  after_filter  :read_messages!,   :only => [:show,:create]
-  
+  before_filter :ajax_only,         :only => [:new, :show, :menu_top, :menu_left]
+  before_filter :destroy_archives!, :only => [:menu_left]
+  after_filter  :read_messages!,    :only => [:show,:create]
+
   def new
     @message = Message.new
     render :partial => 'messages/new_conversation'
@@ -19,7 +20,7 @@ class MessagesController < ApplicationController
   end
   
   def index
-    init_page :title => 'menu_messages', :javascripts => 'messages'
+    init_page :title => 'messages.title', :javascripts => 'messages'
     @contacts = current_user.messaged_contacts
     @current_contact = @contacts.empty? ? 0 : @contacts.first.id
     @messages = current_user.messages
