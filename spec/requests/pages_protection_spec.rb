@@ -547,7 +547,7 @@ describe 'PagesProtection' do
         current_path.should     == signin_path
       end
       
-      it "should deny access to signed-in canddiates who haven't completed signup" do
+      it "should deny access to signed-in candidates who haven't completed signup" do
         visit signin_path
         fill_in 'email',    :with => @candidate1.email
         fill_in 'password', :with => @candidate1.password
@@ -599,6 +599,59 @@ describe 'PagesProtection' do
         click_button I18n.t('sessions.new.signin')
         visit company_path(@company1)
         current_path.should == company_path(@company1)
+      end
+    end
+  end
+  
+  describe 'Messages' do
+    
+    describe "'show'" do
+      it 'should deny access to non signed-in users' do
+        visit messages_path
+        current_path.should_not == messages_path
+        current_path.should     == signin_path
+      end
+      
+      it "should deny access to signed-in candidates who haven't completed signup" do
+        visit signin_path
+        fill_in 'email',    :with => @candidate1.email
+        fill_in 'password', :with => @candidate1.password
+        click_button I18n.t('sessions.new.signin')
+        visit messages_path
+        current_path.should_not == messages_path
+        current_path.should     == edit_candidate_path(@candidate1)
+        find('div.flash.notice').should have_content I18n.t('flash.notice.please_finish_signup')
+      end
+      
+      it "grant access to signed-in candidates who have completed signup" do
+        @candidate1.update_attributes :profile_completion => 5
+        visit signin_path
+        fill_in 'email',    :with => @candidate1.email
+        fill_in 'password', :with => @candidate1.password
+        click_button I18n.t('sessions.new.signin')
+        visit messages_path
+        current_path.should == messages_path
+      end
+      
+      it "should deny access to signed-in recruiters who haven't completed signup" do
+        visit signin_path
+        fill_in 'email',    :with => @recruiter1.email
+        fill_in 'password', :with => @recruiter1.password
+        click_button I18n.t('sessions.new.signin')
+        visit messages_path
+        current_path.should_not == messages_path
+        current_path.should     == edit_recruiter_path(@recruiter1)
+        find('div.flash.notice').should have_content I18n.t('flash.notice.please_finish_signup')
+      end
+      
+      it "grant access to signed-in recruiters who have completed signup" do
+        @recruiter1.update_attributes :profile_completion => 5
+        visit signin_path
+        fill_in 'email',    :with => @recruiter1.email
+        fill_in 'password', :with => @recruiter1.password
+        click_button I18n.t('sessions.new.signin')
+        visit messages_path
+        current_path.should == messages_path
       end
     end
   end
