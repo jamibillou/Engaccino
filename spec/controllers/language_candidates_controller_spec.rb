@@ -22,7 +22,7 @@ describe LanguageCandidatesController do
     
     describe 'for signed-in candidates' do
       
-      before(:each) do
+      before :each do
         test_sign_in @candidate
       end
       

@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
   before_filter :authenticate
   before_filter :ajax_only,         :only => [:new, :show, :menu_top, :menu_left]
   before_filter :destroy_archives!, :only => [:menu_left]
-  after_filter  :read_messages!,    :only => [:show,:create]
+  after_filter  :read_messages!,    :only => [:show, :create]
   
   def index
     init_page :title => 'messages.title', :javascripts => 'messages'
@@ -49,16 +49,8 @@ class MessagesController < ApplicationController
   
   def archive
     current_contact = params[:current_contact]
-    Message.where(:author_id => current_user, :recipient_id => current_contact).each { |message| message.update_attribute :archived_author, true }
-    Message.where(:author_id => current_contact, :recipient_id => current_user).each { |message| message.update_attribute :archived_recipient, true }
-    @current_contact = params[:current_contact].nil? ? @contacts.first.id : params[:current_contact].to_i
-    render :partial => 'messages/menu_left', :locals => { :contacts => @contacts, :messages => @messages, :current_contact => @current_contact }
-  end
-  
-  def archive
-    current_contact = params[:current_contact]
-    Message.where(:author_id => current_user, :recipient_id => current_contact).each   { |message| message.update_attribute :archived_author,    true }
-    Message.where(:author_id => current_contact,   :recipient_id => current_user).each { |message| message.update_attribute :archived_recipient, true }
+    Message.where(:author_id => current_user,    :recipient_id => current_contact).each { |message| message.update_attribute :archived_author,    true }
+    Message.where(:author_id => current_contact, :recipient_id => current_user).each    { |message| message.update_attribute :archived_recipient, true }
     respond_to { |format| format.html { render :json => 'archive!' if request.xhr? } }
   end
   

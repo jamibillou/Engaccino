@@ -7,5 +7,5 @@ doc/
 *~
 .project
 .DS_Store
-.settings/
+.settings/org.eclipse.ltk.core.refactoring.prefs
 public/uploads/

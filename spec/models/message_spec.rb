@@ -45,7 +45,7 @@ describe Message do
       Message.new(:content => '').should_not be_valid
     end
     
-    it 'should reject to long contents' do
+    it 'should reject too long contents' do
       too_long_content = 'a' * 141
       Message.new(:content => too_long_content).should_not be_valid
     end

@@ -1,15 +1,15 @@
 class Message < ActiveRecord::Base
   
-  attr_accessible :content, :author_id, :recipient_id, :read, :archived_author, :archived_recipient
+  attr_accessible :content, :read, :archived_author, :archived_recipient, :author_id, :recipient_id
     
   belongs_to :author,    :class_name => 'User', :foreign_key => :author_id
   belongs_to :recipient, :class_name => 'User', :foreign_key => :recipient_id
     
-  validates :content,    :length => { :maximum => 140 }, :presence => true
-  validates :author_id,                                  :presence => true
-  validates :recipient_id,                               :presence => true
-  validates :read, :inclusion => { :in => [true, false] }
-  validates :archived_author, :inclusion => { :in => [true, false] }
+  validates :author_id,                                                 :presence => true
+  validates :recipient_id,                                              :presence => true
+  validates :content,            :length => { :maximum => 140 },        :presence => true
+  validates :read,               :inclusion => { :in => [true, false] }
+  validates :archived_author,    :inclusion => { :in => [true, false] }
   validates :archived_recipient, :inclusion => { :in => [true, false] }
   
   validate  :different_users

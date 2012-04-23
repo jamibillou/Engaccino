@@ -5,7 +5,7 @@ describe ExperiencesController do
   render_views
 
   before :each do
-    @candidate = Factory :candidate
+    @candidate  = Factory :candidate
     @experience = Factory :experience, :candidate => @candidate
   end
 

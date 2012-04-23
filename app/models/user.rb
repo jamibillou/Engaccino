@@ -42,20 +42,20 @@ class User < ActiveRecord::Base
   end
   
   def admin?
-    self.admin
+    admin
   end
   
   def authored?(message)
-    self.id == message.author_id
+    id == message.author_id
   end
   
   def messages
-    Message.where "author_id = #{self.id} AND archived_author = 0 OR recipient_id = #{self.id} AND archived_recipient = 0"
+    Message.where "author_id = #{id} AND archived_author = 0 OR recipient_id = #{id} AND archived_recipient = 0"
   end
   
   def messaged_contacts
-    Message.where("author_id = #{self.id} AND archived_author = 0 OR recipient_id = #{self.id} AND archived_recipient = 0").sort_by { |message| message.created_at }.reverse.map do |message|
-      message.author_id == self.id ? User.find(message.recipient_id) : User.find(message.author_id)
+    Message.where("author_id = #{id} AND archived_author = 0 OR recipient_id = #{id} AND archived_recipient = 0").sort_by { |message| message.created_at }.reverse.map do |message|
+      message.author_id == id ? User.find(message.recipient_id) : User.find(message.author_id)
     end.uniq
   end
   
