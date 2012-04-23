@@ -8,6 +8,7 @@ en:
     other_said: "Said"
     type_your_message: "Type your message here"
     new_message: "New message"
+    no_conversation: "No conversation yet"
     new_conversation: "New conversation"
     delete_conversation: "Delete conversation"
     recipient: "Recipient"

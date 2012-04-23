@@ -18,5 +18,5 @@
 <% unless messages.empty? %>
   <%= render 'new', :contact => contact %>
 <% else %>
-  No conversations yet
+  <%=t 'messages.no_conversation' %>
 <% end %>
