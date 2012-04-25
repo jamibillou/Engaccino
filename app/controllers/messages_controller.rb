@@ -3,8 +3,8 @@ class MessagesController < ApplicationController
   before_filter :authenticate
   before_filter :ajax_only,         :only => [:new, :show, :menu_top, :menu_left]
   before_filter :destroy_archives!, :only => [:menu_left]
-  before_filter :signed_up,         :only => [:index]
-  after_filter  :read_messages!,    :only => [:show,:create]
+  before_filter :signed_up,         :only => [:index, :show]
+  after_filter  :read_messages!,    :only => [:show, :create]
   
   def index
     init_page :title => 'messages.title', :javascripts => 'messages'

@@ -1,7 +1,7 @@
 class CertificateCandidatesController < ApplicationController
   
   before_filter :authenticate
-  before_filter :ajax_only, :only => [:new,:edit]
+  before_filter :ajax_only, :only => [:new, :edit]
   
   def new
     @certificate_candidate = CertificateCandidate.new

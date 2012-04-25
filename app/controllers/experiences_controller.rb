@@ -1,7 +1,7 @@
 class ExperiencesController < ApplicationController
   
   before_filter :authenticate
-  before_filter :ajax_only, :only => [:edit]
+  before_filter :ajax_only, :only => :edit
   
   def new
     @experience = Experience.new

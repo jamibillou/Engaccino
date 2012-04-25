@@ -12,74 +12,40 @@ describe RecruitersController do
   
   describe "GET 'index'" do
     
-    describe 'for non-signed-in users' do
-      
-      it "should deny access to 'index'" do
-        get :index
-        response.should redirect_to signin_path
-        flash[:notice].should == I18n.t('flash.notice.please_signin')
-      end
-    end
-    
-    describe 'for signed-in candidates' do
+    describe 'for candidates' do
     
       before :each do
         test_sign_in @candidate
-        first_recruiter  = Factory.create :recruiter, :email => Factory.next(:email), :facebook_login => Factory.next(:facebook_login),
-                                                      :linkedin_login => Factory.next(:linkedin_login), :twitter_login => Factory.next(:twitter_login)
-        second_recruiter = Factory.create :recruiter, :email => Factory.next(:email), :facebook_login => Factory.next(:facebook_login),
-                                                      :linkedin_login => Factory.next(:linkedin_login), :twitter_login => Factory.next(:twitter_login)
+        @candidate.update_attributes :profile_completion => 5
       end
-      
-      describe "who haven't completed signup" do
         
-        it "should deny access to 'index'" do
-          get :index
-          response.should redirect_to edit_candidate_path @candidate
-          flash[:notice].should == I18n.t('flash.notice.please_finish_signup')
-        end
+      it 'should return http success' do
+        get :index
+        response.should be_success
       end
-      
-      describe 'who have completed signup' do
-      
-        before :each do
-          @candidate.update_attributes :profile_completion => 5
-        end
         
-        it 'should return http success' do
-          get :index
-          response.should be_success
-        end
-        
-        it 'should have the right title' do
-          get :index
-          response.body.should have_selector 'title', :text => I18n.t('recruiters.index.title')
-        end
-        
-        it 'should have the right selected navigation tab' do
-          get :index
-          response.body.should have_selector 'li', :class => 'round selected', :text => I18n.t(:menu_recruiters)
-        end
-        
-        it 'should have a card for each recruiter' do 
-          get :index
-          Recruiter.all.each do |recruiter|
-            response.body.should have_selector 'div', :id => "recruiter_#{recruiter.id}"
-          end  
-        end                  
+      it 'should have the right title' do
+        get :index
+        response.body.should have_selector 'title', :text => I18n.t('recruiters.index.title')
       end
+        
+      it 'should have the right selected navigation tab' do
+        get :index
+        response.body.should have_selector 'li', :class => 'round selected', :text => I18n.t(:menu_recruiters)
+      end
+        
+      it 'should have a card for each recruiter' do 
+        get :index
+        Recruiter.all.each do |recruiter|
+          response.body.should have_selector 'div', :id => "recruiter_#{recruiter.id}"
+        end  
+      end                  
     end
     
-    describe 'for signed-in recruiters' do
+    describe 'for recruiters' do
     
-      before  :each do
-        test_sign_in @recruiter2
-      end
-        
       it "should deny access to 'show'" do
-        get :index
-        response.should redirect_to recruiter_path @recruiter2
-        flash[:notice].should == I18n.t('flash.notice.restricted_page')
+        test_sign_in @recruiter2
         @recruiter2.update_attributes :profile_completion => 5
         get :index
         response.should redirect_to recruiter_path @recruiter2
@@ -119,58 +85,28 @@ describe RecruitersController do
   
   describe "GET 'show'" do
     
-    describe 'for non-signed-in candidates' do
-      
-      it "should deny access to 'show'" do
-        get :show, :id => @recruiter
-        response.should redirect_to signin_path
-        flash[:notice].should == I18n.t('flash.notice.please_signin')
-      end
-    end
-    
-    describe 'for signed-in candidates' do
+    describe 'for candidates' do
     
       before  :each do
         test_sign_in @candidate
+        @candidate.update_attributes :profile_completion => 5
       end
-      
-      describe "who haven't completed signup" do
         
-        it "should deny access to 'show'" do
-          get :show,  :id => @recruiter
-          response.should redirect_to edit_candidate_path @candidate
-          flash[:notice].should == I18n.t('flash.notice.please_finish_signup')
-        end
+      it 'should return http success' do
+        get :show, :id => @recruiter
+        response.should be_success
       end
-      
-      describe 'who have completed signup' do
         
-        before :each do
-          @candidate.update_attributes :profile_completion => 5
-        end
-        
-        it 'should return http success' do
-          get :show, :id => @recruiter
-          response.should be_success
-        end
-        
-        it 'should have the right selected navigation tab' do
-          get :show, :id => @recruiter
-          response.body.should have_selector 'li', :class => 'round selected', :text => I18n.t(:menu_recruiters)
-        end
+      it 'should have the right selected navigation tab' do
+        get :show, :id => @recruiter
+        response.body.should have_selector 'li', :class => 'round selected', :text => I18n.t(:menu_recruiters)
       end
     end
     
-    describe 'for signed-in recruiters' do
-    
-      before  :each do
-        test_sign_in @recruiter2
-      end
-        
+    describe 'for recruiters' do
+
       it "should deny access to 'show'" do
-        get :show, :id => @recruiter
-        response.should redirect_to recruiter_path @recruiter2
-        flash[:notice].should == I18n.t('flash.notice.restricted_page')
+        test_sign_in @recruiter2
         @recruiter2.update_attributes :profile_completion => 5
         get :show, :id => @recruiter
         response.should redirect_to recruiter_path @recruiter2
@@ -191,7 +127,7 @@ describe RecruitersController do
       end
     end
     
-    describe 'for non-signed-in recruiters' do
+    describe 'for non-signed-in users' do
     
       it 'should return http success' do
         get :new
@@ -261,17 +197,8 @@ describe RecruitersController do
   end
   
   describe "GET 'edit'" do
-  
-    describe 'for non-signed-in recruiters' do
-      
-      it "should deny access to 'edit'" do
-        get :edit, :id => @recruiter
-        response.should redirect_to signin_path
-        flash[:notice].should == I18n.t('flash.notice.please_signin')
-      end
-    end
     
-    describe 'for signed-in recruiters' do
+    describe 'for recruiters' do
       
       before :each do
         test_sign_in @recruiter

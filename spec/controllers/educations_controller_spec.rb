@@ -9,31 +9,19 @@ describe EducationsController do
   end
 
   describe "GET 'new'" do
-    
-    describe 'for non-signed-in candidates' do
+          
+    before :each do
+      test_sign_in @candidate
+    end
       
-      it "should deny access to 'new'" do
-        get :new
-        response.should redirect_to signin_path
-        flash[:notice].should == I18n.t('flash.notice.please_signin')
-      end
+    it 'should respond http success' do
+      get :new
+      response.should be_success
     end
     
-    describe 'for signed-in candidates' do
-      
-      before(:each) do
-        test_sign_in @candidate
-      end
-      
-      it 'should respond http success' do
-        get :new
-        response.should be_success
-      end
-    
-      it 'should display the correct form' do
-        get :new
-        response.should render_template(:partial => '_new_form')
-      end  
+    it 'should display the correct form' do
+      get :new
+      response.should render_template(:partial => '_new_form')
     end  
   end
   
@@ -106,43 +94,20 @@ describe EducationsController do
   end
   
   describe "GET 'edit'" do
-    
-    describe 'for non-signed-in candidates' do
       
-      it "should deny access to 'edit'" do
-        get :edit
-        response.should redirect_to signin_path
-        flash[:notice].should == I18n.t('flash.notice.please_signin')
-      end
+    before :each do
+      test_sign_in @candidate
     end
-    
-    describe 'for signed-in candidates' do
-      
-      before(:each) do
-        test_sign_in @candidate
-      end
-      
-      describe 'failure' do
-        
-        it 'should fail using the html format' do
-          get :edit, :id => @education
-          response.should redirect_to @candidate
-          flash[:notice].should == I18n.t('flash.notice.restricted_page')
-        end
-      end
-      
-      #describe 'success' do
-      #  it 'should respond http success' do
-      #    xhr :get, :edit, :id => @education
-      #    response.should be_success
-      #  end
-      
-      #  it 'should display the correct form' do
-      #    xhr :get, :edit, :id => @education
-      #    response.should render_template(:partial => '_edit_form')
-      #  end
-      #end      
-    end  
+              
+    # it 'should respond http success' do
+    #   xhr :get, :edit, :id => @education
+    #   response.should be_success
+    # end
+    # 
+    # it 'should display the correct form' do
+    #   xhr :get, :edit, :id => @education
+    #   response.should render_template(:partial => '_edit_form')
+    # end
   end
   
   describe "PUT 'update'" do

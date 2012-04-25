@@ -55,77 +55,53 @@ describe MessagesController do
   end
   
   describe "GET 'show'" do
-
-    describe 'failure' do
-      
-      it 'should fail using the html format' do
-        get :show, :current_contact => @recruiter1.id
-        response.should redirect_to @candidate
-        flash[:notice].should == I18n.t('flash.notice.restricted_page')
-      end
+          
+    it 'should respond http success' do
+      xhr :get, :show, :current_contact => @recruiter1.id
+      response.should be_success
     end
     
-    describe 'success' do
+    it 'should display a conversation' do
+      xhr :get, :show, :current_contact => @recruiter1.id
+      response.should render_template(:partial => '_conversation')
+    end
       
-      it 'should respond http success' do
-        xhr :get, :show, :current_contact => @recruiter1.id
-        response.should be_success
-      end
-    
-      it 'should display a conversation' do
-        xhr :get, :show, :current_contact => @recruiter1.id
-        response.should render_template(:partial => '_conversation')
-      end
+    it 'should have all the messages of the corresponding conversation' do
+      xhr :get, :show, :current_contact => @recruiter2.id
+      response.body.should include "message_#{@messages[2].id}"
+      response.body.should include "message_#{@messages[3].id}"
+    end
       
-      it 'should have all the messages of the corresponding conversation' do
-        xhr :get, :show, :current_contact => @recruiter2.id
-        response.body.should include "message_#{@messages[2].id}"
-        response.body.should include "message_#{@messages[3].id}"
-      end
+    it 'should not have messages from other conversations' do
+      xhr :get, :show, :current_contact => @recruiter2.id
+      response.body.should_not include "message_#{@messages[0].id}"
+      response.body.should_not include "message_#{@messages[1].id}"
+    end
       
-      it 'should not have messages from other conversations' do
-        xhr :get, :show, :current_contact => @recruiter2.id
-        response.body.should_not include "message_#{@messages[0].id}"
-        response.body.should_not include "message_#{@messages[1].id}"
-      end
-      
-      it 'should not have a new conversation form' do
-        xhr :get, :show, :current_contact => @recruiter1.id
-        response.body.should_not have_selector '#new_conversation'
-      end
+    it 'should not have a new conversation form' do
+      xhr :get, :show, :current_contact => @recruiter1.id
+      response.body.should_not have_selector '#new_conversation'
     end
   end
   
   describe "GET 'new'" do
-    
-    describe 'failure' do
-      
-      it 'should fail using the html format' do
-        get :new
-        response.should redirect_to @candidate
-        flash[:notice].should == I18n.t('flash.notice.restricted_page')
-      end
+          
+    it 'should respond http success' do
+      xhr :get, :new
+      response.should be_success
     end
     
-    describe 'success' do
+    it 'should have a new conversation form' do
+      xhr :get, :new
+      response.body.should have_selector '#new_conversation'
+    end
       
-      it 'should respond http success' do
-        xhr :get, :new
-        response.should be_success
-      end
-    
-      it 'should have a new conversation form' do
-        xhr :get, :new
-        response.body.should have_selector '#new_conversation'
-      end
-      
-      it 'should not have messages' do
-        xhr :get, :new
-        response.body.should_not include "message_#{@messages[0].id}"
-        response.body.should_not include "message_#{@messages[1].id}"
-        response.body.should_not include "message_#{@messages[2].id}"
-        response.body.should_not include "message_#{@messages[3].id}"
-      end
+    it 'should not have messages' do
+      xhr :get, :new
+      response.body.should_not include "message_#{@messages[0].id}"
+      response.body.should_not include "message_#{@messages[1].id}"
+      response.body.should_not include "message_#{@messages[2].id}"
+      response.body.should_not include "message_#{@messages[3].id}"
     end
   end
   

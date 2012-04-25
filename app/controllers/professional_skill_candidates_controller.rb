@@ -1,7 +1,7 @@
 class ProfessionalSkillCandidatesController < ApplicationController
 
   before_filter :authenticate
-  before_filter :ajax_only, :only => [:new,:edit] 
+  before_filter :ajax_only, :only => [:new, :edit] 
   
   def new
     @professional_skill_candidate = ProfessionalSkillCandidate.new
@@ -35,6 +35,5 @@ class ProfessionalSkillCandidatesController < ApplicationController
   def destroy
     ProfessionalSkillCandidate.find(params[:id]).destroy
     respond_to { |format| format.html { render :json => 'destroy!' if request.xhr? } }
-  end
-  
+  end 
 end
