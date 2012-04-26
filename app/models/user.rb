@@ -34,11 +34,11 @@ class User < ActiveRecord::Base
   end
   
   def candidate?
-    self.class.name.downcase == 'candidate'
+    self.class == Candidate
   end
   
   def recruiter?
-    self.class.name.downcase == 'recruiter'
+    self.class == Recruiter
   end
   
   def admin?

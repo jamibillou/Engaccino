@@ -33,17 +33,9 @@ describe 'SignedUp' do
         current_path.should_not == candidates_path
       end
     
-      describe "'show'" do
-              
-        it "another candidate's profile" do
-            visit candidate_path(@candidate)
-            current_path.should_not == candidate_path(@candidate)
-          end
-      
-        it "their own profile" do
-            visit candidate_path(@candidate)
-            current_path.should_not == candidate_path(@candidate)
-          end
+      it "'show'" do
+        visit candidate_path(@candidate)
+        current_path.should_not == candidate_path(@candidate)
       end
     end
   
@@ -114,17 +106,9 @@ describe 'SignedUp' do
         current_path.should_not == recruiters_path
       end
     
-      describe "'show'" do
-      
-        it "another recruiter's profile" do
-          visit recruiter_path(@recruiter)
-          current_path.should_not == recruiter_path(@recruiter)
-        end
-      
-        it "their own profile" do
-          visit recruiter_path(@recruiter)
-          current_path.should_not == recruiter_path(@recruiter)
-        end
+      it "'show'" do
+        visit recruiter_path(@recruiter)
+        current_path.should_not == recruiter_path(@recruiter)
       end
     end
 

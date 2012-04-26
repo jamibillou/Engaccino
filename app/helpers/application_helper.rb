@@ -42,7 +42,7 @@ module ApplicationHelper
   end
   
   def authorized_class_of_user?
-    if current_user.class.name.downcase == 'candidate' 
+    if current_user.candidate?
      params[:controller] == 'recruiters' || params[:controller] == 'companies'
     else
      params[:controller] ==  'candidates'
