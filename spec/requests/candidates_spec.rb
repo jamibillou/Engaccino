@@ -4,12 +4,15 @@ describe 'Candidates' do
 
   describe 'signup' do
     
+    before :each do
+      visit candidate_signup_path
+      fill_in 'candidate_email',                 :with => 'test@example.com'
+      fill_in 'candidate_password',              :with => 'password'    
+    end
+    
     describe 'failure' do
       
       it 'should not sign a candidate up' do
-        visit candidate_signup_path
-        fill_in 'candidate_email',                 :with => 'test@example.com'
-        fill_in 'candidate_password',              :with => 'password'
         fill_in 'candidate_password_confirmation', :with => 'passwordd'
         click_button "#{I18n.t('candidates.new.set_up_profile')}"
         current_path.should == candidates_path
@@ -19,9 +22,6 @@ describe 'Candidates' do
     describe 'success' do
       
       it 'should sign a candidate up and display his profile page' do
-        visit candidate_signup_path
-        fill_in 'candidate_email',                 :with => 'test@example.com'
-        fill_in 'candidate_password',              :with => 'password'
         fill_in 'candidate_password_confirmation', :with => 'password'
         click_button "#{I18n.t('candidates.new.set_up_profile')}"
         fill_in 'candidate_first_name',            :with => 'Jack'
@@ -53,21 +53,17 @@ describe 'Candidates' do
       before :each do
         @candidate = Factory :candidate
         @candidate.update_attributes :profile_completion => 5
-      end
-      
-      it 'should sign a candidate in' do
         visit signin_path
         fill_in 'email',    :with => @candidate.email
         fill_in 'password', :with => @candidate.password
         click_button "#{I18n.t('sessions.new.signin')}"
+      end
+      
+      it 'should sign a candidate in' do
         current_path.should == candidate_path(@candidate)
       end 
       
        it 'should sign a cnadidate out' do
-          visit signin_path
-          fill_in 'email',    :with => @candidate.email
-          fill_in 'password', :with => @candidate.password
-          click_button "#{I18n.t('sessions.new.signin')}"
           click_link I18n.t(:sign_out)
           current_path.should == root_path
         end     

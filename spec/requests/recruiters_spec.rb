@@ -4,12 +4,15 @@ describe 'Recruiters' do
 
   describe 'signup' do
     
+    before :each do
+      visit recruiter_signup_path
+      fill_in 'recruiter_email',                 :with => 'test@example.com'
+      fill_in 'recruiter_password',              :with => 'password'
+    end
+    
     describe 'failure' do
       
       it 'should not sign a recruiter up' do
-        visit recruiter_signup_path
-        fill_in 'recruiter_email',                 :with => 'test@example.com'
-        fill_in 'recruiter_password',              :with => 'password'
         fill_in 'recruiter_password_confirmation', :with => 'passwordd'
         click_button "#{I18n.t('recruiters.new.set_up_profile')}"
         current_path.should == recruiters_path
@@ -19,9 +22,6 @@ describe 'Recruiters' do
     describe 'success' do
       
       it 'should sign a recruiter up and display his profile page' do
-        visit recruiter_signup_path
-        fill_in 'recruiter_email',                 :with => 'test@example.com'
-        fill_in 'recruiter_password',              :with => 'password'
         fill_in 'recruiter_password_confirmation', :with => 'password'
         click_button "#{I18n.t('recruiters.new.set_up_profile')}"
         fill_in 'recruiter_first_name',            :with => 'Jack'
@@ -52,21 +52,17 @@ describe 'Recruiters' do
       before :each do
         @recruiter = Factory :recruiter
         @recruiter.update_attributes :profile_completion => 5
-      end
-      
-      it 'should sign a recruiter in' do
         visit signin_path
         fill_in 'email',    :with => @recruiter.email
         fill_in 'password', :with => @recruiter.password
         click_button "#{I18n.t('sessions.new.signin')}"
+      end
+      
+      it 'should sign a recruiter in' do
         current_path.should == recruiter_path(@recruiter)
       end
       
       it 'should sign a recruiter out' do
-        visit signin_path
-        fill_in 'email',    :with => @recruiter.email
-        fill_in 'password', :with => @recruiter.password
-        click_button "#{I18n.t('sessions.new.signin')}"
         click_link I18n.t(:sign_out)
         current_path.should == root_path
       end      
