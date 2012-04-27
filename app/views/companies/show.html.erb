@@ -26,7 +26,7 @@
       <div class='subtitle'><%= @company.city %>, <%= @company.country %></div>
       <%= link_to t('companies.visit_website'), "http://#{@company.url}", :class => 'small', :target => '_blank' %>
     <% end %>
-    <% if current_user.admin? %><%= link_to image('trash', t('delete')), @company, :method => :delete, :id => "destroy_company_#{@company.id}", :class => 'hidden',
+    <% if current_user.admin %><%= link_to image('trash', t('delete')), @company, :method => :delete, :id => "destroy_company_#{@company.id}", :class => 'hidden',
     	                                                                           :confirm => "#{t('companies.destroy.title')} #{@company.name}#{t('_?')}",
                                                                                    :title => "#{t('companies.destroy.title')} #{@company.name}" %><% end %>
   </div>

@@ -75,6 +75,6 @@ class ApplicationController < ActionController::Base
     end
     
     def authorized
-      redirect_to current_user, :notice => t('flash.notice.restricted_page') unless current_user.admin? || authorized_class_of_user? || current_user_profile? || current_user_company_profile?
+      redirect_to current_user, :notice => t('flash.notice.restricted_page') unless current_user.admin || authorized_class_of_user? || current_user_profile? || current_user_company_profile?
     end
 end

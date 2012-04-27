@@ -40,11 +40,7 @@ class User < ActiveRecord::Base
   def recruiter?
     self.class == Recruiter
   end
-  
-  def admin?
-    admin
-  end
-  
+
   def authored?(message)
     id == message.author_id
   end

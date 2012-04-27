@@ -9,7 +9,7 @@
   <li class='round<% if @title == t('recruiters.index.title') || (@company && @title == @company.name) || (@recruiter && @title == "#{@recruiter.first_name} #{@recruiter.last_name}") %> selected<% end %>'>
     <%= link_to t(:menu_recruiters), recruiters_path %>
   </li>
-  <% if current_user.admin? %>
+  <% if current_user.admin %>
     <li class='round<% if @title == t('candidates.index.title') %> selected<% end %>'>
       <%= link_to t(:menu_candidates), candidates_path %>
     </li>
@@ -21,7 +21,7 @@
   <li class='round<% if @title == t('candidates.index.title') || (@candidate && @title == "#{@candidate.first_name} #{@candidate.last_name}") %> selected<% end %>'>
     <%= link_to t(:menu_candidates), candidates_path %>
   </li>
-  <% if current_user.admin? %>
+  <% if current_user.admin %>
     <li class='round<% if @title == t('recruiters.index.title') %> selected<% end %>'>
       <%= link_to t(:menu_recruiters), recruiters_path %>
     </li>

@@ -36,37 +36,15 @@ describe CandidatesController do
       get :index
       Candidate.all.each do |candidate|
         response.body.should have_selector 'div', :id => "candidate_#{candidate.id}"
-      end  
-    end                
-    
-    describe 'admin features' do
-      
-      before :each do
-        @recruiter.update_attributes :profile_completion => 5
-        test_sign_in @recruiter
       end
+    end
       
-      describe 'for admin users' do
-      
-        it 'should have a destroy link for each candidate' do 
-          @recruiter.toggle! :admin
-          get :index            
-          Candidate.all.each do |candidate|
-            response.body.should have_link("#{candidate.first_name} #{candidate.last_name}", :href => candidate_path(candidate))
-          end
-        end
+    it "shouldn't have a destroy link for each candidate" do 
+      get :index
+      Candidate.all.each do |candidate|
+        response.body.should_not have_link("#{candidate.first_name} #{candidate.last_name}", :href => candidate_path(candidate))
       end
-      
-      describe 'for non-admin users' do
-      
-        it "shouldn't have a destroy link for each candidate" do 
-          get :index
-          Candidate.all.each do |candidate|
-            response.body.should_not have_link("#{candidate.first_name} #{candidate.last_name}", :href => candidate_path(candidate))
-          end
-        end
-      end            
-    end 
+    end
   end
   
   describe "GET 'show'" do

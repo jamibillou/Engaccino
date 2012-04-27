@@ -42,7 +42,7 @@ class RecruitersController < ApplicationController
   
   def update
     @recruiter = Recruiter.find params[:id]
-    @recruiter.update_attribute :company, Company.find_by_id(params[:recruiter][:company_attributes][:id]) unless request.xhr? || params[:recruiter][:company_attributes][:id].empty?
+    @recruiter.update_attribute :company, Company.find_by_id(params[:recruiter][:company_attributes][:id]) unless request.xhr? || params[:recruiter][:company_attributes].nil?
     unless @recruiter.update_attributes params[:recruiter]
       @recruiter.build_company if no_company_submitted?
       init_page :title => 'recruiters.edit.complete_your_profile', :javascripts => 'recruiters/edit'

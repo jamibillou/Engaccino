@@ -7,7 +7,7 @@
     <h2><%= t('educations.main').remove_accents.upcase %></h2>
     <% unless candidate.no_edu? %>
       <% main_education = Education.find(candidate.main_education) %>
-      <% if current_user == candidate %>
+      <% if current_user_profile? %>
         <h3 id='degreetype_BIPcombo'>
           <%= best_in_place candidate, :main_education, :type => :select, :collection => main_education_options(candidate), :html_attrs => { :class => 'combobox' } %>
         </h3>

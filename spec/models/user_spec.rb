@@ -460,18 +460,6 @@ describe User do
     end
   end
   
-  describe 'admin? method' do
-    
-    it 'should be true for admin users' do
-      @user.toggle! :admin
-      @user.admin?.should == true
-    end
-    
-    it 'should be false for non-admin users' do
-      @user.admin?.should == false
-    end
-  end
-  
   describe 'authored?(message) method' do
     
     it 'should be true for authored messages' do

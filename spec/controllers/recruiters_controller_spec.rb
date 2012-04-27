@@ -36,36 +36,14 @@ describe RecruitersController do
       get :index
       Recruiter.all.each do |recruiter|
         response.body.should have_selector 'div', :id => "recruiter_#{recruiter.id}"
-      end  
-    end                  
-    
-    describe 'admin features' do
-      
-      before :each do
-        @candidate.update_attributes :profile_completion => 5
-        test_sign_in @candidate
       end
+    end
       
-      describe 'for admin users' do
-      
-        it 'should have a destroy link for each candidate' do 
-          @candidate.toggle! :admin
-          get :index            
-          Recruiter.all.each do |recruiter|
-            response.body.should have_selector 'a', :id => "destroy_recruiter_#{recruiter.id}"
-          end
-        end
+    it "shouldn't have a destroy link for each recruiter" do 
+      get :index
+      Recruiter.all.each do |recruiter|
+        response.body.should have_selector 'a', :id => "destroy_recruiter_#{recruiter.id}"
       end
-      
-      describe 'for non-admin users' do
-      
-        it "shouldn't have a destroy link for each candidate" do 
-          get :index
-          Recruiter.all.each do |recruiter|
-            response.body.should have_selector 'a', :id => "destroy_recruiter_#{recruiter.id}"
-          end
-        end
-      end            
     end
   end
   
@@ -192,9 +170,7 @@ describe RecruitersController do
         end
         
         it "should require the matching recruiter" do
-          @wrong_recruiter = Factory.create :recruiter, :email => Factory.next(:email), :facebook_login => Factory.next(:facebook_login),
-                                                        :linkedin_login => Factory.next(:linkedin_login), :twitter_login => Factory.next(:twitter_login)
-          put :update, :recruiter => @attr[:recruiter], :id => @wrong_recruiter
+          put :update, :recruiter => @attr[:recruiter], :id => @recruiter2
           response.should redirect_to recruiter_path @recruiter
           flash[:notice].should == I18n.t('flash.notice.other_user_page')
         end
