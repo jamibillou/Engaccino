@@ -55,6 +55,14 @@ describe 'Authorized' do
     after :each do
       current_path.should == recruiter_path(@recruiter)
     end
+    
+    describe 'Companies' do
+    
+      it "'show' another company's profile" do
+        visit company_path(@company2)
+        current_path.should_not == company_path(@company2)
+      end
+    end
   
     describe 'Recruiters' do
     
@@ -66,14 +74,6 @@ describe 'Authorized' do
       it "'show' another recruiter's profile" do
         visit recruiter_path(@recruiter2)
         current_path.should_not == recruiter_path(@recruiter2)
-      end
-    end
-
-    describe 'Companies' do
-    
-      it "'show' another company's profile" do
-        visit company_path(@company2)
-        current_path.should_not == company_path(@company2)
       end
     end
   end

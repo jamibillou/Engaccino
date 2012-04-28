@@ -36,5 +36,4 @@ class CertificateCandidatesController < ApplicationController
     CertificateCandidate.find(params[:id]).destroy
     respond_to { |format| format.html { render :json => 'destroy!' if request.xhr? } }
   end
-  
 end

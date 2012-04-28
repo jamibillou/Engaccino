@@ -5,44 +5,39 @@ describe CandidatesController do
   render_views
 
   before :each do
-    @candidate  = Factory :candidate
-    @candidate2 = Factory :candidate
-    @recruiter  = Factory :recruiter
+    @candidate  = Factory :candidate, :profile_completion => 5
+    @candidate2 = Factory :candidate, :profile_completion => 5
+    @recruiter  = Factory :recruiter, :profile_completion => 5
   end
   
   describe "GET 'index'" do
         
     before :each do
       test_sign_in @recruiter
-      @recruiter.update_attributes :profile_completion => 5
+      get :index
     end
         
     it 'should return http success' do
-      get :index
       response.should be_success
     end
         
     it 'should have the right title' do
-      get :index
       response.body.should have_selector 'title', :text => I18n.t('candidates.index.title')
     end
         
     it 'should have the right selected navigation tab' do
-      get :index
       response.body.should have_selector 'li', :class => 'round selected', :text => I18n.t(:menu_candidates)
     end
         
     it 'should have a card for each candidate' do 
-      get :index
       Candidate.all.each do |candidate|
         response.body.should have_selector 'div', :id => "candidate_#{candidate.id}"
       end
     end
       
     it "shouldn't have a destroy link for each candidate" do 
-      get :index
       Candidate.all.each do |candidate|
-        response.body.should_not have_link("#{candidate.first_name} #{candidate.last_name}", :href => candidate_path(candidate))
+        response.body.should_not include "destroy_candidate_#{candidate.id}"
       end
     end
   end
@@ -51,35 +46,35 @@ describe CandidatesController do
         
     before  :each do
       test_sign_in @recruiter
-      @recruiter.update_attributes :profile_completion => 5
+      get :show, :id => @candidate
     end
         
     it 'should return http success' do
-      get :show, :id => @candidate
       response.should be_success
     end
         
     it 'should have the right selected navigation tab' do
-      get :show, :id => @candidate
       response.body.should have_selector 'li', :class => 'round selected', :text => I18n.t(:menu_candidates)
     end
   end
 
   describe "GET 'new'" do
         
-    it 'should return http success' do
+    before :each do
       get :new
+    end
+    
+    it 'should return http success' do
       response.should be_success
     end
       
     it 'should have the right title' do 
-      get :new
       response.body.should have_selector 'title', :text => I18n.t('candidates.new.title')
     end
   end
 
   describe "POST 'create'" do
-        
+    
     it "should return http success" do
       post :create
       response.should be_success
@@ -88,25 +83,17 @@ describe CandidatesController do
     describe 'success' do
       
       before :each do
-        @attr = { :first_name => 'First name',                :last_name             => 'Last name',
-                  :password   => 'pouetpouet45',              :password_confirmation => 'pouetpouet45',
-                  :email      => 'new_candidate@example.com', :status                => 'available',
-                  :city       => 'Sample city',               :country               => 'Netherlands' }
-      end
-        
-      it 'should create a candidate' do
         lambda do
-          post :create, :candidate => @attr
-        end.should change(Candidate, :count).by(1)
+          post :create, :candidate => { :first_name => 'First', :last_name => 'Last', :password => 'pouet45', :password_confirmation => 'pouet45',
+                                        :email => 'create@example.com', :status => 'available', :city => 'City', :country => 'Netherlands' }
+        end.should change(Candidate, :count).by 1
       end
         
       it "should render the 'edit' page" do
-        post :create, :candidate => @attr
         response.should render_template :edit
       end
         
       it 'should sign the candidate in' do
-        post :create, :candidate => @attr
         controller.should be_signed_in
       end
     end
@@ -123,116 +110,77 @@ describe CandidatesController do
   describe "GET 'edit'" do
       
     before :each do
+      @candidate.update_attributes :profile_completion => 0
       test_sign_in @candidate
+      get :edit, :id => @candidate
     end
         
     it 'should return http success' do
-      get :edit, :id => @candidate
       response.should be_success
     end
       
     it 'should have the right title' do
-      get :edit, :id => @candidate
-      response.body.should have_selector 'title', :content => I18n.t('candidates.edit.complete_your_profile')
+      response.body.should have_selector 'title', :text => I18n.t('candidates.edit.complete_your_profile')
     end
             
     it 'should have an edit form' do
-      get :edit, :id => @candidate
       response.body.should have_selector 'form', :id => 'candidate_edit_form'
     end
   end
   
   describe "PUT 'update'" do
-          
-    describe 'for non-signed-in candidates' do
+        
+    before :each do
+      test_sign_in @candidate
+    end
       
-      it "should deny access to 'update'" do
-        put :update, :id => @candidate
-        response.should redirect_to signin_path
-        flash[:notice].should == I18n.t('flash.notice.please_signin')
+    describe 'success' do
+      
+      before :each do
+        @attr = { :first_name => 'Updated', :last_name => 'Updated',
+                  :experiences_attributes => { '0' => { :role => 'BG en chef', :start_month => 7, :start_year => 1984, :end_month => 12, :end_year => 2011,
+                                                        :company_attributes => { :name => 'BG Corp', :city => 'Rotterdam', :country => 'Netherlands' } } } }
+      end
+        
+      it "should update the candidate's attributes" do
+        put :update, :candidate => @attr, :id => @candidate
+        updated_candidate = assigns :candidate
+        @candidate.reload
+        @candidate.first_name.should    == updated_candidate.first_name
+        @candidate.last_name.should     == updated_candidate.last_name
+        @candidate.country.should       == updated_candidate.country
+        @candidate.year_of_birth.should == updated_candidate.year_of_birth
+      end
+        
+      it 'should not create a new candidate' do
+        lambda do
+          put :update, :candidate => @attr, :id => @candidate
+        end.should_not change(Candidate, :count)
+      end
+        
+      it 'should create an experience' do
+        lambda do
+          put :update, :candidate => @attr, :id => @candidate
+        end.should change(Experience, :count).by 1
+      end
+        
+      it 'should create a company' do
+        lambda do
+          put :update, :candidate => @attr, :id => @candidate
+        end.should change(Company, :count).by 1
+      end
+        
+      it "should redirect to the 'show' page" do
+        put :update, :candidate => @attr, :id => @candidate
+        response.should redirect_to @candidate
       end
     end
-    
-    describe 'for signed-in candidates' do
-    
-      before :each do
-        test_sign_in @candidate
-      end
       
-      describe 'success' do
-      
-        before :each do
-          @attr = { :candidate => { :first_name => 'Updated',
-                                    :last_name => 'Candidate',
-                                    :experiences_attributes => { '0' => { :role => 'BG en chef',
-                                                                          :start_month => 7,
-                                                                          :start_year => 1984,
-                                                                          :end_month => 12,
-                                                                          :end_year => 2011,
-                                                                          :company_attributes => { :name => 'BG Corp',
-                                                                                                   :city => 'Rotterdam',
-                                                                                                   :country => 'Netherlands' } } } }  }
-        end
-        
-        it "should require the matching candidate" do
-          @wrong_candidate = Factory.create :candidate, :email => Factory.next(:email), :facebook_login => Factory.next(:facebook_login),
-                                                        :linkedin_login => Factory.next(:linkedin_login), :twitter_login => Factory.next(:twitter_login)
-          put :update, :candidate => @attr[:candidate], :id => @wrong_candidate
-          response.should redirect_to candidate_path @candidate
-          flash[:notice].should == I18n.t('flash.notice.other_user_page')
-        end
-        
-        it "should update the candidate's attributes" do
-          put :update, :candidate => @attr[:candidate], :id => @candidate
-          candidate = assigns :candidate
-          @candidate.reload
-          @candidate.first_name == candidate.first_name
-          @candidate.last_name == candidate.last_name
-          @candidate.country == candidate.country
-          @candidate.year_of_birth == candidate.year_of_birth
-          @candidate.profile_completion >= 0
-        end
-        
-        it 'should not create a candidate' do
-          lambda do
-            put :update, :candidate => @attr[:candidate], :id => @candidate
-          end.should_not change(Candidate, :count)
-        end
-        
-        it 'should create an experience' do
-          lambda do
-            put :update, :candidate => @attr[:candidate], :id => @candidate
-          end.should change(Experience, :count).by(1)
-        end
-        
-        it 'should create a company' do
-          lambda do
-            put :update, :candidate => @attr[:candidate], :id => @candidate
-          end.should change(Company, :count).by(1)
-        end
-        
-        it "should redirect to the 'show' page" do
-          put :update, :candidate => @attr[:candidate], :id => @candidate
-          response.should redirect_to @candidate
-        end
-      end
-      
-      describe 'failure' do
-        
-        before :each do
-          @attr = { :email => 'new_candidate@example.com', :first_name => '', :last_name => '', :country => '' }
-        end
+    describe 'failure' do
                     
-        it "should render the 'edit' page" do
-           put :update, :candidate => @attr, :id => @candidate
-           response.should render_template :edit
-        end
-        
-        it 'should not create another candidate' do
-          lambda do
-            put :update, :candidate => @attr, :id => @candidate
-          end.should_not change(Candidate, :count)
-        end 
+      it "should render the 'edit' page" do
+        put :update, :candidate => { :email => 'new_candidate@example.com', :first_name => '', :last_name => '', :country => '' }, :id => @candidate
+        response.should render_template :edit
       end
     end
   end
@@ -251,41 +199,14 @@ describe CandidatesController do
     describe 'for signed-in candidates' do
     
       before :each do
+        @candidate.toggle! :admin
         test_sign_in @candidate
       end
-      
-      describe "who haven't got admin rights" do
-      
-        it 'should not destroy the candidate' do
-          lambda do
-            delete :destroy, :id => @candidate
-          end.should_not change(Candidate, :count).by(-1)
-        end
         
-        it 'should redirect to the root path' do
+      it 'should destroy the candidate' do
+        lambda do
           delete :destroy, :id => @candidate
-          flash[:notice].should == I18n.t('flash.notice.restricted_page')
-          response.should redirect_to candidate_path @candidate
-        end
-      end
-      
-      describe 'who have admin rights' do
-      
-        before :each do
-          @candidate.toggle! :admin
-        end
-        
-        it 'should destroy the candidate' do
-          lambda do
-            delete :destroy, :id => @candidate
-          end.should change(Candidate, :count).by(-1)
-        end
-        
-        it 'should redirect to the candidates page' do
-          delete :destroy, :id => @candidate
-          flash[:success].should == I18n.t('flash.success.user_destroyed')
-          response.should redirect_to candidates_path
-        end
+        end.should change(Candidate, :count).by -1
       end
     end
   end
