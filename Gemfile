@@ -10,6 +10,7 @@ gem 'i18n-js'
 gem 'carrierwave', git: "git://github.com/jnicklas/carrierwave.git"
 gem 'rmagick'
 gem 'remotipart', '~> 1.0'
+gem 'haml'
 
 group :development do
   gem 'rspec-rails'
