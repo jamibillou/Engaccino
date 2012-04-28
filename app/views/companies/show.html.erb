@@ -24,7 +24,6 @@
     <% else %>
       <%= link_to @company.name, company_path(@company), :class => 'title' %>
       <div class='subtitle'><%= @company.city %>, <%= @company.country %></div>
-      <%= link_to t('companies.visit_website'), "http://#{@company.url}", :class => 'small', :target => '_blank' %>
     <% end %>
     <% if current_user.admin %><%= link_to image('trash', t('delete')), @company, :method => :delete, :id => "destroy_company_#{@company.id}", :class => 'hidden',
     	                                                                           :confirm => "#{t('companies.destroy.title')} #{@company.name}#{t('_?')}",
@@ -45,11 +44,9 @@
       <p><%= best_in_place_if current_user_company, @company, :email,   :nil => "#{t('companies.email').downcase}#{t('_:')}",   :html_attrs => { :class => 'field' } %></p>
       <p><%= best_in_place_if current_user_company, @company, :phone,   :nil => "#{t('companies.phone').downcase}#{t('_:')}",   :html_attrs => { :class => 'field' } %></p>
       <br />
-      <p><%= best_in_place_if current_user_company, @company, :address, :nil => "#{t('companies.address').downcase}#{t('_:')}",
-                                                              :html_attrs => { :class => 'field' } %><%= ',' unless @company.address.nil? || @company.address.empty? %>
-      </p>
+      <p><%= best_in_place_if current_user_company, @company, :address, :nil => "#{t('companies.address').downcase}#{t('_:')}", :html_attrs => { :class => 'field' } %></p>
       <p><%= best_in_place_if current_user_company, @company, :zip,     :nil => t('companies.zip').downcase,                    :html_attrs => { :class => 'field' } %>
-         <%= best_in_place_if current_user_company, @company, :city,    :nil => "#{t('companies.city').downcase}#{t('_:')}",    :html_attrs => { :class => 'field' } %>,</p>  
+         <%= best_in_place_if current_user_company, @company, :city,    :nil => "#{t('companies.city').downcase}#{t('_:')}",    :html_attrs => { :class => 'field' } %></p>  
       <p><%= best_in_place_if current_user_company, @company, :country, :nil => "#{t('companies.country').downcase}#{t('_:')}", :html_attrs => { :class => 'field' } %></p>
     </div>
   <% end %>

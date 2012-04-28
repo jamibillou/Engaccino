@@ -16,10 +16,14 @@
                                                             :title => "#{t('recruiters.destroy.title')} #{recruiter.first_name} #{recruiter.last_name}" %>
 	  <% end %>
       <% if current_user_profile? %>
-    	  <div class='title'><%= best_in_place recruiter, :first_name, :html_attrs => { :class => 'field' } %></div><br />
-    	  <div class='title'><%= best_in_place recruiter, :last_name,  :html_attrs => { :class => 'field' } %></div>
+    	<div class='title'>
+		  <%= best_in_place recruiter, :first_name, :html_attrs => { :class => 'field' } %><br />
+    	  <%= best_in_place recruiter, :last_name,  :html_attrs => { :class => 'field' } %>
+	    </div>
       <% else %>
-        <a href='<%= recruiter_path(recruiter) %>'><div class='title'><%= recruiter.first_name %></div><br /><div class='title'><%= recruiter.last_name %></div></a>
+        <a href='<%= recruiter_path(recruiter) %>' class='title'>
+		  <%= recruiter.first_name %><br /><%= recruiter.last_name %>
+	    </a>
       <% end %>
       <div class='subtitle'><%= best_in_place_if current_user_profile?, recruiter, :city,    :nil => t('recruiters.city'), :html_attrs => { :class => 'field' } %></div>
       <div class='subtitle'><%= best_in_place_if current_user_profile?, recruiter, :country, :nil => t('recruiters.country'), :html_attrs => { :class => 'country field' } %></div>
