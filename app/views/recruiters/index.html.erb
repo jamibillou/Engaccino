@@ -1,1 +1,3 @@
-<%= render @recruiters %>
+<% Recruiter.all.each do |recruiter| %>
+  <%= render 'recruiter', :recruiter => recruiter unless recruiter.profile_completion == 0 %>
+<% end %>

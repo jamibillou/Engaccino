@@ -152,7 +152,7 @@ describe CertificateCandidatesController do
       
       it 'should respond with the right json message' do
         response.body.should == 'destroy!'
-      end     
+      end 
     end    
   end
 end

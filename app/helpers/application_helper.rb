@@ -20,13 +20,11 @@ module ApplicationHelper
   end
   
   def build_education
-    education = @candidate.educations.build ; education.build_school ; degree = education.build_degree ; degree.build_degree_type
-    education
+    education = @candidate.educations.build ; education.build_school ; degree = education.build_degree ; degree.build_degree_type ; education
   end
   
   def build_experience
-    experience = @candidate.experiences.build ; experience.build_company
-    experience
+    experience = @candidate.experiences.build ; experience.build_company ; experience
   end
   
   def associate_schools_and_degrees
@@ -42,10 +40,6 @@ module ApplicationHelper
   end
   
   def authorized_class_of_user?
-    if current_user.candidate?
-     params[:controller] == 'recruiters' || params[:controller] == 'companies'
-    else
-     params[:controller] ==  'candidates'
-    end
+    if current_user.candidate? then params[:controller] == 'recruiters' || params[:controller] == 'companies' else params[:controller] ==  'candidates' end
   end
 end
