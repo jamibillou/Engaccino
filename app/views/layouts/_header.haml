@@ -1,0 +1,7 @@
+%header
+  = link_to image('logo', 'Engaccino'), root_path
+  = render 'layouts/languages'
+  %nav
+    = render 'layouts/signin_up'
+    = render 'layouts/search'
+    = (signed_in? && signed_up?) ? render('layouts/member_menu') : render('layouts/public_menu')

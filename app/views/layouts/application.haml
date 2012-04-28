@@ -1,0 +1,27 @@
+!!! XML
+!!!
+
+%html
+  %head
+    %title title
+    = stylesheet_link_tag 'application' unless Rails.env.test?
+    = stylesheet_link_tag 'application_test' if Rails.env.test?
+    = javascript_include_tag 'application'
+    = javascript_tag do
+      = "I18n.defaultLocale = #{I18n.default_locale}"
+      = "I18n.locale = #{I18n.locale}"
+    = javascript_include_tag @javascripts.join(', ') unless @javascripts.nil? || @javascripts.empty?
+    = csrf_meta_tags
+	
+  %body
+    - flash.each do |key, value|
+      #flash{ :class => "flash #{key}"}
+        = value
+        = link_to '', '#', :id => 'close_flash', :class => 'close'
+    = render('layouts/header')
+	
+    #container
+      - unless params[:action] == 'show' || params[:action] == 'edit'
+        %h1{ :id => 'container_title', :style => "#{'margin-left: 10px' if signed_in?}" }
+          = @title
+      = yield

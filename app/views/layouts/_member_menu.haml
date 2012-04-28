@@ -1,0 +1,23 @@
+%ul
+  %li{ :class => selected_tab?(:menu_dashboard) }
+    = link_to t(:menu_dashboard), '#'
+  - if current_user.candidate?
+    %li{ :class => "#{'selected' if current_user_profile?}" }
+      = link_to t(:menu_profile), candidate_path(current_user)
+    %li{ :class => "#{'selected' if @title == t('recruiters.index.title') || (@company && @title == @company.name) || (@recruiter && @title == @recruiter.first_name+' '+@recruiter.last_name)}" }
+      = link_to t(:menu_recruiters), recruiters_path
+    - if current_user.admin
+      %li{ :class => "#{'selected' if @title == t('candidates.index.title')}" }
+        = link_to t(:menu_candidates), candidates_path
+  - elsif current_user.recruiter?
+    %li{ :class => "#{'selected' if current_user_profile?}" }
+      = link_to t(:menu_profile), recruiter_path(current_user)
+    %li{ :class => "#{'selected' if @title == t('candidates.index.title') || (@candidate && @title == @candidate.first_name+' '+@candidate.last_name)}" }
+      = link_to t(:menu_candidates), candidates_path
+    - if current_user.admin
+      %li{ :class => "#{'selected' if @title == t('recruiters.index.title')}" }
+        = link_to t(:menu_recruiters), recruiters_path
+  %li{ :id => 'messages_menu', :class => "#{'selected' if @title == t('messages.title')}" }
+    - if unread_messages?
+      %span{ :class => 'unread' }
+    = link_to "#{t(:menu_messages)}", messages_path  

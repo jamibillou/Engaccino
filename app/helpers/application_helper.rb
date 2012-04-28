@@ -5,6 +5,10 @@ module ApplicationHelper
     @title.nil? ? base_title : "#{base_title} | #{@title}"
   end
   
+  def selected_tab?(title)
+    'selected' if @title == I18n.t(title)
+  end
+  
   def image(name, alt = '')
     image_tag "#{name}.png", :alt => (alt.blank? ? t(name).humanize : alt), :class => name
   end

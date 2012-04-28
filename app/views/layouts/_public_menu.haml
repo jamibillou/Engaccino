@@ -1,0 +1,11 @@
+%ul
+  %li{ :class => selected_tab?(:menu_overview) }
+    = link_to t(:menu_overview), root_path
+  %li{ :class => selected_tab?(:menu_tour) }
+    = link_to t(:menu_tour), tour_path
+  %li{ :class => selected_tab?(:menu_pricing) }
+    = link_to t(:menu_pricing), pricing_path
+  %li{ :class => selected_tab?(:menu_about) }
+    = link_to t(:menu_about), about_path
+  %li{ :class => selected_tab?(:menu_contact) }
+    = link_to t(:menu_contact), contact_path
