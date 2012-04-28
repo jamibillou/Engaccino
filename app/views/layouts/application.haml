@@ -18,10 +18,10 @@
       #flash{ :class => "flash #{key}"}
         = value
         = link_to '', '#', :id => 'close_flash', :class => 'close'
-    = render('layouts/header')
+    = render 'layouts/header'
 	
     #container
       - unless params[:action] == 'show' || params[:action] == 'edit'
-        %h1{ :id => 'container_title', :style => "#{'margin-left: 10px' if signed_in?}" }
+        %h1#container_title{ :style => "#{'margin-left: 10px' if signed_in?}" }
           = @title
       = yield

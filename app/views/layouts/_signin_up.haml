@@ -5,4 +5,5 @@
   - else
     = t(:already_member)
     = link_to t(:sign_in), signin_path
-    = link_to t(:sign_up), candidate_signup_path, :class => 'button blue round'
+    %a.blue.round.button{ :href => candidate_signup_path }
+      = t(:sign_up)
