@@ -223,4 +223,57 @@ describe RecruitersController do
       end
     end
   end
+  
+  describe "DELETE 'destroy'" do
+    
+    describe 'for non-signed-in users' do
+      
+      it "should deny access to 'destroy'" do
+        delete :destroy, :id => @candidate
+        response.should redirect_to signin_path
+        flash[:notice].should == I18n.t('flash.notice.please_signin')
+      end
+    end
+    
+    describe 'for signed-in recruiter' do
+    
+      before :each do
+        test_sign_in @recruiter
+      end
+      
+      describe "who haven't got admin rights" do
+      
+        it 'should not destroy the recruiter' do
+          lambda do
+            delete :destroy, :id => @recruiter
+          end.should_not change(Recruiter, :count).by(-1)
+        end
+        
+        it 'should redirect to the root path' do
+          delete :destroy, :id => @recruiter
+          flash[:notice].should == I18n.t('flash.notice.restricted_page')
+          response.should redirect_to recruiter_path @recruiter
+        end
+      end
+      
+      describe 'who have admin rights' do
+      
+        before :each do
+          @recruiter.toggle! :admin
+        end
+        
+        it 'should destroy the recruiter' do
+          lambda do
+            delete :destroy, :id => @recruiter
+          end.should change(Recruiter, :count).by(-1)
+        end
+        
+        it 'should redirect to the recruiters page' do
+          delete :destroy, :id => @recruiter
+          flash[:success].should == I18n.t('flash.success.user_destroyed')
+          response.should redirect_to recruiters_path
+        end
+      end
+    end
+  end
 end

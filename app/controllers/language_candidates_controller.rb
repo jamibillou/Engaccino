@@ -1,7 +1,7 @@
 class LanguageCandidatesController < ApplicationController
   
   before_filter :authenticate
-  before_filter :ajax_only, :only => [:new,:edit]  
+  before_filter :ajax_only, :only => [:new, :edit]  
   
   def new
     @language_candidate = LanguageCandidate.new

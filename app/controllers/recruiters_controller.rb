@@ -60,6 +60,11 @@ class RecruitersController < ApplicationController
     end
   end
   
+  def destroy
+   Recruiter.find(params[:id]).destroy
+   redirect_to recruiters_path, :flash => { :success => t('flash.success.user_destroyed') }
+  end
+  
   def refresh
     render :partial => 'recruiters/recruiter', :locals => { :recruiter => current_user }
   end

@@ -10,6 +10,11 @@
       <div class='default image <%= "color-#{rand(1..4)} " if recruiter.image_url.nil? %>left'>
         <%= image_tag (recruiter.image_url.nil? ? 'default_user.png' : recruiter.image_url(:thumb).to_s) %>
       </div>
+      <% if current_user.admin && !current_user?(recruiter) %>
+	    <%= link_to image('trash', t('delete')), recruiter, :method => :delete, :id => "destroy_recruiter_#{recruiter.id}", :class => 'hidden',
+      	                                                    :confirm => "#{t('recruiters.destroy.title')} #{recruiter.first_name} #{recruiter.last_name}#{t('_?')}",
+                                                            :title => "#{t('recruiters.destroy.title')} #{recruiter.first_name} #{recruiter.last_name}" %>
+	  <% end %>
       <% if current_user_profile? %>
     	  <div class='title'><%= best_in_place recruiter, :first_name, :html_attrs => { :class => 'field' } %></div><br />
     	  <div class='title'><%= best_in_place recruiter, :last_name,  :html_attrs => { :class => 'field' } %></div>
@@ -25,11 +30,7 @@
           <div id='recruiter_picture_upload_error' class='hidden error_messages'></div>
         <% end %>
       <% end %>
-      <% if current_user.admin && !current_user?(recruiter) %>
-	    <%= link_to image('trash', t('delete')), recruiter, :method => :delete, :id => "destroy_recruiter_#{recruiter.id}", :class => 'hidden',
-      	                                                    :confirm => "#{t('recruiters.destroy.title')} #{recruiter.first_name} #{recruiter.last_name}#{t('_?')}",
-                                                            :title => "#{t('recruiters.destroy.title')} #{recruiter.first_name} #{recruiter.last_name}" %>
-	  <% end %>
+	  
       <% if current_user_profile? %>
         <p><%= best_in_place recruiter, :quote, :type => :textarea, :nil => "\"#{t('recruiters.show.add_quote').downcase}\"", :html_attrs => { :class => 'field' } %></p>
       <% elsif !(recruiter.quote.nil? || recruiter.quote.empty?) %>

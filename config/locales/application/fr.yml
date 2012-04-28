@@ -37,7 +37,7 @@ fr:
     success:
       welcome: "Bienvenue sur Engaccino !"
       profile_updated: "Vos informations ont été mis à jour."
-      candidate_destroyed: "L'utilisateur a été supprimé."
+      user_destroyed: "L'utilisateur a été supprimé."
       experience_destroyed: "Le poste a été supprimé."
       education_destroyed: "La formation a été supprimée."
     error: 

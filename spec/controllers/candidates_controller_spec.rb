@@ -239,9 +239,9 @@ describe CandidatesController do
 
   describe "DELETE 'destroy'" do
     
-    describe 'for non-signed-in candidates' do
+    describe 'for non-signed-in users' do
       
-      it "should deny access to 'update'" do
+      it "should deny access to 'destroy'" do
         delete :destroy, :id => @candidate
         response.should redirect_to signin_path
         flash[:notice].should == I18n.t('flash.notice.please_signin')
@@ -283,7 +283,7 @@ describe CandidatesController do
         
         it 'should redirect to the candidates page' do
           delete :destroy, :id => @candidate
-          flash[:success].should == I18n.t('flash.success.candidate_destroyed')
+          flash[:success].should == I18n.t('flash.success.user_destroyed')
           response.should redirect_to candidates_path
         end
       end
