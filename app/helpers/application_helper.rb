@@ -40,7 +40,7 @@ module ApplicationHelper
   end
   
   def current_user_company_profile?
-    params['controller'] == 'companies' && params[:action] == 'show' && current_user.company && params[:id] == current_user.company.id.to_s
+    current_user.recruiter? && params['controller'] == 'companies' && params[:action] == 'show' && current_user.company && params[:id] == current_user.company.id.to_s
   end
   
   def authorized_class_of_user?

@@ -1,0 +1,41 @@
+.card{ :id => "company_#{@company.id}" }
+  #company_loader.loader
+    = image_tag 'loader.gif'
+  
+  .company.identity.block
+  
+    - if current_user_company_profile?
+      #image_edit.image_hover
+      = form_for @company, :remote => true, :html => { :id => 'image_form', :multipart => true } do |f|
+        = f.file_field :image,  :id => 'image_button', :class => 'image_button'
+        = f.submit     :submit, :class => 'hidden'
+        #company_picture_upload_error.hidden.error_messages
+
+    #profile_picture.default.image{ :class => "#{'color-'+rand(1..4).to_s if @company.image_url.nil?}" } 
+      = image_tag (@company.image_url.nil? ? 'default_company.png' : @company.image_url(:profile).to_s)
+
+    - if current_user_company_profile?
+      .title
+        = best_in_place @company, :name, :html_attrs => { :class => 'field' }
+      .subtitle
+        = best_in_place @company, :city,    :nil => "#{t('companies.city').downcase}", :html_attrs => { :class => 'field' }
+        ,
+        = best_in_place @company, :country, :nil => "#{t('companies.country').downcase}#{t('_:')}", :html_attrs => { :class => 'field' }
+    - else
+      = link_to @company.name, company_path(@company), :class => 'title'
+      .subtitle
+        = "#{@company.city}, #{@company.country}"
+    
+    - if current_user.admin
+      - link_to image('trash', t('delete')), @company, :method => :delete, :id => "destroy_company_#{@company.id}", :class => 'hidden', :confirm => "#{t('companies.destroy.title')} #{@company.name}#{t('_?')}", :title => "#{t('companies.destroy.title')} #{@company.name}"
+  
+  - unless @company.no_about? && !current_user_company_profile?
+    .about.block
+      %h2
+        = t('companies.about').remove_accents.upcase
+      %p
+        = best_in_place_if current_user_company_profile?, @company, :about, :type => 'textarea', :nil => t('companies.about_nil'), :html_attrs => { :class => 'textarea' }
+  
+  = render 'show_contact_info'
+  
+= render 'show_recruiters'

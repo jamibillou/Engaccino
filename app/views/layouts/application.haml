@@ -3,7 +3,7 @@
 
 %html
   %head
-    %title title
+    %title #{title}
     = stylesheet_link_tag 'application' unless Rails.env.test?
     = stylesheet_link_tag 'application_test' if Rails.env.test?
     = javascript_include_tag 'application'

@@ -37,7 +37,7 @@
 	  
       <% if current_user_profile? %>
         <p><%= best_in_place recruiter, :quote, :type => :textarea, :nil => "\"#{t('recruiters.show.add_quote').downcase}\"", :html_attrs => { :class => 'field' } %></p>
-      <% elsif !(recruiter.quote.nil? || recruiter.quote.empty?) %>
+      <% elsif params[:controller] != 'companies' && !(recruiter.quote.nil? || recruiter.quote.empty?) %>
         <p><%= "\"#{recruiter.quote}\"" %></p>
       <% end %>
     </div>
