@@ -8,6 +8,7 @@ describe CandidatesController do
     @candidate  = Factory :candidate, :profile_completion => 5
     @candidate2 = Factory :candidate, :profile_completion => 5
     @recruiter  = Factory :recruiter, :profile_completion => 5
+    @attr = { :first_name => 'First', :last_name => 'Last', :password => 'pouet45', :password_confirmation => 'pouet45', :email => 'create@example.com', :status => 'available', :city => 'City', :country => 'Netherlands' }
   end
   
   describe "GET 'index'" do
@@ -84,8 +85,7 @@ describe CandidatesController do
       
       before :each do
         lambda do
-          post :create, :candidate => { :first_name => 'First', :last_name => 'Last', :password => 'pouet45', :password_confirmation => 'pouet45',
-                                        :email => 'create@example.com', :status => 'available', :city => 'City', :country => 'Netherlands' }
+          post :create, :candidate => @attr
         end.should change(Candidate, :count).by 1
       end
         
@@ -137,41 +137,32 @@ describe CandidatesController do
     describe 'success' do
       
       before :each do
-        @attr = { :first_name => 'Updated', :last_name => 'Updated',
-                  :experiences_attributes => { '0' => { :role => 'BG en chef', :start_month => 7, :start_year => 1984, :end_month => 12, :end_year => 2011,
-                                                        :company_attributes => { :name => 'BG Corp', :city => 'Rotterdam', :country => 'Netherlands' } } } }
+        @updated_attr = @attr.merge( :first_name => 'Updated',
+                                     :experiences_attributes => { '0' => { :role => 'BG en chef', :start_month => 7, :start_year => 1984, :end_month => 12, :end_year => 2011,
+                                     :company_attributes => { :name => 'BG Corp', :city => 'Rotterdam', :country => 'Netherlands' } } } )
       end
         
       it "should update the candidate's attributes" do
-        put :update, :candidate => @attr, :id => @candidate
+        put :update, :candidate => @updated_attr, :id => @candidate
         updated_candidate = assigns :candidate
         @candidate.reload
-        @candidate.first_name.should    == updated_candidate.first_name
-        @candidate.last_name.should     == updated_candidate.last_name
-        @candidate.country.should       == updated_candidate.country
-        @candidate.year_of_birth.should == updated_candidate.year_of_birth
+        @candidate.first_name.should == updated_candidate.first_name
       end
         
       it 'should not create a new candidate' do
         lambda do
-          put :update, :candidate => @attr, :id => @candidate
+          put :update, :candidate => @updated_attr, :id => @candidate
         end.should_not change(Candidate, :count)
       end
         
-      it 'should create an experience' do
+      it 'should create an experience and a company' do
         lambda do
-          put :update, :candidate => @attr, :id => @candidate
-        end.should change(Experience, :count).by 1
-      end
-        
-      it 'should create a company' do
-        lambda do
-          put :update, :candidate => @attr, :id => @candidate
-        end.should change(Company, :count).by 1
+          put :update, :candidate => @updated_attr, :id => @candidate
+        end.should change(Experience, :count).by(1) && change(Company, :count).by(1)
       end
         
       it "should redirect to the 'show' page" do
-        put :update, :candidate => @attr, :id => @candidate
+        put :update, :candidate => @updated_attr, :id => @candidate
         response.should redirect_to @candidate
       end
     end
@@ -179,7 +170,7 @@ describe CandidatesController do
     describe 'failure' do
                     
       it "should render the 'edit' page" do
-        put :update, :candidate => { :email => 'new_candidate@example.com', :first_name => '', :last_name => '', :country => '' }, :id => @candidate
+        put :update, :candidate => @attr.merge(:email => 'new_candidate@example.com', :first_name => '', :last_name => '', :country => ''), :id => @candidate
         response.should render_template :edit
       end
     end

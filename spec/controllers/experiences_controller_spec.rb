@@ -188,10 +188,10 @@ describe ExperiencesController do
   
   describe "DESTROY 'delete'" do
     
-    describe 'for non-signed-in candidates' do
+    describe 'for non-signed-in users' do
       
       it "should deny access to 'delete'" do
-        delete :destroy, :id => @experience
+        xhr :delete, :destroy, :id => @experience
         response.should redirect_to signin_path
         flash[:notice].should == I18n.t('flash.notice.please_signin')
       end
@@ -201,23 +201,18 @@ describe ExperiencesController do
       
       before :each do
         test_sign_in @candidate
+        lambda do
+          xhr :delete, :destroy, :id => @experience
+        end.should change(Experience, :count).by -1
       end
       
       it 'should respond http success' do
-        xhr :delete, :destroy, :id => @experience
         response.should be_success
       end
       
       it 'should respond with the correct json message' do
-        xhr :delete, :destroy, :id => @experience
         response.body.should == 'destroy!'
       end    
-    
-      it 'should destroy the selected experience object' do
-        lambda do
-          xhr :delete, :destroy, :id => @experience
-        end.should change(Experience, :count).by(-1)
-      end   
     end    
   end
 end

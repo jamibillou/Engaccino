@@ -5,8 +5,7 @@ class EducationsController < ApplicationController
   
   def new
     @education = Education.new
-    @education.build_school
-    @education.build_degree.build_degree_type
+    @education.build_school ; @education.build_degree.build_degree_type
     render :partial => 'new_form'
   end
   
@@ -21,7 +20,7 @@ class EducationsController < ApplicationController
   end
   
   def edit
-    render :partial, 'edit_form', :locals => { :education => Education.find(params[:id]) }
+    render :partial => 'edit_form', :locals => { :education => Education.find(params[:id]) }
   end
   
   def update

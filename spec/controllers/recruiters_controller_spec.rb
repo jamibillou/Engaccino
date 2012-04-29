@@ -8,6 +8,7 @@ describe RecruitersController do
     @recruiter  = Factory :recruiter, :profile_completion => 5
     @recruiter2 = Factory :recruiter, :profile_completion => 5
     @candidate  = Factory :candidate, :profile_completion => 5
+    @attr = { :first_name => 'First', :last_name => 'Last', :password => 'pouet45', :password_confirmation => 'pouet45', :email => 'create@example.com', :city => 'Sample city', :country => 'Netherlands' }
   end
   
   describe "GET 'index'" do
@@ -84,8 +85,7 @@ describe RecruitersController do
       
       before :each do
         lambda do
-          post :create, :recruiter => { :first_name => 'First', :last_name => 'Last', :password => 'pouet45', :password_confirmation => 'pouet45',
-                                        :email => 'create@example.com', :city => 'Sample city', :country => 'Netherlands' }
+          post :create, :recruiter => @attr
         end.should change(Recruiter, :count).by 1
       end
         
@@ -132,39 +132,34 @@ describe RecruitersController do
     
     before :each do
       test_sign_in @recruiter
+      @updated_attr =  @attr.merge(:first_name => 'Updated', :last_name => 'Updated', :company_attributes => { :name => 'BG Corp'})
     end
       
     describe 'success' do
-      
-      before :each do
-        @attr = { :first_name => 'Updated', :last_name => 'Updated',
-                  :company_attributes => { :name => 'BG Corp', :city => 'Grenoble', :country => 'France' } }
-      end
         
       it "should update the recruiter's attributes" do
-        put :update, :recruiter => @attr, :id => @recruiter
+        put :update, :recruiter => @updated_attr, :id => @recruiter
         updated_recruiter = assigns :recruiter
         @recruiter.reload
         @recruiter.first_name.should    == updated_recruiter.first_name
         @recruiter.last_name.should     == updated_recruiter.last_name
-        @recruiter.country.should       == updated_recruiter.country
-        @recruiter.year_of_birth.should == updated_recruiter.year_of_birth
+        @recruiter.company.name.should  == updated_recruiter.company.name
       end
         
       it 'should not create a new recruiter' do
         lambda do
-          put :update, :recruiter => @attr, :id => @recruiter
+          put :update, :recruiter => @updated_attr, :id => @recruiter
         end.should_not change(Recruiter, :count)
       end
         
       it 'should create a company' do
         lambda do
-          put :update, :recruiter => @attr, :id => @recruiter
+          put :update, :recruiter => @updated_attr, :id => @recruiter
         end.should change(Company, :count).by 1
       end
         
       it "should redirect to the 'show' page" do
-        put :update, :recruiter => @attr, :id => @recruiter
+        put :update, :recruiter => @updated_attr, :id => @recruiter
         response.should redirect_to @recruiter
       end
     end
@@ -172,7 +167,7 @@ describe RecruitersController do
     describe 'failure' do
                     
       it "should render the 'edit' page" do
-        put :update, :recruiter => { :email => 'new_recruiter@example.com', :first_name => '', :last_name => '', :country => '' }, :id => @recruiter
+        put :update, :recruiter => @attr.merge(:email => 'new_recruiter@example.com', :first_name => '', :last_name => '', :country => ''), :id => @recruiter
         response.should render_template :edit
       end
     end

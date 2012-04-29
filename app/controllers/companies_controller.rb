@@ -27,10 +27,4 @@ class CompaniesController < ApplicationController
     @company  = Company.find params[:id]
     render :partial => "companies/up_picture"
   end  
-  
-  private
-  
-    def signed_up
-      redirect_to edit_candidate_path(current_user), :notice => t('flash.notice.please_finish_signup') unless signed_up?
-    end
 end

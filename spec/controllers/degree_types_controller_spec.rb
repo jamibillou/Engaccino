@@ -3,16 +3,17 @@ require 'spec_helper'
 describe DegreeTypesController do
   
   before :each do
-    @candidate = Factory :candidate
+    @candidate   = Factory :candidate, :profile_completion => 5
     @degree_type = Factory :degree_type
+    @attr        = { :label => 'Master'}
   end
   
   describe "PUT 'update'" do
     
-    describe 'for non-signed-in candidates' do
+    describe 'for non signed-in users' do
       
       it "should deny access to 'update'" do
-        put :update, :id => @degree_type
+        xhr :put, :update, :degree_type => @attr, :id => @degree_type
         response.should redirect_to signin_path
         flash[:notice].should == I18n.t('flash.notice.please_signin')
       end
@@ -27,46 +28,29 @@ describe DegreeTypesController do
       describe 'success' do
         
         before :each do
-          @attr = { :degree_type => {:label => "Master"} }
-        end
-        
-        it 'should update the degree_type object ' do
-          xhr :put, :update, :degree_type => @attr[:degree_type], :id => @degree_type
-          degree_type = assigns :degree_type
-          @degree_type.reload
-          @degree_type.label == degree_type.label
-        end
-        
-        it 'should not create a degree_type' do
           lambda do
-            xhr :put, :update, :degree_type => @attr[:degree_type], :id => @degree_type
+            xhr :put, :update, :degree_type => @attr, :id => @degree_type
           end.should_not change(DegreeType, :count)
         end
         
-        it 'should respond with an empty message (respond_with_bip return)' do
-          xhr :put, :update, :degree_type => @attr[:degree_type], :id => @degree_type
-          response.body.should == " "
+        it 'should update the degree_type object' do
+          updated_degree_type = assigns :degree_type
+          @degree_type.reload
+          @degree_type.label.should == updated_degree_type.label
+        end
+        
+        it 'should respond with an empty message' do
+          response.body.should == ' '
         end 
       end
       
       describe 'failure' do
         
-        before :each do
-          @attr = { :degree_type => {:label => ""} }
-        end
-        
-        it 'should render the correct error message' do
-          xhr :put, :update, :degree_type => @attr[:degree_type], :id => @degree_type 
-          response.body.should include "mandatory"
-        end
-      
-        it 'should not create another degree_type object' do
-          lambda do
-            xhr :put, :update, :degree_type => @attr[:degree_type], :id => @degree_type
-          end.should_not change(DegreeType, :count)
+        it 'should have the right error message' do
+          xhr :put, :update, :degree_type => @attr.merge(:label => ''), :id => @degree_type 
+          response.body.should include 'mandatory'
         end
       end  
     end   
   end
-
 end
