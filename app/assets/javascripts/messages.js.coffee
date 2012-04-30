@@ -1,5 +1,6 @@
 $ ->
   $('#new_message').bind('ajax:success', (evt, data, status, xhr) -> show_conversation($.parseJSON(xhr.responseText)))
+                   .bind('ajax:error', (evt, xhr, status)         -> $('#message_errors').html(buildErrorMessages(xhr)))
 
 @show_conversation = (current_contact) ->
   refresh_menu_left(current_contact)
@@ -7,7 +8,8 @@ $ ->
     $('#conversation').html(data)
     hide('unread_'+current_contact)
     refresh_menu_top()
-    $('#new_message').bind('ajax:success', (evt, data, status, xhr) -> show_conversation($.parseJSON(xhr.responseText))))
+    $('#new_message').bind('ajax:success', (evt, data, status, xhr) -> show_conversation($.parseJSON(xhr.responseText)))
+                     .bind('ajax:error', (evt, xhr, status)         -> $('#message_errors').html(buildErrorMessages(xhr))))
     
 @refresh_menu_top = ->
   ajax_call('messages/menu_top','POST',{},'',(data) -> $('#messages_menu').html(data))
