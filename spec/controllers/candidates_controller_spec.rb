@@ -142,7 +142,7 @@ describe CandidatesController do
                                      :company_attributes => { :name => 'BG Corp', :city => 'Rotterdam', :country => 'Netherlands' } } } )
       end
         
-      it "should update the candidate's attributes" do
+      it 'should update the candidate' do
         put :update, :candidate => @updated_attr, :id => @candidate
         updated_candidate = assigns :candidate
         @candidate.reload

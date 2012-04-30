@@ -35,7 +35,9 @@ describe CertificateCandidatesController do
     describe 'failure' do
         
       before :each do
-        xhr :post, :create, :certificate_candidate => @attr.merge(:certificate_attributes => { :label => '' })
+        lambda do
+          xhr :post, :create, :certificate_candidate => @attr.merge(:certificate_attributes => { :label => '' })
+        end.should_not change(CertificateCandidate, :count)
       end
         
       it 'should fail with a blank label' do
@@ -43,7 +45,7 @@ describe CertificateCandidatesController do
       end
         
       it 'should respond with the error messages' do
-        response.body.should include('certificate.label')
+        response.body.should include 'certificate.label'
       end
     end
       
@@ -93,11 +95,11 @@ describe CertificateCandidatesController do
         @updated_attr = @attr.merge(:certificate_attrbiutes => { :label => 'BEPC' }, :level_score => 'BBB')
       end
         
-      it 'should update the certificate_candidate object ' do
+      it 'should update the certificate_candidate' do
         xhr :put, :update, :certificate_candidate => @updated_attr, :id => @certificate_candidate
-        certificate_candidate = assigns :certificate_candidate
+        updated_certificate_candidate = assigns :certificate_candidate
         @certificate_candidate.reload
-        @certificate_candidate.level_score.should == certificate_candidate.level_score
+        @certificate_candidate.level_score.should == updated_certificate_candidate.level_score
       end
         
       it 'should not create a new certificate_candidate' do
@@ -122,7 +124,7 @@ describe CertificateCandidatesController do
 
       it 'should have the right error messages' do
         xhr :put, :update, :certificate_candidate => @attr.merge(:certificate_attributes => { :label => '' }), :id => @certificate_candidate  
-        response.body.should include('certificate.label')
+        response.body.should include 'certificate.label'
       end
     end  
   end

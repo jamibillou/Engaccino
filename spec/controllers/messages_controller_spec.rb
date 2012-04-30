@@ -63,7 +63,7 @@ describe MessagesController do
     
     it 'should display a conversation' do
       xhr :get, :show, :current_contact => @recruiter1.id
-      response.should render_template(:partial => '_conversation')
+      response.should render_template :partial => '_conversation'
     end
       
     it 'should have all the messages of the corresponding conversation' do

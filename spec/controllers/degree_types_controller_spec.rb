@@ -33,7 +33,7 @@ describe DegreeTypesController do
           end.should_not change(DegreeType, :count)
         end
         
-        it 'should update the degree_type object' do
+        it 'should update the degree_type' do
           updated_degree_type = assigns :degree_type
           @degree_type.reload
           @degree_type.label.should == updated_degree_type.label

@@ -5,12 +5,12 @@ describe DegreesController do
   before :each do
     @candidate = Factory :candidate, :profile_completion => 5
     @degree    = Factory :degree
-    @attr      = { :label => "Web Development" }
+    @attr      = { :label => 'Web Development' }
   end
   
   describe "PUT 'update'" do
     
-    describe 'for non-signed-in candidates' do
+    describe 'for non-signed-in users' do
       
       it "should deny access to 'update'" do
         xhr :put, :update, :degree => @attr, :id => @degree
@@ -33,7 +33,7 @@ describe DegreesController do
           end.should_not change(Degree, :count)
         end
         
-        it 'should update the degree object' do
+        it 'should update the degree' do
           updated_degree = assigns :degree
           @degree.reload
           @degree.label.should == updated_degree.label
@@ -48,7 +48,7 @@ describe DegreesController do
         
         it 'should have the right error message' do
           xhr :put, :update, :degree => @attr.merge(:label => ''), :id => @degree 
-          response.body.should include "mandatory"
+          response.body.should include 'mandatory'
         end
       end  
     end   

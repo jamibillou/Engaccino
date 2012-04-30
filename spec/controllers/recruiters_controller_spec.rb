@@ -137,7 +137,7 @@ describe RecruitersController do
       
     describe 'success' do
         
-      it "should update the recruiter's attributes" do
+      it 'should update the recruiter' do
         put :update, :recruiter => @updated_attr, :id => @recruiter
         updated_recruiter = assigns :recruiter
         @recruiter.reload

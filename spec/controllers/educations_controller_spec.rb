@@ -22,8 +22,8 @@ describe EducationsController do
       response.should be_success
     end
     
-    it 'should display the new form' do
-      response.should render_template(:partial => '_new_form')
+    it 'should render the new form' do
+      response.should render_template :partial => '_new_form'
     end  
   end
   
@@ -36,15 +36,17 @@ describe EducationsController do
     describe 'failure' do
         
       before :each do
-        xhr :post, :create, :education => @attr.merge(:start_month => '', :school_attributes => { :name => '' })
+        lambda do
+          xhr :post, :create, :education => @attr.merge(:start_month => '', :school_attributes => { :name => '' })
+        end.should_not change(Education, :count)
       end
         
       it 'should fail with empty fields' do
         response.should_not be_success
       end
         
-      it 'should respond with the right error messages' do
-        response.body.should include('school.name', 'start_month')
+      it 'should respond with the right error message' do
+        response.body.should include 'school.name', 'start_month'
       end
     end
       
@@ -77,8 +79,8 @@ describe EducationsController do
       response.should be_success
     end
     
-    it 'should display the edit form' do
-      response.should render_template(:partial => '_edit_form')
+    it 'should render the edit form' do
+      response.should render_template :partial => '_edit_form'
     end
   end
   
@@ -90,7 +92,7 @@ describe EducationsController do
       
     describe 'success' do
 
-      it 'should update the education object ' do
+      it 'should update the education' do
         xhr :put, :update, :education => @attr, :id => @education
         updated_education = assigns :education
         @education.reload
@@ -121,7 +123,7 @@ describe EducationsController do
 
       it 'should render the right error message' do
         xhr :put, :update, :education => @attr.merge(:start_month => '', :school_attributes => { :name => '' }), :id => @education  
-        response.body.should include('school.name', 'start_month')
+        response.body.should include 'school.name', 'start_month'
       end
     end  
   end

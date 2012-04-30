@@ -55,7 +55,7 @@ describe SchoolsController do
           @attr = { :school => {:name => ''} }
         end
         
-        it 'should render the correct error message' do
+        it 'should render the right error message' do
           xhr :put, :update, :school => @attr[:school], :id => @school 
           response.body.should include "mandatory"
         end
