@@ -3,7 +3,6 @@ class Certificate < ActiveRecord::Base
   attr_accessible :label
   
   validates :label, :length => { :maximum => 100 },  :presence => true
-  
 end
 
 # == Schema Information
@@ -15,4 +14,3 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #
-

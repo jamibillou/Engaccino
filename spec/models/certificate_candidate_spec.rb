@@ -10,17 +10,14 @@ describe CertificateCandidate do
   end
   
   it 'should create an instance given valid attributes' do
-    certificate_candidate                 = CertificateCandidate.new @attr
-    certificate_candidate.candidate       = @candidate
-    certificate_candidate.certificate     = @certificate
+    certificate_candidate = CertificateCandidate.new @attr
+    certificate_candidate.candidate = @candidate ; certificate_candidate.certificate = @certificate
     certificate_candidate.should be_valid
   end
   
-  describe 'candidate associations' do
+  describe 'candidates associations' do
   
-    it 'should have a candidate attribute' do
-      @certificate_candidate.should respond_to :candidate
-    end
+    it { @certificate_candidate.should respond_to :candidate }
     
     it 'should have the right associated candidate' do
       @certificate_candidate.candidate_id.should == @candidate.id
@@ -28,11 +25,9 @@ describe CertificateCandidate do
     end
   end
   
-  describe 'certificate associations' do
+  describe 'certificates associations' do
   
-    it 'should have a certificate attribute' do
-      @certificate_candidate.should respond_to :certificate
-    end
+    it { @certificate_candidate.should respond_to :certificate }
     
     it 'should have the right associated certificate' do
       @certificate_candidate.certificate_id.should == @certificate.id
@@ -41,20 +36,9 @@ describe CertificateCandidate do
   end
   
   describe 'validations' do
-  
-    it 'should allow blank level/score' do
-      no_level_score_certificate_candidate                       = CertificateCandidate.new @attr.merge :level_score => ''
-      no_level_score_certificate_candidate.candidate             = @candidate
-      no_level_score_certificate_candidate.certificate           = @certificate
-      no_level_score_certificate_candidate.should be_valid
-    end
-    
-    it 'should reject too long level/score' do
-      long_level_score_certificate_candidate                     = CertificateCandidate.new @attr.merge :level_score => 'a'*21
-      long_level_score_certificate_candidate.candidate           = @candidate
-      long_level_score_certificate_candidate.certificate         = @certificate
-      long_level_score_certificate_candidate.should_not be_valid
-    end
+    it { should validate_presence_of :certificate }
+    it { should_not validate_presence_of :level_score }
+    it { should ensure_length_of(:level_score).is_at_most 20 }
   end
 end
 
@@ -69,4 +53,3 @@ end
 #  created_at     :datetime
 #  updated_at     :datetime
 #
-

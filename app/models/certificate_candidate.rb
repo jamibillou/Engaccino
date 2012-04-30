@@ -9,7 +9,6 @@ class CertificateCandidate < ActiveRecord::Base
   
   validates :candidate, :certificate,                    :presence => true
   validates :level_score, :length => { :maximum => 20 }, :allow_blank => true  
-  
 end
 
 # == Schema Information
@@ -23,4 +22,3 @@ end
 #  created_at     :datetime
 #  updated_at     :datetime
 #
-

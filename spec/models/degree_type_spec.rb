@@ -12,16 +12,12 @@ describe DegreeType do
   end
 
   it 'should create an instance given valid attributes' do
-    degree_type = DegreeType.new @attr
-    degree_type.save!
-    degree_type.should be_valid
+    DegreeType.new(@attr).should be_valid
   end
   
   describe 'degree associations' do
     
-    it 'should have degrees attribute' do
-      @degree_type.should respond_to :degrees
-    end
+    it { @degree_type.should respond_to :degrees }
     
     it 'should not destroy associated degrees' do
       @degree_type.destroy
@@ -31,9 +27,7 @@ describe DegreeType do
   
   describe 'educations associations' do
     
-    it 'should have an educations attribute' do
-      @degree_type.should respond_to :educations
-    end
+    it { @degree_type.should respond_to :educations }
     
     it 'should not destroy associated educations' do
       @degree_type.destroy
@@ -42,17 +36,8 @@ describe DegreeType do
   end
 
   describe 'validations' do
-        
-    it 'should require a label' do
-      invalid_degree_type = DegreeType.new @attr.merge :label => ''
-      invalid_degree_type.should_not be_valid
-    end
-    
-    it 'should reject too long labels' do
-      long_label = 'a' * 31
-      long_degree_type = DegreeType.new @attr.merge :label => long_label
-      long_degree_type.should_not be_valid      
-    end
+    it { should validate_presence_of :label }
+    it { should ensure_length_of(:label).is_at_most 30 }
   end
 end
 
@@ -65,4 +50,3 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #
-

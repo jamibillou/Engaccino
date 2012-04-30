@@ -2,27 +2,17 @@ require 'spec_helper'
 
 describe Certificate do
   
-  before :each do
-    @attr      = { :label => 'Sample certificate' }
-    @candidate = Factory :candidate
+  before :all do
+    @attr = { :label => 'Sample certificate' }
   end
   
   it 'should create an instance given valid attributes' do
-    certificate = Certificate.create @attr
-    certificate.should be_valid
+    Certificate.create(@attr).should be_valid
   end
   
   describe 'validations' do
-  
-    it 'should require a label' do
-      certificate = Certificate.new @attr.merge :label => ''
-      certificate.should_not be_valid
-    end
-    
-    it 'should reject too long labels' do
-      certificate = Certificate.new @attr.merge :label => 'a'*101
-      certificate.should_not be_valid
-    end
+    it { should validate_presence_of :label }
+    it { should ensure_length_of(:label).is_at_most 100 }
   end
 end
 
@@ -35,4 +25,3 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #
-
