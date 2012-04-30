@@ -3,8 +3,7 @@ require 'spec_helper'
 describe Experience do
 
   before :each do
-    @attr = { :role => 'UX Designer', :start_month => 7, :start_year => 2009, :end_month => 2, :end_year => 2011,
-              :description => 'Designed web-apps mostly, a bit of mobile work as well.' }
+    @attr       = { :role => 'UX Designer', :start_month => 7, :start_year => 2009, :end_month => 2, :end_year => 2011, :description => 'Designed web-apps mostly, a bit for mobiles as well.' }
     @candidate  = Factory :candidate
     @company    = Factory :company
     @experience = Factory :experience, :candidate => @candidate, :company => @company
@@ -17,9 +16,7 @@ describe Experience do
   
   describe 'candidate associations' do
     
-    it 'should have a candidate attribute' do
-      @experience.should respond_to :candidate
-    end
+    it { @experience.should respond_to :candidate }
     
     it 'should not be valid without a candidate' do
       experience_without_candidate = Experience.new @attr ; experience_without_candidate.company = @company
@@ -28,15 +25,13 @@ describe Experience do
     
     it 'should have the right associated candidate' do
       @experience.candidate_id.should == @candidate.id
-      @experience.candidate.should == @candidate
+      @experience.candidate.should    == @candidate
     end
   end
   
   describe 'company associations' do
     
-    it 'should have a company attribute' do
-      @experience.should respond_to :company
-    end
+    it { @experience.should respond_to :company }
     
     it 'should not be valid without a company' do
       experience_without_company = Experience.new @attr ; experience_without_company.candidate = @candidate
@@ -45,176 +40,73 @@ describe Experience do
     
     it 'should have the right associated company' do
       @experience.company_id.should == @company.id
-      @experience.company.should == @company
+      @experience.company.should    == @company
     end
   end
   
   describe 'validations' do
     
-    it 'should require a candidate' do
-      @company.experiences.build(@attr).should_not be_valid
-    end
+    it { should validate_presence_of :candidate_id }
+    it { should validate_presence_of :company }
     
-    it 'should require a company' do
-      @candidate.experiences.build(@attr).should_not be_valid
-    end
+    it { should validate_presence_of :role }
+    it { should ensure_length_of(:role).is_at_most 80 }
     
-    it 'should require a role' do
-      experience = Experience.new @attr.merge :role => '' ; experience.candidate = @candidate ; experience.company = @company
-      experience.should_not be_valid
-    end
+    it { should_not validate_presence_of :description }
+    it { should ensure_length_of(:description).is_at_least(20).is_at_most 300 }
     
-    it 'should reject too long roles' do
-      too_long_role = 'a'*81
-      experience = Experience.new @attr.merge :role => too_long_role ; experience.candidate = @candidate ; experience.company = @company
-      experience.should_not be_valid
-    end
+    it { should validate_presence_of :start_month }
+    it { should ensure_inclusion_of(:start_month).in_range 1..12 }
+    it { should validate_presence_of :start_year }
+    it { should ensure_inclusion_of(:start_year).in_range 100.years.ago.year..Time.now.year }
     
-    it 'should require a start month' do
-      experience = Experience.new @attr.merge :start_month => '' ; experience.candidate = @candidate ; experience.company = @company
-      experience.should_not be_valid
-    end
-    
-    it 'should reject invalid start months' do
-      invalid_start_months = [ 'march', 13, 0, '*&^%$#@' ]
-      invalid_start_months.each do |invalid_start_month|
-        experience = Experience.new @attr.merge :start_month => invalid_start_month ; experience.candidate = @candidate ; experience.company = @company
-        experience.should_not be_valid
-      end
-    end
-    
-    it 'should accept valid start months' do
-      valid_start_months = [ 1, 3, 9, 12 ]
-      valid_start_months.each do |valid_start_month|
-        experience = Experience.new @attr.merge :start_month => valid_start_month ; experience.candidate = @candidate ; experience.company = @company
-        experience.should be_valid
-      end
-    end
-    
-    it 'should require a start year' do
-      experience = Experience.new @attr.merge :start_year => '' ; experience.candidate = @candidate ; experience.company = @company
-      experience.should_not be_valid
-    end
-    
-    it 'should reject invalid start years' do
-      invalid_start_years = [ 'year', 12, Time.now.year+1, 1792 ]
-      invalid_start_years.each do |invalid_start_year|
-        experience = Experience.new @attr.merge :start_year => invalid_start_year ; experience.candidate = @candidate ; experience.company = @company
-        experience.should_not be_valid
-      end
-    end
-    
-    it 'should accept valid start years' do
-      valid_start_years = [ 1995, 2010, 1980, 2000 ]
-      valid_start_years.each do |valid_start_year|
-        experience = Experience.new @attr.merge :start_year => valid_start_year ; experience.candidate = @candidate ; experience.company = @company
-        experience.should be_valid
-      end
-    end
-    
-    describe 'when current' do
-    
+    context 'current experience' do
       it 'should require neither end month nor end year' do
         experience = Experience.new @attr.merge :end_month => '', :end_year => '' ; experience.candidate = @candidate ; experience.company = @company
         experience.toggle!(:current)
         experience.should be_valid
       end
-      
-      it 'should set the end month and year to the current date' do
-        experience = Experience.new @attr.merge :end_month => '', :end_year => '' ; experience.candidate = @candidate ; experience.company = @company
-        experience.toggle!(:current) ; experience.save!
-        experience.end_month.should == Time.now.month
-        experience.end_year.should == Time.now.year
-      end
-      
     end
     
-    describe 'when not current' do
+    context 'other experience' do
     
-      it 'should require an end month' do
-        experience = Experience.new @attr.merge :end_month => '' ; experience.candidate = @candidate ; experience.company = @company
-        experience.should_not be_valid
-      end
-      
-      it 'should reject invalid end months' do
-        invalid_end_months = [ 'march', 13, 0, '*&^%$#@' ]
-        invalid_end_months.each do |invalid_end_month|
-          experience = Experience.new @attr.merge :end_month => invalid_end_month ; experience.candidate = @candidate ; experience.company = @company
-          experience.should_not be_valid
-        end
-      end
-      
-      it 'should accept valid end months' do
-        valid_end_months = [ 1, 3, 9, 12 ]
-        valid_end_months.each do |valid_end_month|
-          experience = Experience.new @attr.merge :end_month => valid_end_month ; experience.candidate = @candidate ; experience.company = @company
-          experience.should be_valid
-        end
-      end
-      
-      it 'should require an end year' do
-        experience = Experience.new @attr.merge :end_year => '' ; experience.candidate = @candidate ; experience.company = @company
-        experience.should_not be_valid
-      end
-      
-      it 'should reject invalid end years' do
-        invalid_end_years = [ 'year', 12, Time.now.year+1, 1792 ]
-        invalid_end_years.each do |invalid_end_year|
-          experience = Experience.new @attr.merge :end_year => invalid_end_year ; experience.candidate = @candidate ; experience.company = @company
-          experience.should_not be_valid
-        end
-      end
-      
-      it 'should accept valid end years' do
-        valid_end_years = [ 1995, 2010, 1980, 2000 ]
-        valid_end_years.each do |valid_end_year|
-          experience = Experience.new @attr.merge :start_year => valid_end_year-1, :end_year => valid_end_year
-          experience.candidate = @candidate ; experience.company = @company
-          experience.should be_valid
-        end
-      end
+      it { should validate_presence_of :end_month }
+      it { should ensure_inclusion_of(:end_month).in_range 1..12 }
+      it { should validate_presence_of :end_year }
+      it { should ensure_inclusion_of(:end_year).in_range 100.years.ago.year..Time.now.year }
       
       it 'should reject start years greater than end years' do
-        experience = Experience.new @attr.merge :start_year => 2010, :start_month => 5, :end_year => 2009, :end_month => 3
-        experience.candidate = @candidate ; experience.company = @company
-        experience.should_not be_valid
+        incoherent_experience = Experience.new :start_year => 2010, :start_month => 1, :end_year => 2009, :end_month => 10, :role => 'Bla'
+        incoherent_experience.candidate = @candidate ; incoherent_experience.company = @company
+        incoherent_experience.should_not be_valid
       end
+    
+      context 'start and end years are the same' do
       
-      it 'should reject start months greater than end months when start and end years are the same' do
-        experience = Experience.new @attr.merge :start_year => 2009, :start_month => 5, :end_year => 2009, :end_month => 3
-        experience.candidate = @candidate ; experience.company = @company
-        experience.should_not be_valid
-      end
+        it 'should reject start months greater than end months' do
+          incoherent_experience = Experience.new :start_year => 2009, :start_month => 5, :end_year => 2009, :end_month => 3, :role => 'Bla'
+          incoherent_experience.candidate = @candidate ; incoherent_experience.company = @company
+          incoherent_experience.should_not be_valid
+        end
       
-      it 'should accept start months greater than end months when start and end years are different' do
-        experience = Experience.new @attr ; experience.candidate = @candidate ; experience.company = @company
-        experience.should be_valid
+        it 'should accept start months lower than end months' do
+          coherent_experience = Factory :experience, :start_year => 2009, :start_month => 5, :end_year => 2009, :end_month => 10, :role => 'Bla', :candidate => @candidate
+          coherent_experience.should be_valid
+        end
       end
-    end
     
-    it 'should accept empty descriptions' do
-      experience = Experience.new @attr.merge :description => '' ; experience.candidate = @candidate ; experience.company = @company
-      experience.should be_valid
-    end
-    
-    it 'should reject too short descriptions' do
-      too_short_description = 'a'*19
-      experience = Experience.new @attr.merge :description => too_short_description ; experience.candidate = @candidate ; experience.company = @company
-      experience.should_not be_valid
-    end
-    
-    it 'should reject too long descriptions' do
-      too_long_description = 'a'*301
-      experience = Experience.new @attr.merge :description => too_long_description ; experience.candidate = @candidate ; experience.company = @company
-      experience.should_not be_valid
+      context 'start and end years are different' do
+        it 'should accept start months greater than end months' do
+          coherent_experience = Factory :experience, @attr.merge(:candidate => @candidate)
+          coherent_experience.should be_valid
+        end
+      end
     end
   end
   
   describe 'current attribute' do
     
-    it 'should exist' do
-      @experience.should respond_to :current
-    end
+    it { @experience.should respond_to :current }
     
     it 'should be false by default' do
       @experience.current.should be_false
@@ -227,18 +119,13 @@ describe Experience do
   end
   
   describe 'main attribute' do
-    
-    it 'should exist' do
-      @experience.should respond_to :main
-    end
+    it { @experience.should respond_to :main }
   end
   
   describe 'duration method' do
     
-    it 'should exist' do
-      @experience.should respond_to :duration
-    end
-
+    it { @experience.should respond_to :duration }
+    
     it 'should calculate the right number of years between the dates' do
       @experience.duration.truncate.should == 5
       @experience.duration.round.should == 6
@@ -251,17 +138,14 @@ describe Experience do
   
   describe 'yrs_after_first_event method' do
     
-    it 'should exist' do
-      @experience.should respond_to :yrs_after_first_event
-    end
+    it { @experience.should respond_to :yrs_after_first_event }
     
     it 'should be 0 if the experience is the first event' do
       @experience.yrs_after_first_event.should == 0
     end
     
     it 'be the number of years between the the first event and the experience' do
-      experience2 = Experience.new :start_month => 1, :start_year => 1990, :end_month => 2, :end_year => 1992, :role => 'Sales administrator'
-      experience2.company = @company ; experience2.candidate = @candidate ; experience2.save!
+      Factory :experience, :start_month => 1, :start_year => 1990, :end_month => 2, :end_year => 1992, :role => 'Sales administrator', :candidate => @candidate
       @experience.yrs_after_first_event.floor.should == 9
     end
   end
@@ -284,4 +168,3 @@ end
 #  role         :string(255)
 #  current      :boolean(1)      default(FALSE)
 #
-

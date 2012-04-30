@@ -47,6 +47,7 @@ describe Recruiter do
     end
   end
 end
+
 # == Schema Information
 #
 # Table name: users
@@ -80,4 +81,3 @@ end
 #  quote              :string(255)
 #  company_id         :integer(4)
 #
-

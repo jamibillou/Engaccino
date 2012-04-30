@@ -9,14 +9,14 @@ class Experience < ActiveRecord::Base
   
   accepts_nested_attributes_for :company, :allow_destroy => true
               
-  validates :candidate_id,                                              :presence => true
-  validates :company,                                                   :presence => true
-  validates :role,        :length    => { :maximum => 80 },             :presence => true
-  validates :start_month, :inclusion => { :in => 1..12 },               :presence => true
-  validates :start_year,  :inclusion => { :in => 1900..Time.now.year }, :presence => true
-  validates :end_month,   :inclusion => { :in => 1..12 },               :presence => true
-  validates :end_year,    :inclusion => { :in => 1900..Time.now.year }, :presence => true
-  validates :description, :length    => { :within => 20..300 },         :allow_blank => true
+  validates :candidate_id,                                                            :presence => true
+  validates :company,                                                                 :presence => true
+  validates :role,        :length    => { :maximum => 80 },                           :presence => true
+  validates :start_month, :inclusion => { :in => 1..12 },                             :presence => true
+  validates :start_year,  :inclusion => { :in => 100.years.ago.year..Time.now.year }, :presence => true
+  validates :end_month,   :inclusion => { :in => 1..12 },                             :presence => true
+  validates :end_year,    :inclusion => { :in => 100.years.ago.year..Time.now.year }, :presence => true
+  validates :description, :length    => { :within => 20..300 },                       :allow_blank => true
   
   validate  :date_consistance, :unless => lambda { |proc| duration.nil? }
   
