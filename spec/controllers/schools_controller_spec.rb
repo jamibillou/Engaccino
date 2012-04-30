@@ -4,12 +4,13 @@ describe SchoolsController do
   
   before :each do
     @candidate = Factory :candidate
-    @school = Factory :school
+    @school    = Factory :school
+    @attr      = { :name => 'Polyfarce' }
   end
   
   describe "PUT 'update'" do
     
-    describe 'for non-signed-in candidates' do
+    describe 'for non-signed-in user' do
       
       it "should deny access to 'update'" do
         put :update, :id => @school
@@ -27,43 +28,27 @@ describe SchoolsController do
       describe 'success' do
         
         before :each do
-          @attr = { :school => {:name => "Polyfarce"} }
-        end
-        
-        it 'should update the school object ' do
-          xhr :put, :update, :school => @attr[:school], :id => @school
-          school = assigns :school
-          @school.reload
-          @school.name == school.name
-        end
-        
-        it 'should not create a school' do
           lambda do
-            xhr :put, :update, :school => @attr[:school], :id => @school
+            xhr :put, :update, :school => @attr, :id => @school
           end.should_not change(School, :count)
         end
         
-        it 'should respond with an empty message (respond_with_bip return)' do
-          xhr :put, :update, :school => @attr[:school], :id => @school
-          response.body.should == " "
+        it 'should update the school' do
+          updated_school = assigns :school
+          @school.reload
+          @school.name.should == updated_school.name
+        end
+        
+        it 'should respond with an empty message' do
+          response.body.should == ' '
         end 
       end
       
       describe 'failure' do
         
-        before :each do
-          @attr = { :school => {:name => ''} }
-        end
-        
         it 'should render the right error message' do
-          xhr :put, :update, :school => @attr[:school], :id => @school 
-          response.body.should include "mandatory"
-        end
-      
-        it 'should not create another school object' do
-          lambda do
-            xhr :put, :update, :school => @attr[:school], :id => @school
-          end.should_not change(School, :count)
+          xhr :put, :update, :school => @attr.merge(:name => ''), :id => @school 
+          response.body.should include 'mandatory'
         end
       end  
     end   
