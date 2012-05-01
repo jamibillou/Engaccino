@@ -4,22 +4,25 @@ describe LanguageCandidateObserver do
   
   before :each do
     @candidate = Factory :candidate
-    @language  = Factory :language
   end
   
   describe 'update_profile_completion_create method' do
     
-    it 'should increase the profile completion by 5 when candidates with no language add one' do
-      before_profile_completion_update = @candidate.profile_completion
-      language_candidate = Factory :language_candidate, :candidate => @candidate
-      @candidate.profile_completion.should == before_profile_completion_update + 5
+    context 'a candidate with no language adds one' do
+      it 'should increase his profile completion by 5' do
+        before = @candidate.profile_completion
+        language_candidate = Factory :language_candidate, :candidate => @candidate
+        @candidate.profile_completion.should == before + 5
+      end
     end
     
-    it 'should not increase the profile completion when candidates with 1 or more languages add a new one' do
-      language_candidate = Factory :language_candidate, :candidate => @candidate
-      before_profile_completion_update = @candidate.profile_completion
-      language_candidate2 = Factory :language_candidate, :candidate => @candidate
-      @candidate.profile_completion.should == before_profile_completion_update
+    context 'a candidate with 1 or more languages adds a new one' do
+      it 'should not increase his profile completion' do
+        language_candidate = Factory :language_candidate, :candidate => @candidate
+        before = @candidate.profile_completion
+        language_candidate2 = Factory :language_candidate, :candidate => @candidate
+        @candidate.profile_completion.should == before
+      end
     end
   end
   
@@ -29,17 +32,21 @@ describe LanguageCandidateObserver do
       @language_candidate = Factory :language_candidate, :candidate => @candidate
     end
     
-    it 'should decrease the profile completion by 5 when candidates with 1 language delete it' do
-      before_profile_completion_update = @candidate.profile_completion
-      @language_candidate.destroy
-      @candidate.profile_completion.should == before_profile_completion_update - 5
+    context 'a candidats with 1 language deletes it' do
+      it 'should decrease his profile completion by 5' do
+        before = @candidate.profile_completion
+        @language_candidate.destroy
+        @candidate.profile_completion.should == before - 5
+      end
     end
     
-    it 'should not decrease the profile completion when candidates with more than 1 language delete one' do
-      language_candidate2 = Factory :language_candidate, :candidate => @candidate
-      before_profile_completion_update = @candidate.profile_completion
-      language_candidate2.destroy
-      @candidate.profile_completion.should == before_profile_completion_update
-    end   
+    context 'a candidate with more than 1 language deletes one' do
+      it 'should not decrease his profile completion' do
+        Factory :language_candidate, :candidate => @candidate
+        before = @candidate.profile_completion
+        @language_candidate.destroy
+        @candidate.profile_completion.should == before
+      end
+    end
   end
 end

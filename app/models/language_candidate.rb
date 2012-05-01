@@ -9,7 +9,6 @@ class LanguageCandidate < ActiveRecord::Base
 
   validates :candidate, :language,                                                               :presence => true
   validates :level, :inclusion => { :in => [ 'beginner', 'intermediate', 'fluent', 'native' ] }, :presence => true
-  
 end
 
 # == Schema Information
@@ -23,4 +22,3 @@ end
 #  created_at   :datetime
 #  updated_at   :datetime
 #
-

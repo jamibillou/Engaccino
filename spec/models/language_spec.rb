@@ -15,9 +15,7 @@ describe Language do
   
   describe 'language_candidates associations' do
     
-    it 'should have a language_candidates attributes' do
-      @language.should respond_to :language_candidates
-    end
+    it { @language.should respond_to :language_candidates }
     
     it 'should destroy associated language_candidates' do
       @language.destroy
@@ -27,9 +25,7 @@ describe Language do
   
   describe 'candidates associations' do
     
-    it 'should have a candidates attributes' do
-      @language.should respond_to :candidates
-    end
+    it { @language.should respond_to :candidates }
     
     it 'should not destroy associated candidates' do
       @language.destroy
@@ -38,17 +34,8 @@ describe Language do
   end
   
   describe 'validations' do
-    
-    it 'should require a label' do
-      empty_label_language = Language.new @attr.merge :label => ''
-      empty_label_language.should_not be_valid
-    end
-    
-    it 'should reject too long labels' do
-      too_long_label = 'a'*81
-      too_long_label_language = Language.new @attr.merge :label => too_long_label
-      too_long_label_language.should_not be_valid
-    end
+    it { should validate_presence_of :label }
+    it { should ensure_length_of(:label).is_at_most 80 }
   end
 end
 
@@ -61,4 +48,3 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #
-

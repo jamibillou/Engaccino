@@ -11,15 +11,12 @@ describe School do
   end
 
   it 'should create an instance given valid attributes' do
-    school = School.create! @attr
-    school.should be_valid
+    School.create(@attr).should be_valid
   end
   
   describe 'educations associations' do
     
-    it 'should have an educations attribute' do
-      @school.should respond_to :educations
-    end
+    it { @school.should respond_to :educations }
     
     it 'should destroy associated educations' do
       @school.destroy
@@ -29,9 +26,7 @@ describe School do
   
   describe 'degrees associations' do
     
-    it 'should have a degrees attribute' do
-      @school.should respond_to :degrees
-    end
+    it { @school.should respond_to :degrees }
     
     it 'should not destroy associated degrees' do
       @school.destroy
@@ -41,9 +36,7 @@ describe School do
   
   describe 'candidates associations' do
     
-    it 'should have a candidates attribute' do
-      @school.should respond_to :candidates
-    end
+    it { @school.should respond_to :candidates }
     
     it 'should not destroy associated candidates' do
       @school.destroy
@@ -53,48 +46,19 @@ describe School do
 
   describe 'validations' do
     
-    it 'should require a name' do
-      invalid_school = School.new @attr.merge :name => ''
-      invalid_school.should_not be_valid
+    before :all do
+      @country = { :invalid => ['SAVOIE', 'Rotterdam', '6552$%##', '__pouet_' ], :valid => Country.all.collect { |c| c[0] } }
     end
     
-    it 'should reject too long names' do
-      long_name = 'a' * 201
-      long_name_school = School.new @attr.merge :name => long_name
-      long_name_school.should_not be_valid
-    end
+    it { should validate_presence_of :name }
+    it { should ensure_length_of(:name).is_at_most 200 }
+        
+    it { should_not validate_presence_of :city }
+    it { should ensure_length_of(:city).is_at_most 80 }
     
-    it 'should accept empty cities' do
-      empty_city_school = School.new @attr.merge :city => ''
-      empty_city_school.should be_valid
-    end
-    
-    it 'should reject too long cities' do
-      long_city = 'a' * 81
-      long_city_school = School.new @attr.merge :city => long_city
-      long_city_school.should_not be_valid
-    end
-    
-    it 'should accept empty countries' do
-      empty_country_school = School.new @attr.merge :country => ''
-      empty_country_school.should be_valid
-    end
-    
-    it 'should reject invalid countries' do
-      invalid_countries = [ 'SAVOIE', 'Rotterdam', '6552$%##', '__pouet_' ]
-      invalid_countries.each do |invalid_country|
-        invalid_country_school = School.new @attr.merge :country => invalid_country
-        invalid_country_school.should_not be_valid
-      end
-    end
-    
-    it 'should accept valid countries' do
-      valid_countries = Country.all.collect { |c| c[0] }
-      valid_countries.each do |valid_country|
-        valid_country_school = School.new @attr.merge :country => valid_country
-        valid_country_school.should be_valid
-      end
-    end
+    it { should_not validate_presence_of :country }
+    it { should validate_format_of(:country).not_with(@country[:invalid]).with_message(I18n.t('activerecord.errors.messages.inclusion')) }
+    it { should validate_format_of(:country).with @country[:valid] }
   end
 end
 

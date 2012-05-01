@@ -3,14 +3,12 @@ require 'spec_helper'
 describe Message do
   
   before :each do
-    @attr         = { :content => 'Sample content' }
-    @candidate1   = Factory :candidate
-    @candidate2   = Factory :candidate, :email => Factory.next(:email), :facebook_login => Factory.next(:facebook_login),
-                                        :linkedin_login => Factory.next(:linkedin_login), :twitter_login => Factory.next(:twitter_login)
-    @recruiter1   = Factory :recruiter
-    @recruiter2   = Factory :recruiter, :email => Factory.next(:email), :facebook_login => Factory.next(:facebook_login),
-                                        :linkedin_login => Factory.next(:linkedin_login), :twitter_login => Factory.next(:twitter_login)
-    @message      = Factory :message,   :author => @candidate1, :recipient => @recruiter1
+    @attr       = { :content => 'Sample content' }
+    @candidate1 = Factory :candidate
+    @candidate2 = Factory :candidate, :email => Factory.next(:email), :facebook_login => Factory.next(:facebook_login), :linkedin_login => Factory.next(:linkedin_login), :twitter_login => Factory.next(:twitter_login)
+    @recruiter1 = Factory :recruiter
+    @recruiter2 = Factory :recruiter, :email => Factory.next(:email), :facebook_login => Factory.next(:facebook_login), :linkedin_login => Factory.next(:linkedin_login), :twitter_login => Factory.next(:twitter_login)
+    @message    = Factory :message,   :author => @candidate1, :recipient => @recruiter1
   end
   
   it 'should create a new instance given valid attributes' do
@@ -20,13 +18,9 @@ describe Message do
   
   describe 'users aossciations' do
     
-    it 'should have an author attribute' do
-      @message.should respond_to :author
-    end
+    it { @message.should respond_to :author }
     
-    it 'should have a recipient attribute' do
-      @message.should respond_to :recipient
-    end
+    it { @message.should respond_to :recipient }
     
     it 'should have the right associated author' do
       @message.author.should    == @candidate1
@@ -41,24 +35,11 @@ describe Message do
   
   describe 'validations' do
     
-    it 'should require a content' do
-      Message.new(:content => '').should_not be_valid
-    end
+    it { should validate_presence_of :content }
+    it { should ensure_length_of(:content).is_at_most 140 }
     
-    it 'should reject too long contents' do
-      too_long_content = 'a' * 141
-      Message.new(:content => too_long_content).should_not be_valid
-    end
-    
-    it 'should require an author' do
-      no_author_message = Message.new @attr ; no_author_message.recipient = @recruiter1
-      no_author_message.should_not be_valid
-    end
-    
-    it 'should require a recipient' do
-      no_recipient_message = Message.new @attr ; no_recipient_message.author = @candidate1
-      no_recipient_message.should_not be_valid
-    end
+    it { should validate_presence_of :author_id }
+    it { should validate_presence_of :recipient_id }
     
     it 'should reject identical authors and recipients' do
       same_user_message = Message.new @attr ; same_user_message.author = @candidate1 ; same_user_message.recipient = @candidate1 ; 
@@ -70,27 +51,6 @@ describe Message do
       same_class_message.should_not be_valid
       same_class_message = Message.new @attr ; same_class_message.author = @recruiter1 ; same_class_message.recipient = @recruiter2 ; 
       same_class_message.should_not be_valid
-    end
-    
-    it 'should reject invalid/empty read attributes' do
-      invalid_reads = ['aaa',12,'']
-      invalid_reads.each do |invalid_read|
-        Message.new(:content => 'Bla bla', :read => invalid_read).should_not be_valid
-      end      
-    end
-    
-    it 'should reject invalid/empty archived_author attributes' do
-      invalid_archived_authors = ['aaa',12,'']
-      invalid_archived_authors.each do |invalid_archived_author|
-        Message.new(:content => 'Bla bla', :archived_author => invalid_archived_author).should_not be_valid
-      end       
-    end
-    
-    it 'should reject invalid/empty archived_recipient attributes' do
-      invalid_archived_recipients = ['aaa',12,'']
-      invalid_archived_recipients.each do |invalid_archived_recipient|
-        Message.new(:content => 'Bla bla', :archived_recipient => invalid_archived_recipient).should_not be_valid
-      end       
     end
   end
 end
@@ -109,4 +69,3 @@ end
 #  archived_author    :boolean(1)      default(FALSE)
 #  archived_recipient :boolean(1)      default(FALSE)
 #
-

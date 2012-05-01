@@ -3,50 +3,52 @@ require 'spec_helper'
 describe InterpersonalSkillCandidateObserver do
   
   before :each do
-    @candidate           = Factory(:candidate)
-    @interpersonal_skill = Factory(:interpersonal_skill)
+    @candidate = Factory :candidate
+    Factory :interpersonal_skill_candidate, :candidate => @candidate
+    Factory :interpersonal_skill_candidate, :candidate => @candidate
   end
   
   describe 'update_profile_completion_create method' do
-
-    before :each do
-       @interpersonal_skill_candidate1 = Factory :interpersonal_skill_candidate, :candidate => @candidate
-       @interpersonal_skill_candidate2 = Factory :interpersonal_skill_candidate, :candidate => @candidate
-    end
-
-    it 'should increase the profile completion by 5 when candidates with less than 3 interpersonal skills add a new one' do
-      before_profile_completion_update = @candidate.profile_completion
-      interpersonal_skill_candidate3 = Factory :interpersonal_skill_candidate, :candidate => @candidate
-      @candidate.profile_completion.should == before_profile_completion_update + 5
+    
+    context 'a candidate with less than 3 interpersonal skills adds a new one' do
+      it 'should increase his profile completion by 5' do
+        before = @candidate.profile_completion
+        Factory :interpersonal_skill_candidate, :candidate => @candidate
+        @candidate.profile_completion.should == before + 5
+      end
     end
     
-    it 'should not increase the profile completion when candidates with 3 or more interpersonal skills add a new one' do
-      interpersonal_skill_candidate3 = Factory :interpersonal_skill_candidate, :candidate => @candidate
-      before_profile_completion_update = @candidate.profile_completion
-      interpersonal_skill_candidate4 = Factory :interpersonal_skill_candidate, :candidate => @candidate
-      @candidate.profile_completion.should == before_profile_completion_update
+    context 'a candidate with 3 or more interpersonal skills adds a new one' do
+      it 'should not increase his profile completion' do
+        Factory :interpersonal_skill_candidate, :candidate => @candidate
+        before = @candidate.profile_completion
+        Factory :interpersonal_skill_candidate, :candidate => @candidate
+        @candidate.profile_completion.should == before
+      end
     end
   end
 
   describe 'update_profile_completion_destroy method' do
   
     before :each do
-      @interpersonal_skill_candidate1 = Factory :interpersonal_skill_candidate, :candidate => @candidate
-      @interpersonal_skill_candidate2 = Factory :interpersonal_skill_candidate, :candidate => @candidate
-      @interpersonal_skill_candidate3 = Factory :interpersonal_skill_candidate, :candidate => @candidate
-    end
-
-    it 'should decrease the profile completion by 10 when candidates with 3 or less interpersonal skills delete one' do
-      before_profile_completion_update = @candidate.profile_completion
-      @interpersonal_skill_candidate1.destroy
-      @candidate.profile_completion.should == before_profile_completion_update - 5
+      @perso_skill_c_3 = Factory :interpersonal_skill_candidate, :candidate => @candidate
     end
     
-    it 'should not decrease the profile completion when candidates with more than 3 interpersonal skills delete one' do
-      interpersonal_skill_candidate4 = Factory :interpersonal_skill_candidate, :candidate => @candidate
-      before_profile_completion_update = @candidate.profile_completion
-      interpersonal_skill_candidate4.destroy
-      @candidate.profile_completion.should == before_profile_completion_update
+    context 'a candidate with 3 or less interpersonal skills deletes one' do
+      it 'should decrease his profile completion by 5' do
+        before = @candidate.profile_completion
+        @perso_skill_c_3.destroy
+        @candidate.profile_completion.should == before - 5
+      end
+    end
+    
+    context 'a candidate with more than 3 interpersonal skills deletes one' do
+      it 'should not decrease his profile completion' do
+        Factory :interpersonal_skill_candidate, :candidate => @candidate
+        before = @candidate.profile_completion
+        @perso_skill_c_3.destroy
+        @candidate.profile_completion.should == before
+      end
     end
   end
 end

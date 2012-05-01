@@ -5,12 +5,12 @@ class Message < ActiveRecord::Base
   belongs_to :author,    :class_name => 'User', :foreign_key => :author_id
   belongs_to :recipient, :class_name => 'User', :foreign_key => :recipient_id
     
-  validates :author_id,                                                 :presence => true
-  validates :recipient_id,                                              :presence => true
-  validates :content,            :length => { :maximum => 140 },        :presence => true
-  validates :read,               :inclusion => { :in => [true, false] }
-  validates :archived_author,    :inclusion => { :in => [true, false] }
-  validates :archived_recipient, :inclusion => { :in => [true, false] }
+  validates :author_id,                                           :presence => true
+  validates :recipient_id,                                        :presence => true
+  validates :content,            :length => { :maximum => 140 },  :presence => true
+  validates :read,               :inclusion => { :in => [ true, false ] }
+  validates :archived_author,    :inclusion => { :in => [ true, false ] }
+  validates :archived_recipient, :inclusion => { :in => [ true, false ] }
   
   validate  :different_users
   validate  :different_classes_of_user
@@ -40,4 +40,3 @@ end
 #  archived_author    :boolean(1)      default(FALSE)
 #  archived_recipient :boolean(1)      default(FALSE)
 #
-
