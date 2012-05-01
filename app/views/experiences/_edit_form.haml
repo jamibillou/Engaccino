@@ -1,0 +1,27 @@
+= form_for experience, :remote => true, :html => { :id => "experience_edit_form_#{experience.id.to_s}", :class => 'experience_edit_form' } do |f|
+  %input{ :type => 'hidden', :name => '_method', :value => 'PUT' }
+  
+  .edu_exp_date
+    = f.text_field :start_month, :placeholder => t('experiences.month'), :class => 'month micro field'
+    = f.text_field :start_year,  :placeholder => t('experiences.year'),  :class => 'year mini field'
+    - 
+    = f.text_field :end_month,   :placeholder => t('experiences.month'), :class => 'month micro field'
+    = f.text_field :end_year,    :placeholder => t('experiences.year'),  :class => 'year mini field'
+    %br/
+	
+  .edu_exp_details
+    = f.text_field :role, :placeholder => t('candidates.role'), :class => 'field small_margin'
+    %span.check_box
+      = f.check_box :current
+      = t('experiences.current').downcase
+    %br/
+    = f.fields_for :company do |company_builder|
+      = company_builder.text_field :name, :placeholder => t('candidates.company'), :class => 'field margin'
+    = f.text_area :description, :placeholder => t('experiences.add_description'),  :class => 'textarea'
+	
+    .error_messages{ :id => "errors_experience#{experience.id}" }
+    = link_to_function t('cancel'), "hideForm('experience','#{experience.id}')",   :class => 'grey button'
+    &nbsp;
+    = f.submit t('submit')
+    .small_trash_link.left
+      = link_to "#{t('delete')}#{t('_?')}", experience, :method => :delete, :confirm => "#{t('delete')}#{t('_?')}", :title => "#{t('delete')}#{t('_!')}", :remote => true

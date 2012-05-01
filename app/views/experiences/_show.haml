@@ -1,0 +1,18 @@
+%div{ :id => "show_experience_#{experience.id}", :class => editable?(candidate) }
+  .edu_exp_date
+    %h2
+      = "#{experience.start_month}/#{experience.start_year} - "
+      = experience.current ? t('experiences.present') : "#{experience.end_month}/#{experience.end_year}"
+  .edu_exp_details
+    %h2 #{experience.role}
+    = experience.company.name
+    %p 
+      - if current_user?(candidate) && (experience.description.nil? || experience.description.empty?)
+        %span.default
+          = t('experiences.add_description')
+      - else
+        = experience.description
+
+- if current_user?(candidate)
+  .hidden.edit_experience{ :id => "edit_experience_#{experience.id}" }
+    = render 'experiences/edit_form', :experience => experience

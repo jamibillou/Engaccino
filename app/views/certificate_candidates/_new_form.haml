@@ -1,10 +1,12 @@
 = form_for @certificate_candidate, :remote => true do |f|
   .certificate_candidate.form
+  
     .label
       = f.fields_for :certificate do |certificate_builder|
         = certificate_builder.text_field :label, :placeholder => t('certificates.label'), :class => 'field'
     .level
       = f.text_field :level_score, :placeholder => t('certificates.level'), :class => 'small field'
+	  
   #errors_new_certificate_candidate.error_messages
   = link_to_function t('cancel'), "hideForm('certificate_candidate')", :class => 'grey button'
   = f.submit t('submit')

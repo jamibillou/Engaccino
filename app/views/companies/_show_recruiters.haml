@@ -1,5 +1,4 @@
 #recruiters
-  %h4
-    = "#{t('companies.recruiters')} (#{@company.recruiters.count})"
+  %h4 #{t('companies.recruiters')} (#{@company.recruiters.count})
   - @company.recruiters.each do |recruiter|
     = render 'recruiters/recruiter', :recruiter => recruiter

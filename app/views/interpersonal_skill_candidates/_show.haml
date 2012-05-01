@@ -1,0 +1,7 @@
+%div{ :id => "show_interpersonal_skill_candidate_#{interpersonal_skill_candidate.id}", :class => editable?(candidate) }
+  %h2 #{interpersonal_skill_candidate.interpersonal_skill.label}
+  %p #{interpersonal_skill_candidate.description}
+  
+- if current_user?(candidate)
+  .hidden.edit_interpersonal_skill_candidate{ :id => "edit_interpersonal_skill_candidate_#{interpersonal_skill_candidate.id}"
+    = render 'interpersonal_skill_candidates/edit_form', :interpersonal_skill_candidate => interpersonal_skill_candidate

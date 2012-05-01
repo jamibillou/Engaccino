@@ -1,0 +1,16 @@
+= form_for language_candidate, :remote => true, :html => { :id => "language_candidate_edit_form_#{language_candidate.id.to_s}" } do |f|
+  .language_candidate.form
+    %input{ :type => 'hidden', :name => '_method', :value => 'PUT' }
+	
+    .label
+      = f.fields_for :language do |language_builder|
+        = language_builder.text_field :label, :placeholder => t('languages.label'), :class => 'field'
+    .level
+      = f.select :level, language_level_options_array
+	  
+  .error_messages{ :id => "errors_language_candidate#{language_candidate.id}" }
+  = link_to_function t('cancel'), "hideForm('language_candidate','#{language_candidate.id}')",  :class => 'grey button'
+  &nbsp;
+  = f.submit t('submit')
+  .small_trash_link.left
+    = link_to "#{t('delete')}#{t('_?')}", language_candidate, :method => :delete, :confirm => "#{t('delete')}#{t('_?')}", :title => "#{t('delete')}#{t('_!')}", :remote => true

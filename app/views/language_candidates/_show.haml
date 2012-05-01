@@ -1,0 +1,8 @@
+.language_candidate{ :id => "show_language_candidate_#{language_candidate.id}", :class => "#{high_level?(language_candidate.level)} #{editable?(candidate)}" }
+  .label #{language_candidate.language.label}
+  .level{ :class => high_level?(language_candidate.level) }
+    = t("languages.#{language_candidate.level}")
+
+- if current_user?(candidate)
+  .hidden.edit_language_candidate{ :id => "edit_language_candidate_#{language_candidate.id}" }
+    = render 'language_candidates/edit_form', :language_candidate => language_candidate

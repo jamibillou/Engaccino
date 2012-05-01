@@ -1,8 +1,7 @@
-.certificate_candidate{ :id => "show_certificate_candidate_#{certificate_candidate.id}", :class => "#{'editable' if current_user?(candidate)}" }
-  .label
-    = certificate_candidate.certificate.label
-  .level
-    = certificate_candidate.level_score
+.certificate_candidate{ :id => "show_certificate_candidate_#{certificate_candidate.id}", :class => editable?(candidate) }
+  .label #{certificate_candidate.certificate.label}
+  .level #{certificate_candidate.level_score }
+
 - if current_user?(candidate)
   .edit_certificate_candidate.hidden{ :id => "edit_certificate_candidate_#{certificate_candidate.id}" }
     = render 'certificate_candidates/edit_form', :certificate_candidate => certificate_candidate

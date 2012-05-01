@@ -9,6 +9,14 @@ module ApplicationHelper
     'selected' if @title == I18n.t(title)
   end
   
+  def editable?(user)
+    'editable' if user == current_user
+  end
+  
+  def high_level?(level)
+    'high' if level == 'native' || level == 'fluent'
+  end
+  
   def image(name, alt = '')
     image_tag "#{name}.png", :alt => (alt.blank? ? t(name).humanize : alt), :class => name
   end

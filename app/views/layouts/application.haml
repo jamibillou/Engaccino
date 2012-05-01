@@ -22,6 +22,5 @@
 	
     #container
       - unless params[:action] == 'show' || params[:action] == 'edit'
-        %h1#container_title{ :style => "#{'margin-left: 10px' if signed_in?}" }
-          = @title
+        %h1#container_title{ :style => "#{'margin-left: 10px' if signed_in?}" } #{@title}
       = yield

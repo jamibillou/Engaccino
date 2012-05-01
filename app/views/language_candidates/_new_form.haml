@@ -1,0 +1,13 @@
+= form_for @language_candidate, :remote => true do |f|
+  .language_candidate.form
+  
+    .label
+      = f.fields_for :language do |language_builder|
+        = language_builder.text_field :label, :placeholder => t('languages.label'), :class => 'field'
+    .level
+      = f.select :level, language_level_options_array
+	  
+  #errors_new_language_candidate.error_messages
+  = link_to_function t('cancel'), "hideForm('language_candidate')", :class => 'grey button'
+  &nbsp;
+  = f.submit t('submit')

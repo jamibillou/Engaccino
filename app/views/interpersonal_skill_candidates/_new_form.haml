@@ -1,0 +1,12 @@
+= form_for @interpersonal_skill_candidate, :remote => true do |f|
+  .form
+  
+    = f.fields_for :interpersonal_skill do |interpersonal_skill_builder|
+      %h2
+        = interpersonal_skill_builder.text_field :label, :placeholder => t('interpersonal_skills.label'), :class => 'field margin'
+    = f.text_area :description, :placeholder => t('interpersonal_skills.add_description'), :class => 'textarea'
+	
+    #errors_new_interpersonal_skill_candidate.error_messages
+    = link_to_function t('cancel'), "hideForm('interpersonal_skill_candidate')", :class => 'grey button'
+    &nbsp;
+    = f.submit t('submit')

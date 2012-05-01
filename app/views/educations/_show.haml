@@ -1,0 +1,16 @@
+%div{ :id => "show_education_#{education.id}", :class => editable?(candidate) }
+  .edu_exp_date
+    %h2 #{education.start_month}/#{education.start_year} - #{education.end_month}/#{education.end_year}
+  .edu_exp_details
+    %h2 #{education.degree.degree_type.label} #{t('in')} #{education.degree.label}
+    = education.school.name
+    %p
+      - if current_user?(candidate) && (education.description.nil? || education.description.empty?)
+        %span.default
+          = t('educations.add_description')
+      - else
+        = education.description
+
+- if current_user?(candidate)
+  .hidden.edit_education{ :id => "edit_education_#{education.id}" }
+    = render 'educations/edit_form', :education => education

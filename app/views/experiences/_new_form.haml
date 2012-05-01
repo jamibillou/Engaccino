@@ -1,0 +1,26 @@
+= form_for @experience, :remote => true do |f|
+
+  .edu_exp_date
+    = f.text_field :start_month, :placeholder => t('experiences.month'), :class => 'month micro field'
+    = f.text_field :start_year,  :placeholder => t('experiences.year'),  :class => 'year mini field'
+    - 
+    = f.text_field :end_month,   :placeholder => t('experiences.month'), :class => 'month micro field'
+    = f.text_field :end_year,    :placeholder => t('experiences.year'),  :class => 'year mini field'
+	
+  .edu_exp_details
+    = f.text_field :role,        :placeholder => t('candidates.role'),   :class => 'field small_margin'
+    %span.check_box
+      = f.check_box :current
+      = t('experiences.current').downcase
+    &nbsp;
+    %br/
+    = f.fields_for :company do |company_builder|
+      = company_builder.text_field :name, :placeholder => t('candidates.company'), :class => 'field margin'
+    = f.text_area :description, :placeholder => t('experiences.add_description'), :class => 'textarea'
+	
+    #errors_new_experience.error_messages
+    = link_to_function t('cancel'), "hideForm('experience')", :class => 'grey button'
+    &nbsp;
+    = f.submit t('submit')
+    %br/
+    %br/

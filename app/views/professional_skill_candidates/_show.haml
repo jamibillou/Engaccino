@@ -1,0 +1,12 @@
+.professional_skill_candidate{ :id => "show_professional_skill_candidate_#{professional_skill_candidate.id}", :class => editable?(candidate) }
+  .label_description
+    %h2 #{professional_skill_candidate.professional_skill.label}
+    %p #{professional_skill_candidate.description}
+  .experience
+    %h3 #{pluralize(professional_skill_candidate.experience, t('yr'))}
+  .level
+    %h3 #{t("skills.#{professional_skill_candidate.level}")}
+
+- if current_user?(candidate)
+  .hidden.edit_professional_skill_candidate{ :id => "edit_professional_skill_candidate_#{professional_skill_candidate.id}" }
+    = render 'professional_skill_candidates/edit_form', :professional_skill_candidate => professional_skill_candidate
