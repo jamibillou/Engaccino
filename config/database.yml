@@ -15,7 +15,7 @@ development:
   database: engaccino_development
   pool: 5
   username: root
-  password: jamiro73
+  password: 
   host: localhost
 
 # Warning: The database defined as "test" will be erased and
@@ -28,7 +28,7 @@ test:
   database: engaccino_test
   pool: 5
   username: root
-  password: jamiro73
+  password: 
   host: localhost
 
 production:
