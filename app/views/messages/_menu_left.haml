@@ -1,0 +1,12 @@
+- contacts.each do |contact|
+  %div{ :class => ['contact', selected?(contact,current_contact)], :id => "contact_#{contact.id}", :onclick => "show_conversation('#{contact.id}')", :onmouseover => "show('archive_#{contact.id}')", :onmouseout => "hide('archive_#{contact.id}')"}
+    %div{ :class => ['small default image left', contact_image?(contact)] }
+      = image_tag(contact.image_url.nil? ? 'default_user_s.png' : contact.image_url(:small_thumb).to_s)
+    %h4
+      - if unread_messages_from?(contact)
+        %span{ :class => 'unread', :id => "unread_#{contact.id}"}
+      = link_to "#{contact.first_name} #{contact.last_name}", contact, :class => 'black'
+      = link_to_function image_tag('small_trash.png'), "archive_conversation(#{contact.id},event)", :title => t('messages.delete_conversation'), :id => "archive_#{contact.id}", :class => 'hidden'
+    %p
+      = time_ago_in_words messages.select { |message| message.author_id == contact.id || message.recipient_id == contact.id }.sort_by { |message| message.created_at }.last.created_at
+= link_to_function t('messages.new_conversation'), 'new_conversation()', :class => 'small black round button'

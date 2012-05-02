@@ -17,6 +17,14 @@ module ApplicationHelper
     'high' if level == 'native' || level == 'fluent'
   end
   
+  def selected?(contact,current_contact)
+    'selected' if contact.id == current_contact
+  end
+  
+  def contact_image?(contact)
+    'color-'+rand(1..4).to_s if contact.image_url.nil?
+  end
+  
   def image(name, alt = '')
     image_tag "#{name}.png", :alt => (alt.blank? ? t(name).humanize : alt), :class => name
   end

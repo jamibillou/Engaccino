@@ -1,0 +1,7 @@
+- unless @contacts.nil?
+  #menu_left
+    = render :partial => 'menu_left', :locals => { :contacts => @contacts, :messages => @messages, :current_contact => @current_contact }
+  #conversation
+    = render 'conversation', :contact => @contact.first
+- else
+    = t('messages.no_message')
