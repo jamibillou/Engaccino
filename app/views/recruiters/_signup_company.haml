@@ -1,0 +1,6 @@
+#company.white_block
+  #company_details.hidden.grey_block
+  #company_information
+    %h2
+      = t('recruiters.edit.company.info')
+    = f.fields_for :company do |company_builder| render 'fields_company', :f => company_builder end
