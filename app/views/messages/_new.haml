@@ -1,4 +1,4 @@
-.new_message{ :id => 'new_message' }
+.new.message#new_message
   = form_for @message, :remote => true do |f|
 
     = f.text_area    :content, :placeholder => t('messages.type_your_message'), :rows => '2', :class => 'textarea'

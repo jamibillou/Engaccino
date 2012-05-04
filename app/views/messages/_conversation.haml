@@ -1,0 +1,21 @@
+- messages = @messages.select { |message| message.author_id == contact.id || message.recipient_id == contact.id }
+.loader#conversation_loader
+  = image_tag 'loader.gif'
+- messages.each_with_index do |message, index|
+  %div{ :id => "message#{message.id}", :class => ['message', message_authored?(message), hidden_message?(messages,index)]}
+    %p
+      %span.title
+        = current_user.authored?(message) ? t('messages.you_said') : "#{contact.first_name} #{t('messages.other_said').downcase}"
+        = t '_:'
+      %br/
+      = message.content
+  - if index == 0 && messages.count > 10
+    %p#all{ :onclick => 'show_all_messages()' }
+      = t('messages.display_all').downcase
+  - elsif index == messages.count - 1
+    %p.last
+      = "#{t('messages.last_message').downcase}#{t('_:')} #{time_ago_in_words message.created_at}"
+- unless messages.empty?
+  = render 'new', :contact => contact
+- else
+  = t('messages.no_conversation')

@@ -25,6 +25,14 @@ module ApplicationHelper
     'color-'+rand(1..4).to_s if contact.image_url.nil?
   end
   
+  def message_authored?(message)
+    current_user.authored?(message) ? 'authored' : 'received'
+  end
+  
+  def hidden_message?(messages,index)
+    'hidden ' if messages.count > 10 && index < messages.count - 10 && index > 0
+  end
+  
   def image(name, alt = '')
     image_tag "#{name}.png", :alt => (alt.blank? ? t(name).humanize : alt), :class => name
   end

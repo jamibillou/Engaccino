@@ -4,8 +4,8 @@
       = image_tag(contact.image_url.nil? ? 'default_user_s.png' : contact.image_url(:small_thumb).to_s)
     %h4
       - if unread_messages_from?(contact)
-        %span{ :class => 'unread', :id => "unread_#{contact.id}"}
-      = link_to "#{contact.first_name} #{contact.last_name}", contact, :class => 'black'
+        %span.unread{ :id => "unread_#{contact.id}" }
+      = link_to_function "#{contact.first_name} #{contact.last_name}", "show_conversation('#{contact.id}')", :class => 'black'
       = link_to_function image_tag('small_trash.png'), "archive_conversation(#{contact.id},event)", :title => t('messages.delete_conversation'), :id => "archive_#{contact.id}", :class => 'hidden'
     %p
       = time_ago_in_words messages.select { |message| message.author_id == contact.id || message.recipient_id == contact.id }.sort_by { |message| message.created_at }.last.created_at
