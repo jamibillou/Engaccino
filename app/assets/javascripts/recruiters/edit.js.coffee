@@ -10,7 +10,7 @@ $ ->
     formatItem: (item) ->
       item.name+' ('+item.city+', '+item.country+')'
     select: (event,ui) -> 
-      ajax_call('recruiters/company_details','POST',{ id: ui.item.id },'',(data) ->
+      ajax_call('../../recruiters/company_details','POST',{ id: ui.item.id },'',(data) ->
         $('#recruiter_company_attributes_id').val(ui.item.id)
         $('#recruiter_company_attributes_url').val(ui.item.url)
         $('#recruiter_company_attributes_city').val(ui.item.city)

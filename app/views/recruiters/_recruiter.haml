@@ -1,0 +1,78 @@
+.card{ :id => "recruiter_#{recruiter.id}", :style => ('height:500px' if params[:action] == 'index'), :onmouseover => ("show('destroy_recruiter_#{recruiter.id}')" if admin_and_not_current?(recruiter)), :onmouseout => ("hide('destroy_recruiter_#{recruiter.id}')" if admin_and_not_current?(recruiter))}
+  #recruiter_loader.loader
+    = image_tag 'loader.gif'
+
+  .identity.block
+    - if current_user_profile?
+      #image_edit_r.image_hover
+
+    %div{ :class => ['default image left',('color-'+rand(1..4).to_s if recruiter.image_url.nil?)] }
+      = image_tag (recruiter.image_url.nil? ? 'default_user.png' : recruiter.image_url(:thumb).to_s)
+
+    - if admin_and_not_current?(recruiter)
+      = link_to image('trash', t('delete')), recruiter, :method => :delete, :id => "destroy_recruiter_#{recruiter.id}", :class => 'hidden', :confirm => "#{t('recruiters.destroy.title')} #{recruiter.first_name} #{recruiter.last_name}#{t('_?')}", :title => "#{t('recruiters.destroy.title')} #{recruiter.first_name} #{recruiter.last_name}"
+
+    - if current_user_profile?
+      .title
+        = best_in_place recruiter, :first_name, :html_attrs => { :class => 'field' } 
+        %br/
+        = best_in_place recruiter, :last_name,  :html_attrs => { :class => 'field' }
+    - else
+      %a.title{ :href => recruiter_path(recruiter) }
+        = recruiter.first_name
+        %br/
+        = recruiter.last_name
+
+    .subtitle
+      = best_in_place_if current_user_profile?, recruiter, :city,    :nil => t('recruiters.city'), :html_attrs => { :class => 'field' }
+    .subtitle
+      = best_in_place_if current_user_profile?, recruiter, :country, :nil => t('recruiters.country'), :html_attrs => { :class => 'country field' }
+
+    - if current_user_profile?
+      = form_for recruiter, :remote => true, :html => { :id => 'recruiter_image_form', :multipart => true } do |f|
+        = f.file_field :image,  :id => 'image_button_r', :class => 'image_button'
+        = f.submit     :submit, :class => 'hidden'
+        #recruiter_picture_upload_error.hidden.error_messages
+    - if current_user_profile?
+      %p
+        = best_in_place recruiter, :quote, :type => :textarea, :nil => "\"#{t('recruiters.show.add_quote').downcase}\"", :html_attrs => { :class => 'field' }
+    - elsif params[:controller] != 'companies' && !(recruiter.quote.nil? || recruiter.quote.empty?)
+      %p
+        = "\"#{recruiter.quote}\""
+
+  - unless current_user_profile? || company_profile? || params[:action] == 'index' || request.xhr?
+    .contact.block
+      %h2
+        = "#{t('contact')} #{recruiter.first_name}"
+      = form_for @message, :remote => true do |f|
+        = f.text_area :content, :placeholder => "#{t('question_or_comment')}#{t('_?')}", :rows => '3', :class => 'textarea'
+        = f.hidden_field :author_id, :value => current_user.id
+        = f.hidden_field :recipient_id, :value => recruiter.id
+        = f.submit t('send')
+      #message_status.hidden
+
+  - unless recruiter.company.nil? || company_profile?
+    .company_r.identity.block{ :id => "company_#{recruiter.company.id}" }
+      %h2
+        = t('recruiters.show.recruiter_at').remove_accents.upcase
+      - if current_user_profile?
+        #image_edit_c.image_hover
+      %div{ :class => ['default image left',('color-'+rand(1..4).to_s if recruiter.company.image_url.nil?)] }
+        = image_tag (recruiter.company.image_url.nil? ? 'default_company.png' : recruiter.company.image_url(:thumb).to_s)
+      - if current_user_profile?
+        .title
+          = best_in_place recruiter.company, :name, :html_attrs => { :class => 'field' }
+        .subtitle
+          = best_in_place recruiter.company, :url, :nil => t('companies.url').downcase, :html_attrs => { :class => 'url field' }
+      - else
+        .title
+          = link_to recruiter.company.name, company_path(recruiter.company)
+        .subtitle
+          = link_to recruiter.company.url, "http://#{recruiter.company.url}", :target => '_blank'
+      - if current_user_profile?
+        = form_for recruiter.company, :remote => true, :html => { :id => 'company_image_form', :multipart => true } do |f|
+          = f.file_field :image,  :id => 'image_button_c', :class => 'image_button'
+          = f.submit     :submit, :class => 'hidden'
+          #company_picture_upload_error.hidden.error_messages
+        %p
+          = link_to t('recruiters.show.company_profile'), recruiter.company, :class => 'small'

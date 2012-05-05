@@ -2,7 +2,7 @@
 .loader#conversation_loader
   = image_tag 'loader.gif'
 - messages.each_with_index do |message, index|
-  %div{ :id => "message#{message.id}", :class => ['message', message_authored?(message), hidden_message?(messages,index)]}
+  %div{ :id => "message#{message.id}", :class => ['message', (current_user.authored?(message) ? 'authored' : 'received'), ('hidden ' if messages.count > 10 && index < messages.count - 10 && index > 0)]}
     %p
       %span.title
         = current_user.authored?(message) ? t('messages.you_said') : "#{contact.first_name} #{t('messages.other_said').downcase}"

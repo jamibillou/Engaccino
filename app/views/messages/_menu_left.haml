@@ -1,6 +1,6 @@
 - contacts.each do |contact|
-  %div{ :class => ['contact', selected?(contact,current_contact)], :id => "contact_#{contact.id}", :onclick => "show_conversation('#{contact.id}')", :onmouseover => "show('archive_#{contact.id}')", :onmouseout => "hide('archive_#{contact.id}')"}
-    %div{ :class => ['small default image left', contact_image?(contact)] }
+  %div{ :class => ['contact', ('selected' if contact.id == current_contact)], :id => "contact_#{contact.id}", :onclick => "show_conversation('#{contact.id}')", :onmouseover => "show('archive_#{contact.id}')", :onmouseout => "hide('archive_#{contact.id}')"}
+    %div{ :class => ['small default image left', ('color-'+rand(1..4).to_s if contact.image_url.nil?)] }
       = image_tag(contact.image_url.nil? ? 'default_user_s.png' : contact.image_url(:small_thumb).to_s)
     %h4
       - if unread_messages_from?(contact)
