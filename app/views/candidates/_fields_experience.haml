@@ -1,0 +1,16 @@
+.fields
+  %br/
+  = f.fields_for :company do |company_builder|
+    = company_builder.text_field :name, :placeholder => t('candidates.company'), :class => 'field'
+  = f.text_field :role,        :placeholder => t('candidates.role'),  :class => 'field'
+  = t('from')
+  &nbsp;
+  = f.text_field :start_month, :placeholder => t('candidates.month'), :class => 'month small field'
+  = f.text_field :start_month, :placeholder => t('candidates.month'), :class => 'hidden field'
+  = f.text_field :start_year,  :placeholder => t('candidates.year'),  :class => 'year mini field'
+  = t('to')
+  &nbsp;
+  = f.text_field :end_month,   :placeholder => t('candidates.month'), :class => 'month small field'
+  = f.text_field :end_month,   :placeholder => t('candidates.month'), :class => 'hidden field'
+  = f.text_field :end_year,    :placeholder => t('candidates.year'),  :class => 'year mini field'
+  = link_to_delete '-', f, t('experiences.delete')

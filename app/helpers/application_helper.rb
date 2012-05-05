@@ -17,8 +17,8 @@ module ApplicationHelper
     'high' if level == 'native' || level == 'fluent'
   end
   
-  def admin_and_not_current?(recruiter)
-    current_user.admin && !current_user?(recruiter)
+  def admin_and_not_current?(user)
+    current_user.admin && !current_user?(user)
   end
   
   def image(name, alt = '')

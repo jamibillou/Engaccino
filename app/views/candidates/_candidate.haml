@@ -1,0 +1,68 @@
+.card{ :id => "candidate#{candidate.id}", :style => ('height:410px' if params[:action] == 'index'), :onmouseover => ("show('destroy_candidate_#{candidate.id}')" if admin_and_not_current?(candidate)), :onmouseout => ("hide('destroy_candidate_#{candidate.id}')" if admin_and_not_current?(candidate))}
+  #candidate_loader.loader
+    = image_tag 'loader.gif'
+
+  .identity.block
+    - if current_user_profile?
+      #image_edit.image_hover
+    %div{ :class => ['default image left',('color-'+rand(1..4).to_s if candidate.image_url.nil?)] }
+      = image_tag (candidate.image_url.nil? ? 'default_user.png' : candidate.image_url(:thumb).to_s)
+    - if admin_and_not_current?(candidate)
+      = link_to image('trash', t('delete')), candidate, :method => :delete, :id => "destroy_candidate_#{candidate.id}", :class => 'hidden', :confirm => "#{t('candidates.destroy.title')} #{candidate.first_name} #{candidate.last_name}#{t('_?')}", :title => "#{t('candidates.destroy.title')} #{candidate.first_name} #{candidate.last_name}"
+    - if current_user_profile?
+      .title
+        = best_in_place candidate, :first_name, :html_attrs => { :class => 'field' }
+        %br/
+        = best_in_place candidate, :last_name,  :html_attrs => { :class => 'field' }
+    - else
+      %a.title{ :href => candidate_path(candidate) }
+        = candidate.first_name
+        %br/
+        = candidate.last_name
+
+    .subtitle
+      = best_in_place_if current_user_profile?, candidate, :city,    :nil => t('candidates.city'), :html_attrs => { :class => 'field' }
+    .subtitle
+      = best_in_place_if current_user_profile?, candidate, :country, :nil => t('candidates.country'), :html_attrs => { :class => 'country field' }
+
+    - if current_user_profile?
+      = form_for candidate, :remote => true, :html => { :id => 'image_form', :multipart => true } do |f|
+        = f.file_field :image, :id => 'image_button', :class => 'image_button'
+        = f.submit :submit, :class => 'hidden'
+        #picture_upload_error.hidden.error_messages
+
+    .job
+      - unless candidate.no_exp?
+        - main_experience = Experience.find(candidate.main_experience)
+        - if current_user_profile?
+          %h2#role_BIPcombo
+            = best_in_place candidate, :main_experience, :type => :select, :collection => main_experience_options(candidate), :html_attrs => { :class => 'combobox' }
+        - else
+          %h2
+            = main_experience.role
+        %p#candidate_company
+          = render 'candidate_company', :candidate => candidate
+
+    .status
+      - if current_user_profile?
+        = best_in_place candidate, :status, :type => :select, :collection => status_options_array, :html_attrs => { :class => 'combobox' }
+      - else
+        = t("candidates.#{candidate.status}_status")
+
+  #candidate_degree_experience.block
+    = render 'candidate_degree_experience', :candidate => candidate
+
+  - unless candidate.no_pro_skill?
+    #candidate_professional_skills.block
+      = render 'candidate_professional_skills', :candidate => candidate
+
+  - unless current_user_profile? || params[:action] == 'index' || request.xhr?
+    .contact.block
+      %h2
+        = "#{t('contact')} #{candidate.first_name}"
+      = form_for @message, :remote => true do |f|
+        = f.text_area :content, :placeholder => "#{t('question_or_comment')}#{t('_?')}", :rows => '3', :class => 'textarea'
+        = f.hidden_field :author_id, :value => current_user.id
+        = f.hidden_field :recipient_id, :value => candidate.id
+        = f.submit t('send')
+      #message_status.hidden

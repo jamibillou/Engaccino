@@ -1,0 +1,22 @@
+- unless candidate.neither_exp_nor_edu?
+  .experience
+    %h2
+      = t('experiences.title').remove_accents.upcase
+    %h3
+      = pluralize(candidate.experience_duration.round, t('yr')) unless candidate.no_exp?
+  .degree
+    %h2
+      = t('educations.main').remove_accents.upcase
+    - unless candidate.no_edu?
+      - main_education = Education.find(candidate.main_education)
+      - if current_user_profile?
+        %h3#degreetype_BIPcombo
+          = best_in_place candidate, :main_education, :type => :select, :collection => main_education_options(candidate), :html_attrs => { :class => 'combobox' }
+      - else
+        %h3
+          = main_education.degree.degree_type.label
+      %p#candidate_degree
+        = render 'candidate_degree', :candidate => candidate
+    - else
+      %br/
+      %br/

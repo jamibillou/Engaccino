@@ -1,0 +1,21 @@
+.fields
+  %br/
+  = f.fields_for :degree do |degree_builder|
+    = degree_builder.fields_for :degree_type do |degree_type_builder|
+      = degree_type_builder.text_field :label, :placeholder => t('candidates.degree_type'), :class => 'field'
+    = degree_builder.text_field :label, :placeholder => t('candidates.degree'), :class => 'field'
+    = t('at')
+    &nbsp;
+  = f.fields_for :school do |school_builder|
+    = school_builder.text_field :name, :placeholder => t('candidates.school'), :class => 'field'
+  = t('from')
+  &nbsp;
+  = f.text_field :start_month, :placeholder => t('candidates.month'), :class => 'month small field'
+  = f.text_field :start_month, :placeholder => t('candidates.month'), :class => 'hidden field'
+  = f.text_field :start_year,  :placeholder => t('candidates.year'),  :class => 'year mini field'
+  = t('to')
+  &nbsp;
+  = f.text_field :end_month,   :placeholder => t('candidates.month'), :class => 'month small field'
+  = f.text_field :end_month,   :placeholder => t('candidates.month'), :class => 'hidden field'
+  = f.text_field :end_year,    :placeholder => t('candidates.year'),  :class => 'year mini field'
+  = link_to_delete '-', f, t('educations.delete')
