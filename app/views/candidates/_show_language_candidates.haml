@@ -1,6 +1,6 @@
-- language_candidates = candidate.language_candidates
 #language_candidate_loader.loader
   = image_tag 'loader.gif'
+  
 %h1
   .label
     = t('languages.title').remove_accents.upcase
@@ -8,9 +8,10 @@
       = link_to_function "#{t('add').upcase} +", "showForm('language_candidate', ['show_top'])", :id => 'link_add_language_candidate', :class => ['add_link',('red' if candidate.no_lang?)]
   .level
     = t('languages.level').remove_accents.upcase
+	
 #new_language_candidate.hidden
 - unless candidate.no_lang?
-  - language_candidates.each do |language_candidate|
+  - candidate.language_candidates.each do |language_candidate|
     %div{ :id => "language_candidate_#{language_candidate.id}" }
       = render 'language_candidates/show', :candidate => candidate, :language_candidate => language_candidate
 - else

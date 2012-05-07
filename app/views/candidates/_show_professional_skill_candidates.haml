@@ -1,6 +1,6 @@
-- professional_skill_candidates = candidate.professional_skill_candidates.order('experience DESC')
 #professional_skill_candidate_loader.loader
   = image_tag 'loader.gif'
+  
 %h1
   .label
     = t('professional_skills.title').remove_accents.upcase
@@ -10,9 +10,10 @@
     = t('professional_skills.experience').remove_accents.upcase
   .level
     = t('professional_skills.level').remove_accents.upcase
+	
 #new_professional_skill_candidate.hidden
 - unless candidate.no_pro_skill?
-  - professional_skill_candidates.each do |professional_skill_candidate|
+  - candidate.professional_skill_candidates.order('experience DESC').each do |professional_skill_candidate|
     %div{ :id => "professional_skill_candidate_#{professional_skill_candidate.id}"}
       = render 'professional_skill_candidates/show', :candidate => candidate, :professional_skill_candidate => professional_skill_candidate
 - else

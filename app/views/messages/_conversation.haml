@@ -1,8 +1,8 @@
 - messages = @messages.select { |message| message.author_id == contact.id || message.recipient_id == contact.id }
-.loader#conversation_loader
+#conversation_loader.loader
   = image_tag 'loader.gif'
 - messages.each_with_index do |message, index|
-  %div{ :id => "message#{message.id}", :class => ['message', (current_user.authored?(message) ? 'authored' : 'received'), ('hidden ' if messages.count > 10 && index < messages.count - 10 && index > 0)]}
+  .message{ :id => "message#{message.id}", :class => [(current_user.authored?(message) ? 'authored' : 'received'), ('hidden ' if messages.count > 10 && index < messages.count - 10 && index > 0)] }
     %p
       %span.title
         = current_user.authored?(message) ? t('messages.you_said') : "#{contact.first_name} #{t('messages.other_said').downcase}"

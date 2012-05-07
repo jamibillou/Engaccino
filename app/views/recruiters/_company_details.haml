@@ -8,7 +8,7 @@
 - recruiters = recruiters[0..2] if recruiters.count > 3
 - recruiters.each do |recruiter|
   .recruiter
-    %div{ :class => ['default image',('color-'+rand(1..4).to_s if recruiter.image_url.nil?)] }
+    .default.image{ :class => ('color-'+rand(1..4).to_s if recruiter.image_url.nil?) }
       = image_tag (recruiter.image_url.nil? ? 'default_user.png' : recruiter.image_url(:thumb).to_s)
     %p
       = "#{recruiter.first_name.first.upcase}. #{recruiter.last_name[0..8].humanize}"

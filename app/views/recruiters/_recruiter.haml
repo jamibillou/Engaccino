@@ -6,7 +6,7 @@
     - if current_user_profile?
       #image_edit_r.image_hover
 
-    %div{ :class => ['default image left',('color-'+rand(1..4).to_s if recruiter.image_url.nil?)] }
+    .default.image.left{ :class => ('color-'+rand(1..4).to_s if recruiter.image_url.nil?) }
       = image_tag (recruiter.image_url.nil? ? 'default_user.png' : recruiter.image_url(:thumb).to_s)
 
     - if admin_and_not_current?(recruiter)
@@ -57,7 +57,7 @@
         = t('recruiters.show.recruiter_at').remove_accents.upcase
       - if current_user_profile?
         #image_edit_c.image_hover
-      %div{ :class => ['default image left',('color-'+rand(1..4).to_s if recruiter.company.image_url.nil?)] }
+      .default.image.left{ :class => ('color-'+rand(1..4).to_s if recruiter.company.image_url.nil?) }
         = image_tag (recruiter.company.image_url.nil? ? 'default_company.png' : recruiter.company.image_url(:thumb).to_s)
       - if current_user_profile?
         .title

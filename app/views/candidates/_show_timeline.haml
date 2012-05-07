@@ -1,12 +1,15 @@
 - unless timeline_duration(candidate).nil?
+
   - units = { :x => 100 / timeline_duration(candidate), :y => 150 / candidate.longest_event.duration }
   - height = (candidate.longest_event.duration * units[:y] * 1.7).round
   - axis = long_timeline?(candidate) ? design_axis_w_decades(candidate, units) : design_axis(candidate, units)
+  
   #timeline{ :style => "height: #{height+55}px;" }
     #show_top_loader.loader
       = image_tag 'loader.gif'
     %h1
       = t('candidates.show.timeline.title').remove_accents.upcase
+	  
     .timeline_container{ :style => "height: #{height}px;"}
       .events
         - [candidate.educations, candidate.experiences].each do |collection|
@@ -15,7 +18,7 @@
             %div{ :class => "#{object.class.name.downcase}_block", :style => "height: #{block[:height]}px; width: #{block[:width]}%; left: #{block[:left]}%; z-index: #{block[:z_index]};"}
               .shade{ :style => "opacity: #{block[:shade]};"}
               - unless block[:label][:type] == 'vertical'
-                %div{ :class => "#{block[:label][:type]} label"}
+                .label{ :class => block[:label][:type]}
                   = block[:label][:text]
             - if block[:label][:type] == 'vertical'
               .vertical_label{ :style => "left: #{block[:label][:left]+0.9}%; z-index: #{block[:z_index]};" }

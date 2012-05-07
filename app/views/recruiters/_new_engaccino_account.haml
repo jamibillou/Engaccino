@@ -1,5 +1,6 @@
 %h2
   = t('recruiters.new.create_engaccino_account')
+  
 = form_for @recruiter, :url => { :action => :create }, :html => { :id => 'recruiter_new_form' } do |f|
   = f.hidden_field   :first_name,            :value => t('recruiters.first_name')
   = f.hidden_field   :last_name,             :value => t('recruiters.last_name')

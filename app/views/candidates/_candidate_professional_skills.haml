@@ -1,5 +1,6 @@
 %h2
   = t('professional_skills.title').remove_accents.upcase
+  
 - candidate.professional_skill_candidates.order('experience DESC').each_with_index do |professional_skill_candidate, index|
   - unless index > 2
     %p
