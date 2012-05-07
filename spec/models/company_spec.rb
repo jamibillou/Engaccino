@@ -141,3 +141,4 @@ end
 #  about            :string(255)
 #  recruiter_agency :boolean(1)      default(FALSE)
 #
+

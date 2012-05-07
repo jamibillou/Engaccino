@@ -16,6 +16,39 @@ describe User do
     User.create!(@attr).should be_valid
   end
   
+  describe 'relationships associations' do
+    
+    before :each do
+      @relationship = @recruiter.relationships.create! :followed_id => @candidate.id
+    end
+    
+    it { @user.should respond_to :relationships }
+    it { @user.should respond_to :reverse_relationships }
+    it { @user.should respond_to :followed_users }
+    it { @user.should respond_to :followers }
+    
+    it 'should have the right associated relationship' do
+      @recruiter.relationships.first.should == @relationship
+    end
+    
+    it 'should have the right associated reverse_relationship' do
+      @candidate.reverse_relationships.first.should == @relationship
+    end
+    
+    it 'should have the right associated followed_users' do
+      @recruiter.followed_users.first.should == @candidate
+    end
+    
+    it 'should have the right associated followers' do
+      @candidate.followers.first.should == @recruiter
+    end
+    
+    it 'should destroy the associated relationship' do
+      @candidate.destroy
+      Relationship.find_by_id(@relationship.id).should be_nil
+    end
+  end
+  
   describe 'messages associations' do
     
     it { @user.should respond_to :authored_messages }
@@ -211,7 +244,35 @@ describe User do
     end
   end
   
-  describe 'authored?(message) method' do
+  describe 'relationships' do
+    
+    it { should respond_to :following? }
+    it { should respond_to :follow! }
+    it { should respond_to :unfollow! }
+    
+    before :each do
+      @candidate.follow! @recruiter
+    end
+    
+    it 'should be albe to follow another user' do
+      @candidate.should be_following(@recruiter)
+    end
+    
+    it 'should include the followed user in the followed users' do
+      @candidate.followed_users.should include(@recruiter)
+    end
+      
+    it 'should be albe to unfollow another user' do
+      @candidate.unfollow! @recruiter
+      @candidate.should_not be_following(@recruiter)
+    end
+    
+    it 'should include the follower in the followers' do
+      @recruiter.followers.should include(@candidate)
+    end
+  end
+  
+  describe 'authored? method' do
     
     it { @user.should respond_to :authored? }
     
@@ -260,3 +321,4 @@ end
 #  quote              :string(255)
 #  company_id         :integer(4)
 #
+

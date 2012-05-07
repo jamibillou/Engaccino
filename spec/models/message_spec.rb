@@ -69,3 +69,4 @@ end
 #  archived_author    :boolean(1)      default(FALSE)
 #  archived_recipient :boolean(1)      default(FALSE)
 #
+

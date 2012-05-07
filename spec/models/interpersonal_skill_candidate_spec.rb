@@ -58,6 +58,7 @@ end
 #  description            :string(255)
 #  candidate_id           :integer(4)
 #  interpersonal_skill_id :integer(4)
-#  created_at             :datetime
-#  updated_at             :datetime
+#  created_at             :datetime        not null
+#  updated_at             :datetime        not null
 #
+

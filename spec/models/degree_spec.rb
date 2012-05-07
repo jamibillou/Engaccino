@@ -71,9 +71,10 @@ end
 #
 # Table name: degrees
 #
-#  id              :integer(4)      not null, primary key
-#  label           :string(255)
+#  id             :integer(4)      not null, primary key
+#  label          :string(255)
 #  degree_type_id :integer(4)
-#  created_at      :datetime
-#  updated_at      :datetime
+#  created_at     :datetime        not null
+#  updated_at     :datetime        not null
 #
+

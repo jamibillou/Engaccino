@@ -4,6 +4,11 @@ class User < ActiveRecord::Base
   
   attr_accessible :first_name, :last_name, :city, :country, :nationality, :year_of_birth, :phone, :email, :facebook_login,
                   :linkedin_login, :twitter_login, :profile_completion, :password, :password_confirmation, :image
+                  
+  has_many :relationships,         :dependent => :destroy,             :foreign_key => 'follower_id'
+  has_many :reverse_relationships, :dependent => :destroy,             :foreign_key => 'followed_id', :class_name => 'Relationship'
+  has_many :followed_users,        :through => :relationships,         :source => :followed
+  has_many :followers,             :through => :reverse_relationships, :source => :follower
   
   has_many :authored_messages,                                  :class_name => 'Message', :foreign_key => 'author_id'
   has_many :received_messages,                                  :class_name => 'Message', :foreign_key => 'recipient_id'
@@ -39,6 +44,18 @@ class User < ActiveRecord::Base
   
   def recruiter?
     self.class == Recruiter
+  end
+  
+  def following?(other_user)
+    relationships.find_by_followed_id(other_user.id)
+  end
+
+  def follow!(other_user)
+    relationships.create!(:followed_id => other_user.id)
+  end
+
+  def unfollow!(other_user)
+    relationships.find_by_followed_id(other_user.id).destroy
   end
 
   def authored?(message)
@@ -120,4 +137,14 @@ end
 #  main_experience    :integer(4)
 #  quote              :string(255)
 #  company_id         :integer(4)
+#              :string(255)
+#  encrypted_password :string(255)
+#  created_at         :datetime        not null
+#  updated_at         :datetime        not null
+#  image              :string(255)
+#  main_education     :integer(4)
+#  main_experience    :integer(4)
+#  quote              :string(255)
+#  company_id         :integer(4)
 #
+

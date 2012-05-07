@@ -19,10 +19,11 @@ end
 #
 #  id                    :integer(4)      not null, primary key
 #  level                 :string(255)
-#  experience            :integer(4) 
+#  experience            :integer(4)
 #  description           :string(255)
 #  candidate_id          :integer(4)
 #  professional_skill_id :integer(4)
-#  created_at            :datetime
-#  updated_at            :datetime
+#  created_at            :datetime        not null
+#  updated_at            :datetime        not null
 #
+

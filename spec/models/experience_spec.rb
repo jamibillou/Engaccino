@@ -163,8 +163,9 @@ end
 #  end_month    :integer(4)
 #  end_year     :integer(4)
 #  description  :string(255)
-#  created_at   :datetime
-#  updated_at   :datetime
+#  created_at   :datetime        not null
+#  updated_at   :datetime        not null
 #  role         :string(255)
 #  current      :boolean(1)      default(FALSE)
 #
+

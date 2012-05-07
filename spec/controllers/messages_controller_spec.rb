@@ -38,11 +38,11 @@ describe MessagesController do
     end
     
     it 'should have all the messages of the last conversation' do 
-      response.body.should include "message_#{@messages[2].id}", "message_#{@messages[3].id}"
+      response.body.should include "message#{@messages[2].id}", "message#{@messages[3].id}"
     end
     
     it 'should not have messages from other conversations' do
-      response.body.should_not include "message_#{@messages[0].id}", "message_#{@messages[1].id}"
+      response.body.should_not include "message#{@messages[0].id}", "message#{@messages[1].id}"
     end
   end
   
@@ -61,11 +61,11 @@ describe MessagesController do
     end
       
     it 'should have all the messages of the corresponding conversation' do
-      response.body.should include "message_#{@messages[2].id}", "message_#{@messages[3].id}"
+      response.body.should include "message#{@messages[2].id}", "message#{@messages[3].id}"
     end
       
     it 'should not have messages from other conversations' do
-      response.body.should_not include "message_#{@messages[0].id}", "message_#{@messages[1].id}"
+      response.body.should_not include "message#{@messages[0].id}", "message#{@messages[1].id}"
     end
       
     it 'should not have a new conversation form' do

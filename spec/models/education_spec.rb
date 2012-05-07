@@ -170,6 +170,7 @@ end
 #  start_year   :integer(4)
 #  end_month    :integer(4)
 #  end_year     :integer(4)
-#  created_at   :datetime
-#  updated_at   :datetime
+#  created_at   :datetime        not null
+#  updated_at   :datetime        not null
 #
+

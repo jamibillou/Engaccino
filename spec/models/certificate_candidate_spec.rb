@@ -50,6 +50,7 @@ end
 #  level_score    :string(255)
 #  candidate_id   :integer(4)
 #  certificate_id :integer(4)
-#  created_at     :datetime
-#  updated_at     :datetime
+#  created_at     :datetime        not null
+#  updated_at     :datetime        not null
 #
+
