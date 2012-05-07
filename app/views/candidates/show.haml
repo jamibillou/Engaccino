@@ -1,0 +1,6 @@
+- if current_user?(@candidate)
+  #show_top
+    = render 'show_top', :candidate => @candidate
+#candidate
+  = render 'candidate', :candidate => @candidate
+= render 'show_resume', :candidate => @candidate

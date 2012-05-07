@@ -1,0 +1,6 @@
+#professional_experience.white_block
+  %h2
+    = t('experiences.title')
+  = f.fields_for :experiences do |experience_builder| render 'fields_experience', :f => experience_builder end
+  = link_to_add '+', f, :experiences, t('experiences.add')
+  %br/

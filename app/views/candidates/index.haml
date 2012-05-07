@@ -1,0 +1,2 @@
+- Candidate.all.each do |candidate|
+  = render 'candidate', :candidate => candidate unless candidate.profile_completion == 0

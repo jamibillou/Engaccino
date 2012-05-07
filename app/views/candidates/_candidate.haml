@@ -1,4 +1,4 @@
-.card{ :id => "candidate#{candidate.id}", :style => ('height:410px' if params[:action] == 'index'), :onmouseover => ("show('destroy_candidate_#{candidate.id}')" if admin_and_not_current?(candidate)), :onmouseout => ("hide('destroy_candidate_#{candidate.id}')" if admin_and_not_current?(candidate))}
+.card{ :id => "candidate_#{candidate.id}", :style => ('height:410px' if params[:action] == 'index'), :onmouseover => ("show('destroy_candidate_#{candidate.id}')" if admin_and_not_current?(candidate)), :onmouseout => ("hide('destroy_candidate_#{candidate.id}')" if admin_and_not_current?(candidate))}
   #candidate_loader.loader
     = image_tag 'loader.gif'
 

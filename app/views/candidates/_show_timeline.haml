@@ -1,0 +1,39 @@
+- unless timeline_duration(candidate).nil?
+  - units = { :x => 100 / timeline_duration(candidate), :y => 150 / candidate.longest_event.duration }
+  - height = (candidate.longest_event.duration * units[:y] * 1.7).round
+  - axis = long_timeline?(candidate) ? design_axis_w_decades(candidate, units) : design_axis(candidate, units)
+  #timeline{ :style => "height: #{height+55}px;" }
+    #show_top_loader.loader
+      = image_tag 'loader.gif'
+    %h1
+      = t('candidates.show.timeline.title').remove_accents.upcase
+    .timeline_container{ :style => "height: #{height}px;"}
+      .events
+        - [candidate.educations, candidate.experiences].each do |collection|
+          - collection.each do |object|
+            - block = design_block(object, collection, units)
+            %div{ :class => "#{object.class.name.downcase}_block", :style => "height: #{block[:height]}px; width: #{block[:width]}%; left: #{block[:left]}%; z-index: #{block[:z_index]};"}
+              .shade{ :style => "opacity: #{block[:shade]};"}
+              - unless block[:label][:type] == 'vertical'
+                %div{ :class => "#{block[:label][:type]} label"}
+                  = block[:label][:text]
+            - if block[:label][:type] == 'vertical'
+              .vertical_label{ :style => "left: #{block[:label][:left]+0.9}%; z-index: #{block[:z_index]};" }
+                = block[:label][:text]
+              .vertical_line{ :style => "left: #{block[:label][:left]}%; height: #{height - block[:height]}px;"}
+
+      .horizontal_axis{ :style => "width: #{axis[:width]}%;" }
+        %span.unit_mark{ :style => "width: #{axis[:first_unit_mark]}%;" }
+          = unit_mark_label(candidate, :first) if first_unit_mark?(candidate)
+        - axis[:unit_marks].times do |n|
+          %span.unit_mark{ :style => "left: #{axis[:first_unit_mark]+n*axis[:unit_mark]}%; width: #{axis[:unit_mark]}%;" }
+            = unit_mark_label(candidate, :normal, n)
+        - if last_unit_mark?(candidate)
+          %span.unit_mark{ :style => "left: #{axis[:first_unit_mark]+(axis[:unit_marks])*axis[:unit_mark]}%; width: #{axis[:last_unit_mark]}%; border:0;" }
+            = unit_mark_label(candidate, :last)
+- else
+  #timeline.example
+    %h1
+      = t('candidates.show.timeline.title').remove_accents.upcase
+    .add_some
+      = t('candidates.show.timeline.add')

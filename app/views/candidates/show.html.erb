@@ -1,9 +1,0 @@
-<% if current_user?(@candidate) %>
-  <div id='show_top'>
-    <%= render 'show_top',    :candidate => @candidate %>
-  </div>
-<% end %>
-<div id='candidate'>
-  <%= render 'candidate',   :candidate => @candidate %>
-</div>
-<%= render 'show_resume',   :candidate => @candidate %>

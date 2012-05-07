@@ -1,0 +1,15 @@
+#signup
+  #signup_import
+    = render 'signup_import'
+  = form_for @candidate, :html => { :id => 'candidate_edit_form' } do |candidate_builder|
+    #signup_personal
+      = render 'signup_personal',   :f => candidate_builder
+    #signup_experience
+      = render 'signup_experience', :f => candidate_builder
+    #signup_education
+      = render 'signup_education',  :f => candidate_builder
+    #signup_status.white_block
+      %h2
+        = t('candidates.status')
+      = candidate_builder.select :status, status_options_hash
+    = candidate_builder.submit t('candidates.show.view_profile'), :class => 'center'

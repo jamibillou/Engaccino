@@ -1,0 +1,15 @@
+- interpersonal_skill_candidates = candidate.interpersonal_skill_candidates
+#professional_skill_candidate_loader.loader
+  = image_tag 'loader.gif'
+%h1
+  = t('interpersonal_skills.title').remove_accents.upcase
+  - if current_user?(candidate)
+    = link_to_function "#{t('add').upcase} +", "showForm('interpersonal_skill_candidate', ['show_top'])", :id => 'link_add_interpersonal_skill_candidate', :class => ['add_link',('red' if candidate.no_perso_skill?)]
+- unless candidate.no_perso_skill?
+  - interpersonal_skill_candidates.each do |interpersonal_skill_candidate|
+    .interpersonal_skill_candidate{ :id => "interpersonal_skill_candidate_#{interpersonal_skill_candidate.id}"}
+      = render 'interpersonal_skill_candidates/show', :candidate => candidate, :interpersonal_skill_candidate => interpersonal_skill_candidate
+- else
+  .add_some
+    = t('interpersonal_skills.add_some')
+#new_interpersonal_skill_candidate.hidden.interpersonal_skill_candidate

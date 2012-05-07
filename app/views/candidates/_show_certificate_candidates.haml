@@ -1,0 +1,18 @@
+- certificate_candidates = candidate.certificate_candidates
+#certificate_candidate_loader.loader
+  = image_tag 'loader.gif'
+%h1
+  .label
+    = t('certificates.title').remove_accents.upcase
+    - if current_user?(candidate)
+      = link_to_function "#{t('add').upcase} +", "showForm('certificate_candidate', ['show_top'])", :id => 'link_add_certificate_candidate', :class => ['add_link',('red' if candidate.no_certif?)]
+  .level
+    = t('certificates.level_score').remove_accents.upcase
+#new_certificate_candidate.hidden
+- unless candidate.no_certif?
+  - certificate_candidates.each do |certificate_candidate|
+    %div{ :id => "certificate_candidate_#{certificate_candidate.id}" }
+      = render 'certificate_candidates/show', :candidate => candidate, :certificate_candidate => certificate_candidate
+- else
+  .add_some
+    = t('certificates.add_some')

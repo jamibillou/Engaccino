@@ -1,6 +1,0 @@
-<div id='education' class='white_block'>
-  <h2><%=t 'educations.title' %></h2>
-  <%= f.fields_for :educations do |education_builder| render 'fields_education', :f => education_builder end %>
-  <%= link_to_add '+', f, :educations, t('educations.add') %>
-  <br />  
-</div>
