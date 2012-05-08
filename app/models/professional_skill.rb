@@ -1,5 +1,4 @@
 class ProfessionalSkill < Skill
-
 end
 
 # == Schema Information

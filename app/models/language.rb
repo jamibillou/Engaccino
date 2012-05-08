@@ -6,7 +6,6 @@ class Language < ActiveRecord::Base
   has_many :candidates, :through => :language_candidates
   
   validates :label, :length => { :maximum => 80 }, :presence => true
-  
 end
 
 # == Schema Information

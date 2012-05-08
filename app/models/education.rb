@@ -34,8 +34,7 @@ class Education < ActiveRecord::Base
   
     def date_consistance
       errors.add :duration, I18n.t('education.validations.duration') if duration < 0
-    end
-    
+    end 
 end
 
 # == Schema Information

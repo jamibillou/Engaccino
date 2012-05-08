@@ -33,7 +33,6 @@ class Experience < ActiveRecord::Base
     def date_consistance
       errors.add :duration, I18n.t('experience.validations.duration') if duration < 0
     end
-    
 end
 
 # == Schema Information

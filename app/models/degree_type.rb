@@ -6,7 +6,6 @@ class DegreeType < ActiveRecord::Base
   has_many :educations, :through => :degrees
   
   validates :label, :length => { :maximum => 30 },  :presence => true
-  
 end
 
 # == Schema Information

@@ -1,5 +1,4 @@
 class InterpersonalSkill < Skill
-
 end
 
 # == Schema Information

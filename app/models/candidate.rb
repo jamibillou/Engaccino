@@ -126,7 +126,6 @@ class Candidate < User
   def no_social?
     facebook_login.empty? && linkedin_login.empty? && twitter_login.empty?
   end
-  
 end
 
 # == Schema Information

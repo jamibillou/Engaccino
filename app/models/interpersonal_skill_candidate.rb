@@ -9,7 +9,6 @@ class InterpersonalSkillCandidate < ActiveRecord::Base
   
   validates :candidate, :interpersonal_skill,                :presence    => true
   validates :description, :length => { :within => 20..160 }, :allow_blank => true
-  
 end
 
 # == Schema Information

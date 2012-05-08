@@ -11,7 +11,6 @@ class School < ActiveRecord::Base
   validates :name,    :length =>    { :maximum => 200 },        :presence => true
   validates :city,    :length =>    { :maximum => 80 },         :allow_blank => true
   validates :country, :inclusion => { :in => countries_array }, :allow_blank => true
-  
 end
 
 # == Schema Information

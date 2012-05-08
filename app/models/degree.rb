@@ -11,8 +11,7 @@ class Degree < ActiveRecord::Base
   accepts_nested_attributes_for :degree_type, :allow_destroy => true
   
   validates :degree_type,                           :presence => true
-  validates :label, :length => { :maximum => 150 }, :presence => true
-    
+  validates :label, :length => { :maximum => 150 }, :presence => true 
 end
 
 # == Schema Information

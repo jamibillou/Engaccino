@@ -19,5 +19,4 @@ class InterpersonalSkillCandidateObserver < ActiveRecord::Observer
       profile_completion = interpersonal_skill_candidate.candidate.profile_completion - 5
       interpersonal_skill_candidate.candidate.update_attributes :profile_completion => profile_completion unless interpersonal_skill_candidate.candidate.interpersonal_skill_candidates.count > 2
     end
-  
 end

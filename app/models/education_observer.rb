@@ -26,6 +26,5 @@ class EducationObserver < ActiveRecord::Observer
     
     def update_profile_completion_destroy(education)
       education.candidate.update_attributes :profile_completion => education.candidate.profile_completion - 10 unless education.candidate.educations.count > 1
-    end
-    
+    end   
 end

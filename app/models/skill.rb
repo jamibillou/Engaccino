@@ -3,7 +3,6 @@ class Skill < ActiveRecord::Base
   attr_accessible :label
   
   validates :label, :length => { :maximum => 100 },  :presence => true
-  
 end
 
 # == Schema Information
