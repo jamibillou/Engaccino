@@ -42,10 +42,8 @@ en:
       title: "List of all candidates"
     show:
       title: "'s Profile"
-      share_profile: "Share profile"
       edit_profile: "Edit profile"
       view_profile: "View profile"
-      next_profile: "Next profile"
       timeline:
         title: "Timeline"
         add: "Detail your experience and education and it shall look nice here ;)"

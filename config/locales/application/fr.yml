@@ -64,6 +64,9 @@ fr:
   edit: "Modifier"
   click_to_edit: "Cliquez pour modifier"
   click_to_add: "Cliquez pour ajouter"
+  follow: "Suivre"
+  unfollow: "Ne plus suivre"
+  share_profile: "Partager profil"
   
   # Common words
   from: "de"

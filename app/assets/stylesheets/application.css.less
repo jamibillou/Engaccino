@@ -108,6 +108,13 @@ a.link                { text-decoration: none;
   &:hover             { text-decoration: underline }
 }
 
+// FOLLOW / SHARE BUTTONS
+#follow_share         { margin: 16px 0 6px 10px;
+  .button			  { padding: 11px 30px }
+  .grey               { font-weight: bold }
+  .blue               { margin-right: 4px }
+}
+
 // BLOCKS
 .white_block          { background: white; margin: 10px 25px 0 10px; padding: 15px 20px 20px 14px; font-size: 14px;
   h2                  { margin-top: 0;   padding: 0 }
@@ -199,35 +206,4 @@ a.link                { text-decoration: none;
 @import 'candidates';
 @import 'recruiters';
 @import 'companies';
-
-.unread               { width: 8px; height: 8px; margin: 5px 5px 0 0; background-color: #0b7fd2; display: inline-block; .radius(4px) }
-
-#menu_left            { width: 250px; margin: 0 50px 0 22px; float: left;
-  .trash              { padding: 0; float: left }
-  .contact            { height: 60px; margin-bottom: 10px; display: block; cursor: pointer;
-    h4                { font-weight: normal; margin: 0 0 4px 0; line-height: 1.2;
-      a               { margin-right: 10px }
-    }
-    p                 { font-size: 11px; color: #444; font-style: italic; line-height: 1 }
-    .image            { width: 50px; height: 50px; margin: 3px 10px 0 0 }
-    &.selected        { margin-left: 10px }
-  }
-}
-
-#conversation         { float: left; width: 500px;
-  .loader             { float: left }
-  #all                { width: 80%; padding: 0 13px 0 13px; margin: 0 0 10px 20%; background: #515151; font-size: 13px; color: white; text-align: center; cursor: pointer; .slightly_round }
-  .message            { margin-bottom: 10px; padding: 10px 13px 10px 13px; font-size: 13px; display: block; .slightly_round;
-    .title            { font-weight: bold; }
-    &.authored        { width: 95%; margin-left: 5%; background-color: #d6d6d6; text-align: right }
-    &.received        { width: 80%; margin-left: 20%; background-color: white;   text-align: left }
-    &.new             { width: 95%; margin-left: 5%; padding: 13px 13px 10px 13px; background-color: #d6d6d6;
-      .close          { margin-left: 20px; float: right }
-      input[type=submit] { float: right }
-      .textarea       { height: 50px; width: 65%; margin-bottom: 5px }
-      .field          { height: 25px; width: 35%; margin-bottom: 8px }
-    }
-    &.hidden          { display: none }
-  }
-  .last               { width: 100%; font-size: 11px; color: #444; text-align: center; font-style: italic; margin: 0 0 10px 5%; }
-}
+@import 'messages';

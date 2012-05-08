@@ -1,22 +1,21 @@
-#resume
-  - unless candidate.neither_exp_nor_edu? && candidate != current_user
-    #show_timeline
-      = render 'show_timeline', :candidate => candidate
-  - unless candidate.no_pro_skill? && candidate != current_user
-    #professional_skill_candidates.block
-      = render 'show_professional_skill_candidates', :candidate => candidate
-  - unless candidate.no_perso_skill? && candidate != current_user
-    #interpersonal_skill_candidates.block
-      = render 'show_interpersonal_skill_candidates', :candidate => candidate
-  - unless candidate.no_exp? && candidate != current_user
-    #experiences.block
-      = render 'show_experiences', :candidate => candidate
-  - unless candidate.no_edu? && candidate != current_user
-    #educations.block
-      = render 'show_educations', :candidate => candidate
-  - unless candidate.no_certif? && candidate != current_user
-    #certificate_candidates.small_block
-      = render 'show_certificate_candidates', :candidate => candidate
-  - unless candidate.no_lang? && candidate != current_user
-    #language_candidates.small_block
-      = render 'show_language_candidates', :candidate => candidate
+- unless candidate.neither_exp_nor_edu? && candidate != current_user
+  #show_timeline
+    = render 'show_timeline', :candidate => candidate
+- unless candidate.no_pro_skill? && candidate != current_user
+  #professional_skill_candidates.block
+    = render 'show_professional_skill_candidates', :candidate => candidate
+- unless candidate.no_perso_skill? && candidate != current_user
+  #interpersonal_skill_candidates.block
+    = render 'show_interpersonal_skill_candidates', :candidate => candidate
+- unless candidate.no_exp? && candidate != current_user
+  #experiences.block
+    = render 'show_experiences', :candidate => candidate
+- unless candidate.no_edu? && candidate != current_user
+  #educations.block
+    = render 'show_educations', :candidate => candidate
+- unless candidate.no_certif? && candidate != current_user
+  #certificate_candidates.small_block
+    = render 'show_certificate_candidates', :candidate => candidate
+- unless candidate.no_lang? && candidate != current_user
+  #language_candidates.small_block
+    = render 'show_language_candidates', :candidate => candidate

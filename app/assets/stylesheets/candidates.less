@@ -1,48 +1,34 @@
-//// SHOW VIEW
+// SHOW VIEW
+#candidate            { float: left }
 
-// TOP BAR
-#show_top             { margin-left: 10px; margin-top: 10px; 
-  .buttons            { width: 250px; float: left }
-  .button {
-    width:              122px;
-    padding:            9px 0;
-    text-decoration:    none;
-    font-size:          13px;
-    font-weight:        bold;
-    text-align:         center; 
-    float:              left;
+// PROFILE COMPLETION BAR
+#completion_container {
+  margin-bottom:      9px;
+  padding:            9px 0;
+  background-color:   #DDD;
+  font-size:          13px;
+  font-weight:        normal;
+  display:            block;
+  a                 { font-size: 13px; font-weight: bold; color: black; margin-right: 10px; margin-left: 20px }
+  #completion_bar_empty {
+    width:            300px;
+    height:           10px;
+    margin-left:      10px;
+    margin-right:     20px;
+    background-color: #555;
+    display:          inline-block;
   }
-  .blue               { margin-right:    6px }
-  a.button:hover      { text-decoration: underline }
-  #completion_container {
-    width:              77.55%;
-    margin-left:        10px;
-    padding:            9px 0;
-    background-color:   #DDD;
-    font-size:          13px;
-    font-weight:        normal;
-    display:            inline-block;
-    a                 { font-size: 13px; font-weight: bold; color: black; margin-right: 10px; margin-left: 20px }
-    #completion_bar_empty {
-      width:            300px;
-      height:           10px;
-      margin-left:      10px;
-      margin-right:     20px;
-      background-color: #555;
-      display:          inline-block;
-    }
-    #completion_bar_full {
-      height:           10px;
-      background-color: #8bbf42;
-      display:          block;
-    }
-    a.close         { float: right }
-    #missing ul     { list-style: circle ; margin-bottom: 0 }
+  #completion_bar_full {
+    height:           10px;
+    background-color: #8bbf42;
+    display:          block;
   }
+  a.close         { float: right }
+  #missing ul     { list-style: circle ; margin-bottom: 0 }
 }
 
 // RESUME
-#resume               { width: 77%;  margin-top: 10px; margin-left: 10px; font-size: 12px; float: left;
+#resume               { width: 77%;  margin: 10px 0 0 10px; font-size: 12px; float: left;
   h1                  { color: #BBB; font-weight: 600; font-size: 10px;   padding: 0;      margin: 0 0 15px 0 }
   h2                  { font-size: 14px; margin: 0; }
   p                   { margin-top: 10px; }

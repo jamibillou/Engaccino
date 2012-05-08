@@ -1,7 +1,7 @@
-- if current_user?(@candidate)
-  #show_top
-    = render 'show_top', :candidate => @candidate
-	
 #candidate
+  = render 'shared/follow_share' unless current_user? @candidate
   = render 'candidate', :candidate => @candidate
-= render 'show_resume', :candidate => @candidate
+
+#resume
+  = render 'show_completion', :candidate => @candidate if current_user? @candidate
+  = render 'show_resume', :candidate => @candidate

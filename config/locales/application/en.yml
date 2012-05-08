@@ -64,6 +64,9 @@ en:
   edit: "Edit"
   click_to_edit: "Click to edit"
   click_to_add: "Click to add"
+  follow: "Follow"
+  unfollow: "Unfollow"
+  share_profile: "Share profile"
   
   # Common words
   from: "from"

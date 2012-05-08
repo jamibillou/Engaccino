@@ -42,10 +42,8 @@ fr:
       title: "Liste des candidats"
     show:
       title: "Profil de "
-      share_profile: "Partager profil"
       edit_profile: "Editer profil"
       view_profile: "Voir profil"
-      next_profile: "Profil suivant"
       timeline:
         title: "Chronologie"
         add: "Détaillez votre expérience et votre formation afin d'avoir un graphique plutôt sympa ici ;)"

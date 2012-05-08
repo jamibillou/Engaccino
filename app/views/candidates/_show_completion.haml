@@ -1,7 +1,3 @@
-.buttons
-  = link_to t('candidates.show.next_profile'), candidate_path(candidate.id+1), :class => 'slightly_round blue button margin_right'
-  = link_to t('candidates.show.share_profile'), '#', :class => 'slightly_round grey button'
-  
 #completion_container.slightly_round
   #completion_bar_empty.slightly_round
     #completion_bar_full.slightly_round{ :style => "width: #{3*candidate.profile_completion}px;"}
