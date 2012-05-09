@@ -5,7 +5,7 @@
   .label
     = t('certificates.title').remove_accents.upcase
     - if current_user?(candidate)
-      = link_to_function "#{t('add').upcase} +", "showForm('certificate_candidate', ['show_top'])", :id => 'link_add_certificate_candidate', :class => ['add_link',('red' if candidate.no_certif?)]
+      = link_to_function "#{t('add').upcase} +", "showForm('certificate_candidate', ['show_completion'])", :id => 'link_add_certificate_candidate', :class => ['add_link',('red' if candidate.no_certif?)]
   .level
     = t('certificates.level_score').remove_accents.upcase
 	

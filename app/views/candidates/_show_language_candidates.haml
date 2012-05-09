@@ -5,7 +5,7 @@
   .label
     = t('languages.title').remove_accents.upcase
     - if current_user?(candidate)
-      = link_to_function "#{t('add').upcase} +", "showForm('language_candidate', ['show_top'])", :id => 'link_add_language_candidate', :class => ['add_link',('red' if candidate.no_lang?)]
+      = link_to_function "#{t('add').upcase} +", "showForm('language_candidate', ['show_completion'])", :id => 'link_add_language_candidate', :class => ['add_link',('red' if candidate.no_lang?)]
   .level
     = t('languages.level').remove_accents.upcase
 	
