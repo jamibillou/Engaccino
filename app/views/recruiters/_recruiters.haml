@@ -1,0 +1,4 @@
+- @recruiters.each do |recruiter|
+  = render 'recruiter', :recruiter => recruiter unless recruiter.profile_completion == 0
+
+= will_paginate @recruiters, :class => 'right will_paginate'

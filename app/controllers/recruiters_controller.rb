@@ -8,9 +8,20 @@ class RecruitersController < ApplicationController
   before_filter :admin_user,             :only   => :destroy
     
   def index
-    @recruiters = Recruiter.all
-    init_page :title => 'recruiters.index.title'
+    @recruiters = Recruiter.paginate :page => params[:page], :per_page => 9
+    init_page :title => 'recruiters.index.title', :javascripts => 'recruiters/index'
   end
+  
+  def followers
+    @recruiters = current_user.followers.paginate :page => params[:page], :per_page => 9
+    render :partial => 'recruiters'
+  end
+  
+  def following
+    @recruiters = current_user.followed_users.paginate :page => params[:page], :per_page => 9
+    render :partial => 'recruiters'
+  end
+  
   
   def show
     @recruiter = Recruiter.find params[:id]

@@ -1,4 +1,4 @@
-// SHOW VIEW
+//// SHOW VIEW
 #candidate            { float: left }
 
 // PROFILE COMPLETION BAR
@@ -266,18 +266,28 @@
    input[type=submit]   { margin-bottom: 10px }
 }
 
+//// INDEX VIEW
+
+#candidates             { max-width: 780px; float: left }
+
+#lists                  { margin: 10px 30px 0 10px; float: left;
+  ul                    { padding: 0; margin: 0;
+    li                  { padding: 0; margin: 0; list-style: none }
+  }
+}
+
 
 //// NEW VIEWS
 
-#new                   { height: 250px }
-#new_session           { height: 215px }
-#new_engaccino_account { border-right: 2px dashed #444; padding-right: 40px; display: inline-block;
-  .field               { width: 255px; height: 35px;    margin-bottom: 10px }
-  input[type=submit]   { margin-top: 10px }
+#new                    { height: 250px }
+#new_session            { height: 215px }
+#new_engaccino_account  { border-right: 2px dashed #444; padding-right: 40px; display: inline-block;
+  .field                { width: 255px; height: 35px;    margin-bottom: 10px }
+  input[type=submit]    { margin-top: 10px }
 }
-#new_social_connect    { padding-left: 40px; display: inline-block; vertical-align: top;
-  .button              { padding: 36px 60px; .radius(3px); display: inline-block;
-    &#facebook_connect { margin-right: 20px }
+#new_social_connect     { padding-left: 40px; display: inline-block; vertical-align: top;
+  .button               { padding: 36px 60px; .radius(3px); display: inline-block;
+    &#facebook_connect  { margin-right: 20px }
   }
 }
 

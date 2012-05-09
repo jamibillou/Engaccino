@@ -1,11 +1,11 @@
-.card{ :id => "candidate_#{candidate.id}", :style => ('height:410px' if params[:action] == 'index'), :onmouseover => ("show('destroy_candidate_#{candidate.id}')" if admin_and_not_current?(candidate)), :onmouseout => ("hide('destroy_candidate_#{candidate.id}')" if admin_and_not_current?(candidate))}
+.card{ :id => "candidate_#{candidate.id}", :style => ('height:410px' unless params[:action] == 'show'), :onmouseover => ("show('destroy_candidate_#{candidate.id}')" if admin_and_not_current?(candidate)), :onmouseout => ("hide('destroy_candidate_#{candidate.id}')" if admin_and_not_current?(candidate))}
   #candidate_loader.loader
     = image_tag 'loader.gif'
 
   .identity.block
-  
     - if current_user_profile?
       #image_edit.image_hover
+	  
     .default.image.left{ :class => ('color-'+rand(1..4).to_s if candidate.image_url.nil?) }
       = image_tag (candidate.image_url.nil? ? 'default_user.png' : candidate.image_url(:thumb).to_s)
 	  

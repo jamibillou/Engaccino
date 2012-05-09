@@ -1,2 +1,11 @@
-- Recruiter.all.each do |recruiter|
-  = render 'recruiter', :recruiter => recruiter unless recruiter.profile_completion == 0
+%nav#lists
+  %ul
+    %li
+      = link_to t('all'), recruiters_path, :class => 'black'
+    %li
+      = link_to_function t('users.following'), "index('following', 'POST')", :class => 'black'
+    %li
+      = link_to_function t('users.followers'), "index('followers', 'POST')", :class => 'black'
+
+#recruiters
+  = render 'recruiters'
