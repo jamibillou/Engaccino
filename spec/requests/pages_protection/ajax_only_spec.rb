@@ -134,4 +134,17 @@ describe 'AjaxOnly' do
       current_path.should_not == edit_professional_skill_candidate_path(@professional_skill_candidate)
     end
   end
+  
+  describe 'Relationships' do
+
+    it "should deny HTML access to 'create'"  do
+      visit candidates_follow_path
+      current_path.should_not == candidates_follow_path
+    end
+    
+    it "should deny HTML access to 'destroy'"  do
+      visit candidates_unfollow_path
+      current_path.should_not == candidates_unfollow_path
+    end
+  end
 end

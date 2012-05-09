@@ -1,2 +1,3 @@
 #recruiter
+  = render 'shared/follow_share', :user => @recruiter unless current_user? @recruiter
   = render 'recruiter', :recruiter => @recruiter

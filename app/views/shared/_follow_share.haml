@@ -1,3 +1,9 @@
 #follow_share
-  = link_to t('follow'), '#', :class => 'slightly_round blue button margin_right'
-  = link_to t('share_profile'), '#', :class => 'slightly_round grey button'
+  
+  #follow_form
+    - if current_user.following? user
+      = render 'shared/unfollow', :user_id => user.id
+    - else
+      = render 'shared/follow', :user_id => user.id
+      
+  = link_to t('share'), '#', :class => 'round grey button'
