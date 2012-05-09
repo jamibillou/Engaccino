@@ -39,25 +39,31 @@ Engaccino::Application.routes.draw do
   resources :sessions, :only => [:new, :create, :destroy]
   
   match 'candidates/refresh',         :to => 'candidates#refresh'  
+  match 'candidates/follow',          :to => 'relationships#create'
+  match 'candidates/unfollow',        :to => 'relationships#destroy'
+  
   match 'recruiters/refresh',         :to => 'recruiters#refresh'
   match 'recruiters/company_details', :to => 'recruiters#company_details'
+  match 'recruiters/follow',          :to => 'relationships#create'
+  match 'recruiters/unfollow',        :to => 'relationships#destroy'
+  
   match 'companies/up_picture',       :to => 'companies#up_picture'
+  
   match 'messages/conversation',      :to => 'messages#conversation'
   match 'messages/menu_top',          :to => 'messages#menu_top'
   match 'messages/menu_left',         :to => 'messages#menu_left'
   match 'messages/archive',           :to => 'messages#archive'
   
-  match '/candidate_signup',  :to => 'candidates#new'
-  match '/recruiter_signup',  :to => 'recruiters#new'
-  match '/signin',  :to => 'sessions#new'
-  match '/signout', :to => 'sessions#destroy'
+  match '/candidate_signup',          :to => 'candidates#new'
+  match '/recruiter_signup',          :to => 'recruiters#new'
+  match '/signin',                    :to => 'sessions#new'
+  match '/signout',                   :to => 'sessions#destroy'
   
-  match '/tour',    :to => 'pages#tour'
-  match '/pricing', :to => 'pages#pricing'
-  match '/about',   :to => 'pages#about'
-  match '/contact', :to => 'pages#contact'
+  match '/tour',                      :to => 'pages#tour'
+  match '/pricing',                   :to => 'pages#pricing'
+  match '/about',                     :to => 'pages#about'
+  match '/contact',                   :to => 'pages#contact'
   
   root :to => 'users#index',    :constraints => SingedIn.new(true)
-  root :to => 'pages#overview', :constraints => SingedIn.new(false)
-    
+  root :to => 'pages#overview', :constraints => SingedIn.new(false) 
 end

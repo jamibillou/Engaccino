@@ -1,0 +1,2 @@
+@follow = (user_id) -> ajax_call('follow', 'POST', {user_id: user_id}, '', (data) -> $('#follow_form').html(data))
+@unfollow = (user_id) -> ajax_call('unfollow', 'POST', {user_id: user_id}, '', (data) -> $('#follow_form').html(data))

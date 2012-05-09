@@ -13,9 +13,10 @@ class RecruitersController < ApplicationController
   end
   
   def show
-    @recruiter = Recruiter.find params[:id] ; @title = "#{@recruiter.first_name} #{@recruiter.last_name}"
+    @recruiter = Recruiter.find params[:id]
+    @title = "#{@recruiter.first_name} #{@recruiter.last_name}"
     @message = Message.new
-    init_page :javascripts => 'recruiters/show'
+    init_page :javascripts => 'recruiters/show relationships'
   end
   
   def new
