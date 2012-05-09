@@ -5,7 +5,7 @@
   .label
     = t('professional_skills.title').remove_accents.upcase
     - if current_user?(candidate)
-      = link_to_function "#{t('add').upcase} +", "showForm('professional_skill_candidate', ['show_top','candidate_professional_skills'])", :id => 'link_add_professional_skill_candidate', :class => ['add_link',('red' if candidate.no_pro_skill?)]
+      = link_to_function "#{t('add').upcase} +", "showForm('professional_skill_candidate', ['show_completion','candidate_professional_skills'])", :id => 'link_add_professional_skill_candidate', :class => ['add_link',('red' if candidate.no_pro_skill?)]
   .experience
     = t('professional_skills.experience').remove_accents.upcase
   .level

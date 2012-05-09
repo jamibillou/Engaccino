@@ -4,7 +4,7 @@
 %h1
   = t('interpersonal_skills.title').remove_accents.upcase
   - if current_user?(candidate)
-    = link_to_function "#{t('add').upcase} +", "showForm('interpersonal_skill_candidate', ['show_top'])", :id => 'link_add_interpersonal_skill_candidate', :class => ['add_link',('red' if candidate.no_perso_skill?)]
+    = link_to_function "#{t('add').upcase} +", "showForm('interpersonal_skill_candidate', ['show_completion'])", :id => 'link_add_interpersonal_skill_candidate', :class => ['add_link',('red' if candidate.no_perso_skill?)]
 	
 - unless candidate.no_perso_skill?
   - candidate.interpersonal_skill_candidates.each do |interpersonal_skill_candidate|

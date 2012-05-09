@@ -1,12 +1,12 @@
 $ ->    
   initBIP(I18n.t('click_to_edit'))
   
-  $('.edit_experience').each                    -> handleAjaxEdition($(this).attr('id'), 'experience', ['show_top','show_timeline', 'candidate']) 
-  $('.edit_education').each                     -> handleAjaxEdition($(this).attr('id'), 'education', ['show_top','show_timeline', 'candidate_degree_experience'])
-  $('.edit_professional_skill_candidate').each  -> handleAjaxEdition($(this).attr('id'), 'professional_skill_candidate', ['show_top','candidate_professional_skills'])
-  $('.edit_interpersonal_skill_candidate').each -> handleAjaxEdition($(this).attr('id'), 'interpersonal_skill_candidate', ['show_top'])
-  $('.edit_language_candidate').each            -> handleAjaxEdition($(this).attr('id'), 'language_candidate', ['show_top'])
-  $('.edit_certificate_candidate').each         -> handleAjaxEdition($(this).attr('id'), 'certificate_candidate', ['show_top'])
+  $('.edit_experience').each                    -> handleAjaxEdition($(this).attr('id'), 'experience', ['show_completion','show_timeline', 'candidate']) 
+  $('.edit_education').each                     -> handleAjaxEdition($(this).attr('id'), 'education', ['show_completion','show_timeline', 'candidate_degree_experience'])
+  $('.edit_professional_skill_candidate').each  -> handleAjaxEdition($(this).attr('id'), 'professional_skill_candidate', ['show_completion','candidate_professional_skills'])
+  $('.edit_interpersonal_skill_candidate').each -> handleAjaxEdition($(this).attr('id'), 'interpersonal_skill_candidate', ['show_completion'])
+  $('.edit_language_candidate').each            -> handleAjaxEdition($(this).attr('id'), 'language_candidate', ['show_completion'])
+  $('.edit_certificate_candidate').each         -> handleAjaxEdition($(this).attr('id'), 'certificate_candidate', ['show_completion'])
  
   refreshPartialThroughBIPcombo('candidate_company', 'role_BIPcombo')
   refreshPartialThroughBIPcombo('candidate_degree', 'degreetype_BIPcombo')
