@@ -48,7 +48,7 @@ module ApplicationHelper
   end
   
   def current_user_profile?
-    params[:controller] == "#{current_user.class.name.downcase}s" && params[:action] == 'show' && params[:id] == current_user.id.to_s || request.xhr?
+    params[:controller] == "#{current_user.class.name.downcase}s" && params[:action] == 'show' && params[:id] == current_user.id.to_s || (request.xhr? && controller.controller_name == 'recruiters' && controller.action_name == 'refresh')
   end
   
   def current_user_company_profile?

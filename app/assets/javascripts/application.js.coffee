@@ -10,7 +10,8 @@
 $ ->
   $('input.country').each -> $(this).autocomplete({ source:"/ajax/countries", minLength: 2, autoFocus: true })
   $('#close_flash').click -> hide('flash')
-    
+  $('.will_paginate a').attr('data-remote', 'true')
+
 ## CUSTOMS ALL FIELDS OF THE GIVEN FORM
 @customForm = (formId,translationPath) ->
   $("#"+formId+" input").each ->
