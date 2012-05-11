@@ -1,11 +1,5 @@
 %nav#lists
-  %ul
-    %li
-      = link_to t('all'), recruiters_path, :class => 'black'
-    %li
-      = link_to_function t('users.following'), "index('following', 'POST')", :class => 'black'
-    %li
-      = link_to_function t('users.followers'), "index('followers', 'POST')", :class => 'black'
+  = render 'shared/index_menu', :path => recruiters_path, :model => 'recruiters'
 
 #recruiters
   = render 'recruiters'

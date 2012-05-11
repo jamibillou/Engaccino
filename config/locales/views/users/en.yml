@@ -40,6 +40,8 @@ en:
   
     index:
       title: "List of all users"
+      list_followers: "List of all followers"
+      list_following: "List of all following"
     show:
       title: "'s Profile"
     new:

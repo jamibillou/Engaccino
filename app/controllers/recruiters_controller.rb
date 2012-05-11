@@ -9,16 +9,16 @@ class RecruitersController < ApplicationController
     
   def index
     @recruiters = Recruiter.paginate :page => params[:page], :per_page => 9
-    init_page :title => 'recruiters.index.title', :javascripts => 'recruiters/index'
+    init_page :title => 'recruiters.index.title', :javascripts => 'users/index'
   end
   
   def followers
-    @recruiters = current_user.followers.paginate :page => params[:page], :per_page => 9
+    @recruiters = current_user.followers.where(:type => 'recruiter').paginate :page => params[:page], :per_page => 9
     render :partial => 'recruiters'
   end
   
   def following
-    @recruiters = current_user.followed_users.paginate :page => params[:page], :per_page => 9
+    @recruiters = current_user.followed_users.where(:type => 'recruiter').paginate :page => params[:page], :per_page => 9
     render :partial => 'recruiters'
   end
   

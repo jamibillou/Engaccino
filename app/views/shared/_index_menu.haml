@@ -1,0 +1,7 @@
+%ul
+  %li
+    = link_to t('all'), path, :class => 'black'
+  %li
+    = link_to_function t('users.following'), "index('#{model}','following')", :class => 'black'
+  %li
+    = link_to_function t('users.followers'), "index('#{model}','followers')", :class => 'black'

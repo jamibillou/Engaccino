@@ -40,6 +40,8 @@ fr:
     
     index:
       title: "Liste des utilisateurs"
+      list_followers: "Liste des personnes suivies"
+      list_following: "Liste des personnes vous suivant"
     show:
       title: "Profil de "
     new:
