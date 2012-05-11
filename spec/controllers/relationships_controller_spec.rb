@@ -34,7 +34,7 @@ describe RelationshipsController do
     end
   end
   
-  describe "POST 'destroy'" do
+  describe "DELETE 'destroy'" do
     
     before :each do
       @recruiter.follow! @candidate

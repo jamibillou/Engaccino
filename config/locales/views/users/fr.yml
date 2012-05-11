@@ -35,6 +35,8 @@ fr:
     professional_skills: "Compétences professionnelles"
     skill: "Compétence"
     contact: "Contacter"
+    following: "Vous suivez"
+    followers: "Vous suivent"
     
     index:
       title: "Liste des utilisateurs"

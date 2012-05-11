@@ -35,6 +35,8 @@ en:
     professional_skills: "Professional skills"
     skill: "Skill"
     contact: "Contact"
+    following: "Following"
+    followers: "Followers"
   
     index:
       title: "List of all users"

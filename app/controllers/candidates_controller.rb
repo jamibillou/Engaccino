@@ -1,8 +1,8 @@
 class CandidatesController < ApplicationController
 
   include TimelineHelper
-
-  respond_to :html, :json
+  
+  respond_to :html, :json, :js
   
   before_filter :authenticate,           :except => [:new, :create]
   before_filter :new_user,               :only   => [:new, :create]
@@ -12,8 +12,18 @@ class CandidatesController < ApplicationController
   before_filter :admin_user,             :only   => :destroy
   
   def index
-    @candidates = Candidate.all
-    init_page :title => 'candidates.index.title'
+    @candidates = Candidate.paginate :page => params[:page], :per_page => 9
+    init_page :title => 'candidates.index.title', :javascripts => 'candidates/index'
+  end
+  
+  def followers
+    @candidates = current_user.followers.paginate :page => params[:page], :per_page => 9
+    render :partial => 'candidates'
+  end
+  
+  def following
+    @candidates = current_user.followed_users.paginate :page => params[:page], :per_page => 9
+    render :partial => 'candidates'
   end
   
   def show

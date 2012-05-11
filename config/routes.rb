@@ -38,12 +38,16 @@ Engaccino::Application.routes.draw do
   resources :messages
   resources :sessions, :only => [:new, :create, :destroy]
   
-  match 'candidates/refresh',         :to => 'candidates#refresh'  
+  match 'candidates/refresh',         :to => 'candidates#refresh'
+  match 'candidates/following',       :to => 'candidates#following'
+  match 'candidates/followers',       :to => 'candidates#followers'
   match 'candidates/follow',          :to => 'relationships#create'
   match 'candidates/unfollow',        :to => 'relationships#destroy'
   
   match 'recruiters/refresh',         :to => 'recruiters#refresh'
   match 'recruiters/company_details', :to => 'recruiters#company_details'
+  match 'recruiters/following',       :to => 'recruiters#following'
+  match 'recruiters/followers',       :to => 'recruiters#followers'
   match 'recruiters/follow',          :to => 'relationships#create'
   match 'recruiters/unfollow',        :to => 'relationships#destroy'
   

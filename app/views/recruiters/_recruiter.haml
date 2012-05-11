@@ -1,4 +1,4 @@
-.card{ :id => "recruiter_#{recruiter.id}", :style => ('height:500px' if params[:action] == 'index'), :onmouseover => ("show('destroy_recruiter_#{recruiter.id}')" if admin_and_not_current?(recruiter)), :onmouseout => ("hide('destroy_recruiter_#{recruiter.id}')" if admin_and_not_current?(recruiter))}
+.card{ :id => "recruiter_#{recruiter.id}", :style => ('height:500px' unless params[:action] == 'show'), :onmouseover => ("show('destroy_recruiter_#{recruiter.id}')" if admin_and_not_current?(recruiter)), :onmouseout => ("hide('destroy_recruiter_#{recruiter.id}')" if admin_and_not_current?(recruiter))}
   #recruiter_loader.loader
     = image_tag 'loader.gif'
 

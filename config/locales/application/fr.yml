@@ -74,6 +74,7 @@ fr:
   at: "à"
   in: "en"
   hide: "masquer"
+  all: "Tous"
   
   # Dates
   mth: "mois"
