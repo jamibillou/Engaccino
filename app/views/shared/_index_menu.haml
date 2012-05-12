@@ -1,7 +1,7 @@
 %ul
   %li
-    = link_to t('all'), path, :class => 'black'
+    = link_to t('all'), path, :class => 'black', :id => 'all', :remote => true
   %li
-    = link_to_function t('users.following'), "index('#{model}','following')", :class => 'black'
+    = link_to t('users.following'), "#{model}/#{current_user.id}/following", :class => 'black', :id => 'following' , :remote => true
   %li
-    = link_to_function t('users.followers'), "index('#{model}','followers')", :class => 'black'
+    = link_to t('users.followers'), "#{model}/#{current_user.id}/followers", :class => 'black', :id => 'followers', :remote => true

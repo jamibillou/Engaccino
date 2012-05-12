@@ -16,19 +16,20 @@ class CandidatesController < ApplicationController
     init_page :title => 'candidates.index.title', :javascripts => 'users/index'
     respond_to do |format|
       format.html
-      format.js
+      format.js { render :partial => 'candidates' }
     end
   end
   
   def followers
     @candidates = current_user.followers.where(:type => 'candidate').paginate :page => params[:page], :per_page => 9
-    render :partial => 'candidates'
+    respond_to do |format|
+      format.js { render :partial => 'candidates' }
+    end 
   end
   
   def following
     @candidates = current_user.followed_users.where(:type => 'candidate').paginate :page => params[:page], :per_page => 9
     respond_to do |format|
-      format.html { render :partial => 'candidates' }
       format.js { render :partial => 'candidates' }
     end    
   end
