@@ -55,6 +55,11 @@ class MessagesController < ApplicationController
     respond_to { |format| format.html { render :json => 'archive!' if request.xhr? } }
   end
   
+  def card_messages
+    @messages = current_user.messages.where("author_id=#{params[:id]} OR recipient_id=#{params[:id]}").order("created_at DESC").limit(5)
+    render :partial => 'card_messages', :locals => { :user => User.find(params[:id]) }
+  end
+  
   private
     def read_messages!(current_contact = params[:current_contact])
       Message.where(:author_id => current_contact, :recipient_id => current_user, :read => false).each { |message| message.update_attribute :read, true }

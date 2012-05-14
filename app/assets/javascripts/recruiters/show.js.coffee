@@ -4,7 +4,9 @@ $ ->
   manageProfilePicture('image_edit_c','image_button_c','company_image_form')
   
   $('#new_message').submit -> show('message_status')
-  $('#new_message').bind('ajax:success', (evt, data, status, xhr) -> $('#message_content').val('') ; $('#message_status').html('Message sent !'))
+  $('#new_message').bind('ajax:success', (evt, data, status, xhr) -> 
+                      $('#message_content').val('')
+                      ajax_call('../messages/card_messages','POST',{id:$.parseJSON(xhr.responseText)}, '', (data) -> $('#card_messages').html(data)))
                    .bind('ajax:error',   (evt, xhr, status)       -> $('#message_status').html(buildErrorMessages(xhr)))
   
 @manageProfilePicture = (image_id,button_id,form_id) ->

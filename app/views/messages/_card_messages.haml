@@ -1,21 +1,22 @@
-- unless @messages.empty?
-  %h2
-    = t('messages.last_messages')
-  - @messages.sort.each do |message|
-    .message{ :class => ('authored' if message.author_id == current_user.id) }
-      %span.title
-        - if message.author_id == current_user.id
-          = "#{t('messages.you_said')} :"
-        - else
-          = "#{user.first_name} #{t('messages.other_said').downcase} :"
-      %br/
-      = message.content
-    - if @messages.sort.last == message
-      %span.last
-        = "#{t('messages.last_message').downcase}#{t('_:')} #{time_ago_in_words message.created_at}"
-  %br/
-  %h2
-    = t('messages.new_message')
-- else
-  %h2
-    = "#{t('contact')} #{user.first_name}"
+#card_messages
+  - unless @messages.empty?
+    %h2
+      = t('messages.last_messages')
+    - @messages.sort.each do |message|
+      .message{ :class => ('authored' if message.author_id == current_user.id) }
+        %span.title
+          - if message.author_id == current_user.id
+            = "#{t('messages.you_said')} :"
+          - else
+            = "#{user.first_name} #{t('messages.other_said').downcase} :"
+        %br/
+        = message.content
+      - if @messages.sort.last == message
+        %span.last
+          = "#{t('messages.last_message').downcase}#{t('_:')} #{time_ago_in_words message.created_at}"
+    %br/
+    %h2
+      = t('messages.new_message')
+  - else
+    %h2
+      = "#{t('contact')} #{user.first_name}"
