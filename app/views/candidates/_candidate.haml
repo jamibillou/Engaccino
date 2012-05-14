@@ -60,7 +60,7 @@
 
   - unless current_user_profile? || params[:action] == 'index' || request.xhr?
     .contact.block
-      %h2 #{t('contact')} #{candidate.first_name}
+      = render 'messages/card_messages', :user => candidate
       = form_for @message, :remote => true do |f|
         = f.text_area :content, :placeholder => "#{t('question_or_comment')}#{t('_?')}", :rows => '3', :class => 'textarea'
         = f.hidden_field :author_id, :value => current_user.id

@@ -26,6 +26,7 @@ class RecruitersController < ApplicationController
   def show
     @recruiter = Recruiter.find params[:id]
     @title = "#{@recruiter.first_name} #{@recruiter.last_name}"
+    @messages = current_user.messages.where("author_id=#{params[:id]} OR recipient_id=#{params[:id]}").order("created_at DESC").limit(5)
     @message = Message.new
     init_page :javascripts => 'recruiters/show relationships'
   end

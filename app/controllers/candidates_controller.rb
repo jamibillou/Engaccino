@@ -30,6 +30,7 @@ class CandidatesController < ApplicationController
   def show
     @candidate = Candidate.find params[:id]
     @message = Message.new
+    @messages = current_user.messages.where("author_id=#{params[:id]} OR recipient_id=#{params[:id]}").order("created_at DESC").limit(5)
     @title = "#{@candidate.first_name} #{@candidate.last_name}"
     init_page :javascripts => 'candidates/show relationships'
   end

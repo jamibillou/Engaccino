@@ -40,17 +40,6 @@
       %p
         = "\"#{recruiter.quote}\""
 
-  - unless current_user_profile? || company_profile? || params[:action] == 'index' || request.xhr?
-    .contact.block
-      %h2
-        = "#{t('contact')} #{recruiter.first_name}"
-      = form_for @message, :remote => true do |f|
-        = f.text_area :content, :placeholder => "#{t('question_or_comment')}#{t('_?')}", :rows => '3', :class => 'textarea'
-        = f.hidden_field :author_id, :value => current_user.id
-        = f.hidden_field :recipient_id, :value => recruiter.id
-        = f.submit t('send')
-      #message_status.hidden
-
   - unless recruiter.company.nil? || company_profile?
     .company_r.identity.block{ :id => "company_#{recruiter.company.id}" }
       %h2
@@ -76,3 +65,13 @@
           #company_picture_upload_error.hidden.error_messages
         %p
           = link_to t('recruiters.show.company_profile'), recruiter.company, :class => 'small'
+
+  - unless current_user_profile? || company_profile? || params[:action] == 'index' || request.xhr?
+    .contact.block
+      = render 'messages/card_messages', :user => recruiter
+      = form_for @message, :remote => true do |f|
+        = f.text_area :content, :placeholder => "#{t('question_or_comment')}#{t('_?')}", :rows => '3', :class => 'textarea'
+        = f.hidden_field :author_id, :value => current_user.id
+        = f.hidden_field :recipient_id, :value => recruiter.id
+        = f.submit t('send')
+      #message_status.hidden
