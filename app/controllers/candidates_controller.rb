@@ -12,26 +12,19 @@ class CandidatesController < ApplicationController
   before_filter :admin_user,             :only   => :destroy
   
   def index
-    @candidates = Candidate.paginate :page => params[:page], :per_page => 9
+    case params[:act]
+    when 'following'
+      @candidates = current_user.followed_users.where(:type => 'candidate').paginate :page => params[:page], :per_page => 9
+    when 'followers'
+      @candidates = current_user.followers.where(:type => 'candidate').paginate :page => params[:page], :per_page => 9
+    else
+      @candidates = Candidate.paginate :page => params[:page], :per_page => 9
+    end
     init_page :title => 'candidates.index.title', :javascripts => 'users/index'
     respond_to do |format|
       format.html
       format.js { render :partial => 'candidates' }
     end
-  end
-  
-  def followers
-    @candidates = current_user.followers.where(:type => 'candidate').paginate :page => params[:page], :per_page => 9
-    respond_to do |format|
-      format.js { render :partial => 'candidates' }
-    end 
-  end
-  
-  def following
-    @candidates = current_user.followed_users.where(:type => 'candidate').paginate :page => params[:page], :per_page => 9
-    respond_to do |format|
-      format.js { render :partial => 'candidates' }
-    end    
   end
   
   def show

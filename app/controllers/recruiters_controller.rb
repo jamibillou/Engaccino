@@ -8,28 +8,20 @@ class RecruitersController < ApplicationController
   before_filter :admin_user,             :only   => :destroy
     
   def index
-    @recruiters = Recruiter.paginate :page => params[:page], :per_page => 9
+    case params[:act]
+    when 'following'
+      @recruiters = current_user.followed_users.where(:type => 'recruiter').paginate :page => params[:page], :per_page => 9
+    when 'followers'
+      @recruiters = current_user.followers.where(:type => 'recruiter').paginate :page => params[:page], :per_page => 9
+    else
+      @recruiters = Recruiter.paginate :page => params[:page], :per_page => 9
+    end
     init_page :title => 'recruiters.index.title', :javascripts => 'users/index'
     respond_to do |format|
       format.html
       format.js { render :partial => 'recruiters' }
     end
   end
-  
-  def followers
-    @recruiters = current_user.followers.where(:type => 'recruiter').paginate :page => params[:page], :per_page => 9
-    respond_to do |format|
-      format.js { render :partial => 'recruiters' }
-    end 
-  end
-  
-  def following
-    @recruiters = current_user.followed_users.where(:type => 'recruiter').paginate :page => params[:page], :per_page => 9
-    respond_to do |format|
-      format.js { render :partial => 'recruiters' }
-    end 
-  end
-  
   
   def show
     @recruiter = Recruiter.find params[:id]
