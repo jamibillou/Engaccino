@@ -161,6 +161,27 @@ describe MessagesController do
     end
   end
   
+  describe "GET 'card_messages'" do
+    
+    before :each do
+      xhr :get, :card_messages, :id => @recruiter1.id
+    end
+    
+    it 'should respond http success' do
+      response.should be_success
+    end
+    
+    it 'should have contents of last messages' do
+      Message.where(:author_id => @recruiter1, :recipient_id => @candidate).each do |message|
+        response.body.should include message.content
+      end
+      
+      Message.where(:author_id => @candidate, :recipient_id => @recruiter1).each do |message|
+        response.body.should include message.content
+      end
+    end
+  end
+  
   describe "GET 'archive'" do
     
     before :each do

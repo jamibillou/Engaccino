@@ -47,7 +47,7 @@ describe "Messages" do
       fill_in 'email',    :with => @candidate.email
       fill_in 'password', :with => @candidate.password
       click_button "#{I18n.t('sessions.new.signin')}"
-      visit messages_path    
+      visit messages_path  
     end
     
     it 'should have a block with the recipient description' do
@@ -61,6 +61,14 @@ describe "Messages" do
     it 'should have a block containing every messages' do
       @messages.each do |message|
         find("div#message_#{message.id}").should have_content message.content
+      end
+    end
+    
+    it 'should contain messages content on the recruiter profile page' do
+      visit recruiter_path @recruiter
+      page.should have_selector "div#card_messages"
+      @messages.each do |message|
+        find('div#card_messages').should have_content message.content
       end
     end    
   end
@@ -98,7 +106,7 @@ describe "Messages" do
       
       it 'should have an error message when an empty form is submitted' do
         click_button "#{I18n.t('send')}"
-        sleep(5)
+        sleep(3)
         find('div#new_conversation').visible?.should be_true
         find('div#message_errors').should have_content I18n.t('message.validations.different_classes_of_user')
       end
@@ -107,13 +115,17 @@ describe "Messages" do
         before :each do
           fill_in 'message_content',      :with => "Lorem ipsum dolor sit amet, consectetur adipisicing elit"
           fill_in 'recipient',            :with => "#{@recruiter2.first_name}"
-          sleep(5)
+          sleep(3)
           page.execute_script "$('.ui-menu-item a:contains(#{@recruiter2.first_name})').first().trigger('mouseenter').click();"
-          click_button "#{I18n.t('send')}"         
+          #fill_in 'message_recipient_id', :with => "#{@recruiter2.id}"
+          page.execute_script "$('#message_recipient_id').val(#{@recruiter2.id});"
+          click_button "#{I18n.t('send')}"
         end
         
-        it 'should hide the form' do
-          find('div#new_conversation').visible?.should be_false
+        it 'should hide the form and contain a new message form' do
+          sleep(3)
+          page.should_not have_selector 'div#new_conversation'
+          page.should have_selector 'div#new_message'
         end
         
         it 'should create a message' do
@@ -123,6 +135,7 @@ describe "Messages" do
         end
         
         it 'should have a block with the new recipient on the left menu' do
+          sleep(3)
           page.should have_selector "div#contact_#{@recruiter2.id}"
         end
       end
@@ -139,7 +152,7 @@ describe "Messages" do
       
       it 'should display an error message when an empty form is submitted' do
         click_button "#{I18n.t('send')}"
-        sleep(5)
+        sleep(2)
         find('form#new_message').visible?.should be_true
         find('div#message_errors').should have_content I18n.t('activerecord.errors.messages.empty')
       end
@@ -148,15 +161,16 @@ describe "Messages" do
         before :each do
           fill_in 'message_content', :with => "Bla bla bla"
           click_button "#{I18n.t('send')}"
-          sleep(5)
         end
         
         it 'should create a message' do
-          lambda do        
+          lambda do
+            sleep(2)        
           end.should change(Message, :count).by(1)
         end
         
         it 'should display the new message, with the submitted content' do
+          sleep(3)
           find("div#message_#{Message.last.id}").should have_content "Bla bla bla"
         end
       end
@@ -165,16 +179,16 @@ describe "Messages" do
     describe 'archiving conversation' do
       before :each do
         click_link "archive_#{@recruiter1.id}"
-        sleep(5)
       end
       
       it 'should not have a block with the recipient description anymore' do
+        sleep(3)
         page.should_not have_selector "div#contact_#{@recruiter1.id}"
       end
       
       it 'should not destroy the related messages in the db' do
-        lambda do        
-          sleep(1)
+        lambda do
+          sleep(2)
         end.should_not change(Message, :count).by(1)
       end    
     end

@@ -59,7 +59,7 @@ describe 'Recruiters' do
       end
       
       it 'should sign a recruiter in' do
-        current_path.should == recruiter_path(@recruiter)
+        current_path.should == candidates_path
       end
       
       it 'should sign a recruiter out' do
@@ -78,6 +78,7 @@ describe 'Recruiters' do
       fill_in 'email',    :with => @recruiter.email
       fill_in 'password', :with => @recruiter.password
       click_button "#{I18n.t('sessions.new.signin')}"
+      visit recruiter_path @recruiter
     end
     
     describe 'when empty' do

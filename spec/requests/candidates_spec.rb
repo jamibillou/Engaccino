@@ -30,7 +30,7 @@ describe 'Candidates' do
         fill_in 'candidate_country',               :with => 'United States'
         click_button "#{I18n.t('candidates.show.view_profile')}"
         current_path.should == candidate_path(Candidate.find_by_email('test@example.com'))
-        find('div#completion_container').should have_content "#{I18n.t('candidates.show.profile_completion.sentence')}5#{I18n.t('candidates.show.profile_completion.%complete')}"
+        find('div#completion_container').should have_content "#{I18n.t('candidates.show.profile_completion.sentence')}\n5\n#{I18n.t('candidates.show.profile_completion.%complete')}"
       end
     end
   end
@@ -60,10 +60,10 @@ describe 'Candidates' do
       end
       
       it 'should sign a candidate in' do
-        current_path.should == candidate_path(@candidate)
+        current_path.should == recruiters_path
       end 
       
-       it 'should sign a cnadidate out' do
+       it 'should sign a candidate out' do
           click_link I18n.t(:sign_out)
           current_path.should == root_path
         end     
@@ -84,10 +84,11 @@ describe 'Candidates' do
         fill_in 'email',    :with => @candidate.email
         fill_in 'password', :with => @candidate.password
         click_button "#{I18n.t('sessions.new.signin')}"
+        visit candidate_path @candidate
       end
       
       it 'should have a top bar' do
-        page.should have_selector 'div#show_top'
+        page.should have_selector 'div#completion_container'
       end
       
       it 'should have a candidate card' do
@@ -133,6 +134,7 @@ describe 'Candidates' do
         fill_in 'email',    :with => @candidate.email
         fill_in 'password', :with => @candidate.password
         click_button "#{I18n.t('sessions.new.signin')}"
+        visit candidate_path @candidate
         page.should have_selector 'div#professional_skill_candidates'
         page.should have_selector "div#professional_skill_candidate_#{professional_skill_candidate.id}"                                                                
       end
@@ -144,6 +146,7 @@ describe 'Candidates' do
         fill_in 'email',    :with => @candidate.email
         fill_in 'password', :with => @candidate.password
         click_button "#{I18n.t('sessions.new.signin')}"
+        visit candidate_path @candidate
         page.should have_selector 'div#interpersonal_skill_candidates'
         page.should have_selector "div#interpersonal_skill_candidate_#{interpersonal_skill_candidate.id}"
       end
@@ -155,6 +158,7 @@ describe 'Candidates' do
         fill_in 'email',    :with => @candidate.email
         fill_in 'password', :with => @candidate.password
         click_button "#{I18n.t('sessions.new.signin')}"
+        visit candidate_path @candidate
         page.should have_selector 'div#experiences'
         page.should have_selector "div#experience_#{experience.id}"
       end
@@ -168,6 +172,7 @@ describe 'Candidates' do
         fill_in 'email',    :with => @candidate.email
         fill_in 'password', :with => @candidate.password
         click_button "#{I18n.t('sessions.new.signin')}"
+        visit candidate_path @candidate
         page.should have_selector 'div#educations'
         page.should have_selector "div#education_#{education.id}"                                                            
       end
@@ -179,6 +184,7 @@ describe 'Candidates' do
         fill_in 'email',    :with => @candidate.email
         fill_in 'password', :with => @candidate.password
         click_button "#{I18n.t('sessions.new.signin')}"
+        visit candidate_path @candidate
         page.should have_selector 'div#certificate_candidates'
         page.should have_selector "div#certificate_candidate_#{certificate_candidate.id}"                                                                
       end
@@ -190,6 +196,7 @@ describe 'Candidates' do
         fill_in 'email',    :with => @candidate.email
         fill_in 'password', :with => @candidate.password
         click_button "#{I18n.t('sessions.new.signin')}"
+        visit candidate_path @candidate
         page.should have_selector 'div#language_candidates'
         page.should have_selector "div#language_candidate_#{language_candidate.id}"
       end        
@@ -212,6 +219,7 @@ describe 'Candidates' do
           fill_in 'email',    :with => @candidate.email
           fill_in 'password', :with => @candidate.password
           click_button "#{I18n.t('sessions.new.signin')}"
+          visit candidate_path @candidate
         end
        
         it "should have an empty form after 'ADD +' is clicked" do
@@ -324,6 +332,7 @@ describe 'Candidates' do
           fill_in 'email',    :with => @candidate.email
           fill_in 'password', :with => @candidate.password
           click_button "#{I18n.t('sessions.new.signin')}"
+          visit candidate_path @candidate
         end
         
         it "should have an empty form after 'ADD +' is clicked" do
@@ -434,6 +443,7 @@ describe 'Candidates' do
           fill_in 'email',    :with => @candidate.email
           fill_in 'password', :with => @candidate.password
           click_button "#{I18n.t('sessions.new.signin')}"
+          visit candidate_path @candidate
         end
                 
         it "should have an empty form after 'ADD +' is clicked" do
@@ -554,6 +564,7 @@ describe 'Candidates' do
           fill_in 'email',    :with => @candidate.email
           fill_in 'password', :with => @candidate.password
           click_button "#{I18n.t('sessions.new.signin')}"
+          visit candidate_path @candidate
         end
         
         it "should have an empty form after 'ADD +' is clicked" do
@@ -676,6 +687,7 @@ describe 'Candidates' do
           fill_in 'email',    :with => @candidate.email
           fill_in 'password', :with => @candidate.password
           click_button "#{I18n.t('sessions.new.signin')}"
+          visit candidate_path @candidate
         end
         
         it "should have an empty form after 'ADD +' is clicked" do
@@ -786,6 +798,7 @@ describe 'Candidates' do
           fill_in 'email',    :with => @candidate.email
           fill_in 'password', :with => @candidate.password
           click_button "#{I18n.t('sessions.new.signin')}"
+          visit candidate_path @candidate
         end
         
         it "should have an empty form after 'ADD +' is clicked" do
