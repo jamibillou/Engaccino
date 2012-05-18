@@ -73,6 +73,64 @@ describe "Messages" do
     end    
   end
   
+  describe 'Message block on profile' do
+    before :each do
+      require 'coffee_script'
+      @recruiter  = Factory :recruiter, :profile_completion => 5
+      @candidate  = Factory :candidate, :profile_completion => 5
+      visit signin_path
+      fill_in 'email',    :with => @candidate.email
+      fill_in 'password', :with => @candidate.password
+      click_button "#{I18n.t('sessions.new.signin')}"
+      visit recruiter_path @recruiter
+    end
+    
+    it "should have a 'no message' title" do    
+      find('div#card_messages').should have_content "#{I18n.t('contact')} #{@recruiter.first_name}"
+    end
+    
+    describe 'if messages have been written' do      
+      before :each do
+        @messages   = [ (Factory :message, :author => @candidate,  :recipient => @recruiter),
+                        (Factory :message, :author => @recruiter,  :recipient => @candidate) ]
+        visit recruiter_path @recruiter
+      end
+      
+      it 'should have a block containing all messages' do
+        @messages.each do |message|
+          find('div#card_messages').should have_content message.content
+        end 
+      end
+    end
+    
+    describe "'new message' form", :js => true do
+      describe 'failure' do
+        it "should display an error message when we try to send an empty message" do
+          click_button "#{I18n.t('send')}"
+          find('div#message_status').should have_content I18n.t('activerecord.errors.messages.empty')
+        end
+      end 
+      
+      describe 'success' do
+        before :each do
+          fill_in 'message_content',      :with => 'Pouet pouet'
+          click_button "#{I18n.t('send')}"
+        end
+        
+        it 'should create a message' do
+          lambda do
+            sleep(3)
+          end.should change(Message, :count).by(1)
+        end
+        
+        it 'should display the created message' do
+          sleep(2)
+          find('div#card_messages').should have_content 'Pouet pouet'
+        end
+      end
+    end
+  end
+  
   describe 'ajax', :js => true do
     before :each do
       require 'coffee_script'
@@ -129,7 +187,7 @@ describe "Messages" do
         
         it 'should create a message' do
           lambda do
-            sleep(2)
+            sleep(4)
           end.should change(Message, :count).by(1)
         end
         
