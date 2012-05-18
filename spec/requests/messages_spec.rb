@@ -117,7 +117,6 @@ describe "Messages" do
           fill_in 'recipient',            :with => "#{@recruiter2.first_name}"
           sleep(3)
           page.execute_script "$('.ui-menu-item a:contains(#{@recruiter2.first_name})').first().trigger('mouseenter').click();"
-          #fill_in 'message_recipient_id', :with => "#{@recruiter2.id}"
           page.execute_script "$('#message_recipient_id').val(#{@recruiter2.id});"
           click_button "#{I18n.t('send')}"
         end
