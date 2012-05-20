@@ -9,7 +9,9 @@
 
 $ ->
   $('input.country').each -> $(this).autocomplete({ source:"/ajax/countries", minLength: 2, autoFocus: true })
-  $('#close_flash').click -> hide('flash')  
+  $('#close_flash').click -> hide('flash')
+  $('#search_bar').autocomplete({ source:"/ajax/search", minLength: 2, autoFocus: true, select: (event,ui) ->
+    $(location).attr('href',getBaseURL()+ui.item.type+'/'+ui.item.id)})
 
 ## CUSTOMS ALL FIELDS OF THE GIVEN FORM
 @customForm = (formId,translationPath) ->
@@ -68,3 +70,5 @@ $ ->
       
 @show = (id) -> $('#'+id).show()
 @hide = (id) -> $('#'+id).hide()
+
+@getBaseURL = -> location.protocol+'//'+location.hostname+(location.port && ':'+location.port)+'/'

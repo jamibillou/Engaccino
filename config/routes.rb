@@ -7,6 +7,7 @@ Engaccino::Application.routes.draw do
   get 'ajax/months'
   get 'ajax/companies'
   get 'ajax/recipients'
+  get 'ajax/search'
   
   resources :candidates do
     resources :experiences do

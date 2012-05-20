@@ -32,4 +32,21 @@ class AjaxController < ApplicationController
     end
     render json: hash_recipients 
   end  
+  
+  def search
+    hash_results = []
+    if current_user.type == "Recruiter"
+      Candidate.all(:order => :last_name).each do |candidate|
+        hash_results << {"type" => "candidates", "id" => candidate.id, "value" => "#{candidate.first_name} #{candidate.last_name}", "label" => "#{candidate.first_name} #{candidate.last_name} (#{candidate.city}, #{candidate.country})"} if candidate.first_name.downcase.include?(params[:term].downcase) || candidate.last_name.downcase.include?(params[:term].downcase)
+      end
+    else
+      Recruiter.all(:order => :last_name).each do |recruiter|
+        hash_results << {"type" => "recruiters", "id" => recruiter.id, "value" => "#{recruiter.first_name} #{recruiter.last_name}", "label" => "#{recruiter.first_name} #{recruiter.last_name} (#{recruiter.city}, #{recruiter.country})"} if recruiter.first_name.downcase.include?(params[:term].downcase) || recruiter.last_name.downcase.include?(params[:term].downcase)
+      end
+      Company.all(:order => :name).each do |company|
+        hash_results << {"type" => "companies", "id" => company.id, "value" => "#{company.name}", "label" => "#{company.name} (#{company.city} #{company.country})"} if company.name.downcase.include?(params[:term].downcase)
+      end
+    end
+    render json: hash_results
+  end
 end
