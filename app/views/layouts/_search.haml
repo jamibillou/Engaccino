@@ -1,2 +1,2 @@
-%form#search_bar_form
-  = text_field_tag 'search_bar', nil, :placeholder => t('search_bar'), :title => t('search_bar_title'), :class => 'search_bar round'
+%form#search_bar_form{:method => 'POST', :action => '/search/index/'}
+  = text_field_tag 'search', nil, :placeholder => t('search_bar'), :title => t('search_bar_title'), :id => 'search_bar', :class => 'search_bar round'

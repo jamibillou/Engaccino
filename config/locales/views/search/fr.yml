@@ -1,0 +1,9 @@
+fr:
+  search:
+    
+    title: 'Résultats de la recherche pour'
+    no_results: "Désolé, aucun résultat n'a été trouvé"
+    
+    candidates: 'Candidats'
+    recruiters: 'Recruteurs'
+    companies: 'Entreprises'

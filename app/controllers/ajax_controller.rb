@@ -51,6 +51,7 @@ class AjaxController < ApplicationController
         hash_results << {"type" => "Company", "model" => "companies", "pic" => company_pic, "id" => company.id, "value" => "#{company.name}", "label" => "#{company.name} (#{company.city} #{company.country})"} if company.name.downcase.include?(params[:term].downcase)
       end
     end
+    hash_results << {"type" => "", "pic" => '/assets/default_user.png', "model" => "search/index", "id" => params[:term], "value" => params[:term], "label" => I18n.t('search_bar_show_all')}
     render json: hash_results
   end
 end

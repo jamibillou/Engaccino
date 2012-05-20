@@ -43,7 +43,7 @@
           %h2
             = Experience.find(candidate.main_experience).role
         %p#candidate_company
-          = render 'candidate_company', :candidate => candidate
+          = render 'candidates/candidate_company', :candidate => candidate
 
     .status
       - if current_user_profile?
@@ -52,11 +52,11 @@
         = t("candidates.#{candidate.status}_status")
 
   #candidate_degree_experience.block
-    = render 'candidate_degree_experience', :candidate => candidate
+    = render 'candidates/candidate_degree_experience', :candidate => candidate
 
   - unless candidate.no_pro_skill?
     #candidate_professional_skills.block
-      = render 'candidate_professional_skills', :candidate => candidate
+      = render 'candidates/candidate_professional_skills', :candidate => candidate
 
   - unless current_user_profile? || params[:action] == 'index' || request.xhr?
     .contact.block

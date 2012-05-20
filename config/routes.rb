@@ -8,7 +8,7 @@ Engaccino::Application.routes.draw do
   get 'ajax/companies'
   get 'ajax/recipients'
   get 'ajax/search'
-  
+    
   resources :candidates do
     resources :experiences do
       resources :companies
@@ -36,7 +36,7 @@ Engaccino::Application.routes.draw do
   resources :candidates, :experiences, :companies, :educations, :schools, :degree_types, :degrees, :professional_skill_candidates, :professional_skills, 
             :interpersonal_skill_candidates, :interpersonal_skills, :language_candidates, :languages, :certificate_candidates, :certificates
   resources :recruiters
-  resources :messages
+  resources :messages, :search
   resources :sessions, :only => [:new, :create, :destroy]
   
   match 'candidates/refresh',         :to => 'candidates#refresh'
@@ -57,6 +57,9 @@ Engaccino::Application.routes.draw do
   match 'messages/menu_left',         :to => 'messages#menu_left'
   match 'messages/archive',           :to => 'messages#archive'
   match 'messages/card_messages',     :to => 'messages#card_messages'
+  
+  match 'search/index/:search',       :to => 'search#index'
+  match 'search/index',               :to => 'search#index'
   
   match '/candidate_signup',          :to => 'candidates#new'
   match '/recruiter_signup',          :to => 'recruiters#new'

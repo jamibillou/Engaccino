@@ -1,0 +1,9 @@
+en:
+  search:
+    
+    title: 'Search results for'
+    no_results: 'Sorry but no results have been found'
+    
+    candidates: 'Candidates'
+    recruiters: 'Recruiters'
+    companies: 'Companies'

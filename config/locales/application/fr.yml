@@ -17,6 +17,7 @@ fr:
   
   search_bar: "Accès rapide"
   search_bar_title: "Rechercher un contact, une entreprise, offre d'emploi, etc."
+  search_bar_show_all: "Afficher tous les résultats"
    
   already_member: "Membre ?"
   sign_in: "S'identifier"

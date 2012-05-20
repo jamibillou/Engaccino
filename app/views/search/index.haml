@@ -1,0 +1,22 @@
+%h1
+  = "#{t('search.title')} #{@search}"
+- if @candidates.empty? && @recruiters.empty? && @companies.empty?
+  %h2
+    = t('search.no_results')
+.titles
+  - unless @candidates.empty?
+    = link_to_function "#{t('search.candidates')} (#{@candidates.count})", "show_results('candidates')", :id => 'candidates_link', :class => ('selected' unless @candidates.empty?)
+  - unless @recruiters.empty?
+    = link_to_function "#{t('search.recruiters')} (#{@recruiters.count})", "show_results('recruiters')", :id => 'recruiters_link', :class => ('selected' if @candidates.empty? && !@recruiters.empty?)
+  - unless @companies.empty?
+    = link_to_function "#{t('search.companies')} (#{@companies.count})", "show_results('companies')", :id => 'companies_link', :class => ('selected' if @candidates.empty? && @recruiters.empty?)
+
+#candidates.search_block  
+  - @candidates.each do |candidate|
+    = render 'candidates/candidate', :candidate => candidate unless candidate.profile_completion == 0
+#recruiters.search_block{ :class => ('hidden' unless @candidates.empty?) }
+  - @recruiters.each do |recruiter|
+    = render 'recruiters/recruiter', :recruiter => recruiter unless recruiter.profile_completion == 0
+#companies.search_block{ :class => ('hidden' unless @candidates.empty? && @recruiters.empty?) }
+  - @companies.each do |company|
+    = render 'companies/company', :company => company
