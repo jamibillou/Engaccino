@@ -35,16 +35,20 @@ class AjaxController < ApplicationController
   
   def search
     hash_results = []
-    if current_user.type == "Recruiter"
+    if current_user.type == "Recruiter" || current_user.admin?
       Candidate.all(:order => :last_name).each do |candidate|
-        hash_results << {"type" => "candidates", "id" => candidate.id, "value" => "#{candidate.first_name} #{candidate.last_name}", "label" => "#{candidate.first_name} #{candidate.last_name} (#{candidate.city}, #{candidate.country})"} if candidate.first_name.downcase.include?(params[:term].downcase) || candidate.last_name.downcase.include?(params[:term].downcase)
+        candidate_pic = candidate.image_url.nil? ? '/assets/default_user.png' : candidate.image_url(:thumb)
+        hash_results << {"type" => "Candidate", "model" => "candidates", "pic" => candidate_pic, "id" => candidate.id, "value" => "#{candidate.first_name} #{candidate.last_name}", "label" => "#{candidate.first_name} #{candidate.last_name} (#{candidate.city}, #{candidate.country})"} if candidate.first_name.downcase.include?(params[:term].downcase) || candidate.last_name.downcase.include?(params[:term].downcase)
       end
-    else
+    end
+    if current_user.type == "Candidate" || current_user.admin?
       Recruiter.all(:order => :last_name).each do |recruiter|
-        hash_results << {"type" => "recruiters", "id" => recruiter.id, "value" => "#{recruiter.first_name} #{recruiter.last_name}", "label" => "#{recruiter.first_name} #{recruiter.last_name} (#{recruiter.city}, #{recruiter.country})"} if recruiter.first_name.downcase.include?(params[:term].downcase) || recruiter.last_name.downcase.include?(params[:term].downcase)
+        recruiter_pic = recruiter.image_url.nil? ? '/assets/default_user.png' : recruiter.image_url(:thumb)
+        hash_results << {"type" => "Recruiter", "model" => "recruiters", "pic" => recruiter_pic, "id" => recruiter.id, "value" => "#{recruiter.first_name} #{recruiter.last_name}", "label" => "#{recruiter.first_name} #{recruiter.last_name} (#{recruiter.city}, #{recruiter.country})"} if recruiter.first_name.downcase.include?(params[:term].downcase) || recruiter.last_name.downcase.include?(params[:term].downcase)
       end
       Company.all(:order => :name).each do |company|
-        hash_results << {"type" => "companies", "id" => company.id, "value" => "#{company.name}", "label" => "#{company.name} (#{company.city} #{company.country})"} if company.name.downcase.include?(params[:term].downcase)
+        company_pic = company.image_url.nil? ? '/assets/default_company.png' : company.image_url(:thumb)
+        hash_results << {"type" => "Company", "model" => "companies", "pic" => company_pic, "id" => company.id, "value" => "#{company.name}", "label" => "#{company.name} (#{company.city} #{company.country})"} if company.name.downcase.include?(params[:term].downcase)
       end
     end
     render json: hash_results

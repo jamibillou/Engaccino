@@ -10,8 +10,8 @@
 $ ->
   $('input.country').each -> $(this).autocomplete({ source:"/ajax/countries", minLength: 2, autoFocus: true })
   $('#close_flash').click -> hide('flash')
-  $('#search_bar').autocomplete({ source:"/ajax/search", minLength: 2, autoFocus: true, select: (event,ui) ->
-    $(location).attr('href',getBaseURL()+ui.item.type+'/'+ui.item.id)})
+  $('#search_bar').autocomplete({ source:"/ajax/search", minLength: 2, autoFocus: true, select: (event,ui) -> $(location).attr('href',getBaseURL()+ui.item.model+'/'+ui.item.id)}).data('autocomplete')._renderItem = (ul,item) ->
+    $("<li></li>").data("item.autocomplete",item).append("<a><img src='"+item.pic+"' />"+item.label+"<br/><span class='light_grey'>"+item.type+"</span><br/><br/></a>").appendTo(ul) 
 
 ## CUSTOMS ALL FIELDS OF THE GIVEN FORM
 @customForm = (formId,translationPath) ->

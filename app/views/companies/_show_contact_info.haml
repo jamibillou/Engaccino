@@ -3,7 +3,10 @@
     %h2
       = t('companies.contact_info').remove_accents.upcase
     %p
-      = best_in_place_if current_user_company_profile?, @company, :url,     :nil => "#{t('companies.url').downcase}#{t('_:')}",     :html_attrs => { :class => 'field' }
+      - if current_user_company_profile?
+        = best_in_place @company, :url, :nil => "#{t('companies.url').downcase}#{t('_:')}", :html_attrs => { :class => 'field' }
+      - else
+        = link_to @company.url, "http://#{@company.url}", :target => '_blank'
     %p
       = best_in_place_if current_user_company_profile?, @company, :email,   :nil => "#{t('companies.email').downcase}#{t('_:')}",   :html_attrs => { :class => 'field' }
     %p
