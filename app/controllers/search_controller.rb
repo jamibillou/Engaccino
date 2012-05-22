@@ -3,11 +3,11 @@ class SearchController < ApplicationController
   before_filter :authenticate
   
   def index
-    init_page :javascripts => 'search'
     @search = params[:search]
     @candidates = search_candidates
     @recruiters = search_recruiters
     @companies = search_companies
+    init_page :javascripts => 'search'
   end
   
   private
