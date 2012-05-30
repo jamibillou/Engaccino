@@ -71,6 +71,9 @@ Engaccino::Application.routes.draw do
   match '/about',                     :to => 'pages#about'
   match '/contact',                   :to => 'pages#contact'
   
+  match '/linkedin_signup',           :to => 'users#linkedin_login'
+  match '/users/authenticate_login',  :to => 'users#authenticate_login'
+  
   root :to => 'users#index',    :constraints => SingedIn.new(true)
   root :to => 'pages#overview', :constraints => SingedIn.new(false) 
 end

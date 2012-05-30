@@ -81,6 +81,7 @@ GEM
       i18n (~> 0.4)
     ffi (1.0.11)
     haml (3.1.4)
+    hashie (1.2.0)
     hike (1.2.1)
     i18n (0.6.0)
     i18n-js (2.1.2)
@@ -99,6 +100,10 @@ GEM
       actionpack (>= 3.1)
       less (~> 2.0.7)
     libv8 (3.3.10.4)
+    linkedin (0.3.7)
+      hashie (~> 1.2)
+      multi_json (~> 1.0)
+      oauth (~> 0.4)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -107,6 +112,7 @@ GEM
     multi_json (1.1.0)
     mysql2 (0.3.11)
     nokogiri (1.5.2)
+    oauth (0.4.6)
     polyglot (0.3.3)
     rack (1.4.1)
     rack-cache (1.2)
@@ -192,6 +198,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   less-rails
+  linkedin
   mysql2
   rails
   remotipart (~> 1.0)
