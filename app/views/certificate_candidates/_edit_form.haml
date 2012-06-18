@@ -1,13 +1,11 @@
 = form_for certificate_candidate, :remote => true, :html => { :id => "certificate_candidate_edit_form_#{certificate_candidate.id.to_s}" } do |f|
   .certificate_candidate.form
     %input{ :type => 'hidden', :name => '_method', :value => 'PUT' }
-	
     .label
       = f.fields_for :certificate do |certificate_builder|
         = certificate_builder.text_field :label, :placeholder => t('certificates.label'), :class => 'field'
     .level
       = f.text_field :level_score, :placeholder => t('certificates.level'), :class => 'small field'
-	  
   .error_messages{ :id => "errors_certificate_candidate#{certificate_candidate.id}" }
   = link_to_function t('cancel'), "hideForm('certificate_candidate','#{certificate_candidate.id}')", :class => 'grey button'
   = f.submit t('submit')
