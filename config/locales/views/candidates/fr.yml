@@ -49,7 +49,7 @@ fr:
         add: "Détaillez votre expérience et votre formation afin d'avoir un graphique plutôt sympa ici ;)"
       profile_completion:
         sentence: "Votre profil est complet à "
-        %complete: "%"
+        complete: "%"
         link: "Qu'est-ce qu'il manque ?"
     new:
       title: "S'inscrire"

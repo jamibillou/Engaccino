@@ -44,7 +44,7 @@ fr:
       recruiter_at: "Recrute pour"
       profile_completion:
         sentence: "Votre profil est complet à "
-        %complete: "%"
+        complete: "%"
         link: "Qu'est-ce qu'il manque ?"
       company_profile: "Profil d'entreprise"
     new:

@@ -49,7 +49,7 @@ en:
         add: "Detail your experience and education and it shall look nice here ;)"
       profile_completion:
         sentence: "Your profile is "
-        %complete: "% complete"
+        complete: "% complete"
         link: "What is missing?"
     new:
       title: "Sign up"

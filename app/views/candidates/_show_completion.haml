@@ -3,7 +3,7 @@
     #completion_bar_full.slightly_round{ :style => "width: #{3*candidate.profile_completion}px;"}
   = t('candidates.show.profile_completion.sentence')
   = candidate.profile_completion
-  = t('candidates.show.profile_completion.%complete')
+  = t('candidates.show.profile_completion.complete')
   = link_to_function t('candidates.show.profile_completion.link'), "show('missing'); show('close_missing')"
   = link_to_function '', "hide('missing') ; hide('close_missing')", :class => 'hidden close', :id => 'close_missing'
   
